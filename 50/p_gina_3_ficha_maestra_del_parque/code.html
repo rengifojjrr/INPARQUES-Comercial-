@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>INPARQUES - Parque Nacional El Ávila</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#005131",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#e4e2dd",
+                        "on-tertiary-fixed-variant": "#3a4a43",
+                        "inverse-on-surface": "#f3f1eb",
+                        "outline-variant": "#bfc9c0",
+                        "outline": "#6f7a71",
+                        "inverse-surface": "#30312d",
+                        "on-background": "#1b1c18",
+                        "surface": "#fbf9f3",
+                        "on-surface": "#1b1c18",
+                        "surface-bright": "#fbf9f3",
+                        "secondary": "#3e6753",
+                        "primary-fixed-dim": "#88d7a8",
+                        "tertiary-container": "#516159",
+                        "surface-tint": "#186c45",
+                        "tertiary-fixed": "#d5e7dd",
+                        "secondary-fixed": "#c0edd4",
+                        "primary-container": "#176b45",
+                        "on-tertiary-fixed": "#0f1e19",
+                        "surface-container-highest": "#e4e2dd",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#446d59",
+                        "surface-container-high": "#eae8e2",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#002114",
+                        "on-error": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#99e9b9",
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#f5f3ed",
+                        "secondary-container": "#c0edd4",
+                        "error-container": "#ffdad6",
+                        "primary-fixed": "#a4f4c3",
+                        "inverse-primary": "#88d7a8",
+                        "on-primary": "#ffffff",
+                        "on-surface-variant": "#3f4942",
+                        "on-primary-fixed-variant": "#005232",
+                        "surface-container": "#f0eee8",
+                        "background": "#fbf9f3",
+                        "secondary-fixed-dim": "#a4d0b8",
+                        "tertiary-fixed-dim": "#b9cbc1",
+                        "on-primary-fixed": "#002111",
+                        "on-secondary-fixed-variant": "#264e3c",
+                        "surface-dim": "#dcdad4",
+                        "tertiary": "#3a4942",
+                        "on-tertiary-container": "#cadbd2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "sm": "12px",
+                        "xs": "8px",
+                        "lg": "24px",
+                        "xl": "32px",
+                        "base": "4px",
+                        "xxl": "48px",
+                        "touch-target": "44px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Manrope", "sans-serif"],
+                        "body-md": ["Manrope", "sans-serif"],
+                        "display-lg": ["Manrope", "sans-serif"],
+                        "label-md": ["Manrope", "sans-serif"],
+                        "body-lg": ["Manrope", "sans-serif"],
+                        "headline-lg": ["Manrope", "sans-serif"],
+                        "headline-md": ["Manrope", "sans-serif"],
+                        "label-sm": ["Manrope", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<!-- Google Fonts & Material Symbols -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+        }
+        .icon-fill { font-variation-settings: 'FILL' 1; }
+        
+        /* Ambient Shadows */
+        .shadow-level-1 { box-shadow: 0px 1px 3px rgba(40, 51, 46, 0.05); }
+        .shadow-level-2 { box-shadow: 0px 4px 12px rgba(40, 51, 46, 0.08); }
+        .shadow-level-3 { box-shadow: 0px 12px 32px rgba(40, 51, 46, 0.12); }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md antialiased min-h-screen">
+<!-- TopNavBar Component -->
+<header class="flex justify-between items-center w-full h-16 pl-80 pr-lg fixed top-0 z-40 bg-surface-container-lowest border-b border-outline-variant shadow-sm transition-opacity duration-150">
+<!-- Brand/Search Area -->
+<div class="flex items-center gap-md">
+<span class="font-headline-sm text-headline-sm font-bold text-primary">INPARQUES Control Panel</span>
+<div class="h-8 w-[1px] bg-outline-variant mx-sm"></div>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-sm text-on-surface-variant">search</span>
+<input class="pl-[36px] pr-sm h-touch-target rounded-full bg-surface-container border border-transparent focus:border-primary focus:bg-surface-container-lowest focus:outline-none transition-colors duration-200 font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant w-64" placeholder="Search parks, users..." type="text"/>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="hidden md:flex items-center h-full gap-lg">
+<a class="h-full flex items-center font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">National Scope</a>
+<a class="h-full flex items-center font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Region Scope</a>
+<a class="h-full flex items-center font-label-md text-label-md text-primary border-b-2 border-primary pb-1" href="#">Park Scope</a>
+</nav>
+<!-- Trailing Actions -->
+<div class="flex items-center gap-sm">
+<button class="w-touch-target h-touch-target rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors duration-200">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-touch-target h-touch-target rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors duration-200">
+<span class="material-symbols-outlined">verified_user</span>
+</button>
+<div class="ml-sm w-10 h-10 rounded-full overflow-hidden border border-outline-variant cursor-pointer">
+<img alt="Administrator Avatar with MFA" class="w-full h-full object-cover" data-alt="A professional portrait of an administrative user, well-lit, corporate headshot style, conveying trust and authority, set against a neutral light background reflecting the clean modern UI." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjtZlqxrCHwO80ttQFvoEd7yKE4EJ7eCdoy9vOMC3xYqPtR7tRKrCb-3B0NgMIcsgbUcRiPwgg4NR1iXC-munXE0Wl-aZSazZhS0o2nu0TT2D2A-Hl3fPZ-ZiXo1wn-_8OTImbywrqE9V19dbvMzfAuoQA832so6qNrlZ5l5j1W7lQepgQYUOurYilbOkbpqHcuhhNbJ_qlmwF2I96NcMyFcLL8Jl73kI37QctPEOtq6ChFTB09jZB"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar Component -->
+<nav class="flex flex-col h-screen fixed left-0 top-0 overflow-y-auto px-xs py-md bg-surface border-r border-outline-variant docked h-full w-72 z-50">
+<!-- Header -->
+<div class="px-md pb-lg pt-sm flex items-center gap-sm border-b border-outline-variant mb-sm">
+<div class="w-12 h-12 rounded-lg bg-primary-container flex items-center justify-center text-on-primary-container flex-shrink-0">
+<span class="material-symbols-outlined icon-fill">eco</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary leading-tight">INPARQUES</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">National Superadministrator</p>
+</div>
+</div>
+<!-- Links -->
+<div class="flex flex-col gap-1 flex-1">
+<a class="flex items-center gap-md px-md h-touch-target rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                National Home
+            </a>
+<a class="flex items-center gap-md px-md h-touch-target rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">account_tree</span>
+                Territorial Structure
+            </a>
+<a class="flex items-center gap-md px-md h-touch-target rounded-lg font-label-md text-label-md text-primary font-bold border-l-4 border-primary bg-surface-container-highest scale-[0.98] transition-transform duration-150" href="#">
+<span class="material-symbols-outlined icon-fill">park</span>
+                Parks
+            </a>
+<a class="flex items-center gap-md px-md h-touch-target rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">business_center</span>
+                Businesses
+            </a>
+<a class="flex items-center gap-md px-md h-touch-target rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">person_outline</span>
+                Users/Roles
+            </a>
+<a class="flex items-center gap-md px-md h-touch-target rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">gavel</span>
+                Global Rules
+            </a>
+<a class="flex items-center gap-md px-md h-touch-target rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">extension</span>
+                Integrations
+            </a>
+<a class="flex items-center gap-md px-md h-touch-target rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">history</span>
+                Audit
+            </a>
+<a class="flex items-center gap-md px-md h-touch-target rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">security</span>
+                Security
+            </a>
+<a class="flex items-center gap-md px-md h-touch-target rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Configuration
+            </a>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="ml-72 mt-16 p-lg pb-xxl flex flex-col gap-lg">
+<!-- Park Header Section -->
+<section class="relative w-full h-[280px] rounded-xl overflow-hidden border border-outline-variant shadow-level-1 flex flex-col justify-end">
+<!-- Background Image -->
+<div class="absolute inset-0 z-0">
+<div class="bg-cover bg-center w-full h-full" data-alt="A breathtaking, panoramic view of the majestic El Ávila mountain range in Venezuela, captured during golden hour. The lush green slopes are illuminated by warm, soft sunlight, creating a sense of stewardship and natural heritage. The image is high-resolution, vibrant yet natural, fitting a modern corporate dashboard header." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBWOvNyUy4zKlcPcZEp_-PTpToDV6QjGUcrv49Ze7xqElRJmXdXYaJtYe7Eob0ebMeD_JA-UuHKWF27EOTOFdl7DTOkYhtnUorQWy9wYCMvKT2RRVrHZGhkgwNb3pKqwtQH5nIsTLXYDRyQ8D1mMeBfQJ7RgsGqh3rQ00ZXxyLjuVIZjSRKunIDwX58wZi2oYMluiQfg4VG5BAfAH_3FFcmw5AlZ5eBqluGXjhc0rxB6HLAQ7QJzqpo')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/90 via-inverse-surface/40 to-transparent"></div>
+</div>
+<!-- Header Content -->
+<div class="relative z-10 p-lg text-white">
+<div class="flex items-end justify-between">
+<div>
+<div class="flex items-center gap-sm mb-xs">
+<span class="px-sm py-1 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm border border-primary-fixed-dim inline-flex items-center gap-1">
+<div class="w-2 h-2 rounded-full bg-primary"></div> Active Conservation
+                            </span>
+<span class="font-label-md text-label-md text-surface-variant">ID: PN-001</span>
+</div>
+<h2 class="font-display-lg text-display-lg text-surface-container-lowest">Parque Nacional El Ávila</h2>
+<p class="font-body-lg text-body-lg text-surface-variant mt-1 max-w-2xl">Región Capital, Miranda, Vargas. Established 1958. Crucial green lung and administrative node for the capital district.</p>
+</div>
+<div class="flex gap-sm">
+<button class="h-touch-target px-md rounded-lg bg-surface-container-lowest text-primary font-label-md text-label-md flex items-center gap-2 hover:bg-surface-container transition-colors shadow-sm">
+<span class="material-symbols-outlined">edit</span> Edit Profile
+                        </button>
+<button class="h-touch-target px-md rounded-lg bg-primary text-on-primary font-label-md text-label-md flex items-center gap-2 hover:bg-primary-container transition-colors shadow-sm">
+<span class="material-symbols-outlined">download</span> Export Data
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Tabs Navigation -->
+<nav class="flex items-center gap-lg border-b border-outline-variant overflow-x-auto hide-scrollbar pb-xs">
+<button class="font-label-md text-label-md text-primary border-b-2 border-primary pb-sm px-2 flex-shrink-0">Summary</button>
+<button class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors pb-sm px-2 flex-shrink-0">Zones/Points</button>
+<button class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors pb-sm px-2 flex-shrink-0">Businesses</button>
+<button class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors pb-sm px-2 flex-shrink-0">Users</button>
+<button class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors pb-sm px-2 flex-shrink-0">Rules</button>
+<button class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors pb-sm px-2 flex-shrink-0">Finance</button>
+<button class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors pb-sm px-2 flex-shrink-0">Incidents</button>
+<button class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors pb-sm px-2 flex-shrink-0">Audit</button>
+</nav>
+<!-- Bento Grid Main Content -->
+<div class="grid grid-cols-12 gap-lg">
+<!-- Operational Details (Col 4) -->
+<div class="col-span-12 lg:col-span-4 bg-surface-container-lowest border border-outline-variant rounded-lg p-lg shadow-level-1 flex flex-col gap-md">
+<div class="flex items-center justify-between mb-sm">
+<h3 class="font-headline-md text-headline-md text-on-surface">Operational Status</h3>
+<span class="material-symbols-outlined text-outline">info</span>
+</div>
+<div class="space-y-sm">
+<div class="flex justify-between items-start border-b border-surface-container pb-sm">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Lead Manager</p>
+<p class="font-body-md text-body-md text-on-surface font-semibold">Dra. Elena Silva</p>
+</div>
+<button class="text-primary hover:bg-surface-container p-1 rounded"><span class="material-symbols-outlined text-[18px]">mail</span></button>
+</div>
+<div class="flex justify-between items-start border-b border-surface-container pb-sm pt-sm">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Access Schedule</p>
+<p class="font-body-md text-body-md text-on-surface">05:00 AM - 17:00 PM (Sabas Nieves)</p>
+<p class="font-label-sm text-label-sm text-error mt-1">Cable car maintenance on Mondays</p>
+</div>
+</div>
+<div class="pt-sm">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-xs">Connectivity &amp; Infrastructure</p>
+<div class="flex flex-wrap gap-xs">
+<span class="px-2 py-1 rounded bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm">LTE Node Active</span>
+<span class="px-2 py-1 rounded bg-surface-variant text-on-surface-variant font-label-sm text-label-sm">Radio VHF</span>
+<span class="px-2 py-1 rounded bg-error-container text-on-error-container font-label-sm text-label-sm">Trail 3 Closed</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Capacity & Occupancy (Col 4) -->
+<div class="col-span-12 lg:col-span-4 bg-surface-container-lowest border border-outline-variant rounded-lg p-lg shadow-level-1 flex flex-col justify-between">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-xs">Current Occupancy</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Real-time estimate across main access points.</p>
+</div>
+<div class="my-lg flex flex-col items-center justify-center">
+<div class="relative w-32 h-32 flex items-center justify-center">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 100 100">
+<circle class="text-surface-variant" cx="50" cy="50" fill="none" r="45" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-primary transition-all duration-1000" cx="50" cy="50" fill="none" r="45" stroke="currentColor" stroke-dasharray="283" stroke-dashoffset="100" stroke-width="8"></circle>
+</svg>
+<div class="absolute flex flex-col items-center">
+<span class="font-headline-lg text-headline-lg text-on-surface">65%</span>
+</div>
+</div>
+</div>
+<div class="space-y-sm">
+<div class="flex justify-between font-label-md text-label-md text-on-surface">
+<span>Current Visitors</span>
+<span>~3,250</span>
+</div>
+<div class="w-full bg-surface-variant h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[65%] rounded-full"></div>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant text-right">Max capacity: 5,000</p>
+</div>
+</div>
+<!-- Business & Concessions Summary (Col 4) -->
+<div class="col-span-12 lg:col-span-4 bg-surface-container-lowest border border-outline-variant rounded-lg p-lg shadow-level-1 flex flex-col gap-md">
+<div class="flex items-center justify-between mb-sm">
+<h3 class="font-headline-md text-headline-md text-on-surface">Commercial Activity</h3>
+<button class="text-primary font-label-md text-label-md hover:underline">View All</button>
+</div>
+<div class="grid grid-cols-2 gap-sm mb-md">
+<div class="p-sm bg-surface-container rounded-lg border border-outline-variant">
+<p class="font-label-sm text-label-sm text-on-surface-variant">Active Concessions</p>
+<p class="font-headline-md text-headline-md text-primary mt-1">24</p>
+</div>
+<div class="p-sm bg-surface-container rounded-lg border border-outline-variant">
+<p class="font-label-sm text-label-sm text-on-surface-variant">Pending Renewals</p>
+<p class="font-headline-md text-headline-md text-error mt-1">3</p>
+</div>
+</div>
+<div class="flex-1 space-y-sm">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Top Revenue Nodes</p>
+<div class="flex items-center justify-between py-1">
+<span class="font-body-md text-body-md text-on-surface flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-secondary"></span> Hotel Humboldt</span>
+<span class="font-label-md text-label-md text-on-surface-variant">42%</span>
+</div>
+<div class="flex items-center justify-between py-1">
+<span class="font-body-md text-body-md text-on-surface flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-tertiary-container"></span> Teleférico Warairarepano</span>
+<span class="font-label-md text-label-md text-on-surface-variant">38%</span>
+</div>
+<div class="flex items-center justify-between py-1">
+<span class="font-body-md text-body-md text-on-surface flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-outline"></span> Kiosks Galipán</span>
+<span class="font-label-md text-label-md text-on-surface-variant">15%</span>
+</div>
+</div>
+</div>
+</div> <!-- End Bento Grid -->
+<!-- Audit Trail Snippet Section -->
+<section class="mt-md bg-surface-container-lowest border border-outline-variant rounded-lg p-lg shadow-level-1">
+<div class="flex items-center justify-between mb-md pb-sm border-b border-surface-container">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-outline">history</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Recent Sensitive Actions</h3>
+</div>
+<button class="h-touch-target px-md border border-outline-variant rounded-lg font-label-md text-label-md text-on-surface hover:bg-surface-container transition-colors">
+                    Full Audit Log
+                </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider border-b border-outline-variant/50">
+<th class="pb-sm px-2 font-normal">Timestamp</th>
+<th class="pb-sm px-2 font-normal">User/Role</th>
+<th class="pb-sm px-2 font-normal">Action</th>
+<th class="pb-sm px-2 font-normal">Entity Affected</th>
+<th class="pb-sm px-2 font-normal">Status</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md text-on-surface">
+<tr class="border-b border-surface-container hover:bg-surface transition-colors">
+<td class="py-sm px-2 text-on-surface-variant">2023-10-24 14:32:10</td>
+<td class="py-sm px-2">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-label-sm text-[10px]">AD</div>
+<span>A. Delgado (SuperAdmin)</span>
+</div>
+</td>
+<td class="py-sm px-2 font-label-md text-label-md">Modified Rule: Entry Fee</td>
+<td class="py-sm px-2 text-on-surface-variant">Global Rule ID: GR-092</td>
+<td class="py-sm px-2"><span class="px-2 py-1 bg-secondary-fixed text-on-secondary-fixed rounded text-xs">Logged</span></td>
+</tr>
+<tr class="border-b border-surface-container hover:bg-surface transition-colors">
+<td class="py-sm px-2 text-on-surface-variant">2023-10-24 09:15:00</td>
+<td class="py-sm px-2">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center font-label-sm text-[10px]">CM</div>
+<span>C. Mendoza (ParkMgr)</span>
+</div>
+</td>
+<td class="py-sm px-2 font-label-md text-label-md">Closed Zone: Sabas Nieves II</td>
+<td class="py-sm px-2 text-on-surface-variant">Zone ID: Z-AV-04 (Weather alert)</td>
+<td class="py-sm px-2"><span class="px-2 py-1 bg-secondary-fixed text-on-secondary-fixed rounded text-xs">Logged</span></td>
+</tr>
+<tr class="hover:bg-surface transition-colors">
+<td class="py-sm px-2 text-on-surface-variant">2023-10-23 16:45:22</td>
+<td class="py-sm px-2">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-label-sm text-[10px]">AD</div>
+<span>A. Delgado (SuperAdmin)</span>
+</div>
+</td>
+<td class="py-sm px-2 font-label-md text-label-md text-error">Revoked Concession Access</td>
+<td class="py-sm px-2 text-on-surface-variant">Business ID: B-774 (Kiosk 5)</td>
+<td class="py-sm px-2"><span class="px-2 py-1 bg-secondary-fixed text-on-secondary-fixed rounded text-xs">Logged</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</main>
+</body></html>

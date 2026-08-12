@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>INPARQUES - Directorio Nacional de Negocios</title>
+<!-- Google Fonts: Manrope -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config injected from Design System -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#005131",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#e4e2dd",
+                        "on-tertiary-fixed-variant": "#3a4a43",
+                        "inverse-on-surface": "#f3f1eb",
+                        "outline-variant": "#bfc9c0",
+                        "outline": "#6f7a71",
+                        "inverse-surface": "#30312d",
+                        "on-background": "#1b1c18",
+                        "surface": "#fbf9f3",
+                        "on-surface": "#1b1c18",
+                        "surface-bright": "#fbf9f3",
+                        "secondary": "#3e6753",
+                        "primary-fixed-dim": "#88d7a8",
+                        "tertiary-container": "#516159",
+                        "surface-tint": "#186c45",
+                        "tertiary-fixed": "#d5e7dd",
+                        "secondary-fixed": "#c0edd4",
+                        "primary-container": "#176b45",
+                        "on-tertiary-fixed": "#0f1e19",
+                        "surface-container-highest": "#e4e2dd",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#446d59",
+                        "surface-container-high": "#eae8e2",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#002114",
+                        "on-error": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#99e9b9",
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#f5f3ed",
+                        "secondary-container": "#c0edd4",
+                        "error-container": "#ffdad6",
+                        "primary-fixed": "#a4f4c3",
+                        "inverse-primary": "#88d7a8",
+                        "on-primary": "#ffffff",
+                        "on-surface-variant": "#3f4942",
+                        "on-primary-fixed-variant": "#005232",
+                        "surface-container": "#f0eee8",
+                        "background": "#fbf9f3",
+                        "secondary-fixed-dim": "#a4d0b8",
+                        "tertiary-fixed-dim": "#b9cbc1",
+                        "on-primary-fixed": "#002111",
+                        "on-secondary-fixed-variant": "#264e3c",
+                        "surface-dim": "#dcdad4",
+                        "tertiary": "#3a4942",
+                        "on-tertiary-container": "#cadbd2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "sm": "12px",
+                        "xs": "8px",
+                        "lg": "24px",
+                        "xl": "32px",
+                        "base": "4px",
+                        "xxl": "48px",
+                        "touch-target": "44px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "display-lg": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "label-sm": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Custom styles for specific component interactions not easily handled by pure Tailwind utilities */
+        .table-row-hover:hover {
+            box-shadow: 0px 4px 12px rgba(40, 51, 46, 0.08);
+            transform: translateY(-1px);
+            z-index: 10;
+            position: relative;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased overflow-hidden flex h-screen">
+<!-- Shared Component: SideNavBar -->
+<aside class="bg-surface dark:bg-surface-dim docked left-0 h-full w-72 flex flex-col fixed left-0 top-0 overflow-y-auto px-xs py-md border-r border-outline-variant dark:border-outline z-50">
+<!-- Brand Area -->
+<div class="px-md pb-lg mb-md border-b border-outline-variant/50">
+<div class="flex items-center gap-sm mb-xs">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed" style="font-size: 32px; font-variation-settings: 'FILL' 1;">eco</span>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">INPARQUES</h1>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">National Superadministrator</p>
+</div>
+<!-- Navigation Links -->
+<nav class="flex flex-col gap-xs">
+<!-- Inactive -->
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container dark:hover:bg-on-tertiary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">National Home</span>
+</a>
+<!-- Inactive -->
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container dark:hover:bg-on-tertiary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">account_tree</span>
+<span class="font-label-md text-label-md">Territorial Structure</span>
+</a>
+<!-- Inactive -->
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container dark:hover:bg-on-tertiary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">park</span>
+<span class="font-label-md text-label-md">Parks</span>
+</a>
+<!-- Active: Businesses -->
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-primary dark:text-primary-fixed font-bold border-r-4 border-primary dark:border-primary-fixed bg-surface-container/50 scale-[0.98] transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">business_center</span>
+<span class="font-label-md text-label-md">Businesses</span>
+</a>
+<!-- Inactive -->
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container dark:hover:bg-on-tertiary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">person_outline</span>
+<span class="font-label-md text-label-md">Users/Roles</span>
+</a>
+<!-- Inactive -->
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container dark:hover:bg-on-tertiary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">gavel</span>
+<span class="font-label-md text-label-md">Global Rules</span>
+</a>
+<!-- Inactive -->
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container dark:hover:bg-on-tertiary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">extension</span>
+<span class="font-label-md text-label-md">Integrations</span>
+</a>
+<!-- Inactive -->
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container dark:hover:bg-on-tertiary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-md text-label-md">Audit</span>
+</a>
+<!-- Inactive -->
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container dark:hover:bg-on-tertiary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">security</span>
+<span class="font-label-md text-label-md">Security</span>
+</a>
+<!-- Inactive -->
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container dark:hover:bg-on-tertiary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Configuration</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content Wrapper (Accounts for SideNav width) -->
+<div class="flex flex-col flex-1 ml-72 h-screen overflow-hidden relative bg-background">
+<!-- Shared Component: TopNavBar -->
+<header class="bg-surface-container-lowest dark:bg-inverse-surface flex justify-between items-center w-full h-16 px-lg border-b border-outline-variant dark:border-outline shadow-sm z-40 shrink-0">
+<!-- Left Side: Product Name & Scopes -->
+<div class="flex items-center gap-xl">
+<span class="font-headline-sm text-headline-sm font-bold text-primary dark:text-primary-fixed">INPARQUES Control Panel</span>
+<nav class="hidden lg:flex items-center gap-md">
+<a class="font-label-md text-label-md text-primary dark:text-primary-fixed border-b-2 border-primary dark:border-primary-fixed pb-1 opacity-80 transition-opacity duration-150" href="#">National Scope</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200 pb-1 border-b-2 border-transparent" href="#">Region Scope</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200 pb-1 border-b-2 border-transparent" href="#">Park Scope</a>
+</nav>
+</div>
+<!-- Right Side: Search & Actions -->
+<div class="flex items-center gap-md">
+<div class="relative hidden md:block">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">search</span>
+<input class="h-[44px] pl-10 pr-4 rounded-lg bg-surface-container-low border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary text-body-md w-64 transition-all" placeholder="Global search..." type="text"/>
+</div>
+<button class="w-[44px] h-[44px] flex items-center justify-center rounded-full hover:bg-surface-container transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-[44px] h-[44px] flex items-center justify-center rounded-full hover:bg-surface-container transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined">verified_user</span>
+</button>
+<div class="w-[40px] h-[40px] rounded-full overflow-hidden border border-outline-variant cursor-pointer ml-sm">
+<img alt="Administrator Avatar with MFA" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFPanhWtd8iu0VaXDe75FfPBwNxrZhEQPmwOgDmi2820mK7DbMYaXlEaUGO4CwTO3snErpuXv9BVHHgDn3JOqjvDSy39X0eYJmAJ4uPPkroSFRcYu_HApPDtaBDmE2jNZslbWea7yWJKuhWXusNAiYNz0SXVWBp-pNPKrNUe4Bzg_EgYhQ3B0U1h_mzr76QHVKKrxQo6ym4462xVQDAK8-XWD7R9NzD70yGCxjUz-Pa_rhw2DymoFg"/>
+</div>
+</div>
+</header>
+<!-- Page Canvas -->
+<main class="flex-1 overflow-y-auto p-lg lg:p-xl relative z-10">
+<!-- Page Header -->
+<div class="mb-lg">
+<h2 class="font-headline-lg text-headline-lg text-on-surface tracking-tight mb-xs">Directorio nacional de negocios</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-3xl">Manage commercial entities, concessions, and permits operating within the national park system. Select a row to view the complete institutional file.</p>
+</div>
+<!-- Toolbar (Search & Filters) -->
+<div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-md mb-md bg-surface-container-lowest p-md rounded-lg border border-outline-variant shadow-sm">
+<!-- Search -->
+<div class="relative w-full lg:w-96">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">search</span>
+<input class="w-full h-[44px] pl-10 pr-4 rounded-md bg-surface border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary text-body-md transition-all" placeholder="Search by Entity Name or RIF..." type="text"/>
+</div>
+<!-- Filters -->
+<div class="flex flex-wrap items-center gap-sm w-full lg:w-auto">
+<button class="h-[44px] px-md flex items-center gap-sm bg-surface border border-outline-variant rounded-md text-on-surface hover:bg-surface-container transition-colors font-label-md text-label-md">
+<span class="material-symbols-outlined" style="font-size: 18px;">park</span>
+                        All Parks
+                        <span class="material-symbols-outlined" style="font-size: 18px;">expand_more</span>
+</button>
+<button class="h-[44px] px-md flex items-center gap-sm bg-surface border border-outline-variant rounded-md text-on-surface hover:bg-surface-container transition-colors font-label-md text-label-md">
+<span class="material-symbols-outlined" style="font-size: 18px;">category</span>
+                        Category
+                        <span class="material-symbols-outlined" style="font-size: 18px;">expand_more</span>
+</button>
+<button class="h-[44px] px-md flex items-center gap-sm bg-surface border border-outline-variant rounded-md text-on-surface hover:bg-surface-container transition-colors font-label-md text-label-md">
+<span class="material-symbols-outlined" style="font-size: 18px;">filter_list</span>
+                        More Filters
+                    </button>
+<div class="w-px h-8 bg-outline-variant mx-sm hidden sm:block"></div>
+<button class="h-[44px] px-lg flex items-center gap-sm bg-primary-container text-on-primary-container rounded-md hover:bg-primary hover:text-on-primary transition-colors shadow-sm font-label-md text-label-md">
+<span class="material-symbols-outlined" style="font-size: 18px;">add</span>
+                        New Entity
+                    </button>
+</div>
+</div>
+<!-- Dense Data Table -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-x-auto shadow-sm">
+<table class="w-full text-left border-collapse min-w-[1000px]">
+<thead class="bg-surface-container-low text-label-md font-label-md text-on-surface-variant border-b border-outline-variant">
+<tr>
+<th class="py-sm px-md font-semibold whitespace-nowrap">Legal Entity</th>
+<th class="py-sm px-md font-semibold whitespace-nowrap">Public Name</th>
+<th class="py-sm px-md font-semibold whitespace-nowrap">RIF (Tax ID)</th>
+<th class="py-sm px-md font-semibold whitespace-nowrap">Park Location</th>
+<th class="py-sm px-md font-semibold whitespace-nowrap">Category</th>
+<th class="py-sm px-md font-semibold whitespace-nowrap">File Status</th>
+<th class="py-sm px-md font-semibold whitespace-nowrap">Permit</th>
+<th class="py-sm px-md font-semibold whitespace-nowrap">Status</th>
+<th class="py-sm px-md font-semibold text-right whitespace-nowrap">Actions</th>
+</tr>
+</thead>
+<tbody class="text-body-md font-body-md text-on-surface divide-y divide-outline-variant/50">
+<!-- Row 1 -->
+<tr class="table-row-hover bg-surface-container-lowest transition-all cursor-pointer group">
+<td class="py-sm px-md whitespace-nowrap font-medium">EcoTours C.A.</td>
+<td class="py-sm px-md whitespace-nowrap text-on-surface-variant">EcoTours Mochima</td>
+<td class="py-sm px-md whitespace-nowrap font-mono text-sm text-on-surface-variant">J-31***890-1</td>
+<td class="py-sm px-md whitespace-nowrap">Mochima NP</td>
+<td class="py-sm px-md whitespace-nowrap">Concessionaire</td>
+<td class="py-sm px-md whitespace-nowrap">
+<span class="inline-flex items-center gap-xs px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Complete
+                                </span>
+</td>
+<td class="py-sm px-md whitespace-nowrap">Valid</td>
+<td class="py-sm px-md whitespace-nowrap">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-primary/10 text-primary font-label-sm text-label-sm border border-primary/20">Active</span>
+</td>
+<td class="py-sm px-md whitespace-nowrap text-right">
+<button class="p-1 rounded hover:bg-surface-variant text-on-surface-variant transition-colors" onclick="document.getElementById('suspend-modal').classList.remove('hidden')" title="Suspend Entity">
+<span class="material-symbols-outlined" style="font-size: 20px;">block</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-variant text-on-surface-variant transition-colors ml-1" title="View File">
+<span class="material-symbols-outlined" style="font-size: 20px;">chevron_right</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="table-row-hover bg-surface-container-lowest transition-all cursor-pointer group">
+<td class="py-sm px-md whitespace-nowrap font-medium">Servicios Ambientales Vzla</td>
+<td class="py-sm px-md whitespace-nowrap text-on-surface-variant">SAV</td>
+<td class="py-sm px-md whitespace-nowrap font-mono text-sm text-on-surface-variant">J-40***112-9</td>
+<td class="py-sm px-md whitespace-nowrap">Henri Pittier NP</td>
+<td class="py-sm px-md whitespace-nowrap">Services</td>
+<td class="py-sm px-md whitespace-nowrap">
+<span class="inline-flex items-center gap-xs px-2 py-0.5 rounded-full bg-surface-variant text-on-surface-variant font-label-sm text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span> Incomplete
+                                </span>
+</td>
+<td class="py-sm px-md whitespace-nowrap text-error font-medium">Expired</td>
+<td class="py-sm px-md whitespace-nowrap">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm border border-error/20">Suspended</span>
+</td>
+<td class="py-sm px-md whitespace-nowrap text-right">
+<button class="p-1 rounded hover:bg-surface-variant text-on-surface-variant transition-colors" disabled="" title="Suspend Entity">
+<span class="material-symbols-outlined opacity-50" style="font-size: 20px;">block</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-variant text-on-surface-variant transition-colors ml-1" title="View File">
+<span class="material-symbols-outlined" style="font-size: 20px;">chevron_right</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="table-row-hover bg-surface-container-lowest transition-all cursor-pointer group">
+<td class="py-sm px-md whitespace-nowrap font-medium">Kiosco El Morro S.R.L</td>
+<td class="py-sm px-md whitespace-nowrap text-on-surface-variant">El Morro Snacks</td>
+<td class="py-sm px-md whitespace-nowrap font-mono text-sm text-on-surface-variant">V-12***334-0</td>
+<td class="py-sm px-md whitespace-nowrap">Morrocoy NP</td>
+<td class="py-sm px-md whitespace-nowrap">Vendor</td>
+<td class="py-sm px-md whitespace-nowrap">
+<span class="inline-flex items-center gap-xs px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Complete
+                                </span>
+</td>
+<td class="py-sm px-md whitespace-nowrap">Valid</td>
+<td class="py-sm px-md whitespace-nowrap">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-primary/10 text-primary font-label-sm text-label-sm border border-primary/20">Active</span>
+</td>
+<td class="py-sm px-md whitespace-nowrap text-right">
+<button class="p-1 rounded hover:bg-surface-variant text-on-surface-variant transition-colors" onclick="document.getElementById('suspend-modal').classList.remove('hidden')" title="Suspend Entity">
+<span class="material-symbols-outlined" style="font-size: 20px;">block</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-variant text-on-surface-variant transition-colors ml-1" title="View File">
+<span class="material-symbols-outlined" style="font-size: 20px;">chevron_right</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="table-row-hover bg-surface-container-lowest transition-all cursor-pointer group">
+<td class="py-sm px-md whitespace-nowrap font-medium">Canaima Lodges C.A.</td>
+<td class="py-sm px-md whitespace-nowrap text-on-surface-variant">Angel Falls Camp</td>
+<td class="py-sm px-md whitespace-nowrap font-mono text-sm text-on-surface-variant">J-22***567-4</td>
+<td class="py-sm px-md whitespace-nowrap">Canaima NP</td>
+<td class="py-sm px-md whitespace-nowrap">Hospitality</td>
+<td class="py-sm px-md whitespace-nowrap">
+<span class="inline-flex items-center gap-xs px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Complete
+                                </span>
+</td>
+<td class="py-sm px-md whitespace-nowrap">Pending Renewal</td>
+<td class="py-sm px-md whitespace-nowrap">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-surface-variant text-on-surface-variant font-label-sm text-label-sm border border-outline/20">Under Review</span>
+</td>
+<td class="py-sm px-md whitespace-nowrap text-right">
+<button class="p-1 rounded hover:bg-surface-variant text-on-surface-variant transition-colors" onclick="document.getElementById('suspend-modal').classList.remove('hidden')" title="Suspend Entity">
+<span class="material-symbols-outlined" style="font-size: 20px;">block</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-variant text-on-surface-variant transition-colors ml-1" title="View File">
+<span class="material-symbols-outlined" style="font-size: 20px;">chevron_right</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination (Simplified) -->
+<div class="flex justify-between items-center mt-md text-on-surface-variant font-label-md text-label-md">
+<span>Showing 1 to 4 of 248 entries</span>
+<div class="flex gap-xs">
+<button class="w-[36px] h-[36px] flex items-center justify-center rounded border border-outline-variant hover:bg-surface-container transition-colors disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-[36px] h-[36px] flex items-center justify-center rounded border border-primary bg-primary-container text-on-primary-container">1</button>
+<button class="w-[36px] h-[36px] flex items-center justify-center rounded border border-outline-variant hover:bg-surface-container transition-colors">2</button>
+<button class="w-[36px] h-[36px] flex items-center justify-center rounded border border-outline-variant hover:bg-surface-container transition-colors">3</button>
+<span class="w-[36px] h-[36px] flex items-center justify-center">...</span>
+<button class="w-[36px] h-[36px] flex items-center justify-center rounded border border-outline-variant hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</main>
+</div>
+<!-- Suspend Action Modal (Hidden by default) -->
+<div class="fixed inset-0 bg-on-background/50 z-[100] hidden flex items-center justify-center p-md backdrop-blur-sm transition-opacity" id="suspend-modal">
+<div class="bg-surface-container-lowest rounded-xl shadow-[0px_12px_32px_rgba(40,51,46,0.12)] w-full max-w-lg border border-outline-variant overflow-hidden flex flex-col max-h-[90vh]">
+<div class="p-lg border-b border-outline-variant/50 flex justify-between items-start bg-error-container/20">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-xs flex items-center gap-sm">
+<span class="material-symbols-outlined text-error">warning</span>
+                        Suspend Entity
+                    </h3>
+<p class="font-body-md text-body-md text-on-surface-variant">You are initiating a suspension for <strong class="text-on-surface">EcoTours C.A.</strong></p>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface" onclick="document.getElementById('suspend-modal').classList.add('hidden')">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="p-lg overflow-y-auto flex-1 flex flex-col gap-md">
+<!-- Reason Field -->
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface">Reason for Suspension <span class="text-error">*</span></label>
+<textarea class="w-full rounded-md bg-surface border border-outline-variant focus:border-error focus:ring-1 focus:ring-error text-body-md p-sm transition-all resize-none" placeholder="Detail the administrative or environmental infraction..." rows="4"></textarea>
+</div>
+<!-- Effective Date -->
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface">Effective Date <span class="text-error">*</span></label>
+<input class="w-full h-[44px] rounded-md bg-surface border border-outline-variant focus:border-error focus:ring-1 focus:ring-error text-body-md px-sm transition-all" type="date"/>
+</div>
+<!-- Evidence Upload -->
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface">Supporting Evidence (PDF, JPG, PNG)</label>
+<div class="border-2 border-dashed border-outline-variant rounded-lg p-lg flex flex-col items-center justify-center text-center bg-surface hover:bg-surface-container transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-on-surface-variant mb-sm" style="font-size: 32px;">upload_file</span>
+<p class="font-body-md text-body-md text-on-surface-variant mb-xs">Drag and drop files here, or click to browse</p>
+<p class="font-label-sm text-label-sm text-outline">Max size 10MB per file</p>
+</div>
+</div>
+</div>
+<div class="p-md border-t border-outline-variant/50 flex justify-end gap-sm bg-surface-container-low">
+<button class="h-[44px] px-lg rounded-md border border-outline-variant text-on-surface hover:bg-surface-container transition-colors font-label-md text-label-md" onclick="document.getElementById('suspend-modal').classList.add('hidden')">
+                    Cancel
+                </button>
+<button class="h-[44px] px-lg rounded-md bg-error text-on-error hover:bg-error/90 transition-colors shadow-sm font-label-md text-label-md flex items-center gap-xs">
+<span class="material-symbols-outlined" style="font-size: 18px;">gavel</span>
+                    Enforce Suspension
+                </button>
+</div>
+</div>
+</div>
+</body></html>

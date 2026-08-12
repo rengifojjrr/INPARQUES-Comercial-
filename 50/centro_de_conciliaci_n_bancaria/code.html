@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Conciliación - Park Commerce Finance</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#005131",
+                        "surface": "#fbf9f3",
+                        "secondary-container": "#c0edd4",
+                        "surface-variant": "#e4e2dd",
+                        "surface-container-high": "#eae8e2",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed": "#002114",
+                        "on-surface": "#1b1c18",
+                        "on-primary-container": "#99e9b9",
+                        "on-tertiary-container": "#cadbd2",
+                        "on-tertiary-fixed": "#0f1e19",
+                        "surface-container": "#f0eee8",
+                        "inverse-surface": "#30312d",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#bfc9c0",
+                        "surface-bright": "#fbf9f3",
+                        "tertiary-fixed": "#d5e7dd",
+                        "on-surface-variant": "#3f4942",
+                        "surface-container-highest": "#e4e2dd",
+                        "primary-container": "#176b45",
+                        "on-primary-fixed": "#002111",
+                        "outline": "#6f7a71",
+                        "tertiary": "#3a4942",
+                        "surface-tint": "#186c45",
+                        "on-background": "#1b1c18",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#3a4a43",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed-variant": "#264e3c",
+                        "primary-fixed-dim": "#88d7a8",
+                        "on-primary-fixed-variant": "#005232",
+                        "inverse-primary": "#88d7a8",
+                        "surface-container-low": "#f5f3ed",
+                        "tertiary-container": "#516159",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed-dim": "#a4d0b8",
+                        "error": "#ba1a1a",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed": "#c0edd4",
+                        "on-secondary-container": "#446d59",
+                        "secondary": "#3e6753",
+                        "primary-fixed": "#a4f4c3",
+                        "surface-dim": "#dcdad4",
+                        "inverse-on-surface": "#f3f1eb",
+                        "background": "#fbf9f3",
+                        "tertiary-fixed-dim": "#b9cbc1"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "32px",
+                        "touch-target": "44px",
+                        "sm": "12px",
+                        "base": "4px",
+                        "md": "16px",
+                        "xxl": "48px",
+                        "lg": "24px",
+                        "xs": "8px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "display-lg": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex">
+<!-- SideNavBar (Shared Component) -->
+<aside class="bg-surface-container-low border-r border-outline-variant h-screen w-64 fixed left-0 top-0 flex flex-col py-md px-sm z-50 hidden md:flex">
+<!-- Header -->
+<div class="px-md pb-lg mb-sm border-b border-outline-variant flex items-center gap-sm">
+<img alt="Organization Logo" class="w-10 h-10 rounded-lg object-cover" data-alt="A clean, minimalist vector logo design for an organization focused on audit and integrity, featuring a geometric crest in deep green and white, set against a light background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgTSiVcVpO26B55yYPOckpAFSBeToYo33p9eLq_DexokNhnMew8R08OgXpl7Xnd-dj1p02BS89FNOjsrWWAUuJRLJ0GoHRe9MBYvk8WdnKNZS7bSGxXP4hnLx6VdSHgqGzVucFr5v-OXjCGYGW_y7JO_6oDgQmMNUrQ1QoY3OFpgh0BhjqITYxjNwiv4dJzo8EPKtaPlKOmK44OwudE_uFc1_NkjSORc9XtNelIR0tlVaYqCNgm6Kv"/>
+<div>
+<h1 class="text-headline-sm font-headline-sm font-extrabold text-on-secondary-fixed">Finance Portal</h1>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Audit &amp; Integrity</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="flex-1 overflow-y-auto space-y-base py-sm">
+<a class="flex items-center gap-md px-md py-sm text-label-md font-label-md text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span> Summary
+            </a>
+<a class="flex items-center gap-md px-md py-sm text-label-md font-label-md text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined text-[20px]">book_2</span> Sales Books
+            </a>
+<a class="flex items-center gap-md px-md py-sm text-label-md font-label-md text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined text-[20px]">payments</span> Payments
+            </a>
+<!-- Active Tab: Reconciliation -->
+<a class="flex items-center gap-md px-md py-sm text-label-md font-label-md bg-secondary-container text-on-secondary-container font-bold rounded-lg transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">account_balance</span> Reconciliation
+            </a>
+<a class="flex items-center gap-md px-md py-sm text-label-md font-label-md text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined text-[20px]">receipt</span> Invoices
+            </a>
+<a class="flex items-center gap-md px-md py-sm text-label-md font-label-md text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined text-[20px]">event_available</span> Daily Closings
+            </a>
+<a class="flex items-center gap-md px-md py-sm text-label-md font-label-md text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined text-[20px]">percent</span> Commissions
+            </a>
+</nav>
+<!-- Footer Links -->
+<div class="mt-auto pt-sm border-t border-outline-variant space-y-base">
+<a class="flex items-center gap-md px-md py-sm text-label-md font-label-md text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined text-[20px]">ios_share</span> Export Manager
+            </a>
+<a class="flex items-center gap-md px-md py-sm text-label-md font-label-md text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined text-[20px]">help</span> Support
+            </a>
+</div>
+</aside>
+<!-- Main Content Wrapper -->
+<div class="flex-1 flex flex-col min-h-screen md:ml-64 w-full relative">
+<!-- TopNavBar (Shared Component) -->
+<header class="flex justify-between items-center px-lg h-[64px] sticky top-0 z-40 bg-surface full-width">
+<div class="flex items-center gap-md w-full max-w-md">
+<!-- Search Bar (on_left) -->
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline text-[20px]">search</span>
+<input class="w-full pl-[40px] pr-sm py-xs bg-surface-container-lowest border border-outline-variant rounded-full text-body-md font-body-md text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors h-[40px]" placeholder="Buscar registros..." type="text"/>
+</div>
+</div>
+<!-- Product Name -->
+<div class="hidden lg:block absolute left-1/2 -translate-x-1/2">
+<h2 class="text-headline-md font-headline-md font-bold text-primary">Park Commerce Finance</h2>
+</div>
+<div class="flex items-center gap-md">
+<!-- Trailing Icon Actions -->
+<button class="w-[44px] h-[44px] flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container transition-colors cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined text-[24px]">notifications</span>
+</button>
+<button class="w-[44px] h-[44px] flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container transition-colors cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined text-[24px]">settings</span>
+</button>
+<!-- Profile Image -->
+<button class="ml-sm cursor-pointer active:opacity-80 rounded-full hover:ring-2 ring-primary ring-offset-2 ring-offset-surface transition-all">
+<img alt="Accountant Profile Avatar" class="w-10 h-10 rounded-full object-cover border border-outline-variant" data-alt="A professional headshot of an accountant in a modern office setting. The person is wearing a tailored grey suit jacket with a subtle green tie, smiling warmly. Lighting is bright and natural, indicating a daytime corporate environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAQByBksVv5dGM8fQoLKOKAxD0mtsoJn8Dqv_rb3DNcc03mAdZgNK9WgK_glZs3QOYPw1zY0eY82nxALyHBno3lRUUhmeEP7g1afUP655YAmT5vgj_kWGifkNVfBDy4DimyzIumurG5UTg7vH6GRRGaOLKsT9t4ijZ2QK5G0pu6IqlClvVGmsmc0d-9NrxDFQy08cQ2uU_I0F1ExDsE_ocQmnySGgX3sdUeq3ZbC2vg3sqSnR--yTb"/>
+</button>
+</div>
+</header>
+<!-- Main Workspace Canvas -->
+<main class="flex-1 p-md lg:p-xl overflow-y-auto pb-xxl">
+<!-- Page Header & Filters -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-lg gap-md">
+<div>
+<h2 class="text-headline-lg font-headline-lg text-on-surface mb-xs">Emparejamiento de Movimientos</h2>
+<p class="text-body-md font-body-md text-on-surface-variant">Compara ventas registradas vs depósitos bancarios para su consolidación.</p>
+</div>
+<div class="flex gap-sm">
+<button class="h-[44px] px-md bg-surface-container-lowest border border-outline-variant text-on-surface rounded-lg text-label-md font-label-md flex items-center gap-xs hover:bg-surface-variant transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[20px]">filter_list</span> Filtrar
+                    </button>
+<button class="h-[44px] px-md bg-primary-container text-on-primary rounded-lg text-label-md font-label-md flex items-center gap-xs hover:bg-surface-tint transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[20px]">magic_button</span> Auto-Emparejar
+                    </button>
+</div>
+</div>
+<!-- Summary Status Bar -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-md mb-xl">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md shadow-sm">
+<p class="text-label-sm font-label-sm text-outline mb-xs">Pendientes</p>
+<p class="text-headline-md font-headline-md text-secondary">42</p>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md shadow-sm">
+<p class="text-label-sm font-label-sm text-outline mb-xs">Con Diferencia</p>
+<p class="text-headline-md font-headline-md text-error">3</p>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md shadow-sm">
+<p class="text-label-sm font-label-sm text-outline mb-xs">Posibles Duplicados</p>
+<p class="text-headline-md font-headline-md text-tertiary">1</p>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md shadow-sm">
+<p class="text-label-sm font-label-sm text-outline mb-xs">Conciliadas (Hoy)</p>
+<p class="text-headline-md font-headline-md text-primary">128</p>
+</div>
+</div>
+<!-- Matching Interface List -->
+<div class="flex flex-col gap-lg">
+<!-- Card 1: Diferencia (Difference) -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-sm hover:shadow-md transition-shadow">
+<!-- Header -->
+<div class="flex justify-between items-center pb-md border-b border-surface-variant mb-md">
+<div class="flex items-center gap-sm">
+<span class="text-label-md font-label-md text-on-surface">Match ID: #REC-8492</span>
+<span class="text-label-sm font-label-sm text-outline-variant">•</span>
+<span class="text-body-md font-body-md text-on-surface-variant">12 Oct 2023</span>
+</div>
+<div class="bg-error-container text-on-error-container bg-opacity-20 px-sm py-xs rounded text-label-sm font-label-sm flex items-center gap-xs border border-error-container">
+<span class="material-symbols-outlined text-[16px]">error</span> Diferencia
+                        </div>
+</div>
+<!-- Split Pane Comparison -->
+<div class="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-md items-center mb-md">
+<!-- Left: System Expected -->
+<div class="bg-surface border border-outline-variant rounded-lg p-md">
+<div class="flex items-center gap-xs mb-sm">
+<span class="material-symbols-outlined text-[18px] text-outline">database</span>
+<p class="text-label-sm font-label-sm text-outline uppercase tracking-wider">Sistema (Esperado)</p>
+</div>
+<h3 class="text-headline-md font-headline-md text-on-surface mb-xs">$1,250.00</h3>
+<div class="space-y-xs">
+<p class="text-body-md font-body-md text-on-surface-variant flex justify-between">
+<span>Referencia:</span> <span class="font-bold text-on-surface">INV-2023-1042</span>
+</p>
+<p class="text-body-md font-body-md text-on-surface-variant flex justify-between">
+<span>Concepto:</span> <span class="text-on-surface truncate ml-sm">Concesión Zona Sur - Octubre</span>
+</p>
+<p class="text-body-md font-body-md text-on-surface-variant flex justify-between">
+<span>Cliente:</span> <span class="text-on-surface">EcoTurismo C.A.</span>
+</p>
+</div>
+</div>
+<!-- Center Divider / Connector -->
+<div class="hidden md:flex flex-col items-center justify-center text-error">
+<span class="material-symbols-outlined text-[32px]">sync_problem</span>
+<div class="h-12 border-l border-dashed border-error-container mt-xs"></div>
+</div>
+<!-- Right: Bank Actual -->
+<div class="bg-surface border border-outline-variant rounded-lg p-md">
+<div class="flex items-center gap-xs mb-sm">
+<span class="material-symbols-outlined text-[18px] text-outline">account_balance_wallet</span>
+<p class="text-label-sm font-label-sm text-outline uppercase tracking-wider">Banco (Recibido)</p>
+</div>
+<h3 class="text-headline-md font-headline-md text-error mb-xs">$1,200.00</h3>
+<div class="space-y-xs">
+<p class="text-body-md font-body-md text-on-surface-variant flex justify-between">
+<span>Referencia:</span> <span class="font-bold text-on-surface">TRN-998822</span>
+</p>
+<p class="text-body-md font-body-md text-on-surface-variant flex justify-between">
+<span>Concepto:</span> <span class="text-on-surface truncate ml-sm">Pago Fectura 1042</span>
+</p>
+<p class="text-body-md font-body-md text-on-surface-variant flex justify-between">
+<span>Origen:</span> <span class="text-on-surface">Banco Provincial</span>
+</p>
+</div>
+</div>
+</div>
+<!-- Discrepancy Note -->
+<div class="bg-surface-variant rounded-md p-sm mb-md text-body-md font-body-md text-on-surface-variant flex items-start gap-sm">
+<span class="material-symbols-outlined text-[20px] text-outline mt-xs">info</span>
+<p>Se detectó una diferencia de <strong>$50.00</strong>. Posible cargo por comisión bancaria o retención no registrada en el sistema. Requiere revisión manual y soporte adjunto.</p>
+</div>
+<!-- Actions Footer -->
+<div class="flex justify-between items-center pt-sm border-t border-surface-variant">
+<div class="flex gap-sm">
+<button class="h-[44px] px-md border border-outline-variant rounded text-label-md font-label-md text-on-surface hover:bg-surface-variant transition-colors flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">attach_file</span> Adjuntar
+                            </button>
+<button class="h-[44px] px-md border border-outline-variant rounded text-label-md font-label-md text-on-surface hover:bg-surface-variant transition-colors flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">add_comment</span> Comentar
+                            </button>
+</div>
+<!-- Blocked Action -->
+<button class="h-[44px] px-md bg-surface-variant text-on-surface-variant rounded text-label-md font-label-md flex items-center gap-xs opacity-60 cursor-not-allowed group relative" disabled="">
+<span class="material-symbols-outlined text-[18px]">lock</span> Conciliar (Requiere Aprobación)
+                            <!-- Tooltip (Simulated via hover setup if needed, keeping simple for now) -->
+</button>
+</div>
+</div>
+<!-- Card 2: Pendiente (Pending Match) -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-sm hover:shadow-md transition-shadow">
+<!-- Header -->
+<div class="flex justify-between items-center pb-md border-b border-surface-variant mb-md">
+<div class="flex items-center gap-sm">
+<span class="text-label-md font-label-md text-on-surface">Match ID: #REC-8495</span>
+<span class="text-label-sm font-label-sm text-outline-variant">•</span>
+<span class="text-body-md font-body-md text-on-surface-variant">12 Oct 2023</span>
+</div>
+<div class="bg-secondary-container text-on-secondary-container bg-opacity-30 px-sm py-xs rounded text-label-sm font-label-sm flex items-center gap-xs border border-secondary-container">
+<span class="material-symbols-outlined text-[16px]">pending</span> Pendiente de Revisión
+                        </div>
+</div>
+<!-- Split Pane Comparison -->
+<div class="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-md items-center mb-md">
+<!-- Left: System -->
+<div class="bg-surface border border-outline-variant rounded-lg p-md">
+<div class="flex items-center gap-xs mb-sm">
+<span class="material-symbols-outlined text-[18px] text-outline">database</span>
+<p class="text-label-sm font-label-sm text-outline uppercase tracking-wider">Sistema (Esperado)</p>
+</div>
+<h3 class="text-headline-md font-headline-md text-on-surface mb-xs">$8,450.00</h3>
+<div class="space-y-xs">
+<p class="text-body-md font-body-md text-on-surface-variant flex justify-between">
+<span>Referencia:</span> <span class="font-bold text-on-surface">INV-2023-1088</span>
+</p>
+<p class="text-body-md font-body-md text-on-surface-variant flex justify-between">
+<span>Cliente:</span> <span class="text-on-surface">Restaurante Mirador</span>
+</p>
+</div>
+</div>
+<!-- Center Link -->
+<div class="hidden md:flex flex-col items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[32px]">link</span>
+<div class="h-12 border-l border-dashed border-secondary-container mt-xs"></div>
+</div>
+<!-- Right: Bank -->
+<div class="bg-surface border border-outline-variant rounded-lg p-md">
+<div class="flex items-center gap-xs mb-sm">
+<span class="material-symbols-outlined text-[18px] text-outline">account_balance_wallet</span>
+<p class="text-label-sm font-label-sm text-outline uppercase tracking-wider">Banco (Recibido)</p>
+</div>
+<h3 class="text-headline-md font-headline-md text-on-surface mb-xs">$8,450.00</h3>
+<div class="space-y-xs">
+<p class="text-body-md font-body-md text-on-surface-variant flex justify-between">
+<span>Referencia:</span> <span class="font-bold text-on-surface">DEP-554411</span>
+</p>
+<p class="text-body-md font-body-md text-on-surface-variant flex justify-between">
+<span>Origen:</span> <span class="text-on-surface">Banco Mercantil</span>
+</p>
+</div>
+</div>
+</div>
+<!-- Actions Footer -->
+<div class="flex justify-between items-center pt-sm border-t border-surface-variant">
+<div class="flex gap-sm">
+<button class="h-[44px] px-md border border-outline-variant rounded text-label-md font-label-md text-on-surface hover:bg-surface-variant transition-colors flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">add_comment</span> Nota Interna
+                            </button>
+</div>
+<button class="h-[44px] px-md bg-secondary text-on-secondary rounded text-label-md font-label-md flex items-center gap-xs hover:bg-primary transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">check_circle</span> Confirmar Emparejamiento
+                        </button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

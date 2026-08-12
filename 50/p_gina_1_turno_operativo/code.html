@@ -1,0 +1,252 @@
+<!DOCTYPE html><html lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Inicio de Turno</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#b9cbc1",
+                        "primary-container": "#176b45",
+                        "on-tertiary-fixed-variant": "#3a4a43",
+                        "inverse-on-surface": "#f3f1eb",
+                        "outline-variant": "#bfc9c0",
+                        "tertiary": "#3a4942",
+                        "secondary-container": "#c0edd4",
+                        "surface-container-low": "#f5f3ed",
+                        "surface-container-high": "#eae8e2",
+                        "tertiary-container": "#516159",
+                        "surface-variant": "#e4e2dd",
+                        "on-primary-fixed": "#002111",
+                        "on-error-container": "#93000a",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed": "#a4f4c3",
+                        "error": "#ba1a1a",
+                        "inverse-surface": "#30312d",
+                        "on-error": "#ffffff",
+                        "surface-container": "#f0eee8",
+                        "on-surface": "#1b1c18",
+                        "on-primary-fixed-variant": "#005232",
+                        "on-tertiary-fixed": "#0f1e19",
+                        "on-secondary-fixed-variant": "#264e3c",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "secondary": "#3e6753",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed-dim": "#a4d0b8",
+                        "surface": "#fbf9f3",
+                        "secondary-fixed": "#c0edd4",
+                        "primary": "#005131",
+                        "on-surface-variant": "#3f4942",
+                        "on-tertiary-container": "#cadbd2",
+                        "background": "#fbf9f3",
+                        "surface-tint": "#186c45",
+                        "on-primary-container": "#99e9b9",
+                        "inverse-primary": "#88d7a8",
+                        "surface-container-highest": "#e4e2dd",
+                        "on-secondary-container": "#446d59",
+                        "primary-fixed-dim": "#88d7a8",
+                        "on-secondary-fixed": "#002114",
+                        "surface-bright": "#fbf9f3",
+                        "tertiary-fixed": "#d5e7dd",
+                        "surface-dim": "#dcdad4",
+                        "on-background": "#1b1c18",
+                        "outline": "#6f7a71"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "8px",
+                        "base": "4px",
+                        "lg": "24px",
+                        "xxl": "48px",
+                        "md": "16px",
+                        "sm": "12px",
+                        "touch-target": "44px",
+                        "xl": "32px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Manrope"],
+                        "display-lg": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "label-sm": ["Manrope"],
+                        "headline-lg": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; background-color: #F7F5EF; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface h-screen flex flex-col antialiased">
+<!-- TopAppBar (Transactional - Hidden for this flow) -->
+<header class="w-full top-0 sticky border-b border-outline-variant dark:border-outline bg-surface dark:bg-surface-dim hidden md:flex flex justify-between items-center px-md h-touch-target max-w-full">
+<div class="flex items-center gap-sm">
+<button class="hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors rounded-full p-xs active:scale-95 duration-100">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim" style="font-variation-settings: 'FILL' 0;">menu</span>
+</button>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim tracking-tight">Operaciones Parque</h1>
+</div>
+<button class="hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors rounded-full p-xs active:scale-95 duration-100">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim" style="font-variation-settings: 'FILL' 0;">account_circle</span>
+</button>
+</header>
+<!-- Main Content - Linear/Transactional Flow -->
+<main class="flex-grow overflow-y-auto px-md md:px-lg py-lg flex flex-col justify-center items-center">
+<div class="w-full max-w-2xl bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm p-lg flex flex-col gap-xl">
+<!-- Header Section -->
+<div class="flex flex-col gap-sm text-center">
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">Bienvenido, Operador</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Confirme sus datos para iniciar el turno operativo.</p>
+<div class="inline-flex items-center justify-center gap-base mt-sm bg-[#e8f5e9] text-[#1b5e20] px-sm py-base rounded-full self-center">
+<span class="material-symbols-outlined text-[16px]">wifi</span>
+<span class="font-label-sm text-label-sm">En línea</span>
+</div>
+</div>
+<!-- Context Details Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<!-- Selector de Local -->
+<div class="flex flex-col gap-base">
+<label class="font-label-md text-label-md text-on-surface" for="local-select">Local Asignado</label>
+<div class="relative">
+<select class="w-full h-touch-target bg-surface-container-lowest border border-outline-variant rounded-lg px-md font-body-md text-body-md text-on-surface appearance-none focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" id="local-select">
+<option>Restaurante Principal - Zona A</option>
+<option>Kiosko Norte - Zona B</option>
+<option>Cafetería Mirador</option>
+</select>
+<span class="material-symbols-outlined absolute right-md top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Responsable -->
+<div class="flex flex-col gap-base">
+<span class="font-label-md text-label-md text-on-surface">Responsable de Turno</span>
+<div class="h-touch-target flex items-center px-md bg-surface-container-low rounded-lg border border-transparent font-body-md text-body-md text-on-surface-variant">
+                        Staff Operativo
+                    </div>
+</div>
+</div>
+<!-- Metric Preview Cards (Bento Style) -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-sm">
+<div class="bg-surface-container-low rounded-lg p-sm border border-outline-variant flex flex-col items-center justify-center text-center">
+<span class="material-symbols-outlined text-primary mb-xs" style="font-variation-settings: 'FILL' 1;">receipt_long</span>
+<span class="font-headline-md text-headline-md text-on-surface">12</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Pedidos Nuevos</span>
+</div>
+<div class="bg-surface-container-low rounded-lg p-sm border border-outline-variant flex flex-col items-center justify-center text-center">
+<span class="material-symbols-outlined text-tertiary-container mb-xs">cooking</span>
+<span class="font-headline-md text-headline-md text-on-surface">5</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">En Preparación</span>
+</div>
+<div class="bg-surface-container-low rounded-lg p-sm border border-outline-variant flex flex-col items-center justify-center text-center">
+<span class="material-symbols-outlined text-secondary mb-xs" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-headline-md text-headline-md text-on-surface">8</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Listos</span>
+</div>
+<div class="bg-surface-container-low rounded-lg p-sm border border-outline-variant flex flex-col items-center justify-center text-center">
+<span class="material-symbols-outlined text-primary mb-xs" style="font-variation-settings: 'FILL' 1;">calendar_today</span>
+<span class="font-headline-md text-headline-md text-on-surface">3</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Reservas Próx.</span>
+</div>
+</div>
+<!-- Call to Action -->
+<div class="pt-sm">
+<button class="w-full h-16 bg-primary-container text-on-primary rounded-full font-headline-md text-headline-md hover:bg-[#125a3a] transition-colors active:scale-95 duration-100 flex items-center justify-center gap-sm shadow-md">
+<span class="material-symbols-outlined">play_arrow</span>
+                    Iniciar Turno
+                </button>
+</div>
+</div>
+</main>
+<!-- Navigation Drawer (Hidden initially) -->
+<aside class="fixed inset-y-0 left-0 transform -translate-x-full transition-transform duration-300 z-50 h-full w-80 rounded-r-xl bg-surface-container dark:bg-surface-container-low shadow-lg dark:shadow-none flex flex-col p-md gap-sm bg-surface dark:bg-surface-dim" id="nav-drawer">
+<div class="flex items-center gap-md mb-lg">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-headline-md">
+                S
+            </div>
+<div>
+<h3 class="font-headline-md text-headline-md-mobile text-primary">Staff Operativo</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Zona A - Restaurante</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Turno Mañana</p>
+</div>
+</div>
+<nav class="flex flex-col gap-base">
+<a class="flex items-center gap-md p-sm text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-high rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-body-md text-body-md">Perfil Usuario</span>
+</a>
+<a class="flex items-center gap-md p-sm text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-high rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">sync_alt</span>
+<span class="font-body-md text-body-md">Cambio Turno</span>
+</a>
+<a class="flex items-center gap-md p-sm text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-high rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">qr_code_scanner</span>
+<span class="font-body-md text-body-md">Validar QR</span>
+</a>
+<hr class="border-outline-variant my-sm">
+<a class="flex items-center gap-md p-sm text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-high rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-body-md text-body-md">Cerrar Sesión</span>
+</a>
+</nav>
+</aside>
+<!-- Drawer Overlay -->
+<div class="fixed inset-0 bg-black/50 z-40 hidden transition-opacity opacity-0" id="drawer-overlay"></div>
+<!-- BottomNavBar (Hidden on this transactional screen per guidelines, but included structurally if needed later) -->
+<!-- 
+    <nav class="fixed bottom-0 w-full z-50 h-[80px] bg-surface dark:bg-surface-dim border-t border-outline-variant dark:border-outline shadow-sm flex justify-around items-center px-xs pb-safe md:hidden">
+    </nav>
+    -->
+<script>
+        // Simple drawer toggle logic for demonstration
+        const menuBtn = document.querySelector('header button:first-child');
+        const drawer = document.getElementById('nav-drawer');
+        const overlay = document.getElementById('drawer-overlay');
+
+        if(menuBtn && drawer && overlay) {
+            menuBtn.addEventListener('click', () => {
+                drawer.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden');
+                setTimeout(() => overlay.classList.remove('opacity-0'), 10);
+            });
+
+            overlay.addEventListener('click', () => {
+                drawer.classList.add('-translate-x-full');
+                overlay.classList.add('opacity-0');
+                setTimeout(() => overlay.classList.add('hidden'), 300);
+            });
+        }
+    </script>
+</body></html>

@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>INPARQUES Control Panel - National Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "primary": "#005131",
+                      "error": "#ba1a1a",
+                      "surface-variant": "#e4e2dd",
+                      "on-tertiary-fixed-variant": "#3a4a43",
+                      "inverse-on-surface": "#f3f1eb",
+                      "outline-variant": "#bfc9c0",
+                      "outline": "#6f7a71",
+                      "inverse-surface": "#30312d",
+                      "on-background": "#1b1c18",
+                      "surface": "#fbf9f3",
+                      "on-surface": "#1b1c18",
+                      "surface-bright": "#fbf9f3",
+                      "secondary": "#3e6753",
+                      "primary-fixed-dim": "#88d7a8",
+                      "tertiary-container": "#516159",
+                      "surface-tint": "#186c45",
+                      "tertiary-fixed": "#d5e7dd",
+                      "secondary-fixed": "#c0edd4",
+                      "primary-container": "#176b45",
+                      "on-tertiary-fixed": "#0f1e19",
+                      "surface-container-highest": "#e4e2dd",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-container": "#446d59",
+                      "surface-container-high": "#eae8e2",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary-fixed": "#002114",
+                      "on-error": "#ffffff",
+                      "on-secondary": "#ffffff",
+                      "on-primary-container": "#99e9b9",
+                      "on-error-container": "#93000a",
+                      "surface-container-low": "#f5f3ed",
+                      "secondary-container": "#c0edd4",
+                      "error-container": "#ffdad6",
+                      "primary-fixed": "#a4f4c3",
+                      "inverse-primary": "#88d7a8",
+                      "on-primary": "#ffffff",
+                      "on-surface-variant": "#3f4942",
+                      "on-primary-fixed-variant": "#005232",
+                      "surface-container": "#f0eee8",
+                      "background": "#fbf9f3",
+                      "secondary-fixed-dim": "#a4d0b8",
+                      "tertiary-fixed-dim": "#b9cbc1",
+                      "on-primary-fixed": "#002111",
+                      "on-secondary-fixed-variant": "#264e3c",
+                      "surface-dim": "#dcdad4",
+                      "tertiary": "#3a4942",
+                      "on-tertiary-container": "#cadbd2"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "md": "16px",
+                      "sm": "12px",
+                      "xs": "8px",
+                      "lg": "24px",
+                      "xl": "32px",
+                      "base": "4px",
+                      "xxl": "48px",
+                      "touch-target": "44px"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": [
+                              "Manrope"
+                      ],
+                      "body-md": [
+                              "Manrope"
+                      ],
+                      "display-lg": [
+                              "Manrope"
+                      ],
+                      "label-md": [
+                              "Manrope"
+                      ],
+                      "body-lg": [
+                              "Manrope"
+                      ],
+                      "headline-lg": [
+                              "Manrope"
+                      ],
+                      "headline-md": [
+                              "Manrope"
+                      ],
+                      "label-sm": [
+                              "Manrope"
+                      ]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+          .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 1,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24
+          }
+      </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md antialiased min-h-screen">
+<!-- TopNavBar -->
+<header class="bg-white dark:bg-inverse-surface border-b border-outline-variant dark:border-outline shadow-sm flex justify-between items-center w-full h-16 pl-80 pr-lg fixed top-0 z-40">
+<div class="flex items-center gap-xl">
+<h1 class="font-headline-sm text-headline-sm font-bold text-primary dark:text-primary-fixed">INPARQUES Control Panel</h1>
+<nav class="hidden md:flex gap-lg">
+<a class="font-label-md text-label-md text-primary dark:text-primary-fixed border-b-2 border-primary dark:border-primary-fixed pb-1" href="#">National Scope</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200" href="#">Region Scope</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200" href="#">Park Scope</a>
+</nav>
+</div>
+<div class="flex items-center gap-md">
+<button class="w-touch-target h-touch-target flex items-center justify-center rounded-full hover:bg-surface-variant text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+<button class="w-touch-target h-touch-target flex items-center justify-center rounded-full hover:bg-surface-variant text-on-surface-variant transition-colors relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="w-touch-target h-touch-target flex items-center justify-center rounded-full hover:bg-surface-variant text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+</button>
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container overflow-hidden">
+<img alt="Administrator Avatar with MFA" class="w-full h-full object-cover" data-alt="A highly detailed portrait of a professional administrative officer in a modern light-filled office. The lighting is crisp and natural, highlighting a clean, institutional environment. The overall color palette is earthy and professional, relying on soft greens and warm whites to convey a sense of ecological stewardship and reliability. The mood is confident and authoritative." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLYc5fOW6uw1vLLtzPdXmxpqQKUESrOZAAjsq5b7zN4kJtJopJ_BgkpCyf7u86SsXKMZyXMA9taPzXg41PJU7QBs3K-Y7cYnyiWvfQqYwbSvTvTKzItH-kzxWWXzYMXDJ-O6WQfy-SqESiySYurRWKvUD2Qqcu3QNGcsCe1ApYVv_B6no59ST7hlpHKJx_htCH40V6gM31PupE6gY5l_9LlGjzlKhj1-QklAUkSxN7-xJWI42OF7Ba"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="bg-surface dark:bg-surface-dim border-r border-outline-variant dark:border-outline flex flex-col h-screen fixed left-0 top-0 overflow-y-auto px-xs py-md docked left-0 w-72 z-50">
+<div class="px-md pb-lg mb-md border-b border-outline-variant">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 bg-primary text-on-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl" data-icon="park">park</span>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed leading-tight">INPARQUES</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant">National Superadministrator</p>
+</div>
+</div>
+</div>
+<nav class="flex flex-col gap-xs flex-1">
+<a class="flex items-center gap-md px-md py-sm rounded-r-full text-primary dark:text-primary-fixed font-bold border-r-4 border-primary dark:border-primary-fixed bg-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard" data-weight="fill">dashboard</span>
+<span class="font-label-md text-label-md">National Home</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-r-full text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container dark:hover:bg-on-tertiary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="account_tree">account_tree</span>
+<span class="font-label-md text-label-md">Territorial Structure</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-r-full text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container dark:hover:bg-on-tertiary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="park">park</span>
+<span class="font-label-md text-label-md">Parks</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-r-full text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container dark:hover:bg-on-tertiary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="business_center">business_center</span>
+<span class="font-label-md text-label-md">Businesses</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-r-full text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container dark:hover:bg-on-tertiary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="person_outline">person_outline</span>
+<span class="font-label-md text-label-md">Users/Roles</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-r-full text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container dark:hover:bg-on-tertiary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="gavel">gavel</span>
+<span class="font-label-md text-label-md">Global Rules</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-r-full text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container dark:hover:bg-on-tertiary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="extension">extension</span>
+<span class="font-label-md text-label-md">Integrations</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-r-full text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container dark:hover:bg-on-tertiary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-label-md text-label-md">Audit</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-r-full text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container dark:hover:bg-on-tertiary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="security">security</span>
+<span class="font-label-md text-label-md">Security</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-r-full text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container dark:hover:bg-on-tertiary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-md text-label-md">Configuration</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content -->
+<main class="ml-72 mt-16 p-lg">
+<div class="mb-xl flex justify-between items-end">
+<div>
+<h2 class="font-display-lg text-display-lg text-on-surface mb-xs">National Overview</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Comprehensive status of all national parks and commercial activities.</p>
+</div>
+<div class="flex gap-md">
+<button class="h-touch-target px-md rounded-full bg-white border border-outline-variant text-on-surface flex items-center gap-sm hover:shadow-md transition-shadow">
+<span class="material-symbols-outlined" data-icon="calendar_month">calendar_month</span>
+<span class="font-label-md text-label-md">Last 30 Days</span>
+</button>
+<button class="h-touch-target px-md rounded-full bg-primary-container text-on-primary flex items-center gap-sm hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+<span class="font-label-md text-label-md">Export Report</span>
+</button>
+</div>
+</div>
+<!-- KPI Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-lg mb-xl">
+<!-- Large KPI Card -->
+<div class="col-span-1 md:col-span-2 bg-white rounded-xl border border-outline-variant p-lg shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between relative overflow-hidden">
+<div class="absolute -right-10 -top-10 opacity-5">
+<span class="material-symbols-outlined text-[160px]" data-icon="park">park</span>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-on-surface-variant flex items-center gap-sm mb-sm">
+<span class="material-symbols-outlined text-primary" data-icon="public">public</span>
+                        Active National Parks
+                    </h3>
+<div class="font-display-lg text-display-lg text-primary">43</div>
+</div>
+<div class="flex items-end justify-between mt-lg">
+<div class="flex items-center gap-sm text-secondary">
+<span class="material-symbols-outlined text-sm" data-icon="trending_up">trending_up</span>
+<span class="font-label-sm text-label-sm">+2 since last year</span>
+</div>
+<button class="text-primary hover:underline font-label-sm text-label-sm">View details</button>
+</div>
+</div>
+<!-- Standard KPIs -->
+<div class="bg-white rounded-xl border border-outline-variant p-lg shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<div>
+<h3 class="font-label-md text-label-md text-on-surface-variant flex items-center gap-sm mb-sm">
+<span class="material-symbols-outlined text-secondary" data-icon="storefront">storefront</span>
+                        Registered Businesses
+                    </h3>
+<div class="font-headline-lg text-headline-lg text-on-surface">1,204</div>
+</div>
+<div class="flex gap-sm mt-md">
+<span class="px-sm py-xs bg-secondary-fixed text-on-secondary-fixed rounded-md font-label-sm text-label-sm flex-1 text-center">890 Active</span>
+<span class="px-sm py-xs bg-error-container text-on-error-container rounded-md font-label-sm text-label-sm flex-1 text-center">31 Suspended</span>
+</div>
+</div>
+<div class="bg-white rounded-xl border border-outline-variant p-lg shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<div>
+<h3 class="font-label-md text-label-md text-on-surface-variant flex items-center gap-sm mb-sm">
+<span class="material-symbols-outlined text-primary" data-icon="location_on">location_on</span>
+                        Occupied Points
+                    </h3>
+<div class="font-headline-lg text-headline-lg text-on-surface">3,450</div>
+</div>
+<div class="mt-md">
+<div class="w-full bg-surface-variant rounded-full h-2 mb-xs">
+<div class="bg-primary h-2 rounded-full" style="width: 75%"></div>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant text-right">75% Capacity</p>
+</div>
+</div>
+<!-- Revenue/Financial Row -->
+<div class="col-span-1 md:col-span-4 grid grid-cols-1 md:grid-cols-3 gap-lg">
+<div class="bg-white rounded-xl border border-outline-variant p-lg shadow-sm flex items-center gap-md">
+<div class="w-12 h-12 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Total Revenue (MTD)</p>
+<p class="font-headline-md text-headline-md text-on-surface">Bs. 4,500,000</p>
+</div>
+</div>
+<div class="bg-white rounded-xl border border-outline-variant p-lg shadow-sm flex items-center gap-md">
+<div class="w-12 h-12 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Processed Orders</p>
+<p class="font-headline-md text-headline-md text-on-surface">12,845</p>
+</div>
+</div>
+<div class="bg-white rounded-xl border border-outline-variant p-lg shadow-sm flex items-center gap-md">
+<div class="w-12 h-12 rounded-full bg-error-container flex items-center justify-center text-error">
+<span class="material-symbols-outlined" data-icon="warning">warning</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Pending Reconciliations</p>
+<p class="font-headline-md text-headline-md text-on-surface">143</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Two Column Layout for complex data -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-lg">
+<!-- Map/Hierarchy Drilldown -->
+<div class="lg:col-span-2 bg-white rounded-xl border border-outline-variant shadow-sm overflow-hidden flex flex-col h-[500px]">
+<div class="p-md border-b border-outline-variant flex justify-between items-center bg-surface-container-lowest">
+<h3 class="font-headline-md text-headline-md text-on-surface">Territorial Drilldown</h3>
+<div class="flex gap-sm">
+<select class="form-select rounded-md border-outline-variant text-label-md py-1 pl-3 pr-8 focus:border-primary focus:ring-primary h-10">
+<option>All Regions</option>
+<option>Andes</option>
+<option>Coastal</option>
+</select>
+</div>
+</div>
+<div class="flex-1 relative bg-surface-container-low">
+<img alt="Map view of parks" class="absolute inset-0 w-full h-full object-cover opacity-80 mix-blend-multiply" data-alt="A stylized, modern high-contrast map of Venezuela focusing on environmental zones. The map uses earthy greens and soft tans against a bright white background, ensuring a clean, institutional light-mode aesthetic. Subtle glowing markers indicate key national park locations, reflecting a professional and authoritative tone suitable for an administrative dashboard." data-location="Venezuela" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDudYA71eu7v3dKJ40eu-jbpHXex1NLcIv9Fcakmy1095Q1qyFR1NWmucEWx-SGvjMvSIBhPtqHjqSF7EQkOfbshoMzNHRSViB4hM5eKyAdFShr2QvK7WSPExVsWjhQG_M-Jr7NLSYHyG-IMkfNZbi1Y-4-dGRiG08lAjcN2vCXKvp9CguSNubhGoA1IwefCg4VnMe8rZrLKhvl_x1vJQ7r0g34FVwvxbhgPSD3aCoVPkFLt0DvEZx3"/>
+<!-- Overlay Interactive Elements -->
+<div class="absolute top-md right-md bg-white p-sm rounded-lg shadow-md border border-outline-variant w-64">
+<p class="font-label-md text-label-md mb-sm border-b border-outline-variant pb-xs">Top Active Regions</p>
+<ul class="space-y-sm">
+<li class="flex justify-between items-center cursor-pointer hover:bg-surface p-1 rounded">
+<span class="font-body-sm text-body-sm flex items-center gap-xs"><span class="w-2 h-2 rounded-full bg-primary"></span> Los Roques</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">412 biz</span>
+</li>
+<li class="flex justify-between items-center cursor-pointer hover:bg-surface p-1 rounded">
+<span class="font-body-sm text-body-sm flex items-center gap-xs"><span class="w-2 h-2 rounded-full bg-primary"></span> Mochima</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">289 biz</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Critical Alerts -->
+<div class="bg-white rounded-xl border border-outline-variant shadow-sm flex flex-col h-[500px]">
+<div class="p-md border-b border-outline-variant flex justify-between items-center bg-surface-container-lowest">
+<h3 class="font-headline-md text-headline-md text-on-surface flex items-center gap-sm">
+<span class="material-symbols-outlined text-error" data-icon="error">error</span>
+                        Critical Alerts
+                    </h3>
+<span class="px-sm py-xs bg-error-container text-on-error-container rounded-full font-label-sm text-label-sm">3 New</span>
+</div>
+<div class="flex-1 overflow-y-auto p-md space-y-md bg-surface-container-lowest">
+<div class="p-md rounded-lg border-l-4 border-error bg-surface flex flex-col gap-sm">
+<div class="flex justify-between items-start">
+<h4 class="font-label-md text-label-md text-on-surface">Expiring Concessions (12)</h4>
+<span class="font-label-sm text-label-sm text-on-surface-variant">2h ago</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Multiple business permits expiring in Morrocoy National Park within 7 days.</p>
+<div class="flex items-center gap-sm mt-xs">
+<div class="w-6 h-6 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center text-xs font-bold">JD</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Assigned: Juan Diaz (Region Admin)</span>
+</div>
+</div>
+<div class="p-md rounded-lg border-l-4 border-error bg-surface flex flex-col gap-sm">
+<div class="flex justify-between items-start">
+<h4 class="font-label-md text-label-md text-on-surface">System Health Warning</h4>
+<span class="font-label-sm text-label-sm text-on-surface-variant">5h ago</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">API latency detected in payment gateway reconciliation module.</p>
+<div class="flex items-center gap-sm mt-xs">
+<div class="w-6 h-6 rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center text-xs font-bold">IT</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Assigned: IT Operations</span>
+</div>
+</div>
+<div class="p-md rounded-lg border-l-4 border-[#FFA500] bg-surface flex flex-col gap-sm">
+<div class="flex justify-between items-start">
+<h4 class="font-label-md text-label-md text-on-surface">Unusual Incident Volume</h4>
+<span class="font-label-sm text-label-sm text-on-surface-variant">1d ago</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Spike in reported environmental incidents in Henri Pittier.</p>
+<div class="flex items-center gap-sm mt-xs">
+<button class="text-primary font-label-sm text-label-sm hover:underline">Review Reports</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

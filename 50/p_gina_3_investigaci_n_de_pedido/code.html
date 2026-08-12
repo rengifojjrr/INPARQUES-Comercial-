@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Investigación de Pedido</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#bfc9c0",
+                        "surface-container-low": "#f5f3ed",
+                        "tertiary": "#3a4942",
+                        "surface-container-high": "#eae8e2",
+                        "surface-container-highest": "#e4e2dd",
+                        "on-primary-fixed-variant": "#005232",
+                        "on-tertiary-fixed-variant": "#3a4a43",
+                        "error-container": "#ffdad6",
+                        "on-secondary-container": "#446d59",
+                        "surface-dim": "#dcdad4",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed-dim": "#a4d0b8",
+                        "background": "#fbf9f3",
+                        "on-secondary-fixed-variant": "#264e3c",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-container": "#cadbd2",
+                        "surface-variant": "#e4e2dd",
+                        "secondary-container": "#c0edd4",
+                        "tertiary-fixed-dim": "#b9cbc1",
+                        "on-primary-fixed": "#002111",
+                        "error": "#ba1a1a",
+                        "surface-container": "#f0eee8",
+                        "inverse-surface": "#30312d",
+                        "on-surface-variant": "#3f4942",
+                        "on-surface": "#1b1c18",
+                        "on-secondary-fixed": "#002114",
+                        "secondary-fixed": "#c0edd4",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#6f7a71",
+                        "primary-fixed": "#a4f4c3",
+                        "inverse-on-surface": "#f3f1eb",
+                        "inverse-primary": "#88d7a8",
+                        "primary-fixed-dim": "#88d7a8",
+                        "surface-tint": "#186c45",
+                        "surface": "#fbf9f3",
+                        "primary": "#005131",
+                        "on-background": "#1b1c18",
+                        "tertiary-container": "#516159",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#d5e7dd",
+                        "secondary": "#3e6753",
+                        "on-primary-container": "#99e9b9",
+                        "surface-bright": "#fbf9f3",
+                        "primary-container": "#176b45",
+                        "on-tertiary-fixed": "#0f1e19",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "xs": "8px",
+                        "xl": "32px",
+                        "xxl": "48px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "touch-target": "44px",
+                        "sm": "12px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "display-lg": ["Manrope"],
+                        "label-sm": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen">
+<!-- TopAppBar -->
+<header class="bg-background/95 backdrop-blur-sm border-b border-outline-variant docked full-width top-0 sticky z-40 flex justify-between items-center h-touch-target px-xl ml-64">
+<div class="flex items-center gap-md">
+<span class="font-headline-md text-headline-md font-bold text-primary">Support &amp; Dispute Portal</span>
+</div>
+<nav class="hidden md:flex gap-lg h-full items-center">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#">Dashboard</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#">Analytics</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#">Settings</a>
+</nav>
+<div class="flex items-center gap-sm">
+<button class="h-touch-target w-touch-target flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors rounded-full">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="h-touch-target w-touch-target flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors rounded-full">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<button class="h-touch-target w-touch-target flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors rounded-full">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="A small circular avatar portrait of an administrator professional with a neutral background, styled for a modern light-mode interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwl1g1I1LaIHL9FSiWTktW4sJXL0KiQLjRcSqMYUooOH_FqTBBJIe7-EnaGjuTP7DgH34E33Ak7OFco6kgOVeaA7X57GmwLZLYGJdxD5oeNd52TOszqGWbTPJ5PBlo66zh-3WC5LbICUWmmgGVp-LC8LeCJuUT9b5TG3SKEfyWcael1rT6U-eIQZ_1t8ONUb2TcNJO8J4jmBMUG_8_J93N0_6A-A1M4afJk1MZab0iIerKlMX3KjEw"/>
+</button>
+<button class="bg-secondary-container text-on-secondary-container font-label-md text-label-md px-md h-touch-target rounded-full hover:bg-secondary-fixed transition-colors">Park Filter</button>
+<button class="bg-primary-container text-on-primary font-label-md text-label-md px-md h-touch-target rounded-full hover:bg-primary transition-colors flex items-center gap-xs">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                Create Order
+            </button>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="bg-surface h-screen w-64 fixed left-0 top-0 overflow-y-auto border-r border-outline-variant flex flex-col py-lg px-md z-50">
+<div class="mb-xl px-sm">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">INPARQUES</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Administrative Portal</p>
+</div>
+<nav class="flex-1 space-y-sm">
+<a class="flex items-center gap-md px-sm py-sm rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">inbox</span>
+<span class="font-label-md text-label-md">Inbox</span>
+</a>
+<a class="flex items-center gap-md px-sm py-sm rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">assignment_turned_in</span>
+<span class="font-label-md text-label-md">Assigned Cases</span>
+</a>
+<a class="flex items-center gap-md px-sm py-sm rounded-lg text-primary font-bold border-r-4 border-primary bg-secondary-container/20" href="#">
+<span class="material-symbols-outlined" data-weight="fill">receipt_long</span>
+<span class="font-label-md text-label-md">Orders</span>
+</a>
+<a class="flex items-center gap-md px-sm py-sm rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">gavel</span>
+<span class="font-label-md text-label-md">Disputes</span>
+</a>
+<a class="flex items-center gap-md px-sm py-sm rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-md text-label-md">Requested Refunds</span>
+</a>
+<a class="flex items-center gap-md px-sm py-sm rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">timer</span>
+<span class="font-label-md text-label-md">SLA</span>
+</a>
+<a class="flex items-center gap-md px-sm py-sm rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-label-md text-label-md">Knowledge Base</span>
+</a>
+<a class="flex items-center gap-md px-sm py-sm rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="font-label-md text-label-md">Reports</span>
+</a>
+</nav>
+<button class="mt-xl bg-primary-container text-on-primary font-label-md text-label-md h-touch-target rounded-full w-full flex items-center justify-center gap-xs hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-[20px]">add</span>
+            New Support Case
+        </button>
+</aside>
+<!-- Main Content -->
+<main class="ml-64 p-xl pt-lg min-h-screen">
+<!-- Header Section -->
+<div class="flex justify-between items-start mb-xl">
+<div>
+<div class="flex items-center gap-sm mb-xs">
+<button class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-xs">
+<span class="material-symbols-outlined">arrow_back</span>
+<span class="font-label-md text-label-md">Volver a Pedidos</span>
+</button>
+</div>
+<h2 class="font-headline-lg text-headline-lg font-bold text-on-surface">Investigación de Pedido #ORD-9923</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-base">Desglose técnico y operativo (Solo lectura)</p>
+</div>
+<button class="bg-primary-container text-on-primary font-label-md text-label-md px-lg h-touch-target rounded-full hover:bg-primary transition-colors flex items-center gap-xs shadow-[0px_4px_12px_rgba(40,51,46,0.08)]">
+<span class="material-symbols-outlined text-[20px]">link</span>
+                Vincular al caso
+            </button>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-lg">
+<!-- Timeline Card (Left Column) -->
+<div class="col-span-12 lg:col-span-4 bg-white border border-outline-variant rounded-lg p-lg">
+<h3 class="font-headline-md text-headline-md font-semibold mb-md flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary">history</span>
+                    Estados Cronológicos
+                </h3>
+<div class="relative pl-xs border-l-2 border-surface-container-highest space-y-md ml-xs">
+<div class="relative">
+<div class="absolute -left-[23px] top-1 w-4 h-4 rounded-full bg-primary-container border-2 border-white"></div>
+<div class="pl-md">
+<span class="font-label-md text-label-md text-on-surface block">Entregado</span>
+<span class="font-body-md text-body-md text-on-surface-variant text-sm block">12 Oct, 14:30 - Validación QR exitosa</span>
+</div>
+</div>
+<div class="relative">
+<div class="absolute -left-[23px] top-1 w-4 h-4 rounded-full bg-surface-container-highest border-2 border-white"></div>
+<div class="pl-md">
+<span class="font-label-md text-label-md text-on-surface block">En Camino</span>
+<span class="font-body-md text-body-md text-on-surface-variant text-sm block">12 Oct, 14:15 - Conductor asignado</span>
+</div>
+</div>
+<div class="relative">
+<div class="absolute -left-[23px] top-1 w-4 h-4 rounded-full bg-surface-container-highest border-2 border-white"></div>
+<div class="pl-md">
+<span class="font-label-md text-label-md text-on-surface block">Preparación</span>
+<span class="font-body-md text-body-md text-on-surface-variant text-sm block">12 Oct, 13:50 - T. Prep: 25 min</span>
+</div>
+</div>
+<div class="relative">
+<div class="absolute -left-[23px] top-1 w-4 h-4 rounded-full bg-surface-container-highest border-2 border-white"></div>
+<div class="pl-md">
+<span class="font-label-md text-label-md text-on-surface block">Pagado</span>
+<span class="font-body-md text-body-md text-on-surface-variant text-sm block">12 Oct, 13:48 - Confirmación de banco</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Details (Right Column) -->
+<div class="col-span-12 lg:col-span-8 flex flex-col gap-lg">
+<!-- Items and Store Info -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<!-- Items Purchased -->
+<div class="bg-white border border-outline-variant rounded-lg p-lg">
+<h3 class="font-headline-md text-headline-md font-semibold mb-md flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary">shopping_bag</span>
+                            Artículos Comprados
+                        </h3>
+<ul class="space-y-sm">
+<li class="flex justify-between items-center py-xs border-b border-surface-container-highest last:border-0">
+<div>
+<span class="font-label-md text-label-md block text-on-surface">2x Botella de Agua 1L</span>
+<span class="font-body-md text-body-md text-on-surface-variant text-sm">SKU: AGU-1002</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface">$4.00</span>
+</li>
+<li class="flex justify-between items-center py-xs border-b border-surface-container-highest last:border-0">
+<div>
+<span class="font-label-md text-label-md block text-on-surface">1x Guía Impresa del Parque</span>
+<span class="font-body-md text-body-md text-on-surface-variant text-sm">SKU: GUI-001</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface">$12.50</span>
+</li>
+</ul>
+</div>
+<!-- Store Data -->
+<div class="bg-white border border-outline-variant rounded-lg p-lg">
+<h3 class="font-headline-md text-headline-md font-semibold mb-md flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary">storefront</span>
+                            Datos del Comercio
+                        </h3>
+<div class="space-y-xs">
+<div class="flex justify-between">
+<span class="font-body-md text-body-md text-on-surface-variant">Nombre:</span>
+<span class="font-label-md text-label-md text-on-surface">Kiosko Central Ávila</span>
+</div>
+<div class="flex justify-between">
+<span class="font-body-md text-body-md text-on-surface-variant">ID Comercio:</span>
+<span class="font-label-md text-label-md text-on-surface">COM-4451</span>
+</div>
+<div class="flex justify-between">
+<span class="font-body-md text-body-md text-on-surface-variant">Ubicación:</span>
+<span class="font-label-md text-label-md text-on-surface">Sector Quebrada</span>
+</div>
+<div class="flex justify-between mt-sm pt-sm border-t border-surface-container-highest">
+<span class="font-body-md text-body-md text-on-surface-variant">T. Prep Promedio:</span>
+<span class="font-label-md text-label-md text-on-surface">18 min</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Payment & Delivery Details -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<!-- Payment Details -->
+<div class="bg-white border border-outline-variant rounded-lg p-lg">
+<h3 class="font-headline-md text-headline-md font-semibold mb-md flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary">credit_card</span>
+                            Detalles del Pago
+                        </h3>
+<div class="space-y-xs">
+<div class="flex justify-between items-center p-sm bg-surface-container-low rounded-md mb-sm">
+<span class="font-label-md text-label-md text-on-surface">Total Cobrado</span>
+<span class="font-headline-md text-headline-md font-bold text-primary">$16.50</span>
+</div>
+<div class="flex justify-between">
+<span class="font-body-md text-body-md text-on-surface-variant">Método:</span>
+<span class="font-label-md text-label-md text-on-surface">Tarjeta •••• 4242</span>
+</div>
+<div class="flex justify-between">
+<span class="font-body-md text-body-md text-on-surface-variant">Ref Transacción:</span>
+<span class="font-label-md text-label-md text-on-surface font-mono text-xs">TXN-88291A</span>
+</div>
+<div class="flex justify-between mt-sm">
+<button class="text-primary font-label-md text-label-md flex items-center gap-xs hover:underline">
+<span class="material-symbols-outlined text-[16px]">receipt</span>
+                                    Ver Factura PDF
+                                </button>
+</div>
+</div>
+</div>
+<!-- Delivery Validation -->
+<div class="bg-white border border-outline-variant rounded-lg p-lg flex flex-col justify-between">
+<div>
+<h3 class="font-headline-md text-headline-md font-semibold mb-md flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary">qr_code_scanner</span>
+                                Validación de Entrega
+                            </h3>
+<div class="flex items-center gap-sm mb-sm p-sm bg-[#c0edd4]/30 rounded-md border border-[#c0edd4]">
+<span class="material-symbols-outlined text-[#176b45]">check_circle</span>
+<span class="font-label-md text-label-md text-[#176b45]">Escaneo QR Exitoso</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Dispositivo: Scanner_Pto1</p>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Operador: Juan D.</p>
+</div>
+<img class="w-full h-24 object-cover rounded-md mt-sm border border-outline-variant opacity-80 mix-blend-multiply" data-alt="A simulated map view showing a delivery route within a national park, featuring natural terrain colors, a path line, and a marker pin at the delivery point. The style is modern and clean, fitting a light-mode admin interface." data-location="Caracas" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGOxt0NyTYCNXE9Q8xxPV_qd3vxvFTja3rBbbDxEU_9zDXbs6dFM9qDAm3kvrM5YesM5R0Rcmlq0_qwafH3nObWygkVdJV0402uvS_4N5subeT6gwDjpTx5dhPAtWPI2_fJatRWI4df4DY5dmMsxKhkQh9o8Ggdibx5r1NgnqyDg8HkO1hkZS_7Iq2zi-ZSKln20iF6DmPlYy84VrXGnQ5TT2aS3Qe3-ihtXEgKEtqJCVzd5VJ6MOV"/>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

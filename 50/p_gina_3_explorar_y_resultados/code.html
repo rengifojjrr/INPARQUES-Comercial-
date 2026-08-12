@@ -1,0 +1,331 @@
+<!DOCTYPE html><html lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>INPARQUES Comercial - Explorar</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#176b45",
+                        "on-surface-variant": "#3f4942",
+                        "outline-variant": "#bfc9c0",
+                        "on-primary": "#ffffff",
+                        "surface-tint": "#186c45",
+                        "on-surface": "#1b1c18",
+                        "surface-bright": "#fbf9f3",
+                        "surface-container-high": "#eae8e2",
+                        "on-tertiary-container": "#cadbd2",
+                        "tertiary-container": "#516159",
+                        "surface-container-highest": "#e4e2dd",
+                        "surface-container": "#f0eee8",
+                        "on-primary-fixed-variant": "#005232",
+                        "background": "#fbf9f3",
+                        "on-background": "#1b1c18",
+                        "primary-fixed-dim": "#88d7a8",
+                        "secondary-fixed": "#c0edd4",
+                        "secondary-container": "#c0edd4",
+                        "on-secondary-container": "#446d59",
+                        "on-primary-fixed": "#002111",
+                        "surface-variant": "#e4e2dd",
+                        "on-primary-container": "#99e9b9",
+                        "primary": "#005131",
+                        "error": "#ba1a1a",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#002114",
+                        "outline": "#6f7a71",
+                        "inverse-primary": "#88d7a8",
+                        "primary-fixed": "#a4f4c3",
+                        "secondary-fixed-dim": "#a4d0b8",
+                        "secondary": "#3e6753",
+                        "surface-dim": "#dcdad4",
+                        "tertiary-fixed": "#d5e7dd",
+                        "inverse-on-surface": "#f3f1eb",
+                        "surface": "#fbf9f3",
+                        "tertiary-fixed-dim": "#b9cbc1",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#264e3c",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#3a4942",
+                        "on-tertiary-fixed-variant": "#3a4a43",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#0f1e19",
+                        "surface-container-low": "#f5f3ed",
+                        "inverse-surface": "#30312d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "32px",
+                        "lg": "24px",
+                        "xxl": "48px",
+                        "md": "16px",
+                        "xs": "8px",
+                        "sm": "12px",
+                        "base": "4px",
+                        "touch-target": "44px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "display-lg": ["Manrope"],
+                        "label-sm": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; background-color: #fbf9f3; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0; }
+        .filled-icon { font-variation-settings: 'FILL' 1; }
+        /* Hide scrollbar for horizontal scroll areas */
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="text-on-surface pb-24 md:pb-0">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-surface-dim docked full-width top-0 border-b border-outline-variant dark:border-outline flat no shadows flex justify-between items-center px-lg w-full h-14 md:hidden">
+<button class="flex items-center justify-center w-touch-target h-touch-target hover:bg-surface-container-low rounded-full">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed" data-icon="park">park</span>
+</button>
+<div class="font-headline-md text-headline-md-mobile font-bold text-primary dark:text-primary-fixed">INPARQUES Comercial</div>
+<button class="flex items-center justify-center w-touch-target h-touch-target hover:bg-surface-container-low rounded-full">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="notifications">notifications</span>
+</button>
+</header>
+<!-- Top Nav for Web -->
+<nav class="hidden md:flex bg-surface-container-lowest border-b border-outline-variant px-xl py-md justify-between items-center sticky top-0 z-50">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="park" style="font-variation-settings: 'FILL' 1;">park</span>
+<div class="font-headline-md text-headline-md font-bold text-primary">INPARQUES Comercial</div>
+</div>
+<div class="flex gap-lg font-label-md text-label-md">
+<a class="text-on-surface-variant hover:bg-surface-container-low px-sm py-xs rounded-full transition-colors flex items-center gap-xs" href="#">Inicio</a>
+<a class="bg-primary-container text-on-primary-container px-sm py-xs rounded-full transition-colors font-bold flex items-center gap-xs" href="#">Explorar</a>
+<a class="text-on-surface-variant hover:bg-surface-container-low px-sm py-xs rounded-full transition-colors flex items-center gap-xs" href="#">Pedidos</a>
+<a class="text-on-surface-variant hover:bg-surface-container-low px-sm py-xs rounded-full transition-colors flex items-center gap-xs" href="#">Ayuda</a>
+<a class="text-on-surface-variant hover:bg-surface-container-low px-sm py-xs rounded-full transition-colors flex items-center gap-xs" href="#">Perfil</a>
+</div>
+<button class="flex items-center justify-center w-touch-target h-touch-target hover:bg-surface-container-low rounded-full">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="notifications">notifications</span>
+</button>
+</nav>
+<main class="max-w-7xl mx-auto px-md md:px-lg py-lg">
+<!-- Search and Toggle Header -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-md mb-lg">
+<div class="w-full md:w-2/3 relative">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
+<input class="w-full pl-[48px] pr-md py-sm bg-surface-container-lowest border border-outline-variant rounded-full font-body-md text-body-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary h-[48px]" placeholder="Buscar comercios, servicios o productos..." type="text">
+</div>
+<div class="flex items-center gap-sm bg-surface-container-low p-base rounded-full self-end md:self-auto">
+<button class="bg-surface-container-lowest text-primary shadow-sm px-md py-xs rounded-full font-label-md text-label-md flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]" data-icon="list">list</span>
+                    Lista
+                </button>
+<button class="text-on-surface-variant hover:bg-surface-container-high px-md py-xs rounded-full font-label-md text-label-md flex items-center gap-xs transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="map">map</span>
+                    Mapa
+                </button>
+</div>
+</div>
+<!-- Filters -->
+<div class="flex overflow-x-auto hide-scrollbar gap-sm mb-lg pb-base">
+<button class="flex items-center gap-xs bg-surface-container-lowest border border-outline-variant px-md py-xs rounded-full whitespace-nowrap hover:bg-surface-container-low transition-colors min-h-[44px]">
+<span class="material-symbols-outlined text-[18px]" data-icon="tune">tune</span>
+<span class="font-label-md text-label-md text-on-surface">Filtros</span>
+</button>
+<button class="flex items-center gap-xs bg-[#c0edd4] border border-[#88d7a8] px-md py-xs rounded-full whitespace-nowrap hover:bg-[#a4d0b8] transition-colors min-h-[44px]">
+<span class="font-label-md text-label-md text-[#002111]">Categoría: Comida</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="close">close</span>
+</button>
+<button class="flex items-center gap-xs bg-surface-container-lowest border border-outline-variant px-md py-xs rounded-full whitespace-nowrap hover:bg-surface-container-low transition-colors min-h-[44px]">
+<span class="font-label-md text-label-md text-on-surface">Abierto ahora</span>
+</button>
+<button class="flex items-center gap-xs bg-surface-container-lowest border border-outline-variant px-md py-xs rounded-full whitespace-nowrap hover:bg-surface-container-low transition-colors min-h-[44px]">
+<span class="font-label-md text-label-md text-on-surface">Tiempo de retiro</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="arrow_drop_down">arrow_drop_down</span>
+</button>
+<button class="flex items-center gap-xs bg-surface-container-lowest border border-outline-variant px-md py-xs rounded-full whitespace-nowrap hover:bg-surface-container-low transition-colors min-h-[44px]">
+<span class="font-label-md text-label-md text-on-surface">Valoración</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="arrow_drop_down">arrow_drop_down</span>
+</button>
+</div>
+<!-- Results Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden hover:shadow-[0px_4px_12px_rgba(40,51,46,0.08)] transition-shadow duration-200 cursor-pointer group flex flex-col">
+<div class="relative h-48 w-full overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A bright, inviting outdoor cafe seating area nestled among lush green trees in a commercial national park setting. Natural sunlight filters through leaves, casting soft dappled shadows on wooden tables. The scene is photographed in a modern, light-mode style with vibrant earth tones and crisp white accents, evoking a clean and professional outdoor dining experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDI1kHEmxfLoXTxVybsUYomuzsT5S7W3F9m1_K0cdyTqODAPTiQ_vfQsVobbc7gh9S9vEDpTGtvPJrDoXXlZZh7XhfuI4mzJQn_ZNirmOi5nUAMfQhiHnDCLcAwwcWEToSOYtStvHXFx9vy-2fpZdsP5NPAEiV3xQbWAtuo3AKrAGOrwoleRCBS8WuYrO7rJvUGajDP9KphJx-88fBeNiBGlsGzI3ZslG35tRorkmMKBE8RGUhGYdIa">
+<div class="absolute top-sm right-sm bg-surface-container-lowest/90 backdrop-blur-sm px-sm py-base rounded-full flex items-center gap-base">
+<span class="material-symbols-outlined text-[#176b45] filled-icon text-[16px]" data-icon="star">star</span>
+<span class="font-label-sm text-label-sm font-bold text-on-surface">4.8</span>
+</div>
+</div>
+<div class="p-md flex-grow flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-base">
+<h3 class="font-headline-md text-[20px] leading-tight font-bold text-on-surface">El Rincón del Guardaparques</h3>
+</div>
+<p class="font-body-md text-[14px] text-on-surface-variant mb-sm">Comida criolla y refrigerios.</p>
+<div class="flex flex-wrap gap-sm mb-md">
+<div class="flex items-center gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]" data-icon="location_on">location_on</span>
+<span class="font-label-sm text-label-sm">Zona Central</span>
+</div>
+<div class="flex items-center gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]" data-icon="schedule">schedule</span>
+<span class="font-label-sm text-label-sm">15-20 min</span>
+</div>
+</div>
+</div>
+<div class="pt-sm border-t border-outline-variant/50">
+<span class="inline-block bg-[#DDEFE5] text-[#123C2B] font-label-sm text-[11px] px-2 py-1 rounded-full">Abierto</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden hover:shadow-[0px_4px_12px_rgba(40,51,46,0.08)] transition-shadow duration-200 cursor-pointer group flex flex-col">
+<div class="relative h-48 w-full overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A rustic yet modern artisan ice cream stand in a park pavilion. The stand features natural wood textures and clean white signage. Bright, airy photography captures the casual, welcoming atmosphere with soft, natural lighting typical of a sunny afternoon in a well-maintained commercial nature reserve." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwwlrd7H0hLxaSBLVVdSZ3UNRGfmcgugPusGCN3ILzTvuT3Jr0BC_xr21JU_0NGg9bGxfgf_M3f21gqY1SVFKnflmp_xKW_2eHh6CsUFnolMp0_2TMKXA0YaXz9GDo1W4S_TQgEBZS11qDcb0_yJLHvbYQhTc6Lqhl8anXikMjoSBDgKPv_7jApePLsysyClFSsLhZl8jkH_v29uxt_5Z6thcmhJgPODunFE2UStlovroWx-OR3PkU">
+<div class="absolute top-sm right-sm bg-surface-container-lowest/90 backdrop-blur-sm px-sm py-base rounded-full flex items-center gap-base">
+<span class="material-symbols-outlined text-[#176b45] filled-icon text-[16px]" data-icon="star">star</span>
+<span class="font-label-sm text-label-sm font-bold text-on-surface">4.5</span>
+</div>
+</div>
+<div class="p-md flex-grow flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-base">
+<h3 class="font-headline-md text-[20px] leading-tight font-bold text-on-surface">Heladería La Cima</h3>
+</div>
+<p class="font-body-md text-[14px] text-on-surface-variant mb-sm">Helados artesanales locales.</p>
+<div class="flex flex-wrap gap-sm mb-md">
+<div class="flex items-center gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]" data-icon="location_on">location_on</span>
+<span class="font-label-sm text-label-sm">Mirador Norte</span>
+</div>
+<div class="flex items-center gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]" data-icon="schedule">schedule</span>
+<span class="font-label-sm text-label-sm">5-10 min</span>
+</div>
+</div>
+</div>
+<div class="pt-sm border-t border-outline-variant/50">
+<span class="inline-block bg-[#DDEFE5] text-[#123C2B] font-label-sm text-[11px] px-2 py-1 rounded-full">Abierto</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden hover:shadow-[0px_4px_12px_rgba(40,51,46,0.08)] transition-shadow duration-200 cursor-pointer group flex flex-col">
+<div class="relative h-48 w-full overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A clean, professionally organized camping supply rental shop integrated into a park visitor center. The interior is well-lit with natural light streaming through large windows, showcasing neatly arranged gear against white and natural wood walls. The aesthetic is modern corporate mixed with organic outdoor elements, conveying reliability and order." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCv8UW6eYz_A2ox3Rzx8aYeWuzhoFjskOJjtZvFlIy2mXijuNyjeEdU5FrkNP6Jhv5KsLVEG3IInTQnJvHQgRgOKXaVnWB2LNuRiC5EfRDOSGsFB62aTW9PLPqS9byh3dVtoKhJW0G2W6B8tV247mmW86pMjLFGoK1t8kkj_N1Vko6Rgn02RIRo322hXsm8x1dANUqXO1FOTzYzfiedIWZ4kf6Pc_ZGHaFghMGS2dmi2CQWPL_0SlJK">
+<div class="absolute top-sm right-sm bg-surface-container-lowest/90 backdrop-blur-sm px-sm py-base rounded-full flex items-center gap-base">
+<span class="material-symbols-outlined text-[#176b45] filled-icon text-[16px]" data-icon="star">star</span>
+<span class="font-label-sm text-label-sm font-bold text-on-surface">4.9</span>
+</div>
+</div>
+<div class="p-md flex-grow flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-base">
+<h3 class="font-headline-md text-[20px] leading-tight font-bold text-on-surface">Equipos de Aventura Sur</h3>
+</div>
+<p class="font-body-md text-[14px] text-on-surface-variant mb-sm">Alquiler de equipos básicos.</p>
+<div class="flex flex-wrap gap-sm mb-md">
+<div class="flex items-center gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]" data-icon="location_on">location_on</span>
+<span class="font-label-sm text-label-sm">Entrada Principal</span>
+</div>
+<div class="flex items-center gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]" data-icon="schedule">schedule</span>
+<span class="font-label-sm text-label-sm">Inmediato</span>
+</div>
+</div>
+</div>
+<div class="pt-sm border-t border-outline-variant/50">
+<span class="inline-block bg-surface-container-highest text-on-surface-variant font-label-sm text-[11px] px-2 py-1 rounded-full">Cerrado ahora</span>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden hover:shadow-[0px_4px_12px_rgba(40,51,46,0.08)] transition-shadow duration-200 cursor-pointer group flex flex-col">
+<div class="relative h-48 w-full overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A small, modern coffee kiosk with a sleek minimalist design located near a trail head. The kiosk features smooth, clean lines, white panels, and wooden accents, contrasting beautifully with the surrounding green foliage. Soft, bright daylight illuminates the scene, highlighting the professional, clean aesthetic of the park's commercial amenities." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZaaPtPlmJJnwnHC5YiNqK04V1-4rKO-dBeZO2nNn90sR-6pbLDxSN9VBTFet8dznMRsl-SSCEjn6R6BXRvtara9BJKk1C0Iw1pUpGVVWNktlct0U32AQw23pX5DQCZT9v2topSCuw1HlH8taxv8uaQKPCWNF6B30Wxoph73JTZklBA8Lbg9c0jLjVxqM5SjJMSIWw0J_06jKU0tELeGdvpoBdg0UQ6YGRRCCm2ydWUDC0eAOeyVcs">
+<div class="absolute top-sm right-sm bg-surface-container-lowest/90 backdrop-blur-sm px-sm py-base rounded-full flex items-center gap-base">
+<span class="material-symbols-outlined text-[#176b45] filled-icon text-[16px]" data-icon="star">star</span>
+<span class="font-label-sm text-label-sm font-bold text-on-surface">4.2</span>
+</div>
+</div>
+<div class="p-md flex-grow flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-base">
+<h3 class="font-headline-md text-[20px] leading-tight font-bold text-on-surface">Café del Sendero</h3>
+</div>
+<p class="font-body-md text-[14px] text-on-surface-variant mb-sm">Café y repostería ligera.</p>
+<div class="flex flex-wrap gap-sm mb-md">
+<div class="flex items-center gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]" data-icon="location_on">location_on</span>
+<span class="font-label-sm text-label-sm">Sendero Los Pinos</span>
+</div>
+<div class="flex items-center gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]" data-icon="schedule">schedule</span>
+<span class="font-label-sm text-label-sm">10-15 min</span>
+</div>
+</div>
+</div>
+<div class="pt-sm border-t border-outline-variant/50">
+<span class="inline-block bg-[#DDEFE5] text-[#123C2B] font-label-sm text-[11px] px-2 py-1 rounded-full">Abierto</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-2 pb-safe bg-surface-container-lowest dark:bg-surface-container-low border-t border-outline-variant dark:border-outline shadow-sm">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-full w-[64px] h-[64px] transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm mt-1">Inicio</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-primary-container text-on-secondary-container dark:text-on-primary-container rounded-full w-[64px] h-[64px] hover:bg-surface-container-high dark:hover:bg-surface-container-highest scale-90 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="search" style="font-variation-settings: 'FILL' 1;">search</span>
+<span class="font-label-sm text-label-sm mt-1">Explorar</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-full w-[64px] h-[64px] transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+<span class="font-label-sm text-label-sm mt-1">Pedidos</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-full w-[64px] h-[64px] transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-label-sm text-label-sm mt-1">Ayuda</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-full w-[64px] h-[64px] transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm mt-1">Perfil</span>
+</a>
+</nav>
+</body></html>

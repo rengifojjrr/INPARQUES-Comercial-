@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Centro de Exportaciones - Park Commerce Finance</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#005131",
+                        "surface": "#fbf9f3",
+                        "secondary-container": "#c0edd4",
+                        "surface-variant": "#e4e2dd",
+                        "surface-container-high": "#eae8e2",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed": "#002114",
+                        "on-surface": "#1b1c18",
+                        "on-primary-container": "#99e9b9",
+                        "on-tertiary-container": "#cadbd2",
+                        "on-tertiary-fixed": "#0f1e19",
+                        "surface-container": "#f0eee8",
+                        "inverse-surface": "#30312d",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#bfc9c0",
+                        "surface-bright": "#fbf9f3",
+                        "tertiary-fixed": "#d5e7dd",
+                        "on-surface-variant": "#3f4942",
+                        "surface-container-highest": "#e4e2dd",
+                        "primary-container": "#176b45",
+                        "on-primary-fixed": "#002111",
+                        "outline": "#6f7a71",
+                        "tertiary": "#3a4942",
+                        "surface-tint": "#186c45",
+                        "on-background": "#1b1c18",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#3a4a43",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed-variant": "#264e3c",
+                        "primary-fixed-dim": "#88d7a8",
+                        "on-primary-fixed-variant": "#005232",
+                        "inverse-primary": "#88d7a8",
+                        "surface-container-low": "#f5f3ed",
+                        "tertiary-container": "#516159",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed-dim": "#a4d0b8",
+                        "error": "#ba1a1a",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed": "#c0edd4",
+                        "on-secondary-container": "#446d59",
+                        "secondary": "#3e6753",
+                        "primary-fixed": "#a4f4c3",
+                        "surface-dim": "#dcdad4",
+                        "inverse-on-surface": "#f3f1eb",
+                        "background": "#fbf9f3",
+                        "tertiary-fixed-dim": "#b9cbc1"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "32px",
+                        "touch-target": "44px",
+                        "sm": "12px",
+                        "base": "4px",
+                        "md": "16px",
+                        "xxl": "48px",
+                        "lg": "24px",
+                        "xs": "8px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "display-lg": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen">
+<!-- TopNavBar -->
+<header class="flex justify-between items-center px-lg h-[64px] sticky top-0 z-40 bg-surface dark:bg-inverse-surface border-b border-outline-variant dark:border-outline">
+<div class="flex items-center gap-md">
+<!-- Mobile Menu Toggle (Decorative) -->
+<button class="md:hidden p-xs hover:bg-surface-container rounded-full flex items-center justify-center min-h-touch-target min-w-touch-target">
+<span class="material-symbols-outlined text-on-surface-variant">menu</span>
+</button>
+<h1 class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed-dim hidden md:block">
+                Park Commerce Finance
+            </h1>
+</div>
+<div class="flex items-center gap-sm">
+<button class="text-on-surface-variant hover:bg-surface-container rounded-full p-xs flex items-center justify-center min-h-touch-target min-w-touch-target transition-colors cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-container rounded-full p-xs flex items-center justify-center min-h-touch-target min-w-touch-target transition-colors cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">settings</span>
+</button>
+<div class="h-[40px] w-[40px] rounded-full overflow-hidden border border-outline-variant ml-sm cursor-pointer">
+<img alt="Accountant Profile Avatar" class="w-full h-full object-cover" data-alt="A professional headshot of a corporate accountant in a modern office setting. The lighting is bright and clean, emphasizing a modern corporate aesthetic with earthy green undertones in the background. The mood is authoritative yet approachable, fitting for a financial steward of a nature reserve." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbGMjiF6ti1LDss7xEzepMDpKII_0ggEqH1DsxK8X5IeO2kPAZBqdDKO1h_bZyqttnUT06A3w8cQ6Zh3HTQKrn2ZLqShFkTDJfGo7yWMeixjU8yu--jJObsS47yMiXRJNoMGzWVPrJhlvYswzPsRd9Yv4WzZ4cpQb4HqzYoBpFV8SJ9HB63sMohy0c06EQ6FEALj9e9xvz8pOW-_MNOxhOda6T3nQVTyaYuuzjpVtKmjR5U_R0l83e"/>
+</div>
+</div>
+</header>
+<div class="flex h-[calc(100vh-64px)] overflow-hidden">
+<!-- SideNavBar (Hidden on Mobile) -->
+<nav class="hidden md:flex flex-col h-full py-md px-sm border-r border-outline-variant dark:border-outline bg-surface-container-low dark:bg-surface-container-lowest w-64 shrink-0 overflow-y-auto">
+<div class="mb-xl px-sm flex items-center gap-sm">
+<div class="h-[32px] w-[32px] rounded bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-container">eco</span>
+</div>
+<div>
+<h2 class="text-label-md font-label-md font-extrabold text-on-secondary-fixed">Finance Portal</h2>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Audit &amp; Integrity</p>
+</div>
+</div>
+<div class="flex-1 space-y-xs">
+<!-- Inactive Tabs -->
+<a class="flex items-center gap-sm px-sm py-xs min-h-touch-target text-on-surface-variant hover:bg-surface-variant rounded transition-all duration-200 ease-in-out cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-label-md font-label-md">Summary</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-xs min-h-touch-target text-on-surface-variant hover:bg-surface-variant rounded transition-all duration-200 ease-in-out cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined">book_2</span>
+<span class="text-label-md font-label-md">Sales Books</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-xs min-h-touch-target text-on-surface-variant hover:bg-surface-variant rounded transition-all duration-200 ease-in-out cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="text-label-md font-label-md">Payments</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-xs min-h-touch-target text-on-surface-variant hover:bg-surface-variant rounded transition-all duration-200 ease-in-out cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined">account_balance</span>
+<span class="text-label-md font-label-md">Reconciliation</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-xs min-h-touch-target text-on-surface-variant hover:bg-surface-variant rounded transition-all duration-200 ease-in-out cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined">receipt</span>
+<span class="text-label-md font-label-md">Invoices</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-xs min-h-touch-target text-on-surface-variant hover:bg-surface-variant rounded transition-all duration-200 ease-in-out cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined">event_available</span>
+<span class="text-label-md font-label-md">Daily Closings</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-xs min-h-touch-target text-on-surface-variant hover:bg-surface-variant rounded transition-all duration-200 ease-in-out cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined">percent</span>
+<span class="text-label-md font-label-md">Commissions</span>
+</a>
+</div>
+<div class="mt-auto pt-md border-t border-outline-variant space-y-xs">
+<!-- ACTIVE TAB -->
+<a class="flex items-center gap-sm px-sm py-xs min-h-touch-target bg-secondary-container text-on-secondary-container font-bold rounded-lg transition-all duration-200 ease-in-out cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">ios_share</span>
+<span class="text-label-md font-label-md">Export Manager</span>
+</a>
+<!-- Inactive Footer Tab -->
+<a class="flex items-center gap-sm px-sm py-xs min-h-touch-target text-on-surface-variant hover:bg-surface-variant rounded transition-all duration-200 ease-in-out cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="text-label-md font-label-md">Support</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto bg-surface p-md md:p-xl">
+<div class="max-w-7xl mx-auto space-y-lg">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-md mb-xl">
+<div>
+<h2 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg-mobile md:font-headline-lg text-primary mb-base">Centro de Exportaciones</h2>
+<p class="text-body-md font-body-md text-on-surface-variant">Configure y genere reportes masivos del estado financiero y operativo.</p>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg">
+<!-- Configurator Card -->
+<div class="lg:col-span-8 bg-surface-container-lowest border border-outline-variant rounded-lg p-lg shadow-sm">
+<div class="flex items-center gap-sm mb-md border-b border-outline-variant pb-sm">
+<span class="material-symbols-outlined text-primary">tune</span>
+<h3 class="text-headline-md font-headline-md text-on-surface">Configuración de Reporte</h3>
+</div>
+<form class="space-y-lg">
+<!-- Date Range -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div>
+<label class="block text-label-md font-label-md text-on-surface-variant mb-base">Fecha de Inicio</label>
+<input class="w-full min-h-touch-target px-md py-sm bg-surface border border-outline-variant rounded-md text-body-md font-body-md focus:outline-none focus:border-2 focus:border-primary focus:ring-0 transition-colors" type="date"/>
+</div>
+<div>
+<label class="block text-label-md font-label-md text-on-surface-variant mb-base">Fecha de Fin</label>
+<input class="w-full min-h-touch-target px-md py-sm bg-surface border border-outline-variant rounded-md text-body-md font-body-md focus:outline-none focus:border-2 focus:border-primary focus:ring-0 transition-colors" type="date"/>
+</div>
+</div>
+<!-- Location & Module -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div>
+<label class="block text-label-md font-label-md text-on-surface-variant mb-base">Local / Concesionario</label>
+<select class="w-full min-h-touch-target px-md py-sm bg-surface border border-outline-variant rounded-md text-body-md font-body-md focus:outline-none focus:border-2 focus:border-primary focus:ring-0 appearance-none transition-colors">
+<option>Todos los locales</option>
+<option>Cafetería Central</option>
+<option>Tienda de Recuerdos Norte</option>
+</select>
+</div>
+<div>
+<label class="block text-label-md font-label-md text-on-surface-variant mb-base">Módulo de Datos</label>
+<select class="w-full min-h-touch-target px-md py-sm bg-surface border border-outline-variant rounded-md text-body-md font-body-md focus:outline-none focus:border-2 focus:border-primary focus:ring-0 appearance-none transition-colors">
+<option>Ventas Consolidadas</option>
+<option>Cierres Diarios</option>
+<option>Retenciones e Impuestos</option>
+</select>
+</div>
+</div>
+<!-- Format Selection -->
+<div>
+<label class="block text-label-md font-label-md text-on-surface-variant mb-md">Formato de Salida</label>
+<div class="flex flex-wrap gap-md">
+<label class="flex items-center gap-sm cursor-pointer p-sm border border-outline-variant rounded-md hover:bg-surface-variant transition-colors min-h-touch-target pr-lg">
+<input checked="" class="text-primary focus:ring-primary w-5 h-5" name="format" type="radio" value="excel"/>
+<span class="text-body-md font-body-md flex items-center gap-xs"><span class="material-symbols-outlined text-green-700">table_view</span> Excel (.xlsx)</span>
+</label>
+<label class="flex items-center gap-sm cursor-pointer p-sm border border-outline-variant rounded-md hover:bg-surface-variant transition-colors min-h-touch-target pr-lg">
+<input class="text-primary focus:ring-primary w-5 h-5" name="format" type="radio" value="csv"/>
+<span class="text-body-md font-body-md flex items-center gap-xs"><span class="material-symbols-outlined text-gray-600">data_object</span> CSV</span>
+</label>
+<label class="flex items-center gap-sm cursor-pointer p-sm border border-outline-variant rounded-md hover:bg-surface-variant transition-colors min-h-touch-target pr-lg">
+<input class="text-primary focus:ring-primary w-5 h-5" name="format" type="radio" value="pdf"/>
+<span class="text-body-md font-body-md flex items-center gap-xs"><span class="material-symbols-outlined text-red-700">picture_as_pdf</span> PDF</span>
+</label>
+</div>
+</div>
+<!-- Action -->
+<div class="pt-md border-t border-outline-variant flex justify-end">
+<button class="bg-primary-container text-on-primary min-h-touch-target px-xl rounded-md font-label-md text-label-md flex items-center justify-center gap-sm hover:opacity-90 transition-opacity" type="button">
+<span class="material-symbols-outlined">play_arrow</span>
+                                    Iniciar Generación
+                                </button>
+</div>
+</form>
+</div>
+<!-- History / Recent Files -->
+<div class="lg:col-span-12 bg-surface-container-lowest border border-outline-variant rounded-lg p-lg shadow-sm">
+<div class="flex items-center justify-between mb-md border-b border-outline-variant pb-sm">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">history</span>
+<h3 class="text-headline-md font-headline-md text-on-surface">Historial de Descargas</h3>
+</div>
+<button class="text-primary font-label-md text-label-md hover:underline px-sm py-xs min-h-touch-target">Ver Todos</button>
+</div>
+<div class="space-y-sm">
+<!-- File Item 1 -->
+<div class="flex flex-col md:flex-row md:items-center justify-between p-md border border-surface-variant rounded-lg bg-surface-bright hover:bg-surface-container-low transition-colors gap-md">
+<div class="flex items-start gap-md">
+<div class="h-10 w-10 rounded bg-secondary-container/30 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-secondary">table_view</span>
+</div>
+<div>
+<h4 class="text-label-md font-label-md text-on-surface">Reporte_Ventas_Q3_2023.xlsx</h4>
+<div class="text-label-sm font-label-sm text-on-surface-variant mt-xs flex flex-wrap gap-x-md gap-y-xs">
+<span class="flex items-center gap-xs"><span class="material-symbols-outlined text-[14px]">calendar_today</span> Creado: Hoy, 10:45 AM</span>
+<span class="flex items-center gap-xs"><span class="material-symbols-outlined text-[14px]">person</span> Usuario: Admin</span>
+<span class="flex items-center gap-xs text-orange-600"><span class="material-symbols-outlined text-[14px]">timer</span> Expira en 24h</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-sm shrink-0">
+<span class="px-sm py-xs bg-secondary-container/20 text-on-secondary-container rounded-full text-label-sm font-label-sm border border-secondary-container/50">Listo</span>
+<button class="bg-secondary-container text-on-secondary-container min-h-touch-target px-md rounded-md font-label-md text-label-md flex items-center justify-center gap-xs hover:bg-secondary-fixed-dim transition-colors">
+<span class="material-symbols-outlined">download</span>
+                                        Descargar
+                                    </button>
+</div>
+</div>
+<!-- File Item 2 -->
+<div class="flex flex-col md:flex-row md:items-center justify-between p-md border border-surface-variant rounded-lg bg-surface-bright hover:bg-surface-container-low transition-colors gap-md">
+<div class="flex items-start gap-md">
+<div class="h-10 w-10 rounded bg-surface-variant flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-surface-variant">picture_as_pdf</span>
+</div>
+<div>
+<h4 class="text-label-md font-label-md text-on-surface">Cierres_Diarios_Mensual.pdf</h4>
+<div class="text-label-sm font-label-sm text-on-surface-variant mt-xs flex flex-wrap gap-x-md gap-y-xs">
+<span class="flex items-center gap-xs"><span class="material-symbols-outlined text-[14px]">calendar_today</span> Creado: Ayer, 16:20 PM</span>
+<span class="flex items-center gap-xs"><span class="material-symbols-outlined text-[14px]">person</span> Usuario: Juan P.</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-sm shrink-0">
+<span class="px-sm py-xs bg-surface-variant text-on-surface-variant rounded-full text-label-sm font-label-sm border border-outline-variant">Expirado</span>
+<button class="bg-surface-variant text-on-surface-variant/50 min-h-touch-target px-md rounded-md font-label-md text-label-md flex items-center justify-center gap-xs cursor-not-allowed" disabled="">
+<span class="material-symbols-outlined opacity-50">block</span>
+                                        No Disponible
+                                    </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

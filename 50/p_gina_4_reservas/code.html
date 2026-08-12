@@ -1,0 +1,432 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Parques Nacionales - Reservas</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                            "on-error": "#ffffff",
+                            "on-tertiary-fixed-variant": "#3a4a43",
+                            "surface-variant": "#e4e2dd",
+                            "on-background": "#1b1c18",
+                            "surface-dim": "#dcdad4",
+                            "surface-container-high": "#eae8e2",
+                            "on-secondary-container": "#446d59",
+                            "surface-tint": "#186c45",
+                            "on-secondary-fixed-variant": "#264e3c",
+                            "error-container": "#ffdad6",
+                            "error": "#ba1a1a",
+                            "primary-fixed": "#a4f4c3",
+                            "surface-container-lowest": "#ffffff",
+                            "on-surface": "#1b1c18",
+                            "outline": "#6f7a71",
+                            "inverse-on-surface": "#f3f1eb",
+                            "surface-bright": "#fbf9f3",
+                            "surface-container-highest": "#e4e2dd",
+                            "on-tertiary-fixed": "#0f1e19",
+                            "surface": "#fbf9f3",
+                            "secondary-fixed": "#c0edd4",
+                            "on-tertiary-container": "#cadbd2",
+                            "on-primary": "#ffffff",
+                            "primary": "#005131",
+                            "on-secondary-fixed": "#002114",
+                            "tertiary-fixed": "#d5e7dd",
+                            "inverse-surface": "#30312d",
+                            "on-primary-container": "#99e9b9",
+                            "primary-fixed-dim": "#88d7a8",
+                            "on-error-container": "#93000a",
+                            "secondary": "#3e6753",
+                            "on-primary-fixed-variant": "#005232",
+                            "tertiary-container": "#516159",
+                            "outline-variant": "#bfc9c0",
+                            "background": "#fbf9f3",
+                            "primary-container": "#176b45",
+                            "tertiary-fixed-dim": "#b9cbc1",
+                            "surface-container-low": "#f5f3ed",
+                            "on-tertiary": "#ffffff",
+                            "secondary-container": "#c0edd4",
+                            "tertiary": "#3a4942",
+                            "surface-container": "#f0eee8",
+                            "secondary-fixed-dim": "#a4d0b8",
+                            "on-primary-fixed": "#002111",
+                            "on-secondary": "#ffffff",
+                            "inverse-primary": "#88d7a8",
+                            "on-surface-variant": "#3f4942"
+                    },
+                    "borderRadius": {
+                            "DEFAULT": "0.25rem",
+                            "lg": "0.5rem",
+                            "xl": "0.75rem",
+                            "full": "9999px"
+                    },
+                    "spacing": {
+                            "md": "16px",
+                            "xs": "8px",
+                            "xxl": "48px",
+                            "lg": "24px",
+                            "xl": "32px",
+                            "touch-target": "44px",
+                            "base": "4px",
+                            "sm": "12px"
+                    },
+                    "fontFamily": {
+                            "headline-lg-mobile": ["Manrope"],
+                            "display-lg": ["Manrope"],
+                            "headline-md": ["Manrope"],
+                            "headline-lg": ["Manrope"],
+                            "label-sm": ["Manrope"],
+                            "body-lg": ["Manrope"],
+                            "label-md": ["Manrope"],
+                            "body-md": ["Manrope"]
+                    },
+                    "fontSize": {
+                            "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                            "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                            "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                            "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                            "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "700"}],
+                            "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                            "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                            "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #F7F5EF;
+        }
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 20px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            font-feature-settings: 'liga';
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Ambient shadows */
+        .shadow-ambient-2 {
+            box-shadow: 0px 4px 12px rgba(40, 51, 46, 0.08);
+        }
+        .shadow-ambient-3 {
+            box-shadow: 0px 12px 32px rgba(40, 51, 46, 0.12);
+        }
+        
+        /* Hide scrollbar for clean horizontal scrolling */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface flex h-screen overflow-hidden antialiased">
+<!-- SideNavBar (Hidden on Mobile) -->
+<nav class="hidden md:flex flex-col p-md gap-xs bg-surface-container-low border-r border-outline-variant h-screen w-64 fixed left-0 top-0 z-40">
+<div class="mb-xl px-xs flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" data-icon="park">park</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Portal Admin</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Administración de Parque</p>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto hide-scrollbar space-y-1">
+<a class="flex items-center gap-sm px-md py-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-variant transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Resumen
+            </a>
+<a class="flex items-center gap-sm px-md py-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-variant transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+                Pedidos
+            </a>
+<a class="flex items-center gap-sm px-md py-sm rounded-lg font-label-md text-label-md bg-secondary-container text-on-secondary-container font-bold transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today" data-weight="fill" style="font-variation-settings: 'FILL' 1;">calendar_today</span>
+                Reservas
+            </a>
+<a class="flex items-center gap-sm px-md py-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-variant transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+                Catálogo
+            </a>
+<a class="flex items-center gap-sm px-md py-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-variant transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="event_available">event_available</span>
+                Disponibilidad
+            </a>
+<a class="flex items-center gap-sm px-md py-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-variant transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+                Caja
+            </a>
+<a class="flex items-center gap-sm px-md py-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-variant transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+                Ventas
+            </a>
+<a class="flex items-center gap-sm px-md py-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-variant transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+                Equipo operativo
+            </a>
+<a class="flex items-center gap-sm px-md py-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-variant transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                Configuración del local
+            </a>
+</div>
+<div class="mt-auto pt-md border-t border-outline-variant">
+<button class="flex items-center gap-sm px-md py-sm w-full rounded-lg font-label-md text-label-md text-error hover:bg-error-container transition-all duration-200 ease-in-out">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+                Cerrar Sesión
+            </button>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col md:ml-64 relative h-full overflow-hidden bg-background">
+<!-- TopNavBar (Mobile Only) -->
+<header class="md:hidden flex justify-between items-center w-full px-lg h-touch-target sticky top-0 z-50 bg-surface border-b border-outline-variant">
+<div class="flex items-center gap-sm">
+<button class="text-on-surface-variant p-2 rounded-full hover:bg-surface-container-low active:opacity-80">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<span class="font-headline-md text-headline-md font-bold text-primary">Parques Nacionales</span>
+</div>
+<div class="flex items-center gap-xs">
+<button class="text-on-surface-variant p-2 rounded-full hover:bg-surface-container-low active:opacity-80">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-on-surface-variant p-2 rounded-full hover:bg-surface-container-low active:opacity-80">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</button>
+</div>
+</header>
+<!-- Top Header Actions (Desktop) -->
+<header class="hidden md:flex justify-between items-center w-full px-lg h-20 bg-surface border-b border-outline-variant shrink-0">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Gestión de Reservas</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Jueves, 24 de Octubre, 2024</p>
+</div>
+<div class="flex items-center gap-md">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none" data-icon="search">search</span>
+<input class="w-64 pl-10 pr-4 h-[44px] bg-surface rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none font-body-md text-body-md transition-shadow" placeholder="Buscar reserva o cliente..." type="text">
+</div>
+<button class="h-[44px] px-lg bg-primary-container text-on-primary rounded-lg font-label-md text-label-md hover:opacity-90 flex items-center gap-sm transition-opacity shadow-ambient-2">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                    Nueva Reserva
+                </button>
+</div>
+</header>
+<!-- Dashboard Canvas -->
+<div class="flex-1 overflow-y-auto p-4 md:p-lg">
+<div class="max-w-7xl mx-auto space-y-lg">
+<!-- Filters & Context -->
+<div class="bg-surface rounded-lg border border-outline-variant p-md flex flex-col sm:flex-row justify-between items-center gap-md">
+<div class="flex items-center gap-sm w-full sm:w-auto overflow-x-auto hide-scrollbar">
+<button class="h-[40px] px-md rounded-full bg-secondary-container text-on-secondary-container font-label-md text-label-md border border-transparent whitespace-nowrap">Todas (42)</button>
+<button class="h-[40px] px-md rounded-full bg-surface text-on-surface-variant font-label-md text-label-md border border-outline-variant hover:bg-surface-variant whitespace-nowrap">Trekking (18)</button>
+<button class="h-[40px] px-md rounded-full bg-surface text-on-surface-variant font-label-md text-label-md border border-outline-variant hover:bg-surface-variant whitespace-nowrap">Camping (12)</button>
+<button class="h-[40px] px-md rounded-full bg-surface text-on-surface-variant font-label-md text-label-md border border-outline-variant hover:bg-surface-variant whitespace-nowrap">Bote (12)</button>
+</div>
+<div class="flex items-center gap-sm w-full sm:w-auto">
+<div class="relative w-full sm:w-auto">
+<input class="h-[44px] w-full bg-surface rounded-lg border border-outline-variant px-sm font-body-md text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none" type="date" value="2024-10-24">
+</div>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg">
+<!-- Left Column: Schedule & Capacity (4 cols) -->
+<div class="lg:col-span-4 flex flex-col gap-lg">
+<!-- Capacity Widget -->
+<div class="bg-surface rounded-lg border border-outline-variant p-lg shadow-ambient-2 relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined text-[100px]" data-icon="groups">groups</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-xs relative z-10">Cupo Diario</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md relative z-10">Capacidad del Parque (Sector Norte)</p>
+<div class="flex items-end gap-xs mb-sm relative z-10">
+<span class="font-display-lg text-display-lg text-primary">342</span>
+<span class="font-body-lg text-body-lg text-on-surface-variant mb-2">/ 500</span>
+</div>
+<div class="w-full h-2 bg-surface-variant rounded-full overflow-hidden relative z-10">
+<div class="h-full bg-primary" style="width: 68%;"></div>
+</div>
+<div class="flex justify-between mt-2 font-label-sm text-label-sm text-on-surface-variant relative z-10">
+<span>68% Ocupado</span>
+<span>158 Disponibles</span>
+</div>
+</div>
+<!-- Time Slots -->
+<div class="bg-surface rounded-lg border border-outline-variant p-lg flex-1">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-md">Franjas Horarias</h3>
+<div class="space-y-sm">
+<!-- Slot Active -->
+<div class="p-sm rounded-lg border-2 border-primary bg-primary-container/5 cursor-pointer">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-md text-label-md text-on-surface font-bold">08:00 - 10:00 AM</span>
+<span class="px-2 py-1 bg-error-container text-on-error-container rounded-md font-label-sm text-label-sm">Lleno (150/150)</span>
+</div>
+<div class="flex gap-2 mt-2">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-on-surface-variant"><span class="w-2 h-2 rounded-full bg-secondary"></span> 85 Trekking</span>
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-on-surface-variant"><span class="w-2 h-2 rounded-full bg-tertiary"></span> 65 Bote</span>
+</div>
+</div>
+<!-- Slot Normal -->
+<div class="p-sm rounded-lg border border-outline-variant hover:bg-surface-variant cursor-pointer transition-colors">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-md text-label-md text-on-surface">10:00 - 12:00 PM</span>
+<span class="px-2 py-1 bg-secondary-container text-on-secondary-container rounded-md font-label-sm text-label-sm">82/150</span>
+</div>
+<div class="flex gap-2 mt-2">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-on-surface-variant"><span class="w-2 h-2 rounded-full bg-secondary"></span> 42 Trekking</span>
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-on-surface-variant"><span class="w-2 h-2 rounded-full bg-tertiary"></span> 40 Bote</span>
+</div>
+</div>
+<!-- Slot Normal -->
+<div class="p-sm rounded-lg border border-outline-variant hover:bg-surface-variant cursor-pointer transition-colors">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-md text-label-md text-on-surface">14:00 - 16:00 PM</span>
+<span class="px-2 py-1 bg-secondary-container text-on-secondary-container rounded-md font-label-sm text-label-sm">110/150</span>
+</div>
+<div class="flex gap-2 mt-2">
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-on-surface-variant"><span class="w-2 h-2 rounded-full bg-secondary"></span> 90 Trekking</span>
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-on-surface-variant"><span class="w-2 h-2 rounded-full bg-tertiary"></span> 20 Bote</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Booking List (8 cols) -->
+<div class="lg:col-span-8 bg-surface rounded-lg border border-outline-variant shadow-ambient-2 flex flex-col h-full">
+<div class="p-lg border-b border-outline-variant flex justify-between items-center">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Lista de Llegadas</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Franja 08:00 - 10:00 AM</p>
+</div>
+<button class="h-[44px] px-md bg-secondary text-on-secondary rounded-lg font-label-md text-label-md hover:bg-opacity-90 flex items-center gap-sm">
+<span class="material-symbols-outlined" data-icon="qr_code_scanner">qr_code_scanner</span>
+<span class="hidden sm:inline">Escanear QR</span>
+</button>
+</div>
+<div class="flex-1 overflow-auto">
+<!-- Table Header -->
+<div class="grid grid-cols-12 gap-4 px-lg py-sm border-b border-outline-variant bg-surface-container-low font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider sticky top-0 z-10">
+<div class="col-span-4 sm:col-span-3">Cliente / ID</div>
+<div class="col-span-3 hidden sm:block">Experiencia</div>
+<div class="col-span-2 hidden md:block">Estado Pago</div>
+<div class="col-span-4 sm:col-span-4 text-right">Acciones</div>
+</div>
+<!-- List Items -->
+<div class="divide-y divide-outline-variant">
+<!-- Item 1: Pending Arrival, Paid -->
+<div class="grid grid-cols-12 gap-4 px-lg py-md items-center hover:bg-surface-container-lowest transition-colors">
+<div class="col-span-6 sm:col-span-3">
+<p class="font-label-md text-label-md text-on-surface truncate">Carlos Mendoza</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">#RSV-4921</p>
+</div>
+<div class="col-span-3 hidden sm:block">
+<div class="flex items-center gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]" data-icon="hiking">hiking</span>
+<span class="font-body-md text-body-md">Trekking (x4)</span>
+</div>
+</div>
+<div class="col-span-2 hidden md:flex items-center">
+<span class="px-2 py-1 bg-secondary-container text-on-secondary-container rounded font-label-sm text-label-sm whitespace-nowrap">Pagado</span>
+</div>
+<div class="col-span-6 sm:col-span-4 flex justify-end gap-2">
+<button class="h-[36px] px-sm bg-primary text-on-primary rounded font-label-md text-label-md hover:opacity-90 flex items-center gap-1" title="Registrar Llegada">
+<span class="material-symbols-outlined text-[18px]" data-icon="check_circle">check_circle</span>
+<span class="hidden xl:inline">Check-in</span>
+</button>
+<button class="h-[36px] w-[36px] flex justify-center items-center bg-surface border border-outline-variant text-on-surface-variant rounded hover:bg-surface-variant" title="No Show">
+<span class="material-symbols-outlined text-[18px]" data-icon="block">block</span>
+</button>
+</div>
+</div>
+<!-- Item 2: Arrived, Pending Payment -->
+<div class="grid grid-cols-12 gap-4 px-lg py-md items-center bg-secondary-container/10">
+<div class="col-span-6 sm:col-span-3">
+<p class="font-label-md text-label-md text-on-surface truncate">Ana Sofía Rojas</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">#RSV-4925</p>
+</div>
+<div class="col-span-3 hidden sm:block">
+<div class="flex items-center gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]" data-icon="sailing">sailing</span>
+<span class="font-body-md text-body-md">Bote (x2)</span>
+</div>
+</div>
+<div class="col-span-2 hidden md:flex items-center">
+<span class="px-2 py-1 bg-error-container text-on-error-container rounded font-label-sm text-label-sm whitespace-nowrap">Pendiente</span>
+</div>
+<div class="col-span-6 sm:col-span-4 flex justify-end gap-2">
+<button class="h-[36px] px-sm bg-surface text-primary border border-primary rounded font-label-md text-label-md hover:bg-primary-container hover:text-on-primary flex items-center gap-1" title="Cobrar y Validar">
+<span class="material-symbols-outlined text-[18px]" data-icon="payments">payments</span>
+<span class="hidden xl:inline">Cobrar</span>
+</button>
+</div>
+</div>
+<!-- Item 3: Checked In (In Progress) -->
+<div class="grid grid-cols-12 gap-4 px-lg py-md items-center opacity-70">
+<div class="col-span-6 sm:col-span-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[16px]" data-icon="directions_walk">directions_walk</span>
+<div>
+<p class="font-label-md text-label-md text-on-surface truncate">Familia García</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">#RSV-4910</p>
+</div>
+</div>
+</div>
+<div class="col-span-3 hidden sm:block">
+<div class="flex items-center gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]" data-icon="hiking">hiking</span>
+<span class="font-body-md text-body-md">Trekking (x5)</span>
+</div>
+</div>
+<div class="col-span-2 hidden md:flex items-center">
+<span class="px-2 py-1 bg-secondary-container text-on-secondary-container rounded font-label-sm text-label-sm whitespace-nowrap">Pagado</span>
+</div>
+<div class="col-span-6 sm:col-span-4 flex justify-end gap-2">
+<button class="h-[36px] px-sm bg-surface border border-outline-variant text-on-surface-variant rounded font-label-md text-label-md hover:bg-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]" data-icon="flag">flag</span>
+<span class="hidden xl:inline">Completar</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="p-4 border-t border-outline-variant flex items-center justify-between bg-surface">
+<span class="font-body-md text-body-md text-on-surface-variant">Mostrando 1-3 de 42 reservas</span>
+<div class="flex gap-2">
+<button class="w-10 h-10 flex justify-center items-center rounded border border-outline-variant text-on-surface-variant hover:bg-surface-variant disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex justify-center items-center rounded border border-outline-variant text-on-surface-variant hover:bg-surface-variant">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>INPARQUES Control Panel - Estructura territorial</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "primary": "#005131",
+                      "error": "#ba1a1a",
+                      "surface-variant": "#e4e2dd",
+                      "on-tertiary-fixed-variant": "#3a4a43",
+                      "inverse-on-surface": "#f3f1eb",
+                      "outline-variant": "#bfc9c0",
+                      "outline": "#6f7a71",
+                      "inverse-surface": "#30312d",
+                      "on-background": "#1b1c18",
+                      "surface": "#fbf9f3",
+                      "on-surface": "#1b1c18",
+                      "surface-bright": "#fbf9f3",
+                      "secondary": "#3e6753",
+                      "primary-fixed-dim": "#88d7a8",
+                      "tertiary-container": "#516159",
+                      "surface-tint": "#186c45",
+                      "tertiary-fixed": "#d5e7dd",
+                      "secondary-fixed": "#c0edd4",
+                      "primary-container": "#176b45",
+                      "on-tertiary-fixed": "#0f1e19",
+                      "surface-container-highest": "#e4e2dd",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-container": "#446d59",
+                      "surface-container-high": "#eae8e2",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary-fixed": "#002114",
+                      "on-error": "#ffffff",
+                      "on-secondary": "#ffffff",
+                      "on-primary-container": "#99e9b9",
+                      "on-error-container": "#93000a",
+                      "surface-container-low": "#f5f3ed",
+                      "secondary-container": "#c0edd4",
+                      "error-container": "#ffdad6",
+                      "primary-fixed": "#a4f4c3",
+                      "inverse-primary": "#88d7a8",
+                      "on-primary": "#ffffff",
+                      "on-surface-variant": "#3f4942",
+                      "on-primary-fixed-variant": "#005232",
+                      "surface-container": "#f0eee8",
+                      "background": "#fbf9f3",
+                      "secondary-fixed-dim": "#a4d0b8",
+                      "tertiary-fixed-dim": "#b9cbc1",
+                      "on-primary-fixed": "#002111",
+                      "on-secondary-fixed-variant": "#264e3c",
+                      "surface-dim": "#dcdad4",
+                      "tertiary": "#3a4942",
+                      "on-tertiary-container": "#cadbd2"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "md": "16px",
+                      "sm": "12px",
+                      "xs": "8px",
+                      "lg": "24px",
+                      "xl": "32px",
+                      "base": "4px",
+                      "xxl": "48px",
+                      "touch-target": "44px"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": ["Manrope"],
+                      "body-md": ["Manrope"],
+                      "display-lg": ["Manrope"],
+                      "label-md": ["Manrope"],
+                      "body-lg": ["Manrope"],
+                      "headline-lg": ["Manrope"],
+                      "headline-md": ["Manrope"],
+                      "label-sm": ["Manrope"]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "700"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; background-color: #F7F5EF; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .material-symbols-outlined.filled { font-variation-settings: 'FILL' 1; }
+        
+        /* Custom scrollbar for subtle appearance */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #dcdad4; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #bfc9c0; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased">
+<!-- SideNavBar (Shared Component) -->
+<nav class="flex flex-col h-screen fixed left-0 top-0 overflow-y-auto px-xs py-md bg-surface border-r border-outline-variant docked left-0 h-full w-72 z-50">
+<div class="flex items-center gap-sm px-md mb-xl">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center shrink-0">
+<img class="w-6 h-6 object-contain" data-alt="A stylized minimalist vector illustration of a lush green tree inside a circular badge, representing the INPARQUES National Superadministrator logo, set against a modern earthy green color palette. The aesthetic is clean, flat, and professional, suitable for a corporate government dashboard." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYdHGjrycitkxlSf3U6l6_xIOOVyfDKWz2yzOHgShT5wUaAxUwT754U_-oN5YaZuha8uRYx3fH6AFUN2w_9gMgQSsRO3OMYOj3yAgNaQahU8b071GKdY0VTPF0SEJB4WqwdZq31r_o2vRg0v6H1Ca1h8xxxN-FXFeqdhB24Lqxrf5x40dI5t19Oy4w6XV_W2nVlScV12L9I3qr8FaH2NYcjJ-RddyiHKA4UGf6se0nGqDIkS35aCtg"/>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">INPARQUES</h1>
+<p class="font-body-md text-body-md text-on-surface-variant text-xs">National Superadministrator</p>
+</div>
+</div>
+<div class="flex flex-col gap-xs flex-1">
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-lg">dashboard</span>
+<span class="font-label-md text-label-md">National Home</span>
+</a>
+<!-- Active Tab: Territorial Structure -->
+<a class="flex items-center gap-md px-md py-sm text-primary font-bold border-r-4 border-primary bg-surface-container/50 scale-[0.98] transition-transform duration-150 rounded-l-lg" href="#">
+<span class="material-symbols-outlined text-lg filled" style="font-variation-settings: 'FILL' 1;">account_tree</span>
+<span class="font-label-md text-label-md">Territorial Structure</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-lg">park</span>
+<span class="font-label-md text-label-md">Parks</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-lg">business_center</span>
+<span class="font-label-md text-label-md">Businesses</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-lg">person_outline</span>
+<span class="font-label-md text-label-md">Users/Roles</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-lg">gavel</span>
+<span class="font-label-md text-label-md">Global Rules</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-lg">extension</span>
+<span class="font-label-md text-label-md">Integrations</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-lg">history</span>
+<span class="font-label-md text-label-md">Audit</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-lg">security</span>
+<span class="font-label-md text-label-md">Security</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-lg">settings</span>
+<span class="font-label-md text-label-md">Configuration</span>
+</a>
+</div>
+</nav>
+<!-- TopNavBar (Shared Component) -->
+<header class="flex justify-between items-center w-full h-16 pl-80 pr-lg fixed top-0 z-40 bg-white border-b border-outline-variant shadow-sm docked full-width top-0">
+<!-- Search & Navigation Links (Left Side) -->
+<div class="flex items-center gap-xl h-full">
+<h2 class="font-headline-sm text-headline-sm font-bold text-primary mr-md hidden lg:block">INPARQUES Control Panel</h2>
+<div class="hidden md:flex h-full items-end gap-lg">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200 h-full flex items-center border-b-2 border-transparent" href="#">National Scope</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200 h-full flex items-center border-b-2 border-transparent" href="#">Region Scope</a>
+<!-- We'll make Park Scope "active" contextually for this view although not strictly mandated by JSON, it fits the context. Reverting to JSON rules: no explicit active nav defined for TopNav in this specific prompt context, but we will style it as inactive to not conflict with SideNav active state -->
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200 h-full flex items-center border-b-2 border-transparent" href="#">Park Scope</a>
+</div>
+</div>
+<!-- Trailing Actions & Profile -->
+<div class="flex items-center gap-sm">
+<div class="relative flex items-center bg-surface-container rounded-full px-sm py-xs border border-outline-variant mr-md w-64 focus-within:border-primary transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant mr-xs">search</span>
+<input class="bg-transparent border-none outline-none text-sm w-full font-body-md focus:ring-0 text-on-surface" placeholder="Search structure..." type="text"/>
+</div>
+<button class="w-touch-target h-touch-target rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-touch-target h-touch-target rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">verified_user</span>
+</button>
+<div class="w-10 h-10 rounded-full border border-outline-variant overflow-hidden ml-xs cursor-pointer hover:shadow-sm transition-shadow">
+<img alt="Administrator Avatar with MFA" class="w-full h-full object-cover" data-alt="A professional headshot of a female administrator wearing a smart-casual olive green shirt, smiling confidently. The background is a soft, blurred modern office space with subtle indoor plants. The lighting is bright and natural, aligning with the light-mode environmental aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdIIIzSsflbJao5KGkhb_3br6xqRius71hPFtIQ3H3jaXi3zSimI9V61fRyHiU1M-DMW6Ih0JTV_nfd5dwLxdbWSVYyVfgFoQx3HzZ8vCeL89g9ypKRFuGzrygfPQCYwJIDAyeo7YU5hCGhXIrFLkiTcTShmUr5acUlZ--pVb0yYCKpNsTsEh6mnpqX0vSadaPRn-EYpIt92DEV7T2JLTnPiXCmlJhvPoQ82NHmn_IyY06_M7M7cng"/>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="pt-[88px] pl-80 pr-lg pb-xl min-h-screen">
+<!-- Page Header & Global Actions -->
+<div class="flex justify-between items-end mb-lg">
+<div>
+<div class="flex items-center gap-2 text-on-surface-variant mb-1">
+<span class="font-label-sm text-label-sm">Control Panel</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="font-label-sm text-label-sm font-bold text-primary">Territorial Structure</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-background">Territorial Structure Management</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1 max-w-2xl">Manage the administrative hierarchy of national parks, regions, zones, and specific points of interest. Deletion of historical nodes is restricted.</p>
+</div>
+<div class="flex gap-md">
+<button class="h-touch-target px-md rounded-lg border border-outline-variant bg-white text-on-surface font-label-md flex items-center gap-xs hover:bg-surface-container transition-colors shadow-sm">
+<span class="material-symbols-outlined text-lg">download</span>
+                    Export Data
+                </button>
+<button class="h-touch-target px-md rounded-lg bg-primary-container text-white font-label-md flex items-center gap-xs hover:opacity-90 transition-opacity shadow-sm">
+<span class="material-symbols-outlined text-lg">add</span>
+                    Create Node
+                </button>
+</div>
+</div>
+<!-- Layout Grid: Tree View on Left, Details/Map on Right -->
+<div class="grid grid-cols-12 gap-lg h-[calc(100vh-220px)]">
+<!-- Left Panel: Hierarchical Tree Table -->
+<div class="col-span-12 xl:col-span-7 bg-white rounded-xl border border-outline-variant shadow-sm flex flex-col overflow-hidden">
+<div class="px-lg py-md border-b border-outline-variant bg-surface-container-lowest flex justify-between items-center">
+<h3 class="font-headline-md text-headline-md text-on-surface">Hierarchy Tree</h3>
+<div class="flex items-center gap-sm">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-1 rounded hover:bg-surface-container">
+<span class="material-symbols-outlined">unfold_less</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors p-1 rounded hover:bg-surface-container">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto p-0">
+<table class="w-full text-left border-collapse">
+<thead class="sticky top-0 bg-surface-container-low border-b border-outline-variant z-10">
+<tr>
+<th class="py-sm px-lg font-label-md text-on-surface-variant font-semibold">Node Name / Code</th>
+<th class="py-sm px-md font-label-md text-on-surface-variant font-semibold w-24">Type</th>
+<th class="py-sm px-md font-label-md text-on-surface-variant font-semibold w-28">Status</th>
+<th class="py-sm px-md font-label-md text-on-surface-variant font-semibold w-24 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="font-body-md">
+<!-- Region Row -->
+<tr class="border-b border-outline-variant/50 hover:bg-surface-container/30 transition-colors group cursor-pointer">
+<td class="py-sm px-lg">
+<div class="flex items-center gap-xs">
+<button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-lg">keyboard_arrow_down</span></button>
+<span class="material-symbols-outlined text-on-surface-variant text-lg">map</span>
+<div>
+<div class="font-semibold text-on-surface">Región Andes</div>
+<div class="text-xs text-on-surface-variant font-mono">REG-AND-001</div>
+</div>
+</div>
+</td>
+<td class="py-sm px-md"><span class="text-sm text-on-surface-variant">Region</span></td>
+<td class="py-sm px-md">
+<span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-primary-fixed text-on-primary-fixed">
+<span class="w-1.5 h-1.5 rounded-full bg-primary mr-1"></span> Active
+                                    </span>
+</td>
+<td class="py-sm px-md text-right">
+<button class="text-on-surface-variant hover:text-primary opacity-0 group-hover:opacity-100 transition-opacity"><span class="material-symbols-outlined text-lg">more_vert</span></button>
+</td>
+</tr>
+<!-- Park Row (Child of Region) -->
+<tr class="border-b border-outline-variant/50 hover:bg-surface-container/30 transition-colors bg-surface-container-lowest group cursor-pointer bg-primary/5">
+<td class="py-sm px-lg pl-12 border-l-4 border-primary">
+<div class="flex items-center gap-xs">
+<button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-lg">keyboard_arrow_down</span></button>
+<span class="material-symbols-outlined text-primary text-lg">park</span>
+<div>
+<div class="font-semibold text-primary">Parque Nacional Sierra Nevada</div>
+<div class="text-xs text-on-surface-variant font-mono">PN-SNE-045</div>
+</div>
+</div>
+</td>
+<td class="py-sm px-md"><span class="text-sm text-on-surface-variant">Park</span></td>
+<td class="py-sm px-md">
+<span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-primary-fixed text-on-primary-fixed">
+<span class="w-1.5 h-1.5 rounded-full bg-primary mr-1"></span> Active
+                                    </span>
+</td>
+<td class="py-sm px-md text-right">
+<button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-lg">edit</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Right Panel: Contextual Details & Map -->
+<div class="col-span-12 xl:col-span-5 flex flex-col gap-lg h-full">
+<!-- Selected Node Summary Card -->
+<div class="bg-white rounded-xl border border-outline-variant shadow-sm p-lg">
+<div class="flex justify-between items-start mb-md">
+<div>
+<div class="flex items-center gap-xs mb-1">
+<span class="material-symbols-outlined text-primary text-sm">park</span>
+<span class="font-label-sm text-on-surface-variant uppercase tracking-wider">Selected Park Node</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface font-bold">Sierra Nevada</h3>
+<div class="font-mono text-sm text-on-surface-variant mt-1">ID: PN-SNE-045</div>
+</div>
+<span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-primary-fixed text-on-primary-fixed">
+                            Active
+                        </span>
+</div>
+<div class="grid grid-cols-2 gap-md mb-lg">
+<div class="bg-surface-container rounded-lg p-sm">
+<div class="text-xs text-on-surface-variant mb-1">Total Area (Ha)</div>
+<div class="font-semibold text-on-surface">276,446</div>
+</div>
+<div class="bg-surface-container rounded-lg p-sm">
+<div class="text-xs text-on-surface-variant mb-1">Est. Date</div>
+<div class="font-semibold text-on-surface">02 May 1952</div>
+</div>
+</div>
+<div class="flex gap-sm">
+<button class="flex-1 h-touch-target rounded-lg bg-primary-container text-white font-label-md flex items-center justify-center gap-xs hover:opacity-90 transition-opacity shadow-sm">
+<span class="material-symbols-outlined text-lg">visibility</span>
+                            Ver parque
+                        </button>
+<button class="h-touch-target px-md rounded-lg border border-outline-variant bg-white text-on-surface font-label-md flex items-center justify-center gap-xs hover:bg-surface-container transition-colors shadow-sm" title="Edit Node">
+<span class="material-symbols-outlined text-lg">edit</span>
+</button>
+</div>
+</div>
+<!-- Map / Coordinate View -->
+<div class="flex-1 bg-white rounded-xl border border-outline-variant shadow-sm overflow-hidden flex flex-col relative">
+<div class="absolute top-md left-md z-10 bg-white/90 backdrop-blur-sm rounded-lg shadow-sm border border-outline-variant p-sm flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">my_location</span>
+<div>
+<div class="text-xs font-bold text-on-surface">Coordinates (WGS84)</div>
+<div class="text-xs font-mono text-on-surface-variant">8.5333° N, 70.8167° W</div>
+</div>
+</div>
+<!-- Decorative Map Background Placeholder -->
+<div class="w-full h-full bg-surface-variant relative" data-alt="A stylized, top-down map view of a lush mountainous national park region. The aesthetic uses the design system's earthy green palette, with contour lines indicating elevation and soft green shaded areas representing dense forests. The map feels like a modern digital interface for a high-end web application, not a realistic satellite image." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDRjT-kFmEwBbU-n38S0nsk4CYMBlkfnk9qIDi0T0c87pnDw-eH6kI3EpPIhxLrnTQwNicY6VfyUMb9rwiZkmgTslBksCT1B-DTC5s9Kwd2ivecboWeFVH1WEedWKLi_MIhec1YYgRLIF38XZM7hbaR3ymIaJjlik4JsQcOEhegSbF_QuT94lTIVmekUh4Z3hOU6--02NbCJ-JOeCmKSUYcRiPtKUG90F6zMCw59NncJa3xuYaXV7cL')">
+<!-- Pin marker -->
+<div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+<div class="w-8 h-8 bg-primary rounded-full shadow-lg flex items-center justify-center text-white border-2 border-white relative z-10 animate-bounce">
+<span class="material-symbols-outlined text-sm">park</span>
+</div>
+<div class="w-4 h-1 bg-black/20 rounded-full blur-sm mt-1"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Modal for Deactivation (Hidden by default, shown for structure constraints requirement) -->
+<!-- Added logic conceptually, structural class 'hidden' -->
+<div class="fixed inset-0 bg-on-background/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-md">
+<div class="bg-white rounded-xl shadow-lg border border-outline-variant w-full max-w-md overflow-hidden">
+<div class="p-lg border-b border-outline-variant">
+<div class="flex justify-between items-center mb-sm">
+<h3 class="font-headline-md text-headline-md text-on-surface text-error">Deactivate Node</h3>
+<button class="text-on-surface-variant hover:text-on-surface"><span class="material-symbols-outlined">close</span></button>
+</div>
+<p class="font-body-md text-sm text-on-surface-variant">This node has associated historical data. Deletion is blocked by system constraints. You may deactivate it instead.</p>
+</div>
+<div class="p-lg">
+<label class="block font-label-md text-on-surface mb-xs">Reason for deactivation *</label>
+<textarea class="w-full border border-outline-variant rounded-lg p-sm font-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none min-h-[100px] resize-none" placeholder="Provide a justification..."></textarea>
+</div>
+<div class="p-md bg-surface-container-low border-t border-outline-variant flex justify-end gap-sm">
+<button class="h-touch-target px-md rounded-lg border border-outline-variant bg-white text-on-surface font-label-md hover:bg-surface-container transition-colors">Cancel</button>
+<button class="h-touch-target px-md rounded-lg bg-error text-white font-label-md hover:opacity-90 transition-opacity">Deactivate Node</button>
+</div>
+</div>
+</div>
+</body></html>

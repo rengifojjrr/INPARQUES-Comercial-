@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Transaction Traceability - INPARQUES Audit</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "primary-fixed": "#a4f4c3",
+                        "on-surface-variant": "#3f4942",
+                        "tertiary": "#3a4942",
+                        "on-secondary": "#ffffff",
+                        "inverse-surface": "#30312d",
+                        "on-secondary-fixed": "#002114",
+                        "on-primary-fixed-variant": "#005232",
+                        "secondary": "#3e6753",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed": "#002111",
+                        "surface-tint": "#186c45",
+                        "tertiary-fixed-dim": "#b9cbc1",
+                        "on-tertiary-container": "#cadbd2",
+                        "error-container": "#ffdad6",
+                        "primary-container": "#176b45",
+                        "on-tertiary": "#ffffff",
+                        "surface-container": "#f0eee8",
+                        "outline": "#6f7a71",
+                        "outline-variant": "#bfc9c0",
+                        "on-secondary-fixed-variant": "#264e3c",
+                        "surface-variant": "#e4e2dd",
+                        "on-surface": "#1b1c18",
+                        "secondary-container": "#c0edd4",
+                        "tertiary-container": "#516159",
+                        "on-secondary-container": "#446d59",
+                        "secondary-fixed": "#c0edd4",
+                        "on-primary-container": "#99e9b9",
+                        "on-error-container": "#93000a",
+                        "background": "#fbf9f3",
+                        "secondary-fixed-dim": "#a4d0b8",
+                        "surface-bright": "#fbf9f3",
+                        "on-background": "#1b1c18",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#3a4a43",
+                        "inverse-primary": "#88d7a8",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed-dim": "#88d7a8",
+                        "surface-container-high": "#eae8e2",
+                        "surface-dim": "#dcdad4",
+                        "surface": "#fbf9f3",
+                        "surface-container-low": "#f5f3ed",
+                        "tertiary-fixed": "#d5e7dd",
+                        "primary": "#005131",
+                        "on-tertiary-fixed": "#0f1e19",
+                        "inverse-on-surface": "#f3f1eb",
+                        "surface-container-highest": "#e4e2dd"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xxl": "48px",
+                        "xl": "32px",
+                        "base": "4px",
+                        "md": "16px",
+                        "xs": "8px",
+                        "sm": "12px",
+                        "touch-target": "44px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Manrope", "sans-serif"],
+                        "display-lg": ["Manrope", "sans-serif"],
+                        "body-lg": ["Manrope", "sans-serif"],
+                        "headline-lg-mobile": ["Manrope", "sans-serif"],
+                        "label-md": ["Manrope", "sans-serif"],
+                        "label-sm": ["Manrope", "sans-serif"],
+                        "headline-lg": ["Manrope", "sans-serif"],
+                        "headline-md": ["Manrope", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex antialiased">
+<!-- SideNavBar -->
+<nav class="bg-background dark:bg-background h-screen w-72 flex flex-col fixed left-0 top-0 overflow-y-auto border-r border-outline-variant dark:border-outline z-20">
+<div class="h-full py-lg px-md flex flex-col gap-sm">
+<!-- Header -->
+<div class="mb-xl px-sm flex flex-col gap-base">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-inverse-primary">INPARQUES</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Audit &amp; Finance Panel</span>
+</div>
+<!-- CTA -->
+<button class="mb-md bg-primary-container text-on-primary-container h-touch-target rounded-lg font-label-md text-label-md flex items-center justify-center gap-xs hover:bg-opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                New Transaction
+            </button>
+<!-- Tabs -->
+<div class="flex flex-col gap-base flex-1">
+<a class="flex items-center gap-md text-on-surface-variant dark:text-outline-variant px-md py-sm hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                    Financial Overview
+                </a>
+<a class="flex items-center gap-md text-on-surface-variant dark:text-outline-variant px-md py-sm hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">payments</span>
+                    Sales
+                </a>
+<a class="flex items-center gap-md text-on-surface-variant dark:text-outline-variant px-md py-sm hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">account_balance</span>
+                    Reconciliation
+                </a>
+<a class="flex items-center gap-md text-on-surface-variant dark:text-outline-variant px-md py-sm hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">percent</span>
+                    Fees/Commissions
+                </a>
+<a class="flex items-center gap-md text-on-surface-variant dark:text-outline-variant px-md py-sm hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+                    Accounts Receivable
+                </a>
+<a class="flex items-center gap-md text-on-surface-variant dark:text-outline-variant px-md py-sm hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+                    Daily Closings
+                </a>
+<a class="flex items-center gap-md text-on-surface-variant dark:text-outline-variant px-md py-sm hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">undo</span>
+                    Refunds
+                </a>
+<a class="flex items-center gap-md text-on-surface-variant dark:text-outline-variant px-md py-sm hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">edit_document</span>
+                    Adjustments
+                </a>
+<!-- Active Tab: Audit -->
+<a class="flex items-center gap-md bg-secondary-container dark:bg-on-secondary-fixed-variant text-on-secondary-container dark:text-primary-fixed rounded-lg px-md py-sm font-label-md text-label-md scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+                    Audit
+                </a>
+<a class="flex items-center gap-md text-on-surface-variant dark:text-outline-variant px-md py-sm hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">file_export</span>
+                    Exports
+                </a>
+</div>
+<!-- Footer Tabs -->
+<div class="mt-auto border-t border-outline-variant dark:border-outline pt-sm flex flex-col gap-base">
+<a class="flex items-center gap-md text-on-surface-variant dark:text-outline-variant px-md py-sm hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">help_outline</span>
+                    Support
+                </a>
+<a class="flex items-center gap-md text-on-surface-variant dark:text-outline-variant px-md py-sm hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">settings</span>
+                    Settings
+                </a>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 ml-72 flex flex-col min-h-screen">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-surface-dim docked full-width top-0 h-16 border-b border-outline-variant dark:border-outline flex justify-between items-center px-lg sticky z-10 w-full">
+<div class="flex items-center gap-sm">
+<span class="font-headline-md text-headline-md font-extrabold text-primary dark:text-inverse-primary">Financial Audit Management</span>
+</div>
+<div class="flex items-center gap-md">
+<div class="relative hidden lg:flex items-center">
+<span class="material-symbols-outlined absolute left-sm text-on-surface-variant">search</span>
+<input class="pl-xl pr-md h-10 w-64 rounded-full border border-outline-variant bg-surface-container-lowest focus:border-primary focus:ring-1 focus:ring-primary text-body-md font-body-md text-on-surface outline-none" placeholder="Search..." type="text"/>
+</div>
+<button class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors opacity-80 p-xs rounded-full">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors opacity-80 p-xs rounded-full">
+<span class="material-symbols-outlined text-[28px]">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Canvas Area -->
+<main class="p-lg flex-1 overflow-y-auto">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-xl gap-md">
+<div>
+<div class="flex items-center gap-sm mb-xs">
+<button class="text-on-surface-variant hover:bg-surface-container p-xs rounded-full transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-headline-lg text-headline-lg text-on-surface">TRX-20231024-8842</h1>
+<span class="bg-secondary-container text-on-secondary-container px-sm py-xs rounded-full font-label-sm text-label-sm uppercase tracking-wider flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> Settled
+                        </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Operation Traceability Record • Concessionaire: EcoTours Canaima</p>
+</div>
+<button class="bg-error text-on-error px-md h-touch-target rounded-lg font-label-md text-label-md flex items-center gap-xs hover:bg-opacity-90 transition-colors shadow-sm">
+<span class="material-symbols-outlined">warning</span>
+                    Initiate Adjustment / Case
+                </button>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-lg">
+<!-- Left Column (Wider - Financials & Details) -->
+<div class="lg:col-span-2 flex flex-col gap-lg">
+<!-- Core Details & Invoice -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-lg shadow-[0px_4px_12px_rgba(40,51,46,0.04)]">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-md flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">receipt</span> Commercial Details
+                        </h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-md mb-md border-b border-surface-variant pb-md">
+<div>
+<span class="block font-label-sm text-label-sm text-on-surface-variant mb-base">Order Reference</span>
+<span class="font-body-md text-body-md text-on-surface font-semibold">ORD-99120A</span>
+</div>
+<div>
+<span class="block font-label-sm text-label-sm text-on-surface-variant mb-base">Service Category</span>
+<span class="font-body-md text-body-md text-on-surface">Guided Excursion</span>
+</div>
+<div>
+<span class="block font-label-sm text-label-sm text-on-surface-variant mb-base">Date Issued</span>
+<span class="font-body-md text-body-md text-on-surface">Oct 24, 2023, 10:15 AM</span>
+</div>
+<div>
+<span class="block font-label-sm text-label-sm text-on-surface-variant mb-base">Fiscal Invoice #</span>
+<span class="font-body-md text-body-md text-on-surface">SEN-0044192</span>
+</div>
+</div>
+<div class="flex justify-between items-end bg-surface-container-low p-md rounded-lg">
+<div>
+<span class="block font-label-sm text-label-sm text-on-surface-variant mb-base">Total Base Amount</span>
+<span class="font-headline-lg text-headline-lg text-on-surface">Bs. 4,500.00</span>
+</div>
+<div class="text-right">
+<span class="block font-label-sm text-label-sm text-on-surface-variant mb-base">Tax (IVA 16%)</span>
+<span class="font-body-md text-body-md text-on-surface">Bs. 720.00</span>
+</div>
+</div>
+</div>
+<!-- Payment & Allocation Breakdown -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-lg shadow-[0px_4px_12px_rgba(40,51,46,0.04)]">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-md flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">account_balance_wallet</span> Financial Allocation
+                        </h2>
+<!-- Bank Ref -->
+<div class="flex items-center justify-between border border-outline-variant rounded-lg p-md mb-lg bg-surface">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined">account_balance</span>
+</div>
+<div>
+<span class="font-label-md text-label-md text-on-surface block">Bank Transfer (Banco de Venezuela)</span>
+<span class="font-body-sm text-label-sm text-on-surface-variant">Ref: 0102-XXXX-XXXX-9982</span>
+</div>
+</div>
+<span class="font-label-md text-label-md text-primary bg-primary-fixed px-sm py-xs rounded-full">Verified</span>
+</div>
+<!-- Breakdown Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-surface-variant">
+<th class="py-sm font-label-sm text-label-sm text-on-surface-variant font-semibold">Allocation Item</th>
+<th class="py-sm font-label-sm text-label-sm text-on-surface-variant font-semibold text-right">Rate / Basis</th>
+<th class="py-sm font-label-sm text-label-sm text-on-surface-variant font-semibold text-right">Amount (Bs.)</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md text-on-surface">
+<tr class="border-b border-surface-variant">
+<td class="py-sm flex items-center gap-xs"><span class="material-symbols-outlined text-[16px] text-tertiary">park</span> Park Access Fee (Tarifa)</td>
+<td class="py-sm text-right text-on-surface-variant">Fixed</td>
+<td class="py-sm text-right">1,200.00</td>
+</tr>
+<tr class="border-b border-surface-variant">
+<td class="py-sm flex items-center gap-xs"><span class="material-symbols-outlined text-[16px] text-tertiary">monetization_on</span> Concessionaire Canon (Comisión)</td>
+<td class="py-sm text-right text-on-surface-variant">5% of Base</td>
+<td class="py-sm text-right">225.00</td>
+</tr>
+<tr class="border-b border-surface-variant">
+<td class="py-sm flex items-center gap-xs"><span class="material-symbols-outlined text-[16px] text-tertiary">sell</span> Net Service Revenue</td>
+<td class="py-sm text-right text-on-surface-variant">-</td>
+<td class="py-sm text-right">3,075.00</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td class="py-sm font-label-md text-label-md text-right pr-md" colspan="2">Total Settled:</td>
+<td class="py-sm font-label-md text-label-md text-right text-primary">Bs. 4,500.00</td>
+</tr>
+</tfoot>
+</table>
+</div>
+</div>
+<!-- Documentary Evidence -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-lg shadow-[0px_4px_12px_rgba(40,51,46,0.04)]">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-md flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">folder_open</span> Documentary Evidence
+                        </h2>
+<div class="grid grid-cols-2 gap-md">
+<!-- Doc Card 1 -->
+<div class="border border-outline-variant rounded-lg p-sm flex items-start gap-md hover:shadow-md transition-shadow cursor-pointer bg-surface group">
+<div class="w-16 h-20 bg-surface-variant rounded flex items-center justify-center overflow-hidden shrink-0 border border-outline-variant relative">
+<div class="absolute inset-0 bg-primary-container bg-opacity-0 group-hover:bg-opacity-10 transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined opacity-0 group-hover:opacity-100 text-primary">visibility</span>
+</div>
+<img class="object-cover w-full h-full opacity-50 grayscale" data-alt="A macro, well-lit photograph of a crisp physical fiscal invoice printed on thermal paper, bearing a formal corporate header and tabular data, resting on a clean white desk surface. The aesthetic is modern, high-contrast, and professional, emphasizing administrative accuracy." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4OPXpZyPomYLI4dIRHuLOLEvSr5pGkP231z3VUgftn3gwp5omSF9QznYx9vYAzxJ0wDoZozBgdDp2pFZWowh1VZSY1k46feqlFqqEFDcLgtYVPXSocqvIFOV6ni3Yu0X0SBPr2_hyNYgnntg-pUIocH2av2n5Zn6iShRicWUNOD6FjaR9Uw2jl9FabUY3e_9v9-fNXESUIDfvIo57qER_2rhFOOVKxlqNP9SHAIaiFY946-_yEs0S"/>
+</div>
+<div>
+<span class="font-label-md text-label-md text-on-surface block mb-base">Fiscal Invoice Copy</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant block mb-sm">PDF • 142 KB</span>
+<span class="text-primary font-label-sm text-label-sm flex items-center gap-xs"><span class="material-symbols-outlined text-[14px]">download</span> Download</span>
+</div>
+</div>
+<!-- Doc Card 2 -->
+<div class="border border-outline-variant rounded-lg p-sm flex items-start gap-md hover:shadow-md transition-shadow cursor-pointer bg-surface group">
+<div class="w-16 h-20 bg-surface-variant rounded flex items-center justify-center overflow-hidden shrink-0 border border-outline-variant relative">
+<div class="absolute inset-0 bg-primary-container bg-opacity-0 group-hover:bg-opacity-10 transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined opacity-0 group-hover:opacity-100 text-primary">visibility</span>
+</div>
+<img class="object-cover w-full h-full opacity-50 grayscale" data-alt="A screenshot of a digital bank transfer receipt displayed on a sleek mobile device screen. The screen shows green confirmation checkmarks and financial figures against a light mode background. The lighting is bright and modern, suggesting a seamless digital transaction." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVqCsj575WzYHMSPw_VUy2Vh1pwYpzRX3n7A3V5djvKRUsIgXX7CIkLqnR9Nu_e0eJYh-SEnsdfY4WXRXbVX0dFBhWsYKOxmMSEu5OcjgizBCIRwNz-cwI9M14iYJYQxAz2fl4Gnk-xsJeQaGyAEVNvJ4JW6F18ugpuGM7rZIJqcXcD5frPsTjeWI6yBdo-04nZt8fnp5mX0kfi9qPYNjqx4R4b4kHNDOsckgnM8Oj0Czb2cZfO40r"/>
+</div>
+<div>
+<span class="font-label-md text-label-md text-on-surface block mb-base">Bank Transfer Receipt</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant block mb-sm">JPG • 89 KB</span>
+<span class="text-primary font-label-sm text-label-sm flex items-center gap-xs"><span class="material-symbols-outlined text-[14px]">download</span> Download</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column (Audit Timeline) -->
+<div class="lg:col-span-1">
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-lg shadow-[0px_4px_12px_rgba(40,51,46,0.04)] h-full sticky top-24">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-lg flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">history</span> Audit Trail
+                        </h2>
+<!-- Timeline -->
+<div class="relative pl-md border-l-2 border-surface-variant space-y-xl pb-md">
+<!-- Event 5 -->
+<div class="relative">
+<span class="absolute -left-[25px] w-3 h-3 bg-primary rounded-full ring-4 ring-surface-container-lowest"></span>
+<div class="flex flex-col gap-base">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Today, 18:00</span>
+<span class="font-label-md text-label-md text-on-surface">Daily Closing Executed</span>
+<span class="font-body-md text-label-sm text-on-surface-variant">System Automated</span>
+</div>
+</div>
+<!-- Event 4 -->
+<div class="relative">
+<span class="absolute -left-[25px] w-3 h-3 bg-secondary rounded-full ring-4 ring-surface-container-lowest"></span>
+<div class="flex flex-col gap-base">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Today, 14:30</span>
+<span class="font-label-md text-label-md text-on-surface">Funds Settled to Master Acct</span>
+<span class="font-body-md text-label-sm text-on-surface-variant">Treasury API</span>
+</div>
+</div>
+<!-- Event 3 -->
+<div class="relative">
+<span class="absolute -left-[25px] w-3 h-3 bg-outline rounded-full ring-4 ring-surface-container-lowest"></span>
+<div class="flex flex-col gap-base">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Today, 10:18</span>
+<span class="font-label-md text-label-md text-on-surface">Bank Reference Verified</span>
+<span class="font-body-md text-label-sm text-on-surface-variant">Operator: Maria G. (ID: 9912)</span>
+</div>
+</div>
+<!-- Event 2 -->
+<div class="relative">
+<span class="absolute -left-[25px] w-3 h-3 bg-outline rounded-full ring-4 ring-surface-container-lowest"></span>
+<div class="flex flex-col gap-base">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Today, 10:15</span>
+<span class="font-label-md text-label-md text-on-surface">Fiscal Invoice Generated</span>
+<span class="font-body-md text-label-sm text-on-surface-variant">System (SENIAT Integration)</span>
+</div>
+</div>
+<!-- Event 1 -->
+<div class="relative">
+<span class="absolute -left-[25px] w-3 h-3 bg-outline rounded-full ring-4 ring-surface-container-lowest"></span>
+<div class="flex flex-col gap-base">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Today, 10:12</span>
+<span class="font-label-md text-label-md text-on-surface">Order Created (Pending Pmt)</span>
+<span class="font-body-md text-label-sm text-on-surface-variant">Terminal: POS-Canaima-02</span>
+</div>
+</div>
+</div>
+<div class="mt-md pt-md border-t border-surface-variant text-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[14px]">lock</span> Immutable Record
+                            </span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Spacing -->
+<div class="h-xl"></div>
+</main>
+</div>
+</body></html>

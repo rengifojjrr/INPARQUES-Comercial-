@@ -1,0 +1,327 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Detalle de Pedido - Operaciones Parque</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-fixed-dim": "#b9cbc1",
+                      "primary-container": "#176b45",
+                      "on-tertiary-fixed-variant": "#3a4a43",
+                      "inverse-on-surface": "#f3f1eb",
+                      "outline-variant": "#bfc9c0",
+                      "tertiary": "#3a4942",
+                      "secondary-container": "#c0edd4",
+                      "surface-container-low": "#f5f3ed",
+                      "surface-container-high": "#eae8e2",
+                      "tertiary-container": "#516159",
+                      "surface-variant": "#e4e2dd",
+                      "on-primary-fixed": "#002111",
+                      "on-error-container": "#93000a",
+                      "on-secondary": "#ffffff",
+                      "primary-fixed": "#a4f4c3",
+                      "error": "#ba1a1a",
+                      "inverse-surface": "#30312d",
+                      "on-error": "#ffffff",
+                      "surface-container": "#f0eee8",
+                      "on-surface": "#1b1c18",
+                      "on-primary-fixed-variant": "#005232",
+                      "on-tertiary-fixed": "#0f1e19",
+                      "on-secondary-fixed-variant": "#264e3c",
+                      "error-container": "#ffdad6",
+                      "surface-container-lowest": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "secondary": "#3e6753",
+                      "on-tertiary": "#ffffff",
+                      "secondary-fixed-dim": "#a4d0b8",
+                      "surface": "#fbf9f3",
+                      "secondary-fixed": "#c0edd4",
+                      "primary": "#005131",
+                      "on-surface-variant": "#3f4942",
+                      "on-tertiary-container": "#cadbd2",
+                      "background": "#fbf9f3",
+                      "surface-tint": "#186c45",
+                      "on-primary-container": "#99e9b9",
+                      "inverse-primary": "#88d7a8",
+                      "surface-container-highest": "#e4e2dd",
+                      "on-secondary-container": "#446d59",
+                      "primary-fixed-dim": "#88d7a8",
+                      "on-secondary-fixed": "#002114",
+                      "surface-bright": "#fbf9f3",
+                      "tertiary-fixed": "#d5e7dd",
+                      "surface-dim": "#dcdad4",
+                      "on-background": "#1b1c18",
+                      "outline": "#6f7a71"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xs": "8px",
+                      "base": "4px",
+                      "lg": "24px",
+                      "xxl": "48px",
+                      "md": "16px",
+                      "sm": "12px",
+                      "touch-target": "44px",
+                      "xl": "32px"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": [
+                              "Manrope"
+                      ],
+                      "display-lg": [
+                              "Manrope"
+                      ],
+                      "label-md": [
+                              "Manrope"
+                      ],
+                      "body-lg": [
+                              "Manrope"
+                      ],
+                      "body-md": [
+                              "Manrope"
+                      ],
+                      "headline-md": [
+                              "Manrope"
+                      ],
+                      "label-sm": [
+                              "Manrope"
+                      ],
+                      "headline-lg": [
+                              "Manrope"
+                      ]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        body {
+            background-color: #F7F5EF; /* Arena Base */
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="text-on-background font-body-md antialiased pb-[120px]">
+<!-- TopAppBar (Suppressed for focused task, replacing with a custom task header with back button) -->
+<header class="bg-surface sticky top-0 z-40 border-b border-outline-variant shadow-sm px-md h-touch-target w-full flex justify-between items-center">
+<button class="text-on-surface-variant hover:bg-surface-container-high transition-colors active:scale-95 duration-100 p-xs rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<div class="flex flex-col items-center">
+<h1 class="font-headline-md text-headline-md-mobile font-bold text-primary">Pedido #4092</h1>
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">timer</span>
+<span class="text-error font-bold" id="prep-timer">11:59 min</span>
+</span>
+</div>
+<div class="w-[40px]"></div> <!-- Spacer -->
+</header>
+<main class="max-w-4xl mx-auto p-md lg:p-lg grid grid-cols-1 md:grid-cols-12 gap-md">
+<!-- Main Content Area -->
+<div class="md:col-span-8 flex flex-col gap-md">
+<!-- Context Card -->
+<div class="bg-surface rounded-lg border border-outline-variant p-lg flex flex-col gap-sm shadow-sm relative overflow-hidden">
+<div class="absolute top-0 left-0 w-2 h-full bg-primary-container"></div>
+<div class="flex justify-between items-start pl-sm">
+<div>
+<h2 class="font-headline-lg text-headline-lg-mobile font-bold text-on-surface">Zona A - Restaurante Principal</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-base">Mesa 12 • Cliente: Juan Pérez</p>
+</div>
+<div class="bg-primary-container/10 text-primary-container px-sm py-base rounded-full border border-primary-container/20 flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span class="font-label-sm text-label-sm uppercase">Pago Confirmado</span>
+</div>
+</div>
+</div>
+<!-- Checklist -->
+<div class="bg-surface rounded-lg border border-outline-variant shadow-sm overflow-hidden">
+<div class="bg-surface-container-low p-md border-b border-outline-variant">
+<h3 class="font-headline-md text-headline-md-mobile font-bold text-on-surface">Artículos del Pedido</h3>
+</div>
+<div class="flex flex-col divide-y divide-outline-variant">
+<!-- Item 1 -->
+<label class="flex items-start gap-md p-md hover:bg-surface-container-lowest cursor-pointer transition-colors group">
+<div class="flex items-center h-touch-target">
+<input class="w-[24px] h-[24px] rounded border-outline-variant text-primary focus:ring-primary focus:ring-2 cursor-pointer transition-all" type="checkbox">
+</div>
+<div class="flex-1 pt-xs">
+<div class="flex justify-between items-start">
+<span class="font-body-lg text-body-lg font-bold text-on-surface group-hover:text-primary transition-colors">2x Hamburguesa Clásica Parque</span>
+</div>
+<ul class="font-body-md text-body-md text-on-surface-variant mt-xs list-disc list-inside">
+<li>Sin cebolla</li>
+<li>Término medio</li>
+</ul>
+<div class="mt-sm bg-error-container/30 border border-error/20 p-xs rounded-md">
+<span class="font-label-md text-label-md text-error font-bold flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">priority_high</span>
+                                    ALERGIA AL MANÍ INDICADA
+                                </span>
+</div>
+</div>
+</label>
+<!-- Item 2 -->
+<label class="flex items-start gap-md p-md hover:bg-surface-container-lowest cursor-pointer transition-colors group">
+<div class="flex items-center h-touch-target">
+<input class="w-[24px] h-[24px] rounded border-outline-variant text-primary focus:ring-primary focus:ring-2 cursor-pointer transition-all" type="checkbox">
+</div>
+<div class="flex-1 pt-xs">
+<div class="flex justify-between items-start">
+<span class="font-body-lg text-body-lg font-bold text-on-surface group-hover:text-primary transition-colors">1x Ensalada Bosque</span>
+</div>
+<ul class="font-body-md text-body-md text-on-surface-variant mt-xs list-disc list-inside">
+<li>Aderezo aparte</li>
+</ul>
+</div>
+</label>
+<!-- Item 3 -->
+<label class="flex items-start gap-md p-md hover:bg-surface-container-lowest cursor-pointer transition-colors group">
+<div class="flex items-center h-touch-target">
+<input class="w-[24px] h-[24px] rounded border-outline-variant text-primary focus:ring-primary focus:ring-2 cursor-pointer transition-all" type="checkbox">
+</div>
+<div class="flex-1 pt-xs">
+<div class="flex justify-between items-start">
+<span class="font-body-lg text-body-lg font-bold text-on-surface group-hover:text-primary transition-colors">3x Jugo Natural (Lulo)</span>
+</div>
+<ul class="font-body-md text-body-md text-on-surface-variant mt-xs list-disc list-inside">
+<li>Sin hielo</li>
+</ul>
+</div>
+</label>
+</div>
+</div>
+<!-- Global Notes -->
+<div class="bg-surface rounded-lg border border-outline-variant p-md shadow-sm">
+<h4 class="font-label-md text-label-md text-on-surface-variant mb-xs flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">sticky_note_2</span>
+                    Notas del Camarero
+                </h4>
+<p class="font-body-md text-body-md text-on-surface"><strong>El cliente solicitó los platos principales primero, la ensalada como acompañamiento para compartir.</strong></p>
+</div>
+</div>
+<!-- Sidebar / Actions -->
+<div class="md:col-span-4 flex flex-col gap-md">
+<!-- Fixed Action Panel (Sticky on Desktop) -->
+<div class="sticky top-[80px] bg-surface rounded-lg border border-outline-variant p-md shadow-sm flex flex-col gap-sm">
+<h3 class="font-headline-md text-headline-md-mobile font-bold text-on-surface mb-sm">Acciones Operativas</h3>
+<button class="w-full min-h-[56px] bg-primary-container text-on-primary rounded-lg font-label-md text-label-md flex items-center justify-center gap-sm hover:bg-primary transition-colors shadow-md active:scale-95">
+<span class="material-symbols-outlined">play_arrow</span>
+                    Comenzar Preparación
+                </button>
+<button class="w-full min-h-[56px] bg-secondary-container text-on-secondary-container rounded-lg font-label-md text-label-md flex items-center justify-center gap-sm hover:bg-secondary transition-colors border border-outline-variant active:scale-95">
+<span class="material-symbols-outlined">check_circle</span>
+                    Marcar Listo
+                </button>
+<div class="h-px bg-outline-variant w-full my-xs"></div>
+<button class="w-full min-h-[44px] bg-transparent text-error rounded-lg font-label-md text-label-md flex items-center justify-center gap-sm hover:bg-error-container transition-colors border border-error/50 active:scale-95">
+<span class="material-symbols-outlined">report_problem</span>
+                    Reportar Problema
+                </button>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Suppressed as this is a focused task/detail view, prioritizing the canvas and fixed actions above) -->
+<script>
+        // Simple timer logic for demonstration
+        let minutes = 12;
+        let seconds = 45;
+        const timerDisplay = document.getElementById('prep-timer');
+        
+        setInterval(() => {
+            if(seconds === 0) {
+                minutes--;
+                seconds = 59;
+            } else {
+                seconds--;
+            }
+            
+            // Format
+            const m = minutes < 10 ? '0' + minutes : minutes;
+            const s = seconds < 10 ? '0' + seconds : seconds;
+            timerDisplay.textContent = `${m}:${s} min`;
+            
+            // Turn red and blink if under 5 minutes
+            if(minutes < 5) {
+                timerDisplay.classList.add('animate-pulse');
+            }
+        }, 1000);
+    </script>
+</body></html>

@@ -1,0 +1,311 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Detalle del Comercio - INPARQUES Comercial</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-lowest": "#ffffff",
+                      "primary-container": "#176b45",
+                      "on-surface-variant": "#3f4942",
+                      "outline-variant": "#bfc9c0",
+                      "on-primary": "#ffffff",
+                      "surface-tint": "#186c45",
+                      "on-surface": "#1b1c18",
+                      "surface-bright": "#fbf9f3",
+                      "surface-container-high": "#eae8e2",
+                      "on-tertiary-container": "#cadbd2",
+                      "tertiary-container": "#516159",
+                      "surface-container-highest": "#e4e2dd",
+                      "surface-container": "#f0eee8",
+                      "on-primary-fixed-variant": "#005232",
+                      "background": "#fbf9f3",
+                      "on-background": "#1b1c18",
+                      "primary-fixed-dim": "#88d7a8",
+                      "secondary-fixed": "#c0edd4",
+                      "secondary-container": "#c0edd4",
+                      "on-secondary-container": "#446d59",
+                      "on-primary-fixed": "#002111",
+                      "surface-variant": "#e4e2dd",
+                      "on-primary-container": "#99e9b9",
+                      "primary": "#005131",
+                      "error": "#ba1a1a",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary-fixed": "#002114",
+                      "outline": "#6f7a71",
+                      "inverse-primary": "#88d7a8",
+                      "primary-fixed": "#a4f4c3",
+                      "secondary-fixed-dim": "#a4d0b8",
+                      "secondary": "#3e6753",
+                      "surface-dim": "#dcdad4",
+                      "tertiary-fixed": "#d5e7dd",
+                      "inverse-on-surface": "#f3f1eb",
+                      "surface": "#fbf9f3",
+                      "tertiary-fixed-dim": "#b9cbc1",
+                      "on-error": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "on-secondary-fixed-variant": "#264e3c",
+                      "on-secondary": "#ffffff",
+                      "tertiary": "#3a4942",
+                      "on-tertiary-fixed-variant": "#3a4a43",
+                      "on-error-container": "#93000a",
+                      "on-tertiary-fixed": "#0f1e19",
+                      "surface-container-low": "#f5f3ed",
+                      "inverse-surface": "#30312d"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xl": "32px",
+                      "lg": "24px",
+                      "xxl": "48px",
+                      "md": "16px",
+                      "xs": "8px",
+                      "sm": "12px",
+                      "base": "4px",
+                      "touch-target": "44px"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": ["Manrope"],
+                      "body-lg": ["Manrope"],
+                      "headline-lg": ["Manrope"],
+                      "label-md": ["Manrope"],
+                      "body-md": ["Manrope"],
+                      "headline-md": ["Manrope"],
+                      "display-lg": ["Manrope"],
+                      "label-sm": ["Manrope"]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "700"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .bg-opacity-10 {
+            background-color: rgba(var(--color-primary), 0.1);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen pb-[100px]">
+<!-- Top Action Bar (Transparent / Overlay) -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-lg py-sm transition-all duration-300" id="top-bar">
+<button class="w-touch-target h-touch-target flex items-center justify-center bg-surface-container-lowest rounded-full shadow-sm text-on-surface hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<div class="flex gap-sm">
+<button class="w-touch-target h-touch-target flex items-center justify-center bg-surface-container-lowest rounded-full shadow-sm text-on-surface hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined" data-icon="share">share</span>
+</button>
+<button class="w-touch-target h-touch-target flex items-center justify-center bg-surface-container-lowest rounded-full shadow-sm text-on-surface hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined" data-icon="favorite_border">favorite_border</span>
+</button>
+</div>
+</header>
+<!-- Cover Image -->
+<div class="relative w-full h-[309px] md:h-[397px] bg-surface-container-highest">
+<div class="w-full h-full bg-cover bg-center" data-alt="A lush, high-quality photograph of a cozy coffee shop nestled in a dense, green nature reserve. Sun rays pierce through the canopy, illuminating modern wooden tables and a steaming cup of coffee. The lighting is warm and natural, reinforcing a pristine, organic aesthetic with modern corporate cleanliness." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD_RW8Q6Ch5E6_AoTpu9PD59FQbPPIUBB7j5u0ugZ4wpJTGsJwkvq5K7tgdjjG3cIMN34puKULlgBkAgvA25HdCHagng5JXkstClzb_ILEjJB4ar9zzFrtLldviyHIvKBgDsZMysVvF7mb7i0QbBF7BYL67f-zPBKoy2LHgXAQRNfChrzQxu-IrrgwxiGHCCTOr3uojH4W2cvPOmxTRgquyicqZNYM_94dS3h-1kngrUvogsubORybV')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-80"></div>
+</div>
+<!-- Main Content Container -->
+<main class="relative -mt-xl px-4 md:px-lg max-w-4xl mx-auto z-10">
+<!-- Merchant Info Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-sm mb-lg">
+<div class="flex flex-col md:flex-row md:justify-between md:items-start gap-md">
+<div>
+<div class="flex items-center gap-xs mb-xs">
+<span class="bg-secondary-container text-on-secondary-container font-label-sm text-label-sm px-2 py-1 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="verified">verified</span>
+                            Permiso Vigente
+                        </span>
+<span class="bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm px-2 py-1 rounded-full">
+                            Cafetería
+                        </span>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface mb-xs">Café Los Cedros</h1>
+<div class="flex items-center gap-sm text-on-surface-variant font-body-md text-body-md">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[20px] text-primary" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label-md text-label-md">4.8</span>
+<span class="text-outline">(124)</span>
+</div>
+<span class="w-1 h-1 bg-outline-variant rounded-full"></span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[20px]" data-icon="location_on">location_on</span>
+                            Zona 'Lago'
+                        </div>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-lg p-sm border border-outline-variant flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary" data-icon="schedule">schedule</span>
+<div>
+<p class="font-label-md text-label-md text-primary">Abierto ahora</p>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">07:00 AM - 05:00 PM</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Tabs -->
+<div class="border-b border-outline-variant mb-lg overflow-x-auto hide-scrollbar">
+<div class="flex gap-lg min-w-max">
+<button class="pb-sm border-b-2 border-primary text-primary font-label-md text-label-md px-1">Menú</button>
+<button class="pb-sm border-b-2 border-transparent text-on-surface-variant hover:text-on-surface font-label-md text-label-md px-1 transition-colors">Información</button>
+<button class="pb-sm border-b-2 border-transparent text-on-surface-variant hover:text-on-surface font-label-md text-label-md px-1 transition-colors">Opiniones</button>
+</div>
+</div>
+<!-- Menu Content -->
+<div class="space-y-xl">
+<!-- Category: Cafés -->
+<section>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-md">Cafés</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<!-- Item 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-sm flex gap-md hover:shadow-sm transition-shadow">
+<div class="w-24 h-24 rounded-md bg-cover bg-center shrink-0" data-alt="A beautifully poured latte in a ceramic mug resting on a natural wooden coaster, surrounded by subtle tropical greenery. High resolution, organic lighting, modern minimal aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDZRNyqJymUEBvOmM4z9X_eK3hHrh2OfOdS8DXPMdP0h7egEfpq2lawapnjoOIxn9LF3xkJQ15JU8a3vjN3fIGnot5XuKD7FNmKMTsgVAQgTOyFRJFiKzgoFhWIwPZ4bSTwwg981y7SlXIKSY9nYDHOfj4vfL2dVMNolE6yacr_h379R3oookZWFSH-wCT1VpcmI86csuD2_ljDHo71b7Gz4whNJRFzM4svZ-SJgBOCOF_lt9LbhKW0')"></div>
+<div class="flex-1 flex flex-col justify-between">
+<div>
+<h3 class="font-label-md text-label-md text-on-surface">Latte Artesanal</h3>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm line-clamp-2">Espresso doble con leche texturizada y notas de cacao local.</p>
+</div>
+<div class="flex justify-between items-center mt-sm">
+<span class="font-label-md text-label-md text-primary">$4.50</span>
+<button class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center hover:bg-surface-tint hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="add">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-sm flex gap-md hover:shadow-sm transition-shadow">
+<div class="w-24 h-24 rounded-md bg-cover bg-center shrink-0" data-alt="A dark, rich cold brew coffee in a condensation-covered glass over ice. The background is a blurred bright outdoor patio setting. Crisp details, earthy tones." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBJGWJnWCO-E36RJE-OYNURHDgpUMiOR10QKgfYH9bqzvDKqXixf7hevL5hslFfExGkeA4zyMDDXFTwSTupxI1uvaGz11hiMtaJi3O9WZXXhPLTQ4yoRk0gvxLNuc8BvLVGxeTe4Y5d_AtoaHmevc_rU_WJKcKyXOZJXotuyDWZ3eQ3SKgoFRnKnQx2kRZfv_vbyj4qtbO52d_c8Ph4h1a9h8sPHIbIGD7gBsDxyS4HGdda5yPuSZQs')"></div>
+<div class="flex-1 flex flex-col justify-between">
+<div>
+<h3 class="font-label-md text-label-md text-on-surface">Cold Brew del Bosque</h3>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm line-clamp-2">Maceración de 18 horas, servido en las rocas. Refrescante y audaz.</p>
+</div>
+<div class="flex justify-between items-center mt-sm">
+<span class="font-label-md text-label-md text-primary">$5.00</span>
+<button class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center hover:bg-surface-tint hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="add">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Category: Sandwiches -->
+<section>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-md">Sandwiches</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<!-- Item 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-sm flex gap-md hover:shadow-sm transition-shadow">
+<div class="w-24 h-24 rounded-md bg-cover bg-center shrink-0" data-alt="A gourmet ciabatta sandwich filled with fresh greens, roasted vegetables, and artisanal cheese on a slate board. Natural daylight, healthy and organic aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCkkUdoPLvoX_BtcEp8p6CPfnQOH3I5DKF5QzrpwzlhWs0Xmxpe3QVMfhQwqXlOWmFLjCYMla2OQvuwqce-4iS3sH-wxJSEOFR7Dh05wDmP8PfHKW5ay-CA82-4iD-8MHKBbdDgN7Ac9UonbDssXxg50KVvAghpQul70jBNp4TUd5czevAYChxKv5hxWvmwxv01P65bxaRCwD431TVyKHsFPbbgY3-kBwr9oiDxwokxJOx648--t-_9')"></div>
+<div class="flex-1 flex flex-col justify-between">
+<div>
+<h3 class="font-label-md text-label-md text-on-surface">Caprese Rústico</h3>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm line-clamp-2">Tomates asados, mozzarella fresca y pesto en pan de masa madre.</p>
+</div>
+<div class="flex justify-between items-center mt-sm">
+<span class="font-label-md text-label-md text-primary">$8.50</span>
+<button class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center hover:bg-surface-tint hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="add">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Category: Bebidas Frías -->
+<section>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-md">Bebidas Frías</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<!-- Item 4 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-sm flex gap-md hover:shadow-sm transition-shadow">
+<div class="w-24 h-24 rounded-md bg-cover bg-center shrink-0" data-alt="A tall glass of iced lemonade garnished with fresh mint leaves and a lemon wedge, sitting on a sunlit wooden table outdoors. Crisp, vibrant, refreshing look." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAcTLaD-J5ED2eDCaeY5_jExz-FE6axcYdFS6MP1wXrlUAIhA1M5y8Twjvmdu-c51Rs72Rn3adRJ7LxUU5vKkuyYi_GbnFt0Oln0udyEp07eoPz-mUX8GDYFU-ApHYeHYDvxwcPwEupqNpncPvoQzSl5YVM7g7Rvs_eml6PAY_GZokVpBWrnxPI2cwzpleXEXfJHpCzflmOWlXOx-YDB7kY_Gki6a_m31z8s8wYtwRCOQCkY1Dh2Qfw')"></div>
+<div class="flex-1 flex flex-col justify-between">
+<div>
+<h3 class="font-label-md text-label-md text-on-surface">Limonada con Hierbabuena</h3>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm line-clamp-2">Hecha al momento con limones del huerto y hierbabuena fresca.</p>
+</div>
+<div class="flex justify-between items-center mt-sm">
+<span class="font-label-md text-label-md text-primary">$3.50</span>
+<button class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center hover:bg-outline-variant transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="check">check</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Floating Cart Button -->
+<div class="fixed bottom-0 left-0 w-full p-md bg-gradient-to-t from-surface-container-lowest to-transparent z-50 flex justify-center pb-safe">
+<button class="w-full max-w-md bg-primary text-on-primary rounded-full h-touch-target flex items-center justify-between px-lg shadow-lg hover:bg-surface-tint transition-colors">
+<div class="flex items-center gap-sm">
+<div class="bg-on-primary text-primary font-label-sm text-label-sm w-6 h-6 rounded-full flex items-center justify-center">1</div>
+<span class="font-label-md text-label-md">Ver carrito</span>
+</div>
+<span class="font-label-md text-label-md">$3.50</span>
+</button>
+</div>
+<style>
+        .pb-safe {
+            padding-bottom: env(safe-area-inset-bottom, 16px);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<script>
+        // Simple scroll effect for top bar
+        window.addEventListener('scroll', () => {
+            const topBar = document.getElementById('top-bar');
+            if (window.scrollY > 50) {
+                topBar.classList.add('bg-surface-container-lowest', 'shadow-sm');
+                topBar.classList.remove('py-sm');
+                topBar.classList.add('py-2');
+            } else {
+                topBar.classList.remove('bg-surface-container-lowest', 'shadow-sm');
+                topBar.classList.add('py-sm');
+                topBar.classList.remove('py-2');
+            }
+        });
+    </script>
+</body></html>

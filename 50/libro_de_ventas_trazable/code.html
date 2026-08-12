@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Park Commerce Finance - Libro de Ventas</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Custom scrollbar for wide tables */
+        .custom-scrollbar::-webkit-scrollbar {
+            height: 8px;
+            width: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #fbf9f3; /* surface */
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #bfc9c0; /* outline-variant */
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #6f7a71; /* outline */
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#005131",
+                        "surface": "#fbf9f3",
+                        "secondary-container": "#c0edd4",
+                        "surface-variant": "#e4e2dd",
+                        "surface-container-high": "#eae8e2",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed": "#002114",
+                        "on-surface": "#1b1c18",
+                        "on-primary-container": "#99e9b9",
+                        "on-tertiary-container": "#cadbd2",
+                        "on-tertiary-fixed": "#0f1e19",
+                        "surface-container": "#f0eee8",
+                        "inverse-surface": "#30312d",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#bfc9c0",
+                        "surface-bright": "#fbf9f3",
+                        "tertiary-fixed": "#d5e7dd",
+                        "on-surface-variant": "#3f4942",
+                        "surface-container-highest": "#e4e2dd",
+                        "primary-container": "#176b45",
+                        "on-primary-fixed": "#002111",
+                        "outline": "#6f7a71",
+                        "tertiary": "#3a4942",
+                        "surface-tint": "#186c45",
+                        "on-background": "#1b1c18",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#3a4a43",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed-variant": "#264e3c",
+                        "primary-fixed-dim": "#88d7a8",
+                        "on-primary-fixed-variant": "#005232",
+                        "inverse-primary": "#88d7a8",
+                        "surface-container-low": "#f5f3ed",
+                        "tertiary-container": "#516159",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed-dim": "#a4d0b8",
+                        "error": "#ba1a1a",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed": "#c0edd4",
+                        "on-secondary-container": "#446d59",
+                        "secondary": "#3e6753",
+                        "primary-fixed": "#a4f4c3",
+                        "surface-dim": "#dcdad4",
+                        "inverse-on-surface": "#f3f1eb",
+                        "background": "#fbf9f3",
+                        "tertiary-fixed-dim": "#b9cbc1"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "32px",
+                        "touch-target": "44px",
+                        "sm": "12px",
+                        "base": "4px",
+                        "md": "16px",
+                        "xxl": "48px",
+                        "lg": "24px",
+                        "xs": "8px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "display-lg": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body-md h-screen overflow-hidden flex">
+<!-- SideNavBar -->
+<aside class="flex flex-col h-full py-md px-sm border-r border-outline-variant bg-surface-container-low h-screen w-64 fixed left-0 top-0 z-50">
+<div class="flex items-center gap-sm mb-xl px-sm">
+<img alt="Organization Logo" class="w-10 h-10 rounded-full bg-surface-container-high object-cover" data-alt="A minimalist vector logo of a stylized green leaf forming an abstract 'P', representing an environmentally conscious park administration entity, set against a solid off-white background with no text." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBirf2_F02uflU47xsQkCcySc_3B3DDniKzTSG6d4PcSjHgDp1qUtFZ0v3UNH6dOSgYzp4IPcWY3hcQBvu32VJP6T_unkoH-4fMulxY7H6-JEdcXuEFAJykFcYzpTewpe-RDVWX-FYwQpRyJflJPq2L8orADMnJURXpjAbbnb8Xc8MGPbpTkhAd2zOg9uuaf4AcVA8Je1Rs1u_llI6-0MrSO1PEuL_swEHyG4ay25FVYXVZH4muE3sE"/>
+<div>
+<h1 class="text-headline-sm font-headline-sm font-extrabold text-on-secondary-fixed truncate leading-tight">Finance Portal</h1>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Audit &amp; Integrity</p>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-base overflow-y-auto custom-scrollbar pr-xs">
+<!-- Inactive -->
+<a class="flex items-center gap-md px-sm py-xs min-h-[44px] text-on-surface-variant hover:bg-surface-variant transition-all duration-200 ease-in-out rounded-lg group" href="#">
+<span class="material-symbols-outlined text-outline group-hover:text-on-surface transition-colors">dashboard</span>
+<span class="text-label-md font-label-md">Summary</span>
+</a>
+<!-- ACTIVE: Sales Books matches intent perfectly -->
+<a class="flex items-center gap-md px-sm py-xs min-h-[44px] bg-secondary-container text-on-secondary-container font-bold rounded-lg transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">book_2</span>
+<span class="text-label-md font-label-md">Sales Books</span>
+</a>
+<!-- Inactive -->
+<a class="flex items-center gap-md px-sm py-xs min-h-[44px] text-on-surface-variant hover:bg-surface-variant transition-all duration-200 ease-in-out rounded-lg group" href="#">
+<span class="material-symbols-outlined text-outline group-hover:text-on-surface transition-colors">payments</span>
+<span class="text-label-md font-label-md">Payments</span>
+</a>
+<!-- Inactive -->
+<a class="flex items-center gap-md px-sm py-xs min-h-[44px] text-on-surface-variant hover:bg-surface-variant transition-all duration-200 ease-in-out rounded-lg group" href="#">
+<span class="material-symbols-outlined text-outline group-hover:text-on-surface transition-colors">account_balance</span>
+<span class="text-label-md font-label-md">Reconciliation</span>
+</a>
+<!-- Inactive -->
+<a class="flex items-center gap-md px-sm py-xs min-h-[44px] text-on-surface-variant hover:bg-surface-variant transition-all duration-200 ease-in-out rounded-lg group" href="#">
+<span class="material-symbols-outlined text-outline group-hover:text-on-surface transition-colors">receipt</span>
+<span class="text-label-md font-label-md">Invoices</span>
+</a>
+<!-- Inactive -->
+<a class="flex items-center gap-md px-sm py-xs min-h-[44px] text-on-surface-variant hover:bg-surface-variant transition-all duration-200 ease-in-out rounded-lg group" href="#">
+<span class="material-symbols-outlined text-outline group-hover:text-on-surface transition-colors">event_available</span>
+<span class="text-label-md font-label-md">Daily Closings</span>
+</a>
+<!-- Inactive -->
+<a class="flex items-center gap-md px-sm py-xs min-h-[44px] text-on-surface-variant hover:bg-surface-variant transition-all duration-200 ease-in-out rounded-lg group" href="#">
+<span class="material-symbols-outlined text-outline group-hover:text-on-surface transition-colors">percent</span>
+<span class="text-label-md font-label-md">Commissions</span>
+</a>
+</nav>
+<div class="mt-auto pt-md border-t border-outline-variant flex flex-col gap-base">
+<a class="flex items-center gap-md px-sm py-xs min-h-[44px] text-on-surface-variant hover:bg-surface-variant transition-all duration-200 ease-in-out rounded-lg" href="#">
+<span class="material-symbols-outlined text-outline">ios_share</span>
+<span class="text-label-md font-label-md">Export Manager</span>
+</a>
+<a class="flex items-center gap-md px-sm py-xs min-h-[44px] text-on-surface-variant hover:bg-surface-variant transition-all duration-200 ease-in-out rounded-lg" href="#">
+<span class="material-symbols-outlined text-outline">help</span>
+<span class="text-label-md font-label-md">Support</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-64 flex flex-col h-full bg-surface">
+<!-- TopNavBar -->
+<header class="flex justify-between items-center px-lg h-[64px] sticky top-0 z-40 bg-surface border-b border-outline-variant shrink-0">
+<div class="flex items-center gap-md">
+<div class="text-headline-md font-headline-md font-bold text-primary hidden lg:block">Park Commerce Finance</div>
+<!-- Search (on_left as per JSON) -->
+<div class="relative flex items-center ml-lg">
+<span class="material-symbols-outlined absolute left-sm text-outline text-[20px]">search</span>
+<input class="pl-xl pr-sm py-xs bg-surface-container border border-outline-variant rounded-full text-body-md font-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all w-64 lg:w-96 min-h-[44px]" placeholder="Search orders, invoices..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-sm">
+<button class="p-xs text-on-surface-variant hover:bg-surface-container rounded-full transition-colors cursor-pointer active:opacity-80 min-h-[44px] min-w-[44px] flex items-center justify-center">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-xs text-on-surface-variant hover:bg-surface-container rounded-full transition-colors cursor-pointer active:opacity-80 min-h-[44px] min-w-[44px] flex items-center justify-center">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="h-8 w-px bg-outline-variant mx-sm"></div>
+<button class="flex items-center cursor-pointer active:opacity-80 hover:bg-surface-container p-xs rounded-full transition-colors">
+<img alt="Accountant Profile Avatar" class="w-8 h-8 rounded-full object-cover border border-outline-variant" data-alt="A professional headshot of a female accountant in her late 30s, wearing a smart dark green blazer over a white blouse, smiling warmly in a bright, modern office setting with subtle indoor plants blurred in the background, communicating competence and approachability." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgHprwbiqdR2UeOYOebbKvODPKzjmuguv4N3vCxSOPPm2pkmbkoO3Hmli3Ivo413uRvOCmoqhAfacVBr-TOvOEgZd-klU8p9EVi6M525fdvswzOKBU5e-vIy8BiJPWQY7KvYO2dDVwKJyMP5wVzqwQo8haH4nHekmlo5f7ogXpYEAZvxLFDyXfj1CQmsETJknn69ywqaRLvxlgt-zn0BfNIzpmKUW8WqsZP051LIhauZQDskbGva0P"/>
+</button>
+</div>
+</header>
+<!-- Page Canvas -->
+<div class="flex-1 overflow-y-auto p-lg flex flex-col gap-lg relative">
+<!-- Page Header & Actions -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-md">
+<div>
+<h2 class="text-headline-lg font-headline-lg text-on-surface mb-xs">Libro de Ventas</h2>
+<p class="text-body-md font-body-md text-on-surface-variant">Trazabilidad detallada de transacciones comerciales en tiempo real.</p>
+</div>
+<div class="flex gap-sm">
+<button class="flex items-center gap-xs px-md min-h-[44px] bg-surface border border-outline-variant text-on-surface rounded-lg hover:bg-surface-container transition-colors text-label-md font-label-md">
+<span class="material-symbols-outlined text-[20px]">download</span>
+                        Exportar CSV
+                    </button>
+<button class="flex items-center gap-xs px-md min-h-[44px] bg-primary-container text-on-primary border border-transparent rounded-lg hover:bg-surface-tint transition-colors text-label-md font-label-md shadow-sm">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                        Nueva Entrada Manual
+                    </button>
+</div>
+</div>
+<!-- Advanced Filters (Bento-style row) -->
+<section class="bg-surface border border-outline-variant rounded-lg p-md grid grid-cols-1 md:grid-cols-4 gap-md items-end">
+<div class="flex flex-col gap-xs">
+<label class="text-label-sm font-label-sm text-on-surface-variant">Fecha / Rango</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline text-[20px]">calendar_today</span>
+<input class="w-full pl-xl pr-sm py-sm bg-surface border border-outline-variant rounded-lg text-body-md font-body-md focus:border-primary focus:ring-1 focus:ring-primary min-h-[44px]" readonly="" type="text" value="Oct 01 - Oct 31, 2023"/>
+</div>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="text-label-sm font-label-sm text-on-surface-variant">Parque / Local</label>
+<div class="relative">
+<select class="w-full pl-sm pr-xl py-sm bg-surface border border-outline-variant rounded-lg text-body-md font-body-md focus:border-primary focus:ring-1 focus:ring-primary min-h-[44px] appearance-none">
+<option>Todos los Parques</option>
+<option>Parque Nacional Waraira Repano</option>
+<option>Parque Generalísimo Francisco de Miranda</option>
+</select>
+<span class="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 text-outline text-[20px] pointer-events-none">expand_more</span>
+</div>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="text-label-sm font-label-sm text-on-surface-variant">Método de Pago</label>
+<div class="relative">
+<select class="w-full pl-sm pr-xl py-sm bg-surface border border-outline-variant rounded-lg text-body-md font-body-md focus:border-primary focus:ring-1 focus:ring-primary min-h-[44px] appearance-none">
+<option>Todos los Métodos</option>
+<option>Tarjeta de Crédito</option>
+<option>Punto de Venta (POS)</option>
+<option>Transferencia</option>
+</select>
+<span class="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 text-outline text-[20px] pointer-events-none">expand_more</span>
+</div>
+</div>
+<div class="flex gap-sm">
+<button class="flex-1 flex items-center justify-center gap-xs min-h-[44px] bg-secondary-container text-on-secondary-fixed border border-transparent rounded-lg hover:bg-secondary-fixed-dim transition-colors text-label-md font-label-md">
+<span class="material-symbols-outlined text-[20px]">filter_list</span>
+                        Filtrar
+                    </button>
+<button class="flex items-center justify-center min-h-[44px] min-w-[44px] bg-surface border border-outline-variant text-on-surface rounded-lg hover:bg-surface-container transition-colors" title="Limpiar Filtros">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+</section>
+<!-- Data Table Container -->
+<div class="bg-surface border border-outline-variant rounded-lg overflow-hidden flex flex-col flex-1 shadow-sm">
+<!-- Table Wrapper for horizontal scroll -->
+<div class="overflow-x-auto custom-scrollbar flex-1">
+<table class="w-full text-left border-collapse whitespace-nowrap">
+<thead class="bg-surface-container-low border-b border-outline-variant sticky top-0 z-10">
+<tr>
+<th class="px-md py-sm text-label-md font-label-md text-on-surface-variant font-semibold">ID Orden</th>
+<th class="px-md py-sm text-label-md font-label-md text-on-surface-variant font-semibold">Fecha/Hora</th>
+<th class="px-md py-sm text-label-md font-label-md text-on-surface-variant font-semibold">Ubicación (Parque - Local)</th>
+<th class="px-md py-sm text-label-md font-label-md text-on-surface-variant font-semibold">Canal</th>
+<th class="px-md py-sm text-label-md font-label-md text-on-surface-variant font-semibold text-right">Subtotal</th>
+<th class="px-md py-sm text-label-md font-label-md text-on-surface-variant font-semibold text-right">Impuestos</th>
+<th class="px-md py-sm text-label-md font-label-md text-on-surface-variant font-semibold text-right">Total</th>
+<th class="px-md py-sm text-label-md font-label-md text-on-surface-variant font-semibold">Método / Estado Pago</th>
+<th class="px-md py-sm text-label-md font-label-md text-on-surface-variant font-semibold">Factura</th>
+<th class="px-md py-sm text-label-md font-label-md text-on-surface-variant font-semibold">Conciliación</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer group">
+<td class="px-md py-sm text-body-md font-body-md text-primary font-semibold group-hover:underline">#ORD-9012</td>
+<td class="px-md py-sm text-body-md font-body-md text-on-surface">24 Oct 2023<br/><span class="text-label-sm text-on-surface-variant">14:32:05</span></td>
+<td class="px-md py-sm text-body-md font-body-md text-on-surface">
+                                    Waraira Repano<br/>
+<span class="text-label-sm text-on-surface-variant">Kiosco Teleférico Base</span>
+</td>
+<td class="px-md py-sm">
+<span class="inline-flex items-center gap-xs px-2 py-1 rounded-md bg-surface-variant text-on-surface-variant text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-[16px]">storefront</span> Físico
+                                    </span>
+</td>
+<td class="px-md py-sm text-body-md font-body-md text-on-surface text-right">Bs. 450.00</td>
+<td class="px-md py-sm text-body-md font-body-md text-on-surface-variant text-right">Bs. 72.00</td>
+<td class="px-md py-sm text-body-md font-body-md text-on-surface font-semibold text-right">Bs. 522.00</td>
+<td class="px-md py-sm">
+<div class="flex flex-col gap-xs items-start">
+<span class="text-body-md font-body-md text-on-surface">POS (Visa ****4421)</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-[#c0edd4]/30 text-[#264e3c] text-label-sm font-label-sm">
+                                            Pagado
+                                        </span>
+</div>
+</td>
+<td class="px-md py-sm text-body-md font-body-md text-primary hover:underline">FAC-2023-889</td>
+<td class="px-md py-sm">
+<span class="inline-flex items-center gap-xs text-[#264e3c] text-label-sm font-label-sm bg-[#c0edd4]/30 px-2 py-1 rounded-md">
+<span class="material-symbols-outlined text-[16px]">check_circle</span> Conciliado
+                                    </span>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer group">
+<td class="px-md py-sm text-body-md font-body-md text-primary font-semibold group-hover:underline">#ORD-9013</td>
+<td class="px-md py-sm text-body-md font-body-md text-on-surface">24 Oct 2023<br/><span class="text-label-sm text-on-surface-variant">15:10:22</span></td>
+<td class="px-md py-sm text-body-md font-body-md text-on-surface">
+                                    Gral. Fco. de Miranda<br/>
+<span class="text-label-sm text-on-surface-variant">Concesión Botes Laguito</span>
+</td>
+<td class="px-md py-sm">
+<span class="inline-flex items-center gap-xs px-2 py-1 rounded-md bg-[#d5e7dd]/30 text-[#3a4a43] text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-[16px]">language</span> Online
+                                    </span>
+</td>
+<td class="px-md py-sm text-body-md font-body-md text-on-surface text-right">Bs. 120.00</td>
+<td class="px-md py-sm text-body-md font-body-md text-on-surface-variant text-right">Bs. 19.20</td>
+<td class="px-md py-sm text-body-md font-body-md text-on-surface font-semibold text-right">Bs. 139.20</td>
+<td class="px-md py-sm">
+<div class="flex flex-col gap-xs items-start">
+<span class="text-body-md font-body-md text-on-surface">Pago Móvil</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-[#ffdad6]/40 text-[#93000a] text-label-sm font-label-sm">
+                                            Rechazado
+                                        </span>
+</div>
+</td>
+<td class="px-md py-sm text-body-md font-body-md text-on-surface-variant italic">N/A</td>
+<td class="px-md py-sm">
+<span class="inline-flex items-center gap-xs text-[#93000a] text-label-sm font-label-sm bg-[#ffdad6]/40 px-2 py-1 rounded-md">
+<span class="material-symbols-outlined text-[16px]">error</span> Fallido
+                                    </span>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer group">
+<td class="px-md py-sm text-body-md font-body-md text-primary font-semibold group-hover:underline">#ORD-9014</td>
+<td class="px-md py-sm text-body-md font-body-md text-on-surface">24 Oct 2023<br/><span class="text-label-sm text-on-surface-variant">16:45:00</span></td>
+<td class="px-md py-sm text-body-md font-body-md text-on-surface">
+                                    Parque Morrocoy<br/>
+<span class="text-label-sm text-on-surface-variant">Taquilla Entrada Principal</span>
+</td>
+<td class="px-md py-sm">
+<span class="inline-flex items-center gap-xs px-2 py-1 rounded-md bg-surface-variant text-on-surface-variant text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-[16px]">storefront</span> Físico
+                                    </span>
+</td>
+<td class="px-md py-sm text-body-md font-body-md text-on-surface text-right">Bs. 850.00</td>
+<td class="px-md py-sm text-body-md font-body-md text-on-surface-variant text-right">Bs. 136.00</td>
+<td class="px-md py-sm text-body-md font-body-md text-on-surface font-semibold text-right">Bs. 986.00</td>
+<td class="px-md py-sm">
+<div class="flex flex-col gap-xs items-start">
+<span class="text-body-md font-body-md text-on-surface">Transferencia Bco.</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-[#f0eee8] text-[#3f4942] text-label-sm font-label-sm border border-outline-variant">
+                                            Pendiente Validar
+                                        </span>
+</div>
+</td>
+<td class="px-md py-sm text-body-md font-body-md text-primary hover:underline">FAC-2023-890</td>
+<td class="px-md py-sm">
+<span class="inline-flex items-center gap-xs text-[#3a4a43] text-label-sm font-label-sm bg-[#d5e7dd]/30 px-2 py-1 rounded-md">
+<span class="material-symbols-outlined text-[16px]">sync</span> En Proceso
+                                    </span>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-low transition-colors cursor-pointer group">
+<td class="px-md py-sm text-body-md font-body-md text-primary font-semibold group-hover:underline">#ORD-9015</td>
+<td class="px-md py-sm text-body-md font-body-md text-on-surface">24 Oct 2023<br/><span class="text-label-sm text-on-surface-variant">17:05:11</span></td>
+<td class="px-md py-sm text-body-md font-body-md text-on-surface">
+                                    Waraira Repano<br/>
+<span class="text-label-sm text-on-surface-variant">Restaurante Cima</span>
+</td>
+<td class="px-md py-sm">
+<span class="inline-flex items-center gap-xs px-2 py-1 rounded-md bg-surface-variant text-on-surface-variant text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-[16px]">storefront</span> Físico
+                                    </span>
+</td>
+<td class="px-md py-sm text-body-md font-body-md text-on-surface text-right">Bs. 2,100.00</td>
+<td class="px-md py-sm text-body-md font-body-md text-on-surface-variant text-right">Bs. 336.00</td>
+<td class="px-md py-sm text-body-md font-body-md text-on-surface font-semibold text-right">Bs. 2,436.00</td>
+<td class="px-md py-sm">
+<div class="flex flex-col gap-xs items-start">
+<span class="text-body-md font-body-md text-on-surface">POS (Master ****9901)</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-[#c0edd4]/30 text-[#264e3c] text-label-sm font-label-sm">
+                                            Pagado
+                                        </span>
+</div>
+</td>
+<td class="px-md py-sm text-body-md font-body-md text-primary hover:underline">FAC-2023-891</td>
+<td class="px-md py-sm">
+<span class="inline-flex items-center gap-xs text-[#264e3c] text-label-sm font-label-sm bg-[#c0edd4]/30 px-2 py-1 rounded-md">
+<span class="material-symbols-outlined text-[16px]">check_circle</span> Conciliado
+                                    </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Pagination Footer -->
+<div class="bg-surface border-t border-outline-variant px-md py-sm flex items-center justify-between">
+<span class="text-label-md font-label-md text-on-surface-variant">Mostrando 1-4 de 1,024 transacciones</span>
+<div class="flex gap-xs">
+<button class="p-xs text-on-surface-variant hover:bg-surface-container rounded-md transition-colors border border-outline-variant min-h-[36px] min-w-[36px] flex items-center justify-center disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</button>
+<button class="px-3 py-1 text-on-surface hover:bg-surface-container rounded-md transition-colors border border-outline-variant min-h-[36px] flex items-center justify-center text-label-md font-label-md font-bold bg-surface-container-high">1</button>
+<button class="px-3 py-1 text-on-surface-variant hover:bg-surface-container rounded-md transition-colors border border-transparent min-h-[36px] flex items-center justify-center text-label-md font-label-md">2</button>
+<button class="px-3 py-1 text-on-surface-variant hover:bg-surface-container rounded-md transition-colors border border-transparent min-h-[36px] flex items-center justify-center text-label-md font-label-md">3</button>
+<span class="px-2 py-1 text-on-surface-variant flex items-end">...</span>
+<button class="p-xs text-on-surface-variant hover:bg-surface-container rounded-md transition-colors border border-outline-variant min-h-[36px] min-w-[36px] flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

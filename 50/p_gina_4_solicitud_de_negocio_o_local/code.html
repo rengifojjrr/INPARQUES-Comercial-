@@ -1,0 +1,324 @@
+<!DOCTYPE html><html lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Gestión Comercial - Nuevo Negocio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-variant": "#e4e2dd",
+                      "on-tertiary": "#ffffff",
+                      "inverse-primary": "#88d7a8",
+                      "on-tertiary-fixed-variant": "#3a4a43",
+                      "surface-container-high": "#eae8e2",
+                      "tertiary-fixed": "#d5e7dd",
+                      "inverse-on-surface": "#f3f1eb",
+                      "background": "#fbf9f3",
+                      "surface-container-lowest": "#ffffff",
+                      "outline": "#6f7a71",
+                      "primary": "#005131",
+                      "outline-variant": "#bfc9c0",
+                      "error": "#ba1a1a",
+                      "secondary-fixed": "#c0edd4",
+                      "surface-container": "#f0eee8",
+                      "primary-container": "#176b45",
+                      "on-secondary-fixed": "#002114",
+                      "on-tertiary-fixed": "#0f1e19",
+                      "surface-tint": "#186c45",
+                      "on-background": "#1b1c18",
+                      "error-container": "#ffdad6",
+                      "tertiary-fixed-dim": "#b9cbc1",
+                      "on-primary": "#ffffff",
+                      "tertiary-container": "#516159",
+                      "on-secondary-fixed-variant": "#264e3c",
+                      "secondary-fixed-dim": "#a4d0b8",
+                      "surface-container-highest": "#e4e2dd",
+                      "on-primary-container": "#99e9b9",
+                      "on-error": "#ffffff",
+                      "on-surface-variant": "#3f4942",
+                      "primary-fixed": "#a4f4c3",
+                      "surface-dim": "#dcdad4",
+                      "on-primary-fixed": "#002111",
+                      "surface": "#fbf9f3",
+                      "on-secondary": "#ffffff",
+                      "on-primary-fixed-variant": "#005232",
+                      "tertiary": "#3a4942",
+                      "on-tertiary-container": "#cadbd2",
+                      "secondary": "#3e6753",
+                      "on-surface": "#1b1c18",
+                      "secondary-container": "#c0edd4",
+                      "primary-fixed-dim": "#88d7a8",
+                      "on-secondary-container": "#446d59",
+                      "on-error-container": "#93000a",
+                      "surface-container-low": "#f5f3ed",
+                      "surface-bright": "#fbf9f3",
+                      "inverse-surface": "#30312d"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "base": "4px",
+                      "xl": "32px",
+                      "xxl": "48px",
+                      "lg": "24px",
+                      "touch-target": "44px",
+                      "xs": "8px",
+                      "md": "16px",
+                      "sm": "12px"
+              },
+              "fontFamily": {
+                      "body-lg": ["Manrope"],
+                      "headline-lg-mobile": ["Manrope"],
+                      "headline-lg": ["Manrope"],
+                      "display-lg": ["Manrope"],
+                      "label-md": ["Manrope"],
+                      "body-md": ["Manrope"],
+                      "label-sm": ["Manrope"],
+                      "headline-md": ["Manrope"]
+              },
+              "fontSize": {
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "700"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        body { background-color: #F7F5EF; }
+    </style>
+</head>
+<body class="font-body-md text-on-surface min-h-screen flex">
+<!-- TopNavBar -->
+<nav aria-label="Top Navigation" class="h-16 w-[calc(100%-16rem)] fixed top-0 right-0 z-40 border-b border-outline-variant bg-surface shadow-sm flex justify-between items-center px-lg h-full ml-64">
+<!-- Left Side: Product Name -->
+<div class="flex items-center gap-md">
+<h1 class="font-headline-md text-headline-md font-extrabold text-primary">Portal de Concesionarios</h1>
+</div>
+<!-- Right Side: Actions -->
+<div class="flex items-center gap-md">
+<div class="flex items-center gap-sm border-r border-outline-variant pr-md mr-sm">
+<button aria-label="notifications" class="w-touch-target h-touch-target flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-full">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">notifications</span>
+</button>
+<button aria-label="help" class="w-touch-target h-touch-target flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-full">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">help</span>
+</button>
+<button aria-label="verified_user" class="w-touch-target h-touch-target flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-full">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">verified_user</span>
+</button>
+</div>
+<button class="flex items-center gap-sm px-3 py-2 rounded-lg hover:bg-surface-container-low transition-colors text-primary font-bold border-b-2 border-primary pb-1">
+<img alt="Usuario con MFA Activo" class="w-8 h-8 rounded-full object-cover" data-alt="A small, circular avatar portrait of a professional individual in a corporate setting. The lighting is soft and neutral. The background is simple and unobtrusive. The mood is professional and approachable." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCht3HkS36FSEFR26RPKq_0uVg3dlnw8YQjv8HMz8hnDaYrxLEJay59liB_rmN2tWVSAvzos8ehNpc3YtuKGjBgcZK46g6Ac0eiUoeCcoCAfjpd0aifgkUbAm_us94MYYipU-cNJ2_QQCYO8mzYSZ1yQHJCEIBaspQqgHME3nuUcQwnVshfxawtL1o_lZkhQ7omNbKta7EdW8AIp_5_bRuSSMLTeNUcHqf-dNJ-gHg6elA0HBtT7NNI">
+<span class="font-label-md text-label-md">Perfil</span>
+</button>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside aria-label="Sidebar Navigation" class="h-screen w-64 fixed left-0 top-0 border-r border-outline-variant bg-surface z-50 flex flex-col p-md">
+<!-- Header -->
+<div class="mb-xl flex items-center gap-sm">
+<div class="w-10 h-10 bg-primary-container rounded-lg flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined">nature</span>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md font-bold text-primary">Gestión Comercial</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Parques Nacionales</p>
+</div>
+</div>
+<!-- Navigation Tabs -->
+<nav aria-label="Main Menu" class="flex-1 flex flex-col gap-base">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Resumen</span>
+</a>
+<!-- Active Tab -->
+<a aria-current="page" class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-lg font-bold transition-transform scale-[0.98] font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">storefront</span>
+<span>Negocios y locales</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">folder_open</span>
+<span>Expediente</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span>Equipo</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span>Finanzas</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Configuración</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg font-label-md text-label-md mt-auto" href="#">
+<span class="material-symbols-outlined">help</span>
+<span>Ayuda</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 mt-16 p-lg w-full min-h-screen bg-background">
+<div class="max-w-4xl mx-auto">
+<!-- Header & Auto-save Status -->
+<div class="flex justify-between items-end mb-lg">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Solicitud de Nuevo Negocio</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Completa los datos para registrar un nuevo local comercial en un Parque Nacional.</p>
+</div>
+<div class="flex items-center gap-2 text-primary font-label-md text-label-md bg-secondary-container px-3 py-1 rounded-full bg-opacity-20">
+<span class="material-symbols-outlined text-[18px]">cloud_done</span>
+<span>Guardado automático a las 10:42 AM</span>
+</div>
+</div>
+<!-- Progress Indicator -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg mb-xl shadow-sm">
+<div class="flex justify-between items-center mb-md relative">
+<!-- Progress Line Background -->
+<div class="absolute top-1/2 left-0 w-full h-1 bg-surface-container -z-10 -translate-y-1/2"></div>
+<!-- Active Progress Line -->
+<div class="absolute top-1/2 left-0 w-3/5 h-1 bg-primary -z-10 -translate-y-1/2 transition-all duration-500"></div>
+<!-- Steps -->
+<div class="flex flex-col items-center gap-2 bg-surface-container-lowest px-2">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold">
+<span class="material-symbols-outlined text-[18px]">check</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Tipo</span>
+</div>
+<div class="flex flex-col items-center gap-2 bg-surface-container-lowest px-2">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold">
+<span class="material-symbols-outlined text-[18px]">check</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Legal</span>
+</div>
+<div class="flex flex-col items-center gap-2 bg-surface-container-lowest px-2">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold">
+<span class="material-symbols-outlined text-[18px]">check</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Responsable</span>
+</div>
+<div class="flex flex-col items-center gap-2 bg-surface-container-lowest px-2">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-bold ring-4 ring-primary-container/20">
+                            4
+                        </div>
+<span class="font-label-sm text-label-sm text-primary font-bold">Ubicación</span>
+</div>
+<div class="flex flex-col items-center gap-2 bg-surface-container-lowest px-2">
+<div class="w-8 h-8 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center font-bold border border-outline-variant">
+                            5
+                        </div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Documentos</span>
+</div>
+<div class="flex flex-col items-center gap-2 bg-surface-container-lowest px-2">
+<div class="w-8 h-8 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center font-bold border border-outline-variant">
+                            6
+                        </div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Banco</span>
+</div>
+</div>
+</div>
+<!-- Step 4 Content Canvas: Parque/Zona -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg shadow-sm">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-md">Selección de Parque y Zona</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-xl">Indique la ubicación exacta donde operará el local comercial. Esto determinará las normativas ambientales aplicables.</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg mb-xl">
+<!-- Parque Selector -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs" for="parque">Parque Nacional <span class="text-error">*</span></label>
+<div class="relative">
+<select class="w-full h-touch-target pl-3 pr-10 border border-outline-variant rounded bg-surface focus:border-2 focus:border-primary focus:ring-0 appearance-none font-body-md text-body-md text-on-surface" id="parque">
+<option disabled="" selected="" value="">Seleccione un parque</option>
+<option value="1">Parque Nacional Morrocoy</option>
+<option value="2">Parque Nacional Canaima</option>
+<option value="3">Parque Nacional Los Roques</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Sector/Zona Selector -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs" for="sector">Sector / Zona de Interés <span class="text-error">*</span></label>
+<div class="relative">
+<select class="w-full h-touch-target pl-3 pr-10 border border-outline-variant rounded bg-surface focus:border-2 focus:border-primary focus:ring-0 appearance-none font-body-md text-body-md text-on-surface" disabled="" id="sector">
+<option disabled="" selected="" value="">Seleccione un parque primero</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Interactive Map Area (Visual Placeholder) -->
+<div class="mb-xl">
+<label class="block font-label-md text-label-md text-on-surface mb-xs">Coordenadas Específicas (Opcional)</label>
+<p class="font-body-md text-body-md text-on-surface-variant mb-sm">Si conoce el punto exacto, puede marcarlo en el mapa.</p>
+<div class="w-full h-64 bg-surface-container rounded-lg border border-outline-variant overflow-hidden relative flex items-center justify-center">
+<img class="absolute inset-0 w-full h-full object-cover opacity-60" data-alt="A topographical map style image showing a stylized natural area with contour lines, subtle green and beige earth tones, and a red location pin marker in the center. The map looks professional and modern, suitable for a web application interface." data-location="Parque Nacional, Venezuela" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJmLU3oBcJjVxM9JCIEdSB024FDSX7RPRjlb00yRLdpwXGN4aEFHhkrfc3zVsygBHnKR0pgLfttFd4lYU53p0iu9pGzXTN5hVgaNmEb7P1xCpYNOdnw3bRMDNr0MLLgGWZ9hPb2-0XSfxcxa3KHHsZm_o6XSTOAFntgRqJ3EghwtKzEUsleTH-uTQpFMFMU9IquBDig0jejcrXsVXnTW0LhBK4yzmC5NIQUyiHPD83SykPHU7YDLyx">
+<button class="relative z-10 bg-primary-container text-on-primary px-4 py-2 rounded-lg font-label-md text-label-md flex items-center gap-2 shadow-md hover:bg-surface-tint transition-colors h-touch-target">
+<span class="material-symbols-outlined">pin_drop</span>
+                            Marcar Ubicación en Mapa
+                        </button>
+</div>
+</div>
+<!-- Infrastructure Type -->
+<div class="mb-lg">
+<label class="block font-label-md text-label-md text-on-surface mb-sm">Tipo de Infraestructura Requerida</label>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<label class="flex items-start gap-3 p-4 border border-outline-variant rounded-lg cursor-pointer hover:bg-surface-container-lowest transition-colors">
+<input class="mt-1 text-primary focus:ring-primary" name="infra" type="radio">
+<div>
+<span class="block font-label-md text-label-md text-on-surface">Estructura Fija</span>
+<span class="block font-body-md text-body-md text-on-surface-variant text-sm mt-1">Local construido permanentemente.</span>
+</div>
+</label>
+<label class="flex items-start gap-3 p-4 border border-outline-variant rounded-lg cursor-pointer hover:bg-surface-container-lowest transition-colors bg-secondary-container bg-opacity-10 border-primary">
+<input checked="" class="mt-1 text-primary focus:ring-primary" name="infra" type="radio">
+<div>
+<span class="block font-label-md text-label-md text-on-surface">Estructura Temporal</span>
+<span class="block font-body-md text-body-md text-on-surface-variant text-sm mt-1">Kioscos, carpas o stands removibles.</span>
+</div>
+</label>
+<label class="flex items-start gap-3 p-4 border border-outline-variant rounded-lg cursor-pointer hover:bg-surface-container-lowest transition-colors">
+<input class="mt-1 text-primary focus:ring-primary" name="infra" type="radio">
+<div>
+<span class="block font-label-md text-label-md text-on-surface">Sin Estructura</span>
+<span class="block font-body-md text-body-md text-on-surface-variant text-sm mt-1">Servicios de guiado o alquiler móvil.</span>
+</div>
+</label>
+</div>
+</div>
+</div>
+<!-- Footer Actions -->
+<div class="flex justify-between items-center mt-lg pt-md">
+<button class="h-touch-target px-lg border border-outline-variant text-on-surface font-label-md text-label-md rounded-lg hover:bg-surface-container-lowest transition-colors">
+                    Atrás
+                </button>
+<div class="flex gap-md">
+<button class="h-touch-target px-lg border border-outline-variant text-on-surface font-label-md text-label-md rounded-lg hover:bg-surface-container-lowest transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">save</span>
+                        Guardar Borrador
+                    </button>
+<button class="h-touch-target px-lg bg-primary-container text-on-primary font-label-md text-label-md rounded-lg hover:bg-surface-tint transition-colors">
+                        Siguiente Paso
+                    </button>
+</div>
+</div>
+</div>
+</main>
+</body></html>

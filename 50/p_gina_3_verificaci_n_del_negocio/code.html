@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Inparques Ranger - Verificación</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary-fixed-dim": "#a4d0b8",
+                      "surface": "#fbf9f3",
+                      "on-surface-variant": "#3f4942",
+                      "secondary-fixed": "#c0edd4",
+                      "inverse-surface": "#30312d",
+                      "error-container": "#ffdad6",
+                      "on-tertiary-fixed": "#0f1e19",
+                      "surface-container-lowest": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "on-tertiary-container": "#cadbd2",
+                      "on-surface": "#1b1c18",
+                      "error": "#ba1a1a",
+                      "outline-variant": "#bfc9c0",
+                      "surface-container": "#f0eee8",
+                      "on-primary-fixed": "#002111",
+                      "on-secondary-fixed": "#002114",
+                      "secondary-container": "#c0edd4",
+                      "secondary": "#3e6753",
+                      "on-error": "#ffffff",
+                      "on-primary-fixed-variant": "#005232",
+                      "outline": "#6f7a71",
+                      "on-secondary-fixed-variant": "#264e3c",
+                      "on-background": "#1b1c18",
+                      "primary-fixed": "#a4f4c3",
+                      "surface-bright": "#fbf9f3",
+                      "surface-dim": "#dcdad4",
+                      "inverse-primary": "#88d7a8",
+                      "tertiary-fixed-dim": "#b9cbc1",
+                      "inverse-on-surface": "#f3f1eb",
+                      "surface-container-high": "#eae8e2",
+                      "on-tertiary": "#ffffff",
+                      "tertiary-container": "#516159",
+                      "primary-container": "#176b45",
+                      "on-secondary": "#ffffff",
+                      "on-tertiary-fixed-variant": "#3a4a43",
+                      "tertiary": "#3a4942",
+                      "surface-variant": "#e4e2dd",
+                      "surface-container-low": "#f5f3ed",
+                      "on-primary-container": "#99e9b9",
+                      "primary": "#005131",
+                      "background": "#fbf9f3",
+                      "on-secondary-container": "#446d59",
+                      "tertiary-fixed": "#d5e7dd",
+                      "surface-container-highest": "#e4e2dd",
+                      "primary-fixed-dim": "#88d7a8",
+                      "surface-tint": "#186c45"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xs": "8px",
+                      "xxl": "48px",
+                      "lg": "24px",
+                      "touch-target": "44px",
+                      "xl": "32px",
+                      "md": "16px",
+                      "base": "4px",
+                      "sm": "12px"
+              },
+              "fontFamily": {
+                      "headline-md": [
+                              "Manrope"
+                      ],
+                      "label-md": [
+                              "Manrope"
+                      ],
+                      "headline-lg": [
+                              "Manrope"
+                      ],
+                      "body-lg": [
+                              "Manrope"
+                      ],
+                      "label-sm": [
+                              "Manrope"
+                      ],
+                      "body-md": [
+                              "Manrope"
+                      ],
+                      "display-lg": [
+                              "Manrope"
+                      ],
+                      "headline-lg-mobile": [
+                              "Manrope"
+                      ]
+              },
+              "fontSize": {
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        body {
+            background-color: theme('colors.surface');
+            color: theme('colors.on-surface');
+            -webkit-tap-highlight-color: transparent;
+        }
+      </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="antialiased min-h-screen flex flex-col pb-xxl">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-on-background docked full-width top-0 border-b border-outline-variant dark:border-on-surface-variant flat no shadows transition-colors duration-200 flex justify-between items-center w-full px-md h-touch-target sticky z-40">
+<div class="flex items-center gap-sm">
+<button class="w-touch-target h-touch-target flex items-center justify-center text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-on-surface-variant rounded-full transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-primary dark:text-primary-fixed">Inparques Ranger</h1>
+</div>
+<div class="flex items-center gap-sm">
+<img alt="Ranger Profile" class="w-[32px] h-[32px] rounded-full object-cover border border-outline-variant" data-alt="A small circular avatar portrait of a park ranger wearing an olive green uniform hat. The background is a blurred natural forest scene, lit by bright, natural daylight in a modern, earthy corporate style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFafZ_LVZ0yBCRonq47OP4GRFMFqR8-XlqfLRFg831RaIQ5_79KdOFeWHjQas1HA9N460ly9JVfbZRvLrAvFC-0bPERqXyl5qfUIRUYKIk_Rvl4jyJnKsKpH1SPSFlKwSuD94IMHTHKB7F6REY_PoP5dGZh8vm2LVVcTTkwKLvuAUdOztKl-k9F5AMATjuSQ-zzvswx8D27BX-JB5zg0sMQiT3VkC8iK3lpXgdsRRnmt34y9RJeWo8"/>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 px-md py-lg flex flex-col gap-lg">
+<!-- Header Section -->
+<div class="flex flex-col gap-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Verificación de Concesión</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Cafetería Los Pinos</h2>
+<div class="flex items-center gap-xs mt-1">
+<span class="inline-flex items-center gap-1 bg-primary-container/10 text-primary-container font-label-md text-label-md px-3 py-1 rounded-full">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                    Permiso Activo
+                </span>
+<span class="font-body-md text-body-md text-on-surface-variant ml-2">Vence: 12 Nov 2024</span>
+</div>
+</div>
+<!-- Hero Image Card -->
+<div class="rounded-xl overflow-hidden shadow-sm border border-outline-variant bg-surface-container-lowest h-[200px] relative">
+<div class="bg-cover bg-center w-full h-full" data-alt="A bright, welcoming photograph of an outdoor café nestled in a verdant mountain park setting. The café features wooden structures and green accents, harmonizing with the surrounding nature. The lighting is sunny and clear, emphasizing an earthy, modern, and reliable stewardship aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD-bfcyAjdfbIE1Km89KkGwCWYQrMlKtmnwvuC8ghET3qEyMg6_agjc647CDgRrt4FikRGKiiFDxr3kWr4IUUnZ9UP0N33mjx4bQkuv1Y9IOLapftu99Dll0l4IXlUWJxprC-sjAxN7hGKADYCDXa8EMu4yi-lv5xxBhm46_nONsA6csBoO_zpt4uW6Pha4v7dIvm8xoNNaWQih45-ueuRnN7Zaaz3tMs8TSgpNADqA0x5t632FBGVT')"></div>
+<div class="absolute bottom-md left-md right-md flex justify-between items-end">
+<div class="bg-surface/90 backdrop-blur-sm px-3 py-1 rounded-lg border border-outline-variant/50">
+<span class="font-label-md text-label-md text-on-surface flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">restaurant</span>
+                        Gastronomía
+                    </span>
+</div>
+</div>
+</div>
+<!-- Details Bento Grid -->
+<div class="grid grid-cols-2 gap-sm">
+<!-- Location -->
+<div class="col-span-2 bg-surface-container-lowest border border-outline-variant rounded-lg p-md shadow-sm">
+<div class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-primary-container mt-1">location_on</span>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Ubicación</p>
+<p class="font-body-lg text-body-lg text-on-surface">Sector Sabas Nieves</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Parque Nacional El Ávila</p>
+</div>
+</div>
+</div>
+<!-- Responsible Person -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md shadow-sm flex flex-col gap-xs justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">person</span>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Responsable</p>
+<p class="font-label-md text-label-md text-on-surface">Carlos Mendoza</p>
+</div>
+</div>
+<!-- Last Inspection -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md shadow-sm flex flex-col gap-xs justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">history</span>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Últ. Inspección</p>
+<p class="font-label-md text-label-md text-on-surface">Hace 14 días</p>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col gap-md mt-sm">
+<button class="w-full min-h-[44px] bg-primary-container text-on-primary font-label-md text-label-md rounded-lg flex items-center justify-center gap-2 hover:bg-primary transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">assignment_turned_in</span>
+                Iniciar inspección
+            </button>
+<div class="grid grid-cols-2 gap-sm">
+<button class="w-full min-h-[44px] bg-secondary-fixed text-on-secondary-fixed-variant font-label-md text-label-md rounded-lg flex items-center justify-center gap-2 hover:bg-secondary-fixed-dim transition-colors border border-outline-variant/30">
+<span class="material-symbols-outlined text-[20px]">picture_as_pdf</span>
+                    Ver permiso
+                </button>
+<button class="w-full min-h-[44px] bg-surface-container-lowest text-on-surface border border-outline-variant font-label-md text-label-md rounded-lg flex items-center justify-center gap-2 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[20px]">report_problem</span>
+                    Crear incidencia
+                </button>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Hidden on this transactional/focused screen as per instructions, but code included based on JSON, suppressed via display class if strictly following UX rule. Assuming intent 'Scan' is active because we just scanned a QR, but the instructions say 'Automatic Suppression: You MUST exclude the navigation shell if the page intent is: Linear/Transactional... Task-Focused: Any sub-page featuring a "Close" or "Back" action'. Since we have a back button, we suppress it.) -->
+<!-- Navigation intentionally omitted to prioritize canvas content and follow the "Automatic Suppression" rule for task-focused sub-pages with a back action. -->
+</body></html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Detalle de Pedido - Parques Nacionales</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed-variant": "#3a4a43",
+                        "surface-variant": "#e4e2dd",
+                        "on-background": "#1b1c18",
+                        "surface-dim": "#dcdad4",
+                        "surface-container-high": "#eae8e2",
+                        "on-secondary-container": "#446d59",
+                        "surface-tint": "#186c45",
+                        "on-secondary-fixed-variant": "#264e3c",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "primary-fixed": "#a4f4c3",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#1b1c18",
+                        "outline": "#6f7a71",
+                        "inverse-on-surface": "#f3f1eb",
+                        "surface-bright": "#fbf9f3",
+                        "surface-container-highest": "#e4e2dd",
+                        "on-tertiary-fixed": "#0f1e19",
+                        "surface": "#fbf9f3",
+                        "secondary-fixed": "#c0edd4",
+                        "on-tertiary-container": "#cadbd2",
+                        "on-primary": "#ffffff",
+                        "primary": "#005131",
+                        "on-secondary-fixed": "#002114",
+                        "tertiary-fixed": "#d5e7dd",
+                        "inverse-surface": "#30312d",
+                        "on-primary-container": "#99e9b9",
+                        "primary-fixed-dim": "#88d7a8",
+                        "on-error-container": "#93000a",
+                        "secondary": "#3e6753",
+                        "on-primary-fixed-variant": "#005232",
+                        "tertiary-container": "#516159",
+                        "outline-variant": "#bfc9c0",
+                        "background": "#fbf9f3",
+                        "primary-container": "#176b45",
+                        "tertiary-fixed-dim": "#b9cbc1",
+                        "surface-container-low": "#f5f3ed",
+                        "on-tertiary": "#ffffff",
+                        "secondary-container": "#c0edd4",
+                        "tertiary": "#3a4942",
+                        "surface-container": "#f0eee8",
+                        "secondary-fixed-dim": "#a4d0b8",
+                        "on-primary-fixed": "#002111",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#88d7a8",
+                        "on-surface-variant": "#3f4942"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "xs": "8px",
+                        "xxl": "48px",
+                        "lg": "24px",
+                        "xl": "32px",
+                        "touch-target": "44px",
+                        "base": "4px",
+                        "sm": "12px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Manrope"],
+                        "display-lg": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "label-sm": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "body-md": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex">
+<!-- SideNavBar -->
+<nav class="bg-surface-container-low dark:bg-surface-container-highest text-primary dark:text-primary-fixed font-label-md text-label-md h-screen w-64 fixed left-0 top-0 border-r border-outline-variant dark:border-outline flex flex-col p-md gap-xs hidden md:flex z-40">
+<div class="mb-lg px-sm">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Parques Nacionales</h1>
+<div class="flex items-center gap-sm mt-md">
+<img class="w-10 h-10 rounded-full object-cover border border-outline-variant" data-alt="A small circular logo depicting a stylized green mountain peak against a white background, representing the national parks concessionaire. The design is clean, corporate, and minimalist, utilizing earthy green tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVDwtN0Qk_ZVT09w4G5DvV--R7Zqzqr301OBi9tEPB-ucLgeZR5p5F2i-vMVGJ9g3OhKuWSua7JIZ3FiyLAgIiM-Q8FOcoFCks_gTmXuQnk4NcUZmrz6fNhWzou2JemwIuXtdgg-_TJEiv9DUwilVWXzF83dTo311Gy6X-oaTjRQ2GYb_N_oM_Li2rzCJzwuJMJXjckU-zbGHvrer6EvKQJ2htE2lrW1Pqgm5XC-rW5S-8MNmfvFqf">
+<div>
+<div class="font-bold text-on-surface">Portal Admin</div>
+<div class="text-on-surface-variant text-sm">Administración de Parque</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-xs flex-1">
+<a class="text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant dark:hover:bg-outline-variant transition-all duration-200 ease-in-out flex items-center gap-md px-sm py-xs rounded-lg min-h-touch-target" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Resumen
+            </a>
+<a class="bg-secondary-container dark:bg-secondary-fixed-variant text-on-secondary-container dark:text-on-secondary-fixed rounded-lg font-bold hover:bg-surface-variant dark:hover:bg-outline-variant transition-all duration-200 ease-in-out flex items-center gap-md px-sm py-xs min-h-touch-target" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+                Pedidos
+            </a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant dark:hover:bg-outline-variant transition-all duration-200 ease-in-out flex items-center gap-md px-sm py-xs rounded-lg min-h-touch-target" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+                Reservas
+            </a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant dark:hover:bg-outline-variant transition-all duration-200 ease-in-out flex items-center gap-md px-sm py-xs rounded-lg min-h-touch-target" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+                Catálogo
+            </a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant dark:hover:bg-outline-variant transition-all duration-200 ease-in-out flex items-center gap-md px-sm py-xs rounded-lg min-h-touch-target" href="#">
+<span class="material-symbols-outlined" data-icon="event_available">event_available</span>
+                Disponibilidad
+            </a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant dark:hover:bg-outline-variant transition-all duration-200 ease-in-out flex items-center gap-md px-sm py-xs rounded-lg min-h-touch-target" href="#">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+                Caja
+            </a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant dark:hover:bg-outline-variant transition-all duration-200 ease-in-out flex items-center gap-md px-sm py-xs rounded-lg min-h-touch-target" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+                Ventas
+            </a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant dark:hover:bg-outline-variant transition-all duration-200 ease-in-out flex items-center gap-md px-sm py-xs rounded-lg min-h-touch-target" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+                Equipo operativo
+            </a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant dark:hover:bg-outline-variant transition-all duration-200 ease-in-out flex items-center gap-md px-sm py-xs rounded-lg min-h-touch-target" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                Configuración del local
+            </a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 flex flex-col min-h-screen">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-inverse-surface font-body-md text-body-md docked full-width top-0 border-b border-outline-variant dark:border-outline flat no shadows flex justify-between items-center w-full px-lg h-touch-target sticky top-0 z-50">
+<div class="flex items-center gap-md">
+<button class="md:hidden text-on-surface-variant material-symbols-outlined cursor-pointer active:opacity-80 p-xs rounded-full hover:bg-surface-container-low transition-colors" data-icon="menu">menu</button>
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed md:hidden">Parques Nacionales</div>
+<div class="hidden md:flex items-center bg-surface-container-low rounded-full px-sm py-xs border border-outline-variant focus-within:border-primary transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant text-sm mr-xs" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-md text-on-surface w-64 p-0 outline-none" placeholder="Buscar pedidos..." type="text">
+</div>
+</div>
+<div class="flex items-center gap-sm">
+<button class="text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors cursor-pointer active:opacity-80 p-xs rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors cursor-pointer active:opacity-80 p-xs rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors cursor-pointer active:opacity-80 p-xs rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</button>
+</div>
+</header>
+<!-- Canvas -->
+<div class="p-lg lg:p-xl flex-1 bg-background flex flex-col gap-lg max-w-7xl mx-auto w-full">
+<!-- Page Header -->
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-md">
+<div>
+<div class="flex items-center gap-sm mb-xs">
+<button class="text-primary hover:bg-surface-variant rounded-full p-xs transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h2 class="font-headline-lg text-headline-lg text-on-background">Pedido #A-8472</h2>
+<span class="bg-secondary-container text-on-secondary-container px-sm py-xs rounded-full font-label-sm text-label-sm flex items-center gap-xs">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+                            En Preparación
+                        </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant ml-[44px]">Cliente: Juan Pérez • Creado: Hoy, 10:45 AM • Origen: Kiosco Principal</p>
+</div>
+<div class="flex gap-sm">
+<button class="border border-outline-variant text-on-surface bg-surface hover:bg-surface-variant font-label-md text-label-md rounded-lg px-md min-h-touch-target transition-colors flex items-center gap-xs shadow-sm">
+<span class="material-symbols-outlined" data-icon="print">print</span>
+                        Imprimir Ticket
+                    </button>
+<button class="bg-primary text-on-primary font-label-md text-label-md rounded-lg px-md min-h-touch-target transition-colors hover:opacity-90 flex items-center gap-xs shadow-sm">
+<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+                        Marcar Listo
+                    </button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg">
+<!-- Left Column (Items & Details) -->
+<div class="lg:col-span-8 flex flex-col gap-lg">
+<!-- Items Card -->
+<div class="bg-surface border border-outline-variant rounded-xl p-lg shadow-sm">
+<h3 class="font-headline-md text-headline-md text-on-background border-b border-outline-variant pb-sm mb-md flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary" data-icon="list_alt">list_alt</span>
+                            Artículos del Pedido
+                        </h3>
+<div class="flex flex-col gap-md">
+<!-- Item 1 -->
+<div class="flex gap-md p-md rounded-lg bg-surface-container-lowest border border-outline-variant hover:border-primary-fixed-dim transition-colors">
+<img class="w-20 h-20 rounded-lg object-cover bg-surface-variant flex-shrink-0" data-alt="A close-up view of a gourmet sandwich on rustic bread, filled with fresh local greens, roasted vegetables, and a light dressing. The presentation is neat and appetizing, sitting on a wooden board. Soft natural light, high-quality food photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuzxQcMjuP5R7zMm27yE57tE__IYPAgQJ365B8BbiGwhiX0beNyYX25ww8sfkteEg8nBIVkoyK9E0sFcZHzkP9dyTg2T0rm2OooswFabJE2VzX6yNT0mD70WsmPww4Huy5ms0r4tDuwO-w_TXG48OZbQYWCCXLxEKRznrrZ8bW-dDx1_-_8gYBREVPkBlgegKWtqoOB_mcKVcF8dIp2mEPUsI2Tq1wTf0J5tW-L2fJM3QcdzJ8pc3y">
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h4 class="font-label-md text-label-md text-on-background text-lg font-bold">Sandwich de Montaña (x2)</h4>
+<span class="font-label-md text-label-md font-bold">$12.00</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm mt-xs">Modificadores:</p>
+<ul class="list-disc list-inside text-sm text-on-surface-variant ml-xs">
+<li>Sin cebolla</li>
+<li>Aderezo extra aparte</li>
+</ul>
+<div class="mt-sm flex gap-xs">
+<span class="bg-error-container text-on-error-container text-xs px-xs py-base rounded flex items-center gap-base">
+<span class="material-symbols-outlined text-[14px]" data-icon="warning">warning</span>
+                                            Alérgeno: Gluten
+                                        </span>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex gap-md p-md rounded-lg bg-surface-container-lowest border border-outline-variant hover:border-primary-fixed-dim transition-colors">
+<div class="w-20 h-20 rounded-lg bg-surface-variant flex items-center justify-center flex-shrink-0 border border-outline-variant">
+<span class="material-symbols-outlined text-outline text-3xl" data-icon="local_cafe">local_cafe</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h4 class="font-label-md text-label-md text-on-background text-lg font-bold">Café Negro Andino (x1)</h4>
+<span class="font-label-md text-label-md font-bold">$3.50</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm mt-xs">Tamaño: Grande</p>
+<div class="mt-sm bg-surface-variant p-xs rounded text-sm text-on-surface-variant flex gap-xs items-start">
+<span class="material-symbols-outlined text-[16px]" data-icon="note">note</span>
+<em>Nota del cliente: "Bien caliente por favor"</em>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-lg pt-md border-t border-outline-variant flex justify-end">
+<div class="w-full sm:w-1/2">
+<div class="flex justify-between text-on-surface-variant mb-xs">
+<span>Subtotal</span>
+<span>$27.50</span>
+</div>
+<div class="flex justify-between text-on-surface-variant mb-xs">
+<span>Impuestos (16%)</span>
+<span>$4.40</span>
+</div>
+<div class="flex justify-between font-headline-md text-headline-md text-primary font-bold mt-sm pt-sm border-t border-outline-variant">
+<span>Total</span>
+<span>$31.90</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column (Status, Payment, Actions) -->
+<div class="lg:col-span-4 flex flex-col gap-lg">
+<!-- QR Validation Card (Prominent Action) -->
+<div class="bg-primary-container text-on-primary-container rounded-xl p-lg shadow-sm flex flex-col items-center justify-center text-center">
+<span class="material-symbols-outlined text-4xl mb-sm" data-icon="qr_code_scanner">qr_code_scanner</span>
+<h3 class="font-headline-md text-headline-md font-bold mb-xs">Validar Entrega</h3>
+<p class="font-body-md text-body-md opacity-90 mb-md text-sm">Escanea el código QR del cliente para confirmar la entrega del pedido.</p>
+<button class="bg-surface text-primary font-label-md text-label-md rounded-lg px-lg min-h-touch-target w-full hover:bg-surface-variant transition-colors font-bold shadow-md">
+                            Activar Escáner
+                        </button>
+</div>
+<!-- Payment Status -->
+<div class="bg-surface border border-outline-variant rounded-xl p-lg shadow-sm">
+<h3 class="font-headline-md text-headline-md text-on-background mb-md flex items-center gap-xs">
+<span class="material-symbols-outlined text-secondary" data-icon="payments">payments</span>
+                            Estado de Pago
+                        </h3>
+<div class="flex items-center justify-between p-sm bg-surface-container rounded-lg border border-outline-variant">
+<div class="flex items-center gap-sm">
+<span class="bg-primary/20 text-primary p-xs rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="check">check</span>
+</span>
+<span class="font-label-md text-label-md font-bold text-on-surface">Pagado</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface-variant text-sm">Tarjeta terminada en 4242</span>
+</div>
+</div>
+<!-- Timeline -->
+<div class="bg-surface border border-outline-variant rounded-xl p-lg shadow-sm">
+<h3 class="font-headline-md text-headline-md text-on-background mb-md flex items-center gap-xs">
+<span class="material-symbols-outlined text-tertiary" data-icon="history">history</span>
+                            Historial
+                        </h3>
+<div class="relative border-l-2 border-outline-variant ml-sm flex flex-col gap-md pb-xs">
+<div class="relative pl-md">
+<span class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-primary border-2 border-surface"></span>
+<div class="font-label-md text-label-md text-on-background">Pedido en Preparación</div>
+<div class="font-body-md text-body-md text-on-surface-variant text-sm">Por: Cocina (Chef Maria) • 10:48 AM</div>
+</div>
+<div class="relative pl-md">
+<span class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-surface-variant border-2 border-outline-variant"></span>
+<div class="font-label-md text-label-md text-on-background text-on-surface-variant">Pago Confirmado</div>
+<div class="font-body-md text-body-md text-on-surface-variant text-sm">Stripe • 10:46 AM</div>
+</div>
+<div class="relative pl-md">
+<span class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-surface-variant border-2 border-outline-variant"></span>
+<div class="font-label-md text-label-md text-on-background text-on-surface-variant">Pedido Recibido</div>
+<div class="font-body-md text-body-md text-on-surface-variant text-sm">Kiosco Principal • 10:45 AM</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

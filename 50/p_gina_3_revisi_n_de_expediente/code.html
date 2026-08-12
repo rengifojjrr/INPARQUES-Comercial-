@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Revisión de Expediente - Parques Nacionales</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "outline-variant": "#bfc9c0",
+                      "on-secondary-container": "#446d59",
+                      "on-primary-fixed-variant": "#005232",
+                      "surface-container-high": "#eae8e2",
+                      "tertiary-fixed": "#d5e7dd",
+                      "secondary": "#3e6753",
+                      "background": "#fbf9f3",
+                      "surface-container-lowest": "#ffffff",
+                      "primary-fixed": "#a4f4c3",
+                      "on-error-container": "#93000a",
+                      "on-tertiary": "#ffffff",
+                      "tertiary-container": "#516159",
+                      "surface-container-highest": "#e4e2dd",
+                      "primary": "#005131",
+                      "on-surface-variant": "#3f4942",
+                      "surface-tint": "#186c45",
+                      "inverse-on-surface": "#f3f1eb",
+                      "surface-container-low": "#f5f3ed",
+                      "surface-dim": "#dcdad4",
+                      "on-background": "#1b1c18",
+                      "surface-container": "#f0eee8",
+                      "secondary-container": "#c0edd4",
+                      "on-secondary-fixed-variant": "#264e3c",
+                      "inverse-surface": "#30312d",
+                      "primary-container": "#176b45",
+                      "primary-fixed-dim": "#88d7a8",
+                      "on-primary-container": "#99e9b9",
+                      "inverse-primary": "#88d7a8",
+                      "secondary-fixed-dim": "#a4d0b8",
+                      "on-tertiary-fixed": "#0f1e19",
+                      "error": "#ba1a1a",
+                      "error-container": "#ffdad6",
+                      "on-surface": "#1b1c18",
+                      "tertiary": "#3a4942",
+                      "on-primary-fixed": "#002111",
+                      "on-secondary": "#ffffff",
+                      "tertiary-fixed-dim": "#b9cbc1",
+                      "outline": "#6f7a71",
+                      "on-error": "#ffffff",
+                      "on-secondary-fixed": "#002114",
+                      "surface-variant": "#e4e2dd",
+                      "secondary-fixed": "#c0edd4",
+                      "on-tertiary-fixed-variant": "#3a4a43",
+                      "surface": "#fbf9f3",
+                      "on-primary": "#ffffff",
+                      "on-tertiary-container": "#cadbd2",
+                      "surface-bright": "#fbf9f3"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "base": "4px",
+                      "xs": "8px",
+                      "md": "16px",
+                      "lg": "24px",
+                      "xxl": "48px",
+                      "touch-target": "44px",
+                      "sm": "12px",
+                      "xl": "32px"
+              },
+              "fontFamily": {
+                      "headline-lg": ["Manrope"],
+                      "headline-md": ["Manrope"],
+                      "body-md": ["Manrope"],
+                      "label-sm": ["Manrope"],
+                      "label-md": ["Manrope"],
+                      "headline-lg-mobile": ["Manrope"],
+                      "body-lg": ["Manrope"],
+                      "display-lg": ["Manrope"]
+              },
+              "fontSize": {
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "700"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-filled {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar for inner panes */
+        .custom-scroll::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background-color: #bfc9c0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface h-screen w-full flex overflow-hidden font-body-md">
+<!-- SideNavBar (Shared Component) -->
+<nav class="bg-surface-container dark:bg-surface-container-highest fixed left-0 top-0 h-full flex flex-col py-md px-sm w-64 z-40 border-r border-outline-variant dark:border-outline hidden md:flex">
+<!-- Header -->
+<div class="px-sm mb-lg flex items-center gap-sm">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="A minimalist, highly professional corporate logo for an environmental administration agency. The logo features abstract geometric shapes in shades of deep green and white, representing mountains and trees in a modern, flat vector style. The image is set against a clean, light-mode background, exuding authority and organic stewardship." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHLExnD31MFIPc3rIYHASVh5ltZLwBBZgGHgo8-Ri5mGlCeKvAqQV4RpVZpCTtP2mLOh4xTJDVsH8iVlaonDF3P_-NIkoZhXtdEoOGEJNRY0rldICDSFqXDCccwIPN4XBkZtCeuMhf0jpHamj29FS5Rm5Z9H7l7dXt28GIDmoy3IDoiFy6UB2oYqwK0uqoioIC5y4PdZp3w4JBhlPwi2-MmG3Z6w6l_lZFN8EoXSqosMq0UcEgvvb7"/>
+<div>
+<h1 class="font-headline-md text-headline-md text-on-surface leading-tight">Gestión Comercial</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Administración Central</p>
+</div>
+</div>
+<!-- CTA -->
+<div class="px-sm mb-lg">
+<button class="w-full flex items-center justify-center gap-xs bg-primary-container text-on-primary-container font-label-md text-label-md h-touch-target rounded-lg hover:bg-surface-tint hover:text-white transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined">add</span>
+                Nueva Concesión
+            </button>
+</div>
+<!-- Navigation Links -->
+<div class="flex-1 overflow-y-auto custom-scroll flex flex-col gap-base px-sm">
+<!-- Inactive -->
+<a class="flex items-center gap-sm px-md h-10 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest dark:hover:bg-surface-dim transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Resumen Comercial</span>
+</a>
+<!-- Inactive -->
+<a class="flex items-center gap-sm px-md h-10 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-md text-label-md">Solicitudes</span>
+</a>
+<!-- Active ('Expedientes') -->
+<a class="flex items-center gap-sm px-md h-10 rounded-lg bg-primary-container text-on-primary-container font-bold hover:bg-surface-container-highest transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined icon-filled">folder_open</span>
+<span class="font-label-md text-label-md">Expedientes</span>
+</a>
+<!-- Inactive -->
+<a class="flex items-center gap-sm px-md h-10 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined">assignment_turned_in</span>
+<span class="font-label-md text-label-md">Contratos y Permisos</span>
+</a>
+<!-- Inactive -->
+<a class="flex items-center gap-sm px-md h-10 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="font-label-md text-label-md">Puntos Comerciales</span>
+</a>
+<!-- Inactive -->
+<a class="flex items-center gap-sm px-md h-10 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined">monetization_on</span>
+<span class="font-label-md text-label-md">Condiciones Económicas</span>
+</a>
+<!-- Inactive -->
+<a class="flex items-center gap-sm px-md h-10 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-md text-label-md">Prórrogas</span>
+</a>
+<!-- Inactive -->
+<a class="flex items-center gap-sm px-md h-10 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined">verified_user</span>
+<span class="font-label-md text-label-md">Inspecciones</span>
+</a>
+<!-- Inactive -->
+<a class="flex items-center gap-sm px-md h-10 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md">Reportes</span>
+</a>
+</div>
+<!-- Footer -->
+<div class="px-sm mt-auto pt-md border-t border-outline-variant flex flex-col gap-base">
+<a class="flex items-center gap-sm px-md h-10 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Configuración</span>
+</a>
+<a class="flex items-center gap-sm px-md h-10 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Cerrar Sesión</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col md:ml-64 h-screen overflow-hidden bg-background">
+<!-- TopNavBar (Shared Component) -->
+<header class="sticky top-0 z-30 flex items-center justify-between w-full px-lg h-touch-target bg-surface border-b border-outline-variant">
+<div class="flex items-center gap-md">
+<div class="md:hidden">
+<span class="material-symbols-outlined text-primary cursor-pointer">menu</span>
+</div>
+<h2 class="font-label-md text-label-md font-bold text-primary dark:text-primary-fixed hidden md:block">
+                    Parques Nacionales | Dirección Comercial
+                </h2>
+</div>
+<div class="flex items-center gap-sm">
+<!-- Search bar on left logic implied by json, but placing actions on right -->
+<div class="relative hidden lg:block mr-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+<input class="h-10 pl-10 pr-4 rounded-full border border-outline-variant bg-surface-container-lowest focus:border-primary focus:ring-1 focus:ring-primary text-body-md w-64" placeholder="Buscar expediente..." type="text"/>
+</div>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors cursor-pointer active:scale-95 duration-150">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors cursor-pointer active:scale-95 duration-150">
+<span class="material-symbols-outlined">help</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors cursor-pointer active:scale-95 duration-150">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="ml-sm w-8 h-8 rounded-full overflow-hidden border border-outline-variant cursor-pointer">
+<img alt="Administrator Profile" class="w-full h-full object-cover" data-alt="A clean, highly professional headshot of a female administrative worker, softly lit in a modern office environment. She has a subtle, friendly expression. The background is a blurred, light-toned corporate workspace that fits perfectly with a pristine, light-mode dashboard UI design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkVR-WzeRyCxT0aW5T6ai7x-anbpDzR-GyP5AuJEaTKKoV1nn1UHswUkEGkQb5Mq2mlsQygLZ1PO78Nl_I6OpOS7IA-Uc6bivLV9-cv9jk0pz-bASoyWbjstswGvz_hNx_glmXJlnFs8v3Bv6SAivHDcuq1CV1W0CgEeTZzzPwW8SNuC-iwkHhblIEzN9umtxXSe9roZ6I_Sd1IV7_5INRQCYEnJTOH2_O5PUNpXhTTuxJb4y6eIFU"/>
+</div>
+</div>
+</header>
+<!-- Split View Layout -->
+<main class="flex-1 p-md lg:p-lg flex flex-col overflow-hidden">
+<!-- Page Header -->
+<div class="flex flex-wrap items-center justify-between gap-md mb-lg shrink-0">
+<div>
+<div class="flex items-center gap-xs text-on-surface-variant text-label-sm font-label-sm mb-1">
+<span>Expedientes</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span>Solicitud #EXP-2023-089</span>
+</div>
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">Revisión de Documentación</h1>
+</div>
+<div class="flex items-center gap-sm bg-surface-container-low px-md py-sm rounded-full border border-outline-variant">
+<div class="w-2 h-2 rounded-full bg-secondary"></div>
+<span class="font-label-md text-label-md text-on-surface">Estado: En Revisión</span>
+</div>
+</div>
+<!-- Grid Container -->
+<div class="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-lg min-h-0">
+<!-- LEFT PANEL: Checklist & Details (4 cols) -->
+<div class="lg:col-span-4 flex flex-col gap-md overflow-y-auto custom-scroll pr-1 pb-xxl">
+<!-- Applicant Details Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg shadow-sm">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-md flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">person</span>
+                            Datos del Solicitante
+                        </h3>
+<div class="space-y-sm text-body-md">
+<div class="flex justify-between border-b border-surface-container-highest pb-xs">
+<span class="text-on-surface-variant">Razón Social:</span>
+<span class="font-bold text-on-surface">EcoTurismo C.A.</span>
+</div>
+<div class="flex justify-between border-b border-surface-container-highest pb-xs">
+<span class="text-on-surface-variant">Representante:</span>
+<span class="font-bold text-on-surface">Carlos Mendoza</span>
+</div>
+<div class="flex justify-between border-b border-surface-container-highest pb-xs">
+<span class="text-on-surface-variant">Cuenta Bancaria:</span>
+<span class="font-mono text-on-surface">****-****-****-4592</span>
+</div>
+<div class="pt-sm">
+<span class="text-on-surface-variant block mb-xs">Punto Solicitado: Kiosko Norte - P.N. Morrocoy</span>
+<div class="w-full h-32 rounded-md overflow-hidden border border-outline-variant relative">
+<img class="w-full h-full object-cover" data-alt="A clean, minimalist vector map centered on a coastal national park area. The map uses a light-mode color palette with subtle earthy greens for land and soft blues for water. A precise, dark green pin marker highlights a specific commercial point. The style is modern, abstract, and highly suitable for a high-end administrative dashboard." data-location="Morrocoy National Park" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMZKh2SQ7IxElEIcRRkxklT8vcve3Ipm3Wv94kQcLYJXMDdvleEJ45NioaREG8RIRiF032ioXpY71tMNwtRixHGGh97qVnIx6GQ0ADpYzf76m0wrjkVtUrMkYODo9e43a3xd-O5EJKUgyt1N5H4jHgHPSOKhXzf8qIyrjRop-85rcggQvAxHTRUDfVrwDrHrASmJEue384kyWMMD0mENnQdH122lRwq0ox7H2e3MLzgdsObfp44Pcd"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Document Checklist Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg shadow-sm flex-1">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-md flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">checklist</span>
+                            Requisitos Documentales
+                        </h3>
+<div class="flex flex-col gap-sm">
+<!-- Valid Item -->
+<div class="flex items-start gap-sm p-sm rounded-md bg-surface-container-low border border-outline-variant cursor-pointer hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-primary-container icon-filled mt-1">check_circle</span>
+<div class="flex-1">
+<p class="font-label-md text-label-md text-on-surface">Registro Único de Contribuyentes (RUC)</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant mt-1">Verificado automáticamente</p>
+</div>
+</div>
+<!-- Pending Review Item (Active in Viewer) -->
+<div class="flex items-start gap-sm p-sm rounded-md bg-tertiary-fixed border-2 border-primary-container cursor-pointer shadow-[0_4px_12px_rgba(40,51,46,0.08)]">
+<span class="material-symbols-outlined text-primary-container mt-1">visibility</span>
+<div class="flex-1">
+<p class="font-label-md text-label-md text-on-surface font-bold">Documento de Identidad</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant mt-1">Requiere revisión manual</p>
+</div>
+</div>
+<!-- Error/Missing Item -->
+<div class="flex items-start gap-sm p-sm rounded-md bg-error-container/30 border border-error/50 cursor-pointer hover:bg-error-container/50 transition-colors">
+<span class="material-symbols-outlined text-error mt-1">error</span>
+<div class="flex-1">
+<p class="font-label-md text-label-md text-on-surface">Solvencia Municipal</p>
+<p class="text-label-sm font-label-sm text-error mt-1">Documento ilegible o vencido</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Bar (Sticky at bottom of left panel) -->
+<div class="mt-auto pt-md flex flex-col gap-sm sticky bottom-0 bg-surface pb-md border-t border-outline-variant/50">
+<button class="w-full h-touch-target rounded-lg font-label-md text-label-md bg-primary-container text-white flex items-center justify-center gap-xs hover:bg-surface-tint shadow-[0_4px_12px_rgba(40,51,46,0.08)] transition-all">
+<span class="material-symbols-outlined">thumb_up</span>
+                            Recomendar aprobación
+                        </button>
+<div class="grid grid-cols-2 gap-sm">
+<button class="h-touch-target rounded-lg font-label-md text-label-md border border-outline-variant text-on-surface hover:bg-surface-container-low transition-colors flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[20px]">edit_document</span>
+                                Solicitar corrección
+                            </button>
+<button class="h-touch-target rounded-lg font-label-md text-label-md bg-error-container text-on-error-container hover:bg-error/20 transition-colors flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[20px]">cancel</span>
+                                Rechazar con fundamento
+                            </button>
+</div>
+</div>
+</div>
+<!-- RIGHT PANEL: Document Viewer (8 cols) -->
+<div class="hidden lg:flex lg:col-span-8 bg-surface-container border border-outline-variant rounded-lg flex-col overflow-hidden shadow-sm">
+<!-- Viewer Toolbar -->
+<div class="h-14 bg-surface-container-lowest border-b border-outline-variant px-md flex items-center justify-between shrink-0">
+<div class="flex items-center gap-sm">
+<span class="font-label-md text-label-md text-on-surface font-bold">Documento_Identidad_CM.pdf</span>
+<span class="text-label-sm text-on-surface-variant bg-surface-container px-2 py-1 rounded">Pág. 1/2</span>
+</div>
+<div class="flex items-center gap-xs">
+<button class="w-8 h-8 rounded flex items-center justify-center text-on-surface hover:bg-surface-container-high transition-colors" title="Alejar">
+<span class="material-symbols-outlined text-[20px]">zoom_out</span>
+</button>
+<span class="text-label-sm text-on-surface-variant">100%</span>
+<button class="w-8 h-8 rounded flex items-center justify-center text-on-surface hover:bg-surface-container-high transition-colors" title="Acercar">
+<span class="material-symbols-outlined text-[20px]">zoom_in</span>
+</button>
+<div class="w-px h-6 bg-outline-variant mx-xs"></div>
+<button class="w-8 h-8 rounded flex items-center justify-center text-on-surface hover:bg-surface-container-high transition-colors" title="Descargar">
+<span class="material-symbols-outlined text-[20px]">download</span>
+</button>
+</div>
+</div>
+<!-- Viewer Canvas -->
+<div class="flex-1 bg-[#e0e0e0] dark:bg-inverse-surface overflow-auto custom-scroll p-lg flex justify-center items-start">
+<!-- Mock PDF Page -->
+<div class="w-full max-w-2xl bg-white shadow-[0_12px_32px_rgba(40,51,46,0.12)] min-h-[800px] relative">
+<img class="w-full h-full object-cover opacity-90" data-alt="A highly realistic mockup of a scanned official identification document displayed inside a web PDF viewer. The document features structured layout blocks, an official photo placeholder, and detailed micro-text typical of government IDs. The image is rendered clearly from a top-down perspective, completely flat on a stark white 'paper' background, illuminated brightly to fit a light-mode corporate interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuCOpRqIWfV2dKb30cH5JyP_Hj2AYs-h5Qw-3iYP5fOJrg2gACNM-WmV4yfT8y_SQK-9tlsSr64EXZ0YahOEa6XAg2nPRNdkvnw5FraS8zKF2KkYM6burfYjymUNLJftow-kypQkRj4ThoVyFuoti1xIcTRafl_kdzuwn7zTl_721gtv53CIRZQDBS0sniGuJAUTaXg4Uuz0HruFhwDGqcAyp459i_Syoo1Doq8VkEEOBIZkDY8wOE"/>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

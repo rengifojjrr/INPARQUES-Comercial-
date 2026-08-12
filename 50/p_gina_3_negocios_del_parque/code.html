@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Negocios - Parques Nacionales Admin</title>
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Fonts & Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Config Injection -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#b9cbc1",
+                    "on-primary-container": "#99e9b9",
+                    "primary-container": "#176b45",
+                    "surface-dim": "#dcdad4",
+                    "on-surface-variant": "#3f4942",
+                    "outline-variant": "#bfc9c0",
+                    "inverse-surface": "#30312d",
+                    "surface-container": "#f0eee8",
+                    "on-primary-fixed": "#002111",
+                    "on-primary-fixed-variant": "#005232",
+                    "inverse-on-surface": "#f3f1eb",
+                    "tertiary-container": "#516159",
+                    "primary-fixed-dim": "#88d7a8",
+                    "on-secondary-fixed": "#002114",
+                    "on-error-container": "#93000a",
+                    "surface-tint": "#186c45",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "outline": "#6f7a71",
+                    "on-tertiary-container": "#cadbd2",
+                    "surface-container-low": "#f5f3ed",
+                    "secondary-container": "#c0edd4",
+                    "tertiary-fixed": "#d5e7dd",
+                    "error-container": "#ffdad6",
+                    "primary": "#005131",
+                    "tertiary": "#3a4942",
+                    "surface-container-high": "#eae8e2",
+                    "on-tertiary-fixed-variant": "#3a4a43",
+                    "on-secondary": "#ffffff",
+                    "surface-container-highest": "#e4e2dd",
+                    "on-secondary-container": "#446d59",
+                    "surface": "#fbf9f3",
+                    "surface-variant": "#e4e2dd",
+                    "on-background": "#1b1c18",
+                    "secondary-fixed": "#c0edd4",
+                    "background": "#fbf9f3",
+                    "inverse-primary": "#88d7a8",
+                    "surface-bright": "#fbf9f3",
+                    "on-tertiary-fixed": "#0f1e19",
+                    "secondary": "#3e6753",
+                    "primary-fixed": "#a4f4c3",
+                    "error": "#ba1a1a",
+                    "on-primary": "#ffffff",
+                    "secondary-fixed-dim": "#a4d0b8",
+                    "on-surface": "#1b1c18",
+                    "on-secondary-fixed-variant": "#264e3c",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "32px",
+                    "xs": "8px",
+                    "base": "4px",
+                    "lg": "24px",
+                    "xxl": "48px",
+                    "touch-target": "44px",
+                    "sm": "12px",
+                    "md": "16px"
+            },
+            "fontFamily": {
+                    "display-lg": [
+                            "Manrope"
+                    ],
+                    "label-sm": [
+                            "Manrope"
+                    ],
+                    "headline-lg-mobile": [
+                            "Manrope"
+                    ],
+                    "headline-md": [
+                            "Manrope"
+                    ],
+                    "body-lg": [
+                            "Manrope"
+                    ],
+                    "label-md": [
+                            "Manrope"
+                    ],
+                    "body-md": [
+                            "Manrope"
+                    ],
+                    "headline-lg": [
+                            "Manrope"
+                    ]
+            },
+            "fontSize": {
+                    "display-lg": [
+                            "48px",
+                            {
+                                    "lineHeight": "56px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "800"
+                            }
+                    ],
+                    "label-sm": [
+                            "12px",
+                            {
+                                    "lineHeight": "16px",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "headline-lg-mobile": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "headline-md": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-lg": [
+                            "18px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "label-md": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "letterSpacing": "0.01em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "headline-lg": [
+                            "32px",
+                            {
+                                    "lineHeight": "40px",
+                                    "letterSpacing": "-0.01em",
+                                    "fontWeight": "700"
+                            }
+                    ]
+            }
+    },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; background-color: #F7F5EF; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .material-symbols-outlined.fill { font-variation-settings: 'FILL' 1; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface flex min-h-screen">
+<!-- SideNavBar (Mobile hidden, Web visible) -->
+<nav class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 overflow-y-auto bg-surface border-r border-outline-variant py-lg px-md z-50">
+<!-- Brand / Header -->
+<div class="mb-xl flex flex-col gap-sm">
+<span class="font-headline-lg text-headline-lg font-bold text-primary">Gestión de Parques</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Portal Administrativo</span>
+</div>
+<!-- Main Tabs -->
+<ul class="flex flex-col gap-xs flex-grow">
+<!-- Inicio -->
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors duration-200 text-on-surface-variant font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">Inicio</span>
+</a>
+</li>
+<!-- Zonas y puntos -->
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors duration-200 text-on-surface-variant font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="font-label-md text-label-md">Zonas y puntos</span>
+</a>
+</li>
+<!-- Negocios (ACTIVE) -->
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors duration-200 opacity-80 transition-all duration-150 text-primary font-bold border-r-4 border-primary bg-secondary-container/20" href="#">
+<span class="material-symbols-outlined fill" data-icon="storefront">storefront</span>
+<span class="font-label-md text-label-md">Negocios</span>
+</a>
+</li>
+<!-- Operación -->
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors duration-200 text-on-surface-variant font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="settings_applications">settings_applications</span>
+<span class="font-label-md text-label-md">Operación</span>
+</a>
+</li>
+<!-- Horarios -->
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors duration-200 text-on-surface-variant font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="schedule">schedule</span>
+<span class="font-label-md text-label-md">Horarios</span>
+</a>
+</li>
+<!-- Incidencias -->
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors duration-200 text-on-surface-variant font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="report_problem">report_problem</span>
+<span class="font-label-md text-label-md">Incidencias</span>
+</a>
+</li>
+<!-- Inspecciones -->
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors duration-200 text-on-surface-variant font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="verified">verified</span>
+<span class="font-label-md text-label-md">Inspecciones</span>
+</a>
+</li>
+<!-- Desempeño -->
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors duration-200 text-on-surface-variant font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-label-md text-label-md">Desempeño</span>
+</a>
+</li>
+<!-- Usuarios locales -->
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors duration-200 text-on-surface-variant font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="badge">badge</span>
+<span class="font-label-md text-label-md">Usuarios locales</span>
+</a>
+</li>
+</ul>
+<!-- CTA & Footer Tabs -->
+<div class="mt-xl flex flex-col gap-sm">
+<button class="bg-primary-container text-on-tertiary font-label-md text-label-md py-sm px-md rounded-lg h-touch-target hover:bg-primary transition-colors flex items-center justify-center gap-xs">
+                Nueva Inspección
+            </button>
+<ul class="flex flex-col gap-xs mt-sm pt-sm border-t border-outline-variant">
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors duration-200 text-on-surface-variant font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-md text-label-md">Ajustes</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors duration-200 text-on-surface-variant font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-label-md text-label-md">Cerrar sesión</span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-grow flex flex-col min-h-screen md:ml-64 w-full">
+<!-- TopAppBar -->
+<header class="docked full-width top-0 sticky z-40 bg-surface border-b border-outline-variant shadow-sm flex justify-between items-center h-touch-target px-lg py-sm">
+<!-- Mobile Menu Toggle (Only visible on mobile) -->
+<button class="md:hidden text-primary p-xs hover:bg-surface-container-low rounded-full">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<!-- Brand Name (Mobile hidden, handled by SideNav on Desktop usually, but specified in JSON for TopApp) -->
+<div class="font-headline-md text-headline-md font-extrabold text-primary hidden md:block">
+                Parques Nacionales Admin
+            </div>
+<!-- Search (Left aligned as per JSON, but pushed to flex context) -->
+<div class="flex-grow max-w-md mx-md hidden md:flex">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-xl pr-md py-xs rounded-full border border-outline-variant bg-surface-container-lowest focus:border-primary-container focus:ring-1 focus:ring-primary-container font-body-md text-body-md h-10 outline-none text-on-surface transition-shadow" placeholder="Buscar comercios, reportes..." type="text"/>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex items-center gap-md">
+<button class="hidden md:flex items-center gap-xs px-md py-xs border border-outline-variant text-on-surface-variant rounded-full font-label-md text-label-md hover:bg-surface-container-low transition-colors h-10">
+<span class="material-symbols-outlined text-sm">download</span>
+                    Descargar Reporte
+                </button>
+<div class="flex items-center gap-xs">
+<button class="p-xs text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-colors h-10 w-10 flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-xs text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-colors h-10 w-10 flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<main class="flex-grow p-md md:p-lg lg:p-xl bg-surface-container-lowest overflow-x-hidden">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-lg gap-md">
+<div>
+<h1 class="font-display-lg text-display-lg text-primary-fixed-variant mb-xs">Directorio de Negocios</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+                        Gestión y monitoreo de comercios concesionados operando dentro de las instalaciones del parque.
+                    </p>
+</div>
+<div class="flex gap-sm w-full md:w-auto">
+<!-- Filter/Sort Dropdowns Placeholder -->
+<select class="border border-outline-variant rounded-lg px-md py-sm bg-surface font-body-md text-body-md text-on-surface outline-none focus:border-primary h-touch-target w-full md:w-auto">
+<option>Todas las Zonas</option>
+<option>Zona Norte</option>
+<option>Camping Sur</option>
+</select>
+</div>
+</div>
+<!-- Stats Overview Bento (Optional context enhancement) -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-md mb-xl">
+<div class="bg-surface border border-outline-variant rounded-lg p-lg flex flex-col shadow-sm">
+<span class="font-label-md text-label-md text-on-surface-variant mb-xs">Negocios Activos</span>
+<span class="font-headline-lg text-headline-lg text-primary">24</span>
+</div>
+<div class="bg-surface border border-outline-variant rounded-lg p-lg flex flex-col shadow-sm">
+<span class="font-label-md text-label-md text-on-surface-variant mb-xs">En Revisión</span>
+<span class="font-headline-lg text-headline-lg text-tertiary">3</span>
+</div>
+<div class="bg-surface border border-outline-variant rounded-lg p-lg flex flex-col shadow-sm">
+<span class="font-label-md text-label-md text-on-surface-variant mb-xs">Incidencias Hoy</span>
+<span class="font-headline-lg text-headline-lg text-error">2</span>
+</div>
+<div class="bg-surface border border-outline-variant rounded-lg p-lg flex flex-col shadow-sm relative overflow-hidden">
+<!-- Decorative subtle pattern/gradient -->
+<div class="absolute right-[-20%] top-[-20%] w-32 h-32 bg-secondary-container rounded-full opacity-50 blur-2xl"></div>
+<span class="font-label-md text-label-md text-on-surface-variant mb-xs relative z-10">Ventas Totales Estimadas</span>
+<span class="font-headline-lg text-headline-lg text-primary relative z-10">$12,450</span>
+</div>
+</div>
+<!-- Data Table Container (Glassmorphism / Premium Card feel) -->
+<div class="bg-surface rounded-xl border border-outline-variant shadow-[0px_4px_12px_rgba(40,51,46,0.08)] overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant">
+<th class="p-md font-label-md text-label-md text-on-surface-variant whitespace-nowrap">Comercio</th>
+<th class="p-md font-label-md text-label-md text-on-surface-variant whitespace-nowrap">Estado</th>
+<th class="p-md font-label-md text-label-md text-on-surface-variant whitespace-nowrap">Horario</th>
+<th class="p-md font-label-md text-label-md text-on-surface-variant whitespace-nowrap text-right">Pedidos Hoy</th>
+<th class="p-md font-label-md text-label-md text-on-surface-variant whitespace-nowrap text-right">Ventas (Est.)</th>
+<th class="p-md font-label-md text-label-md text-on-surface-variant whitespace-nowrap text-center">Valoración</th>
+<th class="p-md font-label-md text-label-md text-on-surface-variant whitespace-nowrap text-center">Incidencias</th>
+<th class="p-md font-label-md text-label-md text-on-surface-variant whitespace-nowrap text-right">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-lowest transition-colors group">
+<td class="p-md">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-surface-container-high border border-outline flex-shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A detailed, modern minimalist logo for an outdoor cafe named Cafe del Bosque. The logo features a stylized pine tree and a coffee cup, rendered in deep forest greens and earthy browns against a crisp white background. Professional corporate branding style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6AqH63nQiPiTp0kIfUhh0SblFjbbYPiBMqEMOyJOnk79T_p9_-phZ4htYSvzFFvHwAwFz7RZU74IVfDrtu4HP_R_Eo0rNgZTIQChUynVTmQa0M9YoOZxPW-zEB0_SdWd3wAPxdgX93UolJcCrox6nFCOrCDlflxQDp1Cr4Ki07wiVCvWEI1Jp3LkjET3866Op-kNByScP2DjBkqxwHf0k_zemvCdC_i3jPb_48gWQpx37BW5Vjx-Z"/>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Café del Bosque</span>
+<span class="font-body-md text-sm text-outline">Concesión C-102</span>
+</div>
+</div>
+</td>
+<td class="p-md">
+<span class="inline-flex items-center gap-xs px-sm py-1 rounded-full bg-secondary-container/30 text-primary-container border border-secondary-container font-label-sm text-label-sm">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+                                        Activa
+                                    </span>
+</td>
+<td class="p-md font-body-md text-body-md text-on-surface-variant whitespace-nowrap">08:00 - 18:00</td>
+<td class="p-md font-body-md text-body-md text-on-surface text-right">145</td>
+<td class="p-md font-body-md text-body-md text-on-surface text-right">$1,250</td>
+<td class="p-md text-center">
+<div class="flex items-center justify-center text-primary-fixed-dim">
+<span class="material-symbols-outlined fill text-sm">star</span>
+<span class="material-symbols-outlined fill text-sm">star</span>
+<span class="material-symbols-outlined fill text-sm">star</span>
+<span class="material-symbols-outlined fill text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star_half</span>
+<span class="ml-1 font-label-sm text-on-surface-variant">4.2</span>
+</div>
+</td>
+<td class="p-md text-center">
+<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-surface-container text-on-surface font-label-sm">0</span>
+</td>
+<td class="p-md">
+<div class="flex items-center justify-end gap-xs opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="h-8 px-3 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-primary font-label-sm text-label-sm transition-colors" title="Ver ficha">Ver ficha</button>
+<button class="w-8 h-8 rounded text-on-surface-variant hover:bg-surface-container-high transition-colors flex items-center justify-center" title="Más acciones">
+<span class="material-symbols-outlined text-sm">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-lowest transition-colors group bg-error-container/10">
+<td class="p-md">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-surface-container-high border border-outline flex-shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A detailed, modern logo for an outdoor gear rental shop named Aventura Equipos. The logo features a stylized mountain peak and carabiner, rendered in deep forest greens and slate grays against a clean white background. Professional corporate branding style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJL5SEYxEo1lMMumCIX4CrTtYh0jp730-ngQfhN8FPiy3Qgjsk7NIh7ab5u_fz9EKlddC_LEZ9TxGKiqPEEivw1FX8qj7NdWRUWLAxqifs_bJsnZsq6u8ilpodDkY5geK8dpIpp-plYjMrzohygHlkXJpdFjOydyJ4HuYA0FFywF2VknktI4hItWpS6k4tpgI3cYz7l8clAafNCocklJdKN1SIxTZeA9IjNKIhzxGasawJKKPa7VwV"/>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Alquileres Cima</span>
+<span class="font-body-md text-sm text-error">Permiso Vencido (2d)</span>
+</div>
+</div>
+</td>
+<td class="p-md">
+<span class="inline-flex items-center gap-xs px-sm py-1 rounded-full bg-error-container/30 text-error border border-error-container font-label-sm text-label-sm">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+                                        En Revisión
+                                    </span>
+</td>
+<td class="p-md font-body-md text-body-md text-on-surface-variant whitespace-nowrap">07:00 - 16:00</td>
+<td class="p-md font-body-md text-body-md text-on-surface text-right">42</td>
+<td class="p-md font-body-md text-body-md text-on-surface text-right">$840</td>
+<td class="p-md text-center">
+<div class="flex items-center justify-center text-primary-fixed-dim">
+<span class="material-symbols-outlined fill text-sm">star</span>
+<span class="material-symbols-outlined fill text-sm">star</span>
+<span class="material-symbols-outlined fill text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="material-symbols-outlined text-sm">star</span>
+<span class="ml-1 font-label-sm text-on-surface-variant">3.1</span>
+</div>
+</td>
+<td class="p-md text-center">
+<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-error-container text-on-error-container font-label-sm font-bold">2</span>
+</td>
+<td class="p-md">
+<div class="flex items-center justify-end gap-xs">
+<button class="h-8 px-3 rounded bg-surface border border-outline-variant text-on-surface-variant hover:bg-surface-container-low font-label-sm text-label-sm transition-colors shadow-sm">Advertir</button>
+<button class="h-8 px-3 rounded bg-error/10 text-error hover:bg-error/20 font-label-sm text-label-sm transition-colors font-bold">Suspensión</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-lowest transition-colors group">
+<td class="p-md">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-surface-container-high border border-outline flex-shrink-0 overflow-hidden flex items-center justify-center">
+<span class="material-symbols-outlined text-outline">restaurant</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Restaurante El Mirador</span>
+<span class="font-body-md text-sm text-outline">Concesión C-205</span>
+</div>
+</div>
+</td>
+<td class="p-md">
+<span class="inline-flex items-center gap-xs px-sm py-1 rounded-full bg-secondary-container/30 text-primary-container border border-secondary-container font-label-sm text-label-sm">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+                                        Activa
+                                    </span>
+</td>
+<td class="p-md font-body-md text-body-md text-on-surface-variant whitespace-nowrap">11:00 - 20:00</td>
+<td class="p-md font-body-md text-body-md text-on-surface text-right">89</td>
+<td class="p-md font-body-md text-body-md text-on-surface text-right">$3,400</td>
+<td class="p-md text-center">
+<div class="flex items-center justify-center text-primary-fixed-dim">
+<span class="material-symbols-outlined fill text-sm">star</span>
+<span class="material-symbols-outlined fill text-sm">star</span>
+<span class="material-symbols-outlined fill text-sm">star</span>
+<span class="material-symbols-outlined fill text-sm">star</span>
+<span class="material-symbols-outlined fill text-sm">star</span>
+<span class="ml-1 font-label-sm text-on-surface-variant">4.9</span>
+</div>
+</td>
+<td class="p-md text-center">
+<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-surface-container text-on-surface font-label-sm">0</span>
+</td>
+<td class="p-md">
+<div class="flex items-center justify-end gap-xs opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="h-8 px-3 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-primary font-label-sm text-label-sm transition-colors">Ver ficha</button>
+<button class="w-8 h-8 rounded text-on-surface-variant hover:bg-surface-container-high transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="px-md py-sm border-t border-outline-variant bg-surface flex justify-between items-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Mostrando 1-3 de 27 negocios</span>
+<div class="flex gap-xs">
+<button class="w-8 h-8 flex items-center justify-center rounded border border-outline-variant text-on-surface-variant hover:bg-surface-container-low disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-outline-variant text-on-surface-variant hover:bg-surface-container-low">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

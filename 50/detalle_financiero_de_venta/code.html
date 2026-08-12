@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Detalle Financiero de Venta - Park Commerce Finance</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "primary": "#005131",
+                      "surface": "#fbf9f3",
+                      "secondary-container": "#c0edd4",
+                      "surface-variant": "#e4e2dd",
+                      "surface-container-high": "#eae8e2",
+                      "on-error": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "on-secondary-fixed": "#002114",
+                      "on-surface": "#1b1c18",
+                      "on-primary-container": "#99e9b9",
+                      "on-tertiary-container": "#cadbd2",
+                      "on-tertiary-fixed": "#0f1e19",
+                      "surface-container": "#f0eee8",
+                      "inverse-surface": "#30312d",
+                      "on-primary": "#ffffff",
+                      "outline-variant": "#bfc9c0",
+                      "surface-bright": "#fbf9f3",
+                      "tertiary-fixed": "#d5e7dd",
+                      "on-surface-variant": "#3f4942",
+                      "surface-container-highest": "#e4e2dd",
+                      "primary-container": "#176b45",
+                      "on-primary-fixed": "#002111",
+                      "outline": "#6f7a71",
+                      "tertiary": "#3a4942",
+                      "surface-tint": "#186c45",
+                      "on-background": "#1b1c18",
+                      "on-secondary": "#ffffff",
+                      "on-tertiary-fixed-variant": "#3a4a43",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-fixed-variant": "#264e3c",
+                      "primary-fixed-dim": "#88d7a8",
+                      "on-primary-fixed-variant": "#005232",
+                      "inverse-primary": "#88d7a8",
+                      "surface-container-low": "#f5f3ed",
+                      "tertiary-container": "#516159",
+                      "on-tertiary": "#ffffff",
+                      "secondary-fixed-dim": "#a4d0b8",
+                      "error": "#ba1a1a",
+                      "on-error-container": "#93000a",
+                      "secondary-fixed": "#c0edd4",
+                      "on-secondary-container": "#446d59",
+                      "secondary": "#3e6753",
+                      "primary-fixed": "#a4f4c3",
+                      "surface-dim": "#dcdad4",
+                      "inverse-on-surface": "#f3f1eb",
+                      "background": "#fbf9f3",
+                      "tertiary-fixed-dim": "#b9cbc1"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xl": "32px",
+                      "touch-target": "44px",
+                      "sm": "12px",
+                      "base": "4px",
+                      "md": "16px",
+                      "xxl": "48px",
+                      "lg": "24px",
+                      "xs": "8px"
+              },
+              "fontFamily": {
+                      "label-sm": ["Manrope"],
+                      "body-lg": ["Manrope"],
+                      "body-md": ["Manrope"],
+                      "headline-md": ["Manrope"],
+                      "headline-lg-mobile": ["Manrope"],
+                      "headline-lg": ["Manrope"],
+                      "label-md": ["Manrope"],
+                      "display-lg": ["Manrope"]
+              },
+              "fontSize": {
+                      "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "700"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+              }
+            }
+          }
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer utilities {
+            .ambient-shadow-sm { box-shadow: 0px 4px 12px rgba(40, 51, 46, 0.08); }
+            .ambient-shadow-md { box-shadow: 0px 12px 32px rgba(40, 51, 46, 0.12); }
+        }
+    </style>
+</head>
+<body class="bg-surface min-h-screen text-on-surface antialiased flex flex-col font-body-md selection:bg-primary-container selection:text-on-primary-container">
+<!-- Task-Focused Header (Suppresses Global Nav Shell) -->
+<header class="bg-surface-container-lowest border-b border-outline-variant px-lg md:px-xl h-[80px] sticky top-0 z-50 flex justify-between items-center ambient-shadow-sm">
+<div class="flex items-center gap-lg">
+<button aria-label="Volver" class="flex items-center justify-center h-touch-target w-touch-target rounded-full hover:bg-surface-container transition-colors text-on-surface-variant focus:outline-none focus:ring-2 focus:ring-primary">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<div class="flex flex-col md:flex-row md:items-center gap-xs md:gap-md">
+<h1 class="font-headline-md text-headline-md text-on-surface m-0">Transacción #TX-902-BCA</h1>
+<div class="inline-flex items-center gap-xs px-sm py-base rounded-full bg-secondary-container/20 text-secondary font-label-sm text-label-sm border border-secondary-container">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                    Liquidada
+                </div>
+</div>
+</div>
+<button class="h-touch-target px-md rounded-lg border border-outline bg-surface-container-lowest text-on-surface hover:bg-surface-container transition-colors flex items-center gap-xs font-label-md text-label-md focus:outline-none focus:ring-2 focus:ring-primary">
+<span class="material-symbols-outlined text-outline">report</span>
+<span class="hidden sm:inline">Reportar Diferencia</span>
+</button>
+</header>
+<!-- Main Canvas -->
+<main class="w-full max-w-7xl mx-auto px-lg lg:px-xl py-xl grid grid-cols-1 lg:grid-cols-12 gap-lg relative">
+<!-- Left Column: Chronological Flow -->
+<div class="lg:col-span-8 flex flex-col gap-lg">
+<section class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg ambient-shadow-sm">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-xl flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">timeline</span>
+                    Flujo Cronológico
+                </h2>
+<div class="relative pl-md">
+<!-- Vertical Line -->
+<div class="absolute top-0 bottom-0 left-[27px] w-[2px] bg-outline-variant/50"></div>
+<ul class="space-y-xl">
+<!-- Step 1: Order -->
+<li class="relative flex gap-md">
+<div class="relative z-10 flex-shrink-0 w-[40px] h-[40px] rounded-full bg-surface-container border-2 border-outline-variant flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">shopping_cart</span>
+</div>
+<div class="flex-1 pt-base">
+<div class="flex flex-wrap justify-between items-start gap-sm mb-xs">
+<h3 class="font-label-md text-label-md text-on-surface">Orden Generada</h3>
+<time class="font-label-sm text-label-sm text-on-surface-variant">14 Oct, 09:23 AM</time>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Concesionario "EcoTours C.A." registró la venta por servicios guiados.</p>
+<div class="mt-sm bg-surface-container-low rounded p-sm border border-outline-variant/30 flex items-center gap-md">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Ref. Interna:</span>
+<span class="font-body-md text-body-md text-on-surface">ORD-2023-10-14-001</span>
+</div>
+</div>
+</li>
+<!-- Step 2: Payment -->
+<li class="relative flex gap-md">
+<div class="relative z-10 flex-shrink-0 w-[40px] h-[40px] rounded-full bg-secondary-container border-2 border-secondary text-on-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">credit_score</span>
+</div>
+<div class="flex-1 pt-base">
+<div class="flex flex-wrap justify-between items-start gap-sm mb-xs">
+<h3 class="font-label-md text-label-md text-on-surface">Pago Procesado Exitosamente</h3>
+<time class="font-label-sm text-label-sm text-on-surface-variant">14 Oct, 09:25 AM</time>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Aprobación recibida de la pasarela de pagos.</p>
+<div class="mt-sm grid grid-cols-2 gap-sm">
+<div class="bg-surface-container-low rounded p-sm border border-outline-variant/30">
+<div class="font-label-sm text-label-sm text-on-surface-variant mb-base">Método</div>
+<div class="font-body-md text-body-md text-on-surface flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">credit_card</span> Tarjeta de Crédito (**** 4592)
+                                        </div>
+</div>
+<div class="bg-surface-container-low rounded p-sm border border-outline-variant/30">
+<div class="font-label-sm text-label-sm text-on-surface-variant mb-base">Monto Transado</div>
+<div class="font-label-md text-label-md text-primary">Bs. 4,500.00</div>
+</div>
+</div>
+</div>
+</li>
+<!-- Step 3: Invoice -->
+<li class="relative flex gap-md">
+<div class="relative z-10 flex-shrink-0 w-[40px] h-[40px] rounded-full bg-surface-container border-2 border-outline-variant flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">receipt_long</span>
+</div>
+<div class="flex-1 pt-base">
+<div class="flex flex-wrap justify-between items-start gap-sm mb-xs">
+<h3 class="font-label-md text-label-md text-on-surface">Emisión de Factura Fiscal</h3>
+<time class="font-label-sm text-label-sm text-on-surface-variant">14 Oct, 09:26 AM</time>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Documento fiscal generado e integrado con el sistema tributario central.</p>
+<button class="mt-sm h-touch-target px-md rounded border border-outline-variant text-primary hover:bg-surface-container transition-colors inline-flex items-center gap-xs font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px]">download</span> Descargar PDF
+                                </button>
+</div>
+</li>
+<!-- Step 4: Commission -->
+<li class="relative flex gap-md">
+<div class="relative z-10 flex-shrink-0 w-[40px] h-[40px] rounded-full bg-primary-container/10 border-2 border-primary text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">percent</span>
+</div>
+<div class="flex-1 pt-base">
+<div class="flex flex-wrap justify-between items-start gap-sm mb-xs">
+<h3 class="font-label-md text-label-md text-on-surface">Cálculo de Canon Comercial</h3>
+<time class="font-label-sm text-label-sm text-on-surface-variant">14 Oct, 23:59 PM</time>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Aplicación de la tasa estructurada para concesionarios Categoría B (Servicios Guiados).</p>
+<div class="mt-sm bg-surface-container-low rounded p-md border border-outline-variant/30 flex justify-between items-center">
+<div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Tasa Aplicada</div>
+<div class="font-body-md text-body-md text-on-surface">8.5% sobre Base Imponible</div>
+</div>
+<div class="text-right">
+<div class="font-label-sm text-label-sm text-on-surface-variant">Retención</div>
+<div class="font-label-md text-label-md text-error">- Bs. 382.50</div>
+</div>
+</div>
+</div>
+</li>
+<!-- Step 5: Settlement -->
+<li class="relative flex gap-md">
+<div class="relative z-10 flex-shrink-0 w-[40px] h-[40px] rounded-full bg-primary text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+</div>
+<div class="flex-1 pt-base">
+<div class="flex flex-wrap justify-between items-start gap-sm mb-xs">
+<h3 class="font-label-md text-label-md text-on-surface">Liquidación Final</h3>
+<time class="font-label-sm text-label-sm text-on-surface-variant">15 Oct, 08:15 AM</time>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Fondos transferidos a la cuenta recaudadora principal.</p>
+<div class="mt-sm bg-primary-container/5 rounded p-sm border border-primary/20 flex items-center gap-md">
+<span class="material-symbols-outlined text-primary">verified</span>
+<span class="font-label-md text-label-md text-primary">Operación Cerrada</span>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</section>
+</div>
+<!-- Right Column: Breakdowns & Metadata -->
+<div class="lg:col-span-4 flex flex-col gap-lg">
+<!-- Financial Summary -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg ambient-shadow-sm">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-md">Desglose Financiero</h2>
+<div class="space-y-sm mb-md pb-md border-b border-outline-variant/50">
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface-variant">Subtotal</span>
+<span class="font-body-md text-body-md text-on-surface">Bs. 3,879.31</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface-variant">Impuestos (16%)</span>
+<span class="font-body-md text-body-md text-on-surface">Bs. 620.69</span>
+</div>
+<div class="flex justify-between items-center pt-xs">
+<span class="font-label-md text-label-md text-on-surface">Total Bruto Pagado</span>
+<span class="font-label-md text-label-md text-on-surface">Bs. 4,500.00</span>
+</div>
+</div>
+<div class="space-y-sm mb-lg pb-md border-b border-outline-variant/50">
+<div class="flex justify-between items-center text-error">
+<span class="font-body-md text-body-md flex items-center gap-xs">
+                            Canon Parque (8.5%)
+                            <span class="material-symbols-outlined text-[16px] cursor-help" title="Calculado sobre el subtotal base">info</span>
+</span>
+<span class="font-body-md text-body-md">- Bs. 329.74</span>
+</div>
+<div class="flex justify-between items-center text-error">
+<span class="font-body-md text-body-md">Comisión Pasarela (1.5%)</span>
+<span class="font-body-md text-body-md">- Bs. 67.50</span>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-lg p-md text-center">
+<div class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-xs">Neto Liquidado a Cuenta</div>
+<div class="font-headline-lg text-headline-lg text-primary">Bs. 4,102.76</div>
+</div>
+</section>
+<!-- Bank References -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg ambient-shadow-sm">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-md">Referencias Bancarias</h2>
+<ul class="space-y-md">
+<li>
+<div class="font-label-sm text-label-sm text-on-surface-variant mb-xs">Banco Origen (Cliente)</div>
+<div class="font-body-md text-body-md text-on-surface flex items-center gap-sm">
+<div class="w-[24px] h-[24px] rounded bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px] text-outline">account_balance_wallet</span>
+</div>
+                            Banco Mercantil C.A.
+                        </div>
+</li>
+<li>
+<div class="font-label-sm text-label-sm text-on-surface-variant mb-xs">Banco Destino (Recaudadora)</div>
+<div class="font-body-md text-body-md text-on-surface flex items-center gap-sm">
+<div class="w-[24px] h-[24px] rounded bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined text-[16px]">account_balance</span>
+</div>
+                            Banco de Venezuela, Cuenta Corriente terminada en 8812
+                        </div>
+</li>
+<li>
+<div class="font-label-sm text-label-sm text-on-surface-variant mb-xs">Código de Confirmación Red</div>
+<div class="font-body-md text-body-md font-mono text-on-surface bg-surface-variant/30 px-sm py-base rounded inline-block">
+                            REF-20231015-88A912F
+                        </div>
+</li>
+</ul>
+</section>
+<!-- Audit Logs -->
+<section class="bg-surface border border-outline-variant/50 rounded-lg p-lg">
+<h2 class="font-label-md text-label-md text-on-surface-variant mb-md flex items-center gap-xs uppercase tracking-wider">
+<span class="material-symbols-outlined text-[16px]">admin_panel_settings</span>
+                    Metadata de Auditoría
+                </h2>
+<div class="grid grid-cols-2 gap-sm text-left">
+<div>
+<div class="font-label-sm text-label-sm text-outline">ID Sistema</div>
+<div class="font-body-md text-body-md text-on-surface-variant text-[13px] truncate" title="5f8d0a9b-4e3c-4b2a-8d1e-9f0b1c2d3e4f">5f8d0a9b...3e4f</div>
+</div>
+<div>
+<div class="font-label-sm text-label-sm text-outline">Usuario Operador</div>
+<div class="font-body-md text-body-md text-on-surface-variant text-[13px]">SYS_API_AUTO</div>
+</div>
+<div>
+<div class="font-label-sm text-label-sm text-outline">IP Origen</div>
+<div class="font-body-md text-body-md text-on-surface-variant text-[13px]">192.168.10.45</div>
+</div>
+<div>
+<div class="font-label-sm text-label-sm text-outline">Última Modificación</div>
+<div class="font-body-md text-body-md text-on-surface-variant text-[13px]">15 Oct, 08:15:22</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Zonas y puntos - Parques Nacionales Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-fixed-dim": "#b9cbc1",
+                      "on-primary-container": "#99e9b9",
+                      "primary-container": "#176b45",
+                      "surface-dim": "#dcdad4",
+                      "on-surface-variant": "#3f4942",
+                      "outline-variant": "#bfc9c0",
+                      "inverse-surface": "#30312d",
+                      "surface-container": "#f0eee8",
+                      "on-primary-fixed": "#002111",
+                      "on-primary-fixed-variant": "#005232",
+                      "inverse-on-surface": "#f3f1eb",
+                      "tertiary-container": "#516159",
+                      "primary-fixed-dim": "#88d7a8",
+                      "on-secondary-fixed": "#002114",
+                      "on-error-container": "#93000a",
+                      "surface-tint": "#186c45",
+                      "on-tertiary": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "outline": "#6f7a71",
+                      "on-tertiary-container": "#cadbd2",
+                      "surface-container-low": "#f5f3ed",
+                      "secondary-container": "#c0edd4",
+                      "tertiary-fixed": "#d5e7dd",
+                      "error-container": "#ffdad6",
+                      "primary": "#005131",
+                      "tertiary": "#3a4942",
+                      "surface-container-high": "#eae8e2",
+                      "on-tertiary-fixed-variant": "#3a4a43",
+                      "on-secondary": "#ffffff",
+                      "surface-container-highest": "#e4e2dd",
+                      "on-secondary-container": "#446d59",
+                      "surface": "#fbf9f3",
+                      "surface-variant": "#e4e2dd",
+                      "on-background": "#1b1c18",
+                      "secondary-fixed": "#c0edd4",
+                      "background": "#fbf9f3",
+                      "inverse-primary": "#88d7a8",
+                      "surface-bright": "#fbf9f3",
+                      "on-tertiary-fixed": "#0f1e19",
+                      "secondary": "#3e6753",
+                      "primary-fixed": "#a4f4c3",
+                      "error": "#ba1a1a",
+                      "on-primary": "#ffffff",
+                      "secondary-fixed-dim": "#a4d0b8",
+                      "on-surface": "#1b1c18",
+                      "on-secondary-fixed-variant": "#264e3c",
+                      "on-error": "#ffffff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xl": "32px",
+                      "xs": "8px",
+                      "base": "4px",
+                      "lg": "24px",
+                      "xxl": "48px",
+                      "touch-target": "44px",
+                      "sm": "12px",
+                      "md": "16px"
+              },
+              "fontFamily": {
+                      "display-lg": ["Manrope"],
+                      "label-sm": ["Manrope"],
+                      "headline-lg-mobile": ["Manrope"],
+                      "headline-md": ["Manrope"],
+                      "body-lg": ["Manrope"],
+                      "label-md": ["Manrope"],
+                      "body-md": ["Manrope"],
+                      "headline-lg": ["Manrope"]
+              },
+              "fontSize": {
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "700"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; background-color: #fbf9f3; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .filled-icon { font-variation-settings: 'FILL' 1; }
+    </style>
+</head>
+<body class="bg-background text-on-background flex min-h-screen">
+<!-- SideNavBar -->
+<aside class="bg-surface text-primary font-headline-md text-headline-md h-screen w-64 fixed left-0 top-0 overflow-y-auto border-r border-outline-variant flex flex-col py-lg px-md z-50">
+<div class="mb-lg px-md">
+<h1 class="font-headline-lg text-headline-lg font-bold text-primary">Gestión de Parques</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Portal Administrativo</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors duration-200 text-on-surface-variant font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">Inicio</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors duration-200 text-primary font-bold border-r-4 border-primary bg-secondary-container/20 opacity-80" href="#">
+<span class="material-symbols-outlined filled-icon" data-icon="map">map</span>
+<span class="font-label-md text-label-md">Zonas y puntos</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors duration-200 text-on-surface-variant font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+<span class="font-label-md text-label-md">Negocios</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors duration-200 text-on-surface-variant font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="settings_applications">settings_applications</span>
+<span class="font-label-md text-label-md">Operación</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors duration-200 text-on-surface-variant font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="schedule">schedule</span>
+<span class="font-label-md text-label-md">Horarios</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors duration-200 text-on-surface-variant font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="report_problem">report_problem</span>
+<span class="font-label-md text-label-md">Incidencias</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors duration-200 text-on-surface-variant font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="verified">verified</span>
+<span class="font-label-md text-label-md">Inspecciones</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors duration-200 text-on-surface-variant font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-label-md text-label-md">Desempeño</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors duration-200 text-on-surface-variant font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="badge">badge</span>
+<span class="font-label-md text-label-md">Usuarios locales</span>
+</a>
+</nav>
+<div class="mt-auto pt-lg">
+<button class="w-full bg-primary-container text-on-primary-container font-label-md text-label-md py-sm px-md rounded-lg min-h-[44px] flex items-center justify-center gap-sm mb-lg">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                Nueva Inspección
+            </button>
+<div class="border-t border-outline-variant pt-sm">
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors duration-200 text-on-surface-variant font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-md text-label-md">Ajustes</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors duration-200 text-on-surface-variant font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-label-md text-label-md">Cerrar sesión</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-64 flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-surface text-primary font-headline-md text-headline-md docked full-width top-0 sticky z-40 border-b border-outline-variant shadow-sm flex justify-between items-center h-[72px] px-lg">
+<div class="flex items-center gap-md">
+<h2 class="font-headline-md text-headline-md font-extrabold text-primary">Parques Nacionales Admin</h2>
+</div>
+<div class="flex items-center gap-lg">
+<button class="bg-secondary text-on-secondary font-label-md text-label-md px-md py-sm rounded-lg min-h-[44px] flex items-center gap-sm">
+                    Descargar Reporte
+                </button>
+<div class="flex items-center gap-sm">
+<button class="w-[44px] h-[44px] flex items-center justify-center rounded-lg hover:bg-surface-container-low transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="w-[44px] h-[44px] flex items-center justify-center rounded-lg hover:bg-surface-container-low transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="flex-1 p-lg bg-surface-container-lowest overflow-y-auto">
+<div class="max-w-7xl mx-auto space-y-lg">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-md mb-xl">
+<div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface">Zonas y Puntos Operativos</h3>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-sm">Vista esquemática y detalle de disponibilidad por sector del parque.</p>
+</div>
+<div class="flex items-center gap-md">
+<div class="flex gap-sm">
+<div class="flex items-center gap-xs"><span class="w-3 h-3 rounded-full bg-primary-container"></span><span class="font-label-sm text-label-sm">Ocupado</span></div>
+<div class="flex items-center gap-xs"><span class="w-3 h-3 rounded-full bg-tertiary-container"></span><span class="font-label-sm text-label-sm">Disponible</span></div>
+<div class="flex items-center gap-xs"><span class="w-3 h-3 rounded-full bg-error-container"></span><span class="font-label-sm text-label-sm">Mantenimiento</span></div>
+</div>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg">
+<!-- Map Card (Span 5) -->
+<div class="lg:col-span-5 bg-surface rounded-xl border border-outline-variant p-md flex flex-col shadow-[0px_4px_12px_rgba(40,51,46,0.08)]">
+<div class="flex justify-between items-center mb-md">
+<h4 class="font-headline-md text-headline-md text-on-surface">Mapa Esquemático</h4>
+<button class="w-[44px] h-[44px] flex items-center justify-center rounded-lg hover:bg-surface-container-low text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="fullscreen">fullscreen</span>
+</button>
+</div>
+<div class="flex-1 relative rounded-lg overflow-hidden min-h-[400px] border border-outline-variant bg-surface-container">
+<!-- Placeholder Map using img -->
+<img class="absolute inset-0 w-full h-full object-cover opacity-80" data-alt="A highly detailed schematic map of a national park with topographical lines. Clean, modern vector style with earthy greens and subtle terrain shading. The map is overlaid with circular status pins indicating active, available, and maintenance zones. The aesthetic is professional, clear, and well-organized, suitable for an administrative dashboard." data-location="Parque Nacional Henri Pittier, Venezuela" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDThwE6SyOaddAnE4gbTT-sJlL-AeMdEteodykxkj-uPvt96t2N_ayDDOXdGDoqmYQ_ByZZQbvP-Bj9gyNYIadWHsxn5nq7noXmp55Y5tss-ZeA_IzEbsMeYK89nFG3o1X-GI9e7w_X2IOgmt1s2YGnmHii3pSWLP0JKZwrn7o_-UNKe_wIctoaZCuWaNJrLqY3znv_ZCYhXwXKW0pawP35CkPPriBJekJsKgO2IzIW84NhoYYGaNA_"/>
+<!-- Interactive Map Overlays (Simulated Pins) -->
+<div class="absolute top-[30%] left-[40%] flex flex-col items-center group cursor-pointer">
+<span class="w-4 h-4 bg-primary-container rounded-full border-2 border-surface shadow-sm"></span>
+<div class="hidden group-hover:block absolute top-6 bg-surface p-xs rounded shadow-md border border-outline-variant whitespace-nowrap z-10">
+<p class="font-label-sm text-label-sm">Zona Norte - P1</p>
+</div>
+</div>
+<div class="absolute top-[60%] left-[20%] flex flex-col items-center group cursor-pointer">
+<span class="w-4 h-4 bg-tertiary-container rounded-full border-2 border-surface shadow-sm"></span>
+</div>
+<div class="absolute top-[50%] left-[70%] flex flex-col items-center group cursor-pointer">
+<span class="w-4 h-4 bg-error-container rounded-full border-2 border-surface shadow-sm"></span>
+</div>
+</div>
+</div>
+<!-- Details Table Card (Span 7) -->
+<div class="lg:col-span-7 bg-surface rounded-xl border border-outline-variant shadow-[0px_4px_12px_rgba(40,51,46,0.08)] flex flex-col overflow-hidden">
+<div class="p-lg border-b border-outline-variant flex justify-between items-center bg-surface-container-low">
+<h4 class="font-headline-md text-headline-md text-on-surface">Registro de Puntos</h4>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="pl-xl pr-md py-sm rounded-lg border border-outline-variant bg-surface focus:border-primary focus:ring-1 focus:ring-primary font-body-md text-body-md h-[44px] w-64" placeholder="Buscar punto o zona..." type="text"/>
+</div>
+</div>
+<div class="overflow-x-auto flex-1">
+<table class="w-full text-left border-collapse min-w-[600px]">
+<thead>
+<tr class="bg-surface-container border-b border-outline-variant">
+<th class="p-md font-label-md text-label-md text-on-surface-variant font-bold">Zona / Punto</th>
+<th class="p-md font-label-md text-label-md text-on-surface-variant font-bold">Estado</th>
+<th class="p-md font-label-md text-label-md text-on-surface-variant font-bold">Asignación</th>
+<th class="p-md font-label-md text-label-md text-on-surface-variant font-bold">Categoría</th>
+<th class="p-md font-label-md text-label-md text-on-surface-variant font-bold text-right">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant bg-surface">
+<!-- Row 1: Ocupado -->
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="p-md">
+<div class="font-label-md text-label-md text-on-surface">Entrada Principal</div>
+<div class="font-body-sm text-on-surface-variant">Punto A-01</div>
+</td>
+<td class="p-md">
+<span class="inline-flex items-center px-2 py-1 rounded-full bg-primary-container/10 text-primary font-label-sm text-label-sm border border-primary-container/20">
+                                                Ocupado
+                                            </span>
+</td>
+<td class="p-md">
+<div class="font-body-md text-body-md text-on-surface">Café del Sendero C.A.</div>
+<div class="font-body-sm text-on-surface-variant">Vigencia: 2025</div>
+</td>
+<td class="p-md font-body-md text-body-md text-on-surface">Alimentos</td>
+<td class="p-md text-right">
+<button class="h-[44px] px-sm rounded border border-outline-variant text-on-surface-variant hover:bg-surface-container transition-colors font-label-md text-label-md">
+                                                Actualizar
+                                            </button>
+</td>
+</tr>
+<!-- Row 2: Disponible (Needs Concession) -->
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="p-md">
+<div class="font-label-md text-label-md text-on-surface">Mirador Central</div>
+<div class="font-body-sm text-on-surface-variant">Punto B-04</div>
+</td>
+<td class="p-md">
+<span class="inline-flex items-center px-2 py-1 rounded-full bg-tertiary-container/10 text-tertiary font-label-sm text-label-sm border border-tertiary-container/20">
+                                                Disponible
+                                            </span>
+</td>
+<td class="p-md font-body-md text-body-md text-on-surface-variant italic">
+                                            Sin asignar
+                                        </td>
+<td class="p-md font-body-md text-body-md text-on-surface">Mixto</td>
+<td class="p-md text-right">
+<button class="h-[44px] px-md rounded bg-secondary-container text-on-secondary-container hover:bg-secondary-fixed-dim transition-colors font-label-md text-label-md flex items-center gap-xs ml-auto">
+<span class="material-symbols-outlined text-[18px]" data-icon="forward_to_inbox">forward_to_inbox</span>
+                                                Solicitar a Concesiones
+                                            </button>
+</td>
+</tr>
+<!-- Row 3: Mantenimiento -->
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="p-md">
+<div class="font-label-md text-label-md text-on-surface">Área de Camping Sur</div>
+<div class="font-body-sm text-on-surface-variant">Punto C-12</div>
+</td>
+<td class="p-md">
+<span class="inline-flex items-center px-2 py-1 rounded-full bg-error-container/20 text-on-error-container font-label-sm text-label-sm border border-error-container/40">
+                                                Mantenimiento
+                                            </span>
+</td>
+<td class="p-md">
+<div class="font-body-md text-body-md text-on-surface">Eco Tienda S.R.L</div>
+<div class="font-body-sm text-error">Suspendido temp.</div>
+</td>
+<td class="p-md font-body-md text-body-md text-on-surface">Servicios</td>
+<td class="p-md text-right">
+<button class="h-[44px] px-sm rounded border border-outline-variant text-on-surface-variant hover:bg-surface-container transition-colors font-label-md text-label-md">
+                                                Revisar Reporte
+                                            </button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

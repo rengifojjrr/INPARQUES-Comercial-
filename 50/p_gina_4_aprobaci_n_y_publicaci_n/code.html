@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aprobación y Publicación - Expedientes</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#bfc9c0",
+                        "on-secondary-container": "#446d59",
+                        "on-primary-fixed-variant": "#005232",
+                        "surface-container-high": "#eae8e2",
+                        "tertiary-fixed": "#d5e7dd",
+                        "secondary": "#3e6753",
+                        "background": "#fbf9f3",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#a4f4c3",
+                        "on-error-container": "#93000a",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#516159",
+                        "surface-container-highest": "#e4e2dd",
+                        "primary": "#005131",
+                        "on-surface-variant": "#3f4942",
+                        "surface-tint": "#186c45",
+                        "inverse-on-surface": "#f3f1eb",
+                        "surface-container-low": "#f5f3ed",
+                        "surface-dim": "#dcdad4",
+                        "on-background": "#1b1c18",
+                        "surface-container": "#f0eee8",
+                        "secondary-container": "#c0edd4",
+                        "on-secondary-fixed-variant": "#264e3c",
+                        "inverse-surface": "#30312d",
+                        "primary-container": "#176b45",
+                        "primary-fixed-dim": "#88d7a8",
+                        "on-primary-container": "#99e9b9",
+                        "inverse-primary": "#88d7a8",
+                        "secondary-fixed-dim": "#a4d0b8",
+                        "on-tertiary-fixed": "#0f1e19",
+                        "error": "#ba1a1a",
+                        "error-container": "#ffdad6",
+                        "on-surface": "#1b1c18",
+                        "tertiary": "#3a4942",
+                        "on-primary-fixed": "#002111",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#b9cbc1",
+                        "outline": "#6f7a71",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed": "#002114",
+                        "surface-variant": "#e4e2dd",
+                        "secondary-fixed": "#c0edd4",
+                        "on-tertiary-fixed-variant": "#3a4a43",
+                        "surface": "#fbf9f3",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-container": "#cadbd2",
+                        "surface-bright": "#fbf9f3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "xs": "8px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "xxl": "48px",
+                        "touch-target": "44px",
+                        "sm": "12px",
+                        "xl": "32px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "label-sm": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "display-lg": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen flex antialiased">
+<!-- SideNavBar -->
+<nav class="hidden md:flex fixed left-0 top-0 h-full flex-col py-md px-sm w-64 z-40 bg-surface-container border-r border-outline-variant">
+<div class="mb-lg px-xs">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">forest</span>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Gestión Comercial</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Administración Central</p>
+</div>
+</div>
+<button class="mt-lg w-full min-h-touch-target bg-primary-container text-on-primary-container font-label-md text-label-md rounded-lg flex items-center justify-center gap-xs hover:opacity-90 transition-opacity active:opacity-80">
+<span class="material-symbols-outlined">add</span>
+                Nueva Concesión
+            </button>
+</div>
+<ul class="flex-1 space-y-xs overflow-y-auto">
+<li>
+<a class="flex items-center gap-sm px-sm py-xs min-h-touch-target font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all rounded-lg active:opacity-80" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                    Resumen Comercial
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-sm py-xs min-h-touch-target font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all rounded-lg active:opacity-80" href="#">
+<span class="material-symbols-outlined">description</span>
+                    Solicitudes
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-sm py-xs min-h-touch-target font-label-md text-label-md bg-primary-container text-on-primary-container font-bold rounded-lg active:opacity-80" href="#">
+<span class="material-symbols-outlined">folder_open</span>
+                    Expedientes
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-sm py-xs min-h-touch-target font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all rounded-lg active:opacity-80" href="#">
+<span class="material-symbols-outlined">assignment_turned_in</span>
+                    Contratos y Permisos
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-sm py-xs min-h-touch-target font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all rounded-lg active:opacity-80" href="#">
+<span class="material-symbols-outlined">map</span>
+                    Puntos Comerciales
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-sm py-xs min-h-touch-target font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all rounded-lg active:opacity-80" href="#">
+<span class="material-symbols-outlined">monetization_on</span>
+                    Condiciones Económicas
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-sm py-xs min-h-touch-target font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all rounded-lg active:opacity-80" href="#">
+<span class="material-symbols-outlined">history</span>
+                    Prórrogas
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-sm py-xs min-h-touch-target font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all rounded-lg active:opacity-80" href="#">
+<span class="material-symbols-outlined">verified_user</span>
+                    Inspecciones
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-sm py-xs min-h-touch-target font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all rounded-lg active:opacity-80" href="#">
+<span class="material-symbols-outlined">analytics</span>
+                    Reportes
+                </a>
+</li>
+</ul>
+<div class="mt-auto pt-sm border-t border-outline-variant space-y-xs">
+<a class="flex items-center gap-sm px-sm py-xs min-h-touch-target font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all rounded-lg active:opacity-80" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Configuración
+            </a>
+<a class="flex items-center gap-sm px-sm py-xs min-h-touch-target font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all rounded-lg active:opacity-80" href="#">
+<span class="material-symbols-outlined">logout</span>
+                Cerrar Sesión
+            </a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col md:ml-64 w-full">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-50 flex items-center justify-between w-full px-lg h-touch-target bg-surface border-b border-outline-variant">
+<div class="flex items-center gap-md">
+<span class="font-headline-md text-headline-md text-primary font-bold md:hidden">Parques Nacionales | Dirección Comercial</span>
+<span class="font-label-md text-label-md font-bold text-primary hidden md:inline">Parques Nacionales | Dirección Comercial</span>
+</div>
+<div class="flex items-center gap-sm text-primary">
+<button class="w-10 h-10 flex items-center justify-center hover:bg-surface-container-low transition-colors rounded-full cursor-pointer active:scale-95 duration-150">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center hover:bg-surface-container-low transition-colors rounded-full cursor-pointer active:scale-95 duration-150">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center hover:bg-surface-container-low transition-colors rounded-full cursor-pointer active:scale-95 duration-150">
+<span class="material-symbols-outlined">help</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center hover:bg-surface-container-low transition-colors rounded-full cursor-pointer active:scale-95 duration-150">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-primary-container overflow-hidden ml-xs">
+<img alt="Administrator Profile" class="w-full h-full object-cover" data-alt="A highly detailed close-up portrait of a professional administrative worker with a friendly demeanor, wearing a clean, modern uniform. The background is slightly out of focus, showing a bright, well-lit modern office space with subtle earthy green accents, maintaining a professional and approachable mood suitable for a corporate environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwylhQIbLKWtur4rbwP1WSRvRyWhDpjPL46yQw_C3f_qKfEuUEGZn8jVi7V2YYQczvFvKEwTfCsoIBisU0KkICiva-EjXlWusu1-GUwFh-xRKDtdwN0hvqYIl73rkrPd2pbZ9l1KtVH4M1AwI27vEJi5Q_ecwbVWQ8oYyb82U00CUby2cyk4cjSibzUstIeP7VqxKLiHMkwuj-61dg6ZqGOZisVroTIWjIYSDKhL4qDkKNqos9BVSi"/>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<main class="flex-1 p-md md:p-xl overflow-y-auto bg-background">
+<div class="max-w-4xl mx-auto space-y-lg">
+<div class="flex justify-between items-end mb-xl">
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant mb-xs">Expediente #EXP-2023-0842</p>
+<h1 class="font-display-lg text-display-lg text-on-surface">Aprobación Final</h1>
+</div>
+<span class="inline-flex items-center px-sm py-xs rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px] mr-xs">verified</span>
+                        Listo para Firma
+                    </span>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-lg">
+<!-- Resumen del Contrato -->
+<div class="md:col-span-8 bg-surface-container-lowest border border-outline-variant rounded-lg p-lg shadow-[0px_4px_12px_rgba(40,51,46,0.08)]">
+<div class="flex items-center gap-sm border-b border-outline-variant pb-sm mb-md">
+<span class="material-symbols-outlined text-primary">description</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Detalles del Contrato</h3>
+</div>
+<div class="grid grid-cols-2 gap-md">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Concesionario</p>
+<p class="font-body-md text-body-md text-on-surface font-semibold">EcoTours Roraima C.A.</p>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Ubicación</p>
+<p class="font-body-md text-body-md text-on-surface">Parque Nacional Canaima, Sector Oriental</p>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Tipo de Actividad</p>
+<p class="font-body-md text-body-md text-on-surface">Servicios de Guía y Campamento</p>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Vigencia del Contrato</p>
+<p class="font-body-md text-body-md text-on-surface">5 Años (Renovable)</p>
+</div>
+</div>
+</div>
+<!-- Condiciones de Canon -->
+<div class="md:col-span-4 bg-primary-container text-on-primary-container rounded-lg p-lg flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-sm mb-md">
+<span class="material-symbols-outlined">monetization_on</span>
+<h3 class="font-headline-md text-headline-md">Canon Anual</h3>
+</div>
+<p class="font-display-lg text-display-lg font-bold">120 PTR</p>
+<p class="font-body-sm text-body-sm mt-xs opacity-90">Ajustable según índice inflacionario establecido en cláusula 4.</p>
+</div>
+<div class="mt-md pt-sm border-t border-on-primary-container/20">
+<p class="font-label-sm text-label-sm">Frecuencia de Pago: Semestral</p>
+</div>
+</div>
+<!-- Cadena de Aprobación -->
+<div class="md:col-span-12 bg-surface-container-lowest border border-outline-variant rounded-lg p-lg shadow-[0px_4px_12px_rgba(40,51,46,0.08)]">
+<div class="flex items-center gap-sm mb-lg">
+<span class="material-symbols-outlined text-primary">rule</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Aprobadores Previos</h3>
+</div>
+<div class="relative">
+<div class="absolute left-[19px] top-4 bottom-4 w-[2px] bg-outline-variant"></div>
+<ul class="space-y-md relative z-10">
+<li class="flex items-start gap-md">
+<div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0 border-2 border-surface-container-lowest">
+<span class="material-symbols-outlined text-[20px]">check</span>
+</div>
+<div class="bg-surface-container-low rounded-lg p-sm w-full border border-outline-variant/50">
+<div class="flex justify-between items-center mb-xs">
+<p class="font-label-md text-label-md text-on-surface font-semibold">Revisión Técnica</p>
+<span class="font-label-sm text-label-sm text-on-surface-variant">12/10/2023</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Aprobado por: Ing. Carlos Medina (Gestión Ambiental)</p>
+</div>
+</li>
+<li class="flex items-start gap-md">
+<div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0 border-2 border-surface-container-lowest">
+<span class="material-symbols-outlined text-[20px]">check</span>
+</div>
+<div class="bg-surface-container-low rounded-lg p-sm w-full border border-outline-variant/50">
+<div class="flex justify-between items-center mb-xs">
+<p class="font-label-md text-label-md text-on-surface font-semibold">Revisión Legal</p>
+<span class="font-label-sm text-label-sm text-on-surface-variant">14/10/2023</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Aprobado por: Abg. Laura Silva (Consultoría Jurídica)</p>
+</div>
+</li>
+<li class="flex items-start gap-md">
+<div class="w-10 h-10 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center shrink-0 border-2 border-surface-container-lowest">
+<span class="material-symbols-outlined text-[20px]">edit_document</span>
+</div>
+<div class="bg-surface-container-highest rounded-lg p-sm w-full border border-primary border-l-4">
+<div class="flex justify-between items-center mb-xs">
+<p class="font-label-md text-label-md text-on-surface font-semibold">Firma Director General</p>
+<span class="font-label-sm text-label-sm text-primary">Pendiente</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Requiere su firma electrónica para proceder con la publicación.</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<!-- Panel de Confirmación de Alta Seguridad -->
+<div class="md:col-span-12 bg-surface-container border-2 border-error-container rounded-lg p-lg relative overflow-hidden">
+<div class="absolute top-0 right-0 p-lg opacity-10 pointer-events-none">
+<span class="material-symbols-outlined text-[120px] text-error">security</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-sm">Confirmación de Aprobación</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-lg max-w-2xl">
+                            Al confirmar esta acción, el contrato será firmado electrónicamente, se publicará en el registro oficial y se generarán las tareas automáticas de notificación al concesionario e inicio del cobro del canon.
+                        </p>
+<div class="flex flex-col md:flex-row items-center gap-md bg-surface-container-lowest p-md rounded-lg border border-outline-variant">
+<div class="flex-1 w-full">
+<label class="block font-label-md text-label-md text-on-surface mb-xs" for="security-pin">PIN de Seguridad Institucional</label>
+<input class="w-full h-[44px] px-sm bg-surface rounded border border-outline-variant focus:border-2 focus:border-primary focus:outline-none font-body-md text-on-surface tracking-widest text-center" id="security-pin" placeholder="••••••" type="password"/>
+</div>
+<button class="w-full md:w-auto h-[44px] px-xl bg-primary text-on-primary font-label-md text-label-md rounded flex items-center justify-center gap-sm hover:opacity-90 transition-opacity active:scale-95 shadow-[0px_4px_12px_rgba(40,51,46,0.08)] whitespace-nowrap">
+<span class="material-symbols-outlined">fingerprint</span>
+                                Firmar y Publicar
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

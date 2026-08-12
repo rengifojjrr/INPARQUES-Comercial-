@@ -1,0 +1,430 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Portal de Concesionarios - Dashboard</title>
+<!-- Google Fonts: Manrope -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-variant": "#e4e2dd",
+                        "on-tertiary": "#ffffff",
+                        "inverse-primary": "#88d7a8",
+                        "on-tertiary-fixed-variant": "#3a4a43",
+                        "surface-container-high": "#eae8e2",
+                        "tertiary-fixed": "#d5e7dd",
+                        "inverse-on-surface": "#f3f1eb",
+                        "background": "#fbf9f3",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#6f7a71",
+                        "primary": "#005131",
+                        "outline-variant": "#bfc9c0",
+                        "error": "#ba1a1a",
+                        "secondary-fixed": "#c0edd4",
+                        "surface-container": "#f0eee8",
+                        "primary-container": "#176b45",
+                        "on-secondary-fixed": "#002114",
+                        "on-tertiary-fixed": "#0f1e19",
+                        "surface-tint": "#186c45",
+                        "on-background": "#1b1c18",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#b9cbc1",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#516159",
+                        "on-secondary-fixed-variant": "#264e3c",
+                        "secondary-fixed-dim": "#a4d0b8",
+                        "surface-container-highest": "#e4e2dd",
+                        "on-primary-container": "#99e9b9",
+                        "on-error": "#ffffff",
+                        "on-surface-variant": "#3f4942",
+                        "primary-fixed": "#a4f4c3",
+                        "surface-dim": "#dcdad4",
+                        "on-primary-fixed": "#002111",
+                        "surface": "#fbf9f3",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#005232",
+                        "tertiary": "#3a4942",
+                        "on-tertiary-container": "#cadbd2",
+                        "secondary": "#3e6753",
+                        "on-surface": "#1b1c18",
+                        "secondary-container": "#c0edd4",
+                        "primary-fixed-dim": "#88d7a8",
+                        "on-secondary-container": "#446d59",
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#f5f3ed",
+                        "surface-bright": "#fbf9f3",
+                        "inverse-surface": "#30312d"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "base": "4px",
+                        "xl": "32px",
+                        "xxl": "48px",
+                        "lg": "24px",
+                        "touch-target": "44px",
+                        "xs": "8px",
+                        "md": "16px",
+                        "sm": "12px"
+                    },
+                    fontFamily: {
+                        "body-lg": ["Manrope"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "display-lg": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "label-sm": ["Manrope"],
+                        "headline-md": ["Manrope"]
+                    },
+                    fontSize: {
+                        "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+                        "headline-lg-mobile": ["24px", { lineHeight: "32px", fontWeight: "700" }],
+                        "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "700" }],
+                        "display-lg": ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "800" }],
+                        "label-md": ["14px", { lineHeight: "20px", letterSpacing: "0.01em", fontWeight: "600" }],
+                        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+                        "label-sm": ["12px", { lineHeight: "16px", fontWeight: "700" }],
+                        "headline-md": ["24px", { lineHeight: "32px", fontWeight: "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background-color: #bfc9c0; border-radius: 10px; }
+        
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased font-body-md overflow-x-hidden min-h-screen">
+<!-- TopNavBar -->
+<nav class="h-16 w-[calc(100%-16rem)] fixed top-0 right-0 z-40 border-b border-outline-variant bg-surface flex justify-between items-center px-lg shadow-sm">
+<div class="flex items-center gap-md">
+<!-- Search Bar (on_left) -->
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-on-surface-variant text-[20px]">search</span>
+<input class="pl-10 pr-4 h-[44px] bg-surface-container-low border border-outline-variant rounded-lg text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors w-64 placeholder:text-on-surface-variant" placeholder="Buscar..." type="text">
+</div>
+<span class="text-headline-md font-headline-md font-extrabold text-primary hidden lg:block ml-md">Portal de Concesionarios</span>
+</div>
+<div class="flex items-center gap-sm">
+<!-- Trailing Icons -->
+<button aria-label="Notificaciones" class="w-[44px] h-[44px] flex items-center justify-center rounded-full hover:bg-surface-container-low text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button aria-label="Ayuda" class="w-[44px] h-[44px] flex items-center justify-center rounded-full hover:bg-surface-container-low text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined">help</span>
+</button>
+<button aria-label="Verificado" class="w-[44px] h-[44px] flex items-center justify-center rounded-full hover:bg-surface-container-low text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined">verified_user</span>
+</button>
+<!-- Primary Action Profile -->
+<button class="ml-sm flex items-center gap-sm p-1 pr-3 rounded-full border border-outline-variant hover:bg-surface-container-low transition-colors min-h-[44px]">
+<img alt="Usuario con MFA Activo" class="w-8 h-8 rounded-full object-cover" data-alt="A professional headshot of a middle-aged administrative manager wearing a neat green collared shirt. The background is a brightly lit, modern office environment with subtle indoor plants. The lighting is soft, natural, and flattering, creating a trustworthy and corporate aesthetic. The image is cropped in a tight circle." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYBohLAQI1HP9qLu15U5gQoRYpisOBpuH3sNynrf0ipcQaCfOqVLtIkugKWDqKKWKhWTiTb_DQAeIiM76B9yyxludotkQ3eOUb-78Ssa04P36pp9kJiWD6UbAEpx-kHhgT_EwPZw4loFlQniRKiO6oPaPhVeP8nJerhpEQrefEa39sc4GKIcE4YayIq5r2diDVemCsj1pKpNv3ikZQ69ok46WpHC3DPvIgKMfFdsKoI4cCtjc4Vcry">
+<span class="font-label-md text-label-md text-on-surface hidden md:block">Perfil</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">expand_more</span>
+</button>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 border-r border-outline-variant bg-surface flex flex-col p-md z-50">
+<!-- Header -->
+<div class="flex items-center gap-sm mb-xl pt-sm px-2">
+<div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined icon-fill">nature</span>
+</div>
+<div class="flex flex-col">
+<span class="text-label-md font-label-md font-bold text-on-surface">Gestión Comercial</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Parques Nacionales</span>
+</div>
+</div>
+<!-- Navigation Tabs -->
+<nav class="flex flex-col gap-1 flex-1">
+<!-- Active Tab: Resumen -->
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-lg font-bold min-h-[44px] scale-[0.98] transition-transform" href="#">
+<span class="material-symbols-outlined icon-fill">dashboard</span>
+<span class="font-label-md text-label-md">Resumen</span>
+</a>
+<!-- Inactive Tabs -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg min-h-[44px]" href="#">
+<span class="material-symbols-outlined">storefront</span>
+<span class="font-label-md text-label-md">Negocios y locales</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg min-h-[44px]" href="#">
+<span class="material-symbols-outlined">folder_open</span>
+<span class="font-label-md text-label-md">Expediente</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg min-h-[44px]" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-label-md text-label-md">Equipo</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg min-h-[44px]" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-md text-label-md">Finanzas</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg min-h-[44px]" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Configuración</span>
+</a>
+</nav>
+<!-- Bottom Help Tab -->
+<div class="mt-auto border-t border-outline-variant pt-4">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg min-h-[44px]" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md text-label-md">Ayuda</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 pt-16 p-lg min-h-screen flex flex-col gap-lg">
+<!-- Header / Status -->
+<header class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-sm">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-background mb-1">Buenos días, Propietario</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Aquí está el resumen de sus operaciones comerciales.</p>
+</div>
+<!-- User Status Badge -->
+<div class="flex items-center gap-sm bg-error-container/20 border border-error/30 rounded-lg px-4 py-2">
+<span class="material-symbols-outlined text-error text-[20px]">warning</span>
+<div>
+<span class="block font-label-md text-label-md text-on-surface">Cuenta Habilitada</span>
+<span class="block font-label-sm text-label-sm text-error">Trámites por renovar</span>
+</div>
+</div>
+</header>
+<!-- Top Row: Checklist & Quick Actions -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg">
+<!-- Enablement Checklist (Bento Grid Style) -->
+<section class="lg:col-span-8 bg-surface-container-lowest border border-outline-variant rounded-xl p-lg flex flex-col shadow-[0px_4px_12px_rgba(40,51,46,0.02)]">
+<div class="flex justify-between items-center mb-md">
+<h2 class="font-headline-md text-headline-md text-on-surface">Habilitación Comercial</h2>
+<span class="font-label-md text-label-md bg-surface-variant text-on-surface-variant px-3 py-1 rounded-full">Progreso: 80%</span>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-sm flex-1">
+<!-- Item 1 -->
+<div class="p-4 border border-outline-variant rounded-lg bg-surface flex flex-col justify-between">
+<div class="flex justify-between items-start mb-2">
+<span class="material-symbols-outlined text-primary">badge</span>
+<span class="material-symbols-outlined text-primary icon-fill text-[20px]">check_circle</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface">Identidad</span>
+</div>
+<!-- Item 2 -->
+<div class="p-4 border border-outline-variant rounded-lg bg-surface flex flex-col justify-between">
+<div class="flex justify-between items-start mb-2">
+<span class="material-symbols-outlined text-primary">account_balance</span>
+<span class="material-symbols-outlined text-primary icon-fill text-[20px]">check_circle</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface">RIF</span>
+</div>
+<!-- Item 3 (Pending) -->
+<div class="p-4 border-2 border-error-container rounded-lg bg-error-container/10 flex flex-col justify-between relative overflow-hidden">
+<div class="absolute right-0 top-0 w-8 h-8 bg-error-container rounded-bl-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-error text-[16px]">priority_high</span>
+</div>
+<div class="flex justify-between items-start mb-2">
+<span class="material-symbols-outlined text-error">description</span>
+</div>
+<div>
+<span class="font-label-md text-label-md text-on-surface block">Documentos</span>
+<span class="font-label-sm text-label-sm text-error">Por renovar</span>
+</div>
+</div>
+<!-- Item 4 -->
+<div class="p-4 border border-outline-variant rounded-lg bg-surface flex flex-col justify-between">
+<div class="flex justify-between items-start mb-2">
+<span class="material-symbols-outlined text-primary">handshake</span>
+<span class="material-symbols-outlined text-primary icon-fill text-[20px]">check_circle</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface">Contrato</span>
+</div>
+<!-- Item 5 -->
+<div class="p-4 border border-outline-variant rounded-lg bg-surface flex flex-col justify-between">
+<div class="flex justify-between items-start mb-2">
+<span class="material-symbols-outlined text-primary">account_balance_wallet</span>
+<span class="material-symbols-outlined text-primary icon-fill text-[20px]">check_circle</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface">Cuenta</span>
+</div>
+<!-- Item 6 -->
+<div class="p-4 border border-outline-variant rounded-lg bg-surface flex flex-col justify-between">
+<div class="flex justify-between items-start mb-2">
+<span class="material-symbols-outlined text-primary">inventory_2</span>
+<span class="material-symbols-outlined text-primary icon-fill text-[20px]">check_circle</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface">Catálogo</span>
+</div>
+</div>
+</section>
+<!-- Quick Actions -->
+<section class="lg:col-span-4 flex flex-col gap-sm">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg flex-1 shadow-[0px_4px_12px_rgba(40,51,46,0.02)]">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-md">Acciones Rápidas</h2>
+<div class="flex flex-col gap-3">
+<button class="w-full flex items-center justify-center gap-2 bg-primary-container text-on-primary-container font-label-md text-label-md rounded-lg min-h-[44px] hover:bg-primary hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">upload_file</span>
+                            Renovar Documentos
+                        </button>
+<button class="w-full flex items-center justify-center gap-2 bg-secondary-container text-on-secondary-container font-label-md text-label-md rounded-lg min-h-[44px] hover:bg-secondary hover:text-on-secondary transition-colors">
+<span class="material-symbols-outlined text-[20px]">add_shopping_cart</span>
+                            Nueva Orden
+                        </button>
+<button class="w-full flex items-center justify-center gap-2 border border-outline-variant text-on-surface font-label-md text-label-md rounded-lg min-h-[44px] hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[20px]">list_alt</span>
+                            Ver Catálogo
+                        </button>
+</div>
+</div>
+</section>
+</div>
+<!-- Middle Row: KPI Cards -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-lg">
+<!-- KPI 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg flex flex-col gap-2 hover:shadow-[0px_4px_12px_rgba(40,51,46,0.08)] transition-shadow">
+<div class="flex justify-between items-center text-on-surface-variant">
+<span class="font-label-md text-label-md">Ventas del Mes</span>
+<span class="material-symbols-outlined">payments</span>
+</div>
+<div class="font-headline-lg text-headline-lg text-on-surface">Bs. 45.230</div>
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+<span class="font-label-sm text-label-sm">+12% vs mes anterior</span>
+</div>
+</div>
+<!-- KPI 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg flex flex-col gap-2 hover:shadow-[0px_4px_12px_rgba(40,51,46,0.08)] transition-shadow">
+<div class="flex justify-between items-center text-on-surface-variant">
+<span class="font-label-md text-label-md">Órdenes Activas</span>
+<span class="material-symbols-outlined">receipt_long</span>
+</div>
+<div class="font-headline-lg text-headline-lg text-on-surface">128</div>
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="font-label-sm text-label-sm">3 pendientes de envío</span>
+</div>
+</div>
+<!-- KPI 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg flex flex-col gap-2 hover:shadow-[0px_4px_12px_rgba(40,51,46,0.08)] transition-shadow">
+<div class="flex justify-between items-center text-on-surface-variant">
+<span class="font-label-md text-label-md">Locales Activos</span>
+<span class="material-symbols-outlined">store</span>
+</div>
+<div class="font-headline-lg text-headline-lg text-on-surface">3 <span class="text-headline-md text-on-surface-variant">/ 4</span></div>
+<div class="flex items-center gap-1 text-error">
+<span class="material-symbols-outlined text-[16px]">info</span>
+<span class="font-label-sm text-label-sm">1 requiere atención</span>
+</div>
+</div>
+<!-- KPI 4 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg flex flex-col gap-2 hover:shadow-[0px_4px_12px_rgba(40,51,46,0.08)] transition-shadow">
+<div class="flex justify-between items-center text-on-surface-variant">
+<span class="font-label-md text-label-md">Saldo Conciliado</span>
+<span class="material-symbols-outlined">account_balance</span>
+</div>
+<div class="font-headline-lg text-headline-lg text-on-surface">Bs. 12.050</div>
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span class="font-label-sm text-label-sm">Actualizado hoy</span>
+</div>
+</div>
+</section>
+<!-- Bottom Row: Chart & Expirations -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg mb-xl">
+<!-- Chart Area (Placeholder using CSS Grid) -->
+<section class="lg:col-span-8 bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-[0px_4px_12px_rgba(40,51,46,0.02)] flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-headline-md text-headline-md text-on-surface">Actividad Reciente</h2>
+<select class="bg-surface border border-outline-variant rounded-lg px-3 py-1 text-label-sm font-label-sm outline-none focus:border-primary">
+<option>Últimos 7 días</option>
+<option>Este mes</option>
+</select>
+</div>
+<!-- CSS Simulated Bar Chart -->
+<div class="flex-1 flex items-end gap-2 h-48 border-b border-outline-variant pb-2 relative">
+<!-- Y Axis Labels -->
+<div class="absolute left-0 top-0 h-full flex flex-col justify-between text-label-sm text-on-surface-variant -ml-6 pb-2">
+<span>100</span>
+<span>50</span>
+<span>0</span>
+</div>
+<!-- Bars -->
+<div class="flex-1 w-full bg-secondary-container rounded-t-sm h-[40%] hover:bg-secondary transition-colors group relative">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-on-surface text-surface text-label-sm px-2 py-1 rounded hidden group-hover:block z-10">40</div>
+</div>
+<div class="flex-1 w-full bg-primary-container rounded-t-sm h-[65%] hover:bg-primary transition-colors group relative">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-on-surface text-surface text-label-sm px-2 py-1 rounded hidden group-hover:block z-10">65</div>
+</div>
+<div class="flex-1 w-full bg-secondary-container rounded-t-sm h-[30%] hover:bg-secondary transition-colors group relative"></div>
+<div class="flex-1 w-full bg-primary-container rounded-t-sm h-[80%] hover:bg-primary transition-colors group relative"></div>
+<div class="flex-1 w-full bg-secondary-container rounded-t-sm h-[50%] hover:bg-secondary transition-colors group relative"></div>
+<div class="flex-1 w-full bg-primary-container rounded-t-sm h-[95%] hover:bg-primary transition-colors group relative"></div>
+<div class="flex-1 w-full bg-secondary-container rounded-t-sm h-[70%] hover:bg-secondary transition-colors group relative"></div>
+</div>
+<!-- X Axis Labels -->
+<div class="flex justify-between mt-2 text-label-sm text-on-surface-variant px-2">
+<span>Lun</span>
+<span>Mar</span>
+<span>Mie</span>
+<span>Jue</span>
+<span>Vie</span>
+<span>Sab</span>
+<span>Dom</span>
+</div>
+</section>
+<!-- Upcoming Expirations -->
+<section class="lg:col-span-4 bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-[0px_4px_12px_rgba(40,51,46,0.02)]">
+<div class="flex justify-between items-center mb-md">
+<h2 class="font-headline-md text-headline-md text-on-surface">Próximos Vencimientos</h2>
+<span class="material-symbols-outlined text-on-surface-variant">event</span>
+</div>
+<ul class="flex flex-col gap-3">
+<li class="flex items-start gap-3 p-3 bg-error-container/10 border border-error-container rounded-lg">
+<span class="material-symbols-outlined text-error mt-0.5">warning</span>
+<div>
+<span class="block font-label-md text-label-md text-on-surface">Patente de Industria y Comercio</span>
+<span class="block font-body-md text-sm text-error font-bold">Vence en 5 días</span>
+</div>
+</li>
+<li class="flex items-start gap-3 p-3 bg-surface border border-outline-variant rounded-lg">
+<span class="material-symbols-outlined text-on-surface-variant mt-0.5">description</span>
+<div>
+<span class="block font-label-md text-label-md text-on-surface">Permiso Sanitario Local 2</span>
+<span class="block font-body-md text-sm text-on-surface-variant">Vence en 22 días</span>
+</div>
+</li>
+<li class="flex items-start gap-3 p-3 bg-surface border border-outline-variant rounded-lg">
+<span class="material-symbols-outlined text-on-surface-variant mt-0.5">contract</span>
+<div>
+<span class="block font-label-md text-label-md text-on-surface">Renovación de Contrato Base</span>
+<span class="block font-body-md text-sm text-on-surface-variant">Vence en 45 días</span>
+</div>
+</li>
+</ul>
+<button class="w-full mt-4 text-primary font-label-md text-label-md hover:underline text-center">Ver todo el expediente</button>
+</section>
+</div>
+</main>
+</body></html>

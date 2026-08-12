@@ -1,0 +1,220 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport">
+<title>INPARQUES Comercial - Acceso</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#176b45",
+                        "on-surface-variant": "#3f4942",
+                        "outline-variant": "#bfc9c0",
+                        "on-primary": "#ffffff",
+                        "surface-tint": "#186c45",
+                        "on-surface": "#1b1c18",
+                        "surface-bright": "#fbf9f3",
+                        "surface-container-high": "#eae8e2",
+                        "on-tertiary-container": "#cadbd2",
+                        "tertiary-container": "#516159",
+                        "surface-container-highest": "#e4e2dd",
+                        "surface-container": "#f0eee8",
+                        "on-primary-fixed-variant": "#005232",
+                        "background": "#fbf9f3",
+                        "on-background": "#1b1c18",
+                        "primary-fixed-dim": "#88d7a8",
+                        "secondary-fixed": "#c0edd4",
+                        "secondary-container": "#c0edd4",
+                        "on-secondary-container": "#446d59",
+                        "on-primary-fixed": "#002111",
+                        "surface-variant": "#e4e2dd",
+                        "on-primary-container": "#99e9b9",
+                        "primary": "#005131",
+                        "error": "#ba1a1a",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#002114",
+                        "outline": "#6f7a71",
+                        "inverse-primary": "#88d7a8",
+                        "primary-fixed": "#a4f4c3",
+                        "secondary-fixed-dim": "#a4d0b8",
+                        "secondary": "#3e6753",
+                        "surface-dim": "#dcdad4",
+                        "tertiary-fixed": "#d5e7dd",
+                        "inverse-on-surface": "#f3f1eb",
+                        "surface": "#fbf9f3",
+                        "tertiary-fixed-dim": "#b9cbc1",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#264e3c",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#3a4942",
+                        "on-tertiary-fixed-variant": "#3a4a43",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#0f1e19",
+                        "surface-container-low": "#f5f3ed",
+                        "inverse-surface": "#30312d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "32px",
+                        "lg": "24px",
+                        "xxl": "48px",
+                        "md": "16px",
+                        "xs": "8px",
+                        "sm": "12px",
+                        "base": "4px",
+                        "touch-target": "44px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "display-lg": ["Manrope"],
+                        "label-sm": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }]
+                    }
+                },
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; background-color: #F7F5EF; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+        .glass-card { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col antialiased">
+<!-- TopAppBar -->
+<header class="bg-surface text-primary font-headline-md text-headline-md-mobile flex justify-between items-center px-lg w-full h-14 border-b border-outline-variant flat no shadows docked full-width top-0 sticky z-40">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined" data-icon="park">park</span>
+<span class="font-bold">INPARQUES Comercial</span>
+</div>
+<button class="flex items-center justify-center w-touch-target h-touch-target rounded-full hover:bg-surface-container-low transition-transform duration-150 active:scale-95 text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</header>
+<!-- Main Content -->
+<main class="flex-grow flex flex-col p-lg gap-xl max-w-2xl mx-auto w-full mb-24">
+<!-- Welcome Section -->
+<section class="flex flex-col gap-sm">
+<h1 class="font-headline-lg text-headline-lg-mobile text-on-surface">Bienvenido</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Descubre y gestiona tu visita a los parques nacionales.</p>
+</section>
+<!-- QR Code Arrival Card (Bento Style) -->
+<section class="flex flex-col gap-md">
+<h2 class="font-label-md text-label-md text-outline uppercase tracking-wider">Llegaste por código QR</h2>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-[0px_4px_12px_rgba(40,51,46,0.08)] relative overflow-hidden flex flex-col gap-lg">
+<!-- Decorative element -->
+<div class="absolute -right-12 -top-12 w-48 h-48 bg-secondary-container rounded-full opacity-30 blur-2xl pointer-events-none"></div>
+<div class="flex items-start gap-md z-10">
+<div class="w-16 h-16 rounded-lg bg-surface-container-low border border-outline-variant flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="park" style="font-variation-settings: 'FILL' 1;">park</span>
+</div>
+<div class="flex flex-col gap-base">
+<h3 class="font-headline-md text-headline-md-mobile text-on-surface">Parque del Este - Piloto</h3>
+<div class="inline-flex items-center gap-1 bg-secondary-container text-on-secondary-container px-2 py-1 rounded-full w-fit">
+<span class="material-symbols-outlined text-sm" data-icon="pin_drop">pin_drop</span>
+<span class="font-label-sm text-label-sm">Entrada Norte</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-sm z-10">
+<p class="font-body-md text-body-md text-on-surface-variant">Has escaneado el código en la entrada principal. Listo para comenzar tu recorrido.</p>
+<button class="w-full bg-primary-container text-on-primary font-label-md text-label-md h-touch-target rounded-lg flex items-center justify-center gap-sm hover:bg-surface-tint transition-colors mt-2">
+<span>Entrar al parque</span>
+<span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Divider -->
+<div class="flex items-center gap-md">
+<div class="h-px bg-outline-variant flex-grow"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">O escoge un destino</span>
+<div class="h-px bg-outline-variant flex-grow"></div>
+</div>
+<!-- Search & Location Actions -->
+<section class="flex flex-col gap-md">
+<h2 class="font-label-md text-label-md text-outline uppercase tracking-wider">Buscar otro parque</h2>
+<div class="flex flex-col gap-sm">
+<!-- Search Input -->
+<div class="relative w-full">
+<div class="absolute inset-y-0 left-0 pl-sm flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="search">search</span>
+</div>
+<input class="w-full pl-10 pr-4 h-touch-target bg-surface-container-lowest border border-outline-variant rounded-lg font-body-md text-body-md text-on-surface focus:outline-none focus:border-2 focus:border-primary-container transition-colors placeholder:text-on-surface-variant" placeholder="¿Qué parque deseas visitar?" type="text">
+</div>
+<!-- Use Location Button -->
+<button class="w-full bg-surface-container-lowest border border-outline-variant text-on-surface font-label-md text-label-md h-touch-target rounded-lg flex items-center justify-center gap-sm hover:bg-surface-container-high transition-colors shadow-sm">
+<span class="material-symbols-outlined text-secondary" data-icon="my_location">my_location</span>
+<span>Usar mi ubicación actual</span>
+</button>
+</div>
+</section>
+<!-- Quick Suggestions (Bento Grid) -->
+<section class="grid grid-cols-2 gap-sm mt-md">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-sm flex flex-col gap-xs hover:shadow-md transition-shadow cursor-pointer">
+<span class="material-symbols-outlined text-secondary" data-icon="landscape">landscape</span>
+<span class="font-label-md text-label-md text-on-surface">El Ávila</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Caracas</span>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-sm flex flex-col gap-xs hover:shadow-md transition-shadow cursor-pointer">
+<span class="material-symbols-outlined text-secondary" data-icon="waves">waves</span>
+<span class="font-label-md text-label-md text-on-surface">Morrocoy</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Falcón</span>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<!-- Displayed here as it's the 'Inicio' screen -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-2 pb-safe bg-surface-container-lowest border-t border-outline-variant shadow-sm md:hidden">
+<button class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 hover:bg-surface-container-high transition-all">
+<span class="material-symbols-outlined text-xl" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-sm text-label-sm mt-1">Inicio</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full">
+<span class="material-symbols-outlined text-xl" data-icon="search">search</span>
+<span class="font-label-sm text-label-sm mt-1">Explorar</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full">
+<span class="material-symbols-outlined text-xl" data-icon="shopping_bag">shopping_bag</span>
+<span class="font-label-sm text-label-sm mt-1">Pedidos</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full">
+<span class="material-symbols-outlined text-xl" data-icon="help">help</span>
+<span class="font-label-sm text-label-sm mt-1">Ayuda</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all px-4 py-1 rounded-full">
+<span class="material-symbols-outlined text-xl" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm mt-1">Perfil</span>
+</button>
+</nav>
+<script>
+        // Simple script to handle bottom nav active state if needed, though statically set for 'Inicio' here.
+    </script>
+</body></html>

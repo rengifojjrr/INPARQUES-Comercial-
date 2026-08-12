@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>INPARQUES - Detalle del Caso</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#bfc9c0",
+                        "surface-container-low": "#f5f3ed",
+                        "tertiary": "#3a4942",
+                        "surface-container-high": "#eae8e2",
+                        "surface-container-highest": "#e4e2dd",
+                        "on-primary-fixed-variant": "#005232",
+                        "on-tertiary-fixed-variant": "#3a4a43",
+                        "error-container": "#ffdad6",
+                        "on-secondary-container": "#446d59",
+                        "surface-dim": "#dcdad4",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed-dim": "#a4d0b8",
+                        "background": "#fbf9f3",
+                        "on-secondary-fixed-variant": "#264e3c",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-container": "#cadbd2",
+                        "surface-variant": "#e4e2dd",
+                        "secondary-container": "#c0edd4",
+                        "tertiary-fixed-dim": "#b9cbc1",
+                        "on-primary-fixed": "#002111",
+                        "error": "#ba1a1a",
+                        "surface-container": "#f0eee8",
+                        "inverse-surface": "#30312d",
+                        "on-surface-variant": "#3f4942",
+                        "on-surface": "#1b1c18",
+                        "on-secondary-fixed": "#002114",
+                        "secondary-fixed": "#c0edd4",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#6f7a71",
+                        "primary-fixed": "#a4f4c3",
+                        "inverse-on-surface": "#f3f1eb",
+                        "inverse-primary": "#88d7a8",
+                        "primary-fixed-dim": "#88d7a8",
+                        "surface-tint": "#186c45",
+                        "surface": "#fbf9f3",
+                        "primary": "#005131",
+                        "on-background": "#1b1c18",
+                        "tertiary-container": "#516159",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#d5e7dd",
+                        "secondary": "#3e6753",
+                        "on-primary-container": "#99e9b9",
+                        "surface-bright": "#fbf9f3",
+                        "primary-container": "#176b45",
+                        "on-tertiary-fixed": "#0f1e19",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "xs": "8px",
+                        "xl": "32px",
+                        "xxl": "48px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "touch-target": "44px",
+                        "sm": "12px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "display-lg": ["Manrope"],
+                        "label-sm": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex font-body-md text-body-md overflow-hidden">
+<!-- JSON Component: SideNavBar -->
+<nav class="bg-surface dark:bg-surface-dim h-screen w-64 fixed left-0 top-0 overflow-y-auto border-r border-outline-variant dark:border-outline flex flex-col h-full py-lg px-md z-50 shadow-sm hidden md:flex">
+<div class="mb-xl flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold">
+<span class="material-symbols-outlined">shield_person</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed tracking-tight">INPARQUES</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Administrative Portal</p>
+</div>
+</div>
+<button class="w-full bg-primary-container text-on-primary flex items-center justify-center gap-sm py-sm rounded-full font-label-md text-label-md mb-lg min-h-[44px] hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined">add</span>
+            New Support Case
+        </button>
+<ul class="flex flex-col gap-xs flex-1">
+<li><a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors duration-200" href="#"><span class="material-symbols-outlined">inbox</span>Inbox</a></li>
+<!-- Active State: Assigned Cases -->
+<li><a class="flex items-center gap-md px-md py-sm rounded-lg text-primary dark:text-primary-fixed font-bold border-r-4 border-primary dark:border-primary-fixed bg-secondary-container/20 opacity-90 transition-opacity" href="#"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">assignment_turned_in</span>Assigned Cases</a></li>
+<li><a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors duration-200" href="#"><span class="material-symbols-outlined">receipt_long</span>Orders</a></li>
+<li><a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors duration-200" href="#"><span class="material-symbols-outlined">gavel</span>Disputes</a></li>
+<li><a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors duration-200" href="#"><span class="material-symbols-outlined">payments</span>Requested Refunds</a></li>
+<li><a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors duration-200" href="#"><span class="material-symbols-outlined">timer</span>SLA</a></li>
+<li><a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors duration-200" href="#"><span class="material-symbols-outlined">menu_book</span>Knowledge Base</a></li>
+<li><a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors duration-200" href="#"><span class="material-symbols-outlined">bar_chart</span>Reports</a></li>
+</ul>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="flex-1 flex flex-col min-w-0 md:ml-64 h-screen">
+<!-- JSON Component: TopAppBar -->
+<header class="bg-background/95 backdrop-blur-sm dark:bg-background/95 docked full-width top-0 sticky z-40 border-b border-outline-variant dark:border-outline flex justify-between items-center h-[72px] px-xl">
+<div class="flex items-center gap-xl">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed hidden lg:block">Support &amp; Dispute Portal</span>
+<nav class="hidden md:flex gap-md font-label-md text-label-md">
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">Dashboard</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">Analytics</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">Settings</a>
+</nav>
+</div>
+<div class="flex items-center gap-md">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-lowest border border-outline-variant rounded-full font-body-md text-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none" placeholder="Search..." type="text"/>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors p-2 rounded-full hover:bg-surface-container-high"><span class="material-symbols-outlined">notifications</span></button>
+<button class="text-on-surface-variant hover:text-primary transition-colors p-2 rounded-full hover:bg-surface-container-high"><span class="material-symbols-outlined">help_outline</span></button>
+<button class="bg-secondary-container text-on-secondary-container px-4 py-2 rounded-lg font-label-md text-label-md min-h-[44px]">Park Filter</button>
+<button class="bg-primary-container text-on-primary px-4 py-2 rounded-lg font-label-md text-label-md min-h-[44px]">Create Order</button>
+<div class="w-10 h-10 rounded-full bg-tertiary-container overflow-hidden ml-2 border border-outline-variant cursor-pointer">
+<img alt="Administrator Profile" class="w-full h-full object-cover" data-alt="Close-up professional portrait of an administrator in a well-lit office setting, wearing a green lanyard, authoritative yet approachable, bright white corporate lighting, high resolution." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvnmSYLnAno0s7DCxkUyUCrr5XvGShpP8T1Qd_mWz5QQyQRlZt--Xrps-AMQBj53m3TQl3PijLGCGTYKwqIOcOwwn2Cg8A6GS_Q6-1n0xiru5mQfG0gwizwcESz_GKRVoLVCzqBsgUCdHqFcevqq73O3f1MnnBT9NLsHjKDp8WTbjGp0_03WxwzpTN769DBPifNqMZDNOyyQDIF5PObXQj9Kq3sQnpQOZRmAa-nExo-SGKiZmNQWsj"/>
+</div>
+</div>
+</header>
+<!-- Page Content (Scrollable) -->
+<main class="flex-1 overflow-y-auto p-lg bg-surface-container-low flex flex-col gap-lg">
+<!-- Header Actions & Title -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-md bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm">
+<div>
+<div class="flex items-center gap-sm mb-1">
+<span class="bg-error-container text-on-error-container px-2 py-0.5 rounded font-label-sm text-label-sm uppercase tracking-wide">Disputa Abierta</span>
+<span class="text-outline font-label-sm text-label-sm">#CAS-99214-X</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface font-bold">Producto defectuoso y retraso en entrega</h2>
+<p class="text-on-surface-variant font-body-md text-body-md mt-1">Cliente: J*** D** • Comercio: Tienda Naturaleza Viva</p>
+</div>
+<!-- Action Bar -->
+<div class="flex flex-wrap gap-sm">
+<button class="bg-primary-container text-on-primary px-4 py-2 rounded-lg font-label-md text-label-md min-h-[44px] flex items-center gap-2 hover:opacity-90">
+<span class="material-symbols-outlined text-[20px]">reply</span> Responder
+                    </button>
+<button class="bg-secondary-container text-on-secondary-container px-4 py-2 rounded-lg font-label-md text-label-md min-h-[44px] flex items-center gap-2 hover:bg-secondary-fixed-dim">
+<span class="material-symbols-outlined text-[20px]">photo_camera</span> Solicitar Evidencia
+                    </button>
+<div class="relative group">
+<button class="border border-outline-variant bg-surface-container-lowest text-on-surface px-4 py-2 rounded-lg font-label-md text-label-md min-h-[44px] flex items-center gap-2 hover:bg-surface-container-high">
+                            Más Acciones <span class="material-symbols-outlined text-[20px]">expand_more</span>
+</button>
+<!-- Simple dropdown simulation -->
+<div class="absolute right-0 top-full mt-1 w-48 bg-surface-container-lowest border border-outline-variant rounded-lg shadow-lg hidden group-hover:block z-10">
+<button class="w-full text-left px-4 py-3 hover:bg-surface-container-high text-on-surface font-label-md text-label-md">Contactar Comercio</button>
+<button class="w-full text-left px-4 py-3 hover:bg-surface-container-high text-error font-label-md text-label-md">Escalar Caso</button>
+<button class="w-full text-left px-4 py-3 hover:bg-surface-container-high text-on-surface font-label-md text-label-md">Solicitar Reembolso</button>
+</div>
+</div>
+</div>
+</div>
+<!-- 3 Areas Layout Grid -->
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-lg items-start">
+<!-- Area 1: Center - Conversation & Evidence (Spans 2 cols on wide screens) -->
+<div class="xl:col-span-2 flex flex-col gap-lg">
+<!-- Evidence Viewer Card -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-lg shadow-sm">
+<div class="flex justify-between items-center mb-md border-b border-outline-variant pb-sm">
+<h3 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">folder_open</span> Evidencia Adjunta
+                            </h3>
+<span class="text-on-surface-variant font-label-sm text-label-sm">3 Archivos</span>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-md">
+<div class="aspect-square bg-surface-container-high rounded-lg overflow-hidden border border-outline-variant group cursor-pointer relative">
+<img alt="Caja dañada" class="w-full h-full object-cover group-hover:scale-105 transition-transform" data-alt="A photograph of a slightly crushed cardboard delivery box sitting on a wooden table, lit by natural daylight, showing shipping labels, emphasizing the damaged corner. Realistic, documentary style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB015ASP7jvFoQ9Ld4mKkuT3oZIJfpC4RHmOa9VE-CwgaIDOCVH-J_V9aSHw5gFVI4K5J24wkaSlecFAxi0gFwhMEU9ynEvSbgryfNYQhdH-cI7taMYgSyB3iYQdMUShZM9QGYKFMkgHn3bWoJplwYhkDIrj1H_DqVEnR_8qQlNVHSiTIjIHC-FLXyhVmQdNhh7JYJExFv8TRue8cMwNu7Bgri016MbOjD1cyoWD0bsrqtxCf7FHsMB"/>
+<div class="absolute bottom-0 left-0 right-0 bg-background/80 backdrop-blur p-1 text-center font-label-sm text-label-sm">caja_rota.jpg</div>
+</div>
+<div class="aspect-square bg-surface-container-high rounded-lg overflow-hidden border border-outline-variant group cursor-pointer relative">
+<img alt="Costura rota" class="w-full h-full object-cover group-hover:scale-105 transition-transform" data-alt="A macro shot of a torn fabric seam on a green outdoor camping tent, high resolution, soft diffuse lighting, focusing on the frayed threads. Utilitarian, descriptive aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4j9GrTsFi9FPB2bqOr3eF6mBaNjy8MCps2_6AmmCSSJ1Gj-dub1BspszTdzU4d-suv-wHumGqv-xSjC-9HUJ5VvdskJ6iWj6Zz2F6ENCXUTsu3MGoL2MSYJ7PD8DLf0RBD3bwe7TL5BRUNsyAQBv5GfiKT2W0BMZsJl0OZ0D6bZBQnSx1DxHi5_yS0yeJQ5JY20ct3Dt8BdsL4foWaTpvcs4R0JA5TuwxDKVYnT7VwehdBCFK1ytH"/>
+<div class="absolute bottom-0 left-0 right-0 bg-background/80 backdrop-blur p-1 text-center font-label-sm text-label-sm">detalle_tela.jpg</div>
+</div>
+<div class="aspect-square bg-surface-container-high rounded-lg flex items-center justify-center border border-outline-variant border-dashed text-outline-variant hover:text-primary hover:border-primary transition-colors cursor-pointer">
+<div class="text-center">
+<span class="material-symbols-outlined block text-2xl mb-1">add_photo_alternate</span>
+<span class="font-label-sm text-label-sm">Añadir</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Conversation Thread Card -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm flex flex-col h-[500px]">
+<div class="p-lg border-b border-outline-variant bg-surface/50 rounded-t-xl">
+<h3 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">forum</span> Hilo de Comunicación
+                            </h3>
+</div>
+<div class="flex-1 overflow-y-auto p-lg flex flex-col gap-md bg-surface-bright">
+<!-- Customer Message -->
+<div class="flex flex-col items-start max-w-[80%]">
+<div class="flex items-baseline gap-2 mb-1 ml-1">
+<span class="font-label-md text-label-md text-on-surface">J*** D** (Cliente)</span>
+<span class="font-label-sm text-label-sm text-outline">Ayer, 10:42 AM</span>
+</div>
+<div class="bg-surface-container border border-outline-variant text-on-surface p-md rounded-2xl rounded-tl-sm">
+<p>Hola, recibí el pedido ayer pero la caja venía golpeada y la tienda de campaña tiene un desgarro en la lona lateral. Adjunto las fotos. Necesito un reemplazo o reembolso urgente.</p>
+</div>
+</div>
+<!-- Agent Message -->
+<div class="flex flex-col items-end max-w-[80%] self-end">
+<div class="flex items-baseline gap-2 mb-1 mr-1">
+<span class="font-label-sm text-label-sm text-outline">Ayer, 11:15 AM</span>
+<span class="font-label-md text-label-md text-primary">Tú (Soporte)</span>
+</div>
+<div class="bg-secondary-container text-on-secondary-container p-md rounded-2xl rounded-tr-sm">
+<p>Lamento mucho el inconveniente. He revisado las imágenes. Me pondré en contacto con "Tienda Naturaleza Viva" para gestionar el cambio. Por favor, conserve el empaque original por ahora.</p>
+</div>
+</div>
+<!-- System Note -->
+<div class="flex justify-center my-2">
+<span class="bg-surface-container-high text-on-surface-variant px-3 py-1 rounded-full font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">info</span> Estado cambiado a: En Revisión por Comercio
+                                 </span>
+</div>
+</div>
+<!-- Reply Input Area -->
+<div class="p-4 border-t border-outline-variant bg-surface-container-lowest rounded-b-xl">
+<div class="relative">
+<textarea class="w-full bg-surface-container-low border border-outline-variant rounded-lg p-3 pr-12 font-body-md text-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none resize-none h-[80px]" placeholder="Escribe tu respuesta aquí..."></textarea>
+<button class="absolute right-3 bottom-3 text-primary p-2 hover:bg-secondary-container rounded-full transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">send</span>
+</button>
+</div>
+<div class="flex gap-2 mt-2">
+<button class="text-on-surface-variant hover:text-primary p-1"><span class="material-symbols-outlined text-[20px]">attach_file</span></button>
+<button class="text-on-surface-variant hover:text-primary p-1"><span class="material-symbols-outlined text-[20px]">format_bold</span></button>
+<button class="text-on-surface-variant hover:text-primary p-1"><span class="material-symbols-outlined text-[20px]">format_list_bulleted</span></button>
+</div>
+</div>
+</div>
+</div>
+<!-- Area 2: Right - Details & Timeline -->
+<div class="flex flex-col gap-lg">
+<!-- Order Summary Card -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-lg shadow-sm">
+<h3 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2 mb-md border-b border-outline-variant pb-sm">
+<span class="material-symbols-outlined text-primary">shopping_bag</span> Pedido Vinculado
+                        </h3>
+<div class="mb-md">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-sm text-label-sm text-outline">ID Pedido</span>
+<a class="font-label-md text-label-md text-primary hover:underline" href="#">ORD-9912</a>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-label-sm text-label-sm text-outline">Fecha</span>
+<span class="font-body-md text-body-md text-on-surface">12 Oct 2023</span>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-lg p-3 mb-md border border-outline-variant">
+<div class="flex gap-3 mb-3 pb-3 border-b border-outline-variant/50">
+<div class="w-12 h-12 bg-surface-container-high rounded border border-outline-variant flex-shrink-0">
+<img alt="Item" class="w-full h-full object-cover rounded" data-alt="A folded green camping tent inside its carrying bag, isolated on a white background, studio lighting, crisp commercial product photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-IRt5Gagsk7l0HdkfMyJcmyakZfhaXIGrCyq_L1XhtpinVvasDS6-S6Z-UcrySosFPB9JceIihlBoYz6ERMIjlxms3WTQJPSXa1SzTXmWwmA_XPFfzw7Ur2dyF5FWK_1P7KXH1S6SCDMlFa5AwJ_Rh1VJ3xnY0aLUB2euqoInedRbSIuoc_7vyi3EjZsHJyh0fOzfinLxc_qHvw_7QIdOVIZqiOpe8mpkGT5U1lkViOIJ4wP1Uwk2"/>
+</div>
+<div class="flex-1">
+<h4 class="font-label-md text-label-md text-on-surface leading-tight">Tienda de Campaña Andes Pro 4P</h4>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Cant: 1</p>
+</div>
+<div class="font-label-md text-label-md text-on-surface">$145.00</div>
+</div>
+<div class="flex justify-between font-label-md text-label-md font-bold text-on-surface">
+<span>Total</span>
+<span>$145.00</span>
+</div>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-outline mb-1">Datos de Envío (Enmascarados)</p>
+<p class="font-body-md text-body-md text-on-surface">J*** D**</p>
+<p class="font-body-md text-body-md text-on-surface">Av. L** C*****, Edf. R***, Apt **</p>
+</div>
+</div>
+<!-- Timeline Card -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-lg shadow-sm">
+<h3 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2 mb-md border-b border-outline-variant pb-sm">
+<span class="material-symbols-outlined text-primary">history</span> Timeline del Caso
+                        </h3>
+<div class="relative border-l-2 border-surface-container-highest ml-3 mt-4 flex flex-col gap-6">
+<!-- Timeline Item (Current) -->
+<div class="relative pl-6">
+<div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-primary ring-4 ring-surface-container-lowest"></div>
+<p class="font-label-md text-label-md text-on-surface">En Revisión por Comercio</p>
+<p class="font-label-sm text-label-sm text-outline">Hoy, 09:00 AM</p>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1 text-sm">Notificación enviada a Tienda Naturaleza Viva.</p>
+</div>
+<!-- Timeline Item -->
+<div class="relative pl-6">
+<div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-secondary-container ring-4 ring-surface-container-lowest border border-outline-variant"></div>
+<p class="font-label-md text-label-md text-on-surface">Evidencia Revisada</p>
+<p class="font-label-sm text-label-sm text-outline">Ayer, 11:20 AM</p>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1 text-sm">Agente validó fotos del daño.</p>
+</div>
+<!-- Timeline Item -->
+<div class="relative pl-6">
+<div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-surface-container-high ring-4 ring-surface-container-lowest border border-outline-variant"></div>
+<p class="font-label-md text-label-md text-on-surface">Caso Asignado</p>
+<p class="font-label-sm text-label-sm text-outline">Ayer, 10:45 AM</p>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1 text-sm">Asignado a grupo: Soporte Nivel 2.</p>
+</div>
+<!-- Timeline Item -->
+<div class="relative pl-6">
+<div class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-surface-container-high ring-4 ring-surface-container-lowest border border-outline-variant"></div>
+<p class="font-label-md text-label-md text-on-surface">Disputa Abierta</p>
+<p class="font-label-sm text-label-sm text-outline">Ayer, 10:42 AM</p>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1 text-sm">Cliente inició el reclamo.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

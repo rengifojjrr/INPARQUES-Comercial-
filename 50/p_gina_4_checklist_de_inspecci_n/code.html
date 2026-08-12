@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Checklist de inspección</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed-dim": "#a4d0b8",
+                    "surface": "#fbf9f3",
+                    "on-surface-variant": "#3f4942",
+                    "secondary-fixed": "#c0edd4",
+                    "inverse-surface": "#30312d",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-fixed": "#0f1e19",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-container": "#cadbd2",
+                    "on-surface": "#1b1c18",
+                    "error": "#ba1a1a",
+                    "outline-variant": "#bfc9c0",
+                    "surface-container": "#f0eee8",
+                    "on-primary-fixed": "#002111",
+                    "on-secondary-fixed": "#002114",
+                    "secondary-container": "#c0edd4",
+                    "secondary": "#3e6753",
+                    "on-error": "#ffffff",
+                    "on-primary-fixed-variant": "#005232",
+                    "outline": "#6f7a71",
+                    "on-secondary-fixed-variant": "#264e3c",
+                    "on-background": "#1b1c18",
+                    "primary-fixed": "#a4f4c3",
+                    "surface-bright": "#fbf9f3",
+                    "surface-dim": "#dcdad4",
+                    "inverse-primary": "#88d7a8",
+                    "tertiary-fixed-dim": "#b9cbc1",
+                    "inverse-on-surface": "#f3f1eb",
+                    "surface-container-high": "#eae8e2",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-container": "#516159",
+                    "primary-container": "#176b45",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#3a4a43",
+                    "tertiary": "#3a4942",
+                    "surface-variant": "#e4e2dd",
+                    "surface-container-low": "#f5f3ed",
+                    "on-primary-container": "#99e9b9",
+                    "primary": "#005131",
+                    "background": "#fbf9f3",
+                    "on-secondary-container": "#446d59",
+                    "tertiary-fixed": "#d5e7dd",
+                    "surface-container-highest": "#e4e2dd",
+                    "primary-fixed-dim": "#88d7a8",
+                    "surface-tint": "#186c45"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xs": "8px",
+                    "xxl": "48px",
+                    "lg": "24px",
+                    "touch-target": "44px",
+                    "xl": "32px",
+                    "md": "16px",
+                    "base": "4px",
+                    "sm": "12px"
+            },
+            "fontFamily": {
+                    "headline-md": [
+                            "Manrope"
+                    ],
+                    "label-md": [
+                            "Manrope"
+                    ],
+                    "headline-lg": [
+                            "Manrope"
+                    ],
+                    "body-lg": [
+                            "Manrope"
+                    ],
+                    "label-sm": [
+                            "Manrope"
+                    ],
+                    "body-md": [
+                            "Manrope"
+                    ],
+                    "display-lg": [
+                            "Manrope"
+                    ],
+                    "headline-lg-mobile": [
+                            "Manrope"
+                    ]
+            },
+            "fontSize": {
+                    "headline-md": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "label-md": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "letterSpacing": "0.01em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-lg": [
+                            "32px",
+                            {
+                                    "lineHeight": "40px",
+                                    "letterSpacing": "-0.01em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "body-lg": [
+                            "18px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "label-sm": [
+                            "12px",
+                            {
+                                    "lineHeight": "16px",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "display-lg": [
+                            "48px",
+                            {
+                                    "lineHeight": "56px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "800"
+                            }
+                    ],
+                    "headline-lg-mobile": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "fontWeight": "700"
+                            }
+                    ]
+            }
+    },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-on-background text-primary dark:text-primary-fixed font-headline-md text-headline-md docked full-width top-0 border-b border-outline-variant dark:border-on-surface-variant flex justify-between items-center w-full px-md h-touch-target fixed z-50">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+<span class="text-headline-md font-headline-md text-primary dark:text-primary-fixed">Checklist de inspección</span>
+</div>
+<div>
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed hover:bg-surface-container-high dark:hover:bg-on-surface-variant transition-colors duration-200" data-icon="settings">settings</span>
+</div>
+</header>
+<main class="pt-[60px] pb-[100px] px-md max-w-2xl mx-auto">
+<div class="mb-lg mt-md">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-2">Concesión Los Pinos</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Inspección rutinaria - Oct 24, 2023</p>
+</div>
+<form>
+<!-- Section: Salubridad -->
+<section class="bg-surface-container-lowest rounded-lg border border-outline-variant p-lg mb-lg shadow-sm">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-md border-b border-surface-variant pb-2">Salubridad</h2>
+<!-- Item 1 -->
+<div class="mb-lg">
+<label class="font-label-md text-label-md text-on-surface block mb-2">Manejo de desechos sólidos <span class="text-error">*</span></label>
+<div class="flex flex-col gap-2 mb-sm">
+<label class="flex items-center p-3 border border-outline-variant rounded bg-surface-container-lowest">
+<input class="form-radio text-primary focus:ring-primary h-5 w-5 mr-3" name="salubridad_1" type="radio"/>
+<span class="font-body-md text-body-md">Conforme</span>
+</label>
+<label class="flex items-center p-3 border border-outline-variant rounded bg-surface-container-lowest">
+<input class="form-radio text-error focus:ring-error h-5 w-5 mr-3" name="salubridad_1" type="radio"/>
+<span class="font-body-md text-body-md">No conforme</span>
+</label>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="mb-lg">
+<label class="font-label-md text-label-md text-on-surface block mb-2">Limpieza de áreas comunes <span class="text-error">*</span></label>
+<div class="flex flex-col gap-2 mb-sm">
+<label class="flex items-center p-3 border border-outline-variant rounded bg-surface-container-lowest">
+<input checked="" class="form-radio text-primary focus:ring-primary h-5 w-5 mr-3" name="salubridad_2" type="radio"/>
+<span class="font-body-md text-body-md">Conforme</span>
+</label>
+</div>
+</div>
+</section>
+<!-- Section: Seguridad -->
+<section class="bg-surface-container-lowest rounded-lg border border-outline-variant p-lg mb-lg shadow-sm">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-md border-b border-surface-variant pb-2">Seguridad</h2>
+<!-- Item 1 -->
+<div class="mb-lg">
+<label class="font-label-md text-label-md text-on-surface block mb-2">Extintores vigentes <span class="text-error">*</span></label>
+<div class="flex flex-col gap-2 mb-sm">
+<label class="flex items-center p-3 border border-outline-variant rounded bg-surface-container-lowest">
+<input checked="" class="form-radio text-error focus:ring-error h-5 w-5 mr-3" name="seguridad_1" type="radio"/>
+<span class="font-body-md text-body-md">No conforme</span>
+</label>
+</div>
+<!-- Expanded details for 'No conforme' -->
+<div class="bg-surface-container-low p-sm rounded mt-2 border border-outline-variant">
+<label class="font-label-md text-label-md text-on-surface block mb-2">Gravedad</label>
+<div class="flex gap-2 mb-md">
+<button class="flex-1 py-2 rounded border border-outline-variant text-on-surface font-label-md text-label-md bg-surface-container-lowest" type="button">Baja</button>
+<button class="flex-1 py-2 rounded bg-error-container text-on-error-container font-label-md text-label-md" type="button">Alta</button>
+</div>
+<label class="font-label-md text-label-md text-on-surface block mb-2">Notas</label>
+<textarea class="w-full border-outline-variant rounded bg-surface-container-lowest focus:ring-primary focus:border-primary font-body-md text-body-md min-h-[80px] p-2 mb-3" placeholder="Detalles de la no conformidad..."></textarea>
+<button class="flex items-center justify-center gap-2 w-full py-2 border border-outline-variant rounded text-primary font-label-md text-label-md h-touch-target" type="button">
+<span class="material-symbols-outlined" data-icon="add_a_photo">add_a_photo</span>
+                             Adjuntar evidencia
+                         </button>
+</div>
+</div>
+</section>
+<div class="flex flex-col gap-md mt-xl">
+<button class="w-full bg-surface-container-high text-on-surface rounded-full font-label-md text-label-md h-touch-target flex items-center justify-center border border-outline-variant shadow-sm hover:bg-surface-variant transition-colors" type="button">Guardar borrador</button>
+<button class="w-full bg-primary-container text-on-primary rounded-full font-label-md text-label-md h-touch-target flex items-center justify-center shadow-md hover:bg-primary transition-colors" type="submit">Finalizar Inspección</button>
+</div>
+</form>
+</main>
+<!-- BottomNavBar (Suppressed as this is a focused task screen with back action) -->
+</body></html>
