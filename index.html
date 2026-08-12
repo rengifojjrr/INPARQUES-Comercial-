@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <!-- No se bloquea el zoom del navegador: maximum-scale y user-scalable=no
+         quedan deliberadamente fuera. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <!-- Icono embebido: evita una peticion 404 sin anadir un archivo binario. -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231f6b4a'/%3E%3Cpath d='M9 22V10h3l8 8V10h3v12h-3l-8-8v8z' fill='%23fff'/%3E%3C/svg%3E"
+    />
+    <title>INPARQUES Comercial - demo</title>
+    <meta
+      name="description"
+      content="Demo local de la plataforma INPARQUES Comercial: PWA de visitante, portal de comercio y panel institucional."
+    />
+  </head>
+  <body>
+    <a class="salto-contenido" href="#contenido">Saltar al contenido</a>
+    <div id="app" role="application" aria-label="INPARQUES Comercial"></div>
+    <div id="anuncios" role="status" aria-live="polite" class="solo-lectores"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

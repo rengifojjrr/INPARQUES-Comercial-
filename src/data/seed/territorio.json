@@ -1,0 +1,50 @@
+{
+  "regiones": [
+    { "id": "reg_capital", "nombre": "Region Capital" },
+    { "id": "reg_central", "nombre": "Region Central" }
+  ],
+  "parques": [
+    {
+      "id": "pq_este",
+      "regionId": "reg_capital",
+      "nombre": "Parque del Este - piloto",
+      "tipo": "recreacion",
+      "piloto": true,
+      "horario": "05:30 a 17:00, martes a domingo",
+      "activo": true
+    },
+    {
+      "id": "pq_avila",
+      "regionId": "reg_capital",
+      "nombre": "Parque Nacional Waraira Repano",
+      "tipo": "nacional",
+      "piloto": false,
+      "horario": "06:00 a 16:00, todos los dias",
+      "activo": true
+    },
+    {
+      "id": "pq_henri_pittier",
+      "regionId": "reg_central",
+      "nombre": "Parque Nacional Henri Pittier",
+      "tipo": "nacional",
+      "piloto": false,
+      "horario": "06:00 a 17:00, todos los dias",
+      "activo": true
+    }
+  ],
+  "zonas": [
+    { "id": "zn_entrada_norte", "parqueId": "pq_este", "nombre": "Entrada Norte", "mapa": { "x": 50, "y": 12 } },
+    { "id": "zn_lago", "parqueId": "pq_este", "nombre": "Lago", "mapa": { "x": 30, "y": 48 } },
+    { "id": "zn_jardin_central", "parqueId": "pq_este", "nombre": "Jardin Central", "mapa": { "x": 55, "y": 55 } },
+    { "id": "zn_area_infantil", "parqueId": "pq_este", "nombre": "Area Infantil", "mapa": { "x": 72, "y": 78 } },
+    { "id": "zn_avila_sabas", "parqueId": "pq_avila", "nombre": "Sabas Nieves", "mapa": { "x": 40, "y": 30 } }
+  ],
+  "puntos": [
+    { "id": "pt_en_01", "zonaId": "zn_entrada_norte", "parqueId": "pq_este", "codigo": "EN-01", "nombre": "Kiosco Entrada Norte 1", "mapa": { "x": 46, "y": 16 }, "estado": "ocupado", "qr": "INP-PQ_ESTE-PT_EN_01" },
+    { "id": "pt_en_02", "zonaId": "zn_entrada_norte", "parqueId": "pq_este", "codigo": "EN-02", "nombre": "Kiosco Entrada Norte 2", "mapa": { "x": 55, "y": 16 }, "estado": "libre", "qr": "INP-PQ_ESTE-PT_EN_02" },
+    { "id": "pt_lg_01", "zonaId": "zn_lago", "parqueId": "pq_este", "codigo": "LG-01", "nombre": "Embarcadero del Lago", "mapa": { "x": 28, "y": 52 }, "estado": "ocupado", "qr": "INP-PQ_ESTE-PT_LG_01" },
+    { "id": "pt_jc_01", "zonaId": "zn_jardin_central", "parqueId": "pq_este", "codigo": "JC-01", "nombre": "Terraza Jardin Central", "mapa": { "x": 57, "y": 58 }, "estado": "ocupado", "qr": "INP-PQ_ESTE-PT_JC_01" },
+    { "id": "pt_ai_01", "zonaId": "zn_area_infantil", "parqueId": "pq_este", "codigo": "AI-01", "nombre": "Modulo Area Infantil", "mapa": { "x": 74, "y": 80 }, "estado": "ocupado", "qr": "INP-PQ_ESTE-PT_AI_01" },
+    { "id": "pt_ai_02", "zonaId": "zn_area_infantil", "parqueId": "pq_este", "codigo": "AI-02", "nombre": "Modulo Area Infantil 2", "mapa": { "x": 80, "y": 84 }, "estado": "inhabilitado", "qr": "INP-PQ_ESTE-PT_AI_02" }
+  ]
+}

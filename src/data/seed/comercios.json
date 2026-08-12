@@ -1,0 +1,88 @@
+{
+  "negocios": [
+    {
+      "id": "ng_cedros",
+      "nombreComercial": "Cafe Los Cedros",
+      "razonSocial": "Inversiones Los Cedros, C.A.",
+      "rif": "J-410258963-7",
+      "categoria": "comida",
+      "responsableId": "us_prop_cedros",
+      "estado": "activo",
+      "creadoEn": "2026-03-04T09:15:00.000Z"
+    },
+    {
+      "id": "ng_orinoco",
+      "nombreComercial": "Juguetes Orinoco",
+      "razonSocial": "Distribuidora Orinoco Kids, C.A.",
+      "rif": "J-402117845-2",
+      "categoria": "juguetes",
+      "responsableId": "us_prop_orinoco",
+      "estado": "activo",
+      "creadoEn": "2026-03-19T14:40:00.000Z"
+    },
+    {
+      "id": "ng_aventuras",
+      "nombreComercial": "Aventuras del Lago",
+      "razonSocial": "Aventuras del Lago, S.R.L.",
+      "rif": "J-409887412-0",
+      "categoria": "paseos",
+      "responsableId": "us_prop_aventuras",
+      "estado": "activo",
+      "creadoEn": "2026-04-02T11:05:00.000Z"
+    },
+    {
+      "id": "ng_manantial",
+      "nombreComercial": "Artesania Manantial",
+      "razonSocial": "Cooperativa Manantial, R.L.",
+      "rif": "J-411002356-9",
+      "categoria": "artesania",
+      "responsableId": "us_prop_manantial",
+      "estado": "en_revision",
+      "creadoEn": "2026-07-28T16:20:00.000Z"
+    }
+  ],
+  "locales": [
+    {
+      "id": "lc_cedros_jc",
+      "negocioId": "ng_cedros",
+      "puntoId": "pt_jc_01",
+      "parqueId": "pq_este",
+      "nombre": "Cafe Los Cedros - Jardin Central",
+      "cumplimiento": { "retiroInmediato": true, "retiroProgramado": true, "mesa": true },
+      "abierto": true
+    },
+    {
+      "id": "lc_cedros_en",
+      "negocioId": "ng_cedros",
+      "puntoId": "pt_en_01",
+      "parqueId": "pq_este",
+      "nombre": "Cafe Los Cedros - Entrada Norte",
+      "cumplimiento": { "retiroInmediato": true, "retiroProgramado": false, "mesa": false },
+      "abierto": true
+    },
+    {
+      "id": "lc_orinoco_ai",
+      "negocioId": "ng_orinoco",
+      "puntoId": "pt_ai_01",
+      "parqueId": "pq_este",
+      "nombre": "Juguetes Orinoco - Area Infantil",
+      "cumplimiento": { "retiroInmediato": true, "retiroProgramado": true, "mesa": false },
+      "abierto": true
+    },
+    {
+      "id": "lc_aventuras_lg",
+      "negocioId": "ng_aventuras",
+      "puntoId": "pt_lg_01",
+      "parqueId": "pq_este",
+      "nombre": "Aventuras del Lago - Embarcadero",
+      "cumplimiento": { "retiroInmediato": false, "retiroProgramado": true, "mesa": false },
+      "abierto": true
+    }
+  ],
+  "cuentasBancarias": [
+    { "id": "cb_cedros", "negocioId": "ng_cedros", "banco": "Banco Demo Nacional", "titular": "Inversiones Los Cedros, C.A.", "numero": "01020304050607081234", "tipo": "corriente", "verificada": true, "actualizadaEn": "2026-03-10T10:00:00.000Z" },
+    { "id": "cb_orinoco", "negocioId": "ng_orinoco", "banco": "Banco Demo Central", "titular": "Distribuidora Orinoco Kids, C.A.", "numero": "01059988776655443322", "tipo": "corriente", "verificada": true, "actualizadaEn": "2026-03-25T10:00:00.000Z" },
+    { "id": "cb_aventuras", "negocioId": "ng_aventuras", "banco": "Banco Demo Nacional", "titular": "Aventuras del Lago, S.R.L.", "numero": "01021122334455667788", "tipo": "ahorro", "verificada": true, "actualizadaEn": "2026-04-08T10:00:00.000Z" },
+    { "id": "cb_manantial", "negocioId": "ng_manantial", "banco": "Banco Demo Central", "titular": "Cooperativa Manantial, R.L.", "numero": "01054433221100998877", "tipo": "corriente", "verificada": false, "actualizadaEn": "2026-07-29T10:00:00.000Z" }
+  ]
+}

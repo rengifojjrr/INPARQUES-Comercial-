@@ -1,0 +1,196 @@
+{
+  "articulos": [
+    {
+      "id": "ar_cafe_guayoyo",
+      "localId": "lc_cedros_jc",
+      "negocioId": "ng_cedros",
+      "tipo": "comida",
+      "nombre": "Guayoyo grande",
+      "descripcion": "Cafe filtrado suave, servido en vaso de 12 oz.",
+      "categoria": "Bebidas calientes",
+      "precioUsd": 1.2,
+      "disponible": true,
+      "alergenos": [],
+      "tiempoPrepMin": 4,
+      "variantes": [
+        {
+          "id": "vr_tam_cafe",
+          "nombre": "Tamano",
+          "opciones": [
+            { "id": "op_12", "nombre": "12 oz", "deltaUsd": 0, "disponible": true },
+            { "id": "op_16", "nombre": "16 oz", "deltaUsd": 0.4, "disponible": true }
+          ]
+        }
+      ],
+      "modificadores": [
+        {
+          "id": "md_leche",
+          "nombre": "Tipo de leche",
+          "obligatorio": false,
+          "maxSelecciones": 1,
+          "opciones": [
+            { "id": "op_sin", "nombre": "Sin leche", "deltaUsd": 0, "disponible": true },
+            { "id": "op_entera", "nombre": "Leche entera", "deltaUsd": 0.2, "disponible": true },
+            { "id": "op_almendra", "nombre": "Leche de almendra", "deltaUsd": 0.5, "disponible": false }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ar_cachito",
+      "localId": "lc_cedros_jc",
+      "negocioId": "ng_cedros",
+      "tipo": "comida",
+      "nombre": "Cachito de jamon",
+      "descripcion": "Pan suave relleno de jamon, horneado en el local.",
+      "categoria": "Panaderia",
+      "precioUsd": 1.5,
+      "disponible": true,
+      "alergenos": ["gluten", "lacteos"],
+      "tiempoPrepMin": 3,
+      "variantes": [],
+      "modificadores": [
+        {
+          "id": "md_calentar",
+          "nombre": "Preparacion",
+          "obligatorio": true,
+          "maxSelecciones": 1,
+          "opciones": [
+            { "id": "op_natural", "nombre": "Tal como esta", "deltaUsd": 0, "disponible": true },
+            { "id": "op_caliente", "nombre": "Calentar", "deltaUsd": 0, "disponible": true }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ar_tequeyoyo",
+      "localId": "lc_cedros_jc",
+      "negocioId": "ng_cedros",
+      "tipo": "comida",
+      "nombre": "Tequenos (6 unidades)",
+      "descripcion": "Tequenos de queso blanco recien fritos.",
+      "categoria": "Pasapalos",
+      "precioUsd": 3.0,
+      "disponible": false,
+      "alergenos": ["gluten", "lacteos"],
+      "tiempoPrepMin": 8,
+      "variantes": [],
+      "modificadores": []
+    },
+    {
+      "id": "ar_jugo_en",
+      "localId": "lc_cedros_en",
+      "negocioId": "ng_cedros",
+      "tipo": "comida",
+      "nombre": "Jugo natural de parchita",
+      "descripcion": "Jugo exprimido del dia, 16 oz.",
+      "categoria": "Bebidas frias",
+      "precioUsd": 1.8,
+      "disponible": true,
+      "alergenos": [],
+      "tiempoPrepMin": 3,
+      "variantes": [],
+      "modificadores": []
+    },
+    {
+      "id": "ar_rompecabezas",
+      "localId": "lc_orinoco_ai",
+      "negocioId": "ng_orinoco",
+      "tipo": "producto",
+      "nombre": "Rompecabezas fauna del parque",
+      "descripcion": "48 piezas, carton reciclado, ilustracion de aves nacionales.",
+      "categoria": "Juegos de mesa",
+      "precioUsd": 6.5,
+      "disponible": true,
+      "stock": 14,
+      "alergenos": [],
+      "tiempoPrepMin": 2,
+      "variantes": [
+        {
+          "id": "vr_edad",
+          "nombre": "Nivel",
+          "opciones": [
+            { "id": "op_48", "nombre": "48 piezas", "deltaUsd": 0, "disponible": true },
+            { "id": "op_96", "nombre": "96 piezas", "deltaUsd": 2.5, "disponible": true }
+          ]
+        }
+      ],
+      "modificadores": []
+    },
+    {
+      "id": "ar_papagayo",
+      "localId": "lc_orinoco_ai",
+      "negocioId": "ng_orinoco",
+      "tipo": "producto",
+      "nombre": "Papagayo armable",
+      "descripcion": "Kit de papagayo con varillas de bambu y cordel.",
+      "categoria": "Aire libre",
+      "precioUsd": 4.0,
+      "disponible": true,
+      "stock": 3,
+      "alergenos": [],
+      "tiempoPrepMin": 2,
+      "variantes": [],
+      "modificadores": []
+    },
+    {
+      "id": "ar_peluche",
+      "localId": "lc_orinoco_ai",
+      "negocioId": "ng_orinoco",
+      "tipo": "producto",
+      "nombre": "Peluche oso frontino",
+      "descripcion": "Peluche de 25 cm, relleno hipoalergenico.",
+      "categoria": "Peluches",
+      "precioUsd": 9.0,
+      "disponible": true,
+      "stock": 0,
+      "alergenos": [],
+      "tiempoPrepMin": 2,
+      "variantes": [],
+      "modificadores": []
+    },
+    {
+      "id": "ar_paseo_lancha",
+      "localId": "lc_aventuras_lg",
+      "negocioId": "ng_aventuras",
+      "tipo": "servicio",
+      "nombre": "Paseo en lancha por el lago",
+      "descripcion": "Recorrido guiado de 30 minutos. Incluye chaleco salvavidas.",
+      "categoria": "Paseos",
+      "precioUsd": 5.0,
+      "disponible": true,
+      "cupoPorFranja": 12,
+      "duracionMin": 30,
+      "alergenos": [],
+      "tiempoPrepMin": 0,
+      "variantes": [],
+      "modificadores": []
+    },
+    {
+      "id": "ar_bicicleta",
+      "localId": "lc_aventuras_lg",
+      "negocioId": "ng_aventuras",
+      "tipo": "servicio",
+      "nombre": "Alquiler de bicicleta (1 hora)",
+      "descripcion": "Bicicleta de paseo con casco. Uso dentro de las rutas senalizadas.",
+      "categoria": "Alquileres",
+      "precioUsd": 3.5,
+      "disponible": true,
+      "cupoPorFranja": 8,
+      "duracionMin": 60,
+      "alergenos": [],
+      "tiempoPrepMin": 0,
+      "variantes": [
+        {
+          "id": "vr_bici",
+          "nombre": "Tipo",
+          "opciones": [
+            { "id": "op_adulto", "nombre": "Adulto", "deltaUsd": 0, "disponible": true },
+            { "id": "op_infantil", "nombre": "Infantil", "deltaUsd": 0, "disponible": true }
+          ]
+        }
+      ],
+      "modificadores": []
+    }
+  ]
+}

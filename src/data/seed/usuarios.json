@@ -1,0 +1,159 @@
+{
+  "_nota": "Perfiles de demostracion. La clave es la misma para todos y esta documentada en el README. No son credenciales reales ni corresponden a personas reales.",
+  "usuarios": [
+    {
+      "id": "us_superadmin",
+      "nombre": "Ana Belisario",
+      "correo": "superadmin@demo.inparques.ve",
+      "rol": "inparques.superadmin",
+      "scope": { "level": "nacional", "ids": [] },
+      "origen": "invitacion",
+      "estado": "activo",
+      "mfaHabilitado": true,
+      "creadoEn": "2026-01-08T08:00:00.000Z"
+    },
+    {
+      "id": "us_direccion",
+      "nombre": "Carlos Mendoza",
+      "correo": "concesiones@demo.inparques.ve",
+      "rol": "inparques.direccion_comercial",
+      "scope": { "level": "region", "ids": ["reg_capital"] },
+      "origen": "invitacion",
+      "estado": "activo",
+      "mfaHabilitado": true,
+      "creadoEn": "2026-01-08T08:05:00.000Z"
+    },
+    {
+      "id": "us_finanzas",
+      "nombre": "Rosa Marcano",
+      "correo": "finanzas@demo.inparques.ve",
+      "rol": "inparques.finanzas",
+      "scope": { "level": "nacional", "ids": [] },
+      "origen": "invitacion",
+      "estado": "activo",
+      "mfaHabilitado": true,
+      "creadoEn": "2026-01-08T08:10:00.000Z"
+    },
+    {
+      "id": "us_admin_parque",
+      "nombre": "Luis Paredes",
+      "correo": "parque.este@demo.inparques.ve",
+      "rol": "inparques.admin_parque",
+      "scope": { "level": "parque", "ids": ["pq_este"] },
+      "origen": "invitacion",
+      "estado": "activo",
+      "mfaHabilitado": true,
+      "creadoEn": "2026-01-12T08:00:00.000Z"
+    },
+    {
+      "id": "us_inspector",
+      "nombre": "Miriam Colmenares",
+      "correo": "inspeccion.este@demo.inparques.ve",
+      "rol": "inparques.inspector",
+      "scope": { "level": "parque", "ids": ["pq_este"] },
+      "origen": "invitacion",
+      "estado": "activo",
+      "mfaHabilitado": true,
+      "creadoEn": "2026-01-15T08:00:00.000Z"
+    },
+    {
+      "id": "us_soporte",
+      "nombre": "Jose Rangel",
+      "correo": "soporte@demo.inparques.ve",
+      "rol": "inparques.soporte",
+      "scope": { "level": "nacional", "ids": [] },
+      "origen": "invitacion",
+      "estado": "activo",
+      "mfaHabilitado": true,
+      "creadoEn": "2026-01-20T08:00:00.000Z"
+    },
+    {
+      "id": "us_prop_cedros",
+      "nombre": "Elena Vasquez",
+      "correo": "propietario@loscedros.demo.ve",
+      "rol": "comercio.propietario",
+      "scope": { "level": "negocio", "ids": ["ng_cedros"] },
+      "origen": "invitacion",
+      "estado": "activo",
+      "mfaHabilitado": true,
+      "creadoEn": "2026-03-04T09:20:00.000Z"
+    },
+    {
+      "id": "us_admin_cedros",
+      "nombre": "Pedro Salazar",
+      "correo": "local.jardin@loscedros.demo.ve",
+      "rol": "comercio.admin_local",
+      "scope": { "level": "local", "ids": ["lc_cedros_jc", "lc_cedros_en"] },
+      "origen": "invitacion",
+      "estado": "activo",
+      "mfaHabilitado": false,
+      "creadoEn": "2026-03-06T09:00:00.000Z"
+    },
+    {
+      "id": "us_operador_cedros",
+      "nombre": "Yulimar Rojas",
+      "correo": "cocina@loscedros.demo.ve",
+      "rol": "comercio.operador",
+      "scope": { "level": "local", "ids": ["lc_cedros_jc"] },
+      "origen": "invitacion",
+      "estado": "activo",
+      "mfaHabilitado": false,
+      "creadoEn": "2026-03-07T09:00:00.000Z"
+    },
+    {
+      "id": "us_contador_cedros",
+      "nombre": "Hector Guillen",
+      "correo": "contabilidad@loscedros.demo.ve",
+      "rol": "comercio.contador",
+      "scope": { "level": "negocio", "ids": ["ng_cedros"] },
+      "origen": "invitacion",
+      "estado": "activo",
+      "mfaHabilitado": false,
+      "creadoEn": "2026-03-08T09:00:00.000Z"
+    },
+    {
+      "id": "us_visitante",
+      "nombre": "Daniela Ochoa",
+      "correo": "visitante@demo.ve",
+      "rol": "visitante.cliente",
+      "scope": { "level": "propio", "ids": ["us_visitante"] },
+      "origen": "registro_publico",
+      "estado": "activo",
+      "mfaHabilitado": false,
+      "creadoEn": "2026-06-11T18:30:00.000Z"
+    },
+    {
+      "id": "us_prop_orinoco",
+      "nombre": "Ramon Escobar",
+      "correo": "propietario@orinoco.demo.ve",
+      "rol": "comercio.propietario",
+      "scope": { "level": "negocio", "ids": ["ng_orinoco"] },
+      "origen": "invitacion",
+      "estado": "activo",
+      "mfaHabilitado": true,
+      "creadoEn": "2026-03-19T14:45:00.000Z"
+    },
+    {
+      "id": "us_prop_aventuras",
+      "nombre": "Gabriela Nieves",
+      "correo": "propietario@aventurasdellago.demo.ve",
+      "rol": "comercio.propietario",
+      "scope": { "level": "negocio", "ids": ["ng_aventuras"] },
+      "origen": "invitacion",
+      "estado": "activo",
+      "mfaHabilitado": true,
+      "creadoEn": "2026-04-02T11:10:00.000Z"
+    },
+    {
+      "id": "us_prop_manantial",
+      "nombre": "Teresa Lugo",
+      "correo": "propietario@manantial.demo.ve",
+      "rol": "comercio.propietario",
+      "scope": { "level": "negocio", "ids": ["ng_manantial"] },
+      "origen": "invitacion",
+      "estado": "invitado",
+      "mfaHabilitado": false,
+      "creadoEn": "2026-07-28T16:25:00.000Z"
+    }
+  ]
+}

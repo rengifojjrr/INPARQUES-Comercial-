@@ -1,0 +1,230 @@
+/*
+ * Estilos del andamiaje tecnico.
+ *
+ * IMPORTANTE: esta hoja NO es el diseno del producto. Solo da forma al indice
+ * tecnico interno y a los marcadores de vista pendiente, para poder recorrer
+ * rutas y permisos antes de recibir las plantillas HTML.
+ *
+ * Cuando lleguen los HTML originales, cada vista traera su propio marcado y
+ * sus propios estilos; este archivo se mantiene aparte y no los toca.
+ */
+
+:root {
+  --and-fondo: #ffffff;
+  --and-texto: #16211c;
+  --and-tenue: #5c6b64;
+  --and-borde: #d9e2dc;
+  --and-panel: #f5f8f6;
+  --and-acento: #1f6b4a;
+  --and-alerta: #8a5a00;
+  --and-error: #97231f;
+  --and-ok: #1f6b4a;
+  --and-radio: 8px;
+  --and-fuente: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --and-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --and-fondo: #101613;
+    --and-texto: #e8efea;
+    --and-tenue: #9aa8a1;
+    --and-borde: #2b3833;
+    --and-panel: #18211d;
+    --and-acento: #5fd39b;
+    --and-alerta: #e0b062;
+    --and-error: #f08b86;
+    --and-ok: #5fd39b;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--and-fuente);
+  background: var(--and-fondo);
+  color: var(--and-texto);
+  line-height: 1.5;
+}
+
+.solo-lectores {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.salto-contenido {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--and-acento);
+  color: #fff;
+  padding: 8px 16px;
+  z-index: 100;
+}
+.salto-contenido:focus { left: 0; }
+
+:focus-visible {
+  outline: 3px solid var(--and-acento);
+  outline-offset: 2px;
+}
+
+.and-envoltura {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 24px 20px 64px;
+}
+
+.and-cinta {
+  background: var(--and-panel);
+  border-bottom: 1px solid var(--and-borde);
+  padding: 10px 20px;
+  font-size: 13px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.and-cinta strong { font-weight: 650; }
+.and-cinta code { font-family: var(--and-mono); font-size: 12px; }
+
+.and-titulo { font-size: 26px; margin: 24px 0 4px; letter-spacing: -0.01em; }
+.and-bajada { color: var(--and-tenue); margin: 0 0 24px; max-width: 70ch; }
+
+.and-aviso {
+  border: 1px solid var(--and-borde);
+  border-left: 4px solid var(--and-alerta);
+  background: var(--and-panel);
+  border-radius: var(--and-radio);
+  padding: 14px 16px;
+  margin: 0 0 24px;
+}
+.and-aviso h2 { font-size: 15px; margin: 0 0 6px; }
+.and-aviso p { margin: 0; color: var(--and-tenue); font-size: 14px; }
+
+.and-cifras {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin-bottom: 28px;
+}
+.and-cifra {
+  border: 1px solid var(--and-borde);
+  border-radius: var(--and-radio);
+  padding: 12px 14px;
+  background: var(--and-panel);
+}
+.and-cifra b { display: block; font-size: 24px; font-variant-numeric: tabular-nums; }
+.and-cifra span { color: var(--and-tenue); font-size: 12px; }
+
+.and-controles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.and-controles label { font-size: 13px; color: var(--and-tenue); }
+.and-controles select,
+.and-controles input {
+  font: inherit;
+  font-size: 14px;
+  padding: 7px 10px;
+  border: 1px solid var(--and-borde);
+  border-radius: 6px;
+  background: var(--and-fondo);
+  color: var(--and-texto);
+  min-height: 38px;
+}
+
+.and-boton {
+  font: inherit;
+  font-size: 14px;
+  padding: 8px 14px;
+  min-height: 38px;
+  border: 1px solid var(--and-borde);
+  border-radius: 6px;
+  background: var(--and-fondo);
+  color: var(--and-texto);
+  cursor: pointer;
+}
+.and-boton:hover { background: var(--and-panel); }
+.and-boton--principal { background: var(--and-acento); border-color: var(--and-acento); color: #fff; }
+.and-boton--principal:hover { filter: brightness(1.08); }
+
+.and-grupo { margin: 0 0 30px; }
+.and-grupo h2 {
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--and-tenue);
+  margin: 0 0 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--and-borde);
+}
+
+.and-tabla-envoltura { overflow-x: auto; }
+.and-tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  min-width: 720px;
+}
+.and-tabla th, .and-tabla td {
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--and-borde);
+  vertical-align: top;
+}
+.and-tabla th { font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--and-tenue); }
+.and-tabla tr:hover td { background: var(--and-panel); }
+.and-tabla code { font-family: var(--and-mono); font-size: 12.5px; }
+.and-tabla a { color: var(--and-acento); }
+
+.and-marca {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11.5px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--and-borde);
+  background: var(--and-panel);
+  white-space: nowrap;
+}
+.and-marca--pendiente { color: var(--and-alerta); border-color: currentColor; }
+.and-marca--ok { color: var(--and-ok); border-color: currentColor; }
+.and-marca--error { color: var(--and-error); border-color: currentColor; }
+
+.and-roles { color: var(--and-tenue); font-size: 12.5px; }
+
+.and-vacio {
+  border: 1px dashed var(--and-borde);
+  border-radius: var(--and-radio);
+  padding: 28px;
+  text-align: center;
+  color: var(--and-tenue);
+}
+
+.and-ficha {
+  border: 1px solid var(--and-borde);
+  border-radius: var(--and-radio);
+  padding: 20px;
+  background: var(--and-panel);
+  margin-bottom: 20px;
+}
+.and-ficha dl { display: grid; grid-template-columns: max-content 1fr; gap: 6px 16px; margin: 12px 0 0; font-size: 14px; }
+.and-ficha dt { color: var(--and-tenue); }
+.and-ficha dd { margin: 0; }
+
+@media (max-width: 640px) {
+  .and-envoltura { padding: 16px 14px 48px; }
+  .and-ficha dl { grid-template-columns: 1fr; gap: 2px; }
+  .and-ficha dt { margin-top: 8px; }
+}
