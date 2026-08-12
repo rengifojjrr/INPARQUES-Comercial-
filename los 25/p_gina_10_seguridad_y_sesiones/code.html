@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Seguridad y Sesiones - INPARQUES</title>
+<!-- Tailwind CSS with custom config -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#005131",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#e4e2dd",
+                        "on-tertiary-fixed-variant": "#3a4a43",
+                        "inverse-on-surface": "#f3f1eb",
+                        "outline-variant": "#bfc9c0",
+                        "outline": "#6f7a71",
+                        "inverse-surface": "#30312d",
+                        "on-background": "#1b1c18",
+                        "surface": "#fbf9f3",
+                        "on-surface": "#1b1c18",
+                        "surface-bright": "#fbf9f3",
+                        "secondary": "#3e6753",
+                        "primary-fixed-dim": "#88d7a8",
+                        "tertiary-container": "#516159",
+                        "surface-tint": "#186c45",
+                        "tertiary-fixed": "#d5e7dd",
+                        "secondary-fixed": "#c0edd4",
+                        "primary-container": "#176b45",
+                        "on-tertiary-fixed": "#0f1e19",
+                        "surface-container-highest": "#e4e2dd",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#446d59",
+                        "surface-container-high": "#eae8e2",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#002114",
+                        "on-error": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#99e9b9",
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#f5f3ed",
+                        "secondary-container": "#c0edd4",
+                        "error-container": "#ffdad6",
+                        "primary-fixed": "#a4f4c3",
+                        "inverse-primary": "#88d7a8",
+                        "on-primary": "#ffffff",
+                        "on-surface-variant": "#3f4942",
+                        "on-primary-fixed-variant": "#005232",
+                        "surface-container": "#f0eee8",
+                        "background": "#fbf9f3",
+                        "secondary-fixed-dim": "#a4d0b8",
+                        "tertiary-fixed-dim": "#b9cbc1",
+                        "on-primary-fixed": "#002111",
+                        "on-secondary-fixed-variant": "#264e3c",
+                        "surface-dim": "#dcdad4",
+                        "tertiary": "#3a4942",
+                        "on-tertiary-container": "#cadbd2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "sm": "12px",
+                        "xs": "8px",
+                        "lg": "24px",
+                        "xl": "32px",
+                        "base": "4px",
+                        "xxl": "48px",
+                        "touch-target": "44px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "display-lg": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "label-sm": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<!-- Fonts and Icons -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400; }
+        .icon-filled { font-variation-settings: 'FILL' 1, 'wght' 400; }
+        
+        /* Subtle scrollbar for modern look */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #bfc9c0; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #6f7a71; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen overflow-x-hidden antialiased">
+<!-- TopNavBar -->
+<header class="flex justify-between items-center w-full h-16 pl-80 pr-lg fixed top-0 z-40 bg-surface-container-lowest border-b border-outline-variant shadow-sm transition-opacity duration-150">
+<div class="flex items-center gap-md">
+<h1 class="font-headline-sm text-headline-sm font-bold text-primary truncate hidden md:block">INPARQUES Control Panel</h1>
+<nav class="hidden lg:flex items-center gap-sm ml-lg">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200 h-touch-target flex items-center px-sm" href="#">National Scope</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200 h-touch-target flex items-center px-sm" href="#">Region Scope</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200 h-touch-target flex items-center px-sm" href="#">Park Scope</a>
+</nav>
+</div>
+<div class="flex items-center gap-sm">
+<button class="h-touch-target w-touch-target flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors duration-200 rounded-full hover:bg-surface-container">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="h-touch-target w-touch-target flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors duration-200 rounded-full hover:bg-surface-container">
+<span class="material-symbols-outlined">verified_user</span>
+</button>
+<div class="h-10 w-10 rounded-full border border-outline-variant overflow-hidden ml-xs cursor-pointer">
+<img alt="Administrator Avatar with MFA" class="w-full h-full object-cover" data-alt="A professional headshot of a network security administrator. The person is wearing business casual attire, looking directly at the camera with a neutral, confident expression. The lighting is bright and even, resembling a modern corporate office setting. The background is a soft, blurred studio grey." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9nS6_V7nc6CBLjGvW1RfzguhG_9DR1PZAe6QMckUDEfu3q_WcyTWjB4BjcAy6B2Ro0uQeM1FYu9YBFDoRNVzcnkwOukWLNElhn8Z9o3fUGsyd2JJRd0G_LG4-Q1EeaSiR0ryoSxfLf4p5MVythanaHp4aJ9qaEdVMVN116d9SrcHPb7Xz1PeK3mR6YhiqzRM9X9dI_REciWkF0uWKAfpyooAZqED94mu6FNoljmYhEXUa-cxcJ63I"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<nav class="flex flex-col h-screen fixed left-0 top-0 overflow-y-auto px-xs py-md w-72 bg-surface border-r border-outline-variant z-50">
+<div class="flex flex-col items-center justify-center mb-xl mt-sm px-md text-center">
+<div class="h-16 w-16 bg-primary-container text-on-primary-container rounded-lg flex items-center justify-center mb-sm shadow-sm">
+<span class="material-symbols-outlined text-headline-lg icon-filled">admin_panel_settings</span>
+</div>
+<h2 class="font-headline-md text-headline-md font-bold text-primary leading-tight">INPARQUES</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-base">National Superadministrator</p>
+</div>
+<ul class="flex flex-col gap-base mt-md">
+<li><a class="flex items-center gap-sm px-md py-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors duration-200 h-touch-target" href="#"><span class="material-symbols-outlined">dashboard</span> National Home</a></li>
+<li><a class="flex items-center gap-sm px-md py-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors duration-200 h-touch-target" href="#"><span class="material-symbols-outlined">account_tree</span> Territorial Structure</a></li>
+<li><a class="flex items-center gap-sm px-md py-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors duration-200 h-touch-target" href="#"><span class="material-symbols-outlined">park</span> Parks</a></li>
+<li><a class="flex items-center gap-sm px-md py-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors duration-200 h-touch-target" href="#"><span class="material-symbols-outlined">business_center</span> Businesses</a></li>
+<li><a class="flex items-center gap-sm px-md py-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors duration-200 h-touch-target" href="#"><span class="material-symbols-outlined">person_outline</span> Users/Roles</a></li>
+<li><a class="flex items-center gap-sm px-md py-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors duration-200 h-touch-target" href="#"><span class="material-symbols-outlined">gavel</span> Global Rules</a></li>
+<li><a class="flex items-center gap-sm px-md py-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors duration-200 h-touch-target" href="#"><span class="material-symbols-outlined">extension</span> Integrations</a></li>
+<li><a class="flex items-center gap-sm px-md py-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors duration-200 h-touch-target" href="#"><span class="material-symbols-outlined">history</span> Audit</a></li>
+<!-- Active State -->
+<li>
+<a class="flex items-center gap-sm px-md py-sm rounded-r-lg font-label-md text-label-md text-primary font-bold border-r-4 border-primary bg-surface-container-high h-touch-target scale-[0.98] transition-transform duration-150" href="#">
+<span class="material-symbols-outlined icon-filled">security</span> Security
+                </a>
+</li>
+<li><a class="flex items-center gap-sm px-md py-sm rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors duration-200 h-touch-target" href="#"><span class="material-symbols-outlined">settings</span> Configuration</a></li>
+</ul>
+</nav>
+<!-- Main Content Canvas -->
+<main class="ml-72 mt-16 p-lg bg-background min-h-[calc(100vh-64px)]">
+<!-- Page Header -->
+<header class="flex flex-col md:flex-row md:items-center justify-between mb-xl gap-md">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-background">Security Operations Center</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">Monitor access logs, manage active sessions, and oversee MFA compliance across the national network.</p>
+</div>
+<button class="h-touch-target px-lg bg-error-container text-on-error-container hover:bg-error hover:text-on-error rounded-lg font-label-md text-label-md flex items-center gap-sm transition-colors duration-200 shadow-sm border border-error/20" onclick="document.getElementById('revokeModal').classList.remove('hidden')">
+<span class="material-symbols-outlined">dangerous</span>
+                Revoke All Sessions
+            </button>
+</header>
+<!-- KPI Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-md mb-lg">
+<!-- MFA Compliance -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg shadow-[0_4px_12px_rgba(40,51,46,0.02)] flex flex-col justify-between h-32 relative overflow-hidden group hover:shadow-[0_4px_12px_rgba(40,51,46,0.08)] transition-shadow">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-primary-container/10 rounded-full blur-xl group-hover:bg-primary-container/20 transition-colors"></div>
+<div class="flex justify-between items-start z-10">
+<span class="font-label-md text-label-md text-on-surface-variant">MFA Compliance</span>
+<span class="material-symbols-outlined text-primary">verified_user</span>
+</div>
+<div class="z-10 flex items-baseline gap-sm">
+<span class="font-headline-lg text-headline-lg text-on-background">98.2%</span>
+<span class="font-label-sm text-label-sm text-primary flex items-center"><span class="material-symbols-outlined text-[16px]">arrow_upward</span> 0.5%</span>
+</div>
+</div>
+<!-- Active Sessions -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg shadow-[0_4px_12px_rgba(40,51,46,0.02)] flex flex-col justify-between h-32 relative overflow-hidden group hover:shadow-[0_4px_12px_rgba(40,51,46,0.08)] transition-shadow">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-tertiary-container/10 rounded-full blur-xl group-hover:bg-tertiary-container/20 transition-colors"></div>
+<div class="flex justify-between items-start z-10">
+<span class="font-label-md text-label-md text-on-surface-variant">Active Sessions</span>
+<span class="material-symbols-outlined text-tertiary">devices</span>
+</div>
+<div class="z-10 flex items-baseline gap-sm">
+<span class="font-headline-lg text-headline-lg text-on-background">1,245</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Live</span>
+</div>
+</div>
+<!-- Failed Attempts -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg shadow-[0_4px_12px_rgba(40,51,46,0.02)] flex flex-col justify-between h-32 relative overflow-hidden group hover:shadow-[0_4px_12px_rgba(40,51,46,0.08)] transition-shadow">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-error-container/20 rounded-full blur-xl group-hover:bg-error-container/30 transition-colors"></div>
+<div class="flex justify-between items-start z-10">
+<span class="font-label-md text-label-md text-on-surface-variant">Failed Attempts (24h)</span>
+<span class="material-symbols-outlined text-error">gpp_bad</span>
+</div>
+<div class="z-10 flex items-baseline gap-sm">
+<span class="font-headline-lg text-headline-lg text-on-background">87</span>
+<span class="font-label-sm text-label-sm text-error flex items-center"><span class="material-symbols-outlined text-[16px]">arrow_upward</span> 12</span>
+</div>
+</div>
+<!-- Anomalous Accesses -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg shadow-[0_4px_12px_rgba(40,51,46,0.02)] flex flex-col justify-between h-32 relative overflow-hidden group hover:shadow-[0_4px_12px_rgba(40,51,46,0.08)] transition-shadow">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-[#ff9800]/20 rounded-full blur-xl group-hover:bg-[#ff9800]/30 transition-colors"></div>
+<div class="flex justify-between items-start z-10">
+<span class="font-label-md text-label-md text-on-surface-variant">Anomalous Accesses</span>
+<span class="material-symbols-outlined text-[#ff9800]">radar</span>
+</div>
+<div class="z-10 flex items-baseline gap-sm">
+<span class="font-headline-lg text-headline-lg text-on-background">3</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Requires review</span>
+</div>
+</div>
+</section>
+<!-- Main Content Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg">
+<!-- Left Column: Active Sessions & Policies -->
+<div class="lg:col-span-8 flex flex-col gap-lg">
+<!-- Active Sessions Table Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg shadow-[0_4px_12px_rgba(40,51,46,0.02)] flex flex-col h-full overflow-hidden">
+<div class="p-lg border-b border-outline-variant flex justify-between items-center bg-surface-bright">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-background">Active Administrative Sessions</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Real-time view of elevated access connections.</p>
+</div>
+<button class="h-touch-target px-md border border-outline-variant rounded-lg font-label-md text-label-md flex items-center gap-sm hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">filter_list</span> Filter
+                        </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface border-b border-outline-variant">
+<th class="p-md font-label-md text-label-md text-on-surface-variant font-semibold">User / Role</th>
+<th class="p-md font-label-md text-label-md text-on-surface-variant font-semibold">IP &amp; Location</th>
+<th class="p-md font-label-md text-label-md text-on-surface-variant font-semibold">Duration</th>
+<th class="p-md font-label-md text-label-md text-on-surface-variant font-semibold">MFA</th>
+<th class="p-md font-label-md text-label-md text-on-surface-variant font-semibold text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Row 1 -->
+<tr class="hover:bg-surface/50 transition-colors group">
+<td class="p-md">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-label-sm font-bold">JD</div>
+<div>
+<p class="font-label-md text-label-md text-on-background">J. Doe</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Park Admin</p>
+</div>
+</div>
+</td>
+<td class="p-md">
+<p class="font-body-md text-body-md text-on-background">192.168.1.45</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">location_on</span> Caracas, VE</p>
+</td>
+<td class="p-md font-body-md text-body-md text-on-surface-variant">2h 14m</td>
+<td class="p-md">
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-primary-container/10 text-primary font-label-sm text-label-sm border border-primary/20">
+<span class="material-symbols-outlined text-[14px]">verified</span> Active
+                                        </span>
+</td>
+<td class="p-md text-right">
+<button class="text-error hover:bg-error-container/50 p-2 rounded-md transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100" title="End Session">
+<span class="material-symbols-outlined">logout</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 (Anomalous) -->
+<tr class="hover:bg-error-container/10 bg-error-container/5 transition-colors group">
+<td class="p-md">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center font-label-sm font-bold">AS</div>
+<div>
+<p class="font-label-md text-label-md text-on-background flex items-center gap-1">A. Smith <span class="material-symbols-outlined text-error text-[16px]" title="Anomalous behavior detected">warning</span></p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Global Auditor</p>
+</div>
+</div>
+</td>
+<td class="p-md">
+<p class="font-body-md text-body-md text-on-background">104.23.11.9</p>
+<p class="font-label-sm text-label-sm text-error flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">public</span> Unknown Proxy</p>
+</td>
+<td class="p-md font-body-md text-body-md text-on-surface-variant">14m</td>
+<td class="p-md">
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-primary-container/10 text-primary font-label-sm text-label-sm border border-primary/20">
+<span class="material-symbols-outlined text-[14px]">verified</span> Active
+                                        </span>
+</td>
+<td class="p-md text-right">
+<button class="text-error hover:bg-error-container/80 p-2 rounded-md transition-colors border border-error/30" title="Force Terminate">
+<span class="material-symbols-outlined">block</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface/50 transition-colors group">
+<td class="p-md">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center font-label-sm font-bold">MR</div>
+<div>
+<p class="font-label-md text-label-md text-on-background">M. Rojas</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Tech Support</p>
+</div>
+</div>
+</td>
+<td class="p-md">
+<p class="font-body-md text-body-md text-on-background">192.168.2.11</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">location_on</span> Merida, VE</p>
+</td>
+<td class="p-md font-body-md text-body-md text-on-surface-variant">4h 02m</td>
+<td class="p-md">
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-primary-container/10 text-primary font-label-sm text-label-sm border border-primary/20">
+<span class="material-symbols-outlined text-[14px]">verified</span> Active
+                                        </span>
+</td>
+<td class="p-md text-right">
+<button class="text-error hover:bg-error-container/50 p-2 rounded-md transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100" title="End Session">
+<span class="material-symbols-outlined">logout</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-sm border-t border-outline-variant bg-surface flex justify-center">
+<button class="font-label-md text-label-md text-primary hover:underline px-md py-sm">View all 1,245 sessions</button>
+</div>
+</div>
+<!-- Credential Rotation Policy Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg shadow-[0_4px_12px_rgba(40,51,46,0.02)] flex items-center gap-lg">
+<div class="w-16 h-16 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-headline-lg icon-filled">password</span>
+</div>
+<div class="flex-grow">
+<h3 class="font-headline-sm text-headline-sm text-on-background mb-xs">Global Credential Rotation</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-sm">Next mandatory password update for all Tier 1 Administrators.</p>
+<div class="w-full bg-surface-variant rounded-full h-2.5 mb-1">
+<div class="bg-secondary h-2.5 rounded-full" style="width: 75%"></div>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant text-right">15 days remaining (90 day cycle)</p>
+</div>
+<button class="h-touch-target px-md bg-secondary text-on-secondary hover:bg-secondary/90 rounded-lg font-label-md text-label-md whitespace-nowrap transition-colors shrink-0">
+                        Force Early Rotation
+                    </button>
+</div>
+</div>
+<!-- Right Column: Incidents Feed -->
+<div class="lg:col-span-4 flex flex-col gap-lg">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg shadow-[0_4px_12px_rgba(40,51,46,0.02)] flex flex-col h-full">
+<div class="p-lg border-b border-outline-variant bg-surface-bright flex justify-between items-center">
+<h3 class="font-headline-md text-headline-md text-on-background flex items-center gap-sm">
+<span class="material-symbols-outlined text-outline">history_toggle_off</span> Security Incidents
+                        </h3>
+</div>
+<div class="p-lg flex-grow overflow-y-auto">
+<div class="relative border-l-2 border-outline-variant ml-3 space-y-6">
+<!-- Incident Item (Critical) -->
+<div class="relative pl-6">
+<span class="absolute -left-[11px] top-1 w-5 h-5 rounded-full bg-error border-4 border-surface-container-lowest flex items-center justify-center"></span>
+<div class="mb-1 flex justify-between items-start">
+<h4 class="font-label-md text-label-md text-on-background">Multiple Failed Logins</h4>
+<span class="font-label-sm text-label-sm text-on-surface-variant">10m ago</span>
+</div>
+<p class="font-body-sm text-sm text-on-surface-variant">15 failed attempts detected for account 'r.gomez' from IP 45.22.1.99. Account temporarily locked.</p>
+</div>
+<!-- Incident Item (Warning) -->
+<div class="relative pl-6">
+<span class="absolute -left-[11px] top-1 w-5 h-5 rounded-full bg-[#ff9800] border-4 border-surface-container-lowest flex items-center justify-center"></span>
+<div class="mb-1 flex justify-between items-start">
+<h4 class="font-label-md text-label-md text-on-background">Anomalous Location</h4>
+<span class="font-label-sm text-label-sm text-on-surface-variant">1h ago</span>
+</div>
+<p class="font-body-sm text-sm text-on-surface-variant">Admin 'A. Smith' logged in from unusual IP block. Flagged for review.</p>
+<div class="mt-sm h-24 rounded-md border border-outline-variant overflow-hidden" data-alt="A stylized, minimalist digital map showing a connection path from a known safe location to an anomalous unknown origin point. The map uses a dark, subdued color palette with a bright, glowing red line indicating the suspicious connection route. The aesthetic is tech-focused and abstract." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAhaH3WOGno2yg4APCXyHk2duw8WAJKQ6G6NtZdfUEO6bxaZzYZwKctkb_bMsKKXo07Vd5p0T2TM7nOlxAJvkU7wDCwZC42szMsZVcmngp_aABmpZlXhvdruTkFYp9uDj07tSingdakD5kIzFK9LQg71sGqujre_i8wACTNqneeH6QG-saM5XSKDoqYJmzRhrUqW9TEyLsEHOTJQlnwzjh48jjZUXcFPGnhdUv15DWmNQWQe43hYTim')"></div>
+</div>
+<!-- Incident Item (Info) -->
+<div class="relative pl-6">
+<span class="absolute -left-[11px] top-1 w-5 h-5 rounded-full bg-primary border-4 border-surface-container-lowest flex items-center justify-center"></span>
+<div class="mb-1 flex justify-between items-start">
+<h4 class="font-label-md text-label-md text-on-background">MFA Policy Updated</h4>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Yesterday</span>
+</div>
+<p class="font-body-sm text-sm text-on-surface-variant">System enforced hardware keys for all Superadministrators.</p>
+</div>
+<!-- Incident Item (Info) -->
+<div class="relative pl-6">
+<span class="absolute -left-[11px] top-1 w-5 h-5 rounded-full bg-outline-variant border-4 border-surface-container-lowest flex items-center justify-center"></span>
+<div class="mb-1 flex justify-between items-start">
+<h4 class="font-label-md text-label-md text-on-background">Weekly Audit Export</h4>
+<span class="font-label-sm text-label-sm text-on-surface-variant">2 days ago</span>
+</div>
+<p class="font-body-sm text-sm text-on-surface-variant">Automated security audit logs exported to secure storage.</p>
+</div>
+</div>
+</div>
+<div class="p-sm border-t border-outline-variant bg-surface flex justify-center">
+<button class="font-label-md text-label-md text-on-surface-variant hover:text-primary hover:underline px-md py-sm">Open Audit Log</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Modal: Bulk Revocation (Double Confirmation) -->
+<div class="hidden fixed inset-0 z-50 flex items-center justify-center bg-inverse-surface/60 backdrop-blur-sm transition-opacity" id="revokeModal">
+<div class="bg-surface-container-lowest border border-error-container rounded-xl shadow-[0_12px_32px_rgba(40,51,46,0.12)] w-full max-w-lg p-xl relative overflow-hidden">
+<!-- Warning Header -->
+<div class="flex items-start gap-md mb-lg">
+<div class="w-12 h-12 rounded-full bg-error-container text-error flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[28px]">warning</span>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-on-background">Revoke All Active Sessions?</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">This is a critical security action. It will immediately disconnect <strong>all</strong> active users, including administrators, requiring them to re-authenticate.</p>
+</div>
+</div>
+<!-- Double Confirmation Form -->
+<div class="bg-surface-variant/50 border border-outline-variant p-md rounded-lg mb-lg">
+<label class="flex items-start gap-sm cursor-pointer">
+<input class="mt-1 w-5 h-5 rounded border-outline text-error focus:ring-error focus:ring-offset-surface-container-lowest" id="confirmCheck" onchange="document.getElementById('execRevokeBtn').disabled = !this.checked; document.getElementById('execRevokeBtn').classList.toggle('opacity-50', !this.checked); document.getElementById('execRevokeBtn').classList.toggle('cursor-not-allowed', !this.checked);" type="checkbox"/>
+<span class="font-body-md text-body-md text-on-surface font-medium">I understand the impact of this action and confirm that I want to forcefully terminate all sessions network-wide.</span>
+</label>
+</div>
+<!-- Actions -->
+<div class="flex justify-end gap-md">
+<button class="h-touch-target px-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container rounded-lg font-label-md text-label-md transition-colors" onclick="document.getElementById('revokeModal').classList.add('hidden'); document.getElementById('confirmCheck').checked = false; document.getElementById('execRevokeBtn').disabled = true; document.getElementById('execRevokeBtn').classList.add('opacity-50', 'cursor-not-allowed');">
+                    Cancel
+                </button>
+<button class="h-touch-target px-lg bg-error text-on-error hover:bg-[#93000a] rounded-lg font-label-md text-label-md flex items-center gap-sm transition-colors opacity-50 cursor-not-allowed" disabled="" id="execRevokeBtn">
+<span class="material-symbols-outlined">power_settings_new</span> Execute Revocation
+                </button>
+</div>
+</div>
+</div>
+</body></html>

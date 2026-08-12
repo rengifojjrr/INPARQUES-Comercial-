@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>INPARQUES Control Panel - Configuración Institucional</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#005131",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#e4e2dd",
+                        "on-tertiary-fixed-variant": "#3a4a43",
+                        "inverse-on-surface": "#f3f1eb",
+                        "outline-variant": "#bfc9c0",
+                        "outline": "#6f7a71",
+                        "inverse-surface": "#30312d",
+                        "on-background": "#1b1c18",
+                        "surface": "#fbf9f3",
+                        "on-surface": "#1b1c18",
+                        "surface-bright": "#fbf9f3",
+                        "secondary": "#3e6753",
+                        "primary-fixed-dim": "#88d7a8",
+                        "tertiary-container": "#516159",
+                        "surface-tint": "#186c45",
+                        "tertiary-fixed": "#d5e7dd",
+                        "secondary-fixed": "#c0edd4",
+                        "primary-container": "#176b45",
+                        "on-tertiary-fixed": "#0f1e19",
+                        "surface-container-highest": "#e4e2dd",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#446d59",
+                        "surface-container-high": "#eae8e2",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#002114",
+                        "on-error": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#99e9b9",
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#f5f3ed",
+                        "secondary-container": "#c0edd4",
+                        "error-container": "#ffdad6",
+                        "primary-fixed": "#a4f4c3",
+                        "inverse-primary": "#88d7a8",
+                        "on-primary": "#ffffff",
+                        "on-surface-variant": "#3f4942",
+                        "on-primary-fixed-variant": "#005232",
+                        "surface-container": "#f0eee8",
+                        "background": "#fbf9f3",
+                        "secondary-fixed-dim": "#a4d0b8",
+                        "tertiary-fixed-dim": "#b9cbc1",
+                        "on-primary-fixed": "#002111",
+                        "on-secondary-fixed-variant": "#264e3c",
+                        "surface-dim": "#dcdad4",
+                        "tertiary": "#3a4942",
+                        "on-tertiary-container": "#cadbd2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "sm": "12px",
+                        "xs": "8px",
+                        "lg": "24px",
+                        "xl": "32px",
+                        "base": "4px",
+                        "xxl": "48px",
+                        "touch-target": "44px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "display-lg": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "label-sm": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; background-color: #F7F5EF; }
+        .material-symbols-outlined {
+          font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill { font-variation-settings: 'FILL' 1; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased overflow-hidden">
+<!-- TopNavBar -->
+<nav class="flex justify-between items-center w-full h-16 pl-80 pr-lg fixed top-0 z-40 bg-white shadow-sm">
+<div class="flex items-center gap-md">
+<h1 class="font-headline-sm text-headline-sm font-bold text-primary">INPARQUES Control Panel</h1>
+<div class="hidden md:flex gap-md ml-lg">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">National Scope</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Region Scope</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Park Scope</a>
+</div>
+</div>
+<div class="flex items-center gap-sm">
+<div class="relative w-64 mr-md hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full h-10 pl-10 pr-4 bg-surface rounded-full border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant outline-none transition-colors" placeholder="Search..." type="text"/>
+</div>
+<button aria-label="notifications" class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button aria-label="verified_user" class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">verified_user</span>
+</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant ml-2 flex-shrink-0 cursor-pointer">
+<img alt="Administrator Avatar with MFA" class="w-full h-full object-cover" data-alt="A close-up portrait of a professional administrator, looking confident and competent. They are wearing a sharp, modern green uniform with subtle insignia, standing against a clean, softly lit white background that evokes a sense of modern bureaucracy and environmental stewardship." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqPmimB9X3SAuOyhxaRtwdu2E6kfB-PJZK90sNNpxPC8TjL3Dim4IVIFz-FUhsxTbcgoxcLKEB05yJnyFXTdKJqNekfObIJPExPmr1S6FfvrPHaxaczowdNacwKvFWoBIPtx-XmrbU3U6Xnm_GHO4rCg2vMnd0JePv2x7RFQt2mxrFTopp-0EHD9o_E-VnIkGotdT8SZWMHjcVUB_du_13pswTt9op3PwRSY7tWBx0utu0KG1rCZ1J"/>
+</div>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="flex flex-col h-screen fixed left-0 top-0 overflow-y-auto px-xs py-md bg-surface border-r border-outline-variant w-72 z-50">
+<div class="flex flex-col items-center mb-xl px-4 pt-4">
+<div class="w-20 h-20 rounded-full overflow-hidden mb-4 border-2 border-primary-container p-1 bg-white">
+<img alt="National Superadministrator Logo" class="w-full h-full object-contain rounded-full" data-alt="The official logo of INPARQUES, rendered in a crisp, modern vector style. It features stylized green mountains and a sun, representing the natural parks of Venezuela. The logo is displayed on a pure white background, emphasizing its clean, authoritative, yet organic aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC47dSLqF4azV_t3xpZU8X9Q9HFVo009n6mTqqfiGVZBNvSrmew_-rOKiKQRLVPp6yhZd9rO2YVW5Ro0yg_ToyalSmXnsQCz20gXVIaotE_FQZVoVmga_KAr5GwZJw0GE_sS4IRavtKdMAQ3rHCzVIhfIvjMsCZ_1KVptbmm1dmXJJ5B7ug3bE05fymujWZbFBWceyYBXVAc0gelpFP9xK99oZVSCSs4f_lDI4DlIly0xs3v-Z4UFid"/>
+</div>
+<h2 class="font-headline-md text-headline-md font-bold text-primary text-center">INPARQUES</h2>
+<p class="font-body-md text-body-md text-on-surface-variant text-center">National Superadministrator</p>
+</div>
+<nav class="flex-1 flex flex-col gap-1 px-2">
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                National Home
+            </a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">account_tree</span>
+                Territorial Structure
+            </a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">park</span>
+                Parks
+            </a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">business_center</span>
+                Businesses
+            </a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">person_outline</span>
+                Users/Roles
+            </a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">gavel</span>
+                Global Rules
+            </a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">extension</span>
+                Integrations
+            </a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">history</span>
+                Audit
+            </a>
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg font-label-md text-label-md text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">security</span>
+                Security
+            </a>
+<!-- Active State -->
+<a class="flex items-center gap-4 px-4 py-3 rounded-lg font-label-md text-label-md text-primary font-bold border-r-4 border-primary bg-primary/5 hover:bg-surface-container transition-colors duration-200 transform hover:scale-[0.98]" href="#">
+<span class="material-symbols-outlined icon-fill">settings</span>
+                Configuration
+            </a>
+</nav>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-72 mt-16 p-lg h-[calc(100vh-64px)] overflow-y-auto w-[calc(100%-288px)]">
+<div class="max-w-7xl mx-auto">
+<header class="mb-xl flex justify-between items-end">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-2">Configuración Institucional</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl">Administre la identidad visual, datos de contacto, textos legales y parámetros generales de la plataforma nacional.</p>
+</div>
+<div class="flex gap-md">
+<button class="h-touch-target px-lg rounded-lg border border-outline-variant font-label-md text-label-md text-on-surface bg-white hover:bg-surface-container transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined">preview</span>
+                        Preview Changes
+                    </button>
+<button class="h-touch-target px-lg rounded-lg font-label-md text-label-md text-white bg-primary-container hover:bg-primary transition-colors flex items-center gap-2 shadow-sm">
+<span class="material-symbols-outlined">publish</span>
+                        Publish Changes
+                    </button>
+</div>
+</header>
+<div class="grid grid-cols-12 gap-lg">
+<!-- Left Column: Settings Navigation / Sections -->
+<div class="col-span-12 lg:col-span-3">
+<div class="bg-white rounded-xl border border-outline-variant p-4 sticky top-6">
+<nav class="flex flex-col gap-2">
+<a class="px-4 py-3 rounded-lg font-label-md text-label-md bg-secondary/10 text-primary-container flex items-center gap-3" href="#visual-identity">
+<span class="material-symbols-outlined icon-fill">palette</span>
+                                Identidad Visual
+                            </a>
+<a class="px-4 py-3 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors flex items-center gap-3" href="#contact-data">
+<span class="material-symbols-outlined">contact_mail</span>
+                                Datos de Contacto
+                            </a>
+<a class="px-4 py-3 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors flex items-center gap-3" href="#legal-texts">
+<span class="material-symbols-outlined">gavel</span>
+                                Textos Legales
+                            </a>
+<a class="px-4 py-3 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors flex items-center gap-3" href="#data-retention">
+<span class="material-symbols-outlined">database</span>
+                                Retención de Datos
+                            </a>
+<a class="px-4 py-3 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container hover:text-primary transition-colors flex items-center gap-3" href="#notifications">
+<span class="material-symbols-outlined">mail</span>
+                                Plantillas Notificaciones
+                            </a>
+</nav>
+</div>
+</div>
+<!-- Right Column: Settings Content -->
+<div class="col-span-12 lg:col-span-9 flex flex-col gap-xl pb-xxl">
+<!-- Visual Identity Section -->
+<section class="bg-white rounded-xl border border-outline-variant p-lg shadow-sm" id="visual-identity">
+<div class="border-b border-outline-variant pb-4 mb-6 flex justify-between items-center">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Identidad Visual</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Configure los logotipos y colores institucionales provisionales.</p>
+</div>
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full font-label-sm text-label-sm">Active</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg mb-8">
+<div>
+<label class="font-label-md text-label-md text-on-surface block mb-2">Logotipo Principal</label>
+<div class="border-2 border-dashed border-outline-variant rounded-lg p-6 flex flex-col items-center justify-center bg-surface hover:bg-surface-container transition-colors cursor-pointer group">
+<div class="w-24 h-24 bg-white rounded-lg shadow-sm border border-outline-variant flex items-center justify-center mb-4 overflow-hidden">
+<img alt="Current Primary Logo" class="w-full h-full object-contain p-2" data-alt="A graphic representation of the primary institutional logo for INPARQUES. The logo features stylized trees and a sun, rendered in flat, modern vector graphics using a palette of deep forest green, sage, and a hint of warm gold. It sits on a pure white background, looking highly professional and clean." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAz3aJGCS_Fhc8m0fBI9Q7VyRp9dNwgP1GONC9Hzf-Y9ailXsLor0xof-Mr_IcqHAYrrgHp87_VRMoigcNrnPkLfBt3JVFaSkBbr7VLc97LUbFkRJR3Q18_R_q-RiCwU2XzKcTMRzH8U8N54ldtunDizcS4hIDxUa4IjQNZ92WJ1WbEYUv6hIFn8zCDlkezLDGqrpfpbiYHZIjj_qYzq59WAgLw8_9pz5udV3ikaifSJyLouw6zzbBS"/>
+</div>
+<span class="font-label-md text-label-md text-primary group-hover:underline flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">upload</span> Cambiar Logotipo
+                                    </span>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm mt-2 text-center">PNG o SVG. Max 2MB.</p>
+</div>
+</div>
+<div>
+<label class="font-label-md text-label-md text-on-surface block mb-2">Logotipo Secundario (Monocromático)</label>
+<div class="border-2 border-dashed border-outline-variant rounded-lg p-6 flex flex-col items-center justify-center bg-surface hover:bg-surface-container transition-colors cursor-pointer group">
+<div class="w-24 h-24 bg-inverse-surface rounded-lg shadow-sm flex items-center justify-center mb-4 overflow-hidden">
+<img alt="Current Secondary Logo" class="w-full h-full object-contain p-2" data-alt="A secondary, monochromatic version of the INPARQUES logo. It is rendered entirely in pure white against a very dark charcoal grey background. The lines are clean and crisp, demonstrating how the logo works in high-contrast, single-color applications, maintaining its modern and authoritative feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQhdSU6dd-Dz073jrqaxcN3Svz8r_NSu3j3HHByjmi2M9nEagZFQ6G4KK-hd4lLyliJZRyIcJMy-e6aQzRyd675-TULcy4UvvHFaLuDaSmcPdyK3yiJ3B8VPPYePAWHSf-h8Ow2wFyEOgu7LOi3t1ghrHz39ex6wO5Xa89Fyg1UiDOp00BR5BkCsaGOtI0UldfTORvXa0krj3HI99VMwp63GB4SS4MD2W965paJYT85Ea8JuGm1xfz"/>
+</div>
+<span class="font-label-md text-label-md text-primary group-hover:underline flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">upload</span> Cambiar Logotipo
+                                    </span>
+</div>
+</div>
+</div>
+<div class="mb-4">
+<label class="font-label-md text-label-md text-on-surface block mb-4">Paleta de Colores Institucional</label>
+<div class="flex gap-4">
+<div class="flex flex-col items-center gap-2">
+<div class="w-16 h-16 rounded-full bg-primary border-2 border-outline-variant shadow-sm cursor-pointer hover:scale-105 transition-transform flex items-center justify-center">
+<span class="material-symbols-outlined text-white opacity-50">edit</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Primary</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-16 h-16 rounded-full bg-secondary border-2 border-outline-variant shadow-sm cursor-pointer hover:scale-105 transition-transform flex items-center justify-center">
+<span class="material-symbols-outlined text-white opacity-50">edit</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Secondary</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-16 h-16 rounded-full bg-tertiary-container border-2 border-outline-variant shadow-sm cursor-pointer hover:scale-105 transition-transform flex items-center justify-center">
+<span class="material-symbols-outlined text-white opacity-50">edit</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Accent</span>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="w-16 h-16 rounded-full bg-surface border-2 border-outline-variant shadow-sm cursor-pointer hover:scale-105 transition-transform flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant opacity-50">edit</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Surface</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Contact Data Section -->
+<section class="bg-white rounded-xl border border-outline-variant p-lg shadow-sm" id="contact-data">
+<div class="border-b border-outline-variant pb-4 mb-6">
+<h3 class="font-headline-md text-headline-md text-on-surface">Datos de Contacto Públicos</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Información visible en el pie de página de portales públicos y correos.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-lg gap-y-6">
+<div>
+<label class="font-label-md text-label-md text-on-surface block mb-2">Nombre Oficial de la Institución</label>
+<input class="w-full h-touch-target px-4 bg-surface rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary font-body-md text-body-md text-on-surface outline-none transition-colors" type="text" value="Instituto Nacional de Parques (INPARQUES)"/>
+</div>
+<div>
+<label class="font-label-md text-label-md text-on-surface block mb-2">Correo Electrónico de Soporte</label>
+<input class="w-full h-touch-target px-4 bg-surface rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary font-body-md text-body-md text-on-surface outline-none transition-colors" type="email" value="soporte@inparques.gob.ve"/>
+</div>
+<div class="md:col-span-2">
+<label class="font-label-md text-label-md text-on-surface block mb-2">Dirección Sede Principal</label>
+<textarea class="w-full p-4 bg-surface rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary font-body-md text-body-md text-on-surface outline-none transition-colors resize-none" rows="3">Av. Rómulo Gallegos con 2da. Transversal de Santa Eduvigis, Edificio Parque Cristal, Torre Oeste, Piso 2, Caracas, Miranda, Venezuela.</textarea>
+</div>
+<div>
+<label class="font-label-md text-label-md text-on-surface block mb-2">Teléfono Principal</label>
+<input class="w-full h-touch-target px-4 bg-surface rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary font-body-md text-body-md text-on-surface outline-none transition-colors" type="tel" value="+58 (212) 555-0192"/>
+</div>
+</div>
+</section>
+<!-- Publishing Section (Audit Trail) -->
+<section class="bg-surface-container-low rounded-xl border border-outline-variant p-lg">
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-on-secondary-container">history</span>
+</div>
+<div class="flex-1">
+<h4 class="font-headline-sm text-headline-sm text-on-surface mb-1">Última Publicación</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">Los cambios en la configuración institucional requieren revisión y entran en vigencia según la fecha programada.</p>
+<div class="bg-white rounded-lg border border-outline-variant p-4 text-sm font-body-md">
+<div class="flex justify-between items-center py-2 border-b border-surface-variant">
+<span class="text-on-surface-variant">Version:</span>
+<span class="font-label-md text-on-surface">v2.4.1</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-surface-variant">
+<span class="text-on-surface-variant">Published By:</span>
+<span class="font-label-md text-on-surface">Admin System</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-surface-variant">
+<span class="text-on-surface-variant">Effective Date:</span>
+<span class="font-label-md text-on-surface">Oct 15, 2023 - 00:00 VET</span>
+</div>
+<div class="flex justify-between items-center py-2">
+<span class="text-on-surface-variant">Status:</span>
+<span class="px-2 py-1 bg-secondary-fixed text-on-secondary-fixed rounded text-xs font-bold">LIVE</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div>
+</main>
+</body></html>

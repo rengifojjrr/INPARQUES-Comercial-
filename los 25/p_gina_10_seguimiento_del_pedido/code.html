@@ -1,0 +1,226 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Seguimiento del Pedido - INPARQUES Comercial</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#176b45",
+                        "on-surface-variant": "#3f4942",
+                        "outline-variant": "#bfc9c0",
+                        "on-primary": "#ffffff",
+                        "surface-tint": "#186c45",
+                        "on-surface": "#1b1c18",
+                        "surface-bright": "#fbf9f3",
+                        "surface-container-high": "#eae8e2",
+                        "on-tertiary-container": "#cadbd2",
+                        "tertiary-container": "#516159",
+                        "surface-container-highest": "#e4e2dd",
+                        "surface-container": "#f0eee8",
+                        "on-primary-fixed-variant": "#005232",
+                        "background": "#fbf9f3",
+                        "on-background": "#1b1c18",
+                        "primary-fixed-dim": "#88d7a8",
+                        "secondary-fixed": "#c0edd4",
+                        "secondary-container": "#c0edd4",
+                        "on-secondary-container": "#446d59",
+                        "on-primary-fixed": "#002111",
+                        "surface-variant": "#e4e2dd",
+                        "on-primary-container": "#99e9b9",
+                        "primary": "#005131",
+                        "error": "#ba1a1a",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#002114",
+                        "outline": "#6f7a71",
+                        "inverse-primary": "#88d7a8",
+                        "primary-fixed": "#a4f4c3",
+                        "secondary-fixed-dim": "#a4d0b8",
+                        "secondary": "#3e6753",
+                        "surface-dim": "#dcdad4",
+                        "tertiary-fixed": "#d5e7dd",
+                        "inverse-on-surface": "#f3f1eb",
+                        "surface": "#fbf9f3",
+                        "tertiary-fixed-dim": "#b9cbc1",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#264e3c",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#3a4942",
+                        "on-tertiary-fixed-variant": "#3a4a43",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#0f1e19",
+                        "surface-container-low": "#f5f3ed",
+                        "inverse-surface": "#30312d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "32px",
+                        "lg": "24px",
+                        "xxl": "48px",
+                        "md": "16px",
+                        "xs": "8px",
+                        "sm": "12px",
+                        "base": "4px",
+                        "touch-target": "44px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "display-lg": ["Manrope"],
+                        "label-sm": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-surface-dim docked full-width top-0 border-b border-outline-variant dark:border-outline flat no shadows flex justify-between items-center px-lg w-full h-14">
+<div class="flex items-center gap-2">
+<span aria-hidden="true" class="material-symbols-outlined text-primary dark:text-primary-fixed" data-icon="park">park</span>
+<span class="font-headline-md text-headline-md-mobile font-bold text-primary dark:text-primary-fixed">INPARQUES Comercial</span>
+</div>
+<button aria-label="Notificaciones" class="w-touch-target h-touch-target flex items-center justify-center rounded-full hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined text-on-surface-variant dark:text-on-surface-variant" data-icon="notifications">notifications</span>
+</button>
+</header>
+<main class="max-w-4xl mx-auto px-md py-lg md:px-lg grid grid-cols-1 md:grid-cols-12 gap-lg">
+<!-- Header Section -->
+<div class="md:col-span-12 flex flex-col items-center justify-center text-center py-sm">
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Seguimiento de Pedido</p>
+<h1 class="font-display-lg text-display-lg text-primary mt-base">#ABC-123</h1>
+<div class="mt-xs inline-flex items-center bg-primary-container/10 text-primary px-sm py-1 rounded-full border border-primary/20">
+<span class="material-symbols-outlined text-[16px] mr-1" data-icon="check_circle">check_circle</span>
+<span class="font-label-sm text-label-sm">Pago Confirmado</span>
+</div>
+</div>
+<!-- Left Column: Timelines & Details -->
+<div class="md:col-span-7 flex flex-col gap-lg">
+<!-- Order Status Timeline -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg shadow-sm">
+<h2 class="font-headline-md text-headline-md-mobile text-on-surface mb-md">Estado del Pedido</h2>
+<div class="relative pl-6 border-l-2 border-primary-container/30 space-y-8">
+<!-- Step 1: Done -->
+<div class="relative">
+<div class="absolute -left-[35px] top-0 w-6 h-6 bg-primary-container text-on-primary-container rounded-full flex items-center justify-center z-10 ring-4 ring-surface-container-lowest">
+<span class="material-symbols-outlined text-[14px]" data-icon="done">done</span>
+</div>
+<p class="font-label-md text-label-md text-on-surface">Orden Aceptada</p>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Tu orden ha sido procesada por el concesionario.</p>
+<p class="font-label-sm text-label-sm text-outline mt-1">10:42 AM</p>
+</div>
+<!-- Step 2: Active -->
+<div class="relative">
+<div class="absolute -left-[35px] top-0 w-6 h-6 bg-primary text-on-primary rounded-full flex items-center justify-center z-10 ring-4 ring-surface-container-lowest shadow-[0_0_0_2px_rgba(23,107,69,0.2)]">
+<span class="material-symbols-outlined text-[14px] animate-pulse" data-icon="soup_kitchen">soup_kitchen</span>
+</div>
+<p class="font-headline-md text-headline-md-mobile text-primary">Preparando</p>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Estamos preparando tu pedido con ingredientes frescos.</p>
+<p class="font-label-sm text-label-sm text-outline mt-1">10:45 AM - Actual</p>
+</div>
+<!-- Step 3: Pending -->
+<div class="relative">
+<div class="absolute -left-[35px] top-0 w-6 h-6 bg-surface-container-highest text-outline rounded-full flex items-center justify-center z-10 ring-4 ring-surface-container-lowest border border-outline-variant">
+<span class="material-symbols-outlined text-[14px]" data-icon="shopping_bag">shopping_bag</span>
+</div>
+<p class="font-label-md text-label-md text-outline">Lista para retirar</p>
+<p class="font-body-md text-body-md text-outline mt-1">Te notificaremos cuando puedas pasar por tu orden.</p>
+</div>
+</div>
+</section>
+<!-- Actions Card -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg shadow-sm flex flex-col gap-md">
+<button class="w-full min-h-touch-target bg-primary text-on-primary font-label-md text-label-md rounded-lg flex items-center justify-center gap-2 hover:bg-surface-tint transition-colors shadow-sm">
+<span class="material-symbols-outlined" data-icon="directions">directions</span>
+                    Ver cómo llegar
+                </button>
+<button class="w-full min-h-touch-target bg-surface-container-lowest border border-outline-variant text-on-surface font-label-md text-label-md rounded-lg flex items-center justify-center gap-2 hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined" data-icon="support_agent">support_agent</span>
+                    Contactar soporte
+                </button>
+</section>
+</div>
+<!-- Right Column: QR Code & Pickup Info -->
+<div class="md:col-span-5 flex flex-col gap-lg">
+<!-- QR Card -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg shadow-sm flex flex-col items-center text-center">
+<h3 class="font-headline-md text-headline-md-mobile text-on-surface mb-sm">Código de Retiro</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-lg">Muestra este código al concesionario cuando tu pedido esté listo.</p>
+<div class="bg-surface-container p-md rounded-xl border border-outline-variant/50 w-48 h-48 flex items-center justify-center relative overflow-hidden">
+<!-- Faux QR Code Pattern using gradients for a modern look -->
+<div class="absolute inset-2 bg-[radial-gradient(circle_at_center,_#1b1c18_2px,_transparent_2px)] [background-size:8px_8px] opacity-80"></div>
+<div class="absolute inset-8 border-4 border-primary rounded-lg z-10 flex items-center justify-center bg-surface-container-lowest/90 backdrop-blur-sm">
+<span class="material-symbols-outlined text-[48px] text-primary" data-icon="qr_code_scanner">qr_code_scanner</span>
+</div>
+<!-- Corner markers -->
+<div class="absolute top-4 left-4 w-6 h-6 border-4 border-on-surface rounded-sm"></div>
+<div class="absolute top-4 right-4 w-6 h-6 border-4 border-on-surface rounded-sm"></div>
+<div class="absolute bottom-4 left-4 w-6 h-6 border-4 border-on-surface rounded-sm"></div>
+</div>
+<div class="mt-lg pt-md border-t border-outline-variant w-full text-left">
+<div class="flex items-start gap-sm">
+<span class="material-symbols-outlined text-on-surface-variant mt-1" data-icon="storefront">storefront</span>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Kiosko El Ávila</p>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Sector Sabas Nieves, 1er Descanso.</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- BottomNavBar (Hidden on md and up) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-2 pb-safe bg-surface-container-lowest dark:bg-surface-container-low border-t border-outline-variant dark:border-outline shadow-sm">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-highest min-w-[64px] min-h-touch-target rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm">Inicio</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-highest min-w-[64px] min-h-touch-target rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="search">search</span>
+<span class="font-label-sm text-label-sm">Explorar</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-primary-container text-on-secondary-container dark:text-on-primary-container rounded-full px-4 py-1 min-w-[64px] min-h-touch-target scale-90 transition-all" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="shopping_bag">shopping_bag</span>
+<span class="font-label-sm text-label-sm">Pedidos</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-highest min-w-[64px] min-h-touch-target rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="help">help</span>
+<span class="font-label-sm text-label-sm">Ayuda</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-highest min-w-[64px] min-h-touch-target rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm">Perfil</span>
+</a>
+</nav>
+</body></html>

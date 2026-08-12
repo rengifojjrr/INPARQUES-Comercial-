@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Resumen Financiero - Park Commerce Finance</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#005131",
+                        "surface": "#fbf9f3",
+                        "secondary-container": "#c0edd4",
+                        "surface-variant": "#e4e2dd",
+                        "surface-container-high": "#eae8e2",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed": "#002114",
+                        "on-surface": "#1b1c18",
+                        "on-primary-container": "#99e9b9",
+                        "on-tertiary-container": "#cadbd2",
+                        "on-tertiary-fixed": "#0f1e19",
+                        "surface-container": "#f0eee8",
+                        "inverse-surface": "#30312d",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#bfc9c0",
+                        "surface-bright": "#fbf9f3",
+                        "tertiary-fixed": "#d5e7dd",
+                        "on-surface-variant": "#3f4942",
+                        "surface-container-highest": "#e4e2dd",
+                        "primary-container": "#176b45",
+                        "on-primary-fixed": "#002111",
+                        "outline": "#6f7a71",
+                        "tertiary": "#3a4942",
+                        "surface-tint": "#186c45",
+                        "on-background": "#1b1c18",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#3a4a43",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed-variant": "#264e3c",
+                        "primary-fixed-dim": "#88d7a8",
+                        "on-primary-fixed-variant": "#005232",
+                        "inverse-primary": "#88d7a8",
+                        "surface-container-low": "#f5f3ed",
+                        "tertiary-container": "#516159",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed-dim": "#a4d0b8",
+                        "error": "#ba1a1a",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed": "#c0edd4",
+                        "on-secondary-container": "#446d59",
+                        "secondary": "#3e6753",
+                        "primary-fixed": "#a4f4c3",
+                        "surface-dim": "#dcdad4",
+                        "inverse-on-surface": "#f3f1eb",
+                        "background": "#fbf9f3",
+                        "tertiary-fixed-dim": "#b9cbc1"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "32px",
+                        "touch-target": "44px",
+                        "sm": "12px",
+                        "base": "4px",
+                        "md": "16px",
+                        "xxl": "48px",
+                        "lg": "24px",
+                        "xs": "8px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "display-lg": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; background-color: #F7F5EF; color: #1b1c18; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .filled-icon { font-variation-settings: 'FILL' 1; }
+        .card-shadow { box-shadow: 0px 4px 12px rgba(40, 51, 46, 0.08); }
+    </style>
+</head>
+<body class="bg-surface text-on-surface h-screen flex overflow-hidden">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col h-full w-64 fixed left-0 top-0 bg-surface-container-low dark:bg-surface-container-lowest py-md px-sm border-r border-outline-variant dark:border-outline z-50">
+<div class="flex items-center gap-sm mb-xl px-sm">
+<img class="w-10 h-10 rounded-full object-cover border border-outline-variant" data-alt="A minimalist, highly professional logo for an environmental commercial entity. The logo features abstract geometric shapes resembling stylized leaves and a subtle structural pillar, blending nature with institutional authority. Designed in a modern vector style with deep forest greens and earthy tones on a clean white background. High resolution and crisp, evoking stewardship and reliability." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDena-eW_VvmWWbThxLgC_HcywjpPyebCGppEDa3tYNNTgIxopKpPOnQnvUcwiBeRtaL7BZkinRojj1TF9Vb-y8Nw18LOVeU9mYrmdDsx0zTUKaq7IeDwZJfubPnznsHZ5UZKFoC5JjeYOoG7AepL3TMLK6v2_OVZvalx70PWWgJAglDej3OZ4NElETTujFvOv9oVxA2L3U3jYX_a9u2XgXy9yTM19QHY8rfgzBQU54At3G8AN4YwKw"/>
+<div>
+<h1 class="text-headline-sm font-headline-sm font-extrabold text-on-secondary-fixed">Finance Portal</h1>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Audit &amp; Integrity</p>
+</div>
+</div>
+<ul class="flex flex-col gap-xs flex-grow">
+<!-- Active: Summary -->
+<li>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg bg-secondary-container text-on-secondary-container font-bold transition-all duration-200 ease-in-out cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined filled-icon">dashboard</span>
+<span class="text-label-md font-label-md">Summary</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant dark:hover:bg-surface-container-high transition-all duration-200 ease-in-out cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined">book_2</span>
+<span class="text-label-md font-label-md">Sales Books</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant dark:hover:bg-surface-container-high transition-all duration-200 ease-in-out cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="text-label-md font-label-md">Payments</span>
+</a>
+</li>
+</ul>
+<div class="mt-auto">
+<ul class="flex flex-col gap-xs pt-sm border-t border-outline-variant">
+<li>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant dark:hover:bg-surface-container-high transition-all duration-200 ease-in-out cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined">ios_share</span>
+<span class="text-label-md font-label-md">Export Manager</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant dark:hover:bg-surface-container-high transition-all duration-200 ease-in-out cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="text-label-md font-label-md">Support</span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col md:ml-64 w-full overflow-hidden">
+<!-- TopNavBar (Mobile only for Nav, but keeping header elements for desktop) -->
+<header class="flex justify-between items-center px-lg h-[64px] sticky top-0 z-40 bg-surface dark:bg-inverse-surface border-b border-outline-variant dark:border-outline">
+<div class="md:hidden">
+<span class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed-dim">Park Commerce Finance</span>
+</div>
+<div class="hidden md:block">
+<h2 class="text-headline-md font-headline-md text-on-surface">Resumen Financiero</h2>
+</div>
+<div class="flex items-center gap-md">
+<button class="w-[44px] h-[44px] flex items-center justify-center rounded-full hover:bg-surface-container transition-colors text-on-surface-variant cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-[44px] h-[44px] flex items-center justify-center rounded-full hover:bg-surface-container transition-colors text-on-surface-variant cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<img alt="Accountant Profile Avatar" class="w-10 h-10 rounded-full border border-outline-variant object-cover" data-alt="A professional headshot of a corporate accountant in a well-lit office setting. The individual is wearing smart business casual attire with a subtle earthy green tie or scarf, reflecting the brand's natural yet authoritative tone. Soft, natural lighting from a nearby window creates a bright, welcoming light-mode aesthetic. Shot with a shallow depth of field on a crisp white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBh49Pnt4rUrNPhiJsyXZzYpE0RHte777YL3XaEG7q-sPtH3XNFo65c6v8drLSTWHg01jvNwOH-2FMwesDFO5pRPq2P_tTdSNhYXz9ciFbTZe0HFf01LFuQAEFQ12Ihh3zznfEhkMHwO11CwavTbtRFVHx9sPZbxx6ZcZs4nccRRBZ0RAfKghk-Bq778En5eXg17lTIcC67ZxQl27K6J4yGT-gJVf5dc3VqMCVxo313deYRdYQaYs86"/>
+</div>
+</header>
+<!-- Main Scrollable Content -->
+<main class="flex-1 overflow-y-auto p-lg pb-[100px] md:pb-lg">
+<!-- Filter Bar -->
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-md mb-xl">
+<div class="flex flex-wrap gap-sm w-full sm:w-auto">
+<div class="relative w-full sm:w-auto">
+<select class="appearance-none bg-surface-container-lowest border border-outline-variant text-on-surface text-body-md font-body-md rounded-lg pl-sm pr-xl py-sm h-[44px] focus:outline-none focus:ring-2 focus:ring-primary w-full cursor-pointer">
+<option>Todos los Negocios</option>
+<option>Concesionario Norte</option>
+<option>EcoTours del Sur</option>
+</select>
+<span class="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+<div class="relative w-full sm:w-auto">
+<select class="appearance-none bg-surface-container-lowest border border-outline-variant text-on-surface text-body-md font-body-md rounded-lg pl-sm pr-xl py-sm h-[44px] focus:outline-none focus:ring-2 focus:ring-primary w-full cursor-pointer">
+<option>Este Mes</option>
+<option>Mes Pasado</option>
+<option>Trimestre Actual</option>
+</select>
+<span class="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+<div class="flex items-center gap-sm text-label-md font-label-md text-on-surface-variant bg-surface-container px-md py-sm rounded-full w-full sm:w-auto justify-center">
+<span class="material-symbols-outlined text-primary">check_circle</span>
+                    Última conciliación: Hoy, 08:30 AM
+                </div>
+</div>
+<!-- Dashboard Grid (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-lg">
+<!-- KPI: Ventas Brutas -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg flex flex-col gap-md hover:card-shadow transition-shadow">
+<div class="flex justify-between items-start">
+<span class="text-label-md font-label-md text-on-surface-variant">Ventas Brutas</span>
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-sm">point_of_sale</span>
+</div>
+</div>
+<div class="text-headline-lg font-headline-lg text-on-surface">
+                        Bs. 1.25M
+                    </div>
+<div class="text-label-sm font-label-sm text-primary flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">trending_up</span> +12% vs periodo anterior
+                    </div>
+</div>
+<!-- KPI: Pagos Confirmados -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg flex flex-col gap-md hover:card-shadow transition-shadow">
+<div class="flex justify-between items-start">
+<span class="text-label-md font-label-md text-on-surface-variant">Pagos Confirmados</span>
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-sm">verified</span>
+</div>
+</div>
+<div class="text-headline-lg font-headline-lg text-on-surface">
+                        Bs. 1.18M
+                    </div>
+<div class="text-label-sm font-label-sm text-on-surface-variant">
+                        94.4% tasa de conversión
+                    </div>
+</div>
+<!-- KPI: Monto Neto -->
+<div class="bg-surface-container-lowest border border-primary rounded-xl p-lg flex flex-col gap-md lg:col-span-2 shadow-sm relative overflow-hidden">
+<div class="absolute right-0 bottom-0 opacity-5 pointer-events-none">
+<span class="material-symbols-outlined text-[120px]">account_balance_wallet</span>
+</div>
+<div class="flex justify-between items-start relative z-10">
+<span class="text-label-md font-label-md text-on-surface-variant font-bold">Monto Neto Disponible</span>
+<span class="px-sm py-xs rounded-full bg-primary-container text-on-primary text-label-sm font-label-sm">Liquidación Pendiente</span>
+</div>
+<div class="text-display-lg font-display-lg text-primary relative z-10">
+                        Bs. 985K
+                    </div>
+<div class="text-label-sm font-label-sm text-on-surface-variant relative z-10">
+                        Después de deducciones e impuestos
+                    </div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

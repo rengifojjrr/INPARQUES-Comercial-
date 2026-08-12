@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Usuarios locales - Parques Nacionales Admin</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#b9cbc1",
+                    "on-primary-container": "#99e9b9",
+                    "primary-container": "#176b45",
+                    "surface-dim": "#dcdad4",
+                    "on-surface-variant": "#3f4942",
+                    "outline-variant": "#bfc9c0",
+                    "inverse-surface": "#30312d",
+                    "surface-container": "#f0eee8",
+                    "on-primary-fixed": "#002111",
+                    "on-primary-fixed-variant": "#005232",
+                    "inverse-on-surface": "#f3f1eb",
+                    "tertiary-container": "#516159",
+                    "primary-fixed-dim": "#88d7a8",
+                    "on-secondary-fixed": "#002114",
+                    "on-error-container": "#93000a",
+                    "surface-tint": "#186c45",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "outline": "#6f7a71",
+                    "on-tertiary-container": "#cadbd2",
+                    "surface-container-low": "#f5f3ed",
+                    "secondary-container": "#c0edd4",
+                    "tertiary-fixed": "#d5e7dd",
+                    "error-container": "#ffdad6",
+                    "primary": "#005131",
+                    "tertiary": "#3a4942",
+                    "surface-container-high": "#eae8e2",
+                    "on-tertiary-fixed-variant": "#3a4a43",
+                    "on-secondary": "#ffffff",
+                    "surface-container-highest": "#e4e2dd",
+                    "on-secondary-container": "#446d59",
+                    "surface": "#fbf9f3",
+                    "surface-variant": "#e4e2dd",
+                    "on-background": "#1b1c18",
+                    "secondary-fixed": "#c0edd4",
+                    "background": "#fbf9f3",
+                    "inverse-primary": "#88d7a8",
+                    "surface-bright": "#fbf9f3",
+                    "on-tertiary-fixed": "#0f1e19",
+                    "secondary": "#3e6753",
+                    "primary-fixed": "#a4f4c3",
+                    "error": "#ba1a1a",
+                    "on-primary": "#ffffff",
+                    "secondary-fixed-dim": "#a4d0b8",
+                    "on-surface": "#1b1c18",
+                    "on-secondary-fixed-variant": "#264e3c",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "32px",
+                    "xs": "8px",
+                    "base": "4px",
+                    "lg": "24px",
+                    "xxl": "48px",
+                    "touch-target": "44px",
+                    "sm": "12px",
+                    "md": "16px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Manrope", "sans-serif"],
+                    "label-sm": ["Manrope", "sans-serif"],
+                    "headline-lg-mobile": ["Manrope", "sans-serif"],
+                    "headline-md": ["Manrope", "sans-serif"],
+                    "body-lg": ["Manrope", "sans-serif"],
+                    "label-md": ["Manrope", "sans-serif"],
+                    "body-md": ["Manrope", "sans-serif"],
+                    "headline-lg": ["Manrope", "sans-serif"]
+            },
+            "fontSize": {
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        /* Custom styles to ensure icons render correctly */
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .icon-fill-1 {
+             font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex antialiased">
+<!-- SideNavBar -->
+<aside class="bg-surface h-screen w-64 fixed left-0 top-0 overflow-y-auto border-r border-outline-variant flex flex-col py-lg px-md z-50">
+<div class="mb-xl px-md">
+<h1 class="font-headline-lg text-headline-lg font-bold text-primary">Gestión de Parques</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Portal Administrativo</p>
+</div>
+<button class="mb-xl bg-primary-container text-on-primary-container h-touch-target rounded-lg font-label-md text-label-md flex items-center justify-center gap-sm hover:bg-surface-tint transition-colors duration-200">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+            Nueva Inspección
+        </button>
+<nav class="flex-1 flex flex-col gap-base">
+<!-- Tabs -->
+<a class="flex items-center gap-sm px-md h-touch-target rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">Inicio</span>
+</a>
+<a class="flex items-center gap-sm px-md h-touch-target rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="font-label-md text-label-md">Zonas y puntos</span>
+</a>
+<a class="flex items-center gap-sm px-md h-touch-target rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+<span class="font-label-md text-label-md">Negocios</span>
+</a>
+<a class="flex items-center gap-sm px-md h-touch-target rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings_applications">settings_applications</span>
+<span class="font-label-md text-label-md">Operación</span>
+</a>
+<a class="flex items-center gap-sm px-md h-touch-target rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="schedule">schedule</span>
+<span class="font-label-md text-label-md">Horarios</span>
+</a>
+<a class="flex items-center gap-sm px-md h-touch-target rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="report_problem">report_problem</span>
+<span class="font-label-md text-label-md">Incidencias</span>
+</a>
+<a class="flex items-center gap-sm px-md h-touch-target rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="verified">verified</span>
+<span class="font-label-md text-label-md">Inspecciones</span>
+</a>
+<a class="flex items-center gap-sm px-md h-touch-target rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-label-md text-label-md">Desempeño</span>
+</a>
+<!-- Active Tab -->
+<a class="flex items-center gap-sm px-md h-touch-target rounded-lg text-primary font-bold border-r-4 border-primary bg-secondary-container/20 opacity-80 transition-all duration-150" href="#">
+<span class="material-symbols-outlined icon-fill-1" data-icon="badge">badge</span>
+<span class="font-label-md text-label-md">Usuarios locales</span>
+</a>
+</nav>
+<div class="mt-auto pt-lg border-t border-outline-variant/50 flex flex-col gap-base">
+<a class="flex items-center gap-sm px-md h-touch-target rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-md text-label-md">Ajustes</span>
+</a>
+<a class="flex items-center gap-sm px-md h-touch-target rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-label-md text-label-md">Cerrar sesión</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<div class="flex-1 ml-64 flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="bg-surface docked full-width top-0 sticky z-40 border-b border-outline-variant flex justify-between items-center h-touch-target px-lg shadow-sm">
+<div class="flex items-center gap-md">
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-sm text-outline" data-icon="search">search</span>
+<input class="h-[36px] pl-[40px] pr-md rounded-full border border-outline-variant bg-surface-container-lowest text-body-md font-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none w-[240px]" placeholder="Buscar..." type="text"/>
+</div>
+</div>
+<div class="absolute left-1/2 -translate-x-1/2">
+<span class="font-headline-md text-headline-md font-extrabold text-primary">Parques Nacionales Admin</span>
+</div>
+<div class="flex items-center gap-sm">
+<button class="w-[40px] h-[40px] rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="w-[40px] h-[40px] rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+<button class="h-[36px] px-md ml-sm bg-surface-container text-on-surface border border-outline-variant rounded-lg font-label-md text-label-md hover:bg-surface-container-high transition-colors">
+                    Descargar Reporte
+                </button>
+</div>
+</header>
+<!-- Page Content -->
+<main class="p-lg lg:p-xl flex-1 flex flex-col gap-lg max-w-[1400px] w-full mx-auto">
+<!-- Header & Disclaimer -->
+<div class="flex flex-col gap-md">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-background mb-xs">Gestión del equipo institucional</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Administra el personal asignado, sus roles y ámbitos de acción dentro del parque.</p>
+</div>
+<div class="bg-secondary-container/30 border border-secondary/20 rounded-lg p-md flex items-start gap-sm">
+<span class="material-symbols-outlined text-secondary mt-[2px]" data-icon="info">info</span>
+<div>
+<p class="font-label-md text-label-md text-on-secondary-container">Aclaratoria Importante</p>
+<p class="font-body-md text-body-md text-on-surface-variant">La creación de privilegios nacionales requiere autorización central.</p>
+</div>
+</div>
+</div>
+<!-- Toolbar -->
+<div class="flex justify-between items-center py-sm">
+<div class="flex items-center gap-md">
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-sm text-outline" data-icon="filter_list">filter_list</span>
+<select class="h-touch-target pl-[40px] pr-xl rounded-lg border border-outline-variant bg-surface-container-lowest text-body-md font-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none appearance-none">
+<option>Todos los roles</option>
+<option>Guardaparque</option>
+<option>Inspector</option>
+<option>Coordinador</option>
+</select>
+</div>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-sm text-outline" data-icon="location_on">location_on</span>
+<select class="h-touch-target pl-[40px] pr-xl rounded-lg border border-outline-variant bg-surface-container-lowest text-body-md font-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none appearance-none">
+<option>Todos los ámbitos</option>
+<option>Zona A</option>
+<option>Todo el parque</option>
+</select>
+</div>
+</div>
+<button class="h-touch-target px-lg bg-primary text-on-primary rounded-lg font-label-md text-label-md flex items-center justify-center gap-sm hover:bg-primary-container hover:text-on-primary-container transition-colors shadow-sm">
+<span class="material-symbols-outlined" data-icon="person_add">person_add</span>
+                    Añadir Personal
+                </button>
+</div>
+<!-- Directory Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-lg">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg flex flex-col gap-md shadow-[0px_4px_12px_rgba(40,51,46,0.04)] hover:shadow-[0px_12px_32px_rgba(40,51,46,0.08)] transition-shadow duration-300 relative group overflow-hidden">
+<!-- Subtle top accent -->
+<div class="absolute top-0 left-0 right-0 h-1 bg-primary/20"></div>
+<div class="flex justify-between items-start">
+<div class="w-[64px] h-[64px] rounded-full overflow-hidden border-2 border-surface-container bg-surface-variant flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A professional portrait of a male park ranger in a pristine natural reserve setting. The person is wearing a neat, earth-toned uniform featuring subtle green and khaki colors matching a modern corporate environmental aesthetic. Soft, natural sunlight filters through leaves, casting gentle shadows. Shot with a shallow depth of field, highlighting the ranger's face with a clear, authoritative yet approachable expression. Light mode lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAK4aTotCTUqFu8UKrX8HtJ4CvKypM9n3yJ1yLnqd96AhCD8SSoPcVPU8vn59VhTnXlnFi23y6_h-p5Bzi5JWGSzXH1G9el9xC7aGsDvh3w-XEiEdYijyo72KJc30ep7iPMu4BtrMQUAyTYENgMszLwclyDflte54Jz42OIH9lcP6UfXe1j87m8h-YRW3PlAG9dXl0Exc4p_70DUu8xbJSLVuhnvuOb4etC9rIgj_8kPlAdkKQxVvi4"/>
+</div>
+<span class="bg-secondary-container/40 text-on-secondary-container font-label-sm text-label-sm px-3 py-1 rounded-full border border-secondary/20">
+                            Activo
+                        </span>
+</div>
+<div>
+<h3 class="font-headline-md text-[20px] font-semibold text-on-surface mb-1">Carlos Mendoza</h3>
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-[18px] text-primary" data-icon="shield">shield</span>
+<span class="font-label-md text-label-md text-primary">Guardaparque</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]" data-icon="map">map</span>
+<span class="font-body-md text-body-md text-[14px]">Zona A</span>
+</div>
+</div>
+<div class="mt-auto pt-4 border-t border-outline-variant/30 flex flex-col gap-2">
+<button class="w-full h-[36px] bg-surface-container border border-outline-variant rounded-lg font-label-md text-label-md text-on-surface flex items-center justify-center hover:bg-surface-container-high transition-colors">
+                            Proponer rol local
+                        </button>
+<div class="flex gap-2">
+<button class="flex-1 h-[36px] bg-transparent text-primary hover:bg-primary/5 rounded-lg font-label-md text-[13px] flex items-center justify-center transition-colors">
+                                Modificar ámbito
+                            </button>
+<button class="flex-1 h-[36px] bg-transparent text-error hover:bg-error/5 rounded-lg font-label-md text-[13px] flex items-center justify-center transition-colors">
+                                Suspender
+                            </button>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg flex flex-col gap-md shadow-[0px_4px_12px_rgba(40,51,46,0.04)] hover:shadow-[0px_12px_32px_rgba(40,51,46,0.08)] transition-shadow duration-300 relative group overflow-hidden">
+<div class="absolute top-0 left-0 right-0 h-1 bg-tertiary/20"></div>
+<div class="flex justify-between items-start">
+<div class="w-[64px] h-[64px] rounded-full overflow-hidden border-2 border-surface-container bg-surface-variant flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A professional corporate headshot of a female administrative coordinator standing outdoors near a modern, sustainable visitor center. They wear business casual attire with natural beige and forest green accents. The background features clean architectural lines of glass and light wood blending with nature. Bright, diffused daylight provides a clean, open atmosphere typical of premium institutional photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnFcqhxbMl_7YGUohIzLw6p6-948VIcLahO4BKumR8QBoFL3u9NIdh2qnYUvT27gFsJXuMRlhG-CwBrRVVjnBVc3lSR_tx0UfEaho0Ern9AZPKdMpzCfE4Xyg9wJv3v5pLdMFNcbgSIcMK2ms8ilqwKayLkNKG_xf36uopFdO1sqhws-44JiIK6CQNUfEtglZ_H1fwwI0qup0jG_vN_tGV3RwQrUsQIAWhW752FvJ9RwbK_9Vl_-jj"/>
+</div>
+<span class="bg-secondary-container/40 text-on-secondary-container font-label-sm text-label-sm px-3 py-1 rounded-full border border-secondary/20">
+                            Activo
+                        </span>
+</div>
+<div>
+<h3 class="font-headline-md text-[20px] font-semibold text-on-surface mb-1">Elena Ramírez</h3>
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-[18px] text-tertiary" data-icon="work">work</span>
+<span class="font-label-md text-label-md text-tertiary">Coordinador</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]" data-icon="public">public</span>
+<span class="font-body-md text-body-md text-[14px]">Todo el parque</span>
+</div>
+</div>
+<div class="mt-auto pt-4 border-t border-outline-variant/30 flex flex-col gap-2">
+<button class="w-full h-[36px] bg-surface-container border border-outline-variant rounded-lg font-label-md text-label-md text-on-surface flex items-center justify-center hover:bg-surface-container-high transition-colors">
+                            Proponer rol local
+                        </button>
+<div class="flex gap-2">
+<button class="flex-1 h-[36px] bg-transparent text-primary hover:bg-primary/5 rounded-lg font-label-md text-[13px] flex items-center justify-center transition-colors">
+                                Modificar ámbito
+                            </button>
+<button class="flex-1 h-[36px] bg-transparent text-error hover:bg-error/5 rounded-lg font-label-md text-[13px] flex items-center justify-center transition-colors">
+                                Suspender
+                            </button>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg flex flex-col gap-md shadow-[0px_4px_12px_rgba(40,51,46,0.04)] hover:shadow-[0px_12px_32px_rgba(40,51,46,0.08)] transition-shadow duration-300 relative group overflow-hidden opacity-75">
+<div class="absolute top-0 left-0 right-0 h-1 bg-outline-variant"></div>
+<div class="flex justify-between items-start">
+<div class="w-[64px] h-[64px] rounded-full overflow-hidden border-2 border-surface-container bg-surface-variant flex-shrink-0 grayscale">
+<img class="w-full h-full object-cover" data-alt="A portrait of a male environmental inspector in an outdoor setting, looking slightly off-camera. He is wearing a practical, muted olive green uniform vest over a light shirt. The background is slightly blurred forest scenery, lit by overcast, flat natural light. The overall mood is serious and professional, fitting a technical field role in a light mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDA5H155H3g0l6Rf0lt4DSvk0lwQiNdB-JUS29Tf0VwYxOIRhB1xFfuOd5ZdSFmg2Ppfymfn2i8CqdqT0bLI9_Vgfj6d_QG6H1IghENo_n2fFZPsoKuJ6YZjzw-PxXDfgFaJE2nSPWillwnoeDzCt0uOyxERncwSUFdyA1PAjntUiNMrL-hMnaxT0tYIMfYaOhvF5z8maOPyryiUtr-8__ulEp2gL53WuVg2ays5jpADrXm0XMh0f45"/>
+</div>
+<span class="bg-surface-variant text-on-surface-variant font-label-sm text-label-sm px-3 py-1 rounded-full border border-outline-variant">
+                            Suspendido
+                        </span>
+</div>
+<div>
+<h3 class="font-headline-md text-[20px] font-semibold text-on-surface mb-1">Javier Soto</h3>
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant" data-icon="search_check">search_check</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Inspector</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]" data-icon="map">map</span>
+<span class="font-body-md text-body-md text-[14px]">Zona B</span>
+</div>
+</div>
+<div class="mt-auto pt-4 border-t border-outline-variant/30 flex flex-col gap-2">
+<button class="w-full h-[36px] bg-surface-container border border-outline-variant rounded-lg font-label-md text-label-md text-on-surface flex items-center justify-center hover:bg-surface-container-high transition-colors" disabled="">
+                            Proponer rol local
+                        </button>
+<div class="flex gap-2">
+<button class="flex-1 h-[36px] bg-transparent text-primary hover:bg-primary/5 rounded-lg font-label-md text-[13px] flex items-center justify-center transition-colors">
+                                Restaurar
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

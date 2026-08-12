@@ -1,0 +1,215 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Valoración de la Experiencia</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#176b45",
+                        "on-surface-variant": "#3f4942",
+                        "outline-variant": "#bfc9c0",
+                        "on-primary": "#ffffff",
+                        "surface-tint": "#186c45",
+                        "on-surface": "#1b1c18",
+                        "surface-bright": "#fbf9f3",
+                        "surface-container-high": "#eae8e2",
+                        "on-tertiary-container": "#cadbd2",
+                        "tertiary-container": "#516159",
+                        "surface-container-highest": "#e4e2dd",
+                        "surface-container": "#f0eee8",
+                        "on-primary-fixed-variant": "#005232",
+                        "background": "#fbf9f3",
+                        "on-background": "#1b1c18",
+                        "primary-fixed-dim": "#88d7a8",
+                        "secondary-fixed": "#c0edd4",
+                        "secondary-container": "#c0edd4",
+                        "on-secondary-container": "#446d59",
+                        "on-primary-fixed": "#002111",
+                        "surface-variant": "#e4e2dd",
+                        "on-primary-container": "#99e9b9",
+                        "primary": "#005131",
+                        "error": "#ba1a1a",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#002114",
+                        "outline": "#6f7a71",
+                        "inverse-primary": "#88d7a8",
+                        "primary-fixed": "#a4f4c3",
+                        "secondary-fixed-dim": "#a4d0b8",
+                        "secondary": "#3e6753",
+                        "surface-dim": "#dcdad4",
+                        "tertiary-fixed": "#d5e7dd",
+                        "inverse-on-surface": "#f3f1eb",
+                        "surface": "#fbf9f3",
+                        "tertiary-fixed-dim": "#b9cbc1",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#264e3c",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#3a4942",
+                        "on-tertiary-fixed-variant": "#3a4a43",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#0f1e19",
+                        "surface-container-low": "#f5f3ed",
+                        "inverse-surface": "#30312d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "32px",
+                        "lg": "24px",
+                        "xxl": "48px",
+                        "md": "16px",
+                        "xs": "8px",
+                        "sm": "12px",
+                        "base": "4px",
+                        "touch-target": "44px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "display-lg": ["Manrope"],
+                        "label-sm": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+        .star-rating .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; cursor: pointer; transition: color 0.2s; }
+        .star-rating .material-symbols-outlined.filled { font-variation-settings: 'FILL' 1; color: #176B45; }
+        .star-rating .material-symbols-outlined:hover { color: #88d7a8; }
+        
+        /* Form Focus Styles */
+        textarea:focus { outline: none; border-color: #176B45; box-shadow: 0 0 0 2px rgba(23, 107, 69, 0.2); }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col items-center justify-center p-md md:p-xl">
+<!-- Header / Nav Shell is suppressed here as per "Linear/Transactional" rule -->
+<main class="w-full max-w-2xl bg-surface-container-lowest rounded-xl shadow-lg border border-outline-variant p-lg md:p-xl relative overflow-hidden">
+<!-- Decorative Header Background -->
+<div class="absolute top-0 left-0 w-full h-32 bg-cover bg-center opacity-20 -z-10 pointer-events-none rounded-t-xl" data-alt="A macro shot of vibrant green fern leaves in a dense tropical rainforest. The lighting is soft and natural, filtering through the canopy, creating a calm, earthy, and organic mood that reflects environmental stewardship. The image is high-resolution, professional, and slightly desaturated to fit a modern corporate aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCvx87m-ecQB7QyUJk3hsthJo-n7FRp7ZSpqJzA0kIot3zxNwjWa-WqiR-BYaqwpUoDd2WFKMCEF5BaMt0LCc9GmgqL-gNHEnliF60SYxa7kWRiwYndAEdrVfVzzMC6T44Nr4AJ9L4cBTigd4fq_bPX3yjfv62UU9sMhEdnbRxCjoOK4TtkOPsXUpmc51mDM9Zf5B8CRC-P9TzYBBahwyXKrJo906AKaelYDyTlCEqaW9o4-EHydjLk')"></div>
+<header class="text-center mb-xl pt-lg relative z-10">
+<h1 class="font-headline-lg text-headline-lg text-primary mb-sm">Valoración de la Experiencia</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Tu opinión es fundamental para proteger y mejorar nuestros parques.</p>
+</header>
+<form class="space-y-xl relative z-10" id="feedback-form" onsubmit="event.preventDefault(); document.getElementById('feedback-form').classList.add('hidden'); document.getElementById('success-message').classList.remove('hidden');">
+<!-- Ratings Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg bg-surface-container-low p-lg rounded-lg border border-outline-variant">
+<!-- General Rating -->
+<div class="flex flex-col items-start gap-xs">
+<label class="font-label-md text-label-md text-on-surface">General</label>
+<div class="star-rating flex text-outline" data-category="general">
+<span class="material-symbols-outlined text-[32px] filled" data-value="1">star</span>
+<span class="material-symbols-outlined text-[32px] filled" data-value="2">star</span>
+<span class="material-symbols-outlined text-[32px] filled" data-value="3">star</span>
+<span class="material-symbols-outlined text-[32px] filled" data-value="4">star</span>
+<span class="material-symbols-outlined text-[32px] filled" data-value="5">star</span>
+</div>
+</div>
+<!-- Rapidez Rating -->
+<div class="flex flex-col items-start gap-xs">
+<label class="font-label-md text-label-md text-on-surface">Rapidez</label>
+<div class="star-rating flex text-outline" data-category="rapidez">
+<span class="material-symbols-outlined text-[32px] filled" data-value="1">star</span>
+<span class="material-symbols-outlined text-[32px] filled" data-value="2">star</span>
+<span class="material-symbols-outlined text-[32px] filled" data-value="3">star</span>
+<span class="material-symbols-outlined text-[32px] filled" data-value="4">star</span>
+<span class="material-symbols-outlined text-[32px] filled" data-value="5">star</span>
+</div>
+</div>
+<!-- Calidad Rating -->
+<div class="flex flex-col items-start gap-xs md:col-span-2">
+<label class="font-label-md text-label-md text-on-surface">Calidad</label>
+<div class="star-rating flex text-outline" data-category="calidad">
+<span class="material-symbols-outlined text-[32px] filled" data-value="1">star</span>
+<span class="material-symbols-outlined text-[32px] filled" data-value="2">star</span>
+<span class="material-symbols-outlined text-[32px] filled" data-value="3">star</span>
+<span class="material-symbols-outlined text-[32px] filled" data-value="4">star</span>
+<span class="material-symbols-outlined text-[32px] filled" data-value="5">star</span>
+</div>
+</div>
+</div>
+<!-- Text Feedback -->
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface" for="feedback-text">Cuéntanos más...</label>
+<textarea class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg p-sm font-body-md text-body-md text-on-surface resize-none transition-all duration-200" id="feedback-text" placeholder="Comparte detalles sobre tu experiencia..." rows="4"></textarea>
+</div>
+<!-- Upload Photo -->
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface">Adjuntar Evidencia (Opcional)</label>
+<div class="border-2 border-dashed border-outline-variant rounded-lg p-lg flex flex-col items-center justify-center gap-sm bg-surface-container hover:bg-surface-container-highest cursor-pointer transition-colors duration-200">
+<span class="material-symbols-outlined text-outline text-[48px]">add_photo_alternate</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Haz clic para subir foto/evidencia</span>
+<span class="font-body-md text-body-md text-outline text-sm">JPG, PNG, PDF (Max 5MB)</span>
+</div>
+</div>
+<!-- Submit Button -->
+<div class="pt-sm">
+<button class="w-full h-touch-target bg-primary text-on-primary font-label-md text-label-md rounded-lg flex items-center justify-center gap-xs hover:bg-surface-tint shadow-sm hover:shadow-md transition-all duration-200 active:scale-95" type="submit">
+<span class="material-symbols-outlined">send</span>
+                    Enviar mi valoración
+                </button>
+</div>
+</form>
+<!-- Success State (Hidden by default) -->
+<div class="hidden flex flex-col items-center justify-center text-center py-xxl z-10 relative" id="success-message">
+<div class="w-24 h-24 bg-primary-container rounded-full flex items-center justify-center mb-lg shadow-sm">
+<span class="material-symbols-outlined text-[64px] text-on-primary-container" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-primary mb-sm">¡Gracias por tu feedback!</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-xl max-w-md mx-auto">Tus comentarios nos ayudan a mantener los altos estándares de nuestros parques nacionales.</p>
+<button class="h-touch-target px-lg bg-surface-container-high text-on-surface font-label-md text-label-md rounded-lg border border-outline-variant hover:bg-surface-container-highest transition-colors duration-200" onclick="window.location.reload();">
+                Volver al inicio
+            </button>
+</div>
+</main>
+<script>
+        // Simple interactive star rating logic
+        document.querySelectorAll('.star-rating').forEach(group => {
+            const stars = group.querySelectorAll('span');
+            stars.forEach((star, index) => {
+                star.addEventListener('click', () => {
+                    stars.forEach((s, i) => {
+                        if (i <= index) {
+                            s.classList.add('filled');
+                        } else {
+                            s.classList.remove('filled');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body></html>

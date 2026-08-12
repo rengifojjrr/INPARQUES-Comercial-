@@ -1,0 +1,225 @@
+<!DOCTYPE html><html lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>INPARQUES Comercial - Perfil y Preferencias</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#176b45",
+                        "on-surface-variant": "#3f4942",
+                        "outline-variant": "#bfc9c0",
+                        "on-primary": "#ffffff",
+                        "surface-tint": "#186c45",
+                        "on-surface": "#1b1c18",
+                        "surface-bright": "#fbf9f3",
+                        "surface-container-high": "#eae8e2",
+                        "on-tertiary-container": "#cadbd2",
+                        "tertiary-container": "#516159",
+                        "surface-container-highest": "#e4e2dd",
+                        "surface-container": "#f0eee8",
+                        "on-primary-fixed-variant": "#005232",
+                        "background": "#fbf9f3",
+                        "on-background": "#1b1c18",
+                        "primary-fixed-dim": "#88d7a8",
+                        "secondary-fixed": "#c0edd4",
+                        "secondary-container": "#c0edd4",
+                        "on-secondary-container": "#446d59",
+                        "on-primary-fixed": "#002111",
+                        "surface-variant": "#e4e2dd",
+                        "on-primary-container": "#99e9b9",
+                        "primary": "#005131",
+                        "error": "#ba1a1a",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#002114",
+                        "outline": "#6f7a71",
+                        "inverse-primary": "#88d7a8",
+                        "primary-fixed": "#a4f4c3",
+                        "secondary-fixed-dim": "#a4d0b8",
+                        "secondary": "#3e6753",
+                        "surface-dim": "#dcdad4",
+                        "tertiary-fixed": "#d5e7dd",
+                        "inverse-on-surface": "#f3f1eb",
+                        "surface": "#fbf9f3",
+                        "tertiary-fixed-dim": "#b9cbc1",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#264e3c",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#3a4942",
+                        "on-tertiary-fixed-variant": "#3a4a43",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#0f1e19",
+                        "surface-container-low": "#f5f3ed",
+                        "inverse-surface": "#30312d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "32px",
+                        "lg": "24px",
+                        "xxl": "48px",
+                        "md": "16px",
+                        "xs": "8px",
+                        "sm": "12px",
+                        "base": "4px",
+                        "touch-target": "44px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "display-lg": ["Manrope"],
+                        "label-sm": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen pb-20 md:pb-0 flex flex-col antialiased">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center px-lg w-full h-14 bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline docked full-width top-0 z-40">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed" data-icon="park">park</span>
+<h1 class="font-headline-md text-headline-md-mobile md:text-headline-md font-bold text-primary dark:text-primary-fixed">INPARQUES Comercial</h1>
+</div>
+<button class="flex items-center justify-center min-w-[44px] min-h-[44px] rounded-full hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-transform duration-150 active:scale-95 text-on-surface-variant dark:text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow container mx-auto px-4 md:px-lg py-lg max-w-4xl space-y-lg">
+<!-- Profile Header -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-sm flex flex-col md:flex-row items-center md:items-start gap-md">
+<div class="relative w-24 h-24 rounded-full overflow-hidden border-2 border-primary-container shrink-0">
+<img alt="Avatar del Visitante" class="w-full h-full object-cover" data-alt="A professional yet inviting portrait photograph of a park visitor or administrative user, smiling subtly. The background is softly blurred showing natural greenery, evoking an organic and earthy tone aligned with the INPARQUES aesthetic. The lighting is natural and bright, typical of a sunny day in a national park. The overall style is clean, modern corporate, and approachable." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfT7EeB0y9JoplcqQtyVPpb8i6OAW6fUyyuXUQ5GQQt1b3rrMybjqtkaNENmYr5jCf82PhLIfg1n217p1GX7kAYRPFk8wQQ9bwHRukKxcMyv0n8v2BmfJ13EOE_LmgH3bHXW7wWxYds167FdJILXyPP8GSWtouzhzm8SMRPzzEhhA4rEe8pXmVwtchUVHGBm7IaAYjHuXd-qxjEym1kX54jpZIx14VJTt_6IKeqK2TZGzCeHxipbtB">
+<div class="absolute inset-0 bg-primary/10 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity cursor-pointer">
+<span class="material-symbols-outlined text-white">photo_camera</span>
+</div>
+</div>
+<div class="flex-grow text-center md:text-left">
+<h2 class="font-headline-lg-mobile md:text-headline-lg text-primary">Usuario Invitado</h2>
+<p class="font-body-md text-on-surface-variant mt-1">Visitante Regular</p>
+<div class="flex items-center justify-center md:justify-start gap-xs mt-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+<span class="font-label-md text-label-md">Caracas, VE</span>
+</div>
+</div>
+<button class="bg-primary-container text-on-primary min-h-[44px] px-lg rounded-lg font-label-md text-label-md hover:bg-surface-tint transition-colors mt-4 md:mt-0">
+                Editar Perfil
+            </button>
+</div>
+<!-- Preferences Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<!-- Option Card 1: Mis datos -->
+<a class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md hover:shadow-[0px_4px_12px_rgba(40,51,46,0.08)] transition-all group flex items-center gap-md min-h-[88px]" href="#">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container shrink-0 group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined">badge</span>
+</div>
+<div class="flex-grow">
+<h3 class="font-headline-md text-body-md font-semibold text-on-surface group-hover:text-primary transition-colors">Mis datos</h3>
+<p class="font-body-md text-[14px] text-on-surface-variant leading-tight">Información personal y contacto</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors">chevron_right</span>
+</a>
+<!-- Option Card 2: Notificaciones -->
+<a class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md hover:shadow-[0px_4px_12px_rgba(40,51,46,0.08)] transition-all group flex items-center gap-md min-h-[88px]" href="#">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container shrink-0 group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined">notifications_active</span>
+</div>
+<div class="flex-grow">
+<h3 class="font-headline-md text-body-md font-semibold text-on-surface group-hover:text-primary transition-colors">Notificaciones</h3>
+<p class="font-body-md text-[14px] text-on-surface-variant leading-tight">Alertas de reservas y avisos del parque</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors">chevron_right</span>
+</a>
+<!-- Option Card 3: Métodos de pago guardados -->
+<a class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md hover:shadow-[0px_4px_12px_rgba(40,51,46,0.08)] transition-all group flex items-center gap-md min-h-[88px]" href="#">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container shrink-0 group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined">credit_card</span>
+</div>
+<div class="flex-grow">
+<h3 class="font-headline-md text-body-md font-semibold text-on-surface group-hover:text-primary transition-colors">Métodos de pago guardados</h3>
+<p class="font-body-md text-[14px] text-on-surface-variant leading-tight">Tarjetas y cuentas para concesiones</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors">chevron_right</span>
+</a>
+<!-- Option Card 4: Accesibilidad -->
+<a class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md hover:shadow-[0px_4px_12px_rgba(40,51,46,0.08)] transition-all group flex items-center gap-md min-h-[88px]" href="#">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container shrink-0 group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined">accessibility_new</span>
+</div>
+<div class="flex-grow">
+<h3 class="font-headline-md text-body-md font-semibold text-on-surface group-hover:text-primary transition-colors">Accesibilidad</h3>
+<p class="font-body-md text-[14px] text-on-surface-variant leading-tight">Ajustes visuales y de interacción</p>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors">chevron_right</span>
+</a>
+</div>
+<!-- Danger Zone & Logout -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg mt-xl">
+<h3 class="font-headline-md text-headline-md-mobile text-error mb-4">Gestión de Cuenta</h3>
+<div class="space-y-md">
+<button class="w-full flex items-center justify-center gap-2 min-h-[44px] rounded-lg border border-outline-variant text-on-surface bg-surface-container-lowest hover:bg-surface-container-high transition-colors font-label-md text-label-md">
+<span class="material-symbols-outlined text-[20px]">logout</span>
+                    Cerrar sesión
+                </button>
+<button class="w-full flex items-center justify-center gap-2 min-h-[44px] rounded-lg border border-error text-error bg-error-container/20 hover:bg-error-container transition-colors font-label-md text-label-md">
+<span class="material-symbols-outlined text-[20px]">delete_forever</span>
+                    Solicitar eliminación de cuenta
+                </button>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-2 pb-safe bg-surface-container-lowest dark:bg-surface-container-low border-t border-outline-variant dark:border-outline shadow-sm">
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-highest min-w-[64px] min-h-[48px] rounded-lg transition-colors">
+<span class="material-symbols-outlined mb-1" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm">Inicio</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-highest min-w-[64px] min-h-[48px] rounded-lg transition-colors">
+<span class="material-symbols-outlined mb-1" data-icon="search">search</span>
+<span class="font-label-sm text-label-sm">Explorar</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-highest min-w-[64px] min-h-[48px] rounded-lg transition-colors">
+<span class="material-symbols-outlined mb-1" data-icon="shopping_bag">shopping_bag</span>
+<span class="font-label-sm text-label-sm">Pedidos</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-highest min-w-[64px] min-h-[48px] rounded-lg transition-colors">
+<span class="material-symbols-outlined mb-1" data-icon="help">help</span>
+<span class="font-label-sm text-label-sm">Ayuda</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-secondary-container dark:bg-primary-container text-on-secondary-container dark:text-on-primary-container rounded-full px-4 py-1 hover:bg-surface-container-high dark:hover:bg-surface-container-highest min-w-[64px] min-h-[48px] transition-all scale-90">
+<span class="material-symbols-outlined mb-1" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm">Perfil</span>
+</button>
+</nav>
+</body></html>

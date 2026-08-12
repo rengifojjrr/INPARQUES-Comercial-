@@ -1,0 +1,296 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Equipo Operativo - Parques Nacionales</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed-variant": "#3a4a43",
+                        "surface-variant": "#e4e2dd",
+                        "on-background": "#1b1c18",
+                        "surface-dim": "#dcdad4",
+                        "surface-container-high": "#eae8e2",
+                        "on-secondary-container": "#446d59",
+                        "surface-tint": "#186c45",
+                        "on-secondary-fixed-variant": "#264e3c",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "primary-fixed": "#a4f4c3",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#1b1c18",
+                        "outline": "#6f7a71",
+                        "inverse-on-surface": "#f3f1eb",
+                        "surface-bright": "#fbf9f3",
+                        "surface-container-highest": "#e4e2dd",
+                        "on-tertiary-fixed": "#0f1e19",
+                        "surface": "#fbf9f3",
+                        "secondary-fixed": "#c0edd4",
+                        "on-tertiary-container": "#cadbd2",
+                        "on-primary": "#ffffff",
+                        "primary": "#005131",
+                        "on-secondary-fixed": "#002114",
+                        "tertiary-fixed": "#d5e7dd",
+                        "inverse-surface": "#30312d",
+                        "on-primary-container": "#99e9b9",
+                        "primary-fixed-dim": "#88d7a8",
+                        "on-error-container": "#93000a",
+                        "secondary": "#3e6753",
+                        "on-primary-fixed-variant": "#005232",
+                        "tertiary-container": "#516159",
+                        "outline-variant": "#bfc9c0",
+                        "background": "#fbf9f3",
+                        "primary-container": "#176b45",
+                        "tertiary-fixed-dim": "#b9cbc1",
+                        "surface-container-low": "#f5f3ed",
+                        "on-tertiary": "#ffffff",
+                        "secondary-container": "#c0edd4",
+                        "tertiary": "#3a4942",
+                        "surface-container": "#f0eee8",
+                        "secondary-fixed-dim": "#a4d0b8",
+                        "on-primary-fixed": "#002111",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#88d7a8",
+                        "on-surface-variant": "#3f4942"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "md": "16px",
+                        "xs": "8px",
+                        "xxl": "48px",
+                        "lg": "24px",
+                        "xl": "32px",
+                        "touch-target": "44px",
+                        "base": "4px",
+                        "sm": "12px"
+                    },
+                    fontFamily: {
+                        "headline-lg-mobile": ["Manrope"],
+                        "display-lg": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "label-sm": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "body-md": ["Manrope"]
+                    },
+                    fontSize: {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; background-color: #F7F5EF; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .card-elevation { box-shadow: 0px 4px 12px rgba(40, 51, 46, 0.08); }
+    </style>
+</head>
+<body class="bg-background text-on-background flex h-screen overflow-hidden">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col p-md gap-xs bg-surface-container-low border-r border-outline-variant h-screen w-64 fixed left-0 top-0 z-40">
+<div class="flex items-center gap-sm mb-xl mt-sm px-xs">
+<div class="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" data-icon="park">park</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Portal Admin</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Administración de Parque</p>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto flex flex-col gap-xs">
+<a class="flex items-center gap-md px-sm py-xs rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all duration-200 ease-in-out font-label-md text-label-md min-h-[44px]" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span> Resumen
+            </a>
+<a class="flex items-center gap-md px-sm py-xs rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all duration-200 ease-in-out font-label-md text-label-md min-h-[44px]" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span> Pedidos
+            </a>
+<a class="flex items-center gap-md px-sm py-xs rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all duration-200 ease-in-out font-label-md text-label-md min-h-[44px]" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span> Reservas
+            </a>
+<a class="flex items-center gap-md px-sm py-xs rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all duration-200 ease-in-out font-label-md text-label-md min-h-[44px]" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span> Catálogo
+            </a>
+<a class="flex items-center gap-md px-sm py-xs rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all duration-200 ease-in-out font-label-md text-label-md min-h-[44px]" href="#">
+<span class="material-symbols-outlined" data-icon="event_available">event_available</span> Disponibilidad
+            </a>
+<a class="flex items-center gap-md px-sm py-xs rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all duration-200 ease-in-out font-label-md text-label-md min-h-[44px]" href="#">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span> Caja
+            </a>
+<a class="flex items-center gap-md px-sm py-xs rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all duration-200 ease-in-out font-label-md text-label-md min-h-[44px]" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span> Ventas
+            </a>
+<a class="flex items-center gap-md px-sm py-xs bg-secondary-container text-on-secondary-container rounded-lg font-bold transition-all duration-200 ease-in-out font-label-md text-label-md min-h-[44px]" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span> Equipo operativo
+            </a>
+<a class="flex items-center gap-md px-sm py-xs rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all duration-200 ease-in-out font-label-md text-label-md min-h-[44px]" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span> Configuración del local
+            </a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 flex flex-col h-screen overflow-hidden">
+<!-- TopNavBar (Mobile Only) -->
+<header class="md:hidden flex justify-between items-center w-full px-lg h-touch-target sticky top-0 z-50 bg-surface border-b border-outline-variant">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Parques Nacionales</h1>
+<div class="flex gap-sm">
+<button class="min-w-[44px] min-h-[44px] flex items-center justify-center text-primary hover:bg-surface-container-low transition-colors rounded-full cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="min-w-[44px] min-h-[44px] flex items-center justify-center text-primary hover:bg-surface-container-low transition-colors rounded-full cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</button>
+</div>
+</header>
+<!-- Page Header -->
+<div class="px-lg py-xl border-b border-outline-variant bg-surface shrink-0">
+<div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-md">
+<div>
+<h2 class="font-headline-lg text-headline-lg md:text-headline-lg text-on-background mb-base">Equipo Operativo</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Gestión del personal, turnos y áreas de trabajo del local.</p>
+</div>
+<button class="bg-primary-container text-on-primary font-label-md text-label-md px-lg py-sm rounded-lg min-h-[44px] flex items-center justify-center gap-sm hover:opacity-90 transition-opacity whitespace-nowrap">
+<span class="material-symbols-outlined" data-icon="person_add">person_add</span>
+                    Invitar operador
+                </button>
+</div>
+</div>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto p-lg bg-background">
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-lg max-w-7xl mx-auto">
+<!-- Left Column: Staff List -->
+<div class="lg:col-span-2 flex flex-col gap-lg">
+<!-- Search & Filter Bar -->
+<div class="bg-surface border border-outline-variant rounded-lg p-sm flex flex-col sm:flex-row gap-sm items-center">
+<div class="relative w-full flex-1">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="search">search</span>
+<input class="w-full pl-xl pr-sm py-sm border border-outline-variant rounded-lg font-body-md text-body-md min-h-[44px] focus:border-primary focus:ring-1 focus:ring-primary outline-none" placeholder="Buscar por nombre o rol..." type="text">
+</div>
+<div class="flex gap-sm w-full sm:w-auto">
+<select class="border border-outline-variant rounded-lg px-md py-sm font-body-md text-body-md min-h-[44px] bg-surface focus:border-primary outline-none w-full sm:w-auto">
+<option>Todos los turnos</option>
+<option>Mañana</option>
+<option>Tarde</option>
+</select>
+</div>
+</div>
+<!-- Staff List -->
+<div class="bg-surface border border-outline-variant rounded-lg overflow-hidden flex flex-col">
+<div class="border-b border-outline-variant p-md flex items-center justify-between bg-surface-container-low">
+<h3 class="font-headline-md text-headline-md text-on-background">Personal Activo</h3>
+<span class="bg-secondary-container text-on-secondary-container px-sm py-xs rounded-full font-label-sm text-label-sm">8 Operadores</span>
+</div>
+<!-- List Item 1 -->
+<div class="p-md border-b border-outline-variant hover:bg-surface-container-lowest transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-md group">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-full bg-[#e8f0eb] flex items-center justify-center overflow-hidden border border-outline-variant shrink-0">
+<img class="w-full h-full object-cover" data-alt="A professional portrait of a park ranger in uniform, outdoors, bright natural lighting, modern nature reserve setting, clean and confident expression." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAavuBjl_1njThAZnilHXD5XvPlQ_1MfGqnmg5g095ucoJTT6UL8C65YNxDC0uxc0leGPOQkvOnttRyGZb0-6xe1e9DbcSt5PRWKpt0H1vmZv-9Wbb0pQoRilbcrtCfCvFng9fE6nuqjfXAy7W6qeSZHJtqm99PxdH56LFliromu9gc_nMWFWV5_ry-JmdTq_2XjSrzJ4x-xCPxrzZvIFwAwvgDan3zvXJ_2aDSwmpKsmoSkwzHpjvH">
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-on-background group-hover:text-primary transition-colors">Carlos Mendoza</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Guía de Sendero</p>
+</div>
+</div>
+<div class="flex flex-wrap sm:flex-nowrap items-center gap-md">
+<div class="flex flex-col items-start sm:items-end w-full sm:w-auto">
+<span class="font-label-sm text-label-sm text-on-surface-variant mb-base">Turno Actual</span>
+<span class="bg-[#d5e7dd] text-[#0f1e19] px-sm py-xs rounded-md font-label-sm text-label-sm flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]" data-icon="light_mode">light_mode</span> Mañana (08:00 - 14:00)
+                                    </span>
+</div>
+<button class="min-w-[44px] min-h-[44px] border border-outline-variant rounded-lg flex items-center justify-center text-on-surface-variant hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</div>
+<!-- List Item 2 -->
+<div class="p-md border-b border-outline-variant hover:bg-surface-container-lowest transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-md group">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-full bg-[#e8f0eb] flex items-center justify-center overflow-hidden border border-outline-variant shrink-0">
+<img class="w-full h-full object-cover" data-alt="A portrait of a female administrative staff member in a modern visitor center, wearing a professional polo shirt, bright daylight, welcoming smile." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5f_fidoqVL_2JdjvA-OUK6kSFvIUhRt1cE5g7JUyinU6mydEe2fOuppvD4FBqs8nTAX4wvMdf-KYqEvZl5d2HJYhwumAHlUq4kYa2Dy1YKMszwTiS8HRpql5q2xYOX1VS6DgNSrQCyA0F_WJCXaEp5l40bSjc_Q3372GC5l4X5O75smOF_r7nVpsmSr2At7uuJPAMoXFwctcHF6trrkccrlQNWCifWhvAvjPtzI8uLBkXm597WLUj">
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-on-background group-hover:text-primary transition-colors">Elena Rojas</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Atención al Visitante</p>
+</div>
+</div>
+<div class="flex flex-wrap sm:flex-nowrap items-center gap-md">
+<div class="flex flex-col items-start sm:items-end w-full sm:w-auto">
+<span class="font-label-sm text-label-sm text-on-surface-variant mb-base">Turno Actual</span>
+<span class="bg-[#ffdad6] text-[#93000a] px-sm py-xs rounded-md font-label-sm text-label-sm flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]" data-icon="wb_twilight">wb_twilight</span> Tarde (14:00 - 20:00)
+                                    </span>
+</div>
+<button class="min-w-[44px] min-h-[44px] border border-outline-variant rounded-lg flex items-center justify-center text-on-surface-variant hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Areas & Logs -->
+<div class="flex flex-col gap-lg">
+<!-- Areas de Trabajo -->
+<div class="bg-surface border border-outline-variant rounded-lg p-lg">
+<h3 class="font-headline-md text-headline-md text-on-background mb-md flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary" data-icon="map">map</span> Áreas Asignadas
+                        </h3>
+<div class="flex flex-col gap-sm">
+<div class="flex justify-between items-center p-sm bg-surface-container-low rounded-lg">
+<span class="font-body-md text-body-md text-on-background">Entrada Principal</span>
+<span class="font-label-sm text-label-sm bg-surface text-on-surface-variant border border-outline-variant px-xs py-[2px] rounded">3 op.</span>
+</div>
+<div class="flex justify-between items-center p-sm bg-surface-container-low rounded-lg">
+<span class="font-body-md text-body-md text-on-background">Mirador Norte</span>
+<span class="font-label-sm text-label-sm bg-surface text-on-surface-variant border border-outline-variant px-xs py-[2px] rounded">1 op.</span>
+</div>
+</div>
+</div>
+<!-- Log de Actividad -->
+<div class="bg-surface border border-outline-variant rounded-lg p-lg flex-1">
+<h3 class="font-headline-md text-headline-md text-on-background mb-md flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary" data-icon="history">history</span> Actividad Reciente
+                        </h3>
+<div class="relative pl-sm">
+<div class="absolute left-[11px] top-2 bottom-2 w-px bg-outline-variant"></div>
+<div class="relative flex gap-md mb-md">
+<div class="w-2 h-2 rounded-full bg-primary mt-2 shrink-0 z-10 relative"></div>
+<div>
+<p class="font-body-md text-body-md text-on-background text-sm">Carlos M. inició turno en Mirador Norte</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Hace 10 min</p>
+</div>
+</div>
+<div class="relative flex gap-md mb-md">
+<div class="w-2 h-2 rounded-full bg-outline mt-2 shrink-0 z-10 relative"></div>
+<div>
+<p class="font-body-md text-body-md text-on-background text-sm">Elena R. cerró caja terminal 2</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Ayer, 20:05</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

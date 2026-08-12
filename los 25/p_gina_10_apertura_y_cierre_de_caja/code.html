@@ -1,0 +1,338 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Apertura y Cierre de Caja - Parques Nacionales</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-error": "#ffffff",
+                      "on-tertiary-fixed-variant": "#3a4a43",
+                      "surface-variant": "#e4e2dd",
+                      "on-background": "#1b1c18",
+                      "surface-dim": "#dcdad4",
+                      "surface-container-high": "#eae8e2",
+                      "on-secondary-container": "#446d59",
+                      "surface-tint": "#186c45",
+                      "on-secondary-fixed-variant": "#264e3c",
+                      "error-container": "#ffdad6",
+                      "error": "#ba1a1a",
+                      "primary-fixed": "#a4f4c3",
+                      "surface-container-lowest": "#ffffff",
+                      "on-surface": "#1b1c18",
+                      "outline": "#6f7a71",
+                      "inverse-on-surface": "#f3f1eb",
+                      "surface-bright": "#fbf9f3",
+                      "surface-container-highest": "#e4e2dd",
+                      "on-tertiary-fixed": "#0f1e19",
+                      "surface": "#fbf9f3",
+                      "secondary-fixed": "#c0edd4",
+                      "on-tertiary-container": "#cadbd2",
+                      "on-primary": "#ffffff",
+                      "primary": "#005131",
+                      "on-secondary-fixed": "#002114",
+                      "tertiary-fixed": "#d5e7dd",
+                      "inverse-surface": "#30312d",
+                      "on-primary-container": "#99e9b9",
+                      "primary-fixed-dim": "#88d7a8",
+                      "on-error-container": "#93000a",
+                      "secondary": "#3e6753",
+                      "on-primary-fixed-variant": "#005232",
+                      "tertiary-container": "#516159",
+                      "outline-variant": "#bfc9c0",
+                      "background": "#fbf9f3",
+                      "primary-container": "#176b45",
+                      "tertiary-fixed-dim": "#b9cbc1",
+                      "surface-container-low": "#f5f3ed",
+                      "on-tertiary": "#ffffff",
+                      "secondary-container": "#c0edd4",
+                      "tertiary": "#3a4942",
+                      "surface-container": "#f0eee8",
+                      "secondary-fixed-dim": "#a4d0b8",
+                      "on-primary-fixed": "#002111",
+                      "on-secondary": "#ffffff",
+                      "inverse-primary": "#88d7a8",
+                      "on-surface-variant": "#3f4942"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "md": "16px",
+                      "xs": "8px",
+                      "xxl": "48px",
+                      "lg": "24px",
+                      "xl": "32px",
+                      "touch-target": "44px",
+                      "base": "4px",
+                      "sm": "12px"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": ["Manrope"],
+                      "display-lg": ["Manrope"],
+                      "headline-md": ["Manrope"],
+                      "headline-lg": ["Manrope"],
+                      "label-sm": ["Manrope"],
+                      "body-lg": ["Manrope"],
+                      "label-md": ["Manrope"],
+                      "body-md": ["Manrope"]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "700"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; background-color: #F7F5EF; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .icon-fill { font-variation-settings: 'FILL' 1; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex">
+<!-- SideNavBar (Desktop) -->
+<aside class="hidden md:flex flex-col p-md gap-xs bg-surface-container-low dark:bg-surface-container-highest border-r border-outline-variant dark:border-outline h-screen w-64 fixed left-0 top-0">
+<div class="mb-lg px-xs pt-xs">
+<h1 class="font-headline-md text-headline-md font-bold text-primary truncate">Portal Admin</h1>
+<p class="font-body-md text-body-md text-on-surface-variant truncate">Administración de Parque</p>
+</div>
+<nav class="flex-1 overflow-y-auto flex flex-col gap-xs">
+<a class="flex items-center gap-sm p-sm rounded-lg hover:bg-surface-variant dark:hover:bg-outline-variant transition-all duration-200 ease-in-out text-on-surface-variant dark:text-surface-variant font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Resumen</span>
+</a>
+<a class="flex items-center gap-sm p-sm rounded-lg hover:bg-surface-variant dark:hover:bg-outline-variant transition-all duration-200 ease-in-out text-on-surface-variant dark:text-surface-variant font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+<span>Pedidos</span>
+</a>
+<a class="flex items-center gap-sm p-sm rounded-lg hover:bg-surface-variant dark:hover:bg-outline-variant transition-all duration-200 ease-in-out text-on-surface-variant dark:text-surface-variant font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span>Reservas</span>
+</a>
+<a class="flex items-center gap-sm p-sm rounded-lg hover:bg-surface-variant dark:hover:bg-outline-variant transition-all duration-200 ease-in-out text-on-surface-variant dark:text-surface-variant font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span>Catálogo</span>
+</a>
+<a class="flex items-center gap-sm p-sm rounded-lg hover:bg-surface-variant dark:hover:bg-outline-variant transition-all duration-200 ease-in-out text-on-surface-variant dark:text-surface-variant font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="event_available">event_available</span>
+<span>Disponibilidad</span>
+</a>
+<a class="flex items-center gap-sm p-sm rounded-lg bg-secondary-container dark:bg-secondary-fixed-variant text-on-secondary-container dark:text-on-secondary-fixed font-bold font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined icon-fill" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span>Caja</span>
+</a>
+<a class="flex items-center gap-sm p-sm rounded-lg hover:bg-surface-variant dark:hover:bg-outline-variant transition-all duration-200 ease-in-out text-on-surface-variant dark:text-surface-variant font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span>Ventas</span>
+</a>
+<a class="flex items-center gap-sm p-sm rounded-lg hover:bg-surface-variant dark:hover:bg-outline-variant transition-all duration-200 ease-in-out text-on-surface-variant dark:text-surface-variant font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span>Equipo operativo</span>
+</a>
+<a class="flex items-center gap-sm p-sm rounded-lg hover:bg-surface-variant dark:hover:bg-outline-variant transition-all duration-200 ease-in-out text-on-surface-variant dark:text-surface-variant font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Configuración del local</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col md:ml-64 w-full min-h-screen">
+<!-- TopNavBar (Mobile Focus, also visible on desktop for actions) -->
+<header class="flex justify-between items-center w-full px-lg h-touch-target sticky top-0 z-50 bg-surface dark:bg-inverse-surface border-b border-outline-variant dark:border-outline md:border-none shadow-sm md:shadow-none">
+<div class="flex items-center gap-sm md:hidden">
+<button class="p-xs text-primary cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">Parques Nacionales</span>
+</div>
+<div class="hidden md:flex flex-1 max-w-md ml-auto">
+<!-- Empty space for search if needed -->
+</div>
+<div class="flex items-center gap-xs ml-auto">
+<button class="p-xs text-primary dark:text-primary-fixed hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors rounded-full cursor-pointer active:opacity-80 flex items-center justify-center min-w-[44px] min-h-[44px]">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-xs text-primary dark:text-primary-fixed hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors rounded-full cursor-pointer active:opacity-80 flex items-center justify-center min-w-[44px] min-h-[44px]">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+</button>
+<button class="p-xs text-primary dark:text-primary-fixed hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors rounded-full cursor-pointer active:opacity-80 flex items-center justify-center min-w-[44px] min-h-[44px]">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</button>
+</div>
+</header>
+<!-- Page Canvas -->
+<div class="p-md md:p-lg xl:p-xl max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-lg lg:gap-xl">
+<!-- Page Header -->
+<div class="lg:col-span-12 flex flex-col sm:flex-row sm:items-end justify-between gap-md mb-xs">
+<div>
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">Cierre de Caja</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">Complete el formulario para el cierre de turno. Caja #01 - Turno Mañana.</p>
+</div>
+<div class="flex items-center gap-xs text-on-surface-variant bg-surface-container px-sm py-xs rounded-lg border border-outline-variant">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span class="font-label-md text-label-md">Última apertura: Hoy, 08:00 AM</span>
+</div>
+</div>
+<!-- Alert: Open Orders -->
+<div class="lg:col-span-12 bg-error-container/20 border border-error-container text-on-error-container p-md rounded-lg flex items-start gap-sm">
+<span class="material-symbols-outlined text-error mt-0.5">warning</span>
+<div>
+<h4 class="font-label-md text-label-md font-bold text-error">Atención: Hay pedidos abiertos</h4>
+<p class="font-body-md text-body-md mt-xs text-error/80">Existen 3 pedidos pendientes de cobro o entrega. Es recomendable gestionarlos antes de realizar el cierre de caja.</p>
+</div>
+</div>
+<!-- Main Form Area -->
+<div class="lg:col-span-8 flex flex-col gap-lg">
+<!-- Bento Grid: Expected vs Declared -->
+<div class="bg-surface border border-outline-variant rounded-lg p-lg shadow-sm">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-md flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">point_of_sale</span>
+                        Declaración de Valores
+                    </h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md border-b border-outline-variant pb-md mb-md">
+<!-- Esperado -->
+<div class="bg-surface-container-low p-sm rounded-lg">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider block mb-xs">Total Esperado</span>
+<span class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">$1,250.00</span>
+</div>
+<!-- Declarado (Auto sum) -->
+<div class="bg-secondary-container/30 p-sm rounded-lg border border-secondary-container">
+<span class="font-label-sm text-label-sm text-on-secondary-container uppercase tracking-wider block mb-xs">Total Declarado</span>
+<span class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary-container">$0.00</span>
+</div>
+<!-- Diferencia -->
+<div class="bg-surface-container p-sm rounded-lg border border-outline-variant">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider block mb-xs">Diferencia</span>
+<span class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface-variant">-$1,250.00</span>
+</div>
+</div>
+<!-- Input Fields -->
+<div class="space-y-md">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md items-end">
+<div>
+<label class="font-label-md text-label-md text-on-surface-variant block mb-xs">Efectivo Declarado ($)</label>
+<div class="relative">
+<span class="absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant material-symbols-outlined">payments</span>
+<input class="w-full h-touch-target pl-xl pr-sm rounded-lg border border-outline-variant bg-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all font-body-md text-body-md" placeholder="0.00" type="number">
+</div>
+</div>
+<div class="text-right pb-xs">
+<span class="font-body-md text-body-md text-on-surface-variant">Esperado: $450.00</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md items-end">
+<div>
+<label class="font-label-md text-label-md text-on-surface-variant block mb-xs">Pagos Digitales Declarados ($)</label>
+<div class="relative">
+<span class="absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant material-symbols-outlined">credit_card</span>
+<input class="w-full h-touch-target pl-xl pr-sm rounded-lg border border-outline-variant bg-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all font-body-md text-body-md" placeholder="0.00" type="number">
+</div>
+</div>
+<div class="text-right pb-xs">
+<span class="font-body-md text-body-md text-on-surface-variant">Esperado: $800.00</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md items-end">
+<div>
+<label class="font-label-md text-label-md text-on-surface-variant block mb-xs">Reembolsos / Egresos ($)</label>
+<div class="relative">
+<span class="absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant material-symbols-outlined">receipt_long</span>
+<input class="w-full h-touch-target pl-xl pr-sm rounded-lg border border-outline-variant bg-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all font-body-md text-body-md" placeholder="0.00" type="number">
+</div>
+</div>
+<div class="text-right pb-xs">
+<span class="font-body-md text-body-md text-on-surface-variant">Esperado: $0.00</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Justification Card -->
+<div class="bg-surface border border-outline-variant rounded-lg p-lg shadow-sm">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-md">Justificación de Diferencia</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md">Si existe una diferencia entre el monto esperado y el declarado, indique el motivo a continuación.</p>
+<label class="font-label-md text-label-md text-on-surface-variant block mb-xs">Motivo / Observaciones</label>
+<textarea class="w-full min-h-[120px] p-sm rounded-lg border border-outline-variant bg-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all font-body-md text-body-md resize-y" placeholder="Ej: Faltante de cambio, error en vuelto, egreso no registrado..."></textarea>
+</div>
+<!-- Action Button -->
+<div class="flex justify-end mt-sm">
+<button class="bg-primary-container text-on-primary min-h-[44px] px-xl rounded-lg font-label-md text-label-md font-bold hover:opacity-90 transition-opacity flex items-center gap-sm shadow-md">
+<span class="material-symbols-outlined">lock</span>
+                        Enviar Cierre de Caja
+                    </button>
+</div>
+</div>
+<!-- Sidebar / History -->
+<div class="lg:col-span-4 flex flex-col gap-lg">
+<div class="bg-surface border border-outline-variant rounded-lg p-lg shadow-sm h-full max-h-[800px] flex flex-col">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-md flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">history</span>
+                        Historial Reciente
+                    </h3>
+<div class="flex-1 overflow-y-auto pr-xs space-y-sm">
+<!-- History Item 1 -->
+<div class="p-sm bg-surface-container-lowest border border-outline-variant rounded-lg flex flex-col gap-xs hover:bg-surface-container-low transition-colors cursor-pointer">
+<div class="flex justify-between items-start">
+<span class="font-label-md text-label-md text-on-surface font-bold">Ayer, 18:30</span>
+<span class="bg-primary-container/10 text-primary-container px-xs py-0.5 rounded text-xs font-bold border border-primary-container/20">Cuadrado</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant">Turno Tarde - Caja #01</span>
+<span class="font-bold text-on-surface">$1,420.00</span>
+</div>
+<div class="text-xs text-on-surface-variant flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[14px]">person</span>
+                                María G.
+                            </div>
+</div>
+<!-- History Item 2 -->
+<div class="p-sm bg-surface-container-lowest border border-outline-variant rounded-lg flex flex-col gap-xs hover:bg-surface-container-low transition-colors cursor-pointer">
+<div class="flex justify-between items-start">
+<span class="font-label-md text-label-md text-on-surface font-bold">Ayer, 13:00</span>
+<span class="bg-error-container/30 text-error px-xs py-0.5 rounded text-xs font-bold border border-error-container">Diferencia</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant">Turno Mañana - Caja #01</span>
+<span class="font-bold text-on-surface">$850.50</span>
+</div>
+<div class="text-xs text-error/80 flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+                                Faltante: -$5.00
+                            </div>
+</div>
+<!-- History Item 3 -->
+<div class="p-sm bg-surface-container-lowest border border-outline-variant rounded-lg flex flex-col gap-xs hover:bg-surface-container-low transition-colors cursor-pointer">
+<div class="flex justify-between items-start">
+<span class="font-label-md text-label-md text-on-surface font-bold">12 Oct, 18:45</span>
+<span class="bg-primary-container/10 text-primary-container px-xs py-0.5 rounded text-xs font-bold border border-primary-container/20">Cuadrado</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="text-on-surface-variant">Turno Tarde - Caja #01</span>
+<span class="font-bold text-on-surface">$1,100.00</span>
+</div>
+</div>
+</div>
+<button class="mt-md w-full py-xs border border-outline-variant rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low transition-colors">
+                        Ver todos los cierres
+                    </button>
+</div>
+</div>
+</div>
+</main>
+</body></html>
