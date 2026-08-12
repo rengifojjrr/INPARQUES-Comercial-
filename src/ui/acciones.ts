@@ -18,6 +18,7 @@ import { validarAccion } from '../domain/sensitive-actions';
 import * as op from './operaciones';
 import { esc } from './componentes';
 import { formatearUsd } from '../domain/money';
+import { alternarCajon } from './stitch-shell';
 import type { EstadoOrden, MetodoPago } from '../domain/types';
 
 type Repintar = () => void;
@@ -221,6 +222,14 @@ function despachar(accion: string, valor: string): void {
 
   switch (accion) {
     case 'nada':
+      break;
+
+    case 'abrir-cajon':
+      alternarCajon(true);
+      break;
+
+    case 'cerrar-cajon':
+      alternarCajon(false);
       break;
 
     case 'ir':

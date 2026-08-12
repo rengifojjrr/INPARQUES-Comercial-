@@ -38,7 +38,7 @@ export const ROLES: Record<RoleId, RoleDefinition> = {
   },
   'inparques.direccion_comercial': {
     id: 'inparques.direccion_comercial',
-    nombre: 'Direccion comercial / concesiones',
+    nombre: 'Dirección comercial / concesiones',
     superficie: 'inparques',
     ambito: 'INPARQUES',
     nivelScope: 'region',
@@ -49,7 +49,7 @@ export const ROLES: Record<RoleId, RoleDefinition> = {
   },
   'inparques.finanzas': {
     id: 'inparques.finanzas',
-    nombre: 'Finanzas / auditoria',
+    nombre: 'Finanzas / auditoría',
     superficie: 'inparques',
     ambito: 'INPARQUES',
     nivelScope: 'nacional',

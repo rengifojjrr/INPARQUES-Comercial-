@@ -5,6 +5,7 @@
  * Todo ocurre en el navegador; no hay backend ni servicio remoto.
  */
 
+import './ui/stitch-base.css';
 import './ui/estilos.css';
 import './dev/andamiaje.css';
 
@@ -150,7 +151,9 @@ function pintar(r: ResultadoNavegacion, esRepintado = false): void {
   }
 
   const { contenido, ...opciones } = pagina;
-  raiz.innerHTML = marco(contenido, opciones, ruta);
+  raiz.innerHTML = pagina.standalone
+    ? `<div class="stitch-pagina bg-background text-on-background min-h-screen flex flex-col antialiased">${contenido}</div>`
+    : marco(contenido, opciones, ruta);
 
   if (!esRepintado) {
     window.scrollTo({ top: 0 });

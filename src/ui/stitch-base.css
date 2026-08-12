@@ -1,0 +1,49 @@
+/**
+ * Base compartida de las 119 páginas de Stitch.
+ *
+ * Antes cada página cargaba Tailwind por CDN y repetía este mismo bloque de
+ * utilidades en un <style> propio. Aquí se compila Tailwind de verdad y las
+ * utilidades comunes (scrollbar, área segura del notch, tarjeta esmerilada,
+ * el ícono base) quedan una sola vez, verificadas idénticas en todas las
+ * páginas que las usan.
+ */
+
+@import '../assets/fuentes/fuentes.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Manrope', sans-serif;
+  background-color: #f7f5ef;
+}
+
+/* Barra de scroll fina, presente en 24 de las 119 páginas. */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #bfc9c0;
+  border-radius: 10px;
+}
+
+/* Respeta el notch y el indicador inferior en iPhone. */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Tarjeta esmerilada usada en overlays y hojas flotantes. */
+.glass-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* El zoom del navegador nunca se bloquea, aunque algunas páginas originales
+   traían user-scalable=no en su <meta viewport>: se retira al montar cada
+   vista para no violar el requisito de accesibilidad. */

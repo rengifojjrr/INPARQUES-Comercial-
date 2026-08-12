@@ -11,10 +11,26 @@ import * as c from './compartidas';
 import * as v from './visitante';
 import * as com from './comercio';
 import * as inp from './inparques';
+import { entradaStitch } from './stitch-acceso';
+import { propietarioInicio } from './stitch-comercio';
+import { sesion } from '../../app/session';
+
+/**
+ * Algunas rutas dibujan una pantalla distinta según el rol activo: el HTML
+ * original de Stitch es una página por rol, no una plantilla compartida.
+ * A medida que se portan más roles, este mapa crece; el resto sigue usando
+ * la vista genérica hasta que le llegue su turno.
+ */
+function inicioComercioPorRol(): Render {
+  return (ctx) => {
+    if (sesion.rol() === 'comercio.propietario') return propietarioInicio(ctx);
+    return com.inicio(ctx);
+  };
+}
 
 export const VISTAS_POR_ID: Record<string, Render> = {
   // -------------------------------------------------------------- Compartidas
-  'demo.perfiles': c.selectorPerfiles,
+  'demo.perfiles': entradaStitch,
   'acceso.visitante': c.accesoVisitante,
   'acceso.comercio': c.accesoComercio,
   'acceso.inparques': c.accesoInparques,
@@ -78,7 +94,7 @@ export const VISTAS_POR_ID: Record<string, Render> = {
   'v.perfil': v.perfilVisitante,
 
   // ----------------------------------------------------------------- Comercio
-  'c.inicio': com.inicio,
+  'c.inicio': inicioComercioPorRol(),
   'c.mas': c.masOpciones('comercio'),
   'c.expediente': com.expediente,
   'c.documentos': com.documentos,
