@@ -863,3 +863,113 @@ export const inspectorInicio: Render = (): Pagina => {
 
   return { titulo: 'Inparques Ranger', standalone: true, contenido };
 };
+
+// -------------------------------------------------------------------- Soporte
+
+const NAV_SOPORTE: Array<[string, string, string]> = [
+  ['inbox', 'Inbox', '/i'],
+  ['assignment_turned_in', 'Assigned Cases', '/i/disputas'],
+  ['receipt_long', 'Orders', '/i/reembolsos'],
+  ['gavel', 'Disputes', '/i/disputas'],
+  ['payments', 'Requested Refunds', '/i/reembolsos'],
+  ['timer', 'SLA', '/i/sla'],
+  ['menu_book', 'Knowledge Base', '/ayuda'],
+  ['bar_chart', 'Reports', '/i/reportes'],
+];
+
+function riesgoDisputa(slaHoras: number, creadaEn: string): { horas: number; etiqueta: string; tono: string; riesgo: 'Alto' | 'Medio' | 'Bajo' } {
+  const transcurridas = (Date.now() - new Date(creadaEn).getTime()) / 3_600_000;
+  const restantes = Math.round(slaHoras - transcurridas);
+  if (restantes < 0) return { horas: restantes, etiqueta: `Excedido (${Math.abs(restantes)}h)`, tono: 'bg-error-container text-on-error-container border-error/20', riesgo: 'Alto' };
+  if (restantes <= 4) return { horas: restantes, etiqueta: `Queda ${restantes}h`, tono: 'bg-secondary-container text-on-secondary-container border-secondary/20', riesgo: 'Medio' };
+  return { horas: restantes, etiqueta: `En tiempo (${restantes}h)`, tono: 'bg-surface-container-high text-on-surface-variant border-outline-variant', riesgo: 'Bajo' };
+}
+
+const CLASE_RIESGO: Record<'Alto' | 'Medio' | 'Bajo', string> = {
+  Alto: 'bg-error', Medio: 'bg-tertiary', Bajo: 'bg-primary',
+};
+
+export const soporteInicio: Render = (): Pagina => {
+  const e = store.leer();
+  const u = sesion.usuario()!;
+
+  const abiertas = e.disputas.filter((d) => ['abierta', 'en_analisis'].includes(d.estado));
+  const conRiesgo = abiertas.map((d) => ({ disputa: d, r: riesgoDisputa(d.slaHoras, d.creadaEn) })).sort((x, y) => x.r.horas - y.r.horas);
+  const slaEnRiesgo = conRiesgo.filter((x) => x.r.riesgo !== 'Bajo').length;
+
+  const contenido = `
+${conCajonMovil(barraLateralInparques('/i', NAV_SOPORTE, 'Administrative Portal'))}
+${cabeceraInparques('Support & Dispute Portal', u.nombre)}
+<main class="lg:ml-72 pt-16 p-lg bg-surface min-h-screen">
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-lg mb-lg">
+    <div class="md:col-span-2 flex flex-col justify-center">
+      <h2 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Bandeja de Soporte</h2>
+      <p class="font-body-md text-body-md text-on-surface-variant">Gestión de casos activos, prioridades y monitoreo de SLA.</p>
+    </div>
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg flex items-center gap-md shadow-sm">
+      <div class="w-12 h-12 rounded-full bg-error-container/50 flex items-center justify-center text-error"><span class="material-symbols-outlined">warning</span></div>
+      <div>
+        <p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Casos Activos</p>
+        <p class="font-headline-md text-headline-md text-on-surface">${abiertas.length}</p>
+      </div>
+    </div>
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg flex items-center gap-md shadow-sm">
+      <div class="w-12 h-12 rounded-full bg-secondary-container/50 flex items-center justify-center text-primary-container"><span class="material-symbols-outlined">timer</span></div>
+      <div>
+        <p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">SLA en Riesgo</p>
+        <p class="font-headline-md text-headline-md text-on-surface">${slaEnRiesgo}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden shadow-sm flex flex-col">
+    <div class="overflow-x-auto">
+      <table class="w-full text-left border-collapse">
+        <thead>
+          <tr class="border-b border-outline-variant bg-surface-container-low">
+            <th class="py-md px-lg font-label-md text-label-md text-on-surface-variant">Caso</th>
+            <th class="py-md px-lg font-label-md text-label-md text-on-surface-variant">Motivo</th>
+            <th class="py-md px-lg font-label-md text-label-md text-on-surface-variant">ID Orden</th>
+            <th class="py-md px-lg font-label-md text-label-md text-on-surface-variant">Parque Nacional</th>
+            <th class="py-md px-lg font-label-md text-label-md text-on-surface-variant">SLA</th>
+            <th class="py-md px-lg font-label-md text-label-md text-on-surface-variant">Riesgo</th>
+            <th class="py-md px-lg font-label-md text-label-md text-on-surface-variant">Agente Asignado</th>
+            <th class="py-md px-lg w-10"></th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-outline-variant/50">
+          ${conRiesgo.length === 0
+            ? `<tr><td colspan="8" class="py-lg px-lg text-center font-body-md text-body-md text-on-surface-variant">Sin casos abiertos por el momento.</td></tr>`
+            : conRiesgo
+                .slice(0, 8)
+                .map(({ disputa: d, r }) => {
+                  const orden = e.ordenes.find((o) => o.id === d.ordenId);
+                  const parque = orden ? e.parques.find((p) => p.id === orden.parqueId) : undefined;
+                  const agente = d.agenteId ? e.usuarios.find((x) => x.id === d.agenteId) : undefined;
+                  return `<tr data-accion="ir" data-valor="/i/disputa/${esc(d.id)}" class="hover:bg-surface-container-high transition-colors group cursor-pointer">
+                    <td class="py-md px-lg">
+                      <span class="font-label-md text-label-md text-primary font-bold">#${esc(d.id)}</span>
+                      <div class="font-body-md text-label-sm text-on-surface-variant mt-1">${esc(desde(d.creadaEn))}</div>
+                    </td>
+                    <td class="py-md px-lg"><div class="font-body-md text-body-md text-on-surface max-w-[200px] truncate">${esc(d.motivo)}</div></td>
+                    <td class="py-md px-lg font-body-md text-body-md text-on-surface-variant">${esc(d.ordenId)}</td>
+                    <td class="py-md px-lg"><div class="flex items-center gap-xs"><span class="material-symbols-outlined text-outline text-sm">park</span><span class="font-body-md text-body-md text-on-surface">${esc(parque?.nombre ?? '—')}</span></div></td>
+                    <td class="py-md px-lg"><span class="inline-flex items-center px-2 py-1 rounded-full ${r.tono} font-label-sm text-label-sm gap-1 border">${esc(r.etiqueta)}</span></td>
+                    <td class="py-md px-lg"><div class="flex items-center gap-sm"><div class="w-2 h-2 rounded-full ${CLASE_RIESGO[r.riesgo]}"></div><span class="font-label-md text-label-md text-on-surface">${r.riesgo}</span></div></td>
+                    <td class="py-md px-lg"><div class="flex items-center gap-sm">${avatar(agente?.nombre ?? 'Sin Asignar', 'w-8 h-8 text-[11px]')}<span class="font-body-md text-body-md text-on-surface">${esc(agente?.nombre ?? 'Sin Asignar')}</span></div></td>
+                    <td class="py-md px-lg text-right"><span class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity">chevron_right</span></td>
+                  </tr>`;
+                })
+                .join('')}
+        </tbody>
+      </table>
+    </div>
+    <div class="border-t border-outline-variant p-md flex items-center justify-between bg-surface-container-lowest mt-auto">
+      <span class="font-body-md text-body-md text-on-surface-variant">Mostrando ${Math.min(8, conRiesgo.length)} de ${conRiesgo.length} casos activos</span>
+      <button type="button" data-accion="ir" data-valor="/i/disputas" class="font-label-md text-label-md text-primary hover:underline">Ver todos</button>
+    </div>
+  </div>
+</main>`;
+
+  return { titulo: 'Bandeja de Soporte', standalone: true, contenido };
+};
