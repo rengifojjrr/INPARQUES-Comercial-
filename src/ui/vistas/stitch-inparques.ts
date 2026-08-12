@@ -447,3 +447,131 @@ ${cabeceraInparques('Parques Nacionales | Dirección Comercial', u.nombre)}
 
   return { titulo: 'Resumen Comercial', standalone: true, contenido };
 };
+
+// ------------------------------------------------------------------ Finanzas
+
+const NAV_FINANZAS: Array<[string, string, string]> = [
+  ['dashboard', 'Financial Overview', '/i'],
+  ['payments', 'Sales', '/i/contabilidad'],
+  ['account_balance', 'Reconciliation', '/i/conciliacion'],
+  ['percent', 'Fees/Commissions', '/i/canones'],
+  ['receipt_long', 'Accounts Receivable', '/i/cuentas-por-cobrar'],
+  ['inventory_2', 'Daily Closings', '/i/cierres'],
+  ['undo', 'Refunds', '/i/reembolsos'],
+  ['edit_document', 'Adjustments', '/i/ajustes'],
+  ['verified_user', 'Audit', '/i/auditoria'],
+  ['file_export', 'Exports', '/i/reportes'],
+];
+
+export const finanzasInicio: Render = (): Pagina => {
+  const e = store.leer();
+  const u = sesion.usuario()!;
+
+  const ordenesRegistradas = e.ordenes.filter((o) => o.estado !== 'cancelada');
+  const gmvVes = ordenesRegistradas.reduce((s, o) => s + o.totalVes, 0);
+
+  const confirmadosVes = e.pagos.filter((p) => p.estado === 'confirmado').reduce((s, p) => s + p.montoVes, 0);
+  const negociosConciliados = new Set(
+    e.liquidaciones.filter((l) => l.estado === 'conciliada' || l.estado === 'cerrada').map((l) => l.negocioId),
+  );
+  const conciliadosVes = e.pagos
+    .filter((p) => p.estado === 'confirmado')
+    .filter((p) => {
+      const o = e.ordenes.find((x) => x.id === p.ordenId);
+      return o && negociosConciliados.has(o.negocioId);
+    })
+    .reduce((s, p) => s + p.montoVes, 0);
+  const pctConfirmados = gmvVes > 0 ? Math.min(100, Math.round((confirmadosVes / gmvVes) * 100)) : 0;
+  const pctConciliados = gmvVes > 0 ? Math.min(100, Math.round((conciliadosVes / gmvVes) * 100)) : 0;
+
+  const diferenciasVes = e.turnos.reduce((s, t) => s + Math.abs(t.diferenciaVes ?? 0), 0);
+  const reembolsosVes = e.reembolsos.reduce((s, r) => s + r.montoUsd * e.tasaBcv.valor, 0);
+
+  const devengadaUsd = e.liquidaciones.reduce((s, l) => s + l.comisionUsd + l.canonUsd, 0);
+  const cobradaUsd = e.liquidaciones
+    .filter((l) => l.estado === 'conciliada' || l.estado === 'cerrada')
+    .reduce((s, l) => s + l.comisionUsd + l.canonUsd, 0);
+  const porCobrarUsd = e.liquidaciones
+    .filter((l) => l.estado === 'por_cobrar')
+    .reduce((s, l) => s + l.comisionUsd + l.canonUsd, 0);
+
+  const mesActual = new Intl.DateTimeFormat('es-VE', { month: 'long', year: 'numeric' }).format(new Date());
+
+  const contenido = `
+${conCajonMovil(barraLateralInparques('/i', NAV_FINANZAS, 'Audit & Finance Panel'))}
+${cabeceraInparques('Financial Audit Management', u.nombre)}
+<main class="lg:ml-72 pt-16 p-md lg:p-lg">
+  <div class="flex flex-col xl:flex-row xl:items-end justify-between gap-md mb-xl">
+    <div>
+      <h2 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Dashboard nacional</h2>
+      <p class="font-body-md text-body-md text-on-surface-variant">Desempeño financiero consolidado de todas las áreas protegidas.</p>
+    </div>
+    <div class="flex flex-wrap gap-sm items-center">
+      <div class="flex items-center gap-xs bg-surface-container-lowest border border-outline-variant rounded-lg px-md h-touch-target">
+        <span class="font-label-md text-label-md text-on-surface">Alcance: Nacional</span>
+      </div>
+      <div class="flex items-center gap-xs bg-surface-container-lowest border border-outline-variant rounded-lg px-md h-touch-target">
+        <span class="material-symbols-outlined text-on-surface-variant">calendar_today</span>
+        <span class="font-label-md text-label-md text-on-surface capitalize">${esc(mesActual)}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-lg mb-xl">
+    <div class="col-span-1 md:col-span-2 xl:col-span-2 bg-surface-container-lowest border border-outline-variant rounded-xl p-lg flex flex-col justify-between">
+      <div class="flex items-center gap-sm mb-xl">
+        <div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center"><span class="material-symbols-outlined">trending_up</span></div>
+        <h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Valor Bruto de Mercancía (GMV)</h3>
+      </div>
+      <div>
+        <div class="flex items-baseline gap-sm"><span class="font-display-lg text-display-lg text-on-surface">${esc(formatearVes(gmvVes))}</span></div>
+        <p class="font-body-md text-body-md text-on-surface-variant mt-xs">Valor total de todas las transacciones comerciales registradas, sin contar canceladas.</p>
+      </div>
+    </div>
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg flex flex-col justify-between">
+      <h3 class="font-label-md text-label-md text-on-surface-variant mb-md">Estado de Pagos</h3>
+      <div class="space-y-sm">
+        <div>
+          <div class="flex justify-between font-label-sm text-label-sm mb-1"><span class="text-on-surface">Confirmados</span><span class="text-primary font-bold">${esc(formatearVes(confirmadosVes))}</span></div>
+          <div class="w-full bg-surface-variant rounded-full h-2"><div class="bg-primary h-2 rounded-full" style="width:${pctConfirmados}%"></div></div>
+        </div>
+        <div>
+          <div class="flex justify-between font-label-sm text-label-sm mb-1"><span class="text-on-surface">Conciliados (Banco)</span><span class="text-secondary font-bold">${esc(formatearVes(conciliadosVes))}</span></div>
+          <div class="w-full bg-surface-variant rounded-full h-2"><div class="bg-secondary h-2 rounded-full" style="width:${pctConciliados}%"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg flex flex-col justify-between">
+      <h3 class="font-label-md text-label-md text-on-surface-variant mb-md">Excepciones</h3>
+      <div class="grid grid-cols-2 gap-sm">
+        <div class="bg-error-container/20 p-sm rounded-lg border border-error/10">
+          <span class="font-label-sm text-label-sm text-error block mb-1">Diferencias de caja</span>
+          <span class="font-headline-md text-headline-md text-on-surface">${esc(formatearVes(diferenciasVes))}</span>
+        </div>
+        <div class="bg-surface-variant p-sm rounded-lg">
+          <span class="font-label-sm text-label-sm text-on-surface-variant block mb-1">Reembolsos</span>
+          <span class="font-headline-md text-headline-md text-on-surface">${esc(formatearVes(reembolsosVes))}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="font-headline-md text-headline-md text-on-surface mb-md">Análisis de Canon / Comisión</h3>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg flex items-center justify-between">
+      <div><span class="font-label-md text-label-md text-on-surface-variant block mb-xs">Devengada (Calculada)</span><span class="font-headline-lg text-headline-lg text-on-surface">${esc(formatearUsd(devengadaUsd))}</span></div>
+      <div class="w-12 h-12 rounded-full bg-surface-variant flex items-center justify-center text-outline"><span class="material-symbols-outlined">calculate</span></div>
+    </div>
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg flex items-center justify-between">
+      <div><span class="font-label-md text-label-md text-on-surface-variant block mb-xs">Cobrada (Efectiva)</span><span class="font-headline-lg text-headline-lg text-primary">${esc(formatearUsd(cobradaUsd))}</span></div>
+      <div class="w-12 h-12 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center"><span class="material-symbols-outlined">account_balance_wallet</span></div>
+    </div>
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg flex items-center justify-between">
+      <div><span class="font-label-md text-label-md text-on-surface-variant block mb-xs">Por Cobrar</span><span class="font-headline-lg text-headline-lg text-tertiary">${esc(formatearUsd(porCobrarUsd))}</span></div>
+      <div class="w-12 h-12 rounded-full bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center"><span class="material-symbols-outlined">hourglass_empty</span></div>
+    </div>
+  </div>
+</main>`;
+
+  return { titulo: 'Dashboard Financiero Nacional', standalone: true, contenido };
+};
