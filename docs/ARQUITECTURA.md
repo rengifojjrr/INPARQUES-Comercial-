@@ -195,9 +195,38 @@ simulada en `adapters/simulados.ts`. Ninguna hace peticiones de red.
 Sustituir un simulador por un proveedor real es implementar la misma interfaz;
 el resto del sistema no cambia.
 
-## 9. Pruebas
+## 9. Capa de interfaz
 
-`npm test` — 72 pruebas en cuatro archivos:
+Las plantillas del cliente no llegaron, así que la capa visual es **provisional**
+y está deliberadamente aislada para poder sustituirla:
+
+| Archivo | Responsabilidad |
+| --- | --- |
+| `ui/estilos.css` | Tokens de color, tipografía y espacio; mobile-first |
+| `ui/componentes.ts` | Piezas reutilizables (tarjeta, tabla, insignia, hoja) |
+| `ui/shell.ts` | Cabecera, barra inferior y lateral por superficie |
+| `ui/vistas/*.ts` | Una función por pantalla; devuelve marcado |
+| `ui/acciones.ts` | Un único escuchador delegado: `data-accion` |
+| `ui/operaciones.ts` | Donde las tres superficies escriben el mismo estado |
+
+Las vistas no escriben el estado directamente: llaman a `operaciones.ts`, que
+respeta las máquinas de estado y deja auditoría. Por eso lo que hace el
+operador aparece en el visitante sin ningún mecanismo de sincronización.
+
+Decisiones de teléfono, que el encargo pedía explícitamente:
+
+- Acciones principales en barra inferior y hojas que suben desde abajo, dentro
+  del alcance del pulgar.
+- Áreas táctiles de 44 px mínimo; la barra inferior mide 60 px.
+- Entradas a 16 px, que es lo que impide el zoom automático de iOS al enfocar.
+- `env(safe-area-inset-*)` para el notch y el indicador inferior.
+- Tablas con `overflow-x: auto` en su propia caja: el cuerpo nunca rueda en
+  horizontal.
+- Zoom del navegador permitido: no hay `maximum-scale` ni `user-scalable=no`.
+
+## 10. Pruebas
+
+`npm test` — 78 pruebas en cinco archivos:
 
 | Archivo | Cubre |
 | --- | --- |
@@ -205,21 +234,26 @@ el resto del sistema no cambia.
 | `carrito.test.ts` | Un solo comercio por carrito, modal de conflicto, agotados, stock, modificadores obligatorios, totales |
 | `estados-y-controles.test.ts` | Las cuatro máquinas de estado, acciones sensibles, inmutabilidad, auditoría, regla monetaria, ámbitos, coherencia de los datos iniciales |
 | `conectividad.test.ts` | Modos de conexión, cola, idempotencia, conflictos, adaptadores simulados |
+| `cobertura-vistas.test.ts` | Que ninguna ruta quede sin vista ni ninguna vista sin ruta |
 
-`npm run verificar` — 20 comprobaciones en Chromium real: carga del índice
-técnico, 404, acceso sin sesión, 403 por URL directa para operador e
-inspector, bloqueo por MFA, persistencia tras recarga, alternancia de
-conexión, ausencia de desbordamiento horizontal en móvil, tablet y escritorio,
-y ausencia de errores de consola.
+`npm run verificar` — 58 comprobaciones en Chromium real a 390 × 844, con
+`isMobile` y `hasTouch` activos: entrada con los 11 perfiles, compra completa
+de principio a fin, modal de un solo comercio, avance del pedido reflejado en
+el visitante, disponibilidad cruzada, venta de mostrador, siete rutas
+prohibidas, enmascarado bancario, aprobación de expediente, auditoría,
+inmutabilidad de cierres, cola sin conexión, índice técnico, ausencia de
+desbordamiento en móvil, tablet y escritorio, y consola limpia.
 
-## 10. Lo que falta
+## 11. Lo que falta
 
-Todo lo visual. Cuando lleguen las plantillas:
+El aspecto. Cuando lleguen las plantillas:
 
 1. Colocarlas en `plantillas-originales/` sin modificarlas.
 2. Asociar cada archivo a su entrada del registro (`htmlRef`) y crear las
    entradas que falten.
-3. Montar el marcado original en lugar del andamio de `dev/placeholder.ts`.
-4. Conectar botones, formularios, filtros y modales al núcleo ya construido.
-5. Avanzar el estado de cada vista a `conectada` y luego a `revisada`, y
+3. Sustituir el marcado de `ui/vistas/` por el original, conservando los
+   atributos `data-accion` que ya conectan cada control con su operación.
+4. Avanzar el estado de cada vista a `conectada` y luego a `revisada`, y
    regenerar la matriz con `npm run matriz`.
+
+El núcleo no cambia en ninguno de esos pasos.

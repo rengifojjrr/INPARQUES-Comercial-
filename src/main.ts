@@ -1,47 +1,57 @@
 /**
  * Arranque de la demo.
  *
- * Orden: datos -> sesion -> conectividad -> cola -> router.
+ * Orden: datos -> sesión -> conectividad -> cola -> acciones -> router.
  * Todo ocurre en el navegador; no hay backend ni servicio remoto.
  */
 
+import './ui/estilos.css';
 import './dev/andamiaje.css';
 
 import { store } from './data/store';
 import { sesion } from './app/session';
 import { conectividad } from './net/connectivity';
 import { colaSincronizacion, type AccionEncolada } from './net/sync-queue';
-import { evaluar, inicioDeRol, router, type ResultadoNavegacion } from './app/router';
+import { inicioDeRol, router, type ResultadoNavegacion } from './app/router';
 import { renderizarMapa } from './dev/product-map';
-import { renderizarPendiente } from './dev/placeholder';
-import { ROLES } from './domain/roles';
+import { marco } from './ui/shell';
+import { VISTAS_POR_ID } from './ui/vistas';
+import { configurarAcciones, cerrarHoja } from './ui/acciones';
+import { estadoUi, restaurarCarrito } from './ui/estado-ui';
+import * as compartidas from './ui/vistas/compartidas';
+import type { Pagina } from './ui/vistas/tipos';
 
 const raiz = document.getElementById('app')!;
 
 /** Rutas internas de desarrollo. No pertenecen al producto. */
 const RUTAS_DEV = ['/__mapa'];
 
+let ultimoResultado: ResultadoNavegacion | null = null;
+
 async function arrancar(): Promise<void> {
   await store.iniciar();
   sesion.restaurar();
+  restaurarCarrito();
   conectividad.iniciar();
   configurarCola();
+  configurarAcciones(repintar);
   exponerHerramientasDeDemo();
 
   router.iniciar(pintar);
 
-  // Al recuperar la conexion se intenta vaciar la cola automaticamente.
+  // Al recuperar la conexión se intenta vaciar la cola automáticamente.
   conectividad.suscribir(async (modo) => {
     if (modo === 'conectado' && colaSincronizacion.pendientes().length > 0) {
       await colaSincronizacion.sincronizar();
+      estadoUi.colaPendientes = colaSincronizacion.pendientes().length;
     }
-    pintar(evaluar(router.actual()));
+    repintar();
   });
 }
 
 /**
- * La cola necesita saber leer la version actual de un registro y aplicar la
- * accion. Ambas cosas viven en el store, no en la cola.
+ * La cola necesita saber leer la versión actual de un registro y aplicar la
+ * acción. Ambas cosas viven en el store, no en la cola.
  */
 function configurarCola(): void {
   colaSincronizacion.configurar(
@@ -54,8 +64,7 @@ function configurarCola(): void {
         const a = e.articulos.find((x) => x.id === entidadId);
         return a ? String(a.disponible) : null;
       }
-      if (tipo === 'caja.venta_mostrador') return 'pendiente';
-      if (tipo === 'inspeccion.registrar') return 'pendiente';
+      if (tipo === 'caja.venta_mostrador' || tipo === 'inspeccion.registrar') return 'pendiente';
       return null;
     },
     (accion: AccionEncolada) => {
@@ -75,7 +84,7 @@ function configurarCola(): void {
             a: destino,
             porUsuarioId: sesion.activa()?.usuarioId ?? 'sistema',
             porRol: sesion.rol() ?? 'comercio.operador',
-            motivo: 'Sincronizacion de accion encolada sin conexion',
+            motivo: 'Sincronización de acción encolada sin conexión',
           });
           o.estado = destino as typeof o.estado;
         }
@@ -84,104 +93,91 @@ function configurarCola(): void {
   );
 }
 
-function pintar(r: ResultadoNavegacion): void {
+/** Vuelve a dibujar la ruta actual sin navegar. */
+function repintar(): void {
+  if (ultimoResultado) pintar(ultimoResultado, true);
+}
+
+function pintar(r: ResultadoNavegacion, esRepintado = false): void {
+  ultimoResultado = r;
   const ruta = router.actual();
+
+  if (!esRepintado) cerrarHoja();
 
   if (RUTAS_DEV.includes(ruta)) {
     renderizarMapa(raiz);
     return;
   }
 
+  const ctx = {
+    params: r.tipo === 'ok' ? r.coincidencia.params : {},
+    consulta: r.tipo === 'ok' ? r.coincidencia.consulta : new URLSearchParams(),
+    ruta,
+  };
+
+  let pagina: Pagina;
+
   switch (r.tipo) {
-    case 'ok':
-      // Cuando la vista tenga su HTML asociado se montara aqui. Mientras
-      // tanto se muestra el andamio con la ficha de la ruta.
-      renderizarPendiente(raiz, r.coincidencia.vista, r.coincidencia.params);
+    case 'ok': {
+      const render = VISTAS_POR_ID[r.coincidencia.vista.id];
+      pagina = render
+        ? render(ctx)
+        : {
+            titulo: r.coincidencia.vista.titulo,
+            contenido: `<div class="estado"><div class="estado__ic" aria-hidden="true">◻</div>
+              <p class="estado__t">Vista sin implementar</p>
+              <p class="estado__d">La ruta <code>${r.coincidencia.vista.ruta}</code> está registrada pero no tiene vista asociada.</p></div>`,
+          };
       break;
+    }
 
     case 'no_encontrada':
-      estadoSimple(
-        '404',
-        'Pagina no encontrada',
-        `La ruta <code>${escapar(r.ruta)}</code> no existe en el registro de vistas.`,
-        inicioActual(),
-      );
+      pagina = compartidas.error404(ctx);
       break;
 
     case 'sin_sesion':
-      estadoSimple(
-        'Acceso requerido',
-        'Inicie sesion para continuar',
-        `La ruta <code>${escapar(r.destino)}</code> requiere una sesion activa.`,
-        '/acceso',
-      );
-      break;
+      // Sin sesión no se muestra el destino: se envía al acceso.
+      router.ir('/acceso', true);
+      return;
 
     case 'mfa_pendiente':
-      estadoSimple(
-        'Verificacion pendiente',
-        'Complete el segundo factor',
-        'Este rol exige verificacion en dos pasos antes de acceder a sus modulos.',
-        '/mfa',
-      );
-      break;
+      router.ir('/mfa', true);
+      return;
 
     case 'prohibida':
-      estadoSimple(
-        '403',
-        'No tiene permiso para ver esta pagina',
-        `El rol <strong>${ROLES[r.rol].nombre}</strong> no esta autorizado para <code>${escapar(r.vista.ruta)}</code>.`,
-        inicioDeRol(r.rol),
-      );
+      pagina = compartidas.error403(ctx);
       break;
+  }
+
+  const { contenido, ...opciones } = pagina;
+  raiz.innerHTML = marco(contenido, opciones, ruta);
+
+  if (!esRepintado) {
+    window.scrollTo({ top: 0 });
+    const anuncios = document.getElementById('anuncios');
+    if (anuncios) anuncios.textContent = pagina.titulo;
   }
 }
 
-function inicioActual(): string {
-  const rol = sesion.rol();
-  return rol ? inicioDeRol(rol) : '/acceso';
-}
-
 /**
- * Estados 403, 404, sesion vencida y mantenimiento. El andamio los resuelve
- * de forma neutra; cuando lleguen los HTML de estado se montaran en su lugar.
- */
-function estadoSimple(marca: string, titulo: string, cuerpo: string, destino: string): void {
-  raiz.innerHTML = `
-    <div class="and-cinta">
-      <strong>Estado del sistema</strong>
-      <span>${marca}</span>
-      <a href="#/__mapa">Indice tecnico</a>
-    </div>
-    <main class="and-envoltura" id="contenido">
-      <h1 class="and-titulo">${titulo}</h1>
-      <p class="and-bajada">${cuerpo}</p>
-      <p><a class="and-boton and-boton--principal" href="#${destino}">Volver al inicio</a></p>
-    </main>
-  `;
-  const el = document.getElementById('anuncios');
-  if (el) el.textContent = titulo;
-}
-
-function escapar(s: string): string {
-  return s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!);
-}
-
-/**
- * Herramientas de demostracion accesibles desde la consola del navegador:
- * restablecer datos, alternar conexion y exportar el estado.
+ * Herramientas de demostración accesibles desde la consola del navegador.
  */
 function exponerHerramientasDeDemo(): void {
   Object.defineProperty(window, 'demoInparques', {
     value: {
-      restablecer: () => store.restablecer(),
+      restablecer: () => store.restablecer().then(() => repintar()),
       exportar: () => store.exportarJson(),
-      alternarConexion: () => conectividad.alternarDemo(),
+      alternarConexion: () => {
+        const m = conectividad.alternarDemo();
+        repintar();
+        return m;
+      },
       conexion: () => conectividad.actual(),
       cola: () => colaSincronizacion.listar(),
       sincronizar: () => colaSincronizacion.sincronizar(),
       sesion: () => sesion.activa(),
       cerrarSesion: () => sesion.cerrar(),
+      inicioDeRol,
     },
     writable: false,
   });

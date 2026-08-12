@@ -1,5 +1,5 @@
 {
-  "_nota": "Perfiles de demostracion. La clave es la misma para todos y esta documentada en el README. No son credenciales reales ni corresponden a personas reales.",
+  "_nota": "Perfiles de demostración. La clave es la misma para todos y está documentada en el README. No son credenciales reales ni corresponden a personas reales.",
   "usuarios": [
     {
       "id": "us_superadmin",
@@ -58,7 +58,7 @@
     },
     {
       "id": "us_soporte",
-      "nombre": "Jose Rangel",
+      "nombre": "José Rangel",
       "correo": "soporte@demo.inparques.ve",
       "rol": "inparques.soporte",
       "scope": { "level": "nacional", "ids": [] },
@@ -69,7 +69,7 @@
     },
     {
       "id": "us_prop_cedros",
-      "nombre": "Elena Vasquez",
+      "nombre": "Elena Vásquez",
       "correo": "propietario@loscedros.demo.ve",
       "rol": "comercio.propietario",
       "scope": { "level": "negocio", "ids": ["ng_cedros"] },
@@ -102,7 +102,7 @@
     },
     {
       "id": "us_contador_cedros",
-      "nombre": "Hector Guillen",
+      "nombre": "Héctor Guillén",
       "correo": "contabilidad@loscedros.demo.ve",
       "rol": "comercio.contador",
       "scope": { "level": "negocio", "ids": ["ng_cedros"] },
@@ -124,7 +124,7 @@
     },
     {
       "id": "us_prop_orinoco",
-      "nombre": "Ramon Escobar",
+      "nombre": "Ramón Escobar",
       "correo": "propietario@orinoco.demo.ve",
       "rol": "comercio.propietario",
       "scope": { "level": "negocio", "ids": ["ng_orinoco"] },

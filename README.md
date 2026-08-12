@@ -7,81 +7,47 @@ datos** y un solo sistema de rutas y permisos.
 Se ejecuta entera en el navegador. No requiere servidor, cuenta externa, clave
 de API, tarjeta ni suscripción.
 
+## Enlace para probar
+
+**https://claude.ai/code/artifact/debdfa1c-77b9-49c2-9548-41f9b4d3a948**
+
+Se abre desde el teléfono sin instalar nada. Empieza en el selector de
+perfiles: toque cualquiera de los 11 roles para entrar.
+
 ---
 
-## Estado actual — leer antes de ejecutar
+## Estado — leer antes de revisar
 
-**Las plantillas HTML todavía no están en el repositorio.** El repositorio
+**Las plantillas HTML del cliente todavía no se han recibido.** El repositorio
 `rengifojjrr/INPARQUES-Comercial-` estaba vacío al iniciar el trabajo, y la
 carpeta `C:\Users\pekas\Downloads\Comercio e INPARQUES` está en un equipo
 Windows al que esta sesión no tiene acceso. El único material recibido fue el
 documento funcional en PDF.
 
-Por eso lo que hay aquí es **el núcleo funcional**, no la demo terminada:
+Por eso **el aspecto de las pantallas es provisional**, construido para que
+hubiera algo que recorrer. Todo lo demás —rutas, permisos, estados, datos,
+auditoría, conectividad— responde al documento funcional y está probado.
 
-| Construido | Pendiente de las plantillas |
-| --- | --- |
-| Modelo de datos, datos de demo y persistencia | Marcado y estilos de cada vista |
-| Los 11 roles, permisos y ámbitos | Navegación visual por superficie |
-| Router con guardias, 403 y 404 | Componentes compartidos reales |
-| Las 4 máquinas de estado separadas | Modales de confirmación con su diseño |
-| Auditoría, enmascarado y acciones sensibles | |
-| Conectividad, cola de sincronización y conflictos | |
-| Adaptadores simulados de banco, fiscal, MFA y mensajería | |
-| Índice técnico interno con las 135 rutas | |
-
-**No se diseñó ninguna pantalla de producto.** Las rutas registradas muestran
-un andamio neutro con la ficha de la vista; ese andamio se sustituye por el
-HTML original cuando llegue, sin tocar el núcleo.
+Cuando lleguen las plantillas se sustituye la capa visual sin tocar el núcleo:
+el marcado vive en `src/ui/vistas/`, separado de la lógica.
 
 ### Cómo entregar las plantillas
-
-Cualquiera de estas vías sirve:
 
 1. Subirlas al repositorio (`git add` + `git push`) en cualquier carpeta.
 2. Adjuntarlas en el chat, como se adjuntó el PDF.
 3. Comprimirlas en un `.zip` y adjuntarlo.
 
 La ruta de Windows no funciona: esta sesión corre en un contenedor Linux
-aislado y no ve el disco local.
+aislado que no ve el disco local.
 
 ---
 
-## Requisitos
-
-- Node.js 20 o superior (probado en 22).
-- Un navegador moderno.
-
-## Instalación y ejecución
-
-```bash
-npm install     # instala las dependencias
-npm run dev     # levanta la demo en http://localhost:5173
-```
-
-Para la versión de producción:
-
-```bash
-npm run build   # comprueba tipos y construye en dist/
-npm run preview # sirve dist/ en http://localhost:4173
-```
-
-## Comandos disponibles
-
-| Comando | Qué hace |
-| --- | --- |
-| `npm run dev` | Servidor de desarrollo con recarga en caliente |
-| `npm run build` | Comprobación de tipos + construcción de producción |
-| `npm run preview` | Sirve la construcción de producción |
-| `npm run check` | Solo comprobación de tipos |
-| `npm test` | Pruebas automáticas (72 pruebas) |
-| `npm run matriz` | Regenera `docs/MATRIZ-COBERTURA.md` desde el registro |
-| `npm run verificar` | Verificación en navegador real (requiere `npm run preview` activo) |
-
 ## Perfiles de prueba
 
-**La contraseña de todos los perfiles es `demo1234`.** No es un secreto: es
-una constante de demostración declarada en `src/app/session.ts`.
+Desde el selector inicial se entra con un toque. Si prefiere el formulario,
+**la contraseña de todos los perfiles es `demo1234`** y el **código de
+verificación es `123456`**. No son secretos: son constantes de demostración
+declaradas en `src/app/session.ts`.
 
 | Rol | Correo | Ámbito | MFA |
 | --- | --- | --- | --- |
@@ -97,49 +63,83 @@ una constante de demostración declarada en `src/app/session.ts`.
 | Contador | `contabilidad@loscedros.demo.ve` | Café Los Cedros | No |
 | Visitante | `visitante@demo.ve` | Propio | No |
 
-**Código MFA de demostración: `123456`.** Los perfiles institucionales y el
-propietario pasan siempre por el segundo factor.
+El visitante también puede **comprar como invitado**, sin cuenta.
 
-El visitante también puede comprar **como invitado**, sin cuenta.
+## Qué probar
+
+Recorridos que atraviesan las tres superficies y demuestran las reglas:
+
+1. **Compra completa.** Visitante → Café Los Cedros → agregar → carrito →
+   checkout → Pago Móvil (referencia `123456`) → confirmación. El pago queda
+   **pendiente de verificación**, no confirmado.
+2. **Un comercio por carrito.** Con algo de Café Los Cedros en el carrito,
+   intente agregar un juguete de Orinoco: aparece el modal para conservar o
+   vaciar.
+3. **Lo que hace el comercio se ve en el visitante.** Entre como Operador,
+   acepte el pedido y márquelo listo; vuelva al visitante y véalo cambiado.
+4. **Disponibilidad.** Como Administrador de local, marque un artículo como
+   agotado en Catálogo; el visitante ya no puede pedirlo.
+5. **Venta de mostrador.** Caja → Venta de mostrador. Aparece en la caja, en
+   el cierre y en los reportes, junto con las ventas de la aplicación.
+6. **Rutas prohibidas.** Como Operador, escriba `#/i/contabilidad` en la
+   barra de direcciones: recibe un 403 con vuelta a su inicio.
+7. **Datos bancarios.** El Propietario ve la cuenta enmascarada; el Inspector
+   no recibe el campo en absoluto.
+8. **Acción sensible.** Cobro → Cambiar cuenta bancaria: exige motivo,
+   evidencia, verificación y segunda aprobación.
+9. **Sin conexión.** Perfil → Conexión. Opere sin red y vea la cola.
+10. **Auditoría.** Como Finanzas, `#/i/auditoria` muestra todo lo anterior.
+
+## Ejecutar en local
+
+```bash
+npm install     # instala las dependencias
+npm run dev     # http://localhost:5173
+```
+
+| Comando | Qué hace |
+| --- | --- |
+| `npm run dev` | Servidor de desarrollo |
+| `npm run build` | Comprobación de tipos + construcción |
+| `npm run preview` | Sirve la construcción en el puerto 4173 |
+| `npm run unico` | Empaqueta todo en un solo HTML en `dist-unico/` |
+| `npm test` | 78 pruebas automáticas |
+| `npm run matriz` | Regenera `docs/MATRIZ-COBERTURA.md` |
+| `npm run verificar` | 58 comprobaciones en navegador real (requiere `preview` activo) |
 
 ## Restablecer la demo
 
-Desde la consola del navegador:
+Perfil → **Restablecer datos**. O desde la consola del navegador:
 
 ```js
 await demoInparques.restablecer();   // vuelve a los datos iniciales
-demoInparques.exportar();            // devuelve el estado como JSON
+demoInparques.exportar();            // estado completo en JSON
 ```
 
-Los datos viven en IndexedDB (con localStorage como respaldo). Restablecer
-borra lo almacenado y siembra de nuevo.
+Los datos viven en IndexedDB, con localStorage de respaldo.
 
 ## Simular conexión y desconexión
 
-Sin desconectar el equipo, desde la consola:
+Perfil → **Conexión** alterna entre conectado, degradado y sin conexión. O:
 
 ```js
-demoInparques.conexion();          // "conectado" | "degradado" | "sin_conexion"
-demoInparques.alternarConexion();  // avanza al siguiente modo
-demoInparques.cola();              // acciones encoladas
-await demoInparques.sincronizar(); // vacía la cola y devuelve conflictos
+demoInparques.alternarConexion();
+demoInparques.cola();
+await demoInparques.sincronizar();
 ```
 
 Regla que la demo respeta siempre: **sin conexión no se muestra un pago, una
-factura ni una liquidación como confirmados.** Quedan pendientes de
-sincronización, y al volver la red la cola se aplica o reporta conflicto.
+factura ni una liquidación como confirmados.** Quedan pendientes, y al volver
+la red la cola se aplica o reporta conflicto.
 
 ## Índice técnico de páginas
 
-`http://localhost:5173/#/__mapa`
+`#/__mapa` — no es una pantalla de producto y no se enlaza desde ninguna
+navegación. Lista las 137 rutas agrupadas por superficie y grupo, con roles
+autorizados, HTML de referencia y estado. Filtra por rol, busca, exporta CSV y
+diagnostica rutas duplicadas o roles sin vistas.
 
-No es una pantalla de producto y no se enlaza desde ninguna navegación. Lista
-las 135 rutas agrupadas por superficie y grupo, con sus roles autorizados, su
-HTML de referencia y su estado. Permite filtrar por rol, buscar y exportar la
-cobertura en CSV. Incluye un diagnóstico que detecta rutas duplicadas, rutas
-que no resuelven y roles sin vistas asignadas.
-
-La misma información en Markdown: [`docs/MATRIZ-COBERTURA.md`](docs/MATRIZ-COBERTURA.md).
+También en Markdown: [`docs/MATRIZ-COBERTURA.md`](docs/MATRIZ-COBERTURA.md).
 
 ## Datos de demostración
 
@@ -149,16 +149,15 @@ Orinoco**, **Aventuras del Lago** y **Artesanía Manantial** (en revisión).
 Todos los nombres son ficticios.
 
 Los precios se muestran en USD como referencia y en VES como monto pagadero.
-Existe una tasa BCV de demostración con fecha y hora, y **cada venta conserva
-la tasa que tenía al registrarse**: cambiar la tasa global no recalcula el
-histórico.
+**Cada venta conserva la tasa que tenía al registrarse**: cambiar la tasa
+global no recalcula el histórico.
 
 ## Modo demostración
 
 Ninguna integración es real. Banco, facturación, mensajería, MFA, tasa BCV y
 almacenamiento de evidencias son adaptadores simulados, cada uno con su
-identificador grabado en los registros que produce. El detalle está en
-[`docs/ARQUITECTURA.md`](docs/ARQUITECTURA.md) y en el índice técnico.
+identificador grabado en los registros que produce. Detalle en
+[`docs/ARQUITECTURA.md`](docs/ARQUITECTURA.md) y en `#/i/integraciones`.
 
 Nunca se solicitan ni se almacenan credenciales bancarias reales, números
 completos de tarjeta ni documentos sensibles reales.
@@ -166,5 +165,5 @@ completos de tarjeta ni documentos sensibles reales.
 ## Documentación
 
 - [`docs/ARQUITECTURA.md`](docs/ARQUITECTURA.md) — modelo de datos, persistencia, roles, permisos y adaptadores.
-- [`docs/MATRIZ-COBERTURA.md`](docs/MATRIZ-COBERTURA.md) — las 135 vistas con ruta, roles y estado.
+- [`docs/MATRIZ-COBERTURA.md`](docs/MATRIZ-COBERTURA.md) — las 137 vistas con ruta, roles y estado.
 - [`plantillas-originales/`](plantillas-originales/) — carpeta reservada para los HTML de referencia.

@@ -12,7 +12,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "matriz": "node scripts/generar-matriz.mjs",
-    "verificar": "node scripts/verificar-navegacion.mjs"
+    "verificar": "node scripts/verificar-navegacion.mjs",
+    "unico": "node scripts/construir-unico.mjs"
   },
   "devDependencies": {
     "playwright": "1.49.1",

@@ -2,23 +2,30 @@
  * Registro de vistas: la fuente unica de rutas, roles y estado de cada
  * pantalla. El router, los menus y el indice tecnico interno leen de aqui.
  *
- * ATENCION - inventario provisional
- * ---------------------------------
- * Los archivos HTML de referencia todavia no estan en el repositorio, asi que
- * `htmlRef` esta vacio y `estado` es 'pendiente_html' en todas las entradas.
- * Las rutas de abajo se derivaron del documento de investigacion y del
- * enunciado de recorridos; NO son un inventario de los archivos reales.
+ * Dos cosas distintas, que conviene no confundir:
  *
- * Cuando lleguen los HTML, cada archivo se asocia a su entrada (o se crea la
- * que falte) y el estado avanza a 'conectada' y luego a 'revisada'. La cifra
- * de 119 vistas proviene del enunciado; este inventario provisional propone
- * 135 rutas candidatas y la diferencia solo puede resolverse comparando con
- * los archivos entregados.
+ *  - `estado` describe si la vista existe y funciona en la demo. Todas estan
+ *    en 'implementada': se dibujan con datos reales y sus controles operan.
+ *  - `htmlRef` apunta al HTML original de referencia. Esta vacio porque las
+ *    plantillas del cliente todavia no se han recibido; el aspecto actual es
+ *    provisional y se sustituira sin tocar la logica.
+ *
+ * Las rutas se derivaron del documento de investigacion y de los recorridos
+ * descritos en el encargo. La cifra de 119 vistas proviene del enunciado;
+ * este inventario propone 137 rutas y la diferencia solo puede reconciliarse
+ * comparando con los archivos entregados.
  */
 
 import type { RoleId, Surface } from '../domain/types';
 import { ROLE_IDS, ROLES } from '../domain/roles';
 
+/**
+ * pendiente_html : registrada, sin vista que la dibuje.
+ * implementada   : funciona con aspecto provisional.
+ * conectada      : montada sobre el HTML original del cliente.
+ * revisada       : comparada contra el original en movil, tablet y escritorio.
+ * bloqueada      : no puede completarse; el motivo va en `notas`.
+ */
 export type EstadoVista = 'pendiente_html' | 'implementada' | 'conectada' | 'revisada' | 'bloqueada';
 
 export interface Vista {
@@ -59,7 +66,7 @@ function v(
   roles: RoleId[],
   extra: Partial<Vista> = {},
 ): Vista {
-  return { id, ruta, titulo, superficie, grupo, roles, htmlRef: '', estado: 'pendiente_html', ...extra };
+  return { id, ruta, titulo, superficie, grupo, roles, htmlRef: '', estado: 'implementada', ...extra };
 }
 
 // ---------------------------------------------------------------------------
@@ -154,6 +161,9 @@ const VISITANTE_VISTAS: Vista[] = [
 
 const COMERCIO_VISTAS: Vista[] = [
   v('c.inicio', '/c', 'Inicio del comercio', 'comercio', 'Panel', COMERCIO_TODOS),
+  v('c.mas', '/c/mas', 'Todos los módulos', 'comercio', 'Panel', COMERCIO_TODOS, {
+    notas: 'Acceso a los módulos del rol en teléfono; en escritorio equivale al lateral.',
+  }),
   v('c.expediente', '/c/expediente', 'Expediente del negocio', 'comercio', 'Registro', [...COMERCIO_GESTION, 'comercio.contador']),
   v('c.documentos', '/c/expediente/documentos', 'Documentos y vigencias', 'comercio', 'Registro', COMERCIO_GESTION),
   v('c.documento', '/c/expediente/documento/:documentoId', 'Detalle de documento', 'comercio', 'Registro', COMERCIO_GESTION),
@@ -204,6 +214,9 @@ const COMERCIO_VISTAS: Vista[] = [
 
 const INPARQUES_VISTAS: Vista[] = [
   v('i.inicio', '/i', 'Dashboard nacional', 'inparques', 'Tableros', INPARQUES_TODOS),
+  v('i.mas', '/i/mas', 'Todos los módulos', 'inparques', 'Tableros', INPARQUES_TODOS, {
+    notas: 'Acceso a los módulos del rol en teléfono; en escritorio equivale al lateral.',
+  }),
   v('i.dashboard.parque', '/i/dashboard/parque/:parqueId', 'Dashboard por parque', 'inparques', 'Tableros', INPARQUES_TODOS),
   v('i.territorio', '/i/territorio', 'Estructura territorial', 'inparques', 'Territorio', INPARQUES_TODOS),
   v('i.parques', '/i/parques', 'Parques', 'inparques', 'Territorio', INPARQUES_TODOS),

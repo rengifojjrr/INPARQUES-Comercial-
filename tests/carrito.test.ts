@@ -94,7 +94,7 @@ describe('disponibilidad e inventario', () => {
   it('exige los modificadores obligatorios', () => {
     const r = agregarAlCarrito(carritoVacio(), sel('ar_cachito', 1, []));
     expect(r.ok).toBe(false);
-    if (!r.ok && r.razon === 'modificador_obligatorio') expect(r.modificador).toBe('Preparacion');
+    if (!r.ok && r.razon === 'modificador_obligatorio') expect(r.modificador).toBe('Preparación');
   });
 });
 

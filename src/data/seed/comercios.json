@@ -2,7 +2,7 @@
   "negocios": [
     {
       "id": "ng_cedros",
-      "nombreComercial": "Cafe Los Cedros",
+      "nombreComercial": "Café Los Cedros",
       "razonSocial": "Inversiones Los Cedros, C.A.",
       "rif": "J-410258963-7",
       "categoria": "comida",
@@ -32,7 +32,7 @@
     },
     {
       "id": "ng_manantial",
-      "nombreComercial": "Artesania Manantial",
+      "nombreComercial": "Artesanía Manantial",
       "razonSocial": "Cooperativa Manantial, R.L.",
       "rif": "J-411002356-9",
       "categoria": "artesania",
@@ -47,7 +47,7 @@
       "negocioId": "ng_cedros",
       "puntoId": "pt_jc_01",
       "parqueId": "pq_este",
-      "nombre": "Cafe Los Cedros - Jardin Central",
+      "nombre": "Café Los Cedros - Jardín Central",
       "cumplimiento": { "retiroInmediato": true, "retiroProgramado": true, "mesa": true },
       "abierto": true
     },
@@ -56,7 +56,7 @@
       "negocioId": "ng_cedros",
       "puntoId": "pt_en_01",
       "parqueId": "pq_este",
-      "nombre": "Cafe Los Cedros - Entrada Norte",
+      "nombre": "Café Los Cedros - Entrada Norte",
       "cumplimiento": { "retiroInmediato": true, "retiroProgramado": false, "mesa": false },
       "abierto": true
     },
@@ -65,7 +65,7 @@
       "negocioId": "ng_orinoco",
       "puntoId": "pt_ai_01",
       "parqueId": "pq_este",
-      "nombre": "Juguetes Orinoco - Area Infantil",
+      "nombre": "Juguetes Orinoco - Área Infantil",
       "cumplimiento": { "retiroInmediato": true, "retiroProgramado": true, "mesa": false },
       "abierto": true
     },

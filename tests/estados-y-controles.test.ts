@@ -249,7 +249,7 @@ describe('datos de demostracion', () => {
   it('el parque piloto tiene las cuatro zonas previstas', () => {
     const e = construirEstadoInicial();
     const zonas = e.zonas.filter((z) => z.parqueId === 'pq_este').map((z) => z.nombre);
-    expect(zonas).toEqual(['Entrada Norte', 'Lago', 'Jardin Central', 'Area Infantil']);
+    expect(zonas).toEqual(['Entrada Norte', 'Lago', 'Jardín Central', 'Área Infantil']);
   });
 
   it('cada local referencia un punto y un parque existentes', () => {

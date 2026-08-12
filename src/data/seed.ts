@@ -6,7 +6,7 @@
  * referencias cruzadas y tasas congeladas coherentes.
  *
  * Parque piloto: "Parque del Este - piloto", zonas Entrada Norte, Lago,
- * Jardin Central y Area Infantil; negocios Cafe Los Cedros, Juguetes Orinoco
+ * Jardin Central y Area Infantil; negocios Café Los Cedros, Juguetes Orinoco
  * y Aventuras del Lago. Todos los nombres son ficticios.
  */
 
@@ -137,7 +137,7 @@ function documentos(): DemoState['documentos'] {
     { id: 'dc_6', negocioId: 'ng_aventuras', tipo: 'poliza', nombreArchivo: 'poliza-responsabilidad.pdf', cargadoEn: '2026-04-02T11:30:00.000Z', vigenciaHasta: '2026-08-20', estado: 'aprobado', revisadoPor: 'us_direccion' },
     { id: 'dc_7', negocioId: 'ng_aventuras', tipo: 'rif', nombreArchivo: 'rif-aventuras.pdf', cargadoEn: '2026-04-02T11:32:00.000Z', vigenciaHasta: '2027-04-02', estado: 'aprobado', revisadoPor: 'us_direccion' },
     { id: 'dc_8', negocioId: 'ng_manantial', tipo: 'rif', nombreArchivo: 'rif-manantial.pdf', cargadoEn: '2026-07-28T16:30:00.000Z', estado: 'en_revision' },
-    { id: 'dc_9', negocioId: 'ng_manantial', tipo: 'cedula_responsable', nombreArchivo: 'cedula-responsable.pdf', cargadoEn: '2026-07-28T16:31:00.000Z', estado: 'observado', observacion: 'La imagen esta cortada en el margen inferior. Cargue nuevamente el documento completo.', revisadoPor: 'us_admin_parque' },
+    { id: 'dc_9', negocioId: 'ng_manantial', tipo: 'cedula_responsable', nombreArchivo: 'cedula-responsable.pdf', cargadoEn: '2026-07-28T16:31:00.000Z', estado: 'observado', observacion: 'La imagen está cortada en el margen inferior. Cargue nuevamente el documento completo.', revisadoPor: 'us_admin_parque' },
     { id: 'dc_10', negocioId: 'ng_manantial', tipo: 'registro_mercantil', nombreArchivo: 'registro-manantial.pdf', cargadoEn: '2026-07-28T16:33:00.000Z', estado: 'pendiente' },
   ];
 }
@@ -228,7 +228,7 @@ function inspecciones(): DemoState['inspecciones'] {
       inspectorId: 'us_inspector',
       fecha: '2026-07-22T13:00:00.000Z',
       resultado: 'conforme',
-      hallazgos: ['Permiso sanitario a la vista', 'Cadena de frio dentro del rango'],
+      hallazgos: ['Permiso sanitario a la vista', 'Cadena de frío dentro del rango'],
     },
     {
       id: 'in_2',
@@ -237,7 +237,7 @@ function inspecciones(): DemoState['inspecciones'] {
       inspectorId: 'us_inspector',
       fecha: '2026-08-04T10:30:00.000Z',
       resultado: 'observado',
-      hallazgos: ['Dos chalecos sin revision vigente', 'Falta senalizacion de capacidad en el muelle'],
+      hallazgos: ['Dos chalecos sin revisión vigente', 'Falta señalización de capacidad en el muelle'],
     },
   ];
 }
@@ -250,7 +250,7 @@ function incidencias(): DemoState['incidencias'] {
       negocioId: 'ng_aventuras',
       reportadaPor: 'us_inspector',
       tipo: 'seguridad',
-      descripcion: 'Muelle sin cartel de capacidad maxima durante la inspeccion del 4 de agosto.',
+      descripcion: 'Muelle sin cartel de capacidad máxima durante la inspección del 4 de agosto.',
       estado: 'en_atencion',
       creadaEn: '2026-08-04T10:45:00.000Z',
     },
@@ -259,7 +259,7 @@ function incidencias(): DemoState['incidencias'] {
       parqueId: 'pq_este',
       reportadaPor: 'us_admin_parque',
       tipo: 'infraestructura',
-      descripcion: 'Falla intermitente de energia en el modulo AI-02; punto inhabilitado hasta nueva revision.',
+      descripcion: 'Falla intermitente de energía en el módulo AI-02; punto inhabilitado hasta nueva revisión.',
       estado: 'abierta',
       creadaEn: '2026-08-09T08:15:00.000Z',
     },
@@ -282,7 +282,7 @@ function sembrarTransacciones(e: DemoState): void {
     clienteNombre: 'Daniela Ochoa',
     lineas: [
       { articuloId: 'ar_cafe_guayoyo', nombre: 'Guayoyo grande', cantidad: 2, precioUnitarioUsd: 1.2 },
-      { articuloId: 'ar_cachito', nombre: 'Cachito de jamon', cantidad: 1, precioUnitarioUsd: 1.5 },
+      { articuloId: 'ar_cachito', nombre: 'Cachito de jamón', cantidad: 1, precioUnitarioUsd: 1.5 },
     ],
     tasa: TASA_AGOSTO,
     estadoOrden: 'entregada',
@@ -301,7 +301,7 @@ function sembrarTransacciones(e: DemoState): void {
     canal: 'app',
     clienteNombre: 'Invitado',
     invitado: true,
-    lineas: [{ articuloId: 'ar_cachito', nombre: 'Cachito de jamon', cantidad: 3, precioUnitarioUsd: 1.5 }],
+    lineas: [{ articuloId: 'ar_cachito', nombre: 'Cachito de jamón', cantidad: 3, precioUnitarioUsd: 1.5 }],
     tasa: TASA_BCV_INICIAL.valor,
     estadoOrden: 'lista',
     estadoPago: 'pendiente_verificacion',
@@ -372,7 +372,7 @@ function sembrarTransacciones(e: DemoState): void {
     canal: 'app',
     clienteNombre: 'Invitado',
     invitado: true,
-    lineas: [{ articuloId: 'ar_tequeyoyo', nombre: 'Tequenos (6 unidades)', cantidad: 1, precioUnitarioUsd: 3 }],
+    lineas: [{ articuloId: 'ar_tequeyoyo', nombre: 'Tequeños (6 unidades)', cantidad: 1, precioUnitarioUsd: 3 }],
     tasa: TASA_JULIO,
     estadoOrden: 'cancelada',
     estadoPago: 'revertido',
@@ -555,7 +555,7 @@ function valoracionesYDisputas(e: DemoState): void {
     ordenId: 'or_1001',
     negocioId: 'ng_cedros',
     estrellas: 5,
-    comentario: 'El pedido estaba listo cuando llegue al mostrador.',
+    comentario: 'El pedido estaba listo cuando llegué al mostrador.',
     creadaEn: '2026-08-11T14:00:00.000Z',
   });
   e.disputas.push({
@@ -563,7 +563,7 @@ function valoracionesYDisputas(e: DemoState): void {
     ordenId: 'or_0990',
     clienteId: undefined,
     motivo: 'Producto no disponible al retirar',
-    descripcion: 'El local informo que no habia tequenos despues de confirmar el pago.',
+    descripcion: 'El local informó que no había tequeños después de confirmar el pago.',
     estado: 'en_analisis',
     slaHoras: 48,
     creadaEn: '2026-07-30T17:00:00.000Z',
@@ -590,7 +590,7 @@ function notificacionesIniciales(e: DemoState): void {
       destinatarioRol: 'comercio.operador',
       ambitoId: 'lc_cedros_jc',
       titulo: 'Pedido PE-1002 en espera',
-      cuerpo: 'Un pedido de 3 cachitos espera aceptacion.',
+      cuerpo: 'Un pedido de 3 cachitos espera aceptación.',
       tipo: 'orden',
       leida: false,
       creadaEn: '2026-08-12T12:05:00.000Z',
@@ -599,7 +599,7 @@ function notificacionesIniciales(e: DemoState): void {
       id: 'nt_2',
       destinatarioRol: 'inparques.direccion_comercial',
       titulo: 'Permiso PTE-2026-0112 por vencer',
-      cuerpo: 'El permiso temporal de Cafe Los Cedros - Entrada Norte vence el 31 de agosto de 2026.',
+      cuerpo: 'El permiso temporal de Café Los Cedros - Entrada Norte vence el 31 de agosto de 2026.',
       tipo: 'permiso',
       leida: false,
       creadaEn: '2026-08-10T07:00:00.000Z',
@@ -608,8 +608,8 @@ function notificacionesIniciales(e: DemoState): void {
       id: 'nt_3',
       destinatarioRol: 'inparques.admin_parque',
       ambitoId: 'pq_este',
-      titulo: 'Expediente de Artesania Manantial en revision',
-      cuerpo: 'Un documento fue observado y espera correccion del comercio.',
+      titulo: 'Expediente de Artesanía Manantial en revisión',
+      cuerpo: 'Un documento fue observado y espera corrección del comercio.',
       tipo: 'documento',
       leida: false,
       creadaEn: '2026-07-28T16:35:00.000Z',
@@ -627,8 +627,8 @@ function notificacionesIniciales(e: DemoState): void {
       id: 'nt_5',
       destinatarioRol: 'visitante.cliente',
       destinatarioId: 'us_visitante',
-      titulo: 'Tu reserva de las 09:00 esta confirmada',
-      cuerpo: 'Presenta el codigo RE1004 en el Embarcadero del Lago.',
+      titulo: 'Tu reserva de las 09:00 está confirmada',
+      cuerpo: 'Presenta el código RE1004 en el Embarcadero del Lago.',
       tipo: 'orden',
       leida: false,
       creadaEn: '2026-08-12T09:31:00.000Z',

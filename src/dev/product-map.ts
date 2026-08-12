@@ -75,13 +75,13 @@ function envoltura(): HTMLElement {
     </p>
 
     <div class="and-aviso">
-      <h2>Inventario provisional</h2>
+      <h2>Aspecto provisional</h2>
       <p>
-        Las plantillas HTML todavia no estan en el repositorio, asi que ninguna vista tiene
-        HTML de referencia asignado. Las ${VISTAS.length} rutas de abajo se derivaron del documento
-        funcional y de los recorridos descritos; el enunciado menciona
-        ${VISTAS_ESPERADAS_SEGUN_ENUNCIADO} vistas, y la diferencia de
-        ${Math.abs(r.diferencia)} solo puede resolverse comparando contra los archivos entregados.
+        Las ${VISTAS.length} rutas de abajo funcionan con datos reales, pero su aspecto es
+        provisional: las plantillas HTML del cliente todavia no se han recibido, asi que ninguna
+        tiene HTML de referencia asignado. El enunciado menciona
+        ${VISTAS_ESPERADAS_SEGUN_ENUNCIADO} vistas y la diferencia de
+        ${Math.abs(r.diferencia)} solo puede reconciliarse contra los archivos entregados.
       </p>
     </div>
 
@@ -245,6 +245,9 @@ export function diagnostico() {
     }
     if (!v.htmlRef) {
       problemas.push({ severidad: 'aviso', detalle: `${v.id} (${v.ruta}) aun no tiene HTML de referencia.` });
+    }
+    if (v.estado === 'pendiente_html') {
+      problemas.push({ severidad: 'error', detalle: `${v.id} (${v.ruta}) no tiene vista que la dibuje.` });
     }
   }
 

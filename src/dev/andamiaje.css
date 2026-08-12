@@ -24,8 +24,9 @@
   --and-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
 
+/* Tema oscuro del sistema, salvo que el visor haya pedido claro. */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --and-fondo: #101613;
     --and-texto: #e8efea;
     --and-tenue: #9aa8a1;
@@ -36,6 +37,19 @@
     --and-error: #f08b86;
     --and-ok: #5fd39b;
   }
+}
+
+/* Eleccion explicita del visor: gana sobre la del sistema. */
+:root[data-theme="dark"] {
+  --and-fondo: #101613;
+  --and-texto: #e8efea;
+  --and-tenue: #9aa8a1;
+  --and-borde: #2b3833;
+  --and-panel: #18211d;
+  --and-acento: #5fd39b;
+  --and-alerta: #e0b062;
+  --and-error: #f08b86;
+  --and-ok: #5fd39b;
 }
 
 * { box-sizing: border-box; }
