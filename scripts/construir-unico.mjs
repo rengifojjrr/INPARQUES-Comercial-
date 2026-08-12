@@ -29,7 +29,8 @@ const js = await readFile(join(DIST, 'assets', nombreJs), 'utf-8');
 // Una cadena que contenga "</script" cerraría la etiqueta antes de tiempo.
 const jsSeguro = js.replace(/<\/script/gi, '<\\/script');
 
-const html = `<title>INPARQUES Comercial</title>
+const html = `<meta charset="utf-8">
+<title>INPARQUES Comercial</title>
 <style>
 ${css}
 </style>
