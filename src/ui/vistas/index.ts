@@ -12,7 +12,7 @@ import * as v from './visitante';
 import * as com from './comercio';
 import * as inp from './inparques';
 import { entradaStitch } from './stitch-acceso';
-import { propietarioInicio, adminLocalInicio } from './stitch-comercio';
+import { propietarioInicio, adminLocalInicio, operadorInicio, contadorInicio } from './stitch-comercio';
 import { inicioVisitante } from './stitch-visitante';
 import { sesion } from '../../app/session';
 
@@ -26,6 +26,8 @@ function inicioComercioPorRol(): Render {
   return (ctx) => {
     if (sesion.rol() === 'comercio.propietario') return propietarioInicio(ctx);
     if (sesion.rol() === 'comercio.admin_local') return adminLocalInicio(ctx);
+    if (sesion.rol() === 'comercio.operador') return operadorInicio(ctx);
+    if (sesion.rol() === 'comercio.contador') return contadorInicio(ctx);
     return com.inicio(ctx);
   };
 }

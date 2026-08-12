@@ -15,6 +15,7 @@ import { sesion } from '../../app/session';
 import { formatearUsd, formatearVes } from '../../domain/money';
 import { diasHasta, fechaCorta, desde } from '../formato';
 import { ETIQUETA_ORDEN, TONO_ORDEN } from '../../domain/state-machines';
+import { conectividad } from '../../net/connectivity';
 
 function iniciales(nombre: string): string {
   return nombre
@@ -347,7 +348,7 @@ function barraLateralAdminLocal(): string {
     ['settings', 'Configuración del local', '/c/horarios'],
   ];
   return `
-<aside class="hidden md:flex flex-col p-md gap-xs bg-surface-container-low border-r border-outline-variant h-screen w-64 fixed left-0 top-0 z-40">
+<aside class="flex flex-col p-md gap-xs bg-surface-container-low border-r border-outline-variant h-screen w-64 fixed left-0 top-0 z-40">
   <div class="flex items-center gap-sm mb-lg px-xs py-sm">
     <div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center shrink-0 text-on-primary-container">
       <span class="material-symbols-outlined icon-fill">park</span>
@@ -411,7 +412,7 @@ export const adminLocalInicio: Render = (): Pagina => {
   const cuposBajos = articulos.filter((a) => a.tipo === 'servicio' && (a.cupoPorFranja ?? 99) <= 3);
 
   const contenido = `
-${conCajonMovil(barraLateralAdminLocal())}
+${conCajonMovil(barraLateralAdminLocal(), false)}
 <main class="md:ml-64 min-h-screen">
   <header class="md:hidden flex justify-between items-center w-full px-lg h-touch-target sticky top-0 z-30 bg-surface border-b border-outline-variant">
     <div class="flex items-center gap-sm">
@@ -574,4 +575,273 @@ ${conCajonMovil(barraLateralAdminLocal())}
 </main>`;
 
   return { titulo: 'Resumen Operativo', standalone: true, contenido };
+};
+
+// ------------------------------------------------------------------ Operador
+
+/**
+ * Fuente: `50/p_gina_1_turno_operativo/code.html` ("Inicio de Turno"). Es
+ * una pantalla transaccional de una sola tarjeta centrada, no un panel con
+ * navegación persistente: el cajón lateral original es un `<aside>` que ya
+ * trae su propio ancho (`w-80`), así que no necesita la corrección de
+ * `conCajonMovil` (esa corrección era solo para asides `fixed` sin ancho
+ * propio dentro de un contenedor que colapsa a 0). El HTML original abre y
+ * cierra ese cajón con un `<script>` inline; los `<script>` inyectados por
+ * `innerHTML` no se ejecutan en el navegador, así que aquí se cablea con el
+ * mismo mecanismo `data-cajon` / `abrir-cajon` / `cerrar-cajon` que ya usan
+ * las demás vistas portadas, en vez de duplicar ese script.
+ */
+export const operadorInicio: Render = (): Pagina => {
+  const e = store.leer();
+  const u = sesion.usuario()!;
+  const localesIds = u.scope.ids;
+  const locales = e.locales.filter((l) => localesIds.includes(l.id));
+  const ordenes = e.ordenes.filter((o) => localesIds.includes(o.localId));
+
+  const nuevos = ordenes.filter((o) => o.tipo === 'pedido' && ['creada', 'pendiente_aceptacion'].includes(o.estado)).length;
+  const enPreparacion = ordenes.filter((o) => o.tipo === 'pedido' && ['aceptada', 'preparando'].includes(o.estado)).length;
+  const listos = ordenes.filter((o) => o.tipo === 'pedido' && o.estado === 'lista').length;
+  const reservasProx = ordenes.filter((o) => o.tipo === 'reserva' && o.estado !== 'cancelada').length;
+
+  const enLinea = conectividad.hayRed();
+
+  const contenido = `
+<header class="w-full top-0 sticky border-b border-outline-variant bg-surface hidden md:flex justify-between items-center px-md h-touch-target max-w-full">
+  <div class="flex items-center gap-sm">
+    <button type="button" data-accion="abrir-cajon" aria-label="Abrir menú" class="hover:bg-surface-container-high transition-colors rounded-full p-xs">
+      <span class="material-symbols-outlined text-primary">menu</span>
+    </button>
+    <h1 class="font-headline-md text-headline-md font-bold text-primary tracking-tight">Operaciones Parque</h1>
+  </div>
+  <button type="button" data-accion="ir" data-valor="/perfil" aria-label="Perfil" class="hover:bg-surface-container-high transition-colors rounded-full p-xs">
+    <span class="material-symbols-outlined text-primary">account_circle</span>
+  </button>
+</header>
+<main class="flex-grow overflow-y-auto px-md md:px-lg py-lg flex flex-col justify-center items-center min-h-screen">
+  <div class="w-full max-w-2xl bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm p-lg flex flex-col gap-xl">
+    <div class="flex flex-col gap-sm text-center">
+      <h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">Bienvenido, ${esc(u.nombre.split(' ')[0])}</h2>
+      <p class="font-body-md text-body-md text-on-surface-variant">Confirme sus datos para iniciar el turno operativo.</p>
+      <div class="inline-flex items-center justify-center gap-base mt-sm ${enLinea ? 'bg-[#e8f5e9] text-[#1b5e20]' : 'bg-error-container text-on-error-container'} px-sm py-base rounded-full self-center">
+        <span class="material-symbols-outlined text-[16px]">${enLinea ? 'wifi' : 'wifi_off'}</span>
+        <span class="font-label-sm text-label-sm">${esc(conectividad.etiqueta())}</span>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+      <div class="flex flex-col gap-base">
+        <span class="font-label-md text-label-md text-on-surface">Local Asignado</span>
+        ${locales.length > 1
+          ? `<div class="relative">
+              <select class="w-full h-touch-target bg-surface-container-lowest border border-outline-variant rounded-lg px-md font-body-md text-body-md text-on-surface appearance-none focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                ${locales.map((l) => `<option>${esc(l.nombre)}</option>`).join('')}
+              </select>
+              <span class="material-symbols-outlined absolute right-md top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+            </div>`
+          : `<div class="h-touch-target flex items-center px-md bg-surface-container-low rounded-lg border border-transparent font-body-md text-body-md text-on-surface-variant">${esc(locales[0]?.nombre ?? 'Sin local asignado')}</div>`}
+      </div>
+      <div class="flex flex-col gap-base">
+        <span class="font-label-md text-label-md text-on-surface">Responsable de Turno</span>
+        <div class="h-touch-target flex items-center px-md bg-surface-container-low rounded-lg border border-transparent font-body-md text-body-md text-on-surface-variant">${esc(u.nombre)}</div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-sm">
+      <div class="bg-surface-container-low rounded-lg p-sm border border-outline-variant flex flex-col items-center justify-center text-center">
+        <span class="material-symbols-outlined text-primary mb-xs icon-fill">receipt_long</span>
+        <span class="font-headline-md text-headline-md text-on-surface">${nuevos}</span>
+        <span class="font-label-sm text-label-sm text-on-surface-variant">Pedidos Nuevos</span>
+      </div>
+      <div class="bg-surface-container-low rounded-lg p-sm border border-outline-variant flex flex-col items-center justify-center text-center">
+        <span class="material-symbols-outlined text-tertiary-container mb-xs">cooking</span>
+        <span class="font-headline-md text-headline-md text-on-surface">${enPreparacion}</span>
+        <span class="font-label-sm text-label-sm text-on-surface-variant">En Preparación</span>
+      </div>
+      <div class="bg-surface-container-low rounded-lg p-sm border border-outline-variant flex flex-col items-center justify-center text-center">
+        <span class="material-symbols-outlined text-secondary mb-xs icon-fill">check_circle</span>
+        <span class="font-headline-md text-headline-md text-on-surface">${listos}</span>
+        <span class="font-label-sm text-label-sm text-on-surface-variant">Listos</span>
+      </div>
+      <div class="bg-surface-container-low rounded-lg p-sm border border-outline-variant flex flex-col items-center justify-center text-center">
+        <span class="material-symbols-outlined text-primary mb-xs icon-fill">calendar_today</span>
+        <span class="font-headline-md text-headline-md text-on-surface">${reservasProx}</span>
+        <span class="font-label-sm text-label-sm text-on-surface-variant">Reservas Próx.</span>
+      </div>
+    </div>
+
+    <div class="pt-sm">
+      <button type="button" data-accion="ir" data-valor="/c/caja/turno/abrir"
+        class="w-full h-16 bg-primary-container text-on-primary rounded-full font-headline-md text-headline-md hover:bg-[#125a3a] transition-colors active:scale-95 duration-100 flex items-center justify-center gap-sm shadow-md">
+        <span class="material-symbols-outlined">play_arrow</span>
+        Iniciar Turno
+      </button>
+    </div>
+  </div>
+</main>
+<div data-cajon="fondo" class="fixed inset-0 bg-black/50 z-40 hidden" data-accion="cerrar-cajon"></div>
+<aside data-cajon="panel" class="fixed inset-y-0 left-0 -translate-x-full transition-transform duration-300 z-50 h-full w-80 rounded-r-xl bg-surface-container shadow-lg flex flex-col p-md gap-sm">
+  <div class="flex items-center gap-md mb-lg">
+    <div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-headline-md">${esc(iniciales(u.nombre))}</div>
+    <div>
+      <h3 class="font-headline-md text-headline-md-mobile text-primary">${esc(u.nombre)}</h3>
+      <p class="font-body-md text-body-md text-on-surface-variant">${esc(locales[0]?.nombre ?? '')}</p>
+    </div>
+  </div>
+  <nav class="flex flex-col gap-base">
+    <button type="button" data-accion="ir" data-valor="/perfil" class="flex items-center gap-md p-sm text-on-surface-variant hover:bg-surface-container-highest rounded-lg transition-colors text-left">
+      <span class="material-symbols-outlined">person</span>
+      <span class="font-body-md text-body-md">Perfil Usuario</span>
+    </button>
+    <button type="button" data-accion="ir" data-valor="/c/caja/turno/cerrar" class="flex items-center gap-md p-sm text-on-surface-variant hover:bg-surface-container-highest rounded-lg transition-colors text-left">
+      <span class="material-symbols-outlined">sync_alt</span>
+      <span class="font-body-md text-body-md">Cambio de Turno</span>
+    </button>
+    <button type="button" data-accion="ir" data-valor="/v/qr" class="flex items-center gap-md p-sm text-on-surface-variant hover:bg-surface-container-highest rounded-lg transition-colors text-left">
+      <span class="material-symbols-outlined">qr_code_scanner</span>
+      <span class="font-body-md text-body-md">Validar QR</span>
+    </button>
+    <hr class="border-outline-variant my-sm">
+    <button type="button" data-accion="cerrar-sesion" class="flex items-center gap-md p-sm text-on-surface-variant hover:bg-surface-container-highest rounded-lg transition-colors text-left">
+      <span class="material-symbols-outlined">logout</span>
+      <span class="font-body-md text-body-md">Cerrar Sesión</span>
+    </button>
+  </nav>
+</aside>`;
+
+  return { titulo: 'Inicio de Turno', standalone: true, contenido };
+};
+
+// ------------------------------------------------------------------ Contador
+
+const ETIQUETA_LIQUIDACION: Record<string, string> = {
+  calculada: 'Calculada',
+  por_cobrar: 'Por cobrar',
+  por_pagar: 'Liquidación pendiente',
+  conciliada: 'Conciliada',
+  cerrada: 'Liquidación cerrada',
+};
+
+function barraLateralContador(): string {
+  const items: Array<[string, string, string]> = [
+    ['dashboard', 'Summary', '/c'],
+    ['book_2', 'Sales Books', '/c/reportes'],
+    ['payments', 'Payments', '/c/estado-cuenta'],
+  ];
+  const pie: Array<[string, string, string]> = [
+    ['ios_share', 'Export Manager', '/c/exportaciones'],
+    ['help', 'Support', '/ayuda'],
+  ];
+  const item = ([icono, texto, ruta]: [string, string, string]) => `<li>
+    <button type="button" data-accion="ir" data-valor="${ruta}"
+      class="w-full flex items-center gap-sm px-sm py-sm rounded-lg ${ruta === '/c' ? 'bg-secondary-container text-on-secondary-container font-bold' : 'text-on-surface-variant hover:bg-surface-variant'} transition-all duration-200 ease-in-out text-left">
+      <span class="material-symbols-outlined ${ruta === '/c' ? 'icon-fill' : ''}">${icono}</span>
+      <span class="font-label-md text-label-md">${esc(texto)}</span>
+    </button>
+  </li>`;
+  return `
+<aside class="flex flex-col h-full w-64 fixed left-0 top-0 bg-surface-container-low py-md px-sm border-r border-outline-variant z-50">
+  <div class="flex items-center gap-sm mb-xl px-sm">
+    <div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container shrink-0">
+      <span class="material-symbols-outlined icon-fill">account_balance</span>
+    </div>
+    <div>
+      <h1 class="font-headline-sm text-headline-sm font-extrabold text-on-secondary-fixed">Finance Portal</h1>
+      <p class="font-label-sm text-label-sm text-on-surface-variant">Audit &amp; Integrity</p>
+    </div>
+  </div>
+  <ul class="flex flex-col gap-xs flex-grow">${items.map(item).join('')}</ul>
+  <div class="mt-auto">
+    <ul class="flex flex-col gap-xs pt-sm border-t border-outline-variant">${pie.map(item).join('')}</ul>
+  </div>
+</aside>`;
+}
+
+export const contadorInicio: Render = (): Pagina => {
+  const e = store.leer();
+  const u = sesion.usuario()!;
+  const negocioId = u.scope.ids[0];
+  const negocio = e.negocios.find((n) => n.id === negocioId);
+  const ordenes = e.ordenes.filter((o) => o.negocioId === negocioId);
+  const entregadas = ordenes.filter((o) => o.estado === 'entregada');
+  const ventasBrutasUsd = entregadas.reduce((s, o) => s + o.totalUsd, 0);
+
+  const pagos = e.pagos.filter((p) => ordenes.some((o) => o.id === p.ordenId));
+  const pagosConfirmadosUsd = pagos.filter((p) => p.estado === 'confirmado').reduce((s, p) => s + p.montoUsd, 0);
+  const tasaConversion = ventasBrutasUsd > 0 ? Math.round((pagosConfirmadosUsd / ventasBrutasUsd) * 100) : 0;
+
+  const liquidaciones = e.liquidaciones
+    .filter((l) => l.negocioId === negocioId)
+    .sort((a, b) => b.periodoHasta.localeCompare(a.periodoHasta));
+  const ultima = liquidaciones[0];
+  const conciliada = liquidaciones.find((l) => l.estado === 'conciliada' || l.estado === 'cerrada');
+
+  const contenido = `
+${conCajonMovil(barraLateralContador(), false)}
+<div class="flex-1 flex flex-col md:ml-64 min-h-screen">
+  <header class="flex justify-between items-center pl-3 pr-lg h-[64px] sticky top-0 z-40 bg-surface border-b border-outline-variant gap-sm">
+    <div class="flex items-center gap-xs min-w-0">
+      <button type="button" data-accion="abrir-cajon" aria-label="Abrir menú" class="md:hidden shrink-0 w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-low text-on-surface-variant">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+      <span class="md:hidden font-headline-md text-headline-md font-bold text-primary truncate">Park Commerce Finance</span>
+      <h2 class="hidden md:block font-headline-md text-headline-md text-on-surface">Resumen Financiero</h2>
+    </div>
+    <div class="flex items-center gap-md">
+      <button type="button" data-accion="ir" data-valor="/notificaciones" class="w-[44px] h-[44px] flex items-center justify-center rounded-full hover:bg-surface-container transition-colors text-on-surface-variant">
+        <span class="material-symbols-outlined">notifications</span>
+      </button>
+      <button type="button" data-accion="ir" data-valor="/perfil/accesibilidad" class="w-[44px] h-[44px] flex items-center justify-center rounded-full hover:bg-surface-container transition-colors text-on-surface-variant">
+        <span class="material-symbols-outlined">settings</span>
+      </button>
+      <button type="button" data-accion="ir" data-valor="/perfil">${avatar(u.nombre, 'w-10 h-10 text-[13px]')}</button>
+    </div>
+  </header>
+  <main class="flex-1 overflow-y-auto p-lg pb-[100px] md:pb-lg">
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-md mb-xl">
+      <div class="flex items-center gap-sm bg-surface-container-lowest border border-outline-variant text-on-surface font-body-md text-body-md rounded-lg px-md h-[44px]">
+        ${esc(negocio?.nombreComercial ?? 'Negocio')}
+      </div>
+      <div class="flex items-center gap-sm font-label-md text-label-md text-on-surface-variant bg-surface-container px-md py-sm rounded-full w-full sm:w-auto justify-center">
+        <span class="material-symbols-outlined text-primary">check_circle</span>
+        ${conciliada ? `Última conciliación: ${esc(fechaCorta(`${conciliada.periodoHasta}T12:00:00`))}` : 'Sin conciliaciones registradas'}
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-lg">
+      <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg flex flex-col gap-md hover:card-shadow transition-shadow">
+        <div class="flex justify-between items-start">
+          <span class="font-label-md text-label-md text-on-surface-variant">Ventas Brutas</span>
+          <div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-primary-container">
+            <span class="material-symbols-outlined text-sm">point_of_sale</span>
+          </div>
+        </div>
+        <div class="font-headline-lg text-headline-lg text-on-surface">${esc(formatearVes(ventasBrutasUsd * e.tasaBcv.valor))}</div>
+        <div class="font-label-sm text-label-sm text-on-surface-variant">${esc(formatearUsd(ventasBrutasUsd))} equivalente</div>
+      </div>
+      <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg flex flex-col gap-md hover:card-shadow transition-shadow">
+        <div class="flex justify-between items-start">
+          <span class="font-label-md text-label-md text-on-surface-variant">Pagos Confirmados</span>
+          <div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-primary-container">
+            <span class="material-symbols-outlined text-sm">verified</span>
+          </div>
+        </div>
+        <div class="font-headline-lg text-headline-lg text-on-surface">${esc(formatearVes(pagosConfirmadosUsd * e.tasaBcv.valor))}</div>
+        <div class="font-label-sm text-label-sm text-on-surface-variant">${tasaConversion}% tasa de conversión</div>
+      </div>
+      <div class="bg-surface-container-lowest border border-primary rounded-xl p-lg flex flex-col gap-md lg:col-span-2 shadow-sm relative overflow-hidden">
+        <div class="absolute right-0 bottom-0 opacity-5 pointer-events-none">
+          <span class="material-symbols-outlined text-[120px]">account_balance_wallet</span>
+        </div>
+        <div class="flex justify-between items-start relative z-10">
+          <span class="font-label-md text-label-md text-on-surface-variant font-bold">Monto Neto Disponible</span>
+          <span class="px-sm py-xs rounded-full bg-primary-container text-on-primary font-label-sm text-label-sm">${ultima ? esc(ETIQUETA_LIQUIDACION[ultima.estado]) : 'Sin liquidaciones'}</span>
+        </div>
+        <div class="font-display-lg text-display-lg text-primary relative z-10">${esc(formatearVes((ultima?.netoUsd ?? 0) * e.tasaBcv.valor))}</div>
+        <div class="font-label-sm text-label-sm text-on-surface-variant relative z-10">Después de comisiones, cánones y ajustes</div>
+      </div>
+    </div>
+  </main>
+</div>`;
+
+  return { titulo: 'Resumen Financiero', standalone: true, contenido };
 };

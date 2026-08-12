@@ -33,10 +33,22 @@ export const ICONO_MENU = `<svg width="24" height="24" viewBox="0 0 24 24" fill=
  * colapsaría a 0px de ancho y el -100% de 0 seguiría siendo 0 — el cajón
  * nunca se ocultaría. Por eso las clases del cajón se inyectan directo en
  * el `<aside>`, que sí tiene un ancho real (`w-64`).
+ *
+ * Varias páginas de Stitch traen `hidden md:flex` en ese `<aside>`: su
+ * propia estrategia (incompleta) para no romper el layout en móvil era
+ * ocultarlo por completo ahí y ofrecer otra navegación en la cabecera
+ * móvil. `hidden` fija `display:none`, y eso gana sobre cualquier
+ * `transform` — el cajón deslizable nunca se vería así, sin importar la
+ * animación. Por eso `hidden` y su pareja `(sm|md|lg|xl):flex` se quitan
+ * aquí: el `<aside>` queda visible siempre (`flex` a secas) y es el
+ * translate quien decide si está dentro o fuera de la pantalla.
  */
 export function conCajonMovil(aside: string, boton = true): string {
   const asideConCajon = aside.replace(/<aside\b([^>]*)>/, (_m, atributos: string) => {
-    const clases = (/class="([^"]*)"/.exec(atributos)?.[1] ?? '').replace(/\bz-\S+\b/g, '').trim();
+    let clases = (/class="([^"]*)"/.exec(atributos)?.[1] ?? '').replace(/\bz-\S+\b/g, '').trim();
+    const teniaHidden = /\bhidden\b/.test(clases);
+    clases = clases.replace(/\bhidden\b/g, '').replace(/\b(?:sm|md|lg|xl):flex\b/g, '').trim();
+    if (teniaHidden && !/(?<![-\w])flex(?![-\w])/.test(clases)) clases = `flex ${clases}`;
     const restoAtributos = atributos.replace(/\s*class="[^"]*"/, '').trim();
     return `<aside data-cajon="panel" class="${clases} -translate-x-full lg:translate-x-0 transition-transform duration-200 z-[56] lg:z-auto"${restoAtributos ? ` ${restoAtributos}` : ''}>`;
   });
