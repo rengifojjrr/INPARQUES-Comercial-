@@ -95,7 +95,13 @@ export const inicioVisitante: Render = (): Pagina => {
     <span class="material-symbols-outlined p-1 rounded-full cursor-pointer" data-accion="ir" data-valor="/notificaciones">notifications</span>
   </div>
 </header>
-<main class="max-w-7xl mx-auto pb-24 md:pb-8">
+<!-- El envoltorio "stitch-pagina" de main.ts es flex-col: dentro de un
+     contenedor flex, un margin:auto en el eje transversal desactiva el
+     stretch por defecto y el ancho pasa a calcularse por contenido
+     (fit-content), que aquí termina siendo más ancho que la pantalla. El
+     w-full evita eso y deja que max-w-7xl/mx-auto actúen solo como tope y
+     centrado en pantallas anchas, como en el original. -->
+<main class="max-w-7xl mx-auto w-full pb-24 md:pb-8">
   <section class="px-md md:px-lg py-lg">
     <div class="flex justify-between items-start mb-md">
       <div>
