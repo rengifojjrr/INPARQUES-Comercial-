@@ -13,6 +13,7 @@ import * as com from './comercio';
 import * as inp from './inparques';
 import { entradaStitch } from './stitch-acceso';
 import { propietarioInicio, adminLocalInicio, operadorInicio, contadorInicio } from './stitch-comercio';
+import { superadminInicio } from './stitch-inparques';
 import { inicioVisitante } from './stitch-visitante';
 import { sesion } from '../../app/session';
 
@@ -29,6 +30,13 @@ function inicioComercioPorRol(): Render {
     if (sesion.rol() === 'comercio.operador') return operadorInicio(ctx);
     if (sesion.rol() === 'comercio.contador') return contadorInicio(ctx);
     return com.inicio(ctx);
+  };
+}
+
+function inicioInparquesPorRol(): Render {
+  return (ctx) => {
+    if (sesion.rol() === 'inparques.superadmin') return superadminInicio(ctx);
+    return inp.dashboard(ctx);
   };
 }
 
@@ -138,7 +146,7 @@ export const VISTAS_POR_ID: Record<string, Render> = {
   'c.exportaciones': com.exportaciones,
 
   // ---------------------------------------------------------------- INPARQUES
-  'i.inicio': inp.dashboard,
+  'i.inicio': inicioInparquesPorRol(),
   'i.mas': c.masOpciones('inparques'),
   'i.dashboard.parque': inp.dashboardParque,
   'i.territorio': inp.territorio,
