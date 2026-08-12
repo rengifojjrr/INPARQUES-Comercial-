@@ -67,16 +67,39 @@ demostración:
 
 ## Estado de la integración
 
-**Fase 1 (en curso):** infraestructura compartida (Tailwind compilado con los
+**Fase 1 (completa):** infraestructura compartida (Tailwind compilado con los
 tokens reales, tipografía Manrope y subconjunto de Material Symbols
 autohospedados) + pantalla de entrada con los 11 perfiles + la pantalla de
-inicio real de cada rol, con su HTML original.
+inicio real de los 11 roles, con su HTML original, con datos reales del
+store (nada de números de maqueta) y respetando el control de acceso por
+ámbito ya existente en la app (`domain/scope.ts`).
+
+Dos correcciones técnicas se repitieron en varios roles y quedaron resueltas
+de forma reutilizable en `src/ui/stitch-shell.ts` (`conCajonMovil`) en vez de
+una por una:
+
+- El cajón lateral móvil no se ocultaba porque el `<aside>` de Stitch trae
+  `hidden md:flex` (su propia estrategia, incompleta, para no romper el
+  layout en móvil). `hidden` fija `display:none`, que gana sobre cualquier
+  `transform`. Ahora `conCajonMovil` quita `hidden`/`(sm|md|lg|xl):flex`
+  automáticamente.
+- `inparques.inspector` traía `<body class="... md:hidden ...">`: sin
+  versión de escritorio en absoluto, la pantalla quedaba en blanco en
+  cualquier ventana ≥768px. Se quitó esa clase y el contenido se centra en
+  una columna de ancho móvil en pantallas grandes en lugar de desaparecer.
+
+Varios roles institucionales (dirección comercial, admin de parque,
+soporte) tienen en su barra lateral original enlaces a rutas que el
+control de acceso de esta app (`app/registry.ts`) no les permite abrir
+(p. ej. "Inspecciones" o "Usuarios" son de otros roles, "Ajustes" es
+finanzas, no configuración general). En esos casos el enlace se llevó a la
+página accesible más cercana en vez de a un enlace que daría 403; queda
+anotado con un comentario en cada archivo.
 
 **Fase 2 (pendiente):** las ~108 pantallas interiores restantes de cada rol
-(catálogo, caja, expedientes, disputas, reportes, etc.), que se portan
+(catálogo, caja, expedientes, disputas, reportes, etc.), que hoy siguen
+usando la vista genérica anterior en vez del HTML real de Stitch. Se portan
 progresivamente reutilizando la misma infraestructura ya construida en la
-fase 1.
-
-Esta fase no completa las 119 páginas; deja el terreno preparado (fuentes,
-Tailwind, patrón de integración) para que portar cada pantalla adicional sea
-un trabajo mecánico y rápido, no una reconstrucción desde cero.
+fase 1 (fuentes, Tailwind, `conCajonMovil`, `avatar`/`marcadorFoto` en vez
+de fotos generadas por IA) — portar cada pantalla adicional es un trabajo
+mecánico, no una reconstrucción desde cero.
