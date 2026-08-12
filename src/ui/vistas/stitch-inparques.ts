@@ -19,6 +19,8 @@ import { formatearVes, formatearUsd } from '../../domain/money';
 import { diasHasta, desde } from '../formato';
 import { resolverAmbito, filtrarPorAmbito } from '../../domain/scope';
 import { consultar } from '../../data/audit';
+import { conectividad } from '../../net/connectivity';
+import { colaSincronizacion } from '../../net/sync-queue';
 
 function barraLateralInparques(activo: string, items: Array<[string, string, string]>, subtitulo: string): string {
   return `
@@ -732,4 +734,132 @@ ${cabeceraInparques(`Gestión de Parques${parque ? ` · ${parque.nombre}` : ''}`
 </main>`;
 
   return { titulo: 'Gestión de Parques', standalone: true, contenido };
+};
+
+// ------------------------------------------------------------------ Inspector
+
+/**
+ * Fuente: `50/p_gina_1_jornada_de_inspecci_n/code.html` ("Jornada de
+ * Inspección - Inparques Ranger"). Es la única de las 119 páginas con
+ * `<body class="... md:hidden ...">`: Stitch la diseñó exclusivamente para
+ * el teléfono del guardaparque en campo y ni siquiera intentó una versión
+ * de escritorio. `md:hidden` en el propio `<body>` dejaría la pantalla
+ * completamente en blanco en cualquier ventana ≥768px — no es una
+ * preferencia de diseño, es que la interfaz no funciona ahí. Se quita esa
+ * clase y, en su lugar, el contenido se centra en una columna de ancho
+ * móvil (`md:max-w-md md:mx-auto`) para que siga viéndose como la tarjeta
+ * de campo que es, en vez de estirarse a todo el ancho del escritorio.
+ */
+export const inspectorInicio: Render = (): Pagina => {
+  const e = store.leer();
+  const u = sesion.usuario()!;
+  const a = resolverAmbito(u, e);
+  const parque = e.parques.find((p) => p.id === u.scope.ids[0]);
+
+  const incidenciasAmbito = filtrarPorAmbito(e.incidencias, a);
+  const tareasPendientes = incidenciasAmbito.filter((i) => ['abierta', 'en_atencion'].includes(i.estado)).length;
+  const permisosAmbito = filtrarPorAmbito(e.permisos, a);
+  const vencidas = permisosAmbito.filter((p) => p.estado === 'vencido').length;
+  const urgentes = incidenciasAmbito.filter((i) => i.tipo === 'seguridad' && i.estado === 'abierta').length;
+
+  const enLinea = conectividad.hayRed();
+  const porSincronizar = colaSincronizacion.pendientes().length;
+
+  const contenido = `
+<div class="md:max-w-md md:mx-auto md:my-lg md:border md:border-outline-variant md:rounded-xl md:overflow-hidden md:shadow-sm">
+<header class="bg-surface md:relative fixed md:top-auto top-0 md:w-auto w-full z-40 border-b border-outline-variant flex justify-between items-center px-md h-touch-target">
+  <div class="flex items-center gap-sm">
+    <div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center overflow-hidden border border-outline-variant">
+      <span class="material-symbols-outlined text-on-surface-variant text-sm">person</span>
+    </div>
+    <h1 class="font-headline-md text-headline-md text-primary tracking-tight">Inparques Ranger</h1>
+  </div>
+  <button type="button" data-accion="ir" data-valor="/perfil/accesibilidad" class="w-touch-target h-touch-target flex items-center justify-center text-primary hover:bg-surface-container-high transition-colors duration-200 rounded-full">
+    <span class="material-symbols-outlined">settings</span>
+  </button>
+</header>
+<main class="flex-1 md:pt-lg pt-[72px] pb-[96px] md:pb-lg px-md flex flex-col gap-lg">
+  <section class="flex flex-col gap-xs pt-sm">
+    <p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Sector Actual</p>
+    <h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface flex items-center gap-xs">
+      <span class="material-symbols-outlined text-primary icon-fill">park</span>
+      ${esc(parque?.nombre ?? 'Parque asignado')}
+    </h2>
+    <div class="flex flex-wrap gap-sm mt-sm">
+      <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full ${enLinea ? 'bg-secondary-container/40 border-secondary/30' : 'bg-error-container/20 border-error-container'} border">
+        <span class="material-symbols-outlined text-[16px] ${enLinea ? 'text-secondary' : 'text-error'}">${enLinea ? 'wifi' : 'wifi_off'}</span>
+        <span class="font-label-md text-label-md ${enLinea ? 'text-secondary' : 'text-error'}">${esc(conectividad.etiqueta())}</span>
+      </div>
+      <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-high border border-outline-variant">
+        <span class="material-symbols-outlined text-[16px] text-on-surface-variant">cloud_sync</span>
+        <span class="font-label-md text-label-md text-on-surface-variant">${porSincronizar} por sincronizar</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="grid grid-cols-2 gap-sm">
+    <button type="button" data-accion="ir" data-valor="/i/inspecciones" class="col-span-2 flex items-center justify-center gap-sm bg-primary-container text-on-primary rounded-lg min-h-[64px] shadow-sm hover:shadow-md transition-shadow">
+      <span class="material-symbols-outlined text-[24px]">explore</span>
+      <span class="font-label-md text-label-md text-lg">Iniciar recorrido</span>
+    </button>
+    <button type="button" data-accion="ir" data-valor="/i/inspecciones" class="col-span-2 flex items-center justify-center gap-sm bg-surface-container-lowest border border-outline-variant text-on-surface rounded-lg min-h-[56px] shadow-sm hover:bg-surface-container transition-colors">
+      <span class="material-symbols-outlined text-[24px] text-primary">qr_code_scanner</span>
+      <span class="font-label-md text-label-md">Escanear QR</span>
+    </button>
+  </section>
+
+  <section class="grid grid-cols-2 gap-sm">
+    <button type="button" data-accion="ir" data-valor="/i/incidencias" class="col-span-2 bg-surface-container-lowest border border-outline-variant rounded-lg p-md shadow-sm flex items-center justify-between text-left">
+      <div class="flex items-center gap-sm">
+        <div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container"><span class="material-symbols-outlined">assignment</span></div>
+        <div>
+          <p class="font-label-sm text-label-sm text-on-surface-variant">TAREAS ASIGNADAS</p>
+          <p class="font-headline-md text-headline-md text-on-surface">${tareasPendientes} Pendientes</p>
+        </div>
+      </div>
+      <span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+    </button>
+    <button type="button" data-accion="ir" data-valor="/i/vencimientos" class="bg-error-container/10 border border-error-container/30 rounded-lg p-md shadow-sm flex flex-col gap-sm text-left">
+      <div class="w-8 h-8 rounded-full bg-error text-on-error flex items-center justify-center"><span class="material-symbols-outlined text-sm">schedule</span></div>
+      <div>
+        <p class="font-headline-md text-headline-md text-error">${vencidas}</p>
+        <p class="font-label-sm text-label-sm text-error/80 leading-tight">Permisos<br>Vencidos</p>
+      </div>
+    </button>
+    <button type="button" data-accion="ir" data-valor="/i/incidencias" class="bg-surface-container-lowest border border-error/50 rounded-lg p-md shadow-sm flex flex-col gap-sm relative overflow-hidden text-left">
+      <div class="absolute top-0 right-0 w-16 h-16 bg-error/5 rounded-bl-full"></div>
+      <div class="w-8 h-8 rounded-full bg-error-container text-on-error-container flex items-center justify-center"><span class="material-symbols-outlined text-sm">report_problem</span></div>
+      <div>
+        <p class="font-headline-md text-headline-md text-on-surface">${urgentes}</p>
+        <p class="font-label-sm text-label-sm text-on-surface-variant leading-tight">Incidentes<br>Urgentes</p>
+      </div>
+    </button>
+  </section>
+</main>
+<nav class="fixed md:relative bottom-0 md:bottom-auto left-0 md:left-auto w-full z-50 flex justify-around items-center h-xxl bg-surface px-xs pb-safe border-t border-outline-variant shadow-[0_-2px_8px_rgba(40,51,46,0.04)]">
+  <a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 scale-95 transition-transform duration-150 min-w-[64px] min-h-[44px]" href="#/i">
+    <span class="material-symbols-outlined text-[24px] icon-fill">home</span>
+    <span class="font-label-sm text-label-sm mt-0.5">Home</span>
+  </a>
+  <a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container scale-95 transition-transform duration-150 min-w-[64px] min-h-[44px] rounded-full" href="#/i/inspecciones">
+    <span class="material-symbols-outlined text-[24px]">qr_code_scanner</span>
+    <span class="font-label-sm text-label-sm mt-0.5">Scan</span>
+  </a>
+  <a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container scale-95 transition-transform duration-150 min-w-[64px] min-h-[44px] rounded-full" href="#/i/inspecciones">
+    <span class="material-symbols-outlined text-[24px]">assignment</span>
+    <span class="font-label-sm text-label-sm mt-0.5">Inspections</span>
+  </a>
+  <a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container scale-95 transition-transform duration-150 min-w-[64px] min-h-[44px] rounded-full" href="#/i/incidencias">
+    <span class="material-symbols-outlined text-[24px]">report_problem</span>
+    <span class="font-label-sm text-label-sm mt-0.5">Incidents</span>
+  </a>
+  <a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container scale-95 transition-transform duration-150 min-w-[64px] min-h-[44px] rounded-full relative" href="#/conexion/cola">
+    <span class="material-symbols-outlined text-[24px]">sync</span>
+    ${porSincronizar > 0 ? '<span class="absolute top-1 right-3 w-2 h-2 bg-error rounded-full border border-surface"></span>' : ''}
+    <span class="font-label-sm text-label-sm mt-0.5">Sync</span>
+  </a>
+</nav>
+</div>`;
+
+  return { titulo: 'Inparques Ranger', standalone: true, contenido };
 };
