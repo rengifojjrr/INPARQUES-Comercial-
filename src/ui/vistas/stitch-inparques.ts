@@ -575,3 +575,161 @@ ${cabeceraInparques('Financial Audit Management', u.nombre)}
 
   return { titulo: 'Dashboard Financiero Nacional', standalone: true, contenido };
 };
+
+// --------------------------------------------------------------- Admin de parque
+
+const ICONO_INCIDENCIA: Record<string, string> = {
+  seguridad: 'security',
+  higiene: 'cleaning_services',
+  permiso: 'description',
+  infraestructura: 'construction',
+  otro: 'report_problem',
+};
+
+/**
+ * Rutas accesibles para este rol (`INP_CONTROL` / explícitas en
+ * app/registry.ts): "Horarios" no tiene ruta propia en INPARQUES (solo
+ * comercio la tiene) y se lleva a Operación; "Usuarios locales" apuntaba a
+ * `/i/usuarios`, que en este código es exclusiva de
+ * superadmin/dirección comercial, así que se lleva a Reportes en su lugar;
+ * "Ajustes" no es configuración general sino solicitudes de ajuste
+ * financiero (`INP_FINANZAS`, sin este rol), se lleva al selector de
+ * accesibilidad del perfil.
+ */
+const NAV_ADMIN_PARQUE: Array<[string, string, string]> = [
+  ['dashboard', 'Inicio', '/i'],
+  ['map', 'Zonas y puntos', '/i/zonas'],
+  ['storefront', 'Negocios', '/i/negocios'],
+  ['settings_applications', 'Operación', '/i/operacion'],
+  ['schedule', 'Horarios', '/i/operacion'],
+  ['report_problem', 'Incidencias', '/i/incidencias'],
+  ['verified', 'Inspecciones', '/i/inspecciones'],
+  ['analytics', 'Desempeño', '/i/reportes'],
+  ['badge', 'Usuarios locales', '/i/reportes'],
+  ['settings', 'Ajustes', '/perfil/accesibilidad'],
+];
+
+export const adminParqueInicio: Render = (): Pagina => {
+  const e = store.leer();
+  const u = sesion.usuario()!;
+  const a = resolverAmbito(u, e);
+  const parque = e.parques.find((p) => p.id === u.scope.ids[0]);
+
+  const negociosActivos = e.negocios.filter((n) => (a.nacional || a.negocioIds.includes(n.id)) && n.estado === 'activo').length;
+  const hoy = new Date().toISOString().slice(0, 10);
+  const ordenesParque = filtrarPorAmbito(e.ordenes, a);
+  const pedidosHoy = ordenesParque.filter((o) => o.creadaEn.slice(0, 10) === hoy).length;
+  const ventasTotalesVes = ordenesParque.filter((o) => o.estado === 'entregada').reduce((s, o) => s + o.totalVes, 0);
+
+  const puntosParque = filtrarPorAmbito(e.puntos, a);
+  const ocupados = puntosParque.filter((p) => p.estado === 'ocupado').length;
+  const capacidad = puntosParque.length ? Math.round((ocupados / puntosParque.length) * 100) : 0;
+
+  const incidenciasAbiertas = filtrarPorAmbito(e.incidencias, a).filter((i) => i.estado === 'abierta');
+  const haceMediaHora = Date.now() - 30 * 60 * 1000;
+  const retrasados = ordenesParque.filter(
+    (o) => ['pendiente_aceptacion', 'aceptada', 'preparando'].includes(o.estado) && new Date(o.creadaEn).getTime() < haceMediaHora,
+  ).length;
+
+  const contenido = `
+${conCajonMovil(barraLateralInparques('/i', NAV_ADMIN_PARQUE, 'Portal Administrativo'))}
+${cabeceraInparques(`Gestión de Parques${parque ? ` · ${parque.nombre}` : ''}`, u.nombre)}
+<main class="lg:ml-64 pt-16 p-lg bg-background min-h-screen">
+  <div class="flex flex-col sm:flex-row justify-between sm:items-end gap-md mb-lg">
+    <div>
+      <h2 class="font-headline-lg text-headline-lg text-on-surface font-bold">Dashboard</h2>
+      <p class="font-body-md text-body-md text-on-surface-variant mt-xs">Resumen general de operaciones del parque.</p>
+    </div>
+    <div class="flex gap-sm">
+      <div class="bg-primary text-on-primary px-sm py-1 rounded-full flex items-center gap-xs font-label-md text-label-md">
+        <span class="w-2 h-2 rounded-full bg-on-primary animate-pulse"></span>
+        ${parque?.activo ? 'Abierto' : 'Cerrado'}
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-lg">
+    <div class="col-span-12 md:col-span-3 bg-surface border border-outline-variant rounded-lg p-lg shadow-sm">
+      <div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface-variant mb-md"><span class="material-symbols-outlined">storefront</span></div>
+      <p class="font-label-md text-label-md text-on-surface-variant">Negocios Activos</p>
+      <h3 class="font-display-lg text-display-lg text-on-surface">${negociosActivos}</h3>
+    </div>
+    <div class="col-span-12 md:col-span-3 bg-surface border border-outline-variant rounded-lg p-lg shadow-sm">
+      <div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface-variant mb-md"><span class="material-symbols-outlined">receipt_long</span></div>
+      <p class="font-label-md text-label-md text-on-surface-variant">Pedidos Hoy</p>
+      <h3 class="font-display-lg text-display-lg text-on-surface">${pedidosHoy}</h3>
+    </div>
+    <div class="col-span-12 md:col-span-3 bg-surface border border-outline-variant rounded-lg p-lg shadow-sm">
+      <div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface-variant mb-md"><span class="material-symbols-outlined">payments</span></div>
+      <p class="font-label-md text-label-md text-on-surface-variant">Ventas Totales</p>
+      <h3 class="font-headline-lg text-headline-lg font-bold text-on-surface mt-2">${esc(formatearVes(ventasTotalesVes))}</h3>
+    </div>
+    <div class="col-span-12 md:col-span-3 bg-surface border border-outline-variant rounded-lg p-lg shadow-sm relative overflow-hidden">
+      <div class="relative z-10">
+        <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-md"><span class="material-symbols-outlined">map</span></div>
+        <p class="font-label-md text-label-md text-on-surface-variant">Puntos Ocupados</p>
+        <h3 class="font-display-lg text-display-lg text-primary">${capacidad}%</h3>
+      </div>
+      <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-primary/5 rounded-full blur-xl"></div>
+    </div>
+
+    <div class="col-span-12 md:col-span-4 bg-surface border border-outline-variant rounded-lg p-lg shadow-sm">
+      <h3 class="font-headline-md text-headline-md text-on-surface mb-md">Estado Crítico</h3>
+      <div class="flex flex-col gap-md">
+        <div class="flex justify-between items-center p-md ${incidenciasAbiertas.length ? 'bg-error-container/20 border-error/20' : 'bg-surface-container-low border-outline-variant'} rounded-lg border">
+          <div class="flex items-center gap-sm"><span class="material-symbols-outlined ${incidenciasAbiertas.length ? 'text-error' : 'text-on-surface-variant'}">report</span><span class="font-label-md text-label-md text-on-surface">Incidencias Abiertas</span></div>
+          <span class="font-headline-md text-headline-md font-bold ${incidenciasAbiertas.length ? 'text-error' : 'text-on-surface'}">${incidenciasAbiertas.length}</span>
+        </div>
+        <div class="flex justify-between items-center p-md ${retrasados ? 'bg-[#FFF3E0] border-[#FFE0B2]' : 'bg-surface-container-low border-outline-variant'} rounded-lg border">
+          <div class="flex items-center gap-sm"><span class="material-symbols-outlined ${retrasados ? 'text-[#E65100]' : 'text-on-surface-variant'}">timer</span><span class="font-label-md text-label-md text-on-surface">Retrasos en Pedidos</span></div>
+          <span class="font-headline-md text-headline-md font-bold ${retrasados ? 'text-[#E65100]' : 'text-on-surface'}">${retrasados}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-span-12 md:col-span-8 bg-surface border border-outline-variant rounded-lg p-lg shadow-sm">
+      <h3 class="font-headline-md text-headline-md text-on-surface mb-md">Accesos Directos</h3>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-sm">
+        <button type="button" data-accion="ir" data-valor="/i/negocios" class="flex flex-col items-center justify-center gap-sm p-md bg-surface-container-low border border-outline-variant rounded-lg hover:bg-surface-container transition-colors h-32">
+          <span class="material-symbols-outlined text-[32px] text-primary">store</span><span class="font-label-md text-label-md text-center text-on-surface">Revisar negocio</span>
+        </button>
+        <button type="button" data-accion="ir" data-valor="/i/operacion" class="flex flex-col items-center justify-center gap-sm p-md bg-surface-container-low border border-outline-variant rounded-lg hover:bg-surface-container transition-colors h-32">
+          <span class="material-symbols-outlined text-[32px] text-primary">settings_applications</span><span class="font-label-md text-label-md text-center text-on-surface">Ver operación</span>
+        </button>
+        <button type="button" data-accion="ir" data-valor="/i/incidencias" class="flex flex-col items-center justify-center gap-sm p-md bg-surface-container-low border border-outline-variant rounded-lg hover:bg-surface-container transition-colors h-32">
+          <span class="material-symbols-outlined text-[32px] text-error">warning</span><span class="font-label-md text-label-md text-center text-on-surface">Crear incidencia</span>
+        </button>
+        <button type="button" data-accion="ir" data-valor="/i/operacion" class="flex flex-col items-center justify-center gap-sm p-md bg-surface-container-low border border-outline-variant rounded-lg hover:bg-surface-container transition-colors h-32">
+          <span class="material-symbols-outlined text-[32px] text-primary">edit_calendar</span><span class="font-label-md text-label-md text-center text-on-surface">Gestionar horario especial</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="col-span-12 bg-surface border border-outline-variant rounded-lg p-lg shadow-sm mb-xl">
+      <div class="flex justify-between items-center mb-md">
+        <h3 class="font-headline-md text-headline-md text-on-surface">Alertas Operativas</h3>
+        <button type="button" data-accion="ir" data-valor="/i/incidencias" class="font-label-md text-label-md text-primary hover:underline">Ver todas</button>
+      </div>
+      <div class="divide-y divide-outline-variant/50">
+        ${incidenciasAbiertas.length === 0
+          ? '<p class="py-md font-body-md text-body-md text-on-surface-variant">Sin incidencias abiertas en este parque.</p>'
+          : incidenciasAbiertas
+              .slice(0, 3)
+              .map(
+                (i) => `<div class="py-md flex items-start gap-md">
+                <div class="w-10 h-10 rounded-full bg-error/10 text-error flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-[20px]">${ICONO_INCIDENCIA[i.tipo] ?? 'report_problem'}</span></div>
+                <div class="flex-1">
+                  <h4 class="font-label-md text-label-md text-on-surface capitalize">${esc(i.tipo)}</h4>
+                  <p class="font-body-md text-body-md text-on-surface-variant">${esc(i.descripcion)}</p>
+                </div>
+                <span class="font-label-sm text-label-sm text-on-surface-variant whitespace-nowrap">${esc(desde(i.creadaEn))}</span>
+              </div>`,
+              )
+              .join('')}
+      </div>
+    </div>
+  </div>
+</main>`;
+
+  return { titulo: 'Gestión de Parques', standalone: true, contenido };
+};
