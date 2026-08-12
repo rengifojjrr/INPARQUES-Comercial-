@@ -12,7 +12,8 @@ import * as v from './visitante';
 import * as com from './comercio';
 import * as inp from './inparques';
 import { entradaStitch } from './stitch-acceso';
-import { propietarioInicio } from './stitch-comercio';
+import { propietarioInicio, adminLocalInicio } from './stitch-comercio';
+import { inicioVisitante } from './stitch-visitante';
 import { sesion } from '../../app/session';
 
 /**
@@ -24,6 +25,7 @@ import { sesion } from '../../app/session';
 function inicioComercioPorRol(): Render {
   return (ctx) => {
     if (sesion.rol() === 'comercio.propietario') return propietarioInicio(ctx);
+    if (sesion.rol() === 'comercio.admin_local') return adminLocalInicio(ctx);
     return com.inicio(ctx);
   };
 }
@@ -59,7 +61,7 @@ export const VISTAS_POR_ID: Record<string, Render> = {
   'conexion.conflicto': c.conflictoSincronizacion,
 
   // ---------------------------------------------------------------- Visitante
-  'v.inicio': v.inicio,
+  'v.inicio': inicioVisitante,
   'v.qr': v.escanearQr,
   'v.parques': v.parques,
   'v.parque': v.parque,

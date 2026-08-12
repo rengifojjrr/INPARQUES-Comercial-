@@ -13,7 +13,8 @@ import type { Pagina, Render } from './tipos';
 import { store } from '../../data/store';
 import { sesion } from '../../app/session';
 import { formatearUsd, formatearVes } from '../../domain/money';
-import { diasHasta, fechaCorta } from '../formato';
+import { diasHasta, fechaCorta, desde } from '../formato';
+import { ETIQUETA_ORDEN, TONO_ORDEN } from '../../domain/state-machines';
 
 function iniciales(nombre: string): string {
   return nombre
@@ -315,4 +316,262 @@ ${barraSuperior(u.nombre)}
 </main>`;
 
   return { titulo: 'Portal de Concesionarios', standalone: true, contenido };
+};
+
+// ------------------------------------------------------- Administrador de local
+
+/**
+ * Fuente: `50/p_gina_1_resumen_operativo/code.html` ("Parques Nacionales -
+ * Resumen Operativo"). A diferencia del Portal de Concesionarios, esta
+ * pantalla no tiene barra superior en escritorio: la barra lateral fija va
+ * directo al lienzo de contenido, y en móvil aparece una cabecera propia con
+ * el botón de menú. Se respeta esa estructura tal cual.
+ *
+ * El original trae `<main class="flex-1 md:ml-64 w-full ...">`. Ese `w-full`
+ * es el mismo tipo de error técnico que el cajón móvil: fuerza el ancho a
+ * 100% del contenedor y luego el margen de 256px lo desborda 256px a la
+ * derecha (el `<aside>` es `fixed`, así que no cuenta como hermano flex y no
+ * hay quien absorba ese margen). Se omite `w-full`; sin él, el ancho se
+ * resuelve automáticamente restando el margen, sin desbordar.
+ */
+function barraLateralAdminLocal(): string {
+  const items: Array<[string, string, string]> = [
+    ['dashboard', 'Resumen', '/c'],
+    ['shopping_cart', 'Pedidos', '/c/pedidos'],
+    ['calendar_today', 'Reservas', '/c/reservas'],
+    ['menu_book', 'Catálogo', '/c/catalogo'],
+    ['event_available', 'Disponibilidad', '/c/cupos'],
+    ['account_balance_wallet', 'Caja', '/c/caja'],
+    ['payments', 'Ventas', '/c/reportes'],
+    ['group', 'Equipo operativo', '/c/equipo'],
+    ['settings', 'Configuración del local', '/c/horarios'],
+  ];
+  return `
+<aside class="hidden md:flex flex-col p-md gap-xs bg-surface-container-low border-r border-outline-variant h-screen w-64 fixed left-0 top-0 z-40">
+  <div class="flex items-center gap-sm mb-lg px-xs py-sm">
+    <div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center shrink-0 text-on-primary-container">
+      <span class="material-symbols-outlined icon-fill">park</span>
+    </div>
+    <div>
+      <h1 class="font-headline-md text-headline-md font-bold text-primary truncate">Portal Admin</h1>
+      <p class="font-label-sm text-label-sm text-on-surface-variant truncate">Administración de Parque</p>
+    </div>
+  </div>
+  <nav class="flex-1 overflow-y-auto space-y-base">
+    ${items
+      .map(
+        ([icono, texto, ruta]) => `<button type="button" data-accion="ir" data-valor="${ruta}"
+        class="w-full flex items-center gap-sm px-sm py-xs min-h-touch-target ${ruta === '/c' ? 'bg-secondary-container text-on-secondary-container font-bold' : 'text-on-surface-variant hover:bg-surface-variant'} rounded-lg transition-all duration-200 ease-in-out font-label-md text-label-md text-left">
+        <span class="material-symbols-outlined" ${ruta === '/c' ? "style=\"font-variation-settings: 'FILL' 1;\"" : ''}>${icono}</span>
+        ${esc(texto)}
+      </button>`,
+      )
+      .join('')}
+  </nav>
+</aside>`;
+}
+
+function claseTono(tono: string): string {
+  switch (tono) {
+    case 'exito': return 'bg-secondary-container/20 text-on-secondary-container';
+    case 'error': return 'bg-error-container/20 text-error';
+    case 'alerta': return 'bg-tertiary-fixed text-on-tertiary-fixed';
+    case 'progreso': return 'bg-primary-fixed-dim/40 text-on-primary-fixed-variant';
+    default: return 'bg-surface-variant text-on-surface-variant';
+  }
+}
+
+export const adminLocalInicio: Render = (): Pagina => {
+  const e = store.leer();
+  const u = sesion.usuario()!;
+  const localesIds = u.scope.ids;
+  const ordenes = e.ordenes.filter((o) => localesIds.includes(o.localId));
+  const articulos = e.articulos.filter((a) => localesIds.includes(a.localId));
+  const hoy = new Date().toISOString().slice(0, 10);
+
+  const pedidosActivos = ordenes.filter((o) => o.tipo === 'pedido' && !['entregada', 'cancelada'].includes(o.estado));
+  const reservasVigentes = ordenes.filter((o) => o.tipo === 'reserva' && o.estado !== 'cancelada');
+  const ventasHoyVes = ordenes
+    .filter((o) => o.estado === 'entregada' && o.creadaEn.slice(0, 10) === hoy)
+    .reduce((s, o) => s + o.totalVes, 0);
+  const prepPromedio = articulos.length
+    ? Math.round(articulos.reduce((s, a) => s + a.tiempoPrepMin, 0) / articulos.length)
+    : 0;
+
+  const turnos = e.turnos.filter((t) => localesIds.includes(t.localId) && t.diferenciaVes !== undefined);
+  const ultimoTurno = turnos.sort((a, b) => (b.cerradoEn ?? '').localeCompare(a.cerradoEn ?? ''))[0];
+  const diferencia = ultimoTurno?.diferenciaVes ?? 0;
+
+  const actividad = ordenes
+    .flatMap((o) => o.historial.map((h) => ({ ...h, orden: o })))
+    .sort((a, b) => b.en.localeCompare(a.en))
+    .slice(0, 4);
+
+  const agotados = articulos.filter((a) => !a.disponible).map((a) => a.nombre);
+  const cuposBajos = articulos.filter((a) => a.tipo === 'servicio' && (a.cupoPorFranja ?? 99) <= 3);
+
+  const contenido = `
+${conCajonMovil(barraLateralAdminLocal())}
+<main class="md:ml-64 min-h-screen">
+  <header class="md:hidden flex justify-between items-center w-full px-lg h-touch-target sticky top-0 z-30 bg-surface border-b border-outline-variant">
+    <div class="flex items-center gap-sm">
+      <button type="button" data-accion="abrir-cajon" aria-label="Abrir menú" class="min-h-touch-target min-w-[44px] flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-full">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+      <span class="font-headline-md text-headline-md font-bold text-primary">Parques Nacionales</span>
+    </div>
+    <div class="flex items-center gap-xs">
+      <button type="button" data-accion="ir" data-valor="/notificaciones" class="min-h-touch-target min-w-[44px] flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-full">
+        <span class="material-symbols-outlined">notifications</span>
+      </button>
+      <button type="button" data-accion="ir" data-valor="/c/expediente" class="min-h-touch-target min-w-[44px] flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-full">
+        <span class="material-symbols-outlined">storefront</span>
+      </button>
+      <button type="button" data-accion="ir" data-valor="/perfil" class="min-h-touch-target min-w-[44px] flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-full">
+        <span class="material-symbols-outlined">person</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="p-md md:p-lg space-y-lg max-w-7xl mx-auto">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-md">
+      <div>
+        <h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-background">Resumen Operativo</h2>
+        <p class="font-body-md text-body-md text-on-surface-variant mt-xs">Vista general de la actividad de hoy en el parque.</p>
+      </div>
+      <div class="flex flex-wrap gap-sm">
+        <button type="button" data-accion="ir" data-valor="/c/caja/venta-mostrador" class="flex items-center justify-center gap-xs min-h-touch-target px-md rounded-lg font-label-md text-label-md bg-secondary text-on-secondary hover:opacity-90 transition-opacity">
+          <span class="material-symbols-outlined">point_of_sale</span>
+          Registrar venta
+        </button>
+        <button type="button" data-accion="ir" data-valor="/c/pedidos" class="flex items-center justify-center gap-xs min-h-touch-target px-md rounded-lg font-label-md text-label-md bg-primary-container text-on-primary-container hover:opacity-90 transition-opacity">
+          <span class="material-symbols-outlined">receipt_long</span>
+          Abrir pedidos
+        </button>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-md">
+      <div class="bg-surface-container-lowest border border-surface-variant rounded-xl p-lg flex flex-col justify-between hover:shadow-[0px_4px_12px_rgba(40,51,46,0.08)] transition-shadow">
+        <div class="flex justify-between items-start mb-md">
+          <span class="font-label-md text-label-md text-on-surface-variant">Ventas del día</span>
+          <div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+            <span class="material-symbols-outlined">payments</span>
+          </div>
+        </div>
+        <div>
+          <div class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-background mb-base">${esc(formatearVes(ventasHoyVes))}</div>
+        </div>
+      </div>
+      <div class="bg-surface-container-lowest border border-surface-variant rounded-xl p-lg flex flex-col justify-between hover:shadow-[0px_4px_12px_rgba(40,51,46,0.08)] transition-shadow">
+        <div class="flex justify-between items-start mb-md">
+          <span class="font-label-md text-label-md text-on-surface-variant">Pedidos activos</span>
+          <div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed">
+            <span class="material-symbols-outlined">pending_actions</span>
+          </div>
+        </div>
+        <div>
+          <div class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-background mb-base">${pedidosActivos.length}</div>
+          ${prepPromedio ? `<div class="flex items-center gap-xs font-label-sm text-label-sm text-on-surface-variant">
+            <span class="material-symbols-outlined text-[16px]">schedule</span>
+            <span>Promedio: ${prepPromedio} min</span>
+          </div>` : ''}
+        </div>
+      </div>
+      <div class="bg-surface-container-lowest border border-surface-variant rounded-xl p-lg flex flex-col justify-between hover:shadow-[0px_4px_12px_rgba(40,51,46,0.08)] transition-shadow">
+        <div class="flex justify-between items-start mb-md">
+          <span class="font-label-md text-label-md text-on-surface-variant">Reservas vigentes</span>
+          <div class="w-10 h-10 rounded-full bg-primary-fixed-dim flex items-center justify-center text-on-primary-fixed">
+            <span class="material-symbols-outlined">calendar_month</span>
+          </div>
+        </div>
+        <div>
+          <div class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-background mb-base">${reservasVigentes.length}</div>
+        </div>
+      </div>
+      <div class="bg-surface-container-lowest border border-surface-variant rounded-xl p-lg flex flex-col justify-between hover:shadow-[0px_4px_12px_rgba(40,51,46,0.08)] transition-shadow">
+        <div class="flex justify-between items-start mb-md">
+          <span class="font-label-md text-label-md text-on-surface-variant">Diferencia de Caja</span>
+          <div class="w-10 h-10 rounded-full ${diferencia === 0 ? 'bg-secondary-container text-on-secondary-container' : 'bg-error-container text-on-error-container'} flex items-center justify-center">
+            <span class="material-symbols-outlined">account_balance_wallet</span>
+          </div>
+        </div>
+        <div>
+          <div class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-background mb-base">${esc(formatearVes(diferencia))}</div>
+          <div class="flex items-center gap-xs font-label-sm text-label-sm ${diferencia === 0 ? 'text-primary' : 'text-error'}">
+            <span class="material-symbols-outlined text-[16px]">${diferencia === 0 ? 'check_circle' : 'warning'}</span>
+            <span>${diferencia === 0 ? 'Sin diferencias' : 'Requiere revisión'}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-md">
+      <div class="lg:col-span-2 bg-surface-container-lowest border border-surface-variant rounded-xl flex flex-col overflow-hidden">
+        <div class="p-lg border-b border-surface-variant flex justify-between items-center bg-surface-bright">
+          <h3 class="font-headline-md text-headline-md text-on-background">Actividad Operativa Reciente</h3>
+          <button type="button" data-accion="ir" data-valor="/c/pedidos" class="min-h-touch-target px-sm rounded-lg font-label-md text-label-md text-primary hover:bg-surface-container-low transition-colors">Ver todo</button>
+        </div>
+        <div class="p-0 overflow-y-auto max-h-[400px]">
+          ${actividad.length === 0
+            ? '<p class="p-md font-body-md text-body-md text-on-surface-variant">Sin actividad registrada todavía.</p>'
+            : actividad
+                .map(
+                  (h) => `<button type="button" data-accion="ir" data-valor="/c/${h.orden.tipo === 'reserva' ? 'reserva' : 'pedido'}/${esc(h.orden.id)}"
+                  class="w-full flex items-center gap-md p-md border-b border-surface-variant hover:bg-surface-container-lowest transition-colors text-left">
+                  <div class="w-12 h-12 rounded-lg bg-secondary-container flex items-center justify-center text-on-secondary-container shrink-0">
+                    <span class="material-symbols-outlined">${h.orden.tipo === 'reserva' ? 'event_seat' : 'local_dining'}</span>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <p class="font-label-md text-label-md text-on-background truncate">${esc(h.orden.codigo)} → ${esc(ETIQUETA_ORDEN[h.orden.estado])}</p>
+                    <p class="font-body-sm text-body-sm text-on-surface-variant truncate">${esc(h.orden.clienteNombre)}</p>
+                  </div>
+                  <div class="text-right">
+                    <p class="font-label-sm text-label-sm text-on-surface-variant">${esc(desde(h.en))}</p>
+                    <span class="inline-flex mt-base px-2 py-1 rounded-full ${claseTono(TONO_ORDEN[h.orden.estado])} font-label-sm text-[10px]">${esc(ETIQUETA_ORDEN[h.orden.estado])}</span>
+                  </div>
+                </button>`,
+                )
+                .join('')}
+        </div>
+      </div>
+
+      <div class="bg-surface-container-lowest border border-surface-variant rounded-xl flex flex-col overflow-hidden">
+        <div class="p-lg border-b border-surface-variant bg-error-container/10">
+          <h3 class="font-headline-md text-headline-md text-error flex items-center gap-sm">
+            <span class="material-symbols-outlined">notification_important</span>
+            Alertas Críticas
+          </h3>
+        </div>
+        <div class="p-md space-y-md">
+          ${agotados.length === 0 && cuposBajos.length === 0
+            ? '<p class="font-body-md text-body-md text-on-surface-variant">Sin alertas activas.</p>'
+            : ''}
+          ${agotados.length
+            ? `<div class="bg-error-container rounded-lg p-md flex gap-md items-start">
+                <span class="material-symbols-outlined text-on-error-container mt-base">inventory_2</span>
+                <div>
+                  <h4 class="font-label-md text-label-md text-on-error-container">Artículos agotados</h4>
+                  <p class="font-body-sm text-body-sm text-on-error-container/80 mt-base">${esc(agotados.slice(0, 3).join(', '))}</p>
+                  <button type="button" data-accion="ir" data-valor="/c/inventario" class="mt-sm font-label-sm text-label-sm text-on-error-container underline">Reponer stock</button>
+                </div>
+              </div>`
+            : ''}
+          ${cuposBajos.length
+            ? `<div class="bg-tertiary-fixed rounded-lg p-md flex gap-md items-start">
+                <span class="material-symbols-outlined text-on-tertiary-fixed mt-base">group_off</span>
+                <div>
+                  <h4 class="font-label-md text-label-md text-on-tertiary-fixed">Cupos bajos: ${esc(cuposBajos[0].nombre)}</h4>
+                  <p class="font-body-sm text-body-sm text-on-tertiary-fixed/80 mt-base">Solo quedan ${cuposBajos[0].cupoPorFranja} lugares por franja.</p>
+                  <button type="button" data-accion="ir" data-valor="/c/cupos" class="mt-sm font-label-sm text-label-sm text-on-tertiary-fixed underline">Editar disponibilidad</button>
+                </div>
+              </div>`
+            : ''}
+        </div>
+      </div>
+    </div>
+  </div>
+</main>`;
+
+  return { titulo: 'Resumen Operativo', standalone: true, contenido };
 };
