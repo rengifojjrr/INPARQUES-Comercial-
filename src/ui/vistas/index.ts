@@ -13,7 +13,7 @@ import * as com from './comercio';
 import * as inp from './inparques';
 import { entradaStitch } from './stitch-acceso';
 import { propietarioInicio, adminLocalInicio, operadorInicio, contadorInicio } from './stitch-comercio';
-import { superadminInicio } from './stitch-inparques';
+import { superadminInicio, direccionComercialInicio } from './stitch-inparques';
 import { inicioVisitante } from './stitch-visitante';
 import { sesion } from '../../app/session';
 
@@ -36,6 +36,7 @@ function inicioComercioPorRol(): Render {
 function inicioInparquesPorRol(): Render {
   return (ctx) => {
     if (sesion.rol() === 'inparques.superadmin') return superadminInicio(ctx);
+    if (sesion.rol() === 'inparques.direccion_comercial') return direccionComercialInicio(ctx);
     return inp.dashboard(ctx);
   };
 }

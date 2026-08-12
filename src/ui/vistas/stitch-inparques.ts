@@ -15,8 +15,10 @@ import { avatar } from '../stitch-comun';
 import type { Pagina, Render } from './tipos';
 import { store } from '../../data/store';
 import { sesion } from '../../app/session';
-import { formatearVes } from '../../domain/money';
-import { diasHasta } from '../formato';
+import { formatearVes, formatearUsd } from '../../domain/money';
+import { diasHasta, desde } from '../formato';
+import { resolverAmbito, filtrarPorAmbito } from '../../domain/scope';
+import { consultar } from '../../data/audit';
 
 function barraLateralInparques(activo: string, items: Array<[string, string, string]>, subtitulo: string): string {
   return `
@@ -253,4 +255,195 @@ ${cabeceraInparques('INPARQUES Control Panel', u.nombre)}
 </main>`;
 
   return { titulo: 'INPARQUES Control Panel', standalone: true, contenido };
+};
+
+// ----------------------------------------------------------- Dirección comercial
+
+/**
+ * Rutas reales que este rol puede abrir (`INP_CONCESIONES` en
+ * app/registry.ts): ni "Inspecciones" (`/i/inspecciones`, solo
+ * superadmin/inspector/admin_parque) ni "Configuración" apuntan al literal
+ * del HTML original (`/i/ajustes` son solicitudes de ajuste financiero, no
+ * ajustes generales, y tampoco está en su lista de acceso) — se enlazan a
+ * la página accesible más cercana en vez de a una ruta que le daría 403.
+ * "Expedientes" tampoco tiene una lista propia (`/i/expediente/:negocioId`
+ * exige un negocio); usa la misma página que "Solicitudes", que ya cubre
+ * ambos conceptos ("Solicitudes y expedientes" en el registro de rutas).
+ */
+const NAV_DIRECCION: Array<[string, string, string]> = [
+  ['dashboard', 'Resumen Comercial', '/i'],
+  ['description', 'Solicitudes', '/i/solicitudes'],
+  ['folder_open', 'Expedientes', '/i/solicitudes'],
+  ['assignment_turned_in', 'Contratos y Permisos', '/i/contratos'],
+  ['map', 'Puntos Comerciales', '/i/puntos'],
+  ['monetization_on', 'Condiciones Económicas', '/i/canones'],
+  ['history', 'Prórrogas', '/i/vencimientos'],
+  ['verified_user', 'Inspecciones', '/i/reportes'],
+  ['analytics', 'Reportes', '/i/reportes'],
+  ['settings', 'Configuración', '/perfil/accesibilidad'],
+];
+
+export const direccionComercialInicio: Render = (): Pagina => {
+  const e = store.leer();
+  const u = sesion.usuario()!;
+  const a = resolverAmbito(u, e);
+  const alcanceAmplio = u.scope.level === 'region' || u.scope.level === 'nacional';
+
+  const negociosAmbito = e.negocios.filter((n) => {
+    if (a.negocioIds.includes(n.id)) return true;
+    const sinLocal = !e.locales.some((l) => l.negocioId === n.id);
+    return sinLocal && alcanceAmplio && ['en_revision', 'borrador'].includes(n.estado);
+  });
+  const solicitudesNuevas = negociosAmbito.filter((n) => n.estado === 'borrador').length;
+  const solicitudesRevision = negociosAmbito.filter((n) => n.estado === 'en_revision').length;
+
+  const puntosAmbito = filtrarPorAmbito(e.puntos, a);
+  const ocupados = puntosAmbito.filter((p) => p.estado === 'ocupado').length;
+  const capacidad = puntosAmbito.length ? Math.round((ocupados / puntosAmbito.length) * 100) : 0;
+
+  const permisosAmbito = filtrarPorAmbito(e.permisos, a);
+  const porVencer = permisosAmbito.filter((p) => p.estado === 'vigente' && diasHasta(p.hasta) <= 30 && diasHasta(p.hasta) >= 0);
+  const suspendidos = permisosAmbito.filter((p) => p.estado === 'suspendido').length;
+
+  const contratosAmbito = filtrarPorAmbito(e.contratos, a).filter((c) => c.estado === 'vigente');
+  const canonProyectadoUsd = contratosAmbito.reduce((s, c) => s + c.canonFijoUsd, 0);
+
+  type Tarea = { titulo: string; detalle: string; estado: string; color: string; ruta: string };
+  const tareas: Tarea[] = [];
+  for (const p of porVencer.slice(0, 3)) {
+    const n = e.negocios.find((x) => x.id === p.negocioId);
+    const dias = diasHasta(p.hasta);
+    tareas.push({
+      titulo: `Vencimiento de ${p.tipo.replace(/_/g, ' ')} — ${n?.nombreComercial ?? p.numero}`,
+      detalle: `Permiso ${p.numero}`,
+      estado: dias === 0 ? 'Vence hoy' : `Vence en ${dias} días`,
+      color: dias <= 3 ? 'bg-error' : 'bg-tertiary',
+      ruta: '/i/vencimientos',
+    });
+  }
+  for (const n of negociosAmbito.filter((x) => x.estado === 'en_revision').slice(0, 2)) {
+    tareas.push({
+      titulo: `Aprobación pendiente — ${n.nombreComercial}`,
+      detalle: `Expediente en revisión`,
+      estado: 'En Revisión',
+      color: 'bg-primary',
+      ruta: `/i/expediente/${n.id}`,
+    });
+  }
+
+  const actividad = consultar(e, {})
+    .filter((ev) => ['negocio', 'contrato', 'permiso'].includes(ev.entidad))
+    .sort((x, y) => y.en.localeCompare(x.en))
+    .slice(0, 3);
+
+  const contenido = `
+${conCajonMovil(barraLateralInparques('/i', NAV_DIRECCION, 'Dirección comercial'))}
+${cabeceraInparques('Parques Nacionales | Dirección Comercial', u.nombre)}
+<main class="lg:ml-72 pt-16 p-lg lg:p-xl">
+  <div class="mb-lg">
+    <h2 class="font-headline-lg text-headline-lg text-on-background mb-xs">Resumen Comercial</h2>
+    <p class="text-on-surface-variant font-body-md text-body-md">Panorama general de gestión y puntos de concesión.</p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-md mb-xl">
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg shadow-sm hover:shadow-md transition-shadow">
+      <div class="flex justify-between items-start mb-md">
+        <div>
+          <p class="font-label-md text-label-md text-on-surface-variant">Solicitudes</p>
+          <h3 class="font-display-lg text-display-lg text-on-background mt-xs">${negociosAmbito.length}</h3>
+        </div>
+        <div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center"><span class="material-symbols-outlined">description</span></div>
+      </div>
+      <div class="flex gap-sm text-sm">
+        <span class="flex items-center gap-xs text-primary"><span class="material-symbols-outlined text-[16px]">fiber_new</span> ${solicitudesNuevas} Nuevas</span>
+        <span class="text-outline">|</span>
+        <span class="flex items-center gap-xs text-tertiary"><span class="material-symbols-outlined text-[16px]">pending</span> ${solicitudesRevision} Revisión</span>
+      </div>
+    </div>
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg shadow-sm hover:shadow-md transition-shadow">
+      <div class="flex justify-between items-start mb-md">
+        <div>
+          <p class="font-label-md text-label-md text-on-surface-variant">Puntos Comerciales</p>
+          <h3 class="font-display-lg text-display-lg text-on-background mt-xs">${capacidad}%</h3>
+        </div>
+        <div class="w-10 h-10 rounded-full bg-tertiary-container text-on-tertiary flex items-center justify-center"><span class="material-symbols-outlined">map</span></div>
+      </div>
+      <div class="w-full bg-surface-container-highest rounded-full h-2 mb-sm"><div class="bg-primary h-2 rounded-full" style="width:${capacidad}%"></div></div>
+      <div class="flex justify-between font-label-sm text-label-sm">
+        <span class="text-on-surface-variant">${ocupados} Ocupados</span>
+        <span class="text-error">${puntosAmbito.length - ocupados} Vacantes</span>
+      </div>
+    </div>
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg shadow-sm hover:shadow-md transition-shadow">
+      <div class="flex justify-between items-start mb-md">
+        <div>
+          <p class="font-label-md text-label-md text-on-surface-variant">Estado de Permisos</p>
+          <h3 class="font-display-lg text-display-lg text-on-background mt-xs">${porVencer.length}</h3>
+        </div>
+        <div class="w-10 h-10 rounded-full bg-error-container text-error flex items-center justify-center"><span class="material-symbols-outlined">warning</span></div>
+      </div>
+      <p class="font-label-sm text-label-sm text-on-surface-variant mb-xs">Por vencer (próximos 30 días)</p>
+      <div class="flex gap-sm mt-auto">
+        <span class="bg-error/10 text-error px-xs py-[2px] rounded font-label-sm text-label-sm">${suspendidos} Suspendidos</span>
+      </div>
+    </div>
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg shadow-sm hover:shadow-md transition-shadow relative overflow-hidden">
+      <div class="absolute -right-4 -top-4 w-24 h-24 bg-primary-fixed/20 rounded-full blur-xl"></div>
+      <div class="flex justify-between items-start mb-md relative z-10">
+        <div>
+          <p class="font-label-md text-label-md text-on-surface-variant">Canon Proyectado (Mes)</p>
+          <h3 class="font-headline-lg text-headline-lg text-on-background mt-xs">${esc(formatearUsd(canonProyectadoUsd))}</h3>
+        </div>
+        <div class="w-10 h-10 rounded-full bg-primary-container text-on-primary flex items-center justify-center"><span class="material-symbols-outlined">trending_up</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-lg">
+    <div class="lg:col-span-2 bg-surface-container-lowest border border-outline-variant rounded-lg shadow-sm flex flex-col">
+      <div class="p-lg border-b border-outline-variant flex justify-between items-center">
+        <h3 class="font-headline-md text-headline-md text-on-background flex items-center gap-sm"><span class="material-symbols-outlined text-primary">priority</span> Bandeja Priorizada</h3>
+        <button type="button" data-accion="ir" data-valor="/i/vencimientos" class="text-primary font-label-md text-label-md hover:underline min-h-[44px] px-sm">Ver todas</button>
+      </div>
+      <div class="flex-1 p-md space-y-sm">
+        ${tareas.length === 0
+          ? '<p class="font-body-md text-body-md text-on-surface-variant p-sm">Sin tareas pendientes en su ámbito.</p>'
+          : tareas
+              .map(
+                (t) => `<button type="button" data-accion="ir" data-valor="${t.ruta}" class="w-full p-md rounded-lg border border-outline-variant bg-surface hover:shadow-md transition-shadow cursor-pointer flex gap-md items-start text-left">
+                <div class="w-2 h-full min-h-[40px] ${t.color} rounded-full shrink-0"></div>
+                <div class="flex-1">
+                  <div class="flex justify-between items-start mb-xs gap-sm">
+                    <h4 class="font-label-md text-label-md text-on-background">${esc(t.titulo)}</h4>
+                    <span class="bg-error/10 text-error px-sm py-[2px] rounded-full font-label-sm text-label-sm whitespace-nowrap">${esc(t.estado)}</span>
+                  </div>
+                  <p class="text-on-surface-variant text-sm">${esc(t.detalle)}</p>
+                </div>
+              </button>`,
+              )
+              .join('')}
+      </div>
+    </div>
+    <div class="bg-surface-container border border-outline-variant rounded-lg p-lg shadow-sm flex flex-col">
+      <h3 class="font-headline-md text-headline-md text-on-background mb-md">Actividad Reciente</h3>
+      <div class="relative pl-md border-l-2 border-surface-dim space-y-md flex-1">
+        ${actividad.length === 0
+          ? '<p class="font-body-md text-body-md text-on-surface-variant">Sin actividad reciente.</p>'
+          : actividad
+              .map(
+                (ev) => `<div class="relative">
+                <div class="absolute -left-[25px] top-1 w-3 h-3 rounded-full bg-primary ring-4 ring-surface-container"></div>
+                <p class="font-label-md text-label-md text-on-background">${esc(ev.accion)}</p>
+                <p class="text-sm text-on-surface-variant">${esc(ev.usuarioNombre)}</p>
+                <p class="text-xs text-outline mt-1">${esc(desde(ev.en))}</p>
+              </div>`,
+              )
+              .join('')}
+      </div>
+      <button type="button" data-accion="ir" data-valor="/i/auditoria" class="mt-md w-full border border-outline-variant text-on-surface font-label-md text-label-md py-xs rounded hover:bg-surface-container-lowest min-h-[44px]">Ver historial completo</button>
+    </div>
+  </div>
+</main>`;
+
+  return { titulo: 'Resumen Comercial', standalone: true, contenido };
 };
