@@ -1350,7 +1350,7 @@ document.addEventListener('click', (ev) => {
   brindis('Cuenta actualizada. Queda pendiente de verificación bancaria.');
 });
 
-function exportarCsv(tipo: string): void {
+async function exportarCsv(tipo: string): Promise<void> {
   const e = store.leer();
   let filas: string[][] = [];
 
@@ -1394,11 +1394,31 @@ function exportarCsv(tipo: string): void {
   }
 
   const csv = filas.map((f) => f.map((c) => `"${c.replace(/"/g, '""')}"`).join(',')).join('\n');
-  const blob = new Blob([`﻿${csv}`], { type: 'text/csv;charset=utf-8' });
+  const contenido = `﻿${csv}`;
+  const nombreArchivo = `inparques-${tipo}.csv`;
+
+  // Publicada como artefacto, la página corre en un iframe aislado: un
+  // <a download> normal no descarga nada ahí. window.claude.downloads es la
+  // via que el visor ofrece para eso; fuera de ese visor (desarrollo local,
+  // GitHub Pages, el archivo unico abierto directo) no existe y se sigue
+  // usando el metodo de blob + enlace de siempre.
+  const descargasClaude = (window as { claude?: { downloads?: { save(r: { filename: string; data: string }): Promise<unknown> } } }).claude
+    ?.downloads;
+  if (descargasClaude) {
+    try {
+      await descargasClaude.save({ filename: nombreArchivo, data: contenido });
+      brindis(`Archivo ${tipo}.csv descargado.`);
+    } catch {
+      brindis('La descarga no está disponible en este enlace de demostración.');
+    }
+    return;
+  }
+
+  const blob = new Blob([contenido], { type: 'text/csv;charset=utf-8' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = `inparques-${tipo}.csv`;
+  a.download = nombreArchivo;
   a.click();
   URL.revokeObjectURL(url);
   brindis(`Archivo ${tipo}.csv descargado.`);
