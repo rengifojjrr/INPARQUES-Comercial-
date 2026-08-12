@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>INPARQUES - Reportes de Soporte</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#bfc9c0",
+                        "surface-container-low": "#f5f3ed",
+                        "tertiary": "#3a4942",
+                        "surface-container-high": "#eae8e2",
+                        "surface-container-highest": "#e4e2dd",
+                        "on-primary-fixed-variant": "#005232",
+                        "on-tertiary-fixed-variant": "#3a4a43",
+                        "error-container": "#ffdad6",
+                        "on-secondary-container": "#446d59",
+                        "surface-dim": "#dcdad4",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed-dim": "#a4d0b8",
+                        "background": "#fbf9f3",
+                        "on-secondary-fixed-variant": "#264e3c",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-container": "#cadbd2",
+                        "surface-variant": "#e4e2dd",
+                        "secondary-container": "#c0edd4",
+                        "tertiary-fixed-dim": "#b9cbc1",
+                        "on-primary-fixed": "#002111",
+                        "error": "#ba1a1a",
+                        "surface-container": "#f0eee8",
+                        "inverse-surface": "#30312d",
+                        "on-surface-variant": "#3f4942",
+                        "on-surface": "#1b1c18",
+                        "on-secondary-fixed": "#002114",
+                        "secondary-fixed": "#c0edd4",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#6f7a71",
+                        "primary-fixed": "#a4f4c3",
+                        "inverse-on-surface": "#f3f1eb",
+                        "inverse-primary": "#88d7a8",
+                        "primary-fixed-dim": "#88d7a8",
+                        "surface-tint": "#186c45",
+                        "surface": "#fbf9f3",
+                        "primary": "#005131",
+                        "on-background": "#1b1c18",
+                        "tertiary-container": "#516159",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#d5e7dd",
+                        "secondary": "#3e6753",
+                        "on-primary-container": "#99e9b9",
+                        "surface-bright": "#fbf9f3",
+                        "primary-container": "#176b45",
+                        "on-tertiary-fixed": "#0f1e19",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "xs": "8px",
+                        "xl": "32px",
+                        "xxl": "48px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "touch-target": "44px",
+                        "sm": "12px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "display-lg": ["Manrope"],
+                        "label-sm": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }]
+                    }
+                },
+            }
+        }
+    </script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex">
+<!-- SideNavBar -->
+<nav class="hidden md:flex bg-surface dark:bg-surface-dim h-screen w-64 fixed left-0 top-0 overflow-y-auto border-r border-outline-variant dark:border-outline flex-col py-lg px-md z-50 shadow-[0px_4px_12px_rgba(40,51,46,0.08)] md:shadow-none">
+<div class="mb-xl">
+<div class="flex items-center gap-xs mb-sm">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="A small, stylized circular emblem or logo featuring abstract geometric leaf or tree shapes in deep forest green and gold on a white background, representing environmental conservation in a modern corporate style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtY3pC9eyrTRYqAW7KOzVlsi2EOTFwHIjYxCut9Z8hJqyDupluXxpYl2Y1V92auIdyijZpoKsb-oqqUk9eYpxtALMDCflNqz31sq0ihXCCKdcL148SOnlLQKm_w0kFtwGE6IQsumN_n-mwNEWpXB7kajHcYPtygTnOEFyJ9cT1bBBIdYVTmo-a_X9qMVeNrZzrB84_6dS0IJy7GRm58xko_mg8CFsMEEiRB0cVw6fzPVnI8FML5NSe"/>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">INPARQUES</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Administrative Portal</span>
+</div>
+</div>
+<button class="w-full h-touch-target bg-primary-container text-on-primary rounded-lg font-label-md text-label-md flex items-center justify-center gap-xs hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                New Support Case
+            </button>
+</div>
+<ul class="flex flex-col gap-base flex-1">
+<li>
+<a class="flex items-center gap-sm h-touch-target px-md rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors duration-200 font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="inbox">inbox</span>
+                    Inbox
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-sm h-touch-target px-md rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors duration-200 font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="assignment_turned_in">assignment_turned_in</span>
+                    Assigned Cases
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-sm h-touch-target px-md rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors duration-200 font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="receipt_long">receipt_long</span>
+                    Orders
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-sm h-touch-target px-md rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors duration-200 font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="gavel">gavel</span>
+                    Disputes
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-sm h-touch-target px-md rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors duration-200 font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="payments">payments</span>
+                    Requested Refunds
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-sm h-touch-target px-md rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors duration-200 font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="timer">timer</span>
+                    SLA
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-sm h-touch-target px-md rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors duration-200 font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="menu_book">menu_book</span>
+                    Knowledge Base
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-sm h-touch-target px-md rounded-lg text-primary dark:text-primary-fixed font-bold border-r-4 border-primary dark:border-primary-fixed bg-secondary-container/20 font-body-md text-body-md opacity-90 transition-opacity" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="bar_chart" data-weight="fill" style="font-variation-settings: 'FILL' 1;">bar_chart</span>
+                    Reports
+                </a>
+</li>
+</ul>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="flex-1 flex flex-col md:ml-64 w-full">
+<!-- TopAppBar -->
+<header class="bg-background/95 backdrop-blur-sm dark:bg-background/95 docked full-width top-0 sticky z-40 flex justify-between items-center h-[72px] px-xl border-b border-outline-variant dark:border-outline md:ml-0 shadow-none">
+<!-- Mobile Menu Button (Hidden on md) -->
+<button class="md:hidden p-xs text-on-surface-variant hover:text-primary">
+<span class="material-symbols-outlined text-[24px]">menu</span>
+</button>
+<!-- Brand (Mobile only, replaces Search on small screens if needed, but keeping search based on JSON) -->
+<div class="hidden md:block">
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed tracking-tight">Support &amp; Dispute Portal</h1>
+</div>
+<!-- Navigation Links (Web only) -->
+<nav class="hidden lg:flex gap-xl mx-xl">
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors flex items-center h-full" href="#">Dashboard</a>
+<a class="font-label-md text-label-md text-primary dark:text-primary-fixed border-b-2 border-primary dark:border-primary-fixed pb-1 flex items-center h-full scale-95 transition-transform duration-150" href="#">Analytics</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors flex items-center h-full" href="#">Settings</a>
+</nav>
+<div class="flex items-center gap-sm ml-auto">
+<!-- Search Bar -->
+<div class="hidden md:flex relative items-center mr-md">
+<span class="material-symbols-outlined absolute left-sm text-outline text-[20px]">search</span>
+<input class="h-[36px] pl-xl pr-sm rounded-full border border-outline-variant bg-surface-container-lowest focus:border-primary focus:ring-1 focus:ring-primary text-body-md font-body-md w-64" placeholder="Search reports..." type="text"/>
+</div>
+<!-- Secondary Action -->
+<button class="hidden md:flex h-touch-target px-md rounded-lg items-center justify-center gap-xs bg-secondary-container text-on-secondary-container hover:bg-secondary-container/80 transition-colors font-label-md text-label-md min-h-[44px]">
+<span class="material-symbols-outlined text-[20px]">filter_list</span>
+                    Park Filter
+                </button>
+<!-- Primary Action -->
+<button class="h-touch-target px-md rounded-lg flex items-center justify-center bg-primary-container text-on-primary hover:bg-primary transition-colors font-label-md text-label-md min-h-[44px]">
+                    Create Order
+                </button>
+<!-- Icon Actions -->
+<div class="flex items-center gap-xs ml-sm">
+<button class="p-xs text-on-surface-variant hover:text-primary rounded-full hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[24px]" data-icon="notifications">notifications</span>
+</button>
+<button class="p-xs text-on-surface-variant hover:text-primary rounded-full hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[24px]" data-icon="help_outline">help_outline</span>
+</button>
+<button class="p-xs text-on-surface-variant hover:text-primary rounded-full hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[24px]" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Canvas Area -->
+<main class="flex-1 p-md md:p-lg overflow-y-auto w-full max-w-[1600px] mx-auto">
+<div class="mb-xl">
+<h2 class="font-headline-lg text-headline-lg font-bold text-on-surface mb-xs">Reportes de Soporte</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Analítica avanzada y resolución de conflictos.</p>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-lg">
+<!-- KPI Cards (Top Row) -->
+<div class="col-span-1 md:col-span-3 bg-surface-container-lowest border border-outline-variant rounded-lg p-lg flex flex-col justify-between shadow-[0px_4px_12px_rgba(40,51,46,0.08)]">
+<div>
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Total Casos Abiertos</span>
+<div class="font-display-lg text-display-lg text-on-surface mt-sm">2,451</div>
+</div>
+<div class="flex items-center gap-xs mt-md text-error">
+<span class="material-symbols-outlined text-[20px]">trending_up</span>
+<span class="font-label-sm text-label-sm">+12% vs mes anterior</span>
+</div>
+</div>
+<div class="col-span-1 md:col-span-3 bg-surface-container-lowest border border-outline-variant rounded-lg p-lg flex flex-col justify-between shadow-[0px_4px_12px_rgba(40,51,46,0.08)]">
+<div>
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Tasa de Resolución</span>
+<div class="font-display-lg text-display-lg text-on-surface mt-sm">87.4%</div>
+</div>
+<div class="flex items-center gap-xs mt-md text-primary">
+<span class="material-symbols-outlined text-[20px]">trending_up</span>
+<span class="font-label-sm text-label-sm">+3.2% vs mes anterior</span>
+</div>
+</div>
+<!-- Main Chart Area (Spans 6 cols) -->
+<div class="col-span-1 md:col-span-6 bg-surface-container-lowest border border-outline-variant rounded-lg p-lg shadow-[0px_4px_12px_rgba(40,51,46,0.08)]">
+<h3 class="font-headline-md text-headline-md font-semibold text-on-surface mb-md">Reembolsos: Solicitados vs Aprobados</h3>
+<div class="h-64 w-full bg-surface-container rounded flex items-center justify-center border border-dashed border-outline-variant">
+<!-- Placeholder for Chart -->
+<span class="font-body-md text-body-md text-on-surface-variant flex items-center gap-sm">
+<span class="material-symbols-outlined text-outline">bar_chart</span>
+                            Gráfico de Tendencia (Últimos 6 meses)
+                        </span>
+</div>
+</div>
+<!-- Middle Row -->
+<!-- Motivo de Consulta (Pie/Donut placeholder) -->
+<div class="col-span-1 md:col-span-4 bg-surface-container-lowest border border-outline-variant rounded-lg p-lg shadow-[0px_4px_12px_rgba(40,51,46,0.08)]">
+<h3 class="font-headline-md text-headline-md font-semibold text-on-surface mb-md">Motivo de Consulta</h3>
+<div class="flex flex-col gap-sm">
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface">Problemas de Acceso</span>
+<span class="font-label-md text-label-md text-primary">45%</span>
+</div>
+<div class="w-full bg-surface-variant rounded-full h-2 mb-sm">
+<div class="bg-primary h-2 rounded-full" style="width: 45%"></div>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface">Disputas de Pago</span>
+<span class="font-label-md text-label-md text-secondary">30%</span>
+</div>
+<div class="w-full bg-surface-variant rounded-full h-2 mb-sm">
+<div class="bg-secondary h-2 rounded-full" style="width: 30%"></div>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface">Consultas Generales</span>
+<span class="font-label-md text-label-md text-tertiary">15%</span>
+</div>
+<div class="w-full bg-surface-variant rounded-full h-2 mb-sm">
+<div class="bg-tertiary h-2 rounded-full" style="width: 15%"></div>
+</div>
+</div>
+</div>
+<!-- Parques Más Afectados -->
+<div class="col-span-1 md:col-span-8 bg-surface-container-lowest border border-outline-variant rounded-lg p-lg shadow-[0px_4px_12px_rgba(40,51,46,0.08)]">
+<div class="flex justify-between items-center mb-md">
+<h3 class="font-headline-md text-headline-md font-semibold text-on-surface">Parques con Más Incidencias</h3>
+<button class="text-primary hover:text-primary-container font-label-md text-label-md flex items-center gap-xs min-h-[44px]">
+                            Ver Mapa <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline-variant text-on-surface-variant font-label-md text-label-md">
+<th class="pb-sm font-semibold">Parque Nacional</th>
+<th class="pb-sm font-semibold">Casos Totales</th>
+<th class="pb-sm font-semibold">Resolución SLA</th>
+<th class="pb-sm font-semibold text-right">Acción</th>
+</tr>
+</thead>
+<tbody class="text-body-md text-on-surface font-body-md">
+<tr class="border-b border-surface-variant hover:bg-surface-container-low transition-colors">
+<td class="py-md flex items-center gap-sm">
+<div class="w-8 h-8 rounded bg-error-container text-on-error-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]">priority_high</span>
+</div>
+                                        El Ávila
+                                    </td>
+<td class="py-md">842</td>
+<td class="py-md">
+<span class="inline-flex items-center px-2 py-1 rounded-full bg-error-container/20 text-on-error-container font-label-sm text-label-sm">
+                                            72% (Crítico)
+                                        </span>
+</td>
+<td class="py-md text-right">
+<button class="text-on-surface-variant hover:text-primary min-h-[44px] min-w-[44px] inline-flex items-center justify-center"><span class="material-symbols-outlined">more_vert</span></button>
+</td>
+</tr>
+<tr class="border-b border-surface-variant hover:bg-surface-container-low transition-colors">
+<td class="py-md flex items-center gap-sm">
+<div class="w-8 h-8 rounded bg-secondary-container text-on-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]">warning</span>
+</div>
+                                        Morrocoy
+                                    </td>
+<td class="py-md">512</td>
+<td class="py-md">
+<span class="inline-flex items-center px-2 py-1 rounded-full bg-secondary-container/20 text-on-secondary-container font-label-sm text-label-sm">
+                                            88% (Estable)
+                                        </span>
+</td>
+<td class="py-md text-right">
+<button class="text-on-surface-variant hover:text-primary min-h-[44px] min-w-[44px] inline-flex items-center justify-center"><span class="material-symbols-outlined">more_vert</span></button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-md flex items-center gap-sm">
+<div class="w-8 h-8 rounded bg-primary-container text-on-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+</div>
+                                        Canaima
+                                    </td>
+<td class="py-md">120</td>
+<td class="py-md">
+<span class="inline-flex items-center px-2 py-1 rounded-full bg-primary-container/20 text-on-primary-container font-label-sm text-label-sm">
+                                            98% (Óptimo)
+                                        </span>
+</td>
+<td class="py-md text-right">
+<button class="text-on-surface-variant hover:text-primary min-h-[44px] min-w-[44px] inline-flex items-center justify-center"><span class="material-symbols-outlined">more_vert</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

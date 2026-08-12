@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>INPARQUES Control Panel - Usuarios, roles y ámbitos</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Manrope -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Config from Guidelines -->
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "primary": "#005131",
+                      "error": "#ba1a1a",
+                      "surface-variant": "#e4e2dd",
+                      "on-tertiary-fixed-variant": "#3a4a43",
+                      "inverse-on-surface": "#f3f1eb",
+                      "outline-variant": "#bfc9c0",
+                      "outline": "#6f7a71",
+                      "inverse-surface": "#30312d",
+                      "on-background": "#1b1c18",
+                      "surface": "#fbf9f3",
+                      "on-surface": "#1b1c18",
+                      "surface-bright": "#fbf9f3",
+                      "secondary": "#3e6753",
+                      "primary-fixed-dim": "#88d7a8",
+                      "tertiary-container": "#516159",
+                      "surface-tint": "#186c45",
+                      "tertiary-fixed": "#d5e7dd",
+                      "secondary-fixed": "#c0edd4",
+                      "primary-container": "#176b45",
+                      "on-tertiary-fixed": "#0f1e19",
+                      "surface-container-highest": "#e4e2dd",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-container": "#446d59",
+                      "surface-container-high": "#eae8e2",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary-fixed": "#002114",
+                      "on-error": "#ffffff",
+                      "on-secondary": "#ffffff",
+                      "on-primary-container": "#99e9b9",
+                      "on-error-container": "#93000a",
+                      "surface-container-low": "#f5f3ed",
+                      "secondary-container": "#c0edd4",
+                      "error-container": "#ffdad6",
+                      "primary-fixed": "#a4f4c3",
+                      "inverse-primary": "#88d7a8",
+                      "on-primary": "#ffffff",
+                      "on-surface-variant": "#3f4942",
+                      "on-primary-fixed-variant": "#005232",
+                      "surface-container": "#f0eee8",
+                      "background": "#fbf9f3",
+                      "secondary-fixed-dim": "#a4d0b8",
+                      "tertiary-fixed-dim": "#b9cbc1",
+                      "on-primary-fixed": "#002111",
+                      "on-secondary-fixed-variant": "#264e3c",
+                      "surface-dim": "#dcdad4",
+                      "tertiary": "#3a4942",
+                      "on-tertiary-container": "#cadbd2"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "md": "16px",
+                      "sm": "12px",
+                      "xs": "8px",
+                      "lg": "24px",
+                      "xl": "32px",
+                      "base": "4px",
+                      "xxl": "48px",
+                      "touch-target": "44px"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": ["Manrope"],
+                      "body-md": ["Manrope"],
+                      "display-lg": ["Manrope"],
+                      "label-md": ["Manrope"],
+                      "body-lg": ["Manrope"],
+                      "headline-lg": ["Manrope"],
+                      "headline-md": ["Manrope"],
+                      "label-sm": ["Manrope"]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        body {
+            background-color: #F7F5EF; /* Arena Base */
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Ambient Shadows */
+        .shadow-ambient-level-1 {
+             box-shadow: 0px 4px 12px rgba(40, 51, 46, 0.08);
+        }
+        .shadow-ambient-level-2 {
+            box-shadow: 0px 12px 32px rgba(40, 51, 46, 0.12);
+        }
+    </style>
+</head>
+<body class="text-on-background font-body-md antialiased overflow-hidden">
+<!-- TopNavBar (Hidden on Mobile, Visible on Desktop) -->
+<header class="hidden md:flex justify-between items-center w-full h-16 pl-80 pr-lg fixed top-0 z-40 bg-white shadow-sm border-b border-outline-variant">
+<!-- Left: Branding & Search/Nav (Conceptual, mapping from JSON) -->
+<div class="flex items-center gap-xl h-full">
+<h1 class="font-headline-sm text-headline-sm font-bold text-primary">INPARQUES Control Panel</h1>
+<nav class="flex h-full items-center gap-lg">
+<a class="text-on-surface-variant font-label-md text-label-md h-full flex items-center hover:text-primary transition-colors duration-200" href="#">National Scope</a>
+<a class="text-on-surface-variant font-label-md text-label-md h-full flex items-center hover:text-primary transition-colors duration-200" href="#">Region Scope</a>
+<a class="text-on-surface-variant font-label-md text-label-md h-full flex items-center hover:text-primary transition-colors duration-200" href="#">Park Scope</a>
+</nav>
+</div>
+<!-- Right: Actions & Profile -->
+<div class="flex items-center gap-md">
+<button aria-label="Notifications" class="p-xs rounded-full hover:bg-surface-container transition-colors duration-200 text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button aria-label="Verified User" class="p-xs rounded-full hover:bg-surface-container transition-colors duration-200 text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+</button>
+<div class="w-10 h-10 rounded-full border border-outline-variant overflow-hidden cursor-pointer hover:opacity-80 transition-opacity duration-150">
+<img alt="Administrator Avatar with MFA" class="w-full h-full object-cover" data-alt="A professional headshot of a mature individual in formal business attire, looking directly at the camera with a confident expression. The lighting is studio quality, soft and even, highlighting their features against a neutral, light-colored background. The overall mood is authoritative yet approachable, fitting for a senior administrative role. The image quality is high-resolution, clear, and perfectly centered within the circular crop." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAv9_c477IZINM3vzN9vj4zj9y2y02wJ_vyvbjRgXKYod8v1ZQ8O2hmt3wA6PQ6b52ZwRuKEJH758jUbbWwu-3mgdCd0WOEVn6_1tFWLapfrBECZN-DriT2LsWsW_eS94cgf60tRlEYtuEX3G1P407gHUWhxqAoRg1-5XWhoFVfXGSFRDWWk7YRFw_wkjkamR2JEpJfQhaB7jVCTZMmWNZ6yvvnNqSc6F0f-FnJm7vnTvCa6trVFGTM"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar (Hidden on Mobile, Visible on Desktop) -->
+<aside class="hidden md:flex flex-col h-screen fixed left-0 top-0 overflow-y-auto px-xs py-md bg-surface border-r border-outline-variant w-72 z-50">
+<!-- Header / Logo Area -->
+<div class="mb-xl px-sm flex items-center gap-sm">
+<div class="w-12 h-12 rounded-full overflow-hidden shrink-0 border border-outline-variant">
+<img alt="National Superadministrator Logo" class="w-full h-full object-cover" data-alt="A clean, modern logo design featuring stylized leaves or trees integrated with abstract geometric shapes, suggesting structure and nature combined. The primary colors are deep forest green and earth tones. It is set against a pure white background. The style is flat, corporate, and highly professional, suitable for a national parks administration agency." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHZHyiBqrcGY6N3LX_cnEkNiVTkD49wCSBkC8wEFkivT57D1T08G2l6Ea3m1QXaCA74sOoD7k95NFosDeMVn-GvGTihM9mUObCBfc32kxoZaHdp7zmUfp1IT6GDwR6mJwot9K4ntFpeNcjqEhc7FHqDZrCBD68FNB5UfTBhMUnIICq_3UPcrA_feKyAJHty6AYQM_fI7EILB9yjySnkkrARZipD_ofmBdd-jHvOfRDUmqlnKUtNde1"/>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md font-bold text-primary">INPARQUES</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant">National Superadministrator</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="flex flex-col gap-base flex-grow">
+<a class="flex items-center gap-md px-sm py-xs rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">National Home</span>
+</a>
+<a class="flex items-center gap-md px-sm py-xs rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="account_tree">account_tree</span>
+<span class="font-label-md text-label-md">Territorial Structure</span>
+</a>
+<a class="flex items-center gap-md px-sm py-xs rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="park">park</span>
+<span class="font-label-md text-label-md">Parks</span>
+</a>
+<a class="flex items-center gap-md px-sm py-xs rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="business_center">business_center</span>
+<span class="font-label-md text-label-md">Businesses</span>
+</a>
+<!-- ACTIVE TAB -->
+<a class="flex items-center gap-md px-sm py-xs rounded-lg text-primary font-bold border-r-4 border-primary bg-surface-container transition-transform duration-150 scale-[0.98]" href="#">
+<span class="material-symbols-outlined icon-fill" data-icon="person_outline">person_outline</span>
+<span class="font-label-md text-label-md">Users/Roles</span>
+</a>
+<a class="flex items-center gap-md px-sm py-xs rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="gavel">gavel</span>
+<span class="font-label-md text-label-md">Global Rules</span>
+</a>
+<a class="flex items-center gap-md px-sm py-xs rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="extension">extension</span>
+<span class="font-label-md text-label-md">Integrations</span>
+</a>
+<a class="flex items-center gap-md px-sm py-xs rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-label-md text-label-md">Audit</span>
+</a>
+<a class="flex items-center gap-md px-sm py-xs rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="security">security</span>
+<span class="font-label-md text-label-md">Security</span>
+</a>
+<a class="flex items-center gap-md px-sm py-xs rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-md text-label-md">Configuration</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content Canvas -->
+<main class="md:ml-72 md:mt-16 p-lg h-[calc(100vh-64px)] overflow-y-auto">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-md mb-xl">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-background">Users &amp; Roles Management</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">Manage institutional access, verify MFA status, and audit scopes.</p>
+</div>
+<div class="flex gap-sm">
+<button class="h-touch-target px-md flex items-center justify-center gap-xs rounded-lg bg-surface-container text-on-surface font-label-md text-label-md hover:bg-surface-variant transition-colors border border-outline-variant">
+<span class="material-symbols-outlined text-sm" data-icon="filter_list">filter_list</span>
+                    Filter
+                </button>
+<button class="h-touch-target px-md flex items-center justify-center gap-xs rounded-lg bg-primary-container text-on-primary font-label-md text-label-md hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-sm" data-icon="person_add">person_add</span>
+                    Create User
+                </button>
+</div>
+</div>
+<!-- Metrics/Summary Row (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-md mb-lg">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md flex flex-col justify-between h-32 shadow-ambient-level-1">
+<div class="flex justify-between items-start">
+<span class="font-label-md text-label-md text-on-surface-variant">Total Users</span>
+<span class="material-symbols-outlined text-primary" data-icon="group">group</span>
+</div>
+<div>
+<span class="font-headline-lg text-headline-lg">1,248</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md flex flex-col justify-between h-32 shadow-ambient-level-1">
+<div class="flex justify-between items-start">
+<span class="font-label-md text-label-md text-on-surface-variant">Active Sessions</span>
+<span class="material-symbols-outlined text-secondary" data-icon="devices">devices</span>
+</div>
+<div>
+<span class="font-headline-lg text-headline-lg">342</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md flex flex-col justify-between h-32 shadow-ambient-level-1">
+<div class="flex justify-between items-start">
+<span class="font-label-md text-label-md text-on-surface-variant">MFA Enabled</span>
+<span class="material-symbols-outlined text-primary-container" data-icon="shield_lock">shield_lock</span>
+</div>
+<div>
+<span class="font-headline-lg text-headline-lg">98%</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md flex flex-col justify-between h-32 shadow-ambient-level-1">
+<div class="flex justify-between items-start">
+<span class="font-label-md text-label-md text-error">Suspended Accounts</span>
+<span class="material-symbols-outlined text-error" data-icon="block">block</span>
+</div>
+<div>
+<span class="font-headline-lg text-headline-lg text-error">12</span>
+</div>
+</div>
+</div>
+<!-- Complex Data Table inside a Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-ambient-level-1 overflow-hidden">
+<!-- Table Header Tools -->
+<div class="p-md border-b border-outline-variant flex justify-between items-center bg-surface-container-low">
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="search">search</span>
+<input class="w-full pl-xl pr-sm h-touch-target rounded-lg border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary bg-surface-container-lowest font-body-md text-body-md placeholder:text-on-surface-variant/70" placeholder="Search users by name, role..." type="text"/>
+</div>
+<div class="flex gap-sm">
+<button class="p-xs text-on-surface-variant hover:text-primary transition-colors" title="Export List">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+</button>
+</div>
+</div>
+<!-- Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline-variant bg-surface-container">
+<th class="py-sm px-md font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">User</th>
+<th class="py-sm px-md font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Role &amp; Scope</th>
+<th class="py-sm px-md font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Security</th>
+<th class="py-sm px-md font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Status</th>
+<th class="py-sm px-md font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant font-body-md text-body-md">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="py-md px-md">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-bold">
+                                        AC
+                                    </div>
+<div>
+<p class="font-label-md text-label-md text-on-background">Alejandro Campos</p>
+<p class="text-sm text-on-surface-variant">a.campos@inparques.gov.ve</p>
+</div>
+</div>
+</td>
+<td class="py-md px-md">
+<div class="flex flex-col gap-base">
+<span class="font-label-md text-label-md">Regional Director</span>
+<span class="text-sm text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]" data-icon="location_on">location_on</span>
+                                        Andes Region
+                                    </span>
+</div>
+</td>
+<td class="py-md px-md">
+<div class="flex items-center gap-xs text-primary">
+<span class="material-symbols-outlined icon-fill text-[18px]" data-icon="verified_user">verified_user</span>
+<span class="text-sm font-label-md">MFA Active</span>
+</div>
+<div class="text-xs text-on-surface-variant mt-1">Last login: 2h ago</div>
+</td>
+<td class="py-md px-md">
+<span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-label-md bg-primary/10 text-primary">
+                                    Active
+                                </span>
+</td>
+<td class="py-md px-md text-right">
+<div class="flex items-center justify-end gap-xs opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-xs text-on-surface-variant hover:text-primary transition-colors" title="Edit Role">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+</button>
+<button class="p-xs text-on-surface-variant hover:text-error transition-colors" title="Suspend User">
+<span class="material-symbols-outlined" data-icon="block">block</span>
+</button>
+<button class="p-xs text-on-surface-variant hover:text-secondary transition-colors" title="More Actions">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="py-md px-md">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center font-bold">
+                                        MR
+                                    </div>
+<div>
+<p class="font-label-md text-label-md text-on-background">Maria Rodriguez</p>
+<p class="text-sm text-on-surface-variant">m.rodriguez@inparques.gov.ve</p>
+</div>
+</div>
+</td>
+<td class="py-md px-md">
+<div class="flex flex-col gap-base">
+<span class="font-label-md text-label-md">Park Warden</span>
+<span class="text-sm text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]" data-icon="park">park</span>
+                                        Henri Pittier NP
+                                    </span>
+</div>
+</td>
+<td class="py-md px-md">
+<div class="flex items-center gap-xs text-primary">
+<span class="material-symbols-outlined icon-fill text-[18px]" data-icon="verified_user">verified_user</span>
+<span class="text-sm font-label-md">MFA Active</span>
+</div>
+<div class="text-xs text-on-surface-variant mt-1">Last login: 1d ago</div>
+</td>
+<td class="py-md px-md">
+<span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-label-md bg-primary/10 text-primary">
+                                    Active
+                                </span>
+</td>
+<td class="py-md px-md text-right">
+<div class="flex items-center justify-end gap-xs opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-xs text-on-surface-variant hover:text-primary transition-colors" title="Edit Role">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+</button>
+<button class="p-xs text-on-surface-variant hover:text-error transition-colors" title="Suspend User">
+<span class="material-symbols-outlined" data-icon="block">block</span>
+</button>
+<button class="p-xs text-on-surface-variant hover:text-secondary transition-colors" title="More Actions">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 (Suspended) -->
+<tr class="hover:bg-surface-container-low transition-colors group bg-error-container/30">
+<td class="py-md px-md">
+<div class="flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center font-bold opacity-50">
+                                        JV
+                                    </div>
+<div>
+<p class="font-label-md text-label-md text-on-background opacity-50">Juan Vargas</p>
+<p class="text-sm text-on-surface-variant opacity-50">j.vargas@ext.inparques.gov.ve</p>
+</div>
+</div>
+</td>
+<td class="py-md px-md opacity-50">
+<div class="flex flex-col gap-base">
+<span class="font-label-md text-label-md">External Auditor</span>
+<span class="text-sm text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]" data-icon="public">public</span>
+                                        National Scope
+                                    </span>
+</div>
+</td>
+<td class="py-md px-md opacity-50">
+<div class="flex items-center gap-xs text-error">
+<span class="material-symbols-outlined text-[18px]" data-icon="gpp_bad">gpp_bad</span>
+<span class="text-sm font-label-md">MFA Pending</span>
+</div>
+<div class="text-xs text-on-surface-variant mt-1">Last login: Never</div>
+</td>
+<td class="py-md px-md">
+<span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-label-md bg-error/10 text-error">
+                                    Suspended
+                                </span>
+</td>
+<td class="py-md px-md text-right">
+<div class="flex items-center justify-end gap-xs opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="h-8 px-3 text-xs font-label-md bg-surface-container border border-outline-variant rounded text-on-surface hover:bg-surface-variant transition-colors">
+                                        Reactivate
+                                    </button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="p-md border-t border-outline-variant flex items-center justify-between bg-surface-container-lowest">
+<span class="text-sm text-on-surface-variant">Showing 1 to 3 of 1,248 users</span>
+<div class="flex items-center gap-xs">
+<button class="p-xs rounded border border-outline-variant text-on-surface-variant hover:bg-surface-container disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="p-xs rounded bg-primary-container text-on-primary font-label-sm w-8 h-8 flex items-center justify-center">1</button>
+<button class="p-xs rounded border border-outline-variant text-on-surface hover:bg-surface-container font-label-sm w-8 h-8 flex items-center justify-center">2</button>
+<button class="p-xs rounded border border-outline-variant text-on-surface hover:bg-surface-container font-label-sm w-8 h-8 flex items-center justify-center">3</button>
+<button class="p-xs rounded border border-outline-variant text-on-surface-variant hover:bg-surface-container">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</body></html>

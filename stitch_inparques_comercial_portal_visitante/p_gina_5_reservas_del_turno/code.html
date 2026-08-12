@@ -1,0 +1,327 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Operaciones Parque - Reservas</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-fixed-dim": "#b9cbc1",
+                      "primary-container": "#176b45",
+                      "on-tertiary-fixed-variant": "#3a4a43",
+                      "inverse-on-surface": "#f3f1eb",
+                      "outline-variant": "#bfc9c0",
+                      "tertiary": "#3a4942",
+                      "secondary-container": "#c0edd4",
+                      "surface-container-low": "#f5f3ed",
+                      "surface-container-high": "#eae8e2",
+                      "tertiary-container": "#516159",
+                      "surface-variant": "#e4e2dd",
+                      "on-primary-fixed": "#002111",
+                      "on-error-container": "#93000a",
+                      "on-secondary": "#ffffff",
+                      "primary-fixed": "#a4f4c3",
+                      "error": "#ba1a1a",
+                      "inverse-surface": "#30312d",
+                      "on-error": "#ffffff",
+                      "surface-container": "#f0eee8",
+                      "on-surface": "#1b1c18",
+                      "on-primary-fixed-variant": "#005232",
+                      "on-tertiary-fixed": "#0f1e19",
+                      "on-secondary-fixed-variant": "#264e3c",
+                      "error-container": "#ffdad6",
+                      "surface-container-lowest": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "secondary": "#3e6753",
+                      "on-tertiary": "#ffffff",
+                      "secondary-fixed-dim": "#a4d0b8",
+                      "surface": "#fbf9f3",
+                      "secondary-fixed": "#c0edd4",
+                      "primary": "#005131",
+                      "on-surface-variant": "#3f4942",
+                      "on-tertiary-container": "#cadbd2",
+                      "background": "#fbf9f3",
+                      "surface-tint": "#186c45",
+                      "on-primary-container": "#99e9b9",
+                      "inverse-primary": "#88d7a8",
+                      "surface-container-highest": "#e4e2dd",
+                      "on-secondary-container": "#446d59",
+                      "primary-fixed-dim": "#88d7a8",
+                      "on-secondary-fixed": "#002114",
+                      "surface-bright": "#fbf9f3",
+                      "tertiary-fixed": "#d5e7dd",
+                      "surface-dim": "#dcdad4",
+                      "on-background": "#1b1c18",
+                      "outline": "#6f7a71"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xs": "8px",
+                      "base": "4px",
+                      "lg": "24px",
+                      "xxl": "48px",
+                      "md": "16px",
+                      "sm": "12px",
+                      "touch-target": "44px",
+                      "xl": "32px"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": ["Manrope"],
+                      "display-lg": ["Manrope"],
+                      "label-md": ["Manrope"],
+                      "body-lg": ["Manrope"],
+                      "body-md": ["Manrope"],
+                      "headline-md": ["Manrope"],
+                      "label-sm": ["Manrope"],
+                      "headline-lg": ["Manrope"]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "700"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+          font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+          font-variation-settings: 'FILL' 1;
+        }
+        
+        /* Custom Scrollbar for a cleaner look */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #dcdad4; /* surface-dim */
+            border-radius: 9999px;
+        }
+        
+        /* Timeline styling */
+        .timeline-container {
+            position: relative;
+        }
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            left: 23px; /* Align with center of the dot */
+            top: 24px;
+            bottom: 24px;
+            width: 2px;
+            background-color: #e4e2dd; /* surface-variant */
+            z-index: 0;
+        }
+        @media (min-width: 768px) {
+             .timeline-container::before {
+                left: 120px;
+             }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md h-screen flex overflow-hidden antialiased">
+<!-- NAVIGATION DRAWER (Desktop) -->
+<nav class="hidden md:flex h-full w-80 rounded-r-xl bg-surface shadow-lg border-r border-outline-variant flex-col p-md gap-sm shrink-0 z-20">
+<!-- Header -->
+<div class="flex items-center gap-sm mb-lg">
+<img class="w-12 h-12 rounded-full object-cover border border-outline-variant" data-alt="A professional headshot of a park staff operator in a subtle green uniform, standing outdoors with blurred natural foliage in the background. Soft, natural daylight. High quality, realistic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSuXKRkWg_i4e7WAtggmNEtpxXAy01_5W3OTEJes84TK2h43jkAL41-57nYLJm7KjB_61gAL2IU4d4z87TcahDi2mfMa1ekWZ-VNYM0jbDPLZ4ZCJHcOG511oZNKMOcblKV_8tpj7z8gwtZqMdXzFkwQvyjOuk8UPMvQ1_xmRcJs52L5CHR2mXz1LUJLTq-O3UDl6a1QbeW-XE0fDq653aiOMaFFWAxy1OUJ-CcG--kUcMeB_mWBZC">
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md-mobile text-primary font-bold">Staff Operativo</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Zona A - Restaurante</span>
+<span class="font-label-sm text-label-sm text-primary-container">Turno Mañana</span>
+</div>
+</div>
+<!-- Navigation Items -->
+<div class="flex flex-col gap-base">
+<button class="flex items-center gap-sm p-sm w-full text-left rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-colors active:opacity-80">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">Perfil Usuario</span>
+</button>
+<button class="flex items-center gap-sm p-sm w-full text-left rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-colors active:opacity-80">
+<span class="material-symbols-outlined">sync_alt</span>
+<span class="font-label-md text-label-md">Cambio Turno</span>
+</button>
+<button class="flex items-center gap-sm p-sm w-full text-left rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-colors active:opacity-80">
+<span class="material-symbols-outlined">qr_code_scanner</span>
+<span class="font-label-md text-label-md">Validar QR</span>
+</button>
+</div>
+<div class="mt-auto pt-md border-t border-outline-variant">
+<button class="flex items-center gap-sm p-sm w-full text-left rounded-lg text-error hover:bg-error-container hover:text-on-error-container transition-colors active:opacity-80">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Cerrar Sesión</span>
+</button>
+</div>
+</nav>
+<!-- MAIN CONTENT AREA -->
+<main class="flex-1 flex flex-col h-full w-full relative z-10">
+<!-- TOP APP BAR -->
+<header class="w-full top-0 sticky bg-surface border-b border-outline-variant flex justify-between items-center px-md h-touch-target max-w-full z-30 shrink-0">
+<div class="flex items-center gap-sm">
+<button class="md:hidden flex items-center justify-center w-touch-target h-touch-target text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-full active:scale-95 duration-100">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="font-headline-md text-headline-md-mobile font-extrabold text-primary tracking-tight">Operaciones Parque</h1>
+</div>
+<button class="flex items-center justify-center w-touch-target h-touch-target text-primary hover:bg-surface-container-high transition-colors rounded-full active:scale-95 duration-100">
+<span class="material-symbols-outlined icon-fill">account_circle</span>
+</button>
+</header>
+<!-- SCROLLABLE CANVAS -->
+<div class="flex-1 overflow-y-auto pb-[100px] md:pb-lg bg-surface-container-lowest">
+<div class="max-w-5xl mx-auto p-md lg:p-lg flex flex-col gap-lg">
+<!-- Page Header & Quick Actions -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-md">
+<div>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">Reservas del turno</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-base">Gestión cronológica de servicios • Hoy, 24 de Octubre</p>
+</div>
+<div class="flex gap-sm">
+<!-- Primary Action for quick scan -->
+<button class="flex-1 md:flex-none flex items-center justify-center gap-xs bg-primary-container text-on-primary h-touch-target px-md rounded-lg font-label-md text-label-md hover:opacity-90 transition-opacity shadow-sm">
+<span class="material-symbols-outlined">qr_code_scanner</span>
+                            Validar QR
+                        </button>
+</div>
+</div>
+<!-- Filters / Tabs -->
+<div class="flex gap-sm overflow-x-auto pb-xs scrollbar-hide">
+<button class="flex items-center justify-center px-md h-[36px] bg-secondary-container text-on-secondary-container rounded-full font-label-md text-label-md border border-outline-variant whitespace-nowrap">Todos (12)</button>
+<button class="flex items-center justify-center px-md h-[36px] bg-surface text-on-surface-variant rounded-full font-label-md text-label-md border border-outline-variant hover:bg-surface-container-high whitespace-nowrap">Pendientes (5)</button>
+<button class="flex items-center justify-center px-md h-[36px] bg-surface text-on-surface-variant rounded-full font-label-md text-label-md border border-outline-variant hover:bg-surface-container-high whitespace-nowrap">En curso (3)</button>
+</div>
+<!-- Chronological List -->
+<div class="timeline-container flex flex-col gap-md pt-sm">
+<!-- Time Block: 09:00 AM -->
+<div class="flex flex-col md:flex-row gap-sm md:gap-lg relative z-10">
+<div class="flex items-center md:items-start md:w-[100px] shrink-0 gap-sm bg-surface-container-lowest md:bg-transparent">
+<div class="w-12 h-12 rounded-full bg-surface border-2 border-outline-variant flex items-center justify-center md:hidden z-10">
+<span class="font-label-sm text-label-sm text-on-surface-variant">09:00</span>
+</div>
+<span class="hidden md:block font-label-md text-label-md text-on-surface-variant pt-xs">09:00 AM</span>
+</div>
+<!-- Reservation Card 1: Pending -->
+<div class="flex-1 bg-surface border border-outline-variant rounded-lg p-md shadow-sm hover:shadow-md transition-shadow flex flex-col md:flex-row justify-between gap-md relative">
+<div class="flex flex-col gap-xs">
+<div class="flex items-center gap-xs">
+<span class="inline-flex items-center px-xs py-[2px] rounded-sm bg-surface-container-high text-on-surface font-label-sm text-label-sm uppercase tracking-wider">RES-001</span>
+<span class="inline-flex items-center px-sm py-[2px] rounded-full bg-[#f3f1eb] text-[#3a4a43] font-label-sm text-label-sm border border-[#bfc9c0]">Pendiente</span>
+</div>
+<h3 class="font-headline-md text-headline-md-mobile text-on-surface">Paseo en Bote - Ruta Larga</h3>
+<div class="flex items-center gap-md text-on-surface-variant font-body-md text-body-md">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">group</span>
+<span>4 Personas</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">person</span>
+<span>Titular: Familia Perez</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-sm mt-sm md:mt-0 pt-sm md:pt-0 border-t md:border-t-0 border-outline-variant md:flex-col md:justify-center">
+<button class="flex-1 md:flex-none flex items-center justify-center h-touch-target px-md bg-secondary text-on-secondary rounded-lg font-label-md text-label-md hover:opacity-90 transition-opacity">
+                                    Registrar llegada
+                                </button>
+<button class="w-touch-target h-touch-target flex items-center justify-center text-on-surface-variant border border-outline-variant rounded-lg hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Time Block: 09:30 AM -->
+<div class="flex flex-col md:flex-row gap-sm md:gap-lg relative z-10 mt-sm">
+<div class="flex items-center md:items-start md:w-[100px] shrink-0 gap-sm bg-surface-container-lowest md:bg-transparent">
+<div class="w-12 h-12 rounded-full bg-surface border-2 border-outline-variant flex items-center justify-center md:hidden z-10">
+<span class="font-label-sm text-label-sm text-on-surface-variant">09:30</span>
+</div>
+<span class="hidden md:block font-label-md text-label-md text-on-surface-variant pt-xs">09:30 AM</span>
+</div>
+<!-- Reservation Card 2: In Progress -->
+<div class="flex-1 bg-surface border border-outline-variant rounded-lg p-md shadow-sm hover:shadow-md transition-shadow flex flex-col md:flex-row justify-between gap-md relative">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary rounded-l-lg"></div> <!-- Status Indicator Line -->
+<div class="flex flex-col gap-xs pl-sm">
+<div class="flex items-center gap-xs">
+<span class="inline-flex items-center px-xs py-[2px] rounded-sm bg-surface-container-high text-on-surface font-label-sm text-label-sm uppercase tracking-wider">RES-042</span>
+<span class="inline-flex items-center px-sm py-[2px] rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm">En Curso</span>
+</div>
+<h3 class="font-headline-md text-headline-md-mobile text-on-surface">Alquiler de Kayak Doble</h3>
+<div class="flex items-center gap-md text-on-surface-variant font-body-md text-body-md">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">group</span>
+<span>2 Personas</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">timer</span>
+<span>Restan 45 min</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-sm mt-sm md:mt-0 pt-sm md:pt-0 border-t md:border-t-0 border-outline-variant md:flex-col md:justify-center">
+<button class="flex-1 md:flex-none flex items-center justify-center h-touch-target px-md border border-primary text-primary rounded-lg font-label-md text-label-md hover:bg-surface-container-low transition-colors">
+                                    Completar
+                                </button>
+<button class="w-touch-target h-touch-target flex items-center justify-center text-on-surface-variant border border-outline-variant rounded-lg hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- End List -->
+</div>
+</div>
+</main>
+<!-- BOTTOM NAV BAR (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 h-[80px] bg-surface border-t border-outline-variant shadow-sm flex justify-around items-center px-xs pb-safe">
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-xs hover:bg-surface-container-high transition-colors active:scale-90 duration-100 rounded-lg">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-label-sm text-label-sm mt-1">Pedidos</span>
+</button>
+<!-- ACTIVE TAB -->
+<button class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-sm py-xs hover:bg-surface-container-high transition-colors active:scale-90 duration-100">
+<span class="material-symbols-outlined icon-fill">calendar_today</span>
+<span class="font-label-sm text-label-sm mt-1">Reservas</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-xs hover:bg-surface-container-high transition-colors active:scale-90 duration-100 rounded-lg">
+<span class="material-symbols-outlined">bolt</span>
+<span class="font-label-sm text-label-sm mt-1">Venta</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-xs hover:bg-surface-container-high transition-colors active:scale-90 duration-100 rounded-lg">
+<span class="material-symbols-outlined">event_available</span>
+<span class="font-label-sm text-label-sm mt-1">Disponibilidad</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant p-xs hover:bg-surface-container-high transition-colors active:scale-90 duration-100 rounded-lg">
+<span class="material-symbols-outlined">report_problem</span>
+<span class="font-label-sm text-label-sm mt-1">Incidencias</span>
+</button>
+</nav>
+</body></html>

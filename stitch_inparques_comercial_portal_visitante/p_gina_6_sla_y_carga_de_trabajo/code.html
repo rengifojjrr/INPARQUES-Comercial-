@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SLA y Carga de Trabajo - INPARQUES</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#bfc9c0",
+                        "surface-container-low": "#f5f3ed",
+                        "tertiary": "#3a4942",
+                        "surface-container-high": "#eae8e2",
+                        "surface-container-highest": "#e4e2dd",
+                        "on-primary-fixed-variant": "#005232",
+                        "on-tertiary-fixed-variant": "#3a4a43",
+                        "error-container": "#ffdad6",
+                        "on-secondary-container": "#446d59",
+                        "surface-dim": "#dcdad4",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed-dim": "#a4d0b8",
+                        "background": "#fbf9f3",
+                        "on-secondary-fixed-variant": "#264e3c",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-container": "#cadbd2",
+                        "surface-variant": "#e4e2dd",
+                        "secondary-container": "#c0edd4",
+                        "tertiary-fixed-dim": "#b9cbc1",
+                        "on-primary-fixed": "#002111",
+                        "error": "#ba1a1a",
+                        "surface-container": "#f0eee8",
+                        "inverse-surface": "#30312d",
+                        "on-surface-variant": "#3f4942",
+                        "on-surface": "#1b1c18",
+                        "on-secondary-fixed": "#002114",
+                        "secondary-fixed": "#c0edd4",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#6f7a71",
+                        "primary-fixed": "#a4f4c3",
+                        "inverse-on-surface": "#f3f1eb",
+                        "inverse-primary": "#88d7a8",
+                        "primary-fixed-dim": "#88d7a8",
+                        "surface-tint": "#186c45",
+                        "surface": "#fbf9f3",
+                        "primary": "#005131",
+                        "on-background": "#1b1c18",
+                        "tertiary-container": "#516159",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#d5e7dd",
+                        "secondary": "#3e6753",
+                        "on-primary-container": "#99e9b9",
+                        "surface-bright": "#fbf9f3",
+                        "primary-container": "#176b45",
+                        "on-tertiary-fixed": "#0f1e19",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "xs": "8px",
+                        "xl": "32px",
+                        "xxl": "48px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "touch-target": "44px",
+                        "sm": "12px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "display-lg": ["Manrope"],
+                        "label-sm": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; background-color: #F7F5EF; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid #D8DED9;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+    </style>
+</head>
+<body class="text-on-background flex h-screen overflow-hidden">
+<!-- SideNavBar -->
+<nav class="h-screen w-64 fixed left-0 top-0 overflow-y-auto border-r border-outline-variant dark:border-outline bg-surface dark:bg-surface-dim z-50 flex flex-col py-lg px-md">
+<div class="mb-xl px-xs">
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">INPARQUES</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Administrative Portal</p>
+</div>
+<button class="mb-lg w-full flex items-center justify-center min-h-[44px] bg-primary-container text-on-primary rounded-lg font-label-md text-label-md hover:bg-primary transition-colors">
+<span class="material-symbols-outlined mr-sm">add</span>
+            New Support Case
+        </button>
+<ul class="space-y-sm flex-1">
+<li>
+<a class="flex items-center min-h-[44px] px-sm rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-md">inbox</span>
+<span class="font-label-md text-label-md">Inbox</span>
+</a>
+</li>
+<li>
+<a class="flex items-center min-h-[44px] px-sm rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-md">assignment_turned_in</span>
+<span class="font-label-md text-label-md">Assigned Cases</span>
+</a>
+</li>
+<li>
+<a class="flex items-center min-h-[44px] px-sm rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-md">receipt_long</span>
+<span class="font-label-md text-label-md">Orders</span>
+</a>
+</li>
+<li>
+<a class="flex items-center min-h-[44px] px-sm rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-md">gavel</span>
+<span class="font-label-md text-label-md">Disputes</span>
+</a>
+</li>
+<li>
+<a class="flex items-center min-h-[44px] px-sm rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-md">payments</span>
+<span class="font-label-md text-label-md">Requested Refunds</span>
+</a>
+</li>
+<li>
+<a class="flex items-center min-h-[44px] px-sm rounded-lg text-primary dark:text-primary-fixed font-bold border-r-4 border-primary dark:border-primary-fixed bg-secondary-container/20 opacity-90 transition-opacity" href="#">
+<span class="material-symbols-outlined mr-md" style="font-variation-settings: 'FILL' 1;">timer</span>
+<span class="font-label-md text-label-md">SLA</span>
+</a>
+</li>
+<li>
+<a class="flex items-center min-h-[44px] px-sm rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-md">menu_book</span>
+<span class="font-label-md text-label-md">Knowledge Base</span>
+</a>
+</li>
+<li>
+<a class="flex items-center min-h-[44px] px-sm rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-md">bar_chart</span>
+<span class="font-label-md text-label-md">Reports</span>
+</a>
+</li>
+</ul>
+<div class="mt-auto pt-lg border-t border-outline-variant flex items-center">
+<img alt="User administrative avatar" class="w-10 h-10 rounded-full object-cover mr-sm" data-alt="A professional headshot of a park administrator in a modern office, bright natural lighting, nature-inspired decor in the background, earth tones, high quality, soft focus background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuQmVFzM55Dt5zpTyZSecccVjZsrCxKND7eRhmcHL2mTUJb-rZVXE0BdKQJWAw3bFIUHWWmASAh1M8LkzvxPbLFLbFTalgEvgy2DTMJsTAanvcBuZSPm3kWXK6GxhM1iZTg9HsX6NG5s0Z3NwAeV4mOYArLonMI-BbgFqixRYi7zOCl0CbDdLh03H2UhSiC-L1vZL4UQSO0tlB5G8S2WKhsURCpPJPF8abTjuPgF6fMKCE4_btUmJm"/>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Admin User</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Director</p>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 ml-64 flex flex-col overflow-hidden bg-background">
+<!-- TopAppBar -->
+<header class="docked full-width top-0 sticky z-40 border-b border-outline-variant dark:border-outline bg-background/95 backdrop-blur-sm dark:bg-background/95 flex justify-between items-center min-h-[64px] px-xl">
+<div class="flex items-center space-x-lg">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">Support &amp; Dispute Portal</span>
+<nav class="hidden md:flex space-x-md">
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors min-h-[44px] flex items-center" href="#">Dashboard</a>
+<a class="font-label-md text-label-md text-primary dark:text-primary-fixed border-b-2 border-primary dark:border-primary-fixed pb-1 min-h-[44px] flex items-center" href="#">Analytics</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors min-h-[44px] flex items-center" href="#">Settings</a>
+</nav>
+</div>
+<div class="flex items-center space-x-md">
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="pl-xl pr-sm min-h-[44px] rounded-lg border border-outline-variant bg-surface focus:border-primary focus:ring-1 focus:ring-primary font-body-md text-body-md w-64" placeholder="Search..." type="text"/>
+</div>
+<button class="min-h-[44px] px-md bg-secondary-container text-on-secondary-container rounded-lg font-label-md text-label-md hover:bg-secondary-fixed-dim transition-colors">Park Filter</button>
+<button class="min-h-[44px] px-md bg-primary-container text-on-primary rounded-lg font-label-md text-label-md hover:bg-primary transition-colors">Create Order</button>
+<div class="flex space-x-xs">
+<button class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<button class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 overflow-y-auto p-xl">
+<div class="mb-xl flex justify-between items-end">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-xs">SLA y Carga de Trabajo</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Dashboard de rendimiento operativo y balanceo de equipo.</p>
+</div>
+<div class="flex gap-sm">
+<button class="min-h-[44px] px-md border border-outline-variant rounded-lg font-label-md text-label-md text-on-surface hover:bg-surface-container-high transition-colors flex items-center gap-xs">
+<span class="material-symbols-outlined">download</span>
+                        Exportar Reporte
+                    </button>
+<select class="min-h-[44px] rounded-lg border border-outline-variant bg-surface font-label-md text-label-md focus:border-primary">
+<option>Últimos 7 Días</option>
+<option>Este Mes</option>
+<option>Mes Pasado</option>
+</select>
+</div>
+</div>
+<!-- KPIs Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-lg mb-xl">
+<!-- KPI 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg hover:shadow-[0px_4px_12px_rgba(40,51,46,0.08)] transition-shadow">
+<div class="flex justify-between items-start mb-md">
+<div class="w-10 h-10 rounded-full bg-secondary-container/30 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">fiber_new</span>
+</div>
+<span class="bg-primary-container/10 text-primary-container px-2 py-1 rounded-full font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span> 12%
+                        </span>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant mb-xs">Casos Nuevos</p>
+<p class="font-display-lg text-display-lg text-on-surface">148</p>
+</div>
+<!-- KPI 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg hover:shadow-[0px_4px_12px_rgba(40,51,46,0.08)] transition-shadow">
+<div class="flex justify-between items-start mb-md">
+<div class="w-10 h-10 rounded-full bg-tertiary-container/20 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">timer</span>
+</div>
+<span class="bg-error/10 text-error px-2 py-1 rounded-full font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span> 5m
+                        </span>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant mb-xs">T. Medio 1ra Respuesta</p>
+<p class="font-display-lg text-display-lg text-on-surface">1h 15m</p>
+</div>
+<!-- KPI 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg hover:shadow-[0px_4px_12px_rgba(40,51,46,0.08)] transition-shadow">
+<div class="flex justify-between items-start mb-md">
+<div class="w-10 h-10 rounded-full bg-secondary-container/50 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">check_circle</span>
+</div>
+<span class="bg-primary-container/10 text-primary-container px-2 py-1 rounded-full font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span> 2.4%
+                        </span>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant mb-xs">Tasa de Resolución</p>
+<p class="font-display-lg text-display-lg text-on-surface">92%</p>
+</div>
+<!-- KPI 4 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg hover:shadow-[0px_4px_12px_rgba(40,51,46,0.08)] transition-shadow">
+<div class="flex justify-between items-start mb-md">
+<div class="w-10 h-10 rounded-full bg-error-container flex items-center justify-center text-error">
+<span class="material-symbols-outlined">warning</span>
+</div>
+<span class="bg-error/10 text-error px-2 py-1 rounded-full font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">warning</span> Acción Req.
+                        </span>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant mb-xs">Casos Vencidos</p>
+<p class="font-display-lg text-display-lg text-error">12</p>
+</div>
+</div>
+<!-- Main Charts & Agents Area -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-lg">
+<!-- CSAT & SLA Trends -->
+<div class="lg:col-span-2 space-y-lg">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-lg">Rendimiento SLA y Satisfacción (CSAT)</h3>
+<!-- Placeholder for Chart -->
+<div class="h-64 bg-surface-container flex items-center justify-center rounded-lg border border-dashed border-outline-variant relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-r from-secondary-container/20 to-primary-container/10"></div>
+<span class="material-symbols-outlined text-outline text-4xl opacity-50 relative z-10">insights</span>
+<p class="font-body-md text-body-md text-outline-variant ml-sm relative z-10">Gráfico de Tendencias SLA vs CSAT</p>
+</div>
+<div class="flex justify-between mt-md px-md">
+<div class="text-center">
+<p class="font-label-md text-label-md text-on-surface-variant">CSAT Promedio</p>
+<p class="font-headline-md text-headline-md text-primary">4.8/5.0</p>
+</div>
+<div class="text-center">
+<p class="font-label-md text-label-md text-on-surface-variant">SLA Cumplido</p>
+<p class="font-headline-md text-headline-md text-secondary">94%</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Agent Workload (Human Focus) -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg flex flex-col h-full">
+<div class="flex justify-between items-center mb-lg">
+<h3 class="font-headline-md text-headline-md text-on-surface">Carga de Agentes</h3>
+<button class="text-primary hover:bg-primary/10 p-1 rounded-full transition-colors">
+<span class="material-symbols-outlined">sync</span>
+</button>
+</div>
+<div class="space-y-md flex-1 overflow-y-auto pr-sm">
+<!-- Agent 1 (High Load) -->
+<div class="p-md rounded-lg border border-outline-variant bg-surface-container hover:bg-surface-container-high transition-colors group cursor-pointer relative overflow-hidden">
+<div class="absolute top-0 left-0 h-1 w-full bg-error"></div>
+<div class="flex items-center justify-between mb-sm mt-xs">
+<div class="flex items-center gap-sm">
+<img alt="Agent Avatar" class="w-10 h-10 rounded-full object-cover border border-outline-variant" data-alt="A small circular portrait of a friendly female park ranger in a light green uniform, blurred forest background, high quality, professional lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpa5TFHBdtU3yFVcqpkPWLY0HJx86G-7b1EomEslPUTYnhtPRvQ3QqUT8Fv6BDP9jwreV_1JrRhHTHNWEvU_7dzoub87Eh2bUPJbL9joYhBX9_vJqDAoEAog40CN6501uptC7bRtTOlCD7nE8jKIw6Dd1kHDYwPrvawfO1abeFqlvx_I1RkmlgAgpAGmHC2FO0IS6UpMdoa1f8Ij784QxuTL4xFRZE00e7raFSFcRQiCfnGxGAvmN8"/>
+<div>
+<p class="font-label-md text-label-md text-on-surface">María Rodríguez</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Especialista Permisos</p>
+</div>
+</div>
+<span class="bg-error-container text-error px-2 py-1 rounded-full font-label-sm text-label-sm">Alta</span>
+</div>
+<div class="flex justify-between items-end">
+<div>
+<p class="font-body-md text-body-md text-on-surface-variant"><span class="font-bold text-on-surface">24</span> casos activos</p>
+</div>
+<div class="w-24 bg-surface-variant rounded-full h-2 overflow-hidden">
+<div class="bg-error h-2 rounded-full" style="width: 90%"></div>
+</div>
+</div>
+</div>
+<!-- Agent 2 (Optimal) -->
+<div class="p-md rounded-lg border border-outline-variant bg-surface-container hover:bg-surface-container-high transition-colors group cursor-pointer relative overflow-hidden">
+<div class="absolute top-0 left-0 h-1 w-full bg-primary"></div>
+<div class="flex items-center justify-between mb-sm mt-xs">
+<div class="flex items-center gap-sm">
+<img alt="Agent Avatar" class="w-10 h-10 rounded-full object-cover border border-outline-variant" data-alt="A small circular portrait of a professional male administrative assistant, modern glasses, subtle earth-tone background, high quality, soft lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBc37YxA7zgE7CrO0Q25-dvNtUBcKXLFy_yOp79Dmi0jxGj-SZx9J0TxiFRGMSg6J03MmuLZu2Kpro6CWdgBr2WgN0TLjFJIYciLr7OnrqLhcOpDsnbwQKb24SfilrZ5nU8pkNiasalXMukWjZc4KkDln2UJ5xrOFpktrkSzEcGRgRGALTZN68oNYegEMLfaD5OJaxeLiDaSzrS8ykVT8Oer_FhLmR_ssNWlHNuBvPIL5PgS_TovfBB"/>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Carlos Mendoza</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Soporte General</p>
+</div>
+</div>
+<span class="bg-primary-container/20 text-primary-container px-2 py-1 rounded-full font-label-sm text-label-sm">Óptima</span>
+</div>
+<div class="flex justify-between items-end">
+<div>
+<p class="font-body-md text-body-md text-on-surface-variant"><span class="font-bold text-on-surface">12</span> casos activos</p>
+</div>
+<div class="w-24 bg-surface-variant rounded-full h-2 overflow-hidden">
+<div class="bg-primary h-2 rounded-full" style="width: 45%"></div>
+</div>
+</div>
+</div>
+<!-- Agent 3 (Available) -->
+<div class="p-md rounded-lg border border-outline-variant bg-surface-container hover:bg-surface-container-high transition-colors group cursor-pointer relative overflow-hidden">
+<div class="absolute top-0 left-0 h-1 w-full bg-secondary"></div>
+<div class="flex items-center justify-between mb-sm mt-xs">
+<div class="flex items-center gap-sm">
+<img alt="Agent Avatar" class="w-10 h-10 rounded-full object-cover border border-outline-variant" data-alt="A small circular portrait of a confident female administrative worker, professional attire, modern office setting, bright and clear image." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7kabToWEoJrUxiOC79yDyuniOO5JzYR4c2OF6nWFvyOQ-vFTFVKgBfgMX4Ln7C3Ig9fJzbJajWfDWfFkwasxEfeGHZmBD2EOFjJFY9L4IRekw6DAAKsTnb6dLK3mQs0O-mUPc-CisUBHjNrTeyZ40niJIR3Wzwzd_o6TOpTj4qtVHlp9CKgp_k0vWVECNm8U67FvS4MYtqjjByE7He8NVYS1TRYT5MhdasXL4i6LZiZM4B74zljsx"/>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Ana Silva</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Gestión de Disputas</p>
+</div>
+</div>
+<span class="bg-secondary-container/40 text-secondary px-2 py-1 rounded-full font-label-sm text-label-sm">Disponible</span>
+</div>
+<div class="flex justify-between items-end">
+<div>
+<p class="font-body-md text-body-md text-on-surface-variant"><span class="font-bold text-on-surface">4</span> casos activos</p>
+</div>
+<div class="w-24 bg-surface-variant rounded-full h-2 overflow-hidden">
+<div class="bg-secondary h-2 rounded-full" style="width: 15%"></div>
+</div>
+</div>
+</div>
+</div>
+<button class="mt-md w-full min-h-[44px] flex items-center justify-center border border-primary text-primary rounded-lg font-label-md text-label-md hover:bg-primary/5 transition-colors">
+                        Balancear Carga Manualmente
+                    </button>
+</div>
+</div>
+</main>
+</div>
+</body></html>

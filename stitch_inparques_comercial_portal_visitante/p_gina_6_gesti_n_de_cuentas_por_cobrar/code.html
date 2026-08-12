@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Cuentas por cobrar - INPARQUES</title>
+<!-- Fonts & Icons -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "error": "#ba1a1a",
+                      "primary-fixed": "#a4f4c3",
+                      "on-surface-variant": "#3f4942",
+                      "tertiary": "#3a4942",
+                      "on-secondary": "#ffffff",
+                      "inverse-surface": "#30312d",
+                      "on-secondary-fixed": "#002114",
+                      "on-primary-fixed-variant": "#005232",
+                      "secondary": "#3e6753",
+                      "on-error": "#ffffff",
+                      "on-primary-fixed": "#002111",
+                      "surface-tint": "#186c45",
+                      "tertiary-fixed-dim": "#b9cbc1",
+                      "on-tertiary-container": "#cadbd2",
+                      "error-container": "#ffdad6",
+                      "primary-container": "#176b45",
+                      "on-tertiary": "#ffffff",
+                      "surface-container": "#f0eee8",
+                      "outline": "#6f7a71",
+                      "outline-variant": "#bfc9c0",
+                      "on-secondary-fixed-variant": "#264e3c",
+                      "surface-variant": "#e4e2dd",
+                      "on-surface": "#1b1c18",
+                      "secondary-container": "#c0edd4",
+                      "tertiary-container": "#516159",
+                      "on-secondary-container": "#446d59",
+                      "secondary-fixed": "#c0edd4",
+                      "on-primary-container": "#99e9b9",
+                      "on-error-container": "#93000a",
+                      "background": "#fbf9f3",
+                      "secondary-fixed-dim": "#a4d0b8",
+                      "surface-bright": "#fbf9f3",
+                      "on-background": "#1b1c18",
+                      "on-primary": "#ffffff",
+                      "on-tertiary-fixed-variant": "#3a4a43",
+                      "inverse-primary": "#88d7a8",
+                      "surface-container-lowest": "#ffffff",
+                      "primary-fixed-dim": "#88d7a8",
+                      "surface-container-high": "#eae8e2",
+                      "surface-dim": "#dcdad4",
+                      "surface": "#fbf9f3",
+                      "surface-container-low": "#f5f3ed",
+                      "tertiary-fixed": "#d5e7dd",
+                      "primary": "#005131",
+                      "on-tertiary-fixed": "#0f1e19",
+                      "inverse-on-surface": "#f3f1eb",
+                      "surface-container-highest": "#e4e2dd"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xxl": "48px",
+                      "xl": "32px",
+                      "base": "4px",
+                      "md": "16px",
+                      "xs": "8px",
+                      "sm": "12px",
+                      "touch-target": "44px",
+                      "lg": "24px"
+              },
+              "fontFamily": {
+                      "body-md": ["Manrope"],
+                      "display-lg": ["Manrope"],
+                      "body-lg": ["Manrope"],
+                      "headline-lg-mobile": ["Manrope"],
+                      "label-md": ["Manrope"],
+                      "label-sm": ["Manrope"],
+                      "headline-lg": ["Manrope"],
+                      "headline-md": ["Manrope"]
+              },
+              "fontSize": {
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "700"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface flex font-body-md text-body-md min-h-screen">
+<!-- SideNavBar (Shared Component) -->
+<nav class="bg-background h-screen w-72 flex flex-col fixed left-0 top-0 overflow-y-auto border-r border-outline-variant z-20">
+<div class="h-full py-lg px-md flex flex-col gap-sm">
+<!-- Header -->
+<div class="px-md pb-md mb-md border-b border-outline-variant">
+<div class="font-headline-md text-headline-md font-bold text-primary flex items-center gap-sm">
+<span class="material-symbols-outlined text-3xl" data-weight="fill">park</span>
+                    INPARQUES
+                </div>
+<div class="font-label-sm text-label-sm text-on-surface-variant mt-1">Audit &amp; Finance Panel</div>
+</div>
+<!-- Tabs -->
+<div class="flex flex-col gap-base flex-1">
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">dashboard</span>Financial Overview
+                </a>
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">payments</span>Sales
+                </a>
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">account_balance</span>Reconciliation
+                </a>
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">percent</span>Fees/Commissions
+                </a>
+<!-- ACTIVE TAB: Accounts Receivable -->
+<a class="flex items-center gap-md bg-secondary-container text-on-secondary-container rounded-lg px-md py-sm font-label-md text-label-md scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-weight="fill">receipt_long</span>Accounts Receivable
+                </a>
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">inventory_2</span>Daily Closings
+                </a>
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">undo</span>Refunds
+                </a>
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">edit_document</span>Adjustments
+                </a>
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">verified_user</span>Audit
+                </a>
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">file_export</span>Exports
+                </a>
+</div>
+<!-- CTA -->
+<button class="bg-primary-container text-on-primary min-h-[44px] rounded-lg font-label-md text-label-md flex items-center justify-center gap-sm w-full mt-auto mb-md shadow-sm">
+<span class="material-symbols-outlined">add</span> New Transaction
+            </button>
+<!-- Footer Tabs -->
+<div class="flex flex-col gap-base border-t border-outline-variant pt-sm">
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">help_outline</span>Support
+                </a>
+<a class="flex items-center gap-md text-on-surface-variant px-md py-sm rounded-lg hover:bg-surface-container-high transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">settings</span>Settings
+                </a>
+</div>
+</div>
+</nav>
+<!-- TopNavBar (Shared Component) -->
+<header class="bg-surface border-b border-outline-variant docked full-width fixed top-0 h-16 flex justify-between items-center px-lg ml-72 w-[calc(100%-18rem)] z-10">
+<div class="font-headline-md text-headline-md font-extrabold text-primary flex items-center gap-sm">
+            Financial Audit Management
+        </div>
+<div class="flex items-center gap-md">
+<!-- Search Bar (on_right) -->
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">search</span>
+<input class="pl-xl pr-md py-2 bg-surface-container-low border border-outline-variant rounded-full text-on-surface font-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none w-64 min-h-[44px]" placeholder="Search records..." type="text"/>
+</div>
+<!-- Trailing Icons -->
+<button class="w-[44px] h-[44px] rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-[44px] h-[44px] rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors overflow-hidden">
+<img alt="User Profile Avatar" class="w-full h-full object-cover" data-alt="A professional headshot of an administrative professional in an office setting. The lighting is bright and modern, creating a clean corporate aesthetic with subtle organic elements in the background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAe4_ikLVCieSvFvML4_Qn_tE7QHb0cflK6kXL_Zn6QEse0hXJ2LWWogq6FrA4WeL0NMIF9eJztulDrzqK_VCsOXDjh8eCaIafUbAkMeZ5rZi4ixSAcIiC2TjviXpyXMC9VSHldrgkhZeZiOWW3n_-MLEa4436rjMk1dwqYhs9JPsOnXz1IQMCjymdps6ZTvgsg_PRdzxKZIVSzSWfxMRT03n9F3lIZPXiPaDVZrrpWgnwnV5nTy3f7"/>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-72 mt-16 p-lg w-[calc(100%-18rem)]">
+<div class="mb-lg flex justify-between items-end">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight mb-xs">Cuentas por Cobrar</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Gestión y antigüedad de deudas de concesionarios en parques nacionales.</p>
+</div>
+<div class="flex gap-sm">
+<button class="min-h-[44px] px-md rounded-lg border border-outline-variant text-on-surface bg-surface font-label-md text-label-md flex items-center gap-xs hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">filter_list</span> Filtrar
+                </button>
+<button class="min-h-[44px] px-md rounded-lg border border-outline-variant text-on-surface bg-surface font-label-md text-label-md flex items-center gap-xs hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">download</span> Exportar
+                </button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-lg mb-lg">
+<!-- Global Metrics (Span 12 or 8) -->
+<div class="col-span-12 lg:col-span-8 grid grid-cols-3 gap-md">
+<!-- Total Card -->
+<div class="col-span-3 md:col-span-1 bg-surface border border-outline-variant rounded-lg p-lg shadow-sm flex flex-col justify-between">
+<div class="flex items-center gap-xs text-on-surface-variant font-label-md text-label-md mb-md">
+<span class="material-symbols-outlined text-[20px]">account_balance_wallet</span>
+                        Monto Total Adeudado
+                    </div>
+<div>
+<div class="font-display-lg text-display-lg text-on-surface">Bs. 4.2M</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant mt-1">Acumulado en 45 comercios</div>
+</div>
+</div>
+<!-- Aging Risk Card -->
+<div class="col-span-3 md:col-span-2 bg-surface border border-outline-variant rounded-lg p-lg shadow-sm flex flex-col">
+<div class="text-on-surface-variant font-label-md text-label-md mb-md">Antigüedad de Deuda (Riesgo)</div>
+<div class="flex-1 flex items-end gap-sm h-full">
+<div class="w-1/3 flex flex-col items-center">
+<div class="w-full bg-secondary-container rounded-t-sm h-8 relative group cursor-pointer transition-all hover:opacity-80"></div>
+<div class="font-label-sm text-label-sm text-on-surface-variant mt-2 text-center">Al día<br/><span class="font-bold text-on-surface">Bs. 1.1M</span></div>
+</div>
+<div class="w-1/3 flex flex-col items-center">
+<div class="w-full bg-surface-variant rounded-t-sm h-16 relative group cursor-pointer transition-all hover:opacity-80"></div>
+<div class="font-label-sm text-label-sm text-on-surface-variant mt-2 text-center">30-90 días<br/><span class="font-bold text-on-surface">Bs. 1.8M</span></div>
+</div>
+<div class="w-1/3 flex flex-col items-center">
+<div class="w-full bg-error-container rounded-t-sm h-24 relative group cursor-pointer transition-all hover:opacity-80"></div>
+<div class="font-label-sm text-label-sm text-error mt-2 text-center">&gt; 90 días<br/><span class="font-bold">Bs. 1.3M</span></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Action / Log Module (Span 4) -->
+<div class="col-span-12 lg:col-span-4 bg-surface border border-outline-variant rounded-lg p-lg shadow-sm flex flex-col">
+<div class="flex items-center justify-between mb-md">
+<h3 class="font-label-md text-label-md text-on-surface-variant">Gestión Reciente</h3>
+<button class="text-primary hover:text-primary-container"><span class="material-symbols-outlined text-[20px]">add_circle</span></button>
+</div>
+<div class="flex-1 overflow-y-auto pr-2 flex flex-col gap-md">
+<div class="flex gap-sm items-start">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-secondary flex-shrink-0 mt-1">
+<span class="material-symbols-outlined text-[16px]">call</span>
+</div>
+<div>
+<div class="font-label-sm text-label-sm text-on-surface">Llamada: Kiosko El Ávila</div>
+<div class="font-body-md text-[13px] text-on-surface-variant leading-tight mt-1">Acuerdo verbal para pago el 15/11. No altera saldo.</div>
+<div class="font-label-sm text-[11px] text-outline mt-1">Hace 2 horas por Admin</div>
+</div>
+</div>
+<div class="flex gap-sm items-start">
+<div class="w-8 h-8 rounded-full bg-error-container flex items-center justify-center text-error flex-shrink-0 mt-1">
+<span class="material-symbols-outlined text-[16px]">mail</span>
+</div>
+<div>
+<div class="font-label-sm text-label-sm text-on-surface">Notificación: Posada Los Roques</div>
+<div class="font-body-md text-[13px] text-on-surface-variant leading-tight mt-1">Envío de 2do aviso de vencimiento (&gt;90 días).</div>
+<div class="font-label-sm text-[11px] text-outline mt-1">Ayer por Sistema</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Detailed Debtors Grid (Instead of list) -->
+<h2 class="font-headline-md text-headline-md text-on-surface mb-md">Comercios en Mora Destacados</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-md">
+<!-- Debtor Card 1 -->
+<div class="bg-surface border border-outline-variant rounded-lg p-md shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-16 h-16 bg-error-container/20 rounded-bl-full -z-10 transition-transform group-hover:scale-110"></div>
+<div class="flex justify-between items-start mb-md">
+<div>
+<h4 class="font-label-md text-label-md text-on-surface">Posada Los Roques</h4>
+<div class="font-body-md text-[13px] text-on-surface-variant flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[16px]">location_on</span> P.N. Archipiélago Los Roques
+                        </div>
+</div>
+<span class="px-2 py-1 bg-error-container text-on-error-container text-[11px] font-label-sm rounded-full">Crítico (&gt;90d)</span>
+</div>
+<div class="mb-lg">
+<div class="font-label-sm text-label-sm text-on-surface-variant">Monto Adeudado</div>
+<div class="font-headline-md text-headline-md text-error">Bs. 450,000</div>
+<div class="font-body-md text-[12px] text-on-surface-variant mt-1">Venció: 12/08/2023</div>
+</div>
+<div class="flex gap-sm border-t border-outline-variant pt-md">
+<button class="flex-1 min-h-[44px] bg-secondary-container text-on-secondary-container rounded-md font-label-sm text-label-sm flex items-center justify-center gap-xs hover:bg-secondary-fixed transition-colors">
+<span class="material-symbols-outlined text-[18px]">handshake</span> Acuerdo
+                    </button>
+<button class="flex-1 min-h-[44px] border border-outline-variant text-on-surface rounded-md font-label-sm text-label-sm flex items-center justify-center gap-xs hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">campaign</span> Notificar
+                    </button>
+</div>
+</div>
+<!-- Debtor Card 2 -->
+<div class="bg-surface border border-outline-variant rounded-lg p-md shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-16 h-16 bg-surface-variant/50 rounded-bl-full -z-10 transition-transform group-hover:scale-110"></div>
+<div class="flex justify-between items-start mb-md">
+<div>
+<h4 class="font-label-md text-label-md text-on-surface">Kiosko El Ávila 2</h4>
+<div class="font-body-md text-[13px] text-on-surface-variant flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[16px]">location_on</span> P.N. Waraira Repano
+                        </div>
+</div>
+<span class="px-2 py-1 bg-surface-variant text-on-surface-variant text-[11px] font-label-sm rounded-full">Alerta (30-90d)</span>
+</div>
+<div class="mb-lg">
+<div class="font-label-sm text-label-sm text-on-surface-variant">Monto Adeudado</div>
+<div class="font-headline-md text-headline-md text-on-surface">Bs. 125,500</div>
+<div class="font-body-md text-[12px] text-on-surface-variant mt-1">Venció: 05/10/2023</div>
+</div>
+<div class="flex gap-sm border-t border-outline-variant pt-md">
+<button class="flex-1 min-h-[44px] bg-secondary-container text-on-secondary-container rounded-md font-label-sm text-label-sm flex items-center justify-center gap-xs hover:bg-secondary-fixed transition-colors">
+<span class="material-symbols-outlined text-[18px]">handshake</span> Acuerdo
+                    </button>
+<button class="flex-1 min-h-[44px] border border-outline-variant text-on-surface rounded-md font-label-sm text-label-sm flex items-center justify-center gap-xs hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">campaign</span> Notificar
+                    </button>
+</div>
+</div>
+</div>
+</main>
+</body></html>

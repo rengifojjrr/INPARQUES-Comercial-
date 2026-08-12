@@ -1,0 +1,401 @@
+<!DOCTYPE html><html lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Expediente - Portal de Concesionarios</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#e4e2dd",
+                        "on-tertiary": "#ffffff",
+                        "inverse-primary": "#88d7a8",
+                        "on-tertiary-fixed-variant": "#3a4a43",
+                        "surface-container-high": "#eae8e2",
+                        "tertiary-fixed": "#d5e7dd",
+                        "inverse-on-surface": "#f3f1eb",
+                        "background": "#fbf9f3",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#6f7a71",
+                        "primary": "#005131",
+                        "outline-variant": "#bfc9c0",
+                        "error": "#ba1a1a",
+                        "secondary-fixed": "#c0edd4",
+                        "surface-container": "#f0eee8",
+                        "primary-container": "#176b45",
+                        "on-secondary-fixed": "#002114",
+                        "on-tertiary-fixed": "#0f1e19",
+                        "surface-tint": "#186c45",
+                        "on-background": "#1b1c18",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#b9cbc1",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#516159",
+                        "on-secondary-fixed-variant": "#264e3c",
+                        "secondary-fixed-dim": "#a4d0b8",
+                        "surface-container-highest": "#e4e2dd",
+                        "on-primary-container": "#99e9b9",
+                        "on-error": "#ffffff",
+                        "on-surface-variant": "#3f4942",
+                        "primary-fixed": "#a4f4c3",
+                        "surface-dim": "#dcdad4",
+                        "on-primary-fixed": "#002111",
+                        "surface": "#fbf9f3",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#005232",
+                        "tertiary": "#3a4942",
+                        "on-tertiary-container": "#cadbd2",
+                        "secondary": "#3e6753",
+                        "on-surface": "#1b1c18",
+                        "secondary-container": "#c0edd4",
+                        "primary-fixed-dim": "#88d7a8",
+                        "on-secondary-container": "#446d59",
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#f5f3ed",
+                        "surface-bright": "#fbf9f3",
+                        "inverse-surface": "#30312d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "xl": "32px",
+                        "xxl": "48px",
+                        "lg": "24px",
+                        "touch-target": "44px",
+                        "xs": "8px",
+                        "md": "16px",
+                        "sm": "12px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Manrope"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "display-lg": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "label-sm": ["Manrope"],
+                        "headline-md": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen">
+<!-- SideNavBar -->
+<nav class="hidden md:flex h-screen w-64 fixed left-0 top-0 border-r border-outline-variant bg-surface dark:bg-inverse-surface flex-col p-md">
+<div class="mb-8">
+<h1 class="text-headline-md font-headline-md font-bold text-primary dark:text-inverse-primary">Gestión Comercial</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Parques Nacionales</p>
+</div>
+<ul class="flex flex-col gap-2">
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                    Resumen
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">storefront</span>
+                    Negocios y locales
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-lg font-bold font-label-md text-label-md transition-transform active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined" data-weight="fill">folder_open</span>
+                    Expediente
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">groups</span>
+                    Equipo
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">payments</span>
+                    Finanzas
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">settings</span>
+                    Configuración
+                </a>
+</li>
+<li class="mt-auto">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">help</span>
+                    Ayuda
+                </a>
+</li>
+</ul>
+</nav>
+<!-- TopNavBar -->
+<header class="hidden md:flex h-16 w-[calc(100%-16rem)] fixed top-0 right-0 z-40 border-b border-outline-variant bg-surface dark:bg-inverse-surface shadow-sm dark:shadow-none justify-between items-center px-lg ml-64">
+<div class="flex items-center gap-4">
+<span class="text-headline-md font-headline-md font-extrabold text-primary dark:text-inverse-primary">Portal de Concesionarios</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 rounded-full text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined">help</span>
+</button>
+<button class="p-2 rounded-full text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined">verified_user</span>
+</button>
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-full border border-outline-variant hover:bg-surface-container-low transition-colors min-h-[44px]">
+<img class="w-8 h-8 rounded-full object-cover bg-surface-variant" data-alt="A small circular avatar showing a professional person wearing a green lanyard, standing outdoors with trees in the background, signaling a park concessionaire. Bright daylight, modern style, clean and crisp resolution." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7u-whx-w-Ekj2knEaf-trOUxAqc6uueB3AbzdCLTJzTMlQZkcD4CDBTYQTsgiuFY47E6KSnHQ_4eejFyrrDO6fVvUVI3T-5l3yrnJUNZh09C-qhLyq_oh-j4ILpnwfL6A3Xg4QDElMo2JqLzB6v67YblctSqGfydYO4hjc4XZNjqke6TgZauRQa3gnm3Vp50j2DrzZPtXfuZRuXWtnlznnilSSBhs7sQc70Bgw3lmQkhUit-VpU6w">
+<span class="font-label-md text-label-md text-on-surface">Perfil</span>
+</button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="pt-[80px] md:pt-[96px] md:ml-[256px] px-4 md:px-lg pb-xxl max-w-7xl mx-auto">
+<div class="mb-8 flex flex-col md:flex-row md:justify-between md:items-end gap-4">
+<div>
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-2">Expediente de Documentos</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Gestión y control de vigencias de permisos y registros comerciales.</p>
+</div>
+<button class="bg-primary-container text-on-primary min-h-[44px] px-6 rounded-lg font-label-md text-label-md hover:bg-primary transition-colors flex items-center justify-center gap-2 shadow-sm">
+<span class="material-symbols-outlined">upload_file</span>
+                Subir nuevo documento
+            </button>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-lg">
+<!-- Summary Cards -->
+<div class="lg:col-span-1 flex flex-col gap-lg">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-[0px_4px_12px_rgba(40,51,46,0.08)]">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">analytics</span>
+                        Estado General
+                    </h3>
+<div class="flex flex-col gap-4">
+<div class="flex justify-between items-center p-3 bg-secondary-fixed/30 rounded-lg">
+<span class="font-body-md text-body-md">Documentos Vigentes</span>
+<span class="font-headline-md text-headline-md text-primary font-bold">12</span>
+</div>
+<div class="flex justify-between items-center p-3 bg-error-container/50 rounded-lg">
+<span class="font-body-md text-body-md">Por Vencer (&lt; 30 días)</span>
+<span class="font-headline-md text-headline-md text-error font-bold">2</span>
+</div>
+<div class="flex justify-between items-center p-3 bg-tertiary-fixed/40 rounded-lg">
+<span class="font-body-md text-body-md">En Revisión</span>
+<span class="font-headline-md text-headline-md text-tertiary font-bold">1</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-sm relative overflow-hidden">
+<!-- Subtle background pattern/gradient -->
+<div class="absolute inset-0 bg-gradient-to-br from-primary-container/10 to-transparent z-0"></div>
+<div class="relative z-10">
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-2">Siguiente Vencimiento</h3>
+<p class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-1">Permiso Sanitario</p>
+<p class="font-body-md text-body-md text-error flex items-center gap-1 font-bold">
+<span class="material-symbols-outlined text-sm">warning</span>
+                            Vence en 15 días (12 Oct 2024)
+                        </p>
+<button class="mt-4 border border-outline-variant text-on-surface min-h-[44px] px-4 rounded-lg font-label-md text-label-md hover:bg-surface-container-low transition-colors w-full">
+                            Renovar Ahora
+                        </button>
+</div>
+</div>
+</div>
+<!-- Main Table Card -->
+<div class="lg:col-span-2 bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm overflow-hidden flex flex-col">
+<div class="p-lg border-b border-outline-variant bg-surface flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+<h3 class="font-headline-md text-headline-md text-on-surface">Listado de Documentos</h3>
+<div class="relative w-full sm:w-auto">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full sm:w-64 pl-10 pr-4 py-2 bg-surface border border-outline-variant rounded-lg focus:border-primary focus:ring-1 focus:ring-primary font-body-md text-body-md min-h-[44px]" placeholder="Buscar documento..." type="text">
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant text-on-surface-variant font-label-md text-label-md">
+<th class="p-4 font-semibold">Tipo de Documento</th>
+<th class="p-4 font-semibold">Fecha Emisión</th>
+<th class="p-4 font-semibold">Vencimiento</th>
+<th class="p-4 font-semibold">Estado</th>
+<th class="p-4 font-semibold text-right">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant font-body-md text-body-md">
+<!-- Row 1: Vigente -->
+<tr class="hover:bg-surface-container-lowest transition-colors group">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-secondary-fixed/50 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">description</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Registro de Información Fiscal (RIF)</p>
+<p class="text-on-surface-variant text-sm">J-12345678-9</p>
+</div>
+</div>
+</td>
+<td class="p-4 text-on-surface-variant">15/03/2023</td>
+<td class="p-4 text-on-surface-variant">15/03/2026</td>
+<td class="p-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-primary-container/10 text-primary-container font-label-sm text-label-sm">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+                                        Vigente
+                                    </span>
+</td>
+<td class="p-4 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-on-surface-variant hover:text-primary rounded-full hover:bg-surface-container" title="Subir nueva versión">
+<span class="material-symbols-outlined">upload</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary rounded-full hover:bg-surface-container" title="Ver historial">
+<span class="material-symbols-outlined">history</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary rounded-full hover:bg-surface-container" title="Descargar">
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2: Alerta -->
+<tr class="hover:bg-surface-container-lowest transition-colors bg-error-container/10 group">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-error-container/50 flex items-center justify-center text-error">
+<span class="material-symbols-outlined">health_and_safety</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Permiso Sanitario</p>
+<p class="text-on-surface-variant text-sm">Renovación Anual</p>
+</div>
+</div>
+</td>
+<td class="p-4 text-on-surface-variant">12/10/2023</td>
+<td class="p-4 font-bold text-error">12/10/2024</td>
+<td class="p-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-error-container text-error font-label-sm text-label-sm">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+                                        Por Vencer
+                                    </span>
+</td>
+<td class="p-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="p-2 text-primary hover:bg-primary-container/10 rounded-full font-bold" title="Renovar">
+<span class="material-symbols-outlined">autorenew</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary rounded-full hover:bg-surface-container" title="Ver historial">
+<span class="material-symbols-outlined">history</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3: En Revisión -->
+<tr class="hover:bg-surface-container-lowest transition-colors group">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-tertiary-fixed/50 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">forest</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Concesión Uso de Espacio</p>
+<p class="text-on-surface-variant text-sm">Parque Nacional Morrocoy</p>
+</div>
+</div>
+</td>
+<td class="p-4 text-on-surface-variant">--</td>
+<td class="p-4 text-on-surface-variant">--</td>
+<td class="p-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]">pending</span>
+                                        En Revisión
+                                    </span>
+</td>
+<td class="p-4 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-on-surface-variant hover:text-primary rounded-full hover:bg-surface-container" title="Ver estado">
+<span class="material-symbols-outlined">info</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4: Vencido -->
+<tr class="hover:bg-surface-container-lowest transition-colors opacity-75 group">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-variant flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">policy</span>
+</div>
+<div>
+<p class="font-bold text-on-surface line-through">Póliza de Responsabilidad Civil</p>
+<p class="text-on-surface-variant text-sm">Seguros Ávila</p>
+</div>
+</div>
+</td>
+<td class="p-4 text-on-surface-variant">01/01/2023</td>
+<td class="p-4 text-on-surface-variant">01/01/2024</td>
+<td class="p-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-variant text-on-surface-variant font-label-sm text-label-sm">
+<span class="w-2 h-2 rounded-full bg-outline"></span>
+                                        Vencido
+                                    </span>
+</td>
+<td class="p-4 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="px-3 py-1.5 bg-secondary-container text-on-secondary-container rounded-lg font-label-sm hover:bg-secondary-fixed transition-colors">
+                                            Subir Nuevo
+                                        </button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="p-4 border-t border-outline-variant flex justify-between items-center bg-surface mt-auto">
+<span class="font-body-md text-body-md text-on-surface-variant">Mostrando 1-4 de 15 documentos</span>
+<div class="flex gap-2">
+<button class="p-2 rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container-low disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="p-2 rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container-low">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

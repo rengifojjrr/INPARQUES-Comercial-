@@ -1,0 +1,350 @@
+<!DOCTYPE html><html lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Venta Rápida - Operaciones Parque</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#b9cbc1",
+                        "primary-container": "#176b45",
+                        "on-tertiary-fixed-variant": "#3a4a43",
+                        "inverse-on-surface": "#f3f1eb",
+                        "outline-variant": "#bfc9c0",
+                        "tertiary": "#3a4942",
+                        "secondary-container": "#c0edd4",
+                        "surface-container-low": "#f5f3ed",
+                        "surface-container-high": "#eae8e2",
+                        "tertiary-container": "#516159",
+                        "surface-variant": "#e4e2dd",
+                        "on-primary-fixed": "#002111",
+                        "on-error-container": "#93000a",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed": "#a4f4c3",
+                        "error": "#ba1a1a",
+                        "inverse-surface": "#30312d",
+                        "on-error": "#ffffff",
+                        "surface-container": "#f0eee8",
+                        "on-surface": "#1b1c18",
+                        "on-primary-fixed-variant": "#005232",
+                        "on-tertiary-fixed": "#0f1e19",
+                        "on-secondary-fixed-variant": "#264e3c",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "secondary": "#3e6753",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed-dim": "#a4d0b8",
+                        "surface": "#fbf9f3",
+                        "secondary-fixed": "#c0edd4",
+                        "primary": "#005131",
+                        "on-surface-variant": "#3f4942",
+                        "on-tertiary-container": "#cadbd2",
+                        "background": "#fbf9f3",
+                        "surface-tint": "#186c45",
+                        "on-primary-container": "#99e9b9",
+                        "inverse-primary": "#88d7a8",
+                        "surface-container-highest": "#e4e2dd",
+                        "on-secondary-container": "#446d59",
+                        "primary-fixed-dim": "#88d7a8",
+                        "on-secondary-fixed": "#002114",
+                        "surface-bright": "#fbf9f3",
+                        "tertiary-fixed": "#d5e7dd",
+                        "surface-dim": "#dcdad4",
+                        "on-background": "#1b1c18",
+                        "outline": "#6f7a71"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "8px",
+                        "base": "4px",
+                        "lg": "24px",
+                        "xxl": "48px",
+                        "md": "16px",
+                        "sm": "12px",
+                        "touch-target": "44px",
+                        "xl": "32px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Manrope"],
+                        "display-lg": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "label-sm": ["Manrope"],
+                        "headline-lg": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; background-color: #fbf9f3; color: #1b1c18; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline flat no shadows z-40">
+<div class="flex justify-between items-center px-md h-touch-target w-full max-w-full">
+<button aria-label="Menu" class="text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors active:scale-95 duration-100 p-sm rounded-full flex items-center justify-center min-w-[44px] min-h-[44px]">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">Operaciones Parque</h1>
+<button aria-label="Profile" class="text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors active:scale-95 duration-100 p-sm rounded-full flex items-center justify-center min-w-[44px] min-h-[44px]">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Main Content Area: POS Layout -->
+<main class="flex-1 flex flex-col md:flex-row w-full max-w-7xl mx-auto pb-[80px] md:pb-0 overflow-hidden h-[calc(100vh-60px)]">
+<!-- Product Catalog Section -->
+<section class="flex-1 flex flex-col h-full bg-surface-container-lowest overflow-hidden border-r border-outline-variant">
+<!-- Search & Filter -->
+<div class="p-md border-b border-outline-variant bg-surface-container-low shrink-0">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-sm top-1/2 transform -translate-y-1/2 text-on-surface-variant" data-icon="search">search</span>
+<input class="w-full pl-xl pr-md py-sm rounded-lg border border-outline-variant bg-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-shadow font-body-md text-body-md h-touch-target" placeholder="Buscar productos..." type="text">
+</div>
+<div class="flex gap-sm mt-md overflow-x-auto hide-scrollbar pb-xs">
+<button class="px-md py-xs rounded-full bg-secondary-container text-on-secondary-container font-label-md text-label-md whitespace-nowrap border border-transparent min-h-[44px]">Todos</button>
+<button class="px-md py-xs rounded-full bg-surface text-on-surface border border-outline-variant font-label-md text-label-md whitespace-nowrap min-h-[44px]">Bebidas</button>
+<button class="px-md py-xs rounded-full bg-surface text-on-surface border border-outline-variant font-label-md text-label-md whitespace-nowrap min-h-[44px]">Snacks</button>
+<button class="px-md py-xs rounded-full bg-surface text-on-surface border border-outline-variant font-label-md text-label-md whitespace-nowrap min-h-[44px]">Comidas</button>
+<button class="px-md py-xs rounded-full bg-surface text-on-surface border border-outline-variant font-label-md text-label-md whitespace-nowrap min-h-[44px]">Souvenirs</button>
+</div>
+</div>
+<!-- Product Grid -->
+<div class="flex-1 overflow-y-auto p-md bg-surface-container-lowest">
+<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-md pb-xxl">
+<!-- Product Card 1 -->
+<div class="bg-surface border border-outline-variant rounded-lg overflow-hidden flex flex-col cursor-pointer hover:shadow-sm transition-shadow group active:scale-[0.98]">
+<div class="h-32 w-full bg-surface-variant relative">
+<img class="w-full h-full object-cover group-hover:opacity-90 transition-opacity" data-alt="A refreshing bottle of mineral water with condensation drops, presented in a clean, brightly lit modern corporate setting with earthy green accents. High-key lighting emphasizing purity and natural heritage." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4sqly5ueENBk_s7ck8JcqBAMTwTjlBirWEg3A8eptfKhO-7macXc9gvGgB4yAhluYQBnLZfLifOTt-nvg0aJSFIaucJLVdtGTp0ETnviG5tFb4Pi6mQuoEPkpLqEOtfxH6CS1DipaS2f4ODKg4mSG2OwFHQFnDGipLn9XWbRpw0Ke7Dr4yWkAdFsBtoYdPRyU68cGYrafebopX27pHsZLH7HOl0bjPyVDbDinNfLAYKam5bKrlkmt">
+<div class="absolute top-xs right-xs bg-surface/90 backdrop-blur-sm px-sm py-xs rounded-md font-label-sm text-label-sm font-bold text-primary">$1.50</div>
+</div>
+<div class="p-sm flex flex-col flex-1">
+<span class="font-label-md text-label-md text-on-surface line-clamp-2 mb-xs">Agua Mineral Natural 500ml</span>
+<div class="mt-auto flex justify-between items-center text-on-surface-variant">
+<span class="font-label-sm text-label-sm">Bebidas</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="add_circle">add_circle</span>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="bg-surface border border-outline-variant rounded-lg overflow-hidden flex flex-col cursor-pointer hover:shadow-sm transition-shadow group active:scale-[0.98]">
+<div class="h-32 w-full bg-surface-variant relative">
+<img class="w-full h-full object-cover group-hover:opacity-90 transition-opacity" data-alt="A cold, appealing glass bottle of local craft soda resting on a wooden counter, bathed in soft, natural daylight. The aesthetic is organic yet professional, with a clean white and earthy green palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoOyelpGwle_DmCrZkia99lRk-Cgx3eBtY09ZQwEElpgrQy4hsHaVSgMu7y5wteyA76uZXqH9UwtWWeHOInTuw0eaUQh3YrLba6epwnst6AA_m8fV574l0FD9jrbN9ik6A35IvgyHitawdMcEk2Z1Tz_KxYwQcZsa54takzyPz28o_D9z4LS93hhjbTQXrYBKD-ksaUTrsg0keKQDBPS69C57aMfaTTgdmIpKRMv940gneUByZmT-6">
+<div class="absolute top-xs right-xs bg-surface/90 backdrop-blur-sm px-sm py-xs rounded-md font-label-sm text-label-sm font-bold text-primary">$2.00</div>
+</div>
+<div class="p-sm flex flex-col flex-1">
+<span class="font-label-md text-label-md text-on-surface line-clamp-2 mb-xs">Refresco Artesanal Local</span>
+<div class="mt-auto flex justify-between items-center text-on-surface-variant">
+<span class="font-label-sm text-label-sm">Bebidas</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="add_circle">add_circle</span>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="bg-surface border border-outline-variant rounded-lg overflow-hidden flex flex-col cursor-pointer hover:shadow-sm transition-shadow group active:scale-[0.98]">
+<div class="h-32 w-full bg-surface-variant relative">
+<img class="w-full h-full object-cover group-hover:opacity-90 transition-opacity" data-alt="A neatly packaged artisan sandwich wrapped in eco-friendly paper, placed on a pristine white surface. Soft shadows and bright, airy lighting convey a fresh, high-quality administrative food service environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPElBtlu6rdkfhM4HQ-qzSZt-IVzyPsMjzBR20ASszEN8YFr7-zgGBuYXc2p3Qx3L7wcxHbeh-11ugUbaMWbcPRWlTygZo4Rp_sWfz7inl4iH0LmdZa5Jh7j4zNHEHGPt11P7sb7RGaj0NgiTY8eIqhXRE2OfxFj9rl51GwRut5Dg8Z4sDRn24Iqxv6RUBLOl8hnBbrobM4VH6VdSaOocRzrqs7hKImp8WJh3wAvUo7gBAKQmgRo7T">
+<div class="absolute top-xs right-xs bg-surface/90 backdrop-blur-sm px-sm py-xs rounded-md font-label-sm text-label-sm font-bold text-primary">$4.50</div>
+</div>
+<div class="p-sm flex flex-col flex-1">
+<span class="font-label-md text-label-md text-on-surface line-clamp-2 mb-xs">Sándwich de Pollo Empacado</span>
+<div class="mt-auto flex justify-between items-center text-on-surface-variant">
+<span class="font-label-sm text-label-sm">Comidas</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="add_circle">add_circle</span>
+</div>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="bg-surface border border-outline-variant rounded-lg overflow-hidden flex flex-col cursor-pointer hover:shadow-sm transition-shadow group active:scale-[0.98]">
+<div class="h-32 w-full bg-surface-variant relative">
+<img class="w-full h-full object-cover group-hover:opacity-90 transition-opacity" data-alt="A beautifully crafted, small wooden souvenir depicting a park animal, sitting on a clean, modern display desk. The lighting is bright and professional, highlighting the natural wood textures against a light background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfwpo9CQR9uy5nTkjF5xDx_VL9JQKye5ojv4fpQ9UTrfR_9m9o25170BHkGQRGKhx0Uux_8nSv_XClOQKnfYARMl1gBHyGtC56zqvVXknyeC5l7wTOG5cWNTWRn0gY8drspYOdGYa8Fb5w36IlAYCT8cQLXW6qfK2vG9jw2akomx1cE8ok33FduT3B8ZEGobul0gfN_AUQYfBQoaY87flHU5ayOnqlQnvvcIF6dcgTmeQQG1mInUq1">
+<div class="absolute top-xs right-xs bg-surface/90 backdrop-blur-sm px-sm py-xs rounded-md font-label-sm text-label-sm font-bold text-primary">$8.00</div>
+</div>
+<div class="p-sm flex flex-col flex-1">
+<span class="font-label-md text-label-md text-on-surface line-clamp-2 mb-xs">Figura Tallada Souvenir</span>
+<div class="mt-auto flex justify-between items-center text-on-surface-variant">
+<span class="font-label-sm text-label-sm">Souvenirs</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="add_circle">add_circle</span>
+</div>
+</div>
+</div>
+<!-- Product Card 5 -->
+<div class="bg-surface border border-outline-variant rounded-lg overflow-hidden flex flex-col cursor-pointer hover:shadow-sm transition-shadow group active:scale-[0.98]">
+<div class="h-32 w-full bg-surface-variant relative flex items-center justify-center">
+<span class="material-symbols-outlined text-outline-variant text-[48px]" data-icon="fastfood">fastfood</span>
+<div class="absolute top-xs right-xs bg-surface/90 backdrop-blur-sm px-sm py-xs rounded-md font-label-sm text-label-sm font-bold text-primary">$3.00</div>
+</div>
+<div class="p-sm flex flex-col flex-1">
+<span class="font-label-md text-label-md text-on-surface line-clamp-2 mb-xs">Snack Saludable Mix</span>
+<div class="mt-auto flex justify-between items-center text-on-surface-variant">
+<span class="font-label-sm text-label-sm">Snacks</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="add_circle">add_circle</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Cart / POS Sidebar Panel -->
+<aside class="w-full md:w-[360px] lg:w-[400px] h-[442px] md:h-full bg-surface-container-low flex flex-col border-l border-outline-variant shadow-lg md:shadow-none z-10 shrink-0">
+<!-- Cart Header -->
+<div class="p-md border-b border-outline-variant bg-surface shrink-0 flex justify-between items-center">
+<h2 class="font-headline-md text-headline-md text-on-surface font-semibold flex items-center gap-xs">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+                    Venta Actual
+                </h2>
+<button aria-label="Limpiar carrito" class="text-on-surface-variant hover:text-error transition-colors p-xs rounded-full min-h-[44px] min-w-[44px] flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="delete_sweep">delete_sweep</span>
+</button>
+</div>
+<!-- Cart Items List -->
+<div class="flex-1 overflow-y-auto p-md flex flex-col gap-sm">
+<!-- Item 1 -->
+<div class="bg-surface rounded-lg p-sm border border-outline-variant flex gap-sm items-center">
+<div class="flex-1">
+<p class="font-label-md text-label-md text-on-surface">Agua Mineral Natural 500ml</p>
+<p class="font-body-md text-body-md text-on-surface-variant">$1.50</p>
+</div>
+<div class="flex items-center gap-sm bg-surface-variant rounded-md p-xs">
+<button aria-label="Disminuir" class="text-on-surface p-xs flex items-center justify-center"><span class="material-symbols-outlined text-[18px]" data-icon="remove">remove</span></button>
+<span class="font-label-md text-label-md text-on-surface w-4 text-center">2</span>
+<button aria-label="Aumentar" class="text-on-surface p-xs flex items-center justify-center"><span class="material-symbols-outlined text-[18px]" data-icon="add">add</span></button>
+</div>
+<p class="font-label-md text-label-md text-on-surface w-12 text-right">$3.00</p>
+</div>
+<!-- Item 2 -->
+<div class="bg-surface rounded-lg p-sm border border-outline-variant flex gap-sm items-center">
+<div class="flex-1">
+<p class="font-label-md text-label-md text-on-surface">Sándwich de Pollo Empacado</p>
+<p class="font-body-md text-body-md text-on-surface-variant">$4.50</p>
+</div>
+<div class="flex items-center gap-sm bg-surface-variant rounded-md p-xs">
+<button aria-label="Disminuir" class="text-on-surface p-xs flex items-center justify-center"><span class="material-symbols-outlined text-[18px]" data-icon="remove">remove</span></button>
+<span class="font-label-md text-label-md text-on-surface w-4 text-center">1</span>
+<button aria-label="Aumentar" class="text-on-surface p-xs flex items-center justify-center"><span class="material-symbols-outlined text-[18px]" data-icon="add">add</span></button>
+</div>
+<p class="font-label-md text-label-md text-on-surface w-12 text-right">$4.50</p>
+</div>
+</div>
+<!-- Payment Footer -->
+<div class="bg-surface border-t border-outline-variant p-md flex flex-col gap-md shrink-0">
+<div class="flex justify-between items-center">
+<span class="font-body-lg text-body-lg text-on-surface-variant">Subtotal</span>
+<span class="font-body-lg text-body-lg text-on-surface">$7.50</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-lg text-body-lg text-on-surface-variant">Impuestos (16%)</span>
+<span class="font-body-lg text-body-lg text-on-surface">$1.20</span>
+</div>
+<div class="flex justify-between items-center border-t border-outline-variant pt-sm">
+<span class="font-headline-md text-headline-md font-bold text-on-surface">Total</span>
+<span class="font-headline-md text-headline-md font-bold text-primary">$8.70</span>
+</div>
+<!-- Payment Methods -->
+<div class="grid grid-cols-2 gap-sm mt-sm">
+<button class="flex flex-col items-center justify-center gap-xs p-sm rounded-lg border border-outline-variant bg-surface hover:bg-surface-container-high transition-colors active:scale-95 min-h-[64px]" onclick="document.getElementById('confirmationModal').classList.remove('hidden')">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="payments">payments</span>
+<span class="font-label-md text-label-md text-on-surface">Efectivo</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-xs p-sm rounded-lg border border-outline-variant bg-surface hover:bg-surface-container-high transition-colors active:scale-95 min-h-[64px]" onclick="document.getElementById('confirmationModal').classList.remove('hidden')">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="phone_iphone">phone_iphone</span>
+<span class="font-label-md text-label-md text-on-surface">Pago Móvil</span>
+</button>
+</div>
+<button class="w-full bg-primary-container text-on-secondary rounded-lg font-label-md text-label-md py-sm px-md flex items-center justify-center min-h-[44px] hover:opacity-90 transition-opacity active:scale-[0.98]" onclick="document.getElementById('confirmationModal').classList.remove('hidden')">
+                    Procesar Venta
+                </button>
+</div>
+</aside>
+</main>
+<!-- BottomNavBar (Visible only on mobile) -->
+<nav class="fixed bottom-0 w-full z-50 h-[80px] bg-surface dark:bg-surface-dim border-t border-outline-variant dark:border-outline shadow-sm md:hidden">
+<div class="fixed bottom-0 left-0 w-full flex justify-around items-center px-xs pb-safe h-full">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant p-xs hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors active:scale-90 transition-transform flex-1 h-full min-h-[44px]" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="receipt_long">receipt_long</span>
+<span class="font-label-sm text-label-sm">Pedidos</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant p-xs hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors active:scale-90 transition-transform flex-1 h-full min-h-[44px]" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="calendar_today">calendar_today</span>
+<span class="font-label-sm text-label-sm">Reservas</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-primary-container text-on-secondary-container dark:text-on-primary-container rounded-full px-sm py-xs hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors active:scale-90 transition-transform flex-1 h-full max-h-[56px] min-h-[44px]" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="bolt">bolt</span>
+<span class="font-label-sm text-label-sm">Venta</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant p-xs hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors active:scale-90 transition-transform flex-1 h-full min-h-[44px]" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="event_available">event_available</span>
+<span class="font-label-sm text-label-sm">Disponibilidad</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant p-xs hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors active:scale-90 transition-transform flex-1 h-full min-h-[44px]" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="report_problem">report_problem</span>
+<span class="font-label-sm text-label-sm">Incidencias</span>
+</a>
+</div>
+</nav>
+<!-- Confirmation Modal Overlay -->
+<div class="fixed inset-0 bg-on-surface/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-md" id="confirmationModal">
+<div class="bg-surface rounded-xl shadow-lg max-w-md w-full overflow-hidden flex flex-col animate-[fadeIn_0.2s_ease-out]">
+<div class="bg-primary-container p-xl flex flex-col items-center justify-center text-on-secondary text-center">
+<div class="w-16 h-16 bg-on-secondary/20 rounded-full flex items-center justify-center mb-md">
+<span class="material-symbols-outlined text-[32px] text-on-secondary" data-icon="check_circle">check_circle</span>
+</div>
+<h3 class="font-headline-md text-headline-md font-bold mb-xs">¡Venta Exitosa!</h3>
+<p class="font-body-md text-body-md opacity-90">El pago se ha procesado correctamente.</p>
+</div>
+<div class="p-lg flex flex-col items-center border-b border-outline-variant">
+<span class="font-label-md text-label-md text-on-surface-variant mb-xs">Código de Transacción</span>
+<div class="bg-surface-container p-sm rounded-lg font-mono text-lg font-bold text-on-surface tracking-wider">
+                    TXN-8472-VNZ
+                </div>
+</div>
+<div class="p-md flex gap-sm bg-surface-container-lowest">
+<button class="flex-1 bg-surface border border-outline-variant text-on-surface rounded-lg font-label-md text-label-md py-sm px-md flex items-center justify-center min-h-[44px] hover:bg-surface-container-high transition-colors" onclick="document.getElementById('confirmationModal').classList.add('hidden')">
+                    Imprimir Recibo
+                </button>
+<button class="flex-1 bg-primary text-on-primary rounded-lg font-label-md text-label-md py-sm px-md flex items-center justify-center min-h-[44px] hover:opacity-90 transition-opacity" onclick="document.getElementById('confirmationModal').classList.add('hidden')">
+                    Nuevo Pedido
+                </button>
+</div>
+</div>
+</div>
+<style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</body></html>

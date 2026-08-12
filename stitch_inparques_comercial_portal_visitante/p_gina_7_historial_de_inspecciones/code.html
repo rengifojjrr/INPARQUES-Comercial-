@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Historial - Inparques Ranger</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#a4d0b8",
+                        "surface": "#fbf9f3",
+                        "on-surface-variant": "#3f4942",
+                        "secondary-fixed": "#c0edd4",
+                        "inverse-surface": "#30312d",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#0f1e19",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-container": "#cadbd2",
+                        "on-surface": "#1b1c18",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#bfc9c0",
+                        "surface-container": "#f0eee8",
+                        "on-primary-fixed": "#002111",
+                        "on-secondary-fixed": "#002114",
+                        "secondary-container": "#c0edd4",
+                        "secondary": "#3e6753",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed-variant": "#005232",
+                        "outline": "#6f7a71",
+                        "on-secondary-fixed-variant": "#264e3c",
+                        "on-background": "#1b1c18",
+                        "primary-fixed": "#a4f4c3",
+                        "surface-bright": "#fbf9f3",
+                        "surface-dim": "#dcdad4",
+                        "inverse-primary": "#88d7a8",
+                        "tertiary-fixed-dim": "#b9cbc1",
+                        "inverse-on-surface": "#f3f1eb",
+                        "surface-container-high": "#eae8e2",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#516159",
+                        "primary-container": "#176b45",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#3a4a43",
+                        "tertiary": "#3a4942",
+                        "surface-variant": "#e4e2dd",
+                        "surface-container-low": "#f5f3ed",
+                        "on-primary-container": "#99e9b9",
+                        "primary": "#005131",
+                        "background": "#fbf9f3",
+                        "on-secondary-container": "#446d59",
+                        "tertiary-fixed": "#d5e7dd",
+                        "surface-container-highest": "#e4e2dd",
+                        "primary-fixed-dim": "#88d7a8",
+                        "surface-tint": "#186c45"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "8px",
+                        "xxl": "48px",
+                        "lg": "24px",
+                        "touch-target": "44px",
+                        "xl": "32px",
+                        "md": "16px",
+                        "base": "4px",
+                        "sm": "12px",
+                        "pb-safe": "env(safe-area-inset-bottom)"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "label-sm": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "display-lg": ["Manrope"],
+                        "headline-lg-mobile": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #F7F5EF; /* Arena Level 0 */
+        }
+        .card-shadow {
+            box-shadow: 0px 4px 12px rgba(40, 51, 46, 0.04);
+        }
+    </style>
+</head>
+<body class="text-on-background min-h-screen pb-[100px] flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-on-background text-primary dark:text-primary-fixed border-b border-outline-variant dark:border-on-surface-variant flex justify-between items-center w-full px-md h-touch-target sticky top-0 z-40">
+<div class="flex items-center gap-sm">
+<div class="w-[32px] h-[32px] rounded-full overflow-hidden bg-surface-variant flex items-center justify-center">
+<img alt="Ranger Profile" class="object-cover w-full h-full" data-alt="A close-up portrait of a professional park ranger in a clean, modern uniform. The lighting is soft and natural, suggesting an outdoor environment but maintaining a corporate, polished aesthetic. The background is a blurred, lush green forest." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDg5yFrgQIb4LdkmiidRN9Iat-3QrbiNG6LYo3Qpu_ma9GxfOB6j0CsMf1tz1uzkVtiUqzO_uNuGKGF0KVwsC9UuDPq_Nl7DNgG8VzfPenWGPlGCqeAXiGjKOndecDyTAuoc2jzVXk7uyuAHpeg0YVRtR0zqzdZ1mHTtNXJh6NoEksz0nRIQ7rCvmuIZHW2buFD0uchMEXgEKSdQvd3uUsGir8wfcoAFrwlqxYL2xzIMaYesug1fZwz"/>
+</div>
+<h1 class="text-headline-md font-headline-md text-primary dark:text-primary-fixed tracking-tight">Inparques Ranger</h1>
+</div>
+<button class="w-[44px] h-[44px] flex items-center justify-center text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-on-surface-variant transition-colors duration-200 rounded-full">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</header>
+<main class="flex-1 px-md pt-lg flex flex-col gap-lg max-w-2xl mx-auto w-full">
+<!-- Header & Filters -->
+<div class="flex flex-col gap-md">
+<h2 class="text-headline-lg-mobile font-headline-lg-mobile text-on-surface">Historial</h2>
+<!-- Quick Filters (Chips) -->
+<div class="flex gap-sm overflow-x-auto pb-2 scrollbar-hide -mx-md px-md">
+<button class="bg-primary-container text-on-primary whitespace-nowrap px-4 py-2 rounded-full font-label-md text-label-md min-h-[44px] flex items-center shrink-0">
+                    Todos
+                </button>
+<button class="bg-surface-container border border-outline-variant text-on-surface whitespace-nowrap px-4 py-2 rounded-full font-label-md text-label-md min-h-[44px] flex items-center shrink-0">
+                    Inspecciones
+                </button>
+<button class="bg-surface-container border border-outline-variant text-on-surface whitespace-nowrap px-4 py-2 rounded-full font-label-md text-label-md min-h-[44px] flex items-center shrink-0">
+                    Incidentes
+                </button>
+<button class="bg-surface-container border border-outline-variant text-on-surface whitespace-nowrap px-4 py-2 rounded-full font-label-md text-label-md min-h-[44px] flex items-center shrink-0 gap-2">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+                    Fecha
+                </button>
+</div>
+</div>
+<!-- List Content -->
+<div class="flex flex-col gap-md pb-xl">
+<!-- Item 1: Inspection (Approved) -->
+<div class="bg-surface-container-lowest border border-[#D8DED9] rounded-lg p-lg card-shadow flex flex-col gap-sm active:scale-[0.98] transition-transform cursor-pointer relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-primary-container"></div>
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-xs text-primary font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px]">assignment</span>
+<span>Inspección</span>
+</div>
+<span class="bg-[#DDEFE5] text-[#123C2B] px-2 py-1 rounded-full font-label-sm text-label-sm">Aprobado</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Concesión Restaurante El Ávila</h3>
+<div class="flex flex-col gap-1 mt-2">
+<div class="flex items-center gap-2 text-on-surface-variant font-body-md text-body-md">
+<span class="material-symbols-outlined text-[16px]">calendar_today</span>
+<span>12 Oct 2023, 10:30 AM</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-body-md text-body-md">
+<span class="material-symbols-outlined text-[16px]">person</span>
+<span>Insp. Carlos Mendoza</span>
+</div>
+</div>
+</div>
+<!-- Item 2: Incident (Pending) -->
+<div class="bg-surface-container-lowest border border-[#D8DED9] rounded-lg p-lg card-shadow flex flex-col gap-sm active:scale-[0.98] transition-transform cursor-pointer relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-error"></div>
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-xs text-error font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px]">report_problem</span>
+<span>Incidente</span>
+</div>
+<span class="bg-error-container text-on-error-container px-2 py-1 rounded-full font-label-sm text-label-sm">En Revisión</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Derrame menor cerca de Sendero 2</h3>
+<div class="flex flex-col gap-1 mt-2">
+<div class="flex items-center gap-2 text-on-surface-variant font-body-md text-body-md">
+<span class="material-symbols-outlined text-[16px]">calendar_today</span>
+<span>10 Oct 2023, 02:15 PM</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-body-md text-body-md">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+<span>Sector Quebrada Quintero</span>
+</div>
+</div>
+</div>
+<!-- Item 3: Inspection (Needs Action) -->
+<div class="bg-surface-container-lowest border border-[#D8DED9] rounded-lg p-lg card-shadow flex flex-col gap-sm active:scale-[0.98] transition-transform cursor-pointer relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-[#E8A317]"></div> <!-- Warning indication -->
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-xs text-[#8A5F00] font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px]">assignment</span>
+<span>Inspección</span>
+</div>
+<span class="bg-[#FFF4D9] text-[#8A5F00] px-2 py-1 rounded-full font-label-sm text-label-sm">Observaciones</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Kiosko Sector Galipán</h3>
+<div class="flex flex-col gap-1 mt-2">
+<div class="flex items-center gap-2 text-on-surface-variant font-body-md text-body-md">
+<span class="material-symbols-outlined text-[16px]">calendar_today</span>
+<span>08 Oct 2023, 09:00 AM</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-body-md text-body-md">
+<span class="material-symbols-outlined text-[16px]">person</span>
+<span>Insp. Carlos Mendoza</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-xxl bg-surface dark:bg-on-background px-xs pb-safe border-t border-outline-variant dark:border-on-surface-variant shadow-sm md:hidden">
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-4 py-1 hover:bg-surface-container dark:hover:bg-on-surface-variant scale-95 active:scale-90 transition-transform duration-150 min-w-[64px] min-h-[44px]">
+<span class="material-symbols-outlined mb-1">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-4 py-1 hover:bg-surface-container dark:hover:bg-on-surface-variant scale-95 active:scale-90 transition-transform duration-150 min-w-[64px] min-h-[44px]">
+<span class="material-symbols-outlined mb-1">qr_code_scanner</span>
+<span class="font-label-sm text-label-sm">Scan</span>
+</button>
+<!-- Semantic Active State: Historial maps to Inspections/Incidents intent, highlighting Inspections as primary list action -->
+<button class="flex flex-col items-center justify-center bg-secondary-container dark:bg-on-secondary-fixed-variant text-on-secondary-container dark:text-secondary-fixed rounded-full px-4 py-1 hover:bg-surface-container dark:hover:bg-on-surface-variant scale-95 active:scale-90 transition-transform duration-150 min-w-[64px] min-h-[44px]">
+<span class="material-symbols-outlined mb-1">assignment</span>
+<span class="font-label-sm text-label-sm">Inspections</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-4 py-1 hover:bg-surface-container dark:hover:bg-on-surface-variant scale-95 active:scale-90 transition-transform duration-150 min-w-[64px] min-h-[44px]">
+<span class="material-symbols-outlined mb-1">report_problem</span>
+<span class="font-label-sm text-label-sm">Incidents</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant px-4 py-1 hover:bg-surface-container dark:hover:bg-on-surface-variant scale-95 active:scale-90 transition-transform duration-150 min-w-[64px] min-h-[44px]">
+<span class="material-symbols-outlined mb-1">sync</span>
+<span class="font-label-sm text-label-sm">Sync</span>
+</button>
+</nav>
+</body></html>

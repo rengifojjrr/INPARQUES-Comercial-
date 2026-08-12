@@ -1,0 +1,257 @@
+<!DOCTYPE html><html lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>INPARQUES Comercial - Personalizar Producto</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#176b45",
+                        "on-surface-variant": "#3f4942",
+                        "outline-variant": "#bfc9c0",
+                        "on-primary": "#ffffff",
+                        "surface-tint": "#186c45",
+                        "on-surface": "#1b1c18",
+                        "surface-bright": "#fbf9f3",
+                        "surface-container-high": "#eae8e2",
+                        "on-tertiary-container": "#cadbd2",
+                        "tertiary-container": "#516159",
+                        "surface-container-highest": "#e4e2dd",
+                        "surface-container": "#f0eee8",
+                        "on-primary-fixed-variant": "#005232",
+                        "background": "#fbf9f3",
+                        "on-background": "#1b1c18",
+                        "primary-fixed-dim": "#88d7a8",
+                        "secondary-fixed": "#c0edd4",
+                        "secondary-container": "#c0edd4",
+                        "on-secondary-container": "#446d59",
+                        "on-primary-fixed": "#002111",
+                        "surface-variant": "#e4e2dd",
+                        "on-primary-container": "#99e9b9",
+                        "primary": "#005131",
+                        "error": "#ba1a1a",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#002114",
+                        "outline": "#6f7a71",
+                        "inverse-primary": "#88d7a8",
+                        "primary-fixed": "#a4f4c3",
+                        "secondary-fixed-dim": "#a4d0b8",
+                        "secondary": "#3e6753",
+                        "surface-dim": "#dcdad4",
+                        "tertiary-fixed": "#d5e7dd",
+                        "inverse-on-surface": "#f3f1eb",
+                        "surface": "#fbf9f3",
+                        "tertiary-fixed-dim": "#b9cbc1",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#264e3c",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#3a4942",
+                        "on-tertiary-fixed-variant": "#3a4a43",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#0f1e19",
+                        "surface-container-low": "#f5f3ed",
+                        "inverse-surface": "#30312d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "32px",
+                        "lg": "24px",
+                        "xxl": "48px",
+                        "md": "16px",
+                        "xs": "8px",
+                        "sm": "12px",
+                        "base": "4px",
+                        "touch-target": "44px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "display-lg": ["Manrope"],
+                        "label-sm": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col pb-safe">
+<!-- TopAppBar -->
+<header class="bg-surface border-b border-outline-variant flex justify-between items-center px-lg w-full h-14 docked full-width top-0 z-50">
+<div class="flex items-center gap-sm">
+<button aria-label="Volver" class="h-touch-target w-touch-target flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<span class="font-headline-md text-headline-md font-bold text-primary">INPARQUES Comercial</span>
+</div>
+<button aria-label="Notificaciones" class="h-touch-target w-touch-target flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 overflow-y-auto w-full max-w-3xl mx-auto pb-24 md:pb-lg">
+<!-- Product Hero Image -->
+<div class="w-full h-64 md:h-80 bg-surface-container-highest relative rounded-b-xl overflow-hidden shadow-sm">
+<img alt="Sandwich de Pernil" class="w-full h-full object-cover" data-alt="A close-up, high-quality photograph of a delicious Venezuelan Sandwich de Pernil. The sandwich features slow-roasted, tender pulled pork (pernil) layered generously inside a crusty artisan bread roll. Fresh green lettuce and a slice of bright red tomato are visible. The scene is brightly lit with natural sunlight, creating a warm, inviting, and appetizing mood against a clean, modern white background, fitting a premium food app." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-PzID2oGFzuzylAMPVZmdruMvtcEecEvSaySaX7Silmx9GVfC0T-jsFe2vEtMi6eDH1ih5zcsge1F_1NbBHCYc-pwkV8uW9z9uClHgl3lgLcilMCskXFgJ8XkbI4boNd3Tp0ApYsZStLvhWC0MivKr5i5ghHdJZHplR0KCByL_bLdj9E3yRGVoBqbr4-mNUf56Gvv3I7X1weSSbxHqZW3bdb0Y-qHEFWKkMnZwCQIwcnhKqfbjJXL">
+</div>
+<div class="px-md md:px-lg py-lg space-y-lg">
+<!-- Product Header -->
+<div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary mb-xs">Sandwich de Pernil</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                    Clásico sándwich venezolano con pernil horneado a fuego lento, vegetales frescos y nuestra salsa especial de la casa. Perfecto para recuperar energías después de una caminata.
+                </p>
+<div class="mt-sm font-headline-md text-headline-md text-primary font-bold">
+                    150,00 VES
+                </div>
+</div>
+<hr class="border-outline-variant opacity-50">
+<!-- Customization Form -->
+<form class="space-y-xl" id="product-form">
+<!-- Radio Buttons: Tipo de pan -->
+<section>
+<div class="flex justify-between items-center mb-md">
+<h2 class="font-headline-md text-headline-md text-on-surface">Tipo de pan</h2>
+<span class="bg-error-container text-on-error-container font-label-sm text-label-sm px-2 py-1 rounded-full uppercase tracking-wider">Requerido</span>
+</div>
+<div class="space-y-sm">
+<label class="flex items-center p-sm bg-surface-container-lowest border border-outline-variant rounded-lg cursor-pointer hover:bg-surface-container-low transition-colors">
+<input class="form-radio h-5 w-5 text-primary focus:ring-primary border-outline" name="bread_type" required="" type="radio" value="canilla">
+<span class="ml-sm font-body-md text-body-md">Pan Canilla (Clásico)</span>
+</label>
+<label class="flex items-center p-sm bg-surface-container-lowest border border-outline-variant rounded-lg cursor-pointer hover:bg-surface-container-low transition-colors">
+<input class="form-radio h-5 w-5 text-primary focus:ring-primary border-outline" name="bread_type" type="radio" value="campesino">
+<span class="ml-sm font-body-md text-body-md">Pan Campesino (+ 15,00 VES)</span>
+</label>
+<label class="flex items-center p-sm bg-surface-container-lowest border border-outline-variant rounded-lg cursor-pointer hover:bg-surface-container-low transition-colors">
+<input class="form-radio h-5 w-5 text-primary focus:ring-primary border-outline" name="bread_type" type="radio" value="integral">
+<span class="ml-sm font-body-md text-body-md">Pan Integral (+ 10,00 VES)</span>
+</label>
+</div>
+</section>
+<!-- Checkboxes: Extras -->
+<section>
+<div class="flex justify-between items-center mb-md">
+<h2 class="font-headline-md text-headline-md text-on-surface">Extras</h2>
+<span class="text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">Opcional</span>
+</div>
+<div class="space-y-sm">
+<label class="flex items-center p-sm bg-surface-container-lowest border border-outline-variant rounded-lg cursor-pointer hover:bg-surface-container-low transition-colors">
+<input class="form-checkbox h-5 w-5 text-primary focus:ring-primary border-outline rounded" name="extras" type="checkbox" value="queso">
+<div class="ml-sm flex-1 flex justify-between items-center">
+<span class="font-body-md text-body-md">Queso Amarillo</span>
+<span class="font-label-md text-label-md text-on-surface-variant">+ 25,00 VES</span>
+</div>
+</label>
+<label class="flex items-center p-sm bg-surface-container-lowest border border-outline-variant rounded-lg cursor-pointer hover:bg-surface-container-low transition-colors">
+<input class="form-checkbox h-5 w-5 text-primary focus:ring-primary border-outline rounded" name="extras" type="checkbox" value="aguacate">
+<div class="ml-sm flex-1 flex justify-between items-center">
+<span class="font-body-md text-body-md">Aguacate</span>
+<span class="font-label-md text-label-md text-on-surface-variant">+ 30,00 VES</span>
+</div>
+</label>
+<label class="flex items-center p-sm bg-surface-container-lowest border border-outline-variant rounded-lg cursor-pointer hover:bg-surface-container-low transition-colors">
+<input class="form-checkbox h-5 w-5 text-primary focus:ring-primary border-outline rounded" name="extras" type="checkbox" value="salsa">
+<div class="ml-sm flex-1 flex justify-between items-center">
+<span class="font-body-md text-body-md">Extra Salsa de Ajo</span>
+<span class="font-label-md text-label-md text-on-surface-variant">+ 10,00 VES</span>
+</div>
+</label>
+</div>
+</section>
+</form>
+</div>
+</main>
+<!-- Bottom Action Bar (Contextual FAB / Checkout bar) -->
+<div class="fixed bottom-0 left-0 w-full bg-surface border-t border-outline-variant shadow-[0_-4px_12px_rgba(40,51,46,0.08)] z-40 px-md py-sm pb-safe md:hidden">
+<div class="flex items-center justify-between gap-md max-w-3xl mx-auto">
+<!-- Quantity Selector -->
+<div class="flex items-center bg-surface-container-low rounded-lg border border-outline-variant">
+<button class="h-touch-target w-touch-target flex items-center justify-center text-on-surface hover:bg-surface-container-high rounded-l-lg transition-colors" id="btn-minus" type="button">
+<span class="material-symbols-outlined" data-icon="remove">remove</span>
+</button>
+<span class="font-headline-md text-headline-md w-12 text-center" id="quantity">1</span>
+<button class="h-touch-target w-touch-target flex items-center justify-center text-on-surface hover:bg-surface-container-high rounded-r-lg transition-colors" id="btn-plus" type="button">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+</div>
+<!-- Add to Cart Button -->
+<button class="flex-1 h-touch-target bg-primary text-on-primary font-label-md text-label-md rounded-lg flex items-center justify-center gap-sm disabled:opacity-50 disabled:cursor-not-allowed transition-opacity hover:bg-surface-tint" disabled="" id="btn-add-cart">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+<span>Agregar - <span id="total-price">150,00</span> VES</span>
+</button>
+</div>
+</div>
+<!-- Script for interaction logic -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('product-form');
+            const addBtn = document.getElementById('btn-add-cart');
+            const radios = form.querySelectorAll('input[name="bread_type"]');
+            
+            // Quantity logic
+            let qty = 1;
+            const qtyDisplay = document.getElementById('quantity');
+            const btnMinus = document.getElementById('btn-minus');
+            const btnPlus = document.getElementById('btn-plus');
+
+            btnMinus.addEventListener('click', () => {
+                if (qty > 1) {
+                    qty--;
+                    qtyDisplay.textContent = qty;
+                    updateTotal();
+                }
+            });
+
+            btnPlus.addEventListener('click', () => {
+                qty++;
+                qtyDisplay.textContent = qty;
+                updateTotal();
+            });
+
+            // Validation logic
+            radios.forEach(radio => {
+                radio.addEventListener('change', () => {
+                    addBtn.disabled = false;
+                    updateTotal();
+                });
+            });
+
+            // Price calculation (mocked for visual update)
+            function updateTotal() {
+                let basePrice = 150.00;
+                let total = basePrice * qty;
+                document.getElementById('total-price').textContent = total.toFixed(2).replace('.', ',');
+            }
+        });
+    </script>
+</body></html>

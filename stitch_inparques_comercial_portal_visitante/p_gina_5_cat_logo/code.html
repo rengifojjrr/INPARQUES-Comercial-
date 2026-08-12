@@ -1,0 +1,481 @@
+<!DOCTYPE html><html lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Catálogo - Portal Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-error": "#ffffff",
+                      "on-tertiary-fixed-variant": "#3a4a43",
+                      "surface-variant": "#e4e2dd",
+                      "on-background": "#1b1c18",
+                      "surface-dim": "#dcdad4",
+                      "surface-container-high": "#eae8e2",
+                      "on-secondary-container": "#446d59",
+                      "surface-tint": "#186c45",
+                      "on-secondary-fixed-variant": "#264e3c",
+                      "error-container": "#ffdad6",
+                      "error": "#ba1a1a",
+                      "primary-fixed": "#a4f4c3",
+                      "surface-container-lowest": "#ffffff",
+                      "on-surface": "#1b1c18",
+                      "outline": "#6f7a71",
+                      "inverse-on-surface": "#f3f1eb",
+                      "surface-bright": "#fbf9f3",
+                      "surface-container-highest": "#e4e2dd",
+                      "on-tertiary-fixed": "#0f1e19",
+                      "surface": "#fbf9f3",
+                      "secondary-fixed": "#c0edd4",
+                      "on-tertiary-container": "#cadbd2",
+                      "on-primary": "#ffffff",
+                      "primary": "#005131",
+                      "on-secondary-fixed": "#002114",
+                      "tertiary-fixed": "#d5e7dd",
+                      "inverse-surface": "#30312d",
+                      "on-primary-container": "#99e9b9",
+                      "primary-fixed-dim": "#88d7a8",
+                      "on-error-container": "#93000a",
+                      "secondary": "#3e6753",
+                      "on-primary-fixed-variant": "#005232",
+                      "tertiary-container": "#516159",
+                      "outline-variant": "#bfc9c0",
+                      "background": "#fbf9f3",
+                      "primary-container": "#176b45",
+                      "tertiary-fixed-dim": "#b9cbc1",
+                      "surface-container-low": "#f5f3ed",
+                      "on-tertiary": "#ffffff",
+                      "secondary-container": "#c0edd4",
+                      "tertiary": "#3a4942",
+                      "surface-container": "#f0eee8",
+                      "secondary-fixed-dim": "#a4d0b8",
+                      "on-primary-fixed": "#002111",
+                      "on-secondary": "#ffffff",
+                      "inverse-primary": "#88d7a8",
+                      "on-surface-variant": "#3f4942"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "md": "16px",
+                      "xs": "8px",
+                      "xxl": "48px",
+                      "lg": "24px",
+                      "xl": "32px",
+                      "touch-target": "44px",
+                      "base": "4px",
+                      "sm": "12px"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": [
+                              "Manrope"
+                      ],
+                      "display-lg": [
+                              "Manrope"
+                      ],
+                      "headline-md": [
+                              "Manrope"
+                      ],
+                      "headline-lg": [
+                              "Manrope"
+                      ],
+                      "label-sm": [
+                              "Manrope"
+                      ],
+                      "body-lg": [
+                              "Manrope"
+                      ],
+                      "label-md": [
+                              "Manrope"
+                      ],
+                      "body-md": [
+                              "Manrope"
+                      ]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        body {
+            background-color: #F7F5EF; /* Arena Base */
+        }
+        /* Custom toggle styles */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #176B45;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #176B45;
+        }
+        .toggle-checkbox {
+            right: 0;
+            z-index: 1;
+            border-color: #e2e8f0;
+            transition: all 0.3s;
+        }
+        .toggle-label {
+            width: 3rem;
+            height: 1.5rem;
+            background-color: #cbd5e1;
+            border-radius: 9999px;
+            transition: all 0.3s;
+        }
+        .toggle-checkbox:checked {
+            transform: translateX(100%);
+        }
+    </style>
+</head>
+<body class="text-on-background font-body-md bg-background antialiased flex h-screen overflow-hidden">
+<!-- TopNavBar (Mobile Only) -->
+<nav class="md:hidden flex justify-between items-center w-full px-lg h-touch-target sticky top-0 z-50 bg-surface dark:bg-inverse-surface border-b border-outline-variant dark:border-outline flat no shadows">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed" data-icon="menu">menu</span>
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">Parques Nacionales</span>
+</div>
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed cursor-pointer active:opacity-80" data-icon="search">search</span>
+</div>
+</nav>
+<!-- SideNavBar (Desktop) -->
+<aside class="hidden md:flex flex-col p-md gap-xs bg-surface-container-low dark:bg-surface-container-highest border-r border-outline-variant dark:border-outline flat no shadows h-screen w-64 fixed left-0 top-0 z-40 overflow-y-auto">
+<div class="mb-xl flex flex-col items-center mt-lg">
+<div class="w-16 h-16 rounded-full overflow-hidden mb-sm border-2 border-primary-container">
+<img alt="Logo del Concesionario" class="object-cover w-full h-full" data-alt="A minimal, stylized vector logo depicting a majestic mountain peak and a sprawling green forest canopy. The design uses flat colors in shades of deep green and warm earthy brown, set against a pristine white background. The aesthetic is modern corporate, professional, and evocative of nature conservation and authoritative stewardship." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjhu2oM5NKHkt4noU77-9DHksJ_mqr3ODPOzRY4uztGNg_sdwQ0sUghVFwfjkIATm7Dk8c-2Vzf9IS1mmVTAx7B-Nh4-896p3Wc_GIgEsMzNhvcQwIVaoU77B7Z9nbcawSWuGgBKed4JFIEKqW2m3mknc6zcE7CWXRQQIiVwEqncW9uq3HxfPuxK7oRqYkMNatUNNwHfgaSWjLxsAWhihvCtF2NlcJK28SaMDUuNWvw6wHSTa4iuTO">
+</div>
+<h2 class="font-headline-md text-headline-md font-bold text-primary text-center">Portal Admin</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant text-center">Administración de Parque</p>
+</div>
+<nav class="flex-1 flex flex-col gap-base">
+<a class="flex items-center gap-md px-sm py-xs rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant dark:hover:bg-outline-variant transition-all duration-200 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Resumen</span>
+</a>
+<a class="flex items-center gap-md px-sm py-xs rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant dark:hover:bg-outline-variant transition-all duration-200 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+<span>Pedidos</span>
+</a>
+<a class="flex items-center gap-md px-sm py-xs rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant dark:hover:bg-outline-variant transition-all duration-200 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span>Reservas</span>
+</a>
+<!-- ACTIVE ITEM -->
+<a class="flex items-center gap-md px-sm py-xs bg-secondary-container dark:bg-secondary-fixed-variant text-on-secondary-container dark:text-on-secondary-fixed rounded-lg font-bold transition-all duration-200 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span>Catálogo</span>
+</a>
+<a class="flex items-center gap-md px-sm py-xs rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant dark:hover:bg-outline-variant transition-all duration-200 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="event_available">event_available</span>
+<span>Disponibilidad</span>
+</a>
+<a class="flex items-center gap-md px-sm py-xs rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant dark:hover:bg-outline-variant transition-all duration-200 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span>Caja</span>
+</a>
+<a class="flex items-center gap-md px-sm py-xs rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant dark:hover:bg-outline-variant transition-all duration-200 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span>Ventas</span>
+</a>
+<a class="flex items-center gap-md px-sm py-xs rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant dark:hover:bg-outline-variant transition-all duration-200 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span>Equipo operativo</span>
+</a>
+<a class="flex items-center gap-md px-sm py-xs rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant dark:hover:bg-outline-variant transition-all duration-200 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Configuración del local</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 md:ml-64 h-full overflow-y-auto bg-background">
+<!-- Header Actions -->
+<header class="sticky top-0 z-30 bg-background/95 backdrop-blur-sm border-b border-surface-dim px-lg py-md flex flex-col sm:flex-row justify-between items-start sm:items-center gap-md">
+<div>
+<h1 class="font-display-lg text-display-lg text-primary">Catálogo</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-base">Gestión de productos, servicios y disponibilidad.</p>
+</div>
+<div class="flex gap-sm">
+<button class="flex items-center justify-center gap-xs px-md h-touch-target rounded-lg border border-outline-variant text-on-surface bg-surface hover:bg-surface-variant transition-colors font-label-md text-label-md shadow-sm">
+<span class="material-symbols-outlined text-lg" data-icon="preview">preview</span>
+                    Vista Previa Visitante
+                </button>
+<button class="flex items-center justify-center gap-xs px-md h-touch-target rounded-lg bg-primary-container text-on-primary font-label-md text-label-md hover:opacity-90 transition-opacity shadow-sm">
+<span class="material-symbols-outlined text-lg" data-icon="add">add</span>
+                    Nuevo Artículo
+                </button>
+</div>
+</header>
+<!-- Content Padding Area -->
+<div class="p-lg max-w-7xl mx-auto space-y-lg">
+<!-- Tabs -->
+<div class="flex border-b border-surface-dim">
+<button class="px-md py-sm font-label-md text-label-md text-primary font-bold border-b-2 border-primary-container">Comida</button>
+<button class="px-md py-sm font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors">Productos</button>
+<button class="px-md py-sm font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors">Servicios</button>
+</div>
+<!-- Search and Filter Bar -->
+<div class="flex flex-col sm:flex-row gap-md justify-between items-center bg-surface p-sm rounded-lg border border-surface-dim shadow-sm">
+<div class="relative w-full sm:w-96">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
+<input class="w-full pl-xl pr-sm h-touch-target rounded-md border border-outline-variant bg-surface focus:border-primary-container focus:ring-1 focus:ring-primary-container font-body-md text-body-md" placeholder="Buscar en Comida..." type="text">
+</div>
+<div class="flex gap-sm w-full sm:w-auto">
+<button class="flex items-center justify-center gap-xs px-md h-touch-target rounded-md border border-outline-variant bg-surface hover:bg-surface-variant transition-colors font-label-md text-label-md flex-1 sm:flex-none">
+<span class="material-symbols-outlined text-lg" data-icon="filter_list">filter_list</span>
+                        Filtros
+                    </button>
+</div>
+</div>
+<!-- Bento Grid List -->
+<div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-md">
+<!-- Card 1 -->
+<article class="bg-surface border border-outline-variant rounded-lg p-lg hover:shadow-md transition-shadow flex flex-col gap-md relative">
+<div class="flex justify-between items-start">
+<div class="flex gap-md">
+<div class="w-20 h-20 rounded-md overflow-hidden bg-surface-container-low shrink-0 border border-surface-dim">
+<img alt="Arepa" class="w-full h-full object-cover" data-alt="A perfectly plated traditional Venezuelan arepa, steaming hot, resting on a clean wooden board. The scene is brightly lit with natural sunlight, highlighting the golden crust of the arepa and fresh green cilantro garnish. Shot in a modern, organic, and clean food photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCVsNON65wHDJWXF906Z0FMS4mR6b3Nr6DVufdDDcrOPLdbFUYWMxDVwniT2GOTlfTiG1AG4TKQpk9JNuBfvyD3ksttvfgZSdE4iBfODqeAmajlmNI007ckTQONJUcL-ls2c-fi9Z6MvNjLPn9RuX5GitZJ8EOU_7ro23gAblpUqgRLXIn4zj2ARHIKW0v-xnUY8HDqGo_eMFdnrkd0K0yPZCsoUQKlCCaS6Y2mz_Hmaoi6OJ-RO3J">
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Arepa Pelada Tradicional</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-base">Desayunos - Cód: 001</p>
+<div class="mt-xs inline-flex items-center px-2 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm">
+                                    En Stock
+                                </div>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-primary-container transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+<div class="grid grid-cols-2 gap-sm py-sm border-y border-surface-dim mt-auto">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Precio</span>
+<span class="font-body-lg text-body-lg text-on-surface font-semibold">$4.50</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Cupo/Día</span>
+<span class="font-body-lg text-body-lg text-on-surface font-semibold">50 und.</span>
+</div>
+</div>
+<div class="flex justify-between items-center pt-xs">
+<div class="flex items-center gap-sm">
+<span class="font-label-md text-label-md text-on-surface">Disponible</span>
+<!-- Custom Toggle -->
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer top-[-4px] left-0" id="toggle1" name="toggle1" type="checkbox">
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer" for="toggle1"></label>
+</div>
+</div>
+<div class="flex gap-xs">
+<button class="p-2 rounded hover:bg-surface-variant text-on-surface-variant transition-colors" title="Pausar">
+<span class="material-symbols-outlined" data-icon="pause">pause</span>
+</button>
+<button class="p-2 rounded hover:bg-surface-variant text-on-surface-variant transition-colors" title="Editar">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="bg-surface border border-outline-variant rounded-lg p-lg hover:shadow-md transition-shadow flex flex-col gap-md relative">
+<div class="flex justify-between items-start">
+<div class="flex gap-md">
+<div class="w-20 h-20 rounded-md overflow-hidden bg-surface-container-low shrink-0 border border-surface-dim flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-4xl" data-icon="fastfood">fastfood</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Empanada de Cazón</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-base">Desayunos - Cód: 002</p>
+<div class="mt-xs inline-flex items-center px-2 py-1 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm">
+                                    Agotado
+                                </div>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-primary-container transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+<div class="grid grid-cols-2 gap-sm py-sm border-y border-surface-dim mt-auto opacity-70">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Precio</span>
+<span class="font-body-lg text-body-lg text-on-surface font-semibold">$2.50</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Cupo/Día</span>
+<span class="font-body-lg text-body-lg text-error font-semibold">0 und.</span>
+</div>
+</div>
+<div class="flex justify-between items-center pt-xs">
+<div class="flex items-center gap-sm">
+<span class="font-label-md text-label-md text-on-surface-variant">Pausado</span>
+<!-- Custom Toggle -->
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer top-[-4px] left-0" id="toggle2" name="toggle2" type="checkbox">
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer" for="toggle2"></label>
+</div>
+</div>
+<div class="flex gap-xs">
+<button class="p-2 rounded hover:bg-surface-variant text-on-surface-variant transition-colors" title="Reanudar">
+<span class="material-symbols-outlined" data-icon="play_arrow">play_arrow</span>
+</button>
+<button class="p-2 rounded hover:bg-surface-variant text-on-surface-variant transition-colors" title="Editar">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Card 3 -->
+<article class="bg-surface border border-outline-variant rounded-lg p-lg hover:shadow-md transition-shadow flex flex-col gap-md relative">
+<div class="flex justify-between items-start">
+<div class="flex gap-md">
+<div class="w-20 h-20 rounded-md overflow-hidden bg-surface-container-low shrink-0 border border-surface-dim">
+<img alt="Jugo" class="w-full h-full object-cover" data-alt="A refreshing glass of freshly squeezed fruit juice, condensation on the glass, placed on a rustic wooden table overlooking a lush, tropical park environment. The sunlight is bright and clear, creating a vibrant, appealing, and healthy aesthetic suited for an eco-tourism context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuADbEbu64c01kw4oqO2ovvcuZ8bmXgcph7k12Lg65CLAl552mrEriAQ77Y1JF_gnHeuIlDK1DZMRy1dB47HiqAarsFkytkF8LUs2NGPO_ydcBe4-HmMarFS19qdKbsp3ajJFShPyp7JtbNVVCSONujlgD3JIFM2gKF1PuBkbzMsd_YloTzQYewf58VTzOz-t_nUvmjrAfZyCvBdKdwG0F4d7mXTT6sjIDnwx9eYrDXuGsxHY7gofOVz">
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Jugo Natural (Fresa)</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-base">Bebidas - Cód: 015</p>
+<div class="mt-xs inline-flex items-center px-2 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm">
+                                    En Stock
+                                </div>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-primary-container transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+<div class="grid grid-cols-2 gap-sm py-sm border-y border-surface-dim mt-auto">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Precio</span>
+<span class="font-body-lg text-body-lg text-on-surface font-semibold">$3.00</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Cupo/Día</span>
+<span class="font-body-lg text-body-lg text-on-surface font-semibold">120 und.</span>
+</div>
+</div>
+<div class="flex justify-between items-center pt-xs">
+<div class="flex items-center gap-sm">
+<span class="font-label-md text-label-md text-on-surface">Disponible</span>
+<!-- Custom Toggle -->
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer top-[-4px] left-0" id="toggle3" name="toggle3" type="checkbox">
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer" for="toggle3"></label>
+</div>
+</div>
+<div class="flex gap-xs">
+<button class="p-2 rounded hover:bg-surface-variant text-on-surface-variant transition-colors" title="Pausar">
+<span class="material-symbols-outlined" data-icon="pause">pause</span>
+</button>
+<button class="p-2 rounded hover:bg-surface-variant text-on-surface-variant transition-colors" title="Editar">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+</button>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden flex justify-around items-center w-full h-touch-target fixed bottom-0 z-50 bg-surface dark:bg-inverse-surface border-t border-outline-variant dark:border-outline pb-safe pt-xs">
+<a class="flex flex-col items-center gap-base text-on-surface-variant dark:text-surface-variant cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+</a>
+<a class="flex flex-col items-center gap-base text-on-surface-variant dark:text-surface-variant cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+</a>
+<a class="flex flex-col items-center gap-base text-primary dark:text-primary-fixed font-bold border-t-2 border-primary cursor-pointer active:opacity-80 -mt-[6px] pt-[4px]" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+</a>
+<a class="flex flex-col items-center gap-base text-on-surface-variant dark:text-surface-variant cursor-pointer active:opacity-80" href="#">
+<span class="material-symbols-outlined" data-icon="event_available">event_available</span>
+</a>
+</nav>
+<script>
+        // Simple script to handle toggle visual state if needed beyond CSS, though CSS handles the basic UI.
+        document.querySelectorAll('.toggle-checkbox').forEach(toggle => {
+            toggle.addEventListener('change', function() {
+                const label = this.closest('.flex').querySelector('span');
+                if(this.checked) {
+                    label.textContent = 'Disponible';
+                    label.classList.remove('text-on-surface-variant');
+                    label.classList.add('text-on-surface');
+                } else {
+                    label.textContent = 'Pausado';
+                    label.classList.remove('text-on-surface');
+                    label.classList.add('text-on-surface-variant');
+                }
+            });
+        });
+    </script>
+</body></html>

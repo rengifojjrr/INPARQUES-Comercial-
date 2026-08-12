@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Parques Nacionales - Renovaciones</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "outline-variant": "#bfc9c0",
+                        "on-secondary-container": "#446d59",
+                        "on-primary-fixed-variant": "#005232",
+                        "surface-container-high": "#eae8e2",
+                        "tertiary-fixed": "#d5e7dd",
+                        "secondary": "#3e6753",
+                        "background": "#fbf9f3",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#a4f4c3",
+                        "on-error-container": "#93000a",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#516159",
+                        "surface-container-highest": "#e4e2dd",
+                        "primary": "#005131",
+                        "on-surface-variant": "#3f4942",
+                        "surface-tint": "#186c45",
+                        "inverse-on-surface": "#f3f1eb",
+                        "surface-container-low": "#f5f3ed",
+                        "surface-dim": "#dcdad4",
+                        "on-background": "#1b1c18",
+                        "surface-container": "#f0eee8",
+                        "secondary-container": "#c0edd4",
+                        "on-secondary-fixed-variant": "#264e3c",
+                        "inverse-surface": "#30312d",
+                        "primary-container": "#176b45",
+                        "primary-fixed-dim": "#88d7a8",
+                        "on-primary-container": "#99e9b9",
+                        "inverse-primary": "#88d7a8",
+                        "secondary-fixed-dim": "#a4d0b8",
+                        "on-tertiary-fixed": "#0f1e19",
+                        "error": "#ba1a1a",
+                        "error-container": "#ffdad6",
+                        "on-surface": "#1b1c18",
+                        "tertiary": "#3a4942",
+                        "on-primary-fixed": "#002111",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#b9cbc1",
+                        "outline": "#6f7a71",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed": "#002114",
+                        "surface-variant": "#e4e2dd",
+                        "secondary-fixed": "#c0edd4",
+                        "on-tertiary-fixed-variant": "#3a4a43",
+                        "surface": "#fbf9f3",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-container": "#cadbd2",
+                        "surface-bright": "#fbf9f3"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "base": "4px",
+                        "xs": "8px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "xxl": "48px",
+                        "touch-target": "44px",
+                        "sm": "12px",
+                        "xl": "32px"
+                    },
+                    fontFamily: {
+                        "headline-lg": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "label-sm": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "display-lg": ["Manrope"]
+                    },
+                    fontSize: {
+                        "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "700" }],
+                        "headline-md": ["24px", { lineHeight: "32px", fontWeight: "600" }],
+                        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+                        "label-sm": ["12px", { lineHeight: "16px", fontWeight: "700" }],
+                        "label-md": ["14px", { lineHeight: "20px", letterSpacing: "0.01em", fontWeight: "600" }],
+                        "headline-lg-mobile": ["24px", { lineHeight: "32px", fontWeight: "700" }],
+                        "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+                        "display-lg": ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "800" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+            font-size: 20px;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased overflow-x-hidden min-h-screen">
+<div class="flex h-screen overflow-hidden">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col bg-surface-container dark:bg-surface-container-highest border-r border-outline-variant dark:border-outline fixed left-0 top-0 h-full py-md px-sm w-64 z-40">
+<div class="flex items-center gap-xs px-xs mb-lg">
+<img alt="Institution Logo" class="w-10 h-10 rounded-full object-cover shrink-0" data-alt="A professional, minimalist logo for a national parks authority featuring a subtle pine tree motif in deep green on a circular white background. High contrast, clean vector style, modern corporate aesthetics." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXWWum8tjM2f0G05J04586vHx7TbooO-YumYvz2-pHOHSWewvYPZb45BZ9jw8gUAfdjcpM1hCMFG4dRpFdWXArlX7NuVRnhdEGpZd5fEzVwNX7VesgmV7R3H5rIzg0z99yJk0ZalDzpnhjK3BY80lBtqv5N93QU-Ib7xVS-jR1jpQw54ce_CIl_45RlZGcEKun2keSQOFMBwENKmy2nw8rrw1CjMpi9QBdJ4Q_8N9BxBobf0GgAJAf"/>
+<div>
+<h1 class="font-headline-md text-headline-md text-on-surface truncate">Gestión Comercial</h1>
+<p class="font-label-md text-label-md text-on-surface-variant truncate">Administración Central</p>
+</div>
+</div>
+<button class="w-full flex items-center justify-center gap-xs bg-primary-container text-on-primary min-h-[44px] rounded-lg mb-lg hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+<span class="font-label-md text-label-md">Nueva Concesión</span>
+</button>
+<ul class="flex flex-col gap-base flex-1 overflow-y-auto no-scrollbar">
+<li>
+<a class="flex items-center gap-sm px-sm min-h-[44px] rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest dark:hover:bg-surface-dim transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">Resumen Comercial</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-sm min-h-[44px] rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest dark:hover:bg-surface-dim transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span class="font-label-md text-label-md">Solicitudes</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-sm min-h-[44px] rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest dark:hover:bg-surface-dim transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="folder_open">folder_open</span>
+<span class="font-label-md text-label-md">Expedientes</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-sm min-h-[44px] rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest dark:hover:bg-surface-dim transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="assignment_turned_in">assignment_turned_in</span>
+<span class="font-label-md text-label-md">Contratos y Permisos</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-sm min-h-[44px] rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest dark:hover:bg-surface-dim transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="font-label-md text-label-md">Puntos Comerciales</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-sm min-h-[44px] rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest dark:hover:bg-surface-dim transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="monetization_on">monetization_on</span>
+<span class="font-label-md text-label-md">Condiciones Económicas</span>
+</a>
+</li>
+<!-- Prórrogas maps to Renovaciones contextually based on intent if Renovaciones isn't explicit -->
+<li>
+<a class="flex items-center gap-sm px-sm min-h-[44px] bg-primary-container text-on-primary-container font-bold rounded-lg hover:bg-surface-container-highest dark:hover:bg-surface-dim transition-all active:opacity-80" href="#">
+<span class="material-symbols-outlined icon-fill" data-icon="history" data-weight="fill">history</span>
+<span class="font-label-md text-label-md">Prórrogas</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-sm min-h-[44px] rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest dark:hover:bg-surface-dim transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+<span class="font-label-md text-label-md">Inspecciones</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-sm min-h-[44px] rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest dark:hover:bg-surface-dim transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-label-md text-label-md">Reportes</span>
+</a>
+</li>
+</ul>
+<div class="mt-auto border-t border-outline-variant dark:border-outline pt-sm">
+<ul class="flex flex-col gap-base">
+<li>
+<a class="flex items-center gap-sm px-sm min-h-[44px] rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest dark:hover:bg-surface-dim transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-md text-label-md">Configuración</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-sm min-h-[44px] rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest dark:hover:bg-surface-dim transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-label-md text-label-md">Cerrar Sesión</span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="flex-1 flex flex-col md:ml-64 w-full h-full relative">
+<!-- TopNavBar (Mobile Only for Navigation, acts as app bar on desktop) -->
+<header class="sticky top-0 z-50 flex items-center justify-between w-full px-lg min-h-[44px] py-xs bg-surface border-b border-outline-variant dark:border-outline">
+<div class="flex items-center gap-md">
+<!-- Mobile Menu Trigger -->
+<button class="md:hidden flex items-center justify-center w-10 h-10 text-primary hover:bg-surface-container-low rounded-full transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<span class="font-label-md font-headline-lg-mobile md:font-headline-md md:text-headline-md font-bold text-primary dark:text-primary-fixed truncate">Parques Nacionales | Dirección Comercial</span>
+</div>
+<div class="flex items-center gap-sm">
+<button class="flex items-center justify-center w-10 h-10 text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-container-high transition-colors rounded-full cursor-pointer active:scale-95 duration-150">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+<button class="flex items-center justify-center w-10 h-10 text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-container-high transition-colors rounded-full cursor-pointer active:scale-95 duration-150 relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="hidden md:flex items-center justify-center w-10 h-10 text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-container-high transition-colors rounded-full cursor-pointer active:scale-95 duration-150">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+<button class="hidden md:flex items-center justify-center w-10 h-10 text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-container-high transition-colors rounded-full cursor-pointer active:scale-95 duration-150">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<img alt="Administrator Profile" class="w-8 h-8 rounded-full ml-xs border border-outline-variant object-cover cursor-pointer" data-alt="A small, circular avatar portrait of an administrator. Professional lighting, neutral grey background, high resolution, soft corporate feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDB91To5Oc2lNp7U23k3uQAy7JLVR5JRcoNb1yVVM07brs2V_f9qZaQ8QzuFs9dBT7VFWkfwbro_cn6Mal75c-f9fpZYkO6c7eQIhee3teNxQbbCqMtSPUiVyA5ieoIfm8KI2W9aXYg8UPYBFbu999P-EboHLVzGiwEmaHqfuVElV8VBujQAm4X9uYE4i6NRo1pDww1tU_M9mt9TpwB5USuviIXKYppWlqYjFjm3gXQZofpj_XdoUIJ"/>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 overflow-y-auto p-md md:p-lg bg-background">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-center justify-between mb-lg gap-md">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-background">Renovaciones y Vencimientos</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">Gestiona el calendario de alertas y el estado de concesiones próximas a expirar.</p>
+</div>
+<div class="flex items-center gap-sm">
+<button class="flex items-center justify-center gap-xs bg-surface-container-lowest border border-outline-variant text-on-background min-h-[44px] px-md rounded-lg hover:bg-surface-container-low transition-colors shadow-sm">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="download">download</span>
+<span class="font-label-md text-label-md">Exportar</span>
+</button>
+<button class="flex items-center justify-center gap-xs bg-primary-container text-on-primary min-h-[44px] px-md rounded-lg hover:opacity-90 transition-opacity shadow-sm">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+<span class="font-label-md text-label-md">Notificación Masiva</span>
+</button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg mb-lg">
+<!-- Alert Calendar Cards (3 Columns) -->
+<div class="lg:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-md">
+<!-- 30 Days -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg flex flex-col justify-between shadow-sm relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-error-container rounded-full opacity-20 group-hover:scale-110 transition-transform"></div>
+<div>
+<div class="flex items-center gap-xs mb-sm">
+<span class="material-symbols-outlined text-error" data-icon="warning">warning</span>
+<h3 class="font-label-md text-label-md text-on-surface-variant">Crítico (0 - 30 días)</h3>
+</div>
+<div class="font-display-lg text-display-lg text-on-background">12</div>
+</div>
+<div class="mt-md font-body-md text-body-md text-on-surface-variant flex items-center justify-between">
+<span>Concesiones</span>
+<a class="text-primary font-label-md text-label-md hover:underline" href="#">Revisar</a>
+</div>
+</div>
+<!-- 60 Days -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg flex flex-col justify-between shadow-sm relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-secondary-container rounded-full opacity-20 group-hover:scale-110 transition-transform"></div>
+<div>
+<div class="flex items-center gap-xs mb-sm">
+<span class="material-symbols-outlined text-secondary" data-icon="schedule">schedule</span>
+<h3 class="font-label-md text-label-md text-on-surface-variant">Atención (31 - 60 días)</h3>
+</div>
+<div class="font-display-lg text-display-lg text-on-background">24</div>
+</div>
+<div class="mt-md font-body-md text-body-md text-on-surface-variant flex items-center justify-between">
+<span>Concesiones</span>
+<a class="text-primary font-label-md text-label-md hover:underline" href="#">Revisar</a>
+</div>
+</div>
+<!-- 90 Days -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg flex flex-col justify-between shadow-sm relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-primary-fixed rounded-full opacity-20 group-hover:scale-110 transition-transform"></div>
+<div>
+<div class="flex items-center gap-xs mb-sm">
+<span class="material-symbols-outlined text-primary" data-icon="event_upcoming">event_upcoming</span>
+<h3 class="font-label-md text-label-md text-on-surface-variant">Próximos (61 - 90 días)</h3>
+</div>
+<div class="font-display-lg text-display-lg text-on-background">45</div>
+</div>
+<div class="mt-md font-body-md text-body-md text-on-surface-variant flex items-center justify-between">
+<span>Concesiones</span>
+<a class="text-primary font-label-md text-label-md hover:underline" href="#">Revisar</a>
+</div>
+</div>
+</div>
+<!-- Quick Action Widget -->
+<div class="lg:col-span-4 bg-surface-container-lowest border border-outline-variant rounded-lg p-lg shadow-sm flex flex-col">
+<h3 class="font-headline-md text-headline-md text-on-background mb-md">Acciones Rápidas</h3>
+<div class="flex-1 flex flex-col gap-sm justify-center">
+<button class="w-full flex items-center justify-between p-sm border border-outline-variant rounded-lg hover:bg-surface-container-low transition-colors min-h-[44px]">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary" data-icon="rule">rule</span>
+<span class="font-label-md text-label-md text-on-background">Revisión de Cumplimiento</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="chevron_right">chevron_right</span>
+</button>
+<button class="w-full flex items-center justify-between p-sm border border-outline-variant rounded-lg hover:bg-surface-container-low transition-colors min-h-[44px]">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary" data-icon="gavel">gavel</span>
+<span class="font-label-md text-label-md text-on-background">Dictámenes Legales</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- List Section -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg shadow-sm overflow-hidden flex flex-col">
+<div class="p-lg border-b border-outline-variant flex flex-col sm:flex-row sm:items-center justify-between gap-md">
+<h3 class="font-headline-md text-headline-md text-on-background">Concesiones Próximas a Expirar</h3>
+<div class="flex items-center gap-sm w-full sm:w-auto">
+<div class="relative w-full sm:w-64">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="search">search</span>
+<input class="w-full pl-xl pr-sm py-2 bg-surface border border-outline-variant rounded-lg font-body-md text-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none h-[44px]" placeholder="Buscar expediente..." type="text"/>
+</div>
+<button class="flex items-center justify-center w-11 h-11 border border-outline-variant rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors shrink-0">
+<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span>
+</button>
+</div>
+</div>
+<!-- Table (Desktop) / Cards (Mobile) approach for responsiveness -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse min-w-[800px]">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant">
+<th class="p-md font-label-md text-label-md text-on-surface-variant font-semibold">Expediente</th>
+<th class="p-md font-label-md text-label-md text-on-surface-variant font-semibold">Titular / Empresa</th>
+<th class="p-md font-label-md text-label-md text-on-surface-variant font-semibold">Parque Nacional</th>
+<th class="p-md font-label-md text-label-md text-on-surface-variant font-semibold">Vencimiento</th>
+<th class="p-md font-label-md text-label-md text-on-surface-variant font-semibold">Estado de Cumplimiento</th>
+<th class="p-md font-label-md text-label-md text-on-surface-variant font-semibold text-center">Acciones</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md text-on-background divide-y divide-outline-variant">
+<!-- Row 1 - Critical -->
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="p-md font-label-md text-label-md">EXP-2023-0891</td>
+<td class="p-md">
+<div class="font-label-md text-label-md">EcoTours C.A.</div>
+<div class="text-on-surface-variant text-sm">J-123456789</div>
+</td>
+<td class="p-md">PN Morrocoy</td>
+<td class="p-md">
+<div class="flex items-center gap-xs text-error font-semibold">
+<span class="material-symbols-outlined text-[18px]" data-icon="warning">warning</span>
+                                            12 Días
+                                        </div>
+</td>
+<td class="p-md">
+<span class="inline-flex items-center px-2 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm">
+                                            Revisión Pendiente
+                                        </span>
+</td>
+<td class="p-md text-center">
+<button class="inline-flex items-center justify-center p-2 text-primary hover:bg-surface-container-low rounded-full transition-colors" title="Revisar Historial">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 - Attention -->
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="p-md font-label-md text-label-md">EXP-2021-0422</td>
+<td class="p-md">
+<div class="font-label-md text-label-md">Servicios Ávila Sur</div>
+<div class="text-on-surface-variant text-sm">V-098765432</div>
+</td>
+<td class="p-md">PN El Ávila</td>
+<td class="p-md">
+<div class="flex items-center gap-xs text-secondary font-semibold">
+<span class="material-symbols-outlined text-[18px]" data-icon="schedule">schedule</span>
+                                            45 Días
+                                        </div>
+</td>
+<td class="p-md">
+<span class="inline-flex items-center px-2 py-1 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm">
+                                            Óptimo
+                                        </span>
+</td>
+<td class="p-md text-center">
+<button class="inline-flex items-center justify-center p-2 text-primary hover:bg-surface-container-low rounded-full transition-colors" title="Revisar Historial">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 - Upcoming -->
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="p-md font-label-md text-label-md">EXP-2019-1105</td>
+<td class="p-md">
+<div class="font-label-md text-label-md">Kiosko La Laguna</div>
+<div class="text-on-surface-variant text-sm">V-112233445</div>
+</td>
+<td class="p-md">PN Canaima</td>
+<td class="p-md">
+<div class="flex items-center gap-xs text-primary font-semibold">
+<span class="material-symbols-outlined text-[18px]" data-icon="event">event</span>
+                                            82 Días
+                                        </div>
+</td>
+<td class="p-md">
+<span class="inline-flex items-center px-2 py-1 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm">
+                                            Faltas Leves
+                                        </span>
+</td>
+<td class="p-md text-center">
+<button class="inline-flex items-center justify-center p-2 text-primary hover:bg-surface-container-low rounded-full transition-colors" title="Revisar Historial">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="p-md border-t border-outline-variant bg-surface-container-low flex items-center justify-between">
+<span class="font-body-md text-body-md text-on-surface-variant">Mostrando 1 - 3 de 81</span>
+<div class="flex items-center gap-sm">
+<button class="flex items-center justify-center w-10 h-10 border border-outline-variant rounded-lg text-on-surface-variant hover:bg-surface-container-lowest transition-colors disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="flex items-center justify-center w-10 h-10 border border-outline-variant rounded-lg text-on-surface-variant hover:bg-surface-container-lowest transition-colors">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</body></html>

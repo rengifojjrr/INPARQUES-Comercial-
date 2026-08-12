@@ -1,0 +1,281 @@
+<!DOCTYPE html><html class="h-full" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Estado del Expediente</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#e4e2dd",
+                        "on-tertiary": "#ffffff",
+                        "inverse-primary": "#88d7a8",
+                        "on-tertiary-fixed-variant": "#3a4a43",
+                        "surface-container-high": "#eae8e2",
+                        "tertiary-fixed": "#d5e7dd",
+                        "inverse-on-surface": "#f3f1eb",
+                        "background": "#fbf9f3",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#6f7a71",
+                        "primary": "#005131",
+                        "outline-variant": "#bfc9c0",
+                        "error": "#ba1a1a",
+                        "secondary-fixed": "#c0edd4",
+                        "surface-container": "#f0eee8",
+                        "primary-container": "#176b45",
+                        "on-secondary-fixed": "#002114",
+                        "on-tertiary-fixed": "#0f1e19",
+                        "surface-tint": "#186c45",
+                        "on-background": "#1b1c18",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#b9cbc1",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#516159",
+                        "on-secondary-fixed-variant": "#264e3c",
+                        "secondary-fixed-dim": "#a4d0b8",
+                        "surface-container-highest": "#e4e2dd",
+                        "on-primary-container": "#99e9b9",
+                        "on-error": "#ffffff",
+                        "on-surface-variant": "#3f4942",
+                        "primary-fixed": "#a4f4c3",
+                        "surface-dim": "#dcdad4",
+                        "on-primary-fixed": "#002111",
+                        "surface": "#fbf9f3",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#005232",
+                        "tertiary": "#3a4942",
+                        "on-tertiary-container": "#cadbd2",
+                        "secondary": "#3e6753",
+                        "on-surface": "#1b1c18",
+                        "secondary-container": "#c0edd4",
+                        "primary-fixed-dim": "#88d7a8",
+                        "on-secondary-container": "#446d59",
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#f5f3ed",
+                        "surface-bright": "#fbf9f3",
+                        "inverse-surface": "#30312d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "xl": "32px",
+                        "xxl": "48px",
+                        "lg": "24px",
+                        "touch-target": "44px",
+                        "xs": "8px",
+                        "md": "16px",
+                        "sm": "12px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Manrope"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "display-lg": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "label-sm": ["Manrope"],
+                        "headline-md": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .timeline-line {
+            width: 2px;
+            background-color: theme('colors.outline-variant');
+            position: absolute;
+            top: 24px;
+            bottom: -24px;
+            left: 20px;
+            z-index: 0;
+        }
+        .timeline-node {
+            position: relative;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md h-full overflow-hidden flex">
+<!-- SideNavBar -->
+<nav class="h-screen w-64 fixed left-0 top-0 border-r border-outline-variant bg-surface hidden md:flex flex-col z-50">
+<div class="p-md border-b border-outline-variant flex flex-col items-start gap-2">
+<span class="material-symbols-outlined text-4xl text-primary" data-weight="fill">park</span>
+<div class="flex flex-col">
+<span class="text-headline-md font-headline-md font-bold text-primary">Gestión Comercial</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Parques Nacionales</span>
+</div>
+</div>
+<div class="flex flex-col h-full p-md gap-2 overflow-y-auto mt-4">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg font-label-md text-label-md hover:scale-[0.98] transition-transform" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Resumen</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg font-label-md text-label-md hover:scale-[0.98] transition-transform" href="#">
+<span class="material-symbols-outlined">storefront</span>
+<span>Negocios y locales</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-lg font-bold font-label-md text-label-md hover:scale-[0.98] transition-transform" href="#">
+<span class="material-symbols-outlined">folder_open</span>
+<span>Expediente</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg font-label-md text-label-md hover:scale-[0.98] transition-transform" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span>Equipo</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg font-label-md text-label-md hover:scale-[0.98] transition-transform" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span>Finanzas</span>
+</a>
+<div class="mt-auto flex flex-col gap-2 border-t border-outline-variant pt-4">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg font-label-md text-label-md hover:scale-[0.98] transition-transform" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Configuración</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg font-label-md text-label-md hover:scale-[0.98] transition-transform" href="#">
+<span class="material-symbols-outlined">help</span>
+<span>Ayuda</span>
+</a>
+</div>
+</div>
+</nav>
+<!-- TopNavBar -->
+<header class="h-16 w-full md:w-[calc(100%-16rem)] fixed top-0 right-0 z-40 bg-surface border-b border-outline-variant shadow-sm flex justify-between items-center px-lg md:ml-64">
+<div class="flex items-center gap-4">
+<button class="md:hidden material-symbols-outlined text-on-surface p-2">menu</button>
+<span class="text-headline-md font-headline-md font-extrabold text-primary">Portal de Concesionarios</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-low transition-colors p-2 rounded-full h-[44px] w-[44px] flex items-center justify-center">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-low transition-colors p-2 rounded-full h-[44px] w-[44px] flex items-center justify-center">help</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-low transition-colors p-2 rounded-full h-[44px] w-[44px] flex items-center justify-center">verified_user</button>
+<div class="flex items-center gap-2 cursor-pointer hover:bg-surface-container-low p-2 rounded-lg transition-colors h-[44px]">
+<img alt="Usuario con MFA Activo" class="w-8 h-8 rounded-full object-cover border border-outline-variant" data-alt="A professional headshot of a business user, wearing a smart casual outfit, set against a clean, light-mode office background. The lighting is soft and flattering, creating a trustworthy and competent mood." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3cqJ_wNC-UJVAuafAAeimApKIw_mdWHAaYTf54XNtbJfff7cRj2-nHZQMIPKPeedJoIdHgasJPOtAyHovXydZgGMAt1WCBri3TrWfN65iosas3U9UxNxeNkzByIfypSApJDg-WQbMQdtGWBXoTkPX0pcIjgXzixoDNpenqA3YF1F3FvxljmE5pPC7KNYeP3XscKLtJVrkHYUU4Vxkd5AMM4tLZPU2srKUmLKXOUuZOWO6Xf0aIHr-">
+<span class="font-label-md text-label-md text-on-surface hidden sm:block">Perfil</span>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="w-full h-full pt-16 md:pl-64 overflow-y-auto bg-background">
+<div class="max-w-4xl mx-auto p-lg md:p-xl mt-4">
+<div class="mb-xl">
+<div class="flex items-center gap-2 mb-2">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Expediente #EXP-2023-089</span>
+<span class="bg-error-container text-on-error-container px-2 py-1 rounded-full font-label-sm text-label-sm">Requiere Acción</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-primary mb-2">Estado de Revisión</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Revisa las observaciones técnicas y proporciona la información solicitada para continuar con el proceso.</p>
+</div>
+<div class="bg-surface rounded-xl border border-outline-variant p-lg md:p-xl shadow-sm relative">
+<!-- Timeline Container -->
+<div class="relative">
+<!-- Item 1: Enviado -->
+<div class="relative pb-xl">
+<div class="timeline-line"></div>
+<div class="flex gap-lg relative timeline-node">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary flex items-center justify-center shrink-0 border-2 border-surface z-10 shadow-sm">
+<span class="material-symbols-outlined text-[20px]">check</span>
+</div>
+<div class="pt-2">
+<h3 class="font-headline-md text-headline-md text-on-surface">Expediente Enviado</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Documentación inicial recibida satisfactoriamente.</p>
+<span class="font-label-sm text-label-sm text-outline mt-2 block">12 Oct 2023, 09:45 AM</span>
+</div>
+</div>
+</div>
+<!-- Item 2: En revisión -->
+<div class="relative pb-xl">
+<div class="timeline-line"></div>
+<div class="flex gap-lg relative timeline-node">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary flex items-center justify-center shrink-0 border-2 border-surface z-10 shadow-sm">
+<span class="material-symbols-outlined text-[20px]">check</span>
+</div>
+<div class="pt-2">
+<h3 class="font-headline-md text-headline-md text-on-surface">Revisión Técnica</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">El equipo de ingeniería ambiental está evaluando el estudio de impacto.</p>
+<span class="font-label-sm text-label-sm text-outline mt-2 block">15 Oct 2023, 14:20 PM</span>
+</div>
+</div>
+</div>
+<!-- Item 3: Observaciones -->
+<div class="relative pb-xl">
+<div class="timeline-line" style="bottom: 0;"></div>
+<div class="flex gap-lg relative timeline-node">
+<div class="w-10 h-10 rounded-full bg-error-container text-error flex items-center justify-center shrink-0 border-2 border-surface z-10 shadow-sm">
+<span class="material-symbols-outlined text-[20px]">warning</span>
+</div>
+<div class="pt-2 w-full">
+<h3 class="font-headline-md text-headline-md text-error">Observaciones Técnicas</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1 mb-4">Se encontraron discrepancias en el plano arquitectónico presentado y faltan detalles en el plan de mitigación de ruido.</p>
+<div class="bg-error-container/20 border border-error-container rounded-lg p-md mb-4">
+<h4 class="font-label-md text-label-md text-on-surface mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-error">architecture</span>
+                                        Planos Arquitectónicos
+                                    </h4>
+<p class="font-body-md text-body-md text-on-surface-variant mb-3">La cota del terreno en el sector norte no coincide con el levantamiento topográfico oficial. Por favor, actualice el plano (Anexo B.2).</p>
+<button class="h-[44px] px-6 bg-error text-on-error rounded-md font-label-md text-label-md hover:bg-error/90 transition-colors inline-flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">upload</span>
+                                        Corregir Plano
+                                    </button>
+</div>
+<div class="bg-surface-container-low border border-outline-variant rounded-lg p-md">
+<h4 class="font-label-md text-label-md text-on-surface mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-tertiary">volume_up</span>
+                                        Plan de Mitigación de Ruido
+                                    </h4>
+<p class="font-body-md text-body-md text-on-surface-variant mb-3">Se requiere mayor detalle sobre las barreras acústicas propuestas para la zona de carga y descarga colindante al sendero peatonal.</p>
+<button class="h-[44px] px-6 border border-outline text-on-surface rounded-md font-label-md text-label-md hover:bg-surface-container-high transition-colors inline-flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">edit_document</span>
+                                        Responder
+                                    </button>
+</div>
+<span class="font-label-sm text-label-sm text-outline mt-4 block">18 Oct 2023, 10:15 AM</span>
+</div>
+</div>
+</div>
+<!-- Item 4: Respuesta (Pending) -->
+<div class="relative">
+<div class="flex gap-lg relative timeline-node">
+<div class="w-10 h-10 rounded-full bg-surface-container-high text-outline flex items-center justify-center shrink-0 border-2 border-surface z-10 shadow-sm">
+<span class="material-symbols-outlined text-[20px]">pending</span>
+</div>
+<div class="pt-2 opacity-50">
+<h3 class="font-headline-md text-headline-md text-on-surface">Esperando Respuesta</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">El proceso se reanudará una vez que se envíen las correcciones solicitadas.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-xl flex justify-end gap-4">
+<button class="h-[44px] px-6 border border-outline-variant text-on-surface font-label-md text-label-md rounded-lg hover:bg-surface-container-low transition-colors">
+                    Guardar Borrador
+                </button>
+<button class="h-[44px] px-6 bg-primary-container text-on-primary font-label-md text-label-md rounded-lg hover:opacity-90 transition-opacity flex items-center gap-2" disabled="" style="opacity: 0.5; cursor: not-allowed;">
+                    Enviar Correcciones
+                    <span class="material-symbols-outlined text-[18px]">send</span>
+</button>
+</div>
+</div>
+</main>
+</body></html>

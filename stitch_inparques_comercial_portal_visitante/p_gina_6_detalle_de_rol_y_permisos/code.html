@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Role &amp; Permissions Detail - INPARQUES</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#005131",
+                    "error": "#ba1a1a",
+                    "surface-variant": "#e4e2dd",
+                    "on-tertiary-fixed-variant": "#3a4a43",
+                    "inverse-on-surface": "#f3f1eb",
+                    "outline-variant": "#bfc9c0",
+                    "outline": "#6f7a71",
+                    "inverse-surface": "#30312d",
+                    "on-background": "#1b1c18",
+                    "surface": "#fbf9f3",
+                    "on-surface": "#1b1c18",
+                    "surface-bright": "#fbf9f3",
+                    "secondary": "#3e6753",
+                    "primary-fixed-dim": "#88d7a8",
+                    "tertiary-container": "#516159",
+                    "surface-tint": "#186c45",
+                    "tertiary-fixed": "#d5e7dd",
+                    "secondary-fixed": "#c0edd4",
+                    "primary-container": "#176b45",
+                    "on-tertiary-fixed": "#0f1e19",
+                    "surface-container-highest": "#e4e2dd",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-container": "#446d59",
+                    "surface-container-high": "#eae8e2",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-fixed": "#002114",
+                    "on-error": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "on-primary-container": "#99e9b9",
+                    "on-error-container": "#93000a",
+                    "surface-container-low": "#f5f3ed",
+                    "secondary-container": "#c0edd4",
+                    "error-container": "#ffdad6",
+                    "primary-fixed": "#a4f4c3",
+                    "inverse-primary": "#88d7a8",
+                    "on-primary": "#ffffff",
+                    "on-surface-variant": "#3f4942",
+                    "on-primary-fixed-variant": "#005232",
+                    "surface-container": "#f0eee8",
+                    "background": "#fbf9f3",
+                    "secondary-fixed-dim": "#a4d0b8",
+                    "tertiary-fixed-dim": "#b9cbc1",
+                    "on-primary-fixed": "#002111",
+                    "on-secondary-fixed-variant": "#264e3c",
+                    "surface-dim": "#dcdad4",
+                    "tertiary": "#3a4942",
+                    "on-tertiary-container": "#cadbd2"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "16px",
+                    "sm": "12px",
+                    "xs": "8px",
+                    "lg": "24px",
+                    "xl": "32px",
+                    "base": "4px",
+                    "xxl": "48px",
+                    "touch-target": "44px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Manrope"],
+                    "body-md": ["Manrope"],
+                    "display-lg": ["Manrope"],
+                    "label-md": ["Manrope"],
+                    "body-lg": ["Manrope"],
+                    "headline-lg": ["Manrope"],
+                    "headline-md": ["Manrope"],
+                    "label-sm": ["Manrope"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="bg-surface h-full flex antialiased">
+<!-- SideNavBar -->
+<nav class="flex flex-col h-screen fixed left-0 top-0 overflow-y-auto px-xs py-md bg-surface dark:bg-surface-dim docked left-0 h-full w-72 border-r border-outline-variant dark:border-outline flat no shadows z-50">
+<div class="px-md mb-xl">
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">INPARQUES</h1>
+<p class="font-label-md text-label-md text-on-surface-variant mt-1">National Superadministrator</p>
+</div>
+<ul class="flex flex-col gap-1 w-full flex-grow">
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container dark:hover:bg-on-tertiary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">National Home</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container dark:hover:bg-on-tertiary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">account_tree</span>
+<span class="font-label-md text-label-md">Territorial Structure</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container dark:hover:bg-on-tertiary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">park</span>
+<span class="font-label-md text-label-md">Parks</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container dark:hover:bg-on-tertiary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">business_center</span>
+<span class="font-label-md text-label-md">Businesses</span>
+</a>
+</li>
+<!-- ACTIVE TAB -->
+<li>
+<a class="flex items-center gap-md px-md py-sm text-primary dark:text-primary-fixed font-bold border-r-4 border-primary dark:border-primary-fixed bg-surface-container scale-[0.98] transition-transform duration-150 rounded-l-lg" href="#">
+<span class="material-symbols-outlined icon-fill">person_outline</span>
+<span class="font-label-md text-label-md">Users/Roles</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container dark:hover:bg-on-tertiary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">gavel</span>
+<span class="font-label-md text-label-md">Global Rules</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container dark:hover:bg-on-tertiary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">extension</span>
+<span class="font-label-md text-label-md">Integrations</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container dark:hover:bg-on-tertiary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-md text-label-md">Audit</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container dark:hover:bg-on-tertiary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">security</span>
+<span class="font-label-md text-label-md">Security</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container dark:hover:bg-on-tertiary-fixed-variant transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Configuration</span>
+</a>
+</li>
+</ul>
+<div class="mt-auto px-md pt-lg flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-surface-container-high overflow-hidden border border-outline-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-outline">account_circle</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Admin User</p>
+</div>
+</div>
+</nav>
+<!-- TopNavBar -->
+<header class="flex justify-between items-center w-full h-16 pl-[19rem] pr-lg fixed top-0 z-40 bg-white dark:bg-inverse-surface border-b border-outline-variant dark:border-outline shadow-sm">
+<div class="flex items-center gap-lg">
+<h2 class="font-headline-sm text-headline-sm font-bold text-primary dark:text-primary-fixed hidden lg:block">INPARQUES Control Panel</h2>
+<nav class="hidden md:flex gap-md">
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200 py-1" href="#">National Scope</a>
+<a class="font-label-md text-label-md text-primary dark:text-primary-fixed border-b-2 border-primary dark:border-primary-fixed pb-1 opacity-80 transition-opacity duration-150" href="#">Region Scope</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-on-secondary-fixed-variant hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200 py-1" href="#">Park Scope</a>
+</nav>
+</div>
+<div class="flex items-center gap-md">
+<button aria-label="Search" class="p-2 text-on-surface-variant hover:text-primary rounded-full hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button aria-label="Notifications" class="p-2 text-on-surface-variant hover:text-primary rounded-full hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button aria-label="Security" class="p-2 text-on-surface-variant hover:text-primary rounded-full hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">verified_user</span>
+</button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="ml-72 mt-16 p-lg w-full max-w-7xl mx-auto flex-grow flex flex-col gap-lg">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-md">
+<div>
+<div class="flex items-center gap-sm mb-2">
+<a class="text-on-surface-variant hover:text-primary flex items-center" href="#">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+<span class="font-label-md text-label-md ml-1">Back to Roles</span>
+</a>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-background">Regional Manager</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Manage permissions and access scopes for the Regional Manager role.</p>
+</div>
+<div class="flex items-center gap-sm">
+<span class="bg-surface-container-high text-on-surface px-3 py-1 rounded-full font-label-sm text-label-sm flex items-center gap-1 border border-outline-variant">
+<span class="material-symbols-outlined text-[14px]">lock</span> Base Role (Protected)
+                </span>
+<button class="bg-primary-container text-on-primary h-[44px] px-lg rounded-lg font-label-md text-label-md hover:bg-primary transition-colors flex items-center gap-2 shadow-sm">
+<span class="material-symbols-outlined">save</span> Save Changes
+                </button>
+</div>
+</div>
+<!-- Role Summary Card -->
+<div class="bg-white border border-outline-variant rounded-lg p-lg shadow-sm flex flex-col md:flex-row gap-lg justify-between items-start">
+<div class="flex-1">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-sm">Role Details</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-1">Role Name</p>
+<p class="font-body-md text-body-md text-on-surface">Regional Manager</p>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-1">Description</p>
+<p class="font-body-md text-body-md text-on-surface">Oversees operations, staff, and reporting for a specific territorial region.</p>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-low border border-outline-variant rounded-lg p-md flex items-center gap-md min-w-[250px]">
+<div class="bg-primary-container text-on-primary w-12 h-12 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined icon-fill">group</span>
+</div>
+<div>
+<p class="font-headline-md text-headline-md text-on-surface">42</p>
+<p class="font-label-md text-label-md text-on-surface-variant">Users affected by changes</p>
+</div>
+</div>
+</div>
+<!-- Permissions Matrix Bento -->
+<div class="bg-white border border-outline-variant rounded-lg shadow-sm flex-grow flex flex-col overflow-hidden">
+<div class="p-lg border-b border-outline-variant bg-surface-container-lowest flex justify-between items-center">
+<h3 class="font-headline-md text-headline-md text-on-surface">Permissions Matrix</h3>
+<div class="flex gap-2">
+<button class="h-[44px] px-4 rounded-lg font-label-md text-label-md border border-outline-variant text-on-surface hover:bg-surface-container transition-colors">Expand All</button>
+<button class="h-[44px] px-4 rounded-lg font-label-md text-label-md border border-outline-variant text-on-surface hover:bg-surface-container transition-colors">Collapse All</button>
+</div>
+</div>
+<div class="overflow-x-auto flex-grow">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container border-b border-outline-variant">
+<th class="p-md font-label-md text-label-md text-on-surface w-1/3">Module / Resource</th>
+<th class="p-md font-label-md text-label-md text-on-surface text-center">View</th>
+<th class="p-md font-label-md text-label-md text-on-surface text-center">Create</th>
+<th class="p-md font-label-md text-label-md text-on-surface text-center">Edit</th>
+<th class="p-md font-label-md text-label-md text-on-surface text-center">Delete</th>
+<th class="p-md font-label-md text-label-md text-on-surface w-1/4">Scope Restriction</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant font-body-md text-body-md text-on-surface">
+<!-- Module: Parks -->
+<tr class="bg-surface-bright hover:bg-surface-container-low transition-colors group">
+<td class="p-md flex items-center gap-sm">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">park</span>
+<span class="font-bold">Parks Management</span>
+</td>
+<td class="p-md text-center"><input checked="" class="w-5 h-5 text-primary rounded border-outline-variant focus:ring-primary" type="checkbox"/></td>
+<td class="p-md text-center"><input class="w-5 h-5 text-primary rounded border-outline-variant focus:ring-primary" type="checkbox"/></td>
+<td class="p-md text-center"><input checked="" class="w-5 h-5 text-primary rounded border-outline-variant focus:ring-primary" type="checkbox"/></td>
+<td class="p-md text-center"><input class="w-5 h-5 text-outline-variant rounded border-outline-variant bg-surface-variant cursor-not-allowed" disabled="" type="checkbox"/></td>
+<td class="p-md">
+<select class="w-full border-outline-variant rounded-lg font-body-md text-body-md focus:ring-primary focus:border-primary h-[44px]">
+<option>Assigned Region Only</option>
+<option>National (Request Req.)</option>
+</select>
+</td>
+</tr>
+<!-- Sub-module: Park Zones -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="p-md pl-xl flex items-center gap-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">subdirectory_arrow_right</span>
+                                Park Zones
+                            </td>
+<td class="p-md text-center"><input checked="" class="w-5 h-5 text-primary rounded border-outline-variant focus:ring-primary" type="checkbox"/></td>
+<td class="p-md text-center"><input class="w-5 h-5 text-primary rounded border-outline-variant focus:ring-primary" type="checkbox"/></td>
+<td class="p-md text-center"><input class="w-5 h-5 text-primary rounded border-outline-variant focus:ring-primary" type="checkbox"/></td>
+<td class="p-md text-center"><input class="w-5 h-5 text-outline-variant rounded border-outline-variant bg-surface-variant cursor-not-allowed" disabled="" type="checkbox"/></td>
+<td class="p-md text-sm text-on-surface-variant italic">Inherits from parent</td>
+</tr>
+<!-- Module: Businesses -->
+<tr class="bg-surface-bright hover:bg-surface-container-low transition-colors group">
+<td class="p-md flex items-center gap-sm">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">business_center</span>
+<span class="font-bold">Concessions &amp; Businesses</span>
+</td>
+<td class="p-md text-center"><input checked="" class="w-5 h-5 text-primary rounded border-outline-variant focus:ring-primary" type="checkbox"/></td>
+<td class="p-md text-center"><input checked="" class="w-5 h-5 text-primary rounded border-outline-variant focus:ring-primary" type="checkbox"/></td>
+<td class="p-md text-center"><input checked="" class="w-5 h-5 text-primary rounded border-outline-variant focus:ring-primary" type="checkbox"/></td>
+<td class="p-md text-center"><input class="w-5 h-5 text-primary rounded border-outline-variant focus:ring-primary" type="checkbox"/></td>
+<td class="p-md">
+<select class="w-full border-outline-variant rounded-lg font-body-md text-body-md focus:ring-primary focus:border-primary h-[44px]">
+<option>Assigned Region Only</option>
+<option>All Regions</option>
+</select>
+</td>
+</tr>
+<!-- Module: Users -->
+<tr class="bg-surface-bright hover:bg-surface-container-low transition-colors group">
+<td class="p-md flex items-center gap-sm">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">group</span>
+<span class="font-bold">Staff Management</span>
+</td>
+<td class="p-md text-center"><input checked="" class="w-5 h-5 text-primary rounded border-outline-variant focus:ring-primary" type="checkbox"/></td>
+<td class="p-md text-center"><input class="w-5 h-5 text-primary rounded border-outline-variant focus:ring-primary" type="checkbox"/></td>
+<td class="p-md text-center"><input class="w-5 h-5 text-primary rounded border-outline-variant focus:ring-primary" type="checkbox"/></td>
+<td class="p-md text-center"><input class="w-5 h-5 text-outline-variant rounded border-outline-variant bg-surface-variant cursor-not-allowed" disabled="" type="checkbox"/></td>
+<td class="p-md">
+<select class="w-full border-outline-variant rounded-lg font-body-md text-body-md focus:ring-primary focus:border-primary h-[44px]">
+<option>Subordinates Only</option>
+<option>Assigned Region</option>
+</select>
+</td>
+</tr>
+<!-- Special Request Notice -->
+<tr class="bg-secondary-fixed-dim/20">
+<td class="p-md" colspan="6">
+<div class="flex items-start gap-md">
+<span class="material-symbols-outlined text-secondary mt-1">info</span>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Special Permissions Request</p>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Certain actions like global deletion or national scope access require a temporary permission request. Base roles cannot have these enabled permanently.</p>
+<button class="mt-2 text-primary hover:underline font-label-md text-label-md flex items-center gap-1">
+                                             Request Temporary Escalation <span class="material-symbols-outlined text-[16px]">open_in_new</span>
+</button>
+</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</main>
+</body></html>

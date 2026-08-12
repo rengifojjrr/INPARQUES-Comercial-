@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Caso Resuelto - INPARQUES</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#bfc9c0",
+                        "surface-container-low": "#f5f3ed",
+                        "tertiary": "#3a4942",
+                        "surface-container-high": "#eae8e2",
+                        "surface-container-highest": "#e4e2dd",
+                        "on-primary-fixed-variant": "#005232",
+                        "on-tertiary-fixed-variant": "#3a4a43",
+                        "error-container": "#ffdad6",
+                        "on-secondary-container": "#446d59",
+                        "surface-dim": "#dcdad4",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed-dim": "#a4d0b8",
+                        "background": "#fbf9f3",
+                        "on-secondary-fixed-variant": "#264e3c",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-container": "#cadbd2",
+                        "surface-variant": "#e4e2dd",
+                        "secondary-container": "#c0edd4",
+                        "tertiary-fixed-dim": "#b9cbc1",
+                        "on-primary-fixed": "#002111",
+                        "error": "#ba1a1a",
+                        "surface-container": "#f0eee8",
+                        "inverse-surface": "#30312d",
+                        "on-surface-variant": "#3f4942",
+                        "on-surface": "#1b1c18",
+                        "on-secondary-fixed": "#002114",
+                        "secondary-fixed": "#c0edd4",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#6f7a71",
+                        "primary-fixed": "#a4f4c3",
+                        "inverse-on-surface": "#f3f1eb",
+                        "inverse-primary": "#88d7a8",
+                        "primary-fixed-dim": "#88d7a8",
+                        "surface-tint": "#186c45",
+                        "surface": "#fbf9f3",
+                        "primary": "#005131",
+                        "on-background": "#1b1c18",
+                        "tertiary-container": "#516159",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#d5e7dd",
+                        "secondary": "#3e6753",
+                        "on-primary-container": "#99e9b9",
+                        "surface-bright": "#fbf9f3",
+                        "primary-container": "#176b45",
+                        "on-tertiary-fixed": "#0f1e19",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "xs": "8px",
+                        "xl": "32px",
+                        "xxl": "48px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "touch-target": "44px",
+                        "sm": "12px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "display-lg": ["Manrope"],
+                        "label-sm": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background h-full flex flex-col md:flex-row antialiased">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 overflow-y-auto border-r border-outline-variant bg-surface py-lg px-md z-50">
+<div class="mb-xl flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary text-[32px]">forest</span>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">INPARQUES</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Administrative Portal</p>
+</div>
+</div>
+<button class="bg-primary-container text-on-primary min-h-touch-target rounded-full px-lg font-label-md text-label-md flex items-center justify-center gap-xs mb-lg hover:bg-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+            New Support Case
+        </button>
+<ul class="flex flex-col gap-xs flex-1">
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">inbox</span>
+<span class="font-label-md text-label-md">Inbox</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">assignment_turned_in</span>
+<span class="font-label-md text-label-md">Assigned Cases</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-label-md text-label-md">Orders</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-primary font-bold border-r-4 border-primary bg-secondary-container/20" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">gavel</span>
+<span class="font-label-md text-label-md">Disputes</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-md text-label-md">Requested Refunds</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">timer</span>
+<span class="font-label-md text-label-md">SLA</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-label-md text-label-md">Knowledge Base</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="font-label-md text-label-md">Reports</span>
+</a>
+</li>
+</ul>
+<div class="mt-auto pt-lg border-t border-outline-variant flex items-center gap-md">
+<img alt="User administrative avatar" class="w-10 h-10 rounded-full object-cover border border-outline-variant" data-alt="A close up professional headshot of an administrative user for a national parks portal, bright lighting, natural green background hints, modern corporate style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCr4xHrutweHTpYeWCxfcv8oswbxAwZ8c4UOPlrImpL665_sOnJrlF1Ugg8jcG2CUYNWmsrllIumkHMHMgTg8vZhbTyXcJdvpsE_rG6ELI93oIFr_2pCOBpDpZDhgEVAOBS4Qce4GO7OIZwynJr-_fZ5z1WtuTNtd3DV59NC3M8M4lVhQAKAL6T2DmD-Byz-qUDnZIJKGpxnpRSASeJA2pxjw3j-asI53cOp_Pd-iAqZe84PyD-y_-2"/>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Admin User</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Settings</p>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col min-w-0 md:ml-64">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center h-touch-target px-xl docked full-width top-0 sticky z-40 bg-background/95 backdrop-blur-sm border-b border-outline-variant">
+<div class="flex items-center gap-lg">
+<span class="font-headline-md text-headline-md font-bold text-primary">Support &amp; Dispute Portal</span>
+<nav class="hidden lg:flex gap-md ml-xl">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="font-label-md text-label-md text-primary border-b-2 border-primary pb-1" href="#">Analytics</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Settings</a>
+</nav>
+</div>
+<div class="flex items-center gap-md">
+<div class="relative hidden sm:block">
+<input class="pl-xl pr-sm py-sm rounded-full border border-outline-variant bg-surface-container-low text-body-md font-body-md focus:border-primary focus:ring-1 focus:ring-primary w-64 min-h-touch-target" placeholder="Search cases..." type="text"/>
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+</div>
+<button class="min-h-touch-target px-md rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-md flex items-center gap-xs">
+<span class="material-symbols-outlined">filter_list</span>
+                    Park Filter
+                </button>
+<button class="min-h-touch-target px-md rounded-full bg-primary-container text-on-primary hover:bg-primary transition-colors font-label-md">
+                    Create Order
+                </button>
+<div class="flex gap-xs border-l border-outline-variant pl-md ml-xs">
+<button class="w-touch-target h-touch-target rounded-full hover:bg-surface-container-high flex items-center justify-center text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-touch-target h-touch-target rounded-full hover:bg-surface-container-high flex items-center justify-center text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<button class="w-touch-target h-touch-target rounded-full hover:bg-surface-container-high flex items-center justify-center text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<main class="flex-1 p-md md:p-xl overflow-y-auto">
+<!-- Case Header -->
+<div class="mb-lg flex flex-col md:flex-row md:items-center justify-between gap-md">
+<div>
+<div class="flex items-center gap-sm mb-xs">
+<h2 class="font-headline-lg text-headline-lg text-on-background">Ticket #DIS-2023-0894</h2>
+<span class="px-sm py-xs rounded-full bg-primary-container/10 text-primary-container font-label-sm text-label-sm border border-primary-container/20 flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            RESUELTO
+                        </span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Disputa de cobro doble en concesionario 'Mirador El Ávila'</p>
+</div>
+<div class="flex gap-sm">
+<button class="min-h-touch-target px-lg rounded-lg border border-outline-variant text-on-surface hover:bg-surface-container-high transition-colors font-label-md flex items-center gap-xs" onclick="document.getElementById('reopenModal').classList.remove('hidden')">
+<span class="material-symbols-outlined">refresh</span>
+                        Reabrir caso
+                    </button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-lg">
+<!-- Resolution Summary (Spans 2 columns) -->
+<div class="lg:col-span-2 bg-surface rounded-xl border border-outline-variant p-lg shadow-sm">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-md flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary">fact_check</span>
+                        Resumen de Solución
+                    </h3>
+<div class="bg-surface-container-low rounded-lg p-md mb-md border border-outline-variant/50">
+<p class="font-body-md text-body-md text-on-surface leading-relaxed">
+                            Se verificó en el sistema de pagos el doble cargo reportado por el visitante el día 15/10/2023. El proveedor de pasarela de pagos confirmó una latencia que causó la duplicidad. Se procedió a autorizar la devolución íntegra del segundo cargo (Transacción ID: TXN-998342). El concesionario fue notificado y el visitante ha recibido el comprobante de reversión.
+                        </p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-md">
+<div class="border border-outline-variant rounded-lg p-md">
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-xs">Agente Resolutor</p>
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-tertiary">support_agent</span>
+<span class="font-label-md text-label-md text-on-surface">Carlos Mendoza (Tier 2)</span>
+</div>
+</div>
+<div class="border border-outline-variant rounded-lg p-md">
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-xs">Tiempo de Resolución</p>
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-tertiary">schedule</span>
+<span class="font-label-md text-label-md text-on-surface">4h 23m (Dentro de SLA)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Financial Outcome -->
+<div class="bg-surface rounded-xl border border-outline-variant p-lg shadow-sm flex flex-col justify-between">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-md flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary">account_balance_wallet</span>
+                            Resultado Financiero
+                        </h3>
+<div class="flex items-center justify-center p-md bg-secondary-container/30 rounded-full mb-lg border border-secondary-container">
+<span class="material-symbols-outlined text-secondary text-[40px] mr-sm">price_check</span>
+<div>
+<p class="font-label-sm text-label-sm text-secondary">Reembolso Emitido</p>
+<p class="font-headline-lg text-headline-lg font-bold text-on-surface">$24.50</p>
+</div>
+</div>
+</div>
+<ul class="space-y-sm font-body-md text-body-md text-on-surface-variant">
+<li class="flex justify-between border-b border-outline-variant pb-xs">
+<span>Método:</span>
+<span class="font-label-md text-on-surface">TDC terminada en 4432</span>
+</li>
+<li class="flex justify-between border-b border-outline-variant pb-xs">
+<span>Fecha Efectiva:</span>
+<span class="font-label-md text-on-surface">16/10/2023</span>
+</li>
+<li class="flex justify-between pb-xs">
+<span>Comisión asumida:</span>
+<span class="font-label-md text-on-surface">INPARQUES (0.50$)</span>
+</li>
+</ul>
+</div>
+<!-- Communication History (Spans 2 columns) -->
+<div class="lg:col-span-2 bg-surface rounded-xl border border-outline-variant p-lg shadow-sm h-[400px] flex flex-col">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-md flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary">forum</span>
+                        Histórico de Comunicaciones
+                    </h3>
+<div class="flex-1 overflow-y-auto pr-sm space-y-md">
+<!-- Msg User -->
+<div class="flex gap-sm">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">person</span>
+</div>
+<div class="bg-surface-container-low rounded-lg rounded-tl-none p-md border border-outline-variant/30 max-w-[80%]">
+<div class="flex justify-between items-center mb-xs gap-md">
+<span class="font-label-sm text-label-sm text-on-surface font-bold">Visitante (María Pérez)</span>
+<span class="font-label-sm text-label-sm text-outline">15/10 - 10:14 AM</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface">Hola, el día de ayer pagué el estacionamiento y la entrada en el mirador, pero me cobraron dos veces a mi tarjeta. Adjunto el estado de cuenta.</p>
+</div>
+</div>
+<!-- Msg System -->
+<div class="flex gap-sm justify-end">
+<div class="bg-primary-container/10 rounded-lg rounded-tr-none p-md border border-primary-container/20 max-w-[80%]">
+<div class="flex justify-between items-center mb-xs gap-md">
+<span class="font-label-sm text-label-sm text-outline">15/10 - 10:15 AM</span>
+<span class="font-label-sm text-label-sm text-primary-container font-bold">Sistema (Auto-reply)</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface">Hemos recibido su solicitud. Un agente revisará su caso en un plazo máximo de 24 horas.</p>
+</div>
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px] text-on-primary">smart_toy</span>
+</div>
+</div>
+<!-- Msg Agent -->
+<div class="flex gap-sm justify-end">
+<div class="bg-surface-container rounded-lg rounded-tr-none p-md border border-outline-variant/50 max-w-[80%]">
+<div class="flex justify-between items-center mb-xs gap-md">
+<span class="font-label-sm text-label-sm text-outline">15/10 - 02:30 PM</span>
+<span class="font-label-sm text-label-sm text-tertiary font-bold">Carlos Mendoza (Soporte)</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface">Buenas tardes María. Efectivamente detectamos el cobro duplicado debido a un error de comunicación con el banco. Ya hemos procesado la reversión del segundo cobro. Dependiendo de su banco, puede tardar de 24 a 48 horas en reflejarse. Procedo a cerrar este ticket. ¡Gracias por visitar INPARQUES!</p>
+</div>
+<div class="w-8 h-8 rounded-full bg-tertiary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px] text-on-tertiary">support_agent</span>
+</div>
+</div>
+</div>
+</div>
+<!-- CSAT Score -->
+<div class="bg-surface rounded-xl border border-outline-variant p-lg shadow-sm">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-md flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary">sentiment_very_satisfied</span>
+                        Satisfacción (CSAT)
+                    </h3>
+<div class="flex flex-col items-center justify-center py-md">
+<div class="flex gap-xs mb-sm text-primary">
+<span class="material-symbols-outlined text-[32px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[32px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[32px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[32px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[32px]" style="font-variation-settings: 'FILL' 1;">star_half</span>
+</div>
+<span class="font-display-lg text-display-lg font-bold text-on-surface">4.5</span>
+<span class="font-label-md text-label-md text-on-surface-variant">de 5.0</span>
+</div>
+<div class="mt-md pt-md border-t border-outline-variant">
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-xs">Comentario del visitante:</p>
+<p class="font-body-md text-body-md text-on-surface italic">"Resolvieron rápido, pero el banco tardó mucho en mostrarme el dinero de vuelta."</p>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Reopen Modal (Hidden by default) -->
+<div class="hidden fixed inset-0 z-50 flex items-center justify-center bg-on-background/40 backdrop-blur-sm p-md" id="reopenModal">
+<div class="bg-surface rounded-xl shadow-lg w-full max-w-[500px] border border-outline-variant overflow-hidden flex flex-col">
+<div class="p-lg border-b border-outline-variant bg-surface-container-low flex justify-between items-center">
+<h3 class="font-headline-md text-headline-md text-on-surface">Reabrir Caso</h3>
+<button class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-surface-variant text-on-surface-variant transition-colors" onclick="document.getElementById('reopenModal').classList.add('hidden')">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="p-lg">
+<p class="font-body-md text-body-md text-on-surface-variant mb-md">Está a punto de reabrir un caso cerrado y resuelto. Debe proporcionar una justificación técnica o administrativa válida para esta acción, la cual quedará registrada en la auditoría.</p>
+<label class="block font-label-md text-label-md text-on-surface mb-xs">Motivo de reapertura <span class="text-error">*</span></label>
+<select class="w-full min-h-touch-target rounded-lg border border-outline-variant bg-surface mb-md px-md font-body-md focus:border-primary focus:ring-1 focus:ring-primary">
+<option disabled="" selected="" value="">Seleccione un motivo...</option>
+<option value="1">Reclamo reiterado del visitante</option>
+<option value="2">Error en el proceso de reembolso</option>
+<option value="3">Solicitud de auditoría interna</option>
+<option value="4">Fallo en pasarela de pago post-cierre</option>
+</select>
+<label class="block font-label-md text-label-md text-on-surface mb-xs">Detalles adicionales</label>
+<textarea class="w-full rounded-lg border border-outline-variant bg-surface p-md font-body-md focus:border-primary focus:ring-1 focus:ring-primary resize-none" placeholder="Especifique los detalles técnicos..." rows="3"></textarea>
+</div>
+<div class="p-lg border-t border-outline-variant bg-surface-container-low flex justify-end gap-md">
+<button class="min-h-touch-target px-lg rounded-lg border border-outline-variant text-on-surface font-label-md hover:bg-surface-variant transition-colors" onclick="document.getElementById('reopenModal').classList.add('hidden')">
+                    Cancelar
+                </button>
+<button class="min-h-touch-target px-lg rounded-lg bg-primary text-on-primary font-label-md hover:bg-primary/90 transition-colors" onclick="document.getElementById('reopenModal').classList.add('hidden'); document.getElementById('successToast').classList.remove('hidden'); setTimeout(()=&gt;document.getElementById('successToast').classList.add('hidden'), 3000)">
+                    Confirmar Reapertura
+                </button>
+</div>
+</div>
+</div>
+<!-- Success Toast -->
+<div class="hidden fixed bottom-xl right-xl bg-inverse-surface text-inverse-on-surface px-lg py-md rounded-lg shadow-lg flex items-center gap-md z-50 animate-[slideIn_0.3s_ease-out]" id="successToast">
+<span class="material-symbols-outlined text-primary-fixed" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-md text-label-md">Acción procesada exitosamente.</span>
+</div>
+<style>
+        @keyframes slideIn {
+            from { transform: translateY(100%) opacity(0); }
+            to { transform: translateY(0) opacity(1); }
+        }
+    </style>
+</body></html>

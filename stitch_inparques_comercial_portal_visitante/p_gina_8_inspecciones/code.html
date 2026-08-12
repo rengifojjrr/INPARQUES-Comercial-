@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Gestión de Parques - Inspecciones</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-fixed-dim": "#b9cbc1",
+                      "on-primary-container": "#99e9b9",
+                      "primary-container": "#176b45",
+                      "surface-dim": "#dcdad4",
+                      "on-surface-variant": "#3f4942",
+                      "outline-variant": "#bfc9c0",
+                      "inverse-surface": "#30312d",
+                      "surface-container": "#f0eee8",
+                      "on-primary-fixed": "#002111",
+                      "on-primary-fixed-variant": "#005232",
+                      "inverse-on-surface": "#f3f1eb",
+                      "tertiary-container": "#516159",
+                      "primary-fixed-dim": "#88d7a8",
+                      "on-secondary-fixed": "#002114",
+                      "on-error-container": "#93000a",
+                      "surface-tint": "#186c45",
+                      "on-tertiary": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "outline": "#6f7a71",
+                      "on-tertiary-container": "#cadbd2",
+                      "surface-container-low": "#f5f3ed",
+                      "secondary-container": "#c0edd4",
+                      "tertiary-fixed": "#d5e7dd",
+                      "error-container": "#ffdad6",
+                      "primary": "#005131",
+                      "tertiary": "#3a4942",
+                      "surface-container-high": "#eae8e2",
+                      "on-tertiary-fixed-variant": "#3a4a43",
+                      "on-secondary": "#ffffff",
+                      "surface-container-highest": "#e4e2dd",
+                      "on-secondary-container": "#446d59",
+                      "surface": "#fbf9f3",
+                      "surface-variant": "#e4e2dd",
+                      "on-background": "#1b1c18",
+                      "secondary-fixed": "#c0edd4",
+                      "background": "#fbf9f3",
+                      "inverse-primary": "#88d7a8",
+                      "surface-bright": "#fbf9f3",
+                      "on-tertiary-fixed": "#0f1e19",
+                      "secondary": "#3e6753",
+                      "primary-fixed": "#a4f4c3",
+                      "error": "#ba1a1a",
+                      "on-primary": "#ffffff",
+                      "secondary-fixed-dim": "#a4d0b8",
+                      "on-surface": "#1b1c18",
+                      "on-secondary-fixed-variant": "#264e3c",
+                      "on-error": "#ffffff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xl": "32px",
+                      "xs": "8px",
+                      "base": "4px",
+                      "lg": "24px",
+                      "xxl": "48px",
+                      "touch-target": "44px",
+                      "sm": "12px",
+                      "md": "16px"
+              },
+              "fontFamily": {
+                      "display-lg": [
+                              "Manrope"
+                      ],
+                      "label-sm": [
+                              "Manrope"
+                      ],
+                      "headline-lg-mobile": [
+                              "Manrope"
+                      ],
+                      "headline-md": [
+                              "Manrope"
+                      ],
+                      "body-lg": [
+                              "Manrope"
+                      ],
+                      "label-md": [
+                              "Manrope"
+                      ],
+                      "body-md": [
+                              "Manrope"
+                      ],
+                      "headline-lg": [
+                              "Manrope"
+                      ]
+              },
+              "fontSize": {
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .material-symbols-outlined {
+          font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.filled {
+          font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+      </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased min-h-screen">
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 overflow-y-auto border-r border-outline-variant bg-surface py-lg px-md z-50">
+<div class="mb-xl px-xs">
+<h1 class="font-headline-lg text-headline-lg font-bold text-primary truncate">Gestión de Parques</h1>
+<p class="font-body-md text-body-md text-on-surface-variant truncate">Portal Administrativo</p>
+</div>
+<button class="mb-lg w-full min-h-[44px] bg-primary-container text-on-primary-container font-label-md text-label-md rounded-lg flex items-center justify-center gap-2 hover:bg-surface-tint hover:text-white transition-colors">
+<span class="material-symbols-outlined">add</span>
+            Nueva Inspección
+        </button>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-sm py-2 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Inicio</span>
+</a>
+<a class="flex items-center gap-3 px-sm py-2 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">map</span>
+<span class="font-label-md text-label-md">Zonas y puntos</span>
+</a>
+<a class="flex items-center gap-3 px-sm py-2 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">storefront</span>
+<span class="font-label-md text-label-md">Negocios</span>
+</a>
+<a class="flex items-center gap-3 px-sm py-2 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">settings_applications</span>
+<span class="font-label-md text-label-md">Operación</span>
+</a>
+<a class="flex items-center gap-3 px-sm py-2 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">schedule</span>
+<span class="font-label-md text-label-md">Horarios</span>
+</a>
+<a class="flex items-center gap-3 px-sm py-2 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">report_problem</span>
+<span class="font-label-md text-label-md">Incidencias</span>
+</a>
+<a class="flex items-center gap-3 px-sm py-2 rounded-lg text-primary font-bold border-r-4 border-primary bg-secondary-container/20 opacity-80 transition-all duration-150" href="#">
+<span class="material-symbols-outlined filled">verified</span>
+<span class="font-label-md text-label-md">Inspecciones</span>
+</a>
+<a class="flex items-center gap-3 px-sm py-2 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md">Desempeño</span>
+</a>
+<a class="flex items-center gap-3 px-sm py-2 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">badge</span>
+<span class="font-label-md text-label-md">Usuarios locales</span>
+</a>
+</nav>
+<div class="mt-auto pt-lg border-t border-outline-variant space-y-1">
+<a class="flex items-center gap-3 px-sm py-2 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Ajustes</span>
+</a>
+<a class="flex items-center gap-3 px-sm py-2 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Cerrar sesión</span>
+</a>
+</div>
+</aside>
+<!-- TopAppBar -->
+<header class="hidden md:flex justify-between items-center h-touch-target px-lg ml-64 bg-surface border-b border-outline-variant docked full-width top-0 sticky z-40 shadow-sm">
+<div class="flex items-center gap-md">
+<h2 class="font-headline-md text-headline-md font-extrabold text-primary">Parques Nacionales Admin</h2>
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="pl-[40px] pr-sm py-1 rounded-full border border-outline-variant bg-surface-container-lowest focus:border-primary focus:ring-1 focus:ring-primary text-body-md min-h-[36px] w-64" placeholder="Buscar..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-sm">
+<button class="min-h-[44px] px-md border border-outline-variant text-on-surface-variant font-label-md text-label-md rounded-lg hover:bg-surface-container-low transition-colors flex items-center gap-2">
+                Descargar Reporte
+            </button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-colors">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Mobile Header (Fallback for TopAppBar on md:hidden) -->
+<header class="md:hidden flex justify-between items-center h-touch-target px-md bg-surface border-b border-outline-variant sticky top-0 z-40">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary truncate">Gestión de Parques</h2>
+<button class="p-2 text-on-surface-variant">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</header>
+<!-- Main Content -->
+<main class="md:ml-64 p-md md:p-lg lg:p-xl space-y-xl">
+<!-- Header Actions -->
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-md">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-background font-bold">Módulo de Fiscalización</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Gestión integral de inspecciones y cumplimiento.</p>
+</div>
+<div class="flex gap-sm w-full sm:w-auto">
+<button class="flex-1 sm:flex-none min-h-[44px] px-md bg-secondary-container text-on-secondary-container font-label-md text-label-md rounded-lg hover:bg-[#b0dcc5] transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">person_add</span>
+                    Asignar Inspector
+                </button>
+<button class="flex-1 sm:flex-none min-h-[44px] px-md bg-primary text-on-primary font-label-md text-label-md rounded-lg hover:bg-primary-fixed-dim transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add_task</span>
+                    Cargar Inspección
+                </button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg">
+<!-- Resumen de Hallazgos Críticos (Card) -->
+<div class="lg:col-span-4 bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center gap-3 mb-md">
+<div class="w-10 h-10 rounded-full bg-error-container flex items-center justify-center text-on-error-container">
+<span class="material-symbols-outlined">warning</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Hallazgos Críticos</h3>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between items-end border-b border-surface-container-high pb-2">
+<span class="font-body-md text-body-md text-on-surface-variant">Riesgo Ambiental</span>
+<span class="font-headline-md text-headline-md font-bold text-error">12</span>
+</div>
+<div class="flex justify-between items-end border-b border-surface-container-high pb-2">
+<span class="font-body-md text-body-md text-on-surface-variant">Estructurales</span>
+<span class="font-headline-md text-headline-md font-bold text-secondary">5</span>
+</div>
+<div class="flex justify-between items-end">
+<span class="font-body-md text-body-md text-on-surface-variant">Permisología</span>
+<span class="font-headline-md text-headline-md font-bold text-primary">8</span>
+</div>
+</div>
+</div>
+<!-- Calendario Resumen (Card) -->
+<div class="lg:col-span-4 bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center gap-3 mb-md">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined">calendar_today</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Programadas (Semana)</h3>
+</div>
+<div class="space-y-3">
+<div class="flex items-center gap-3 bg-surface-container-low p-2 rounded-lg">
+<div class="bg-primary text-on-primary font-label-sm text-label-sm px-2 py-1 rounded text-center w-12">MAR<br/>14</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Cafetería El Mirador</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Inspector: Juan Pérez</p>
+</div>
+</div>
+<div class="flex items-center gap-3 bg-surface-container-low p-2 rounded-lg">
+<div class="bg-primary text-on-primary font-label-sm text-label-sm px-2 py-1 rounded text-center w-12">JUE<br/>16</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Campamento Los Pinos</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Inspector: Ana Gómez</p>
+</div>
+</div>
+</div>
+<button class="mt-4 w-full text-primary font-label-md text-label-md hover:underline flex items-center justify-center gap-1">
+                    Ver Calendario Completo <span class="material-symbols-outlined" style="font-size: 16px;">arrow_forward</span>
+</button>
+</div>
+<!-- Inspecciones Vencidas (Alert Card) -->
+<div class="lg:col-span-4 bg-error-container border border-error/20 rounded-xl p-lg shadow-sm">
+<div class="flex items-center gap-3 mb-md">
+<span class="material-symbols-outlined text-on-error-container text-3xl">notification_important</span>
+<h3 class="font-headline-md text-headline-md text-on-error-container font-bold">Inspecciones Vencidas</h3>
+</div>
+<p class="font-body-md text-body-md text-on-error-container mb-4">Se requiere atención inmediata para garantizar el cumplimiento normativo.</p>
+<ul class="space-y-2 mb-4">
+<li class="flex justify-between items-center text-sm font-medium text-on-error-container">
+<span>Kiosko La Cascada</span>
+<span class="bg-error text-on-error px-2 py-0.5 rounded-full text-xs">Hace 3 días</span>
+</li>
+<li class="flex justify-between items-center text-sm font-medium text-on-error-container">
+<span>Alquiler de Botes Sur</span>
+<span class="bg-error text-on-error px-2 py-0.5 rounded-full text-xs">Hace 1 semana</span>
+</li>
+</ul>
+<button class="min-h-[44px] w-full bg-error text-on-error font-label-md text-label-md rounded-lg hover:bg-error/90 transition-colors">
+                    Gestionar Retrasos
+                </button>
+</div>
+</div>
+<!-- Data Table Section -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-sm overflow-hidden">
+<div class="p-lg border-b border-outline-variant flex flex-col sm:flex-row justify-between items-start sm:items-center gap-md">
+<h3 class="font-headline-md text-headline-md text-on-surface">Historial y Seguimiento</h3>
+<div class="flex gap-2">
+<select class="min-h-[44px] border border-outline-variant rounded-lg px-3 py-1 font-body-md text-body-md bg-surface text-on-surface focus:border-primary focus:ring-1 focus:ring-primary">
+<option>Todos los estados</option>
+<option>Conforme</option>
+<option>No conforme</option>
+</select>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant">
+<th class="p-md font-label-md text-label-md text-on-surface-variant">Negocio</th>
+<th class="p-md font-label-md text-label-md text-on-surface-variant">Fecha</th>
+<th class="p-md font-label-md text-label-md text-on-surface-variant">Resultado</th>
+<th class="p-md font-label-md text-label-md text-on-surface-variant">Plan Correctivo</th>
+<th class="p-md font-label-md text-label-md text-on-surface-variant text-right">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="p-md font-body-md text-body-md text-on-surface font-medium">Restaurante El Bosque</td>
+<td class="p-md font-body-md text-body-md text-on-surface-variant">10 Mar 2024</td>
+<td class="p-md">
+<span class="inline-flex items-center gap-1 bg-secondary-container/30 text-primary-fixed-dim px-2 py-1 rounded-full font-label-sm text-label-sm border border-secondary-container">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+                                    Conforme
+                                </span>
+</td>
+<td class="p-md font-body-md text-body-md text-on-surface-variant">-</td>
+<td class="p-md text-right">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors" title="Ver detalles">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="p-md font-body-md text-body-md text-on-surface font-medium">Tienda de Souvenirs Norte</td>
+<td class="p-md font-body-md text-body-md text-on-surface-variant">05 Mar 2024</td>
+<td class="p-md">
+<span class="inline-flex items-center gap-1 bg-error-container/30 text-error px-2 py-1 rounded-full font-label-sm text-label-sm border border-error-container">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+                                    No conforme
+                                </span>
+</td>
+<td class="p-md">
+<span class="font-body-md text-body-md text-secondary font-medium">En progreso (45%)</span>
+</td>
+<td class="p-md text-right">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors" title="Ver detalles">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors" title="Actualizar Plan">
+<span class="material-symbols-outlined">edit_document</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="p-md font-body-md text-body-md text-on-surface font-medium">Refugio Alta Montaña</td>
+<td class="p-md font-body-md text-body-md text-on-surface-variant">28 Feb 2024</td>
+<td class="p-md">
+<span class="inline-flex items-center gap-1 bg-error-container/30 text-error px-2 py-1 rounded-full font-label-sm text-label-sm border border-error-container">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+                                    No conforme
+                                </span>
+</td>
+<td class="p-md">
+<span class="font-body-md text-body-md text-primary font-medium">Completado</span>
+</td>
+<td class="p-md text-right">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors" title="Ver detalles">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-md border-t border-outline-variant flex justify-between items-center bg-surface-container-low">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Mostrando 1 a 3 de 24 registros</span>
+<div class="flex gap-1">
+<button class="px-3 py-1 border border-outline-variant rounded bg-surface text-on-surface font-label-sm hover:bg-surface-container-highest transition-colors disabled:opacity-50" disabled="">Anterior</button>
+<button class="px-3 py-1 border border-outline-variant rounded bg-surface text-on-surface font-label-sm hover:bg-surface-container-highest transition-colors">Siguiente</button>
+</div>
+</div>
+</div>
+</main>
+</body></html>

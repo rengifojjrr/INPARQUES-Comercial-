@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Condiciones Económicas - Parques Nacionales</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#bfc9c0",
+                        "on-secondary-container": "#446d59",
+                        "on-primary-fixed-variant": "#005232",
+                        "surface-container-high": "#eae8e2",
+                        "tertiary-fixed": "#d5e7dd",
+                        "secondary": "#3e6753",
+                        "background": "#fbf9f3",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#a4f4c3",
+                        "on-error-container": "#93000a",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#516159",
+                        "surface-container-highest": "#e4e2dd",
+                        "primary": "#005131",
+                        "on-surface-variant": "#3f4942",
+                        "surface-tint": "#186c45",
+                        "inverse-on-surface": "#f3f1eb",
+                        "surface-container-low": "#f5f3ed",
+                        "surface-dim": "#dcdad4",
+                        "on-background": "#1b1c18",
+                        "surface-container": "#f0eee8",
+                        "secondary-container": "#c0edd4",
+                        "on-secondary-fixed-variant": "#264e3c",
+                        "inverse-surface": "#30312d",
+                        "primary-container": "#176b45",
+                        "primary-fixed-dim": "#88d7a8",
+                        "on-primary-container": "#99e9b9",
+                        "inverse-primary": "#88d7a8",
+                        "secondary-fixed-dim": "#a4d0b8",
+                        "on-tertiary-fixed": "#0f1e19",
+                        "error": "#ba1a1a",
+                        "error-container": "#ffdad6",
+                        "on-surface": "#1b1c18",
+                        "tertiary": "#3a4942",
+                        "on-primary-fixed": "#002111",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#b9cbc1",
+                        "outline": "#6f7a71",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed": "#002114",
+                        "surface-variant": "#e4e2dd",
+                        "secondary-fixed": "#c0edd4",
+                        "on-tertiary-fixed-variant": "#3a4a43",
+                        "surface": "#fbf9f3",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-container": "#cadbd2",
+                        "surface-bright": "#fbf9f3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "xs": "8px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "xxl": "48px",
+                        "touch-target": "44px",
+                        "sm": "12px",
+                        "xl": "32px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "label-sm": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "display-lg": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; background-color: #F7F5EF; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .icon-fill { font-variation-settings: 'FILL' 1; }
+        
+        /* Custom Scrollbar for a cleaner look */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #bfc9c0; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #6f7a71; }
+    </style>
+</head>
+<body class="bg-background text-on-background flex min-h-screen overflow-x-hidden">
+<!-- SideNavBar (Hidden on Mobile, Visible on Desktop) -->
+<aside class="hidden md:flex flex-col bg-surface-container border-r border-outline-variant h-screen w-64 fixed left-0 top-0 z-40 py-md px-sm">
+<div class="flex items-center gap-sm mb-xl px-sm">
+<img alt="Institution Logo" class="w-[44px] h-[44px] rounded-full object-cover border border-outline-variant" data-alt="A minimalist, modern vector logo depicting stylized mountains or trees in shades of deep green and warm white, suitable for a national parks commercial entity. The logo is enclosed in a subtle circular badge, conveying authority and organic connection." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOU4sMaz6njgeDM5j-NN-X0RXtI3Aj-PCNog7uq2ZTY5aC0ttt1VW5PjDcidyX5TIGO2Vg4_M3XMzvojW58kYtVO1SYsJt7o0Sdclp-rjj2nI0y_gFqV8BlLZ7fnGLE0mqIEZLmUlm9JfdrlrIkqiiJswqxK6xk7Bux904sGwaER5mlt-PD2rQFKwJ8-hPXjPus4_pjE3pqY2QL2MPzTUJhtKiYm5woUSHtxdlJm5Q0WJDVl2kK-bp"/>
+<div>
+<h1 class="font-headline-md text-headline-md text-on-surface truncate">Gestión Comercial</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant truncate">Administración Central</p>
+</div>
+</div>
+<button class="bg-primary-container text-on-primary w-full min-h-[44px] rounded-lg font-label-md text-label-md mb-lg hover:bg-surface-tint transition-colors shadow-sm flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[20px]">add</span>
+            Nueva Concesión
+        </button>
+<nav class="flex-1 overflow-y-auto space-y-1">
+<a class="flex items-center gap-sm px-sm min-h-[44px] text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="dashboard">dashboard</span>
+                Resumen Comercial
+            </a>
+<a class="flex items-center gap-sm px-sm min-h-[44px] text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="description">description</span>
+                Solicitudes
+            </a>
+<a class="flex items-center gap-sm px-sm min-h-[44px] text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="folder_open">folder_open</span>
+                Expedientes
+            </a>
+<a class="flex items-center gap-sm px-sm min-h-[44px] text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="assignment_turned_in">assignment_turned_in</span>
+                Contratos y Permisos
+            </a>
+<a class="flex items-center gap-sm px-sm min-h-[44px] text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="map">map</span>
+                Puntos Comerciales
+            </a>
+<a aria-current="page" class="flex items-center gap-sm px-sm min-h-[44px] bg-primary-container text-on-primary-container font-bold rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined text-[20px] icon-fill" data-icon="monetization_on">monetization_on</span>
+                Condiciones Económicas
+            </a>
+<a class="flex items-center gap-sm px-sm min-h-[44px] text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="history">history</span>
+                Prórrogas
+            </a>
+<a class="flex items-center gap-sm px-sm min-h-[44px] text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="verified_user">verified_user</span>
+                Inspecciones
+            </a>
+<a class="flex items-center gap-sm px-sm min-h-[44px] text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="analytics">analytics</span>
+                Reportes
+            </a>
+</nav>
+<div class="mt-auto pt-sm border-t border-outline-variant space-y-1">
+<a class="flex items-center gap-sm px-sm min-h-[44px] text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="settings">settings</span>
+                Configuración
+            </a>
+<a class="flex items-center gap-sm px-sm min-h-[44px] text-on-surface-variant hover:bg-surface-container-highest transition-all rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="logout">logout</span>
+                Cerrar Sesión
+            </a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 flex flex-col min-h-screen">
+<!-- TopNavBar -->
+<header class="sticky top-0 z-30 flex items-center justify-between w-full px-lg h-[64px] bg-surface border-b border-outline-variant">
+<!-- Mobile Menu Toggle (Visible only on mobile) -->
+<button class="md:hidden p-xs text-on-surface-variant hover:bg-surface-container-low rounded-full min-w-[44px] min-h-[44px] flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<!-- Brand (Mobile Fallback) or Search -->
+<div class="flex-1 flex items-center gap-md">
+<div class="hidden md:flex items-center bg-surface-container-low rounded-full px-sm py-xs border border-outline-variant focus-within:border-primary focus-within:ring-1 focus-within:ring-primary w-full max-w-md h-[44px]">
+<span class="material-symbols-outlined text-on-surface-variant mr-xs">search</span>
+<input class="bg-transparent border-none outline-none focus:ring-0 w-full font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant" placeholder="Buscar expedientes, contratos..." type="text"/>
+</div>
+<div class="md:hidden font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary truncate">
+                    Parques Nacionales
+                </div>
+</div>
+<!-- Trailing Actions -->
+<div class="flex items-center gap-sm">
+<button aria-label="notifications" class="text-on-surface-variant hover:bg-surface-container-low rounded-full min-w-[44px] min-h-[44px] flex items-center justify-center transition-colors relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button aria-label="help" class="hidden sm:flex text-on-surface-variant hover:bg-surface-container-low rounded-full min-w-[44px] min-h-[44px] items-center justify-center transition-colors">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+<button aria-label="settings" class="hidden sm:flex text-on-surface-variant hover:bg-surface-container-low rounded-full min-w-[44px] min-h-[44px] items-center justify-center transition-colors">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="w-px h-8 bg-outline-variant mx-xs hidden sm:block"></div>
+<button class="flex items-center gap-xs rounded-full p-1 hover:bg-surface-container-low transition-colors min-h-[44px]">
+<img alt="Administrator Profile" class="w-8 h-8 rounded-full object-cover border border-outline-variant" data-alt="A professional headshot of an administrative professional in their 40s, looking approachable yet serious, wearing a crisp light collared shirt against a neutral bright background. The lighting is soft and even." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgih_BLx8d2ldqvHgjFB3ceq2Fg4vXJRfg0oVJJ0vLMMp2Hted7xgriqzhuwiEy7eGwVHgPVbbpac5K2GqBiCbmlF34rFyD4NhWFyGD2o181zrmxBsI86Ej4RNvkiZvTtdGVB-FoMrTtqWprm68YaJOZqNuE12qhlPMeIZ3YzwDpumYCdYaU9Vf9yDNfsCePpyJXhvrh6RE_ekyb0GQtMAcMNwOXa-tcfTDxy1WngGMscQaIY3Kx-L"/>
+</button>
+</div>
+</header>
+<!-- Page Content -->
+<div class="flex-1 p-md md:p-lg lg:p-xl flex flex-col gap-lg max-w-7xl mx-auto w-full">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-md mb-md">
+<div>
+<h2 class="font-headline-lg text-headline-lg md:text-display-lg md:font-display-lg text-on-background mb-xs">Gestión de Canon</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+                        Configuración de reglas económicas, simulador de impacto y registro histórico para concesiones comerciales.
+                    </p>
+</div>
+<div class="flex gap-sm">
+<button class="bg-surface-container-low border border-outline-variant text-on-surface min-h-[44px] px-md rounded-lg font-label-md text-label-md hover:bg-surface-container transition-colors shadow-sm">
+                        Exportar Datos
+                    </button>
+<button class="bg-primary-container text-on-primary min-h-[44px] px-md rounded-lg font-label-md text-label-md hover:bg-surface-tint transition-colors shadow-sm flex items-center gap-xs">
+<span class="material-symbols-outlined text-[20px]">save</span>
+                        Guardar Regla
+                    </button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg">
+<!-- Left Column: Configurator (Spans 8 cols on LG) -->
+<div class="lg:col-span-8 flex flex-col gap-lg">
+<!-- Rule Configuration Card -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-sm">
+<div class="flex items-center gap-sm mb-lg border-b border-outline-variant pb-sm">
+<span class="material-symbols-outlined text-primary bg-primary-fixed p-2 rounded-lg">tune</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Configuración de Regla Económica</h3>
+</div>
+<form class="space-y-lg">
+<!-- Tipo de Canon Selection -->
+<div>
+<label class="font-label-md text-label-md text-on-surface block mb-sm">Estructura del Canon</label>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-md">
+<label class="relative flex flex-col p-md border border-primary bg-secondary-container/10 rounded-lg cursor-pointer hover:bg-surface-container-low transition-colors">
+<input checked="" class="sr-only" name="canon_type" type="radio" value="mixto"/>
+<span class="flex items-center justify-between mb-xs">
+<span class="font-label-md text-label-md text-primary font-bold">Mixto</span>
+<span class="material-symbols-outlined text-primary icon-fill text-[20px]">check_circle</span>
+</span>
+<span class="font-body-md text-body-md text-on-surface-variant text-sm">Fijo + Variable</span>
+</label>
+<label class="relative flex flex-col p-md border border-outline-variant rounded-lg cursor-pointer hover:bg-surface-container-low transition-colors">
+<input class="sr-only" name="canon_type" type="radio" value="fijo"/>
+<span class="flex items-center justify-between mb-xs">
+<span class="font-label-md text-label-md text-on-surface font-bold">Fijo Solo</span>
+<span class="material-symbols-outlined text-outline-variant text-[20px]">radio_button_unchecked</span>
+</span>
+<span class="font-body-md text-body-md text-on-surface-variant text-sm">Monto mensual estable</span>
+</label>
+<label class="relative flex flex-col p-md border border-outline-variant rounded-lg cursor-pointer hover:bg-surface-container-low transition-colors">
+<input class="sr-only" name="canon_type" type="radio" value="variable"/>
+<span class="flex items-center justify-between mb-xs">
+<span class="font-label-md text-label-md text-on-surface font-bold">Variable Solo</span>
+<span class="material-symbols-outlined text-outline-variant text-[20px]">radio_button_unchecked</span>
+</span>
+<span class="font-body-md text-body-md text-on-surface-variant text-sm">% sobre ingresos netos</span>
+</label>
+</div>
+</div>
+<!-- Input Fields Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<div class="space-y-xs">
+<label class="font-label-md text-label-md text-on-surface flex items-center gap-xs" for="canon_fijo">
+                                        Componente Fijo (Mensual)
+                                        <span class="material-symbols-outlined text-[16px] text-outline cursor-help" title="Monto base cobrado independientemente de las ventas">info</span>
+</label>
+<div class="relative">
+<span class="absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant font-body-md">$</span>
+<input class="w-full pl-xl pr-sm min-h-[44px] bg-surface border border-outline-variant rounded-lg focus:border-primary focus:ring-1 focus:ring-primary font-body-md text-body-md text-on-surface transition-all" id="canon_fijo" type="number" value="1500"/>
+</div>
+</div>
+<div class="space-y-xs">
+<label class="font-label-md text-label-md text-on-surface flex items-center gap-xs" for="canon_variable">
+                                        Componente Variable (%)
+                                        <span class="material-symbols-outlined text-[16px] text-outline cursor-help" title="Porcentaje aplicado sobre las ventas brutas declaradas">info</span>
+</label>
+<div class="relative">
+<input class="w-full pl-sm pr-xl min-h-[44px] bg-surface border border-outline-variant rounded-lg focus:border-primary focus:ring-1 focus:ring-primary font-body-md text-body-md text-on-surface transition-all" id="canon_variable" step="0.1" type="number" value="5.5"/>
+<span class="absolute right-sm top-1/2 -translate-y-1/2 text-on-surface-variant font-body-md">%</span>
+</div>
+</div>
+<div class="space-y-xs md:col-span-2">
+<label class="flex items-center gap-sm cursor-pointer">
+<input checked="" class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary bg-surface" type="checkbox"/>
+<span class="font-label-md text-label-md text-on-surface">Aplicar Mínimo Garantizado (MMG)</span>
+</label>
+<div class="relative mt-sm">
+<span class="absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant font-body-md">$</span>
+<input class="w-full pl-xl pr-sm min-h-[44px] bg-surface border border-outline-variant rounded-lg focus:border-primary focus:ring-1 focus:ring-primary font-body-md text-body-md text-on-surface transition-all" placeholder="Monto mínimo anual/mensual" type="number" value="2000"/>
+<p class="mt-xs font-label-sm text-label-sm text-outline">Si la suma (Fijo + Variable) es menor a este monto, se cobrará el MMG.</p>
+</div>
+</div>
+<div class="space-y-xs md:col-span-2">
+<label class="font-label-md text-label-md text-on-surface">Índice de Actualización Anual</label>
+<select class="w-full px-sm min-h-[44px] bg-surface border border-outline-variant rounded-lg focus:border-primary focus:ring-1 focus:ring-primary font-body-md text-body-md text-on-surface transition-all appearance-none">
+<option value="ipc">IPC (Índice de Precios al Consumidor)</option>
+<option value="fijo">Porcentaje Fijo (Acordado en contrato)</option>
+<option value="ninguno">Sin actualización automática</option>
+</select>
+</div>
+</div>
+</form>
+</section>
+<!-- Historial de Versiones (Timeline) -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-sm">
+<div class="flex items-center justify-between mb-lg border-b border-outline-variant pb-sm">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-secondary bg-secondary-container p-2 rounded-lg">history</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Historial de Versiones</h3>
+</div>
+<span class="bg-surface-variant text-on-surface-variant px-sm py-1 rounded-full font-label-sm text-label-sm">Últimos 12 meses</span>
+</div>
+<div class="space-y-md relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:ml-[2.25rem] before:h-full before:w-0.5 before:bg-outline-variant">
+<!-- Current Version -->
+<div class="relative flex items-start justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+<div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-surface-container-lowest bg-primary absolute left-0 md:left-8 -translate-x-1/2 z-10 shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-on-primary icon-fill">star</span>
+</div>
+<div class="w-[calc(100%-3rem)] md:w-[calc(50%-2.5rem)] ml-auto md:ml-0 md:mr-auto pl-4 md:pl-0 md:pr-4">
+<div class="bg-primary/5 border border-primary/20 p-md rounded-lg shadow-sm">
+<div class="flex justify-between items-center mb-xs">
+<span class="font-label-sm text-label-sm text-primary font-bold uppercase tracking-wider">Versión Actual (v3.0)</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">15 Oct 2023</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface mb-sm">Ajuste por inflación y renegociación de componente variable.</p>
+<div class="flex gap-sm text-sm">
+<span class="bg-surface px-2 py-1 border border-outline-variant rounded text-on-surface-variant">Fijo: $1,500</span>
+<span class="bg-surface px-2 py-1 border border-outline-variant rounded text-on-surface-variant">Var: 5.5%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Previous Version 1 -->
+<div class="relative flex items-start justify-between md:justify-normal md:odd:flex-row-reverse group">
+<div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-surface-container-lowest bg-surface-variant absolute left-0 md:left-8 -translate-x-1/2 z-10 shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-outline">description</span>
+</div>
+<div class="w-[calc(100%-3rem)] md:w-[calc(50%-2.5rem)] ml-auto md:ml-0 md:mr-auto pl-4 md:pl-0 md:pr-4 opacity-75">
+<div class="bg-surface border border-outline-variant p-md rounded-lg">
+<div class="flex justify-between items-center mb-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-bold uppercase tracking-wider">Versión Anterior (v2.1)</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">01 Ene 2022</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface mb-sm">Actualización automática anual (IPC).</p>
+<div class="flex gap-sm text-sm">
+<span class="bg-surface-variant px-2 py-1 rounded text-on-surface-variant">Fijo: $1,250</span>
+<span class="bg-surface-variant px-2 py-1 rounded text-on-surface-variant">Var: 5.0%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Previous Version 2 -->
+<div class="relative flex items-start justify-between md:justify-normal md:odd:flex-row-reverse group">
+<div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-surface-container-lowest bg-surface-variant absolute left-0 md:left-8 -translate-x-1/2 z-10 shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-outline">flag</span>
+</div>
+<div class="w-[calc(100%-3rem)] md:w-[calc(50%-2.5rem)] ml-auto md:ml-0 md:mr-auto pl-4 md:pl-0 md:pr-4 opacity-50">
+<div class="bg-surface border border-outline-variant p-md rounded-lg">
+<div class="flex justify-between items-center mb-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant font-bold uppercase tracking-wider">Versión Inicial (v1.0)</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">10 May 2018</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface mb-sm">Firma de contrato original de concesión.</p>
+<div class="flex gap-sm text-sm">
+<span class="bg-surface-variant px-2 py-1 rounded text-on-surface-variant">Fijo: $1,000</span>
+<span class="bg-surface-variant px-2 py-1 rounded text-on-surface-variant">Var: 4.0%</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Simulator (Spans 4 cols on LG, sticky if possible) -->
+<div class="lg:col-span-4">
+<div class="sticky top-[88px] flex flex-col gap-lg">
+<!-- Financial Simulator Widget -->
+<section class="bg-primary/5 border border-primary/20 rounded-xl overflow-hidden shadow-sm">
+<div class="bg-primary-container p-md text-on-primary-container flex items-center gap-sm">
+<span class="material-symbols-outlined icon-fill">monitoring</span>
+<h3 class="font-headline-md text-[18px] leading-tight font-bold">Simulador de Impacto</h3>
+</div>
+<div class="p-lg space-y-md">
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">
+                                    Proyecta los ingresos esperados basados en la regla actual ingresando una estimación de ventas del concesionario.
+                                </p>
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface uppercase tracking-wider">Ventas Estimadas (Mensual)</label>
+<div class="relative">
+<span class="absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant font-body-md">$</span>
+<input class="w-full pl-xl pr-sm min-h-[44px] bg-surface-container-lowest border border-outline-variant rounded-lg focus:border-primary focus:ring-1 focus:ring-primary font-body-md text-body-md text-on-surface transition-all" id="sim_ventas" type="number" value="25000"/>
+</div>
+<!-- Interactive Slider for quick estimation -->
+<input class="w-full accent-primary h-2 bg-surface-variant rounded-lg appearance-none cursor-pointer mt-sm" id="sim_slider" max="100000" min="0" step="1000" type="range" value="25000"/>
+</div>
+<!-- Simulation Results -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md mt-md space-y-sm">
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface-variant">Canon Fijo</span>
+<span class="font-label-md text-label-md text-on-surface" id="res_fijo">$1,500.00</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface-variant">Canon Variable (5.5%)</span>
+<span class="font-label-md text-label-md text-on-surface text-secondary" id="res_variable">+$1,375.00</span>
+</div>
+<div class="border-t border-outline-variant pt-sm flex justify-between items-center">
+<span class="font-label-md text-label-md text-on-surface font-bold">Total Proyectado</span>
+<span class="font-headline-md text-headline-md text-primary font-bold" id="res_total">$2,875.00</span>
+</div>
+<!-- MMG Alert -->
+<div class="mt-xs bg-tertiary-fixed/30 border border-tertiary-fixed-dim rounded p-xs flex items-start gap-xs hidden" id="mmg_alert">
+<span class="material-symbols-outlined text-[16px] text-tertiary mt-0.5">info</span>
+<p class="font-label-sm text-label-sm text-on-tertiary-container">Aplicando Mínimo Garantizado ($2,000).</p>
+</div>
+</div>
+<button class="w-full bg-surface-container border border-outline-variant text-on-surface min-h-[44px] rounded-lg font-label-md text-label-md hover:bg-surface-container-high transition-colors">
+                                    Generar Reporte Detallado
+                                </button>
+</div>
+</section>
+<!-- Contextual Info Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md shadow-sm flex items-start gap-md">
+<div class="bg-surface-container-low p-sm rounded-full shrink-0">
+<span class="material-symbols-outlined text-outline">corporate_fare</span>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-on-surface mb-xs">Refugio de Montaña "El Mirador"</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm mb-xs">Concesión: C-2018-045</p>
+<span class="inline-flex items-center gap-1 bg-primary-fixed/20 text-on-primary-fixed-variant px-2 py-0.5 rounded font-label-sm text-[11px] uppercase tracking-wider">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Activa
+                                </span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Simple Script for Simulator Interactivity (Demonstration) -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const ventasInput = document.getElementById('sim_ventas');
+            const slider = document.getElementById('sim_slider');
+            
+            const canonFijo = 1500;
+            const variablePct = 0.055;
+            const mmg = 2000;
+
+            const resFijoEl = document.getElementById('res_fijo');
+            const resVarEl = document.getElementById('res_variable');
+            const resTotalEl = document.getElementById('res_total');
+            const mmgAlert = document.getElementById('mmg_alert');
+
+            function updateSimulation(ventas) {
+                const varAmount = ventas * variablePct;
+                let total = canonFijo + varAmount;
+                let applyingMmg = false;
+
+                if (total < mmg) {
+                    total = mmg;
+                    applyingMmg = true;
+                }
+
+                resFijoEl.textContent = `$${canonFijo.toLocaleString('en-US', {minimumFractionDigits: 2})}`;
+                resVarEl.textContent = `+$${varAmount.toLocaleString('en-US', {minimumFractionDigits: 2})}`;
+                resTotalEl.textContent = `$${total.toLocaleString('en-US', {minimumFractionDigits: 2})}`;
+
+                if(applyingMmg) {
+                    mmgAlert.classList.remove('hidden');
+                    resTotalEl.classList.replace('text-primary', 'text-tertiary');
+                } else {
+                    mmgAlert.classList.add('hidden');
+                    resTotalEl.classList.replace('text-tertiary', 'text-primary');
+                }
+            }
+
+            ventasInput.addEventListener('input', (e) => {
+                const val = parseFloat(e.target.value) || 0;
+                slider.value = val;
+                updateSimulation(val);
+            });
+
+            slider.addEventListener('input', (e) => {
+                const val = e.target.value;
+                ventasInput.value = val;
+                updateSimulation(val);
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Inparques Ranger - Resultado y Firma</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#a4d0b8",
+                        "surface": "#fbf9f3",
+                        "on-surface-variant": "#3f4942",
+                        "secondary-fixed": "#c0edd4",
+                        "inverse-surface": "#30312d",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#0f1e19",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-container": "#cadbd2",
+                        "on-surface": "#1b1c18",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#bfc9c0",
+                        "surface-container": "#f0eee8",
+                        "on-primary-fixed": "#002111",
+                        "on-secondary-fixed": "#002114",
+                        "secondary-container": "#c0edd4",
+                        "secondary": "#3e6753",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed-variant": "#005232",
+                        "outline": "#6f7a71",
+                        "on-secondary-fixed-variant": "#264e3c",
+                        "on-background": "#1b1c18",
+                        "primary-fixed": "#a4f4c3",
+                        "surface-bright": "#fbf9f3",
+                        "surface-dim": "#dcdad4",
+                        "inverse-primary": "#88d7a8",
+                        "tertiary-fixed-dim": "#b9cbc1",
+                        "inverse-on-surface": "#f3f1eb",
+                        "surface-container-high": "#eae8e2",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#516159",
+                        "primary-container": "#176b45",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#3a4a43",
+                        "tertiary": "#3a4942",
+                        "surface-variant": "#e4e2dd",
+                        "surface-container-low": "#f5f3ed",
+                        "on-primary-container": "#99e9b9",
+                        "primary": "#005131",
+                        "background": "#fbf9f3",
+                        "on-secondary-container": "#446d59",
+                        "tertiary-fixed": "#d5e7dd",
+                        "surface-container-highest": "#e4e2dd",
+                        "primary-fixed-dim": "#88d7a8",
+                        "surface-tint": "#186c45"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "8px",
+                        "xxl": "48px",
+                        "lg": "24px",
+                        "touch-target": "44px",
+                        "xl": "32px",
+                        "md": "16px",
+                        "base": "4px",
+                        "sm": "12px",
+                        "safe": "env(safe-area-inset-bottom)"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "label-sm": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "display-lg": ["Manrope"],
+                        "headline-lg-mobile": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; background-color: #fbf9f3; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .icon-filled { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .signature-pad { touch-action: none; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased overflow-x-hidden min-h-screen pb-32">
+<!-- TopAppBar: Transactional, simplified for flow -->
+<header class="bg-surface dark:bg-on-background w-full top-0 border-b border-outline-variant dark:border-on-surface-variant flex justify-between items-center px-md h-touch-target sticky z-50">
+<div class="flex items-center gap-sm">
+<button aria-label="Volver" class="h-touch-target w-touch-target flex items-center justify-center text-on-surface hover:bg-surface-container-high rounded-full transition-colors duration-200">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-primary dark:text-primary-fixed">Resumen</h1>
+</div>
+<div class="flex items-center gap-xs">
+<span class="bg-surface-variant/50 text-on-surface-variant font-label-md text-label-md px-3 py-1 rounded-full flex items-center gap-1 border border-outline-variant">
+<span class="material-symbols-outlined text-[16px]">sync_problem</span> Pendiente
+            </span>
+</div>
+</header>
+<main class="p-md space-y-lg flex flex-col items-center w-full max-w-md mx-auto">
+<!-- Header & Folio -->
+<div class="w-full text-center space-y-2 mt-4">
+<p class="font-label-md text-label-md text-on-surface-variant">FOLIO DE INSPECCIÓN</p>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">INP-2023-0892</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Concesionario "El Mirador del Ávila"</p>
+</div>
+<!-- Findings Summary Card -->
+<section class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg p-lg shadow-sm">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded-full bg-error-container flex items-center justify-center text-on-error-container">
+<span class="material-symbols-outlined icon-filled">warning</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">2 No Conformidades</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Requieren acción correctiva inmediata.</p>
+</div>
+</div>
+<div class="space-y-4">
+<!-- Finding 1 -->
+<div class="p-4 bg-surface rounded-lg border border-outline-variant/50">
+<h4 class="font-label-md text-label-md text-on-surface font-bold">Manejo de Residuos (Art. 14)</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Acumulación de desechos sólidos fuera del área designada, cercano al sendero principal.</p>
+<div class="flex gap-2 mt-3">
+<img class="w-16 h-16 rounded-md object-cover border border-outline-variant" data-alt="A close-up digital photograph of overflowing garbage bins near a pristine forest trail. The lighting is bright daylight, highlighting the contrast between the lush green foliage and the messy refuse. Modern corporate aesthetic, realistic textures, earthy tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDG4B4y8jofPTz2v1NQN0GyMPcm1mYLPemkHawQEfaNDt99irSAlIJfT0hLL8pVl977yqAzXwDT5BYPtrC6frynedjlfXBwlE6hW7S3LBLOOdr4Usca3visNy996Tg-GIFeDIcnLwo5iU_dvxFDQECWq-6ILIjn9gU4HBLLqvCUxQDo7W0_y6HetljkZ4U4lkPXfC7qN1oQAk-62rfm1_9PnXxA09Ag8n9Yba-GYlF8aAvKtYgH0Yn1"/>
+<img class="w-16 h-16 rounded-md object-cover border border-outline-variant" data-alt="A wider angle shot showing a commercial kiosk in a nature reserve with scattered litter around its base. Soft sunlight filtering through trees. Earthy natural colors mixed with the stark white of discarded cups. High resolution, professional documentary style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZ6q_K-1zoixndzQtsKavjDlDIXNVQPv1l2GeBg7jaWrDklltwWf4GHQ6AR1A2RdvYQSSwWXBO-FsxD_jUGYfp3hc35ls-Hf1SXnuKZVhWwNlIZhvtzlR3HqEPl5AfJCHvcwBOYgFGoHC7sna4uQve5bvX11WbB6A-V9X2h8zLhR-XWznIt0iyxf3zhOdiNLXQNnqVsOIBxt-cEJq5xVl2j3YL9HJD8pYoEZPX1rCTO3vzlf02izJ9"/>
+</div>
+</div>
+<!-- Finding 2 -->
+<div class="p-4 bg-surface rounded-lg border border-outline-variant/50">
+<h4 class="font-label-md text-label-md text-on-surface font-bold">Límites de Concesión (Art. 22)</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Estructura temporal (toldo) excede los límites perimetrales establecidos en el contrato.</p>
+<div class="flex gap-2 mt-3">
+<img class="w-16 h-16 rounded-md object-cover border border-outline-variant" data-alt="A digital photograph showing a white commercial tent encroaching onto a natural dirt path in a park setting. Clear blue sky, bright natural lighting. The scene emphasizes the boundary violation in a professional, objective documentary style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuD3lmWyPpDi73yp3afUePYt_3uyQ6Tqg0kIHYrYOOjy7HMgELknToCgvZfazDhslITXlXEXI3XgPlg2pM4lKDiaesiPU287cITvILNYcN0VPMUgBoAbHmTc_7gFctD59VCJRr_nVFXghG0rN6-GY6k7Z9-s0M10UJ0x7173wSmUXqUK3I0MYxetoBcZmB6hcP30Jw3c91MqGN_f1CDparFcKQwqytPbobkkR-qScBujnm3yl0-OhU"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Corrective Plan -->
+<section class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg p-lg shadow-sm">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">calendar_clock</span>
+                Plan de Acción
+            </h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">El concesionario se compromete a subsanar las observaciones indicadas.</p>
+<div class="bg-surface-variant/30 p-4 rounded-lg border border-outline-variant/30 flex justify-between items-center">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Fecha Límite</p>
+<p class="font-body-lg text-body-lg text-on-surface font-semibold">15 de Nov, 2023</p>
+</div>
+<span class="bg-error-container/20 text-error font-label-sm px-2 py-1 rounded border border-error/20">7 Días</span>
+</div>
+</section>
+<!-- Signature Pad -->
+<section class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg p-lg shadow-sm">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-1">Firma de Conformidad</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">Representante del Concesionario</p>
+<div class="border-2 border-dashed border-outline-variant rounded-lg bg-surface relative h-48 mb-3 flex items-center justify-center">
+<p class="text-outline-variant font-body-md absolute pointer-events-none select-none">Firmar aquí</p>
+<canvas class="w-full h-full signature-pad rounded-lg relative z-10" id="signatureCanvas"></canvas>
+</div>
+<div class="flex justify-between items-center">
+<button class="text-secondary font-label-md text-label-md flex items-center gap-1 hover:text-primary transition-colors h-touch-target px-2" id="clearSignature">
+<span class="material-symbols-outlined text-[18px]">ink_eraser</span> Limpiar
+                </button>
+<div class="text-right">
+<p class="font-label-sm text-label-sm text-on-surface-variant">C.I: V-12.345.678</p>
+<p class="font-label-md text-label-md text-on-surface">Carlos Mendoza</p>
+</div>
+</div>
+</section>
+<!-- Final Action -->
+<div class="w-full pt-4">
+<button class="w-full bg-primary-container text-on-primary font-label-md text-label-md h-touch-target rounded-full flex items-center justify-center gap-2 shadow-sm hover:bg-primary transition-colors">
+<span class="material-symbols-outlined">check_circle</span>
+                Finalizar Inspección
+            </button>
+<p class="text-center font-label-sm text-label-sm text-on-surface-variant mt-3 flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[14px]">cloud_off</span>
+                Se guardará localmente hasta tener conexión
+            </p>
+</div>
+</main>
+<script>
+        // Simple signature pad logic for visual interaction
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('signatureCanvas');
+            const ctx = canvas.getContext('2d');
+            const clearBtn = document.getElementById('clearSignature');
+            
+            // Set canvas resolution
+            function resizeCanvas() {
+                const rect = canvas.parentElement.getBoundingClientRect();
+                canvas.width = rect.width;
+                canvas.height = rect.height;
+                ctx.strokeStyle = '#005131'; // primary color
+                ctx.lineWidth = 3;
+                ctx.lineCap = 'round';
+            }
+            
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            let isDrawing = false;
+            let lastX = 0;
+            let lastY = 0;
+
+            function startDrawing(e) {
+                isDrawing = true;
+                const pos = getPos(e);
+                [lastX, lastY] = [pos.x, pos.y];
+            }
+
+            function draw(e) {
+                if (!isDrawing) return;
+                e.preventDefault(); // prevent scrolling while signing
+                const pos = getPos(e);
+                ctx.beginPath();
+                ctx.moveTo(lastX, lastY);
+                ctx.lineTo(pos.x, pos.y);
+                ctx.stroke();
+                [lastX, lastY] = [pos.x, pos.y];
+                
+                // Hide placeholder text when drawing starts
+                const placeholder = canvas.parentElement.querySelector('p');
+                if(placeholder) placeholder.style.display = 'none';
+            }
+
+            function stopDrawing() {
+                isDrawing = false;
+            }
+
+            function getPos(e) {
+                const rect = canvas.getBoundingClientRect();
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+                return {
+                    x: clientX - rect.left,
+                    y: clientY - rect.top
+                };
+            }
+
+            canvas.addEventListener('mousedown', startDrawing);
+            canvas.addEventListener('mousemove', draw);
+            canvas.addEventListener('mouseup', stopDrawing);
+            canvas.addEventListener('mouseout', stopDrawing);
+
+            canvas.addEventListener('touchstart', startDrawing, {passive: false});
+            canvas.addEventListener('touchmove', draw, {passive: false});
+            canvas.addEventListener('touchend', stopDrawing);
+
+            clearBtn.addEventListener('click', () => {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                const placeholder = canvas.parentElement.querySelector('p');
+                if(placeholder) placeholder.style.display = 'block';
+            });
+        });
+    </script>
+</body></html>

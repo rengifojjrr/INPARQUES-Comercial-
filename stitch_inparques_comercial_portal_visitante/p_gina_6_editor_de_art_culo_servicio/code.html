@@ -1,0 +1,409 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Editor de Artículo/Servicio - Parques Nacionales</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Google Fonts: Manrope -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config injected from system prompt -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed-variant": "#3a4a43",
+                        "surface-variant": "#e4e2dd",
+                        "on-background": "#1b1c18",
+                        "surface-dim": "#dcdad4",
+                        "surface-container-high": "#eae8e2",
+                        "on-secondary-container": "#446d59",
+                        "surface-tint": "#186c45",
+                        "on-secondary-fixed-variant": "#264e3c",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "primary-fixed": "#a4f4c3",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#1b1c18",
+                        "outline": "#6f7a71",
+                        "inverse-on-surface": "#f3f1eb",
+                        "surface-bright": "#fbf9f3",
+                        "surface-container-highest": "#e4e2dd",
+                        "on-tertiary-fixed": "#0f1e19",
+                        "surface": "#fbf9f3",
+                        "secondary-fixed": "#c0edd4",
+                        "on-tertiary-container": "#cadbd2",
+                        "on-primary": "#ffffff",
+                        "primary": "#005131",
+                        "on-secondary-fixed": "#002114",
+                        "tertiary-fixed": "#d5e7dd",
+                        "inverse-surface": "#30312d",
+                        "on-primary-container": "#99e9b9",
+                        "primary-fixed-dim": "#88d7a8",
+                        "on-error-container": "#93000a",
+                        "secondary": "#3e6753",
+                        "on-primary-fixed-variant": "#005232",
+                        "tertiary-container": "#516159",
+                        "outline-variant": "#bfc9c0",
+                        "background": "#fbf9f3",
+                        "primary-container": "#176b45",
+                        "tertiary-fixed-dim": "#b9cbc1",
+                        "surface-container-low": "#f5f3ed",
+                        "on-tertiary": "#ffffff",
+                        "secondary-container": "#c0edd4",
+                        "tertiary": "#3a4942",
+                        "surface-container": "#f0eee8",
+                        "secondary-fixed-dim": "#a4d0b8",
+                        "on-primary-fixed": "#002111",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#88d7a8",
+                        "on-surface-variant": "#3f4942"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "xs": "8px",
+                        "xxl": "48px",
+                        "lg": "24px",
+                        "xl": "32px",
+                        "touch-target": "44px",
+                        "base": "4px",
+                        "sm": "12px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Manrope"],
+                        "display-lg": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "label-sm": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "body-md": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Custom base styles matching style guidance */
+        body {
+            background-color: #F7F5EF; /* Arena Base */
+            color: #1b1c18; /* on-background */
+        }
+        
+        /* Typography utilites based on config */
+        .text-display-lg { font-family: 'Manrope', sans-serif; font-size: 48px; line-height: 56px; letter-spacing: -0.02em; font-weight: 800; }
+        .text-headline-lg { font-family: 'Manrope', sans-serif; font-size: 32px; line-height: 40px; letter-spacing: -0.01em; font-weight: 700; }
+        .text-headline-lg-mobile { font-family: 'Manrope', sans-serif; font-size: 24px; line-height: 32px; font-weight: 700; }
+        .text-headline-md { font-family: 'Manrope', sans-serif; font-size: 24px; line-height: 32px; font-weight: 600; }
+        .text-body-lg { font-family: 'Manrope', sans-serif; font-size: 18px; line-height: 28px; font-weight: 400; }
+        .text-body-md { font-family: 'Manrope', sans-serif; font-size: 16px; line-height: 24px; font-weight: 400; }
+        .text-label-md { font-family: 'Manrope', sans-serif; font-size: 14px; line-height: 20px; letter-spacing: 0.01em; font-weight: 600; }
+        .text-label-sm { font-family: 'Manrope', sans-serif; font-size: 12px; line-height: 16px; font-weight: 700; }
+
+        /* Card and Input Styles */
+        .card-surface {
+            background-color: #ffffff;
+            border: 1px solid #bfc9c0; /* outline-variant */
+            border-radius: 0.5rem; /* rounded-lg */
+        }
+        
+        .form-input {
+            background-color: #ffffff;
+            border: 1px solid #bfc9c0;
+            border-radius: 0.25rem; /* rounded */
+            min-height: 44px; /* touch target */
+            width: 100%;
+            padding: 0 12px;
+            font-family: 'Manrope', sans-serif;
+            font-size: 16px;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border: 2px solid #176b45; /* primary-container */
+        }
+
+        /* Ambient Shadows */
+        .shadow-ambient-hover:hover {
+            box-shadow: 0px 4px 12px rgba(40, 51, 46, 0.08);
+        }
+    </style>
+</head>
+<body class="flex bg-background font-body-md min-h-screen">
+<!-- TopNavBar (Mobile only) -->
+<nav class="md:hidden flex justify-between items-center w-full px-lg h-touch-target sticky top-0 z-50 bg-surface dark:bg-inverse-surface border-b border-outline-variant dark:border-outline">
+<!-- Search Bar: on_left -->
+<div class="flex-1 flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary cursor-pointer">menu</span>
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">Parques Nacionales</span>
+</div>
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:bg-surface-container-low transition-colors rounded-full p-1" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:bg-surface-container-low transition-colors rounded-full p-1" data-icon="storefront">storefront</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:bg-surface-container-low transition-colors rounded-full p-1" data-icon="person">person</span>
+</div>
+</nav>
+<!-- SideNavBar (Desktop only) -->
+<aside class="hidden md:flex flex-col p-md gap-xs bg-surface-container-low dark:bg-surface-container-highest border-r border-outline-variant dark:border-outline h-screen w-64 fixed left-0 top-0 overflow-y-auto">
+<div class="mb-lg px-xs py-md">
+<div class="flex items-center gap-sm mb-2">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined">landscape</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Portal Admin</h1>
+<p class="text-label-sm text-on-surface-variant">Administración de Parque</p>
+</div>
+</div>
+</div>
+<nav class="flex flex-col gap-base flex-1">
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all duration-200 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">dashboard</span> Resumen
+            </a>
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all duration-200 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">shopping_cart</span> Pedidos
+            </a>
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all duration-200 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">calendar_today</span> Reservas
+            </a>
+<!-- Active State: Catálogo -->
+<a class="flex items-center gap-sm px-md py-sm rounded-lg bg-secondary-container text-on-secondary-container font-bold font-label-md text-label-md transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">menu_book</span> Catálogo
+            </a>
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all duration-200 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">event_available</span> Disponibilidad
+            </a>
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all duration-200 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span> Caja
+            </a>
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all duration-200 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">payments</span> Ventas
+            </a>
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all duration-200 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">group</span> Equipo operativo
+            </a>
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all duration-200 ease-in-out font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">settings</span> Configuración del local
+            </a>
+</nav>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 md:ml-64 p-lg md:p-xl max-w-7xl mx-auto w-full">
+<!-- Header -->
+<header class="flex flex-col md:flex-row md:items-center justify-between mb-xl gap-md">
+<div>
+<a class="text-primary hover:underline text-label-md flex items-center gap-xs mb-xs" href="#">
+<span class="material-symbols-outlined text-[16px]">arrow_back</span> Volver al catálogo
+                </a>
+<h1 class="text-headline-lg font-headline-lg text-on-background">Crear Nuevo Artículo / Servicio</h1>
+<p class="text-body-md text-on-surface-variant mt-1">Configure los detalles, precios y disponibilidad de su oferta.</p>
+</div>
+<div class="flex items-center gap-sm">
+<button class="min-h-[44px] px-lg py-sm rounded border border-outline-variant text-on-background font-label-md hover:bg-surface-variant transition-colors shadow-ambient-hover">
+                    Guardar borrador
+                </button>
+<button class="min-h-[44px] px-lg py-sm rounded bg-primary-container text-on-primary font-label-md hover:bg-[#115436] transition-colors shadow-ambient-hover">
+                    Publicar
+                </button>
+</div>
+</header>
+<!-- Form Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-lg">
+<!-- Left Column: Main Details -->
+<div class="lg:col-span-2 flex flex-col gap-lg">
+<!-- Basic Info Card -->
+<section class="card-surface p-lg shadow-ambient-hover transition-shadow">
+<h2 class="text-headline-md font-headline-md text-on-background mb-lg flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">edit_document</span> Información General
+                    </h2>
+<div class="flex flex-col gap-md">
+<div class="flex flex-col gap-xs">
+<label class="text-label-md text-on-surface-variant" for="item-name">Nombre del Artículo / Servicio *</label>
+<input class="form-input" id="item-name" placeholder="Ej. Alquiler de Kayak Doble" required="" type="text">
+</div>
+<div class="flex flex-col gap-xs">
+<label class="text-label-md text-on-surface-variant" for="item-desc">Descripción</label>
+<textarea class="form-input !h-auto py-sm" id="item-desc" placeholder="Describa los detalles, requisitos y condiciones de la oferta..." rows="4"></textarea>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="flex flex-col gap-xs">
+<label class="text-label-md text-on-surface-variant" for="item-category">Categoría Principal *</label>
+<select class="form-input bg-white appearance-none cursor-pointer" id="item-category">
+<option disabled="" selected="" value="">Seleccione una categoría</option>
+<option value="actividades">Actividades Recreativas</option>
+<option value="equipamiento">Alquiler de Equipamiento</option>
+<option value="alimentos">Alimentos y Bebidas</option>
+<option value="souvenirs">Souvenirs</option>
+</select>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="text-label-md text-on-surface-variant" for="item-type">Tipo de Oferta</label>
+<div class="flex gap-sm mt-1">
+<label class="flex items-center gap-xs cursor-pointer">
+<input checked="" class="text-primary focus:ring-primary h-4 w-4 border-outline-variant" name="offer_type" type="radio" value="product">
+<span class="text-body-md">Producto Físico</span>
+</label>
+<label class="flex items-center gap-xs cursor-pointer">
+<input class="text-primary focus:ring-primary h-4 w-4 border-outline-variant" name="offer_type" type="radio" value="service">
+<span class="text-body-md">Servicio / Experiencia</span>
+</label>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Pricing & Inventory Card -->
+<section class="card-surface p-lg shadow-ambient-hover transition-shadow">
+<h2 class="text-headline-md font-headline-md text-on-background mb-lg flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">sell</span> Precios e Inventario
+                    </h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md mb-md">
+<div class="flex flex-col gap-xs">
+<label class="text-label-md text-on-surface-variant" for="item-price">Precio Base ($) *</label>
+<input class="form-input" id="item-price" min="0" placeholder="0.00" step="0.01" type="number">
+</div>
+<div class="flex flex-col gap-xs">
+<label class="text-label-md text-on-surface-variant" for="item-tax">Impuesto Aplicable</label>
+<select class="form-input bg-white appearance-none cursor-pointer" id="item-tax">
+<option value="standard">IVA Estándar (16%)</option>
+<option value="reduced">IVA Reducido (8%)</option>
+<option value="exempt">Exento</option>
+</select>
+</div>
+</div>
+<div class="border-t border-surface-variant pt-md grid grid-cols-1 md:grid-cols-2 gap-md">
+<!-- Product Specific -->
+<div class="flex flex-col gap-xs">
+<label class="text-label-md text-on-surface-variant" for="item-sku">SKU (Para productos físicos)</label>
+<input class="form-input" id="item-sku" placeholder="Ej. KAK-DOB-001" type="text">
+</div>
+<!-- Service Specific -->
+<div class="flex flex-col gap-xs">
+<label class="text-label-md text-on-surface-variant" for="item-capacity">Cupo Máximo / Duración (Servicios)</label>
+<div class="flex gap-sm">
+<input class="form-input w-1/2" id="item-capacity" placeholder="Cant. personas" type="number">
+<select class="form-input w-1/2 bg-white">
+<option>Horas</option>
+<option>Días</option>
+<option>Sesión</option>
+</select>
+</div>
+</div>
+</div>
+</section>
+<!-- Modifiers & Allergens (Food Context) -->
+<section class="card-surface p-lg shadow-ambient-hover transition-shadow">
+<h2 class="text-headline-md font-headline-md text-on-background mb-lg flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">restaurant_menu</span> Opciones y Variantes (Restauración)
+                    </h2>
+<p class="text-body-md text-on-surface-variant mb-md">Configure modificadores (ej. tamaño, guarniciones) y advierta sobre alérgenos si este artículo es comida o bebida.</p>
+<div class="mb-lg">
+<label class="text-label-md text-on-surface-variant mb-sm block">Alérgenos Comunes</label>
+<div class="flex flex-wrap gap-sm">
+<label class="inline-flex items-center px-sm py-1 rounded-full border border-outline-variant bg-surface cursor-pointer hover:bg-surface-variant">
+<input class="sr-only" type="checkbox">
+<span class="text-label-sm text-on-surface">Gluten</span>
+</label>
+<label class="inline-flex items-center px-sm py-1 rounded-full border border-outline-variant bg-surface cursor-pointer hover:bg-surface-variant">
+<input class="sr-only" type="checkbox">
+<span class="text-label-sm text-on-surface">Lácteos</span>
+</label>
+<label class="inline-flex items-center px-sm py-1 rounded-full border border-outline-variant bg-surface cursor-pointer hover:bg-surface-variant">
+<input class="sr-only" type="checkbox">
+<span class="text-label-sm text-on-surface">Frutos Secos</span>
+</label>
+<label class="inline-flex items-center px-sm py-1 rounded-full border border-outline-variant bg-surface cursor-pointer hover:bg-surface-variant">
+<input class="sr-only" type="checkbox">
+<span class="text-label-sm text-on-surface">Mariscos</span>
+</label>
+</div>
+</div>
+<div>
+<button class="flex items-center gap-xs text-primary font-label-md hover:underline" type="button">
+<span class="material-symbols-outlined text-[20px]">add_circle</span>
+                            Añadir Grupo de Modificadores (Ej. "Elige tu salsa")
+                        </button>
+</div>
+</section>
+</div>
+<!-- Right Column: Media & Publish Settings -->
+<div class="flex flex-col gap-lg">
+<!-- Media Upload Card -->
+<section class="card-surface p-lg shadow-ambient-hover transition-shadow">
+<h2 class="text-headline-md font-headline-md text-on-background mb-md flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">image</span> Imágenes
+                    </h2>
+<div class="border-2 border-dashed border-outline-variant rounded-lg p-lg text-center hover:bg-surface-variant transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-[48px] text-outline mb-sm group-hover:text-primary transition-colors">cloud_upload</span>
+<p class="text-body-md text-on-background font-bold mb-1">Haz clic o arrastra imágenes aquí</p>
+<p class="text-label-sm text-on-surface-variant">Recomendado: 800x800px, máx 5MB (JPG, PNG)</p>
+</div>
+<!-- Image Preview Placeholder -->
+<div class="mt-md grid grid-cols-3 gap-sm">
+<div class="aspect-square rounded border border-outline-variant bg-surface-container-high relative group overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A close-up, high-quality photograph of a vibrant yellow double kayak resting on a pristine white sandy beach, with crystal clear turquoise water in the background. The lighting is bright and sunny, highlighting the smooth texture of the kayak against the natural environment. Shot in a modern, clean, outdoor adventure aesthetic suitable for a premium national park catalog." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCibf9qid9vhQeWBwomiacZF-W96TEfxPfjBgmhDL7wH6rfTJC5NV4xYf6y6WDMFQxZkWaDZ2JmgJzVW60HXbI5-otBJB-L49f_K3U4XiVlzBL8q8d4IpLI4aLBs9cn2DT7XHsgE-HRM7vOsSp6MHBwDQ4AiEPrD5bYrlUb-v_peXZfVrTrw4DR8ukRSoOgYZHosfM4cm1Q0a1cwxgrIttuf3RlH_uDswf1LJbTWBRpBCJkGUxRWW2_">
+<button class="absolute top-1 right-1 bg-surface/80 p-1 rounded text-error opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-[16px]">delete</span>
+</button>
+</div>
+<div class="aspect-square rounded border border-dashed border-outline-variant flex items-center justify-center text-outline-variant hover:bg-surface-variant cursor-pointer">
+<span class="material-symbols-outlined">add</span>
+</div>
+</div>
+</section>
+<!-- Visibility Card -->
+<section class="card-surface p-lg shadow-ambient-hover transition-shadow">
+<h2 class="text-headline-md font-headline-md text-on-background mb-md flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">visibility</span> Visibilidad
+                    </h2>
+<div class="flex flex-col gap-sm">
+<label class="flex items-start gap-sm p-sm rounded hover:bg-surface-variant cursor-pointer transition-colors">
+<input checked="" class="mt-1 text-primary focus:ring-primary" name="visibility" type="radio">
+<div>
+<span class="block text-label-md text-on-background font-bold">Activo</span>
+<span class="block text-label-sm text-on-surface-variant">Visible en el catálogo público para reservas o compras.</span>
+</div>
+</label>
+<label class="flex items-start gap-sm p-sm rounded hover:bg-surface-variant cursor-pointer transition-colors">
+<input class="mt-1 text-primary focus:ring-primary" name="visibility" type="radio">
+<div>
+<span class="block text-label-md text-on-background font-bold">Oculto</span>
+<span class="block text-label-sm text-on-surface-variant">No visible públicamente. Solo accesible desde el panel de admin.</span>
+</div>
+</label>
+<label class="flex items-start gap-sm p-sm rounded hover:bg-surface-variant cursor-pointer transition-colors">
+<input class="mt-1 text-primary focus:ring-primary" name="visibility" type="radio">
+<div>
+<span class="block text-label-md text-on-background font-bold">Programado</span>
+<span class="block text-label-sm text-on-surface-variant">Se activará en una fecha específica.</span>
+</div>
+</label>
+</div>
+</section>
+</div>
+</div>
+</main>
+</body></html>

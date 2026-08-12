@@ -1,0 +1,222 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Validar Entrega</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#b9cbc1",
+                        "primary-container": "#176b45",
+                        "on-tertiary-fixed-variant": "#3a4a43",
+                        "inverse-on-surface": "#f3f1eb",
+                        "outline-variant": "#bfc9c0",
+                        "tertiary": "#3a4942",
+                        "secondary-container": "#c0edd4",
+                        "surface-container-low": "#f5f3ed",
+                        "surface-container-high": "#eae8e2",
+                        "tertiary-container": "#516159",
+                        "surface-variant": "#e4e2dd",
+                        "on-primary-fixed": "#002111",
+                        "on-error-container": "#93000a",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed": "#a4f4c3",
+                        "error": "#ba1a1a",
+                        "inverse-surface": "#30312d",
+                        "on-error": "#ffffff",
+                        "surface-container": "#f0eee8",
+                        "on-surface": "#1b1c18",
+                        "on-primary-fixed-variant": "#005232",
+                        "on-tertiary-fixed": "#0f1e19",
+                        "on-secondary-fixed-variant": "#264e3c",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "secondary": "#3e6753",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed-dim": "#a4d0b8",
+                        "surface": "#fbf9f3",
+                        "secondary-fixed": "#c0edd4",
+                        "primary": "#005131",
+                        "on-surface-variant": "#3f4942",
+                        "on-tertiary-container": "#cadbd2",
+                        "background": "#fbf9f3",
+                        "surface-tint": "#186c45",
+                        "on-primary-container": "#99e9b9",
+                        "inverse-primary": "#88d7a8",
+                        "surface-container-highest": "#e4e2dd",
+                        "on-secondary-container": "#446d59",
+                        "primary-fixed-dim": "#88d7a8",
+                        "on-secondary-fixed": "#002114",
+                        "surface-bright": "#fbf9f3",
+                        "tertiary-fixed": "#d5e7dd",
+                        "surface-dim": "#dcdad4",
+                        "on-background": "#1b1c18",
+                        "outline": "#6f7a71"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "8px",
+                        "base": "4px",
+                        "lg": "24px",
+                        "xxl": "48px",
+                        "md": "16px",
+                        "sm": "12px",
+                        "touch-target": "44px",
+                        "xl": "32px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Manrope"],
+                        "display-lg": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "label-sm": ["Manrope"],
+                        "headline-lg": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .scanner-line {
+            animation: scan 2s linear infinite;
+        }
+        @keyframes scan {
+            0% { top: 10%; }
+            50% { top: 90%; }
+            100% { top: 10%; }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md text-body-md">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-surface-dim w-full top-0 sticky border-b border-outline-variant dark:border-outline flat no shadows flex justify-between items-center px-md h-touch-target w-full max-w-full z-10">
+<button class="flex items-center justify-center w-touch-target h-touch-target rounded-full hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors active:scale-95 duration-100 text-on-surface-variant dark:text-on-surface-variant">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">menu</span>
+</button>
+<h1 class="font-headline-md text-headline-md-mobile font-bold text-primary dark:text-primary-fixed-dim">Operaciones Parque</h1>
+<button class="flex items-center justify-center w-touch-target h-touch-target rounded-full hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors active:scale-95 duration-100 text-on-surface-variant dark:text-on-surface-variant">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">account_circle</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex flex-col p-lg gap-lg pb-[100px] md:pb-lg items-center max-w-3xl mx-auto w-full">
+<div class="w-full text-center mb-md">
+<h2 class="font-headline-lg text-headline-lg-mobile text-on-surface">Validar Entrega</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-sm">Escanee el código QR del cliente o ingrese el código manualmente.</p>
+</div>
+<!-- Scanner Area -->
+<div class="relative w-full aspect-square max-w-sm rounded-lg overflow-hidden border border-outline-variant shadow-sm bg-black">
+<!-- Simulated Camera Feed Placeholder -->
+<img class="absolute inset-0 w-full h-full object-cover opacity-60" data-alt="A simulated smartphone camera view showing a slightly blurred natural park environment in the background, like looking through a viewfinder. The scene features lush green trees and a clear sky, typical of a bright, sunny day at a nature reserve. A translucent dark overlay covers the edges, emphasizing the bright, clear central area where a QR code would ideally be scanned. The aesthetic is modern and integrated, blending technology with the outdoors." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWCnuew3dL0LVuWbk0umitgtxo15mp69zwa6YRuZM9hQdbq9tC-hUbRslOTcutar6mmNU4K6RTwCpuatb8zJob5BpNrtzgckh-ryhwIPdiIIFCzcYiUXi0Vxyylhf4Vcs6XdOZ2PRrYyKH5d44HrcZujP5-0Q3vIl2VYUvQvtRxQDq0l72RGCcywyyc062zHKsAV9QsGYA36kOw25h9Mf23nbkPiwtfMrrvmnBLcf1IItl3rWFN2pB">
+<!-- Scanner Overlay Graphics -->
+<div class="absolute inset-0 flex items-center justify-center p-xl">
+<div class="relative w-full h-full border-2 border-primary-fixed-dim rounded-lg">
+<!-- Corner markers -->
+<div class="absolute top-0 left-0 w-8 h-8 border-t-4 border-l-4 border-primary rounded-tl-lg"></div>
+<div class="absolute top-0 right-0 w-8 h-8 border-t-4 border-r-4 border-primary rounded-tr-lg"></div>
+<div class="absolute bottom-0 left-0 w-8 h-8 border-b-4 border-l-4 border-primary rounded-bl-lg"></div>
+<div class="absolute bottom-0 right-0 w-8 h-8 border-b-4 border-r-4 border-primary rounded-br-lg"></div>
+<!-- Scanning line -->
+<div class="absolute left-0 w-full h-0.5 bg-primary shadow-[0_0_8px_2px_rgba(23,107,69,0.8)] scanner-line"></div>
+</div>
+</div>
+</div>
+<!-- Manual Entry -->
+<div class="w-full max-w-sm flex flex-col gap-sm">
+<label class="font-label-md text-label-md text-on-surface">Ingreso Manual</label>
+<div class="flex gap-sm">
+<input class="flex-grow h-touch-target px-md border border-outline-variant rounded-lg bg-surface focus:border-2 focus:border-primary focus:outline-none font-body-md text-body-md text-on-surface" placeholder="Ej. P-12345" type="text">
+<button class="h-touch-target px-lg bg-secondary-container text-on-secondary-container rounded-lg font-label-md text-label-md hover:bg-surface-container-high transition-colors border border-outline-variant">
+                    Buscar
+                </button>
+</div>
+</div>
+<!-- Order Result Card (Simulated Success State - Ready for Pickup) -->
+<div class="w-full max-w-sm bg-surface rounded-lg border border-outline-variant p-lg shadow-sm flex flex-col gap-md">
+<div class="flex justify-between items-start">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Pedido #P-87492</span>
+<h3 class="font-headline-md text-headline-md-mobile text-on-surface mt-base">Familia Rodríguez</h3>
+</div>
+<div class="bg-primary-container text-on-primary-container px-sm py-xs rounded-full font-label-sm text-label-sm flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                    Listo para Entrega
+                </div>
+</div>
+<div class="flex flex-col gap-xs font-body-md text-body-md text-on-surface-variant">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 0;">fastfood</span>
+<span>3x Menú Picnic Premium</span>
+</div>
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 0;">water_drop</span>
+<span>4x Aguas Minerales</span>
+</div>
+</div>
+<button class="w-full h-touch-target bg-primary text-on-primary rounded-lg font-label-md text-label-md hover:opacity-90 transition-opacity flex items-center justify-center gap-sm mt-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">check</span>
+                Confirmar Entrega
+            </button>
+</div>
+<!-- Error Alert (Simulated Error State) -->
+<div class="w-full max-w-sm bg-error-container text-on-error-container rounded-lg p-md flex flex-col gap-sm">
+<div class="flex items-start gap-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">error</span>
+<div>
+<h4 class="font-label-md text-label-md font-bold">Código no reconocido</h4>
+<p class="font-body-sm text-body-sm mt-base opacity-90">El código ingresado no corresponde a un pedido activo o ya fue entregado.</p>
+</div>
+</div>
+<button class="self-end mt-sm h-10 px-md border border-on-error-container rounded-lg font-label-md text-label-md hover:bg-error hover:text-on-error transition-colors">
+                Crear Incidencia
+            </button>
+</div>
+</main>
+<!-- BottomNavBar (Hidden on md and up) -->
+<nav class="fixed bottom-0 w-full z-50 h-[80px] border-t border-outline-variant dark:border-outline shadow-sm fixed bottom-0 left-0 w-full flex justify-around items-center px-xs pb-safe bg-surface dark:bg-surface-dim md:hidden">
+<button class="flex flex-col items-center justify-center bg-secondary-container dark:bg-primary-container text-on-secondary-container dark:text-on-primary-container rounded-full px-sm py-xs hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">receipt_long</span>
+<span class="font-label-sm text-label-sm mt-base">Pedidos</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant p-xs hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 0;">calendar_today</span>
+<span class="font-label-sm text-label-sm mt-base">Reservas</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant p-xs hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 0;">bolt</span>
+<span class="font-label-sm text-label-sm mt-base">Venta</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant p-xs hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 0;">event_available</span>
+<span class="font-label-sm text-label-sm mt-base">Disponibilidad</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant p-xs hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 0;">report_problem</span>
+<span class="font-label-sm text-label-sm mt-base">Incidencias</span>
+</button>
+</nav>
+</body></html>

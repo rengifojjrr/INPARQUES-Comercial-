@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>INPARQUES - Canon, comisión y liquidaciones</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "primary-fixed": "#a4f4c3",
+                        "on-surface-variant": "#3f4942",
+                        "tertiary": "#3a4942",
+                        "on-secondary": "#ffffff",
+                        "inverse-surface": "#30312d",
+                        "on-secondary-fixed": "#002114",
+                        "on-primary-fixed-variant": "#005232",
+                        "secondary": "#3e6753",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed": "#002111",
+                        "surface-tint": "#186c45",
+                        "tertiary-fixed-dim": "#b9cbc1",
+                        "on-tertiary-container": "#cadbd2",
+                        "error-container": "#ffdad6",
+                        "primary-container": "#176b45",
+                        "on-tertiary": "#ffffff",
+                        "surface-container": "#f0eee8",
+                        "outline": "#6f7a71",
+                        "outline-variant": "#bfc9c0",
+                        "on-secondary-fixed-variant": "#264e3c",
+                        "surface-variant": "#e4e2dd",
+                        "on-surface": "#1b1c18",
+                        "secondary-container": "#c0edd4",
+                        "tertiary-container": "#516159",
+                        "on-secondary-container": "#446d59",
+                        "secondary-fixed": "#c0edd4",
+                        "on-primary-container": "#99e9b9",
+                        "on-error-container": "#93000a",
+                        "background": "#fbf9f3",
+                        "secondary-fixed-dim": "#a4d0b8",
+                        "surface-bright": "#fbf9f3",
+                        "on-background": "#1b1c18",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#3a4a43",
+                        "inverse-primary": "#88d7a8",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed-dim": "#88d7a8",
+                        "surface-container-high": "#eae8e2",
+                        "surface-dim": "#dcdad4",
+                        "surface": "#fbf9f3",
+                        "surface-container-low": "#f5f3ed",
+                        "tertiary-fixed": "#d5e7dd",
+                        "primary": "#005131",
+                        "on-tertiary-fixed": "#0f1e19",
+                        "inverse-on-surface": "#f3f1eb",
+                        "surface-container-highest": "#e4e2dd"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xxl": "48px",
+                        "xl": "32px",
+                        "base": "4px",
+                        "md": "16px",
+                        "xs": "8px",
+                        "sm": "12px",
+                        "touch-target": "44px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Manrope"],
+                        "display-lg": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "label-sm": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "headline-md": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen antialiased flex overflow-hidden">
+<!-- SideNavBar -->
+<aside class="bg-background dark:bg-background border-r border-outline-variant dark:border-outline h-screen w-72 flex flex-col fixed left-0 top-0 overflow-y-auto z-20">
+<div class="h-full py-lg px-md flex flex-col gap-sm">
+<!-- Header -->
+<div class="flex flex-col items-start gap-sm mb-lg px-sm">
+<div class="flex items-center gap-sm">
+<img alt="INPARQUES Official Logo" class="w-10 h-10 object-contain rounded-md" data-alt="A stylized logo icon representing a modern eco-friendly organization with green leaves and a geometric mountain peak structure against a clean white background. Natural, authoritative, modern corporate style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVQFVU2BING9Oz5W-ho_z_jlO2eAJTWeSu3Iy_3j_DaPemys-GWEIkJm8M_pWRAQ-EhpemqcQUx7J2ztBYQSGKBBrWpYo6z3zJPlqDHT1UzdixjwVt22c2loNRyytOrnWOXXq8bsjqH0OcpwJStN5W9bqrUPmkMFc_RyMykpXyOSscidYK02vSMDX4VYiDJPdGtz2S9BLvH1qq07847Qr_xKOq_9Ki-VFEYLeW7mYTLTYF8peNEYxT"/>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-inverse-primary">INPARQUES</h1>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant">Audit &amp; Finance Panel</p>
+</div>
+<!-- CTA -->
+<button class="bg-primary-container text-on-primary-container flex items-center justify-center gap-sm rounded-full w-full min-h-[44px] font-label-md text-label-md mb-md hover:bg-surface-tint hover:text-white transition-colors shadow-sm">
+<span class="material-symbols-outlined">add</span>
+                New Transaction
+            </button>
+<!-- Navigation Tabs -->
+<nav class="flex-1 flex flex-col gap-xs">
+<a class="flex items-center gap-md text-on-surface-variant dark:text-outline-variant px-md py-sm hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                    Financial Overview
+                </a>
+<a class="flex items-center gap-md text-on-surface-variant dark:text-outline-variant px-md py-sm hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">payments</span>
+                    Sales
+                </a>
+<a class="flex items-center gap-md text-on-surface-variant dark:text-outline-variant px-md py-sm hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">account_balance</span>
+                    Reconciliation
+                </a>
+<a class="flex items-center gap-md bg-secondary-container dark:bg-on-secondary-fixed-variant text-on-secondary-container dark:text-primary-fixed rounded-lg px-md py-sm font-label-md text-label-md scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined fill-icon">percent</span>
+                    Fees/Commissions
+                </a>
+<a class="flex items-center gap-md text-on-surface-variant dark:text-outline-variant px-md py-sm hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+                    Accounts Receivable
+                </a>
+<a class="flex items-center gap-md text-on-surface-variant dark:text-outline-variant px-md py-sm hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+                    Daily Closings
+                </a>
+<a class="flex items-center gap-md text-on-surface-variant dark:text-outline-variant px-md py-sm hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">undo</span>
+                    Refunds
+                </a>
+<a class="flex items-center gap-md text-on-surface-variant dark:text-outline-variant px-md py-sm hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">edit_document</span>
+                    Adjustments
+                </a>
+<a class="flex items-center gap-md text-on-surface-variant dark:text-outline-variant px-md py-sm hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">verified_user</span>
+                    Audit
+                </a>
+<a class="flex items-center gap-md text-on-surface-variant dark:text-outline-variant px-md py-sm hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">file_export</span>
+                    Exports
+                </a>
+</nav>
+<!-- Footer Tabs -->
+<div class="mt-auto flex flex-col gap-xs border-t border-outline-variant pt-md">
+<a class="flex items-center gap-md text-on-surface-variant dark:text-outline-variant px-md py-sm hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">help_outline</span>
+                    Support
+                </a>
+<a class="flex items-center gap-md text-on-surface-variant dark:text-outline-variant px-md py-sm hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">settings</span>
+                    Settings
+                </a>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col ml-72 min-h-screen">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline docked full-width top-0 h-16 z-10 sticky flex justify-between items-center px-lg w-full">
+<h2 class="font-headline-md text-headline-md font-extrabold text-primary dark:text-inverse-primary">Financial Audit Management</h2>
+<div class="flex items-center gap-md">
+<!-- Search -->
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="pl-xl pr-md py-sm bg-surface-container rounded-full border-none focus:ring-2 focus:ring-primary min-h-[44px] w-64 text-body-md font-body-md placeholder:text-on-surface-variant" placeholder="Search..." type="text"/>
+</div>
+<!-- Trailing Actions -->
+<button class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors opacity-80 p-xs rounded-full hover:bg-surface-container">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors opacity-80 p-xs rounded-full hover:bg-surface-container flex items-center justify-center">
+<img alt="User Profile Avatar" class="w-8 h-8 rounded-full object-cover border border-outline-variant" data-alt="A professional headshot of a female administrator wearing a neat white blouse with a subtle green scarf, standing in an outdoor park setting with soft, glowing natural lighting. Modern corporate aesthetic, high quality, professional photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfmum0wQUwIGiXpWAdDHsDVPU1NdTTQC7U0Sqw9buogP6-kQ0syHI8hJPKIe0oR9wCGseNkvOtRs1DewYkWL79rti5Tn6vzcN7_8s4nACUuB6KxW2Y-gCO4Fd4dnSZ4nVxG67oaDbeHq3LV-MPrO9VWJp3QfHElhEEXu0Hj4ysmnPecFwYMRiqkF49wjOyWSEronfwPKccCd0FMbid6oj4GfcAUolj7onwUOmHh77Km40uVSG5ccIy"/>
+</button>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 p-xl overflow-y-auto bg-background">
+<div class="max-w-7xl mx-auto flex flex-col gap-lg">
+<!-- Page Header -->
+<div class="flex justify-between items-end">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-base">Liquidaciones y Comisiones</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Gestión de periodos por comercio, cálculo de cánones y cierre de liquidaciones.</p>
+</div>
+<div class="flex gap-sm">
+<button class="bg-surface border border-outline-variant text-on-surface px-md py-sm rounded-lg min-h-[44px] font-label-md text-label-md hover:bg-surface-container shadow-sm transition-colors flex items-center gap-xs">
+<span class="material-symbols-outlined">filter_list</span>
+                            Filtros
+                        </button>
+<button class="bg-primary-container text-on-primary-container px-md py-sm rounded-lg min-h-[44px] font-label-md text-label-md hover:bg-surface-tint hover:text-white shadow-sm transition-colors flex items-center gap-xs">
+<span class="material-symbols-outlined">download</span>
+                            Exportar Reporte
+                        </button>
+</div>
+</div>
+<!-- Bento Grid Layout for Main Content -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg">
+<!-- Summary Cards (Spanning top) -->
+<div class="lg:col-span-12 grid grid-cols-1 md:grid-cols-3 gap-lg">
+<div class="bg-surface border border-outline-variant rounded-xl p-lg shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-md">
+<p class="font-label-md text-label-md text-on-surface-variant">Cánones Pendientes</p>
+<span class="material-symbols-outlined text-tertiary">pending_actions</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-xs">Bs. 45,230.00</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary text-[16px]">arrow_upward</span>
+                                12% vs mes anterior
+                            </p>
+</div>
+<div class="bg-surface border border-outline-variant rounded-xl p-lg shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-md">
+<p class="font-label-md text-label-md text-on-surface-variant">Comisiones Calculadas (Mes)</p>
+<span class="material-symbols-outlined text-secondary">calculate</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-xs">Bs. 128,500.50</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary text-[16px]">check_circle</span>
+                                85% comercios procesados
+                            </p>
+</div>
+<div class="bg-surface border border-outline-variant rounded-xl p-lg shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-md">
+<p class="font-label-md text-label-md text-on-surface-variant">Liquidaciones Cerradas</p>
+<span class="material-symbols-outlined text-primary-container">verified</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-xs">42 / 50</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-error text-[16px]">warning</span>
+                                8 pendientes de cierre
+                            </p>
+</div>
+</div>
+<!-- Main Data Table Area -->
+<div class="lg:col-span-12 bg-surface border border-outline-variant rounded-xl shadow-sm overflow-hidden">
+<div class="p-lg border-b border-outline-variant flex justify-between items-center bg-surface-container-lowest">
+<h3 class="font-headline-md text-headline-md text-on-surface">Periodos por Comercio</h3>
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="pl-xl pr-sm py-xs bg-surface w-full rounded-md border border-outline-variant focus:ring-2 focus:ring-primary focus:border-primary min-h-[36px] text-body-md font-body-md" placeholder="Buscar comercio..." type="text"/>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low border-b border-outline-variant">
+<tr>
+<th class="p-md font-label-md text-label-md text-on-surface-variant">Comercio</th>
+<th class="p-md font-label-md text-label-md text-on-surface-variant">Periodo</th>
+<th class="p-md font-label-md text-label-md text-on-surface-variant">Ventas Base</th>
+<th class="p-md font-label-md text-label-md text-on-surface-variant">Reglas/Exen.</th>
+<th class="p-md font-label-md text-label-md text-on-surface-variant text-right">Monto Final</th>
+<th class="p-md font-label-md text-label-md text-on-surface-variant">Estado</th>
+<th class="p-md font-label-md text-label-md text-on-surface-variant text-center">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant bg-surface">
+<!-- Row 1: Pendiente -->
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="p-md">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded bg-secondary-container text-on-secondary-container flex items-center justify-center font-label-md font-bold">EK</div>
+<div>
+<p class="font-label-md text-on-surface">EcoKiosko Central</p>
+<p class="font-label-sm text-on-surface-variant">ID: COM-042</p>
+</div>
+</div>
+</td>
+<td class="p-md font-body-md text-on-surface">Octubre 2023</td>
+<td class="p-md font-body-md text-on-surface">Bs. 45,000.00</td>
+<td class="p-md">
+<div class="flex flex-col gap-xs">
+<span class="inline-flex items-center px-xs py-0.5 rounded-sm bg-surface-variant text-on-surface-variant text-xs font-label-sm">5% Base</span>
+<span class="inline-flex items-center px-xs py-0.5 rounded-sm bg-error-container text-on-error-container text-xs font-label-sm">- Ajuste (Mora)</span>
+</div>
+</td>
+<td class="p-md font-label-md text-on-surface text-right">Bs. 2,350.00</td>
+<td class="p-md">
+<span class="inline-flex items-center gap-xs px-sm py-1 rounded-full bg-[#fff8e1] text-[#f57f17] font-label-sm">
+<span class="w-2 h-2 rounded-full bg-[#f57f17]"></span>
+                                                Pendiente
+                                            </span>
+</td>
+<td class="p-md">
+<div class="flex items-center justify-center gap-sm">
+<button class="text-primary hover:text-primary-container p-xs rounded hover:bg-surface-container transition-colors" onclick="document.getElementById('calc-modal').classList.remove('hidden')" title="Ver Cálculo">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+<button class="bg-primary-container text-on-primary-container px-sm py-1 rounded font-label-sm hover:bg-surface-tint hover:text-white transition-colors">
+                                                    Cerrar Periodo
+                                                </button>
+</div>
+</td>
+</tr>
+<!-- Row 2: Cerrado -->
+<tr class="hover:bg-surface-container-lowest transition-colors bg-surface-container-lowest/50">
+<td class="p-md">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded bg-tertiary-container text-on-tertiary-container flex items-center justify-center font-label-md font-bold">AV</div>
+<div>
+<p class="font-label-md text-on-surface">Aventuras Valle</p>
+<p class="font-label-sm text-on-surface-variant">ID: COM-089</p>
+</div>
+</div>
+</td>
+<td class="p-md font-body-md text-on-surface">Octubre 2023</td>
+<td class="p-md font-body-md text-on-surface">Bs. 120,500.00</td>
+<td class="p-md">
+<div class="flex flex-col gap-xs">
+<span class="inline-flex items-center px-xs py-0.5 rounded-sm bg-surface-variant text-on-surface-variant text-xs font-label-sm">8% Especial</span>
+<span class="inline-flex items-center px-xs py-0.5 rounded-sm bg-primary-container/20 text-on-primary-container text-xs font-label-sm">Exención (Ecológica)</span>
+</div>
+</td>
+<td class="p-md font-label-md text-on-surface text-right">Bs. 8,200.00</td>
+<td class="p-md">
+<span class="inline-flex items-center gap-xs px-sm py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+                                                Cerrado
+                                            </span>
+</td>
+<td class="p-md">
+<div class="flex items-center justify-center gap-sm">
+<button class="text-on-surface-variant hover:text-primary p-xs rounded hover:bg-surface-container transition-colors" title="Ver Detalle Inmutable">
+<span class="material-symbols-outlined text-[20px]">receipt</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3: En Proceso -->
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="p-md">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded bg-primary-fixed-dim text-on-primary-fixed flex items-center justify-center font-label-md font-bold">RS</div>
+<div>
+<p class="font-label-md text-on-surface">Restaurante Selva</p>
+<p class="font-label-sm text-on-surface-variant">ID: COM-112</p>
+</div>
+</div>
+</td>
+<td class="p-md font-body-md text-on-surface">Noviembre 2023</td>
+<td class="p-md font-body-md text-on-surface">Bs. 85,000.00</td>
+<td class="p-md">
+<div class="flex flex-col gap-xs">
+<span class="inline-flex items-center px-xs py-0.5 rounded-sm bg-surface-variant text-on-surface-variant text-xs font-label-sm">10% Fijo</span>
+</div>
+</td>
+<td class="p-md font-label-md text-on-surface text-right">Bs. 8,500.00</td>
+<td class="p-md">
+<span class="inline-flex items-center gap-xs px-sm py-1 rounded-full border border-outline-variant text-on-surface-variant font-label-sm">
+                                                En Proceso
+                                            </span>
+</td>
+<td class="p-md">
+<div class="flex items-center justify-center gap-sm">
+<button class="text-primary hover:text-primary-container p-xs rounded hover:bg-surface-container transition-colors" title="Ver Cálculo">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+<button class="bg-surface border border-outline text-on-surface px-sm py-1 rounded font-label-sm hover:bg-surface-container transition-colors">
+                                                    Editar Ajustes
+                                                </button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="p-md border-t border-outline-variant flex items-center justify-between bg-surface-container-lowest">
+<p class="font-label-sm text-on-surface-variant">Mostrando 1 - 3 de 50 resultados</p>
+<div class="flex gap-xs">
+<button class="p-xs rounded border border-outline-variant text-on-surface-variant disabled:opacity-50"><span class="material-symbols-outlined text-[20px]">chevron_left</span></button>
+<button class="p-xs rounded border border-outline-variant bg-surface-container text-on-surface font-label-md w-8 h-8 flex items-center justify-center">1</button>
+<button class="p-xs rounded border border-outline-variant text-on-surface hover:bg-surface-container font-label-md w-8 h-8 flex items-center justify-center transition-colors">2</button>
+<button class="p-xs rounded border border-outline-variant text-on-surface-variant hover:bg-surface-container transition-colors"><span class="material-symbols-outlined text-[20px]">chevron_right</span></button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Modal: Ver Cálculo (Hidden by default) -->
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-inverse-surface/50 backdrop-blur-sm hidden" id="calc-modal">
+<div class="bg-surface border border-outline-variant rounded-xl shadow-[0px_12px_32px_rgba(40,51,46,0.12)] w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden">
+<!-- Modal Header -->
+<div class="px-lg py-md border-b border-outline-variant flex justify-between items-center bg-surface-container-lowest">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Detalle de Cálculo - Octubre 2023</h2>
+<p class="font-label-sm text-on-surface-variant">EcoKiosko Central (COM-042)</p>
+</div>
+<button class="p-xs rounded-full hover:bg-surface-container text-on-surface-variant transition-colors" onclick="document.getElementById('calc-modal').classList.add('hidden')">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- Modal Body (Scrollable) -->
+<div class="p-lg overflow-y-auto bg-background flex-1 flex flex-col gap-md">
+<div class="bg-surface border border-outline-variant rounded-lg p-md">
+<h4 class="font-label-md text-on-surface border-b border-outline-variant pb-xs mb-sm">Fórmula Aplicada</h4>
+<p class="font-body-md text-on-surface-variant italic mb-md bg-surface-container-low p-sm rounded border-l-4 border-primary">
+                        (Ventas Base * % Canon) - Exenciones + Ajustes = Monto Final
+                    </p>
+<div class="flex flex-col gap-sm">
+<!-- Line item -->
+<div class="flex justify-between items-center py-xs">
+<span class="font-body-md text-on-surface">Ventas Base Declaradas</span>
+<span class="font-label-md text-on-surface">Bs. 45,000.00</span>
+</div>
+<!-- Line item -->
+<div class="flex justify-between items-center py-xs border-t border-outline-variant border-dashed">
+<span class="font-body-md text-on-surface pl-md flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px] text-primary">percent</span>
+                                Regla de Canon (5% Base)
+                            </span>
+<span class="font-label-md text-on-surface">+ Bs. 2,250.00</span>
+</div>
+<!-- Line item -->
+<div class="flex justify-between items-center py-xs border-t border-outline-variant border-dashed">
+<span class="font-body-md text-on-surface pl-md flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px] text-tertiary">eco</span>
+                                Exención (Ninguna aplicable)
+                            </span>
+<span class="font-label-md text-on-surface-variant">- Bs. 0.00</span>
+</div>
+<!-- Line item -->
+<div class="flex justify-between items-center py-xs border-t border-outline-variant border-dashed">
+<span class="font-body-md text-on-surface pl-md flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px] text-error">warning</span>
+                                Ajuste (Cargo por Mora 100.00)
+                            </span>
+<span class="font-label-md text-error">+ Bs. 100.00</span>
+</div>
+</div>
+</div>
+<div class="bg-primary-container text-on-primary-container rounded-lg p-md flex justify-between items-center">
+<span class="font-headline-md text-headline-md">Monto Total a Liquidar</span>
+<span class="font-headline-lg text-headline-lg">Bs. 2,350.00</span>
+</div>
+<div class="bg-surface-container-low p-sm rounded-md border border-outline-variant mt-sm">
+<p class="font-label-sm text-on-surface-variant flex items-start gap-xs">
+<span class="material-symbols-outlined text-[16px] mt-0.5">info</span>
+                        Al cerrar el periodo, estos datos se volverán inmutables y se generará la orden de cobro correspondiente.
+                    </p>
+</div>
+</div>
+<!-- Modal Footer -->
+<div class="px-lg py-md border-t border-outline-variant bg-surface flex justify-end gap-md">
+<button class="border border-outline-variant text-on-surface px-md py-sm rounded-lg min-h-[44px] font-label-md text-label-md hover:bg-surface-container transition-colors" onclick="document.getElementById('calc-modal').classList.add('hidden')">
+                    Cancelar
+                </button>
+<button class="bg-primary-container text-on-primary-container px-md py-sm rounded-lg min-h-[44px] font-label-md text-label-md hover:bg-surface-tint hover:text-white shadow-sm transition-colors flex items-center gap-xs" onclick="alert('Periodo cerrado. Datos inmutados.'); document.getElementById('calc-modal').classList.add('hidden');">
+<span class="material-symbols-outlined text-[18px]">lock</span>
+                    Cerrar e Inmutar Periodo
+                </button>
+</div>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Solicitud de Reembolso - INPARQUES</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#bfc9c0",
+                        "surface-container-low": "#f5f3ed",
+                        "tertiary": "#3a4942",
+                        "surface-container-high": "#eae8e2",
+                        "surface-container-highest": "#e4e2dd",
+                        "on-primary-fixed-variant": "#005232",
+                        "on-tertiary-fixed-variant": "#3a4a43",
+                        "error-container": "#ffdad6",
+                        "on-secondary-container": "#446d59",
+                        "surface-dim": "#dcdad4",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed-dim": "#a4d0b8",
+                        "background": "#fbf9f3",
+                        "on-secondary-fixed-variant": "#264e3c",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-container": "#cadbd2",
+                        "surface-variant": "#e4e2dd",
+                        "secondary-container": "#c0edd4",
+                        "tertiary-fixed-dim": "#b9cbc1",
+                        "on-primary-fixed": "#002111",
+                        "error": "#ba1a1a",
+                        "surface-container": "#f0eee8",
+                        "inverse-surface": "#30312d",
+                        "on-surface-variant": "#3f4942",
+                        "on-surface": "#1b1c18",
+                        "on-secondary-fixed": "#002114",
+                        "secondary-fixed": "#c0edd4",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#6f7a71",
+                        "primary-fixed": "#a4f4c3",
+                        "inverse-on-surface": "#f3f1eb",
+                        "inverse-primary": "#88d7a8",
+                        "primary-fixed-dim": "#88d7a8",
+                        "surface-tint": "#186c45",
+                        "surface": "#fbf9f3",
+                        "primary": "#005131",
+                        "on-background": "#1b1c18",
+                        "tertiary-container": "#516159",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#d5e7dd",
+                        "secondary": "#3e6753",
+                        "on-primary-container": "#99e9b9",
+                        "surface-bright": "#fbf9f3",
+                        "primary-container": "#176b45",
+                        "on-tertiary-fixed": "#0f1e19",
+                        "on-error": "#ffffff"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "base": "4px",
+                        "xs": "8px",
+                        "xl": "32px",
+                        "xxl": "48px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "touch-target": "44px",
+                        "sm": "12px"
+                    },
+                    fontFamily: {
+                        "headline-lg-mobile": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "display-lg": ["Manrope"],
+                        "label-sm": ["Manrope"]
+                    },
+                    fontSize: {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- TopAppBar -->
+<header class="bg-background/95 backdrop-blur-sm dark:bg-background/95 docked full-width top-0 sticky z-40 border-b border-outline-variant dark:border-outline flat no shadows flex justify-between items-center h-touch-target px-xl ml-64">
+<div class="flex items-center gap-lg">
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">Support &amp; Dispute Portal</h1>
+<nav class="hidden md:flex gap-md">
+<a class="text-on-surface-variant dark:text-on-surface-variant font-label-md text-label-md hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">Dashboard</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-label-md text-label-md hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">Analytics</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-label-md text-label-md hover:text-primary dark:hover:text-primary-fixed transition-colors" href="#">Settings</a>
+</nav>
+</div>
+<div class="flex items-center gap-md">
+<button class="bg-surface-container text-on-surface px-md h-touch-target rounded-full font-label-md text-label-md border border-outline-variant hover:bg-surface-container-high transition-colors">Park Filter</button>
+<button class="bg-primary-container text-on-primary h-touch-target px-lg rounded-full font-label-md text-label-md hover:opacity-90 transition-opacity">Create Order</button>
+<button class="w-touch-target h-touch-target flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="w-touch-target h-touch-target flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<button class="w-touch-target h-touch-target flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="bg-surface dark:bg-surface-dim h-screen w-64 fixed left-0 top-0 overflow-y-auto border-r border-outline-variant dark:border-outline flat no shadows flex flex-col h-full py-lg px-md z-50">
+<div class="mb-xl px-md">
+<div class="w-12 h-12 rounded-full bg-surface-container-high border border-outline-variant flex items-center justify-center mb-sm overflow-hidden">
+<span class="material-symbols-outlined text-outline">person</span>
+</div>
+<h2 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">INPARQUES</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Administrative Portal</p>
+</div>
+<button class="bg-primary-container text-on-primary h-touch-target rounded-lg font-label-md text-label-md w-full mb-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-sm">
+<span class="material-symbols-outlined text-sm">add</span> New Support Case
+        </button>
+<nav class="flex-1 flex flex-col gap-base">
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors duration-200 flex items-center gap-md px-md h-touch-target rounded-lg font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined" data-icon="inbox">inbox</span> Inbox
+            </a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors duration-200 flex items-center gap-md px-md h-touch-target rounded-lg font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined" data-icon="assignment_turned_in">assignment_turned_in</span> Assigned Cases
+            </a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors duration-200 flex items-center gap-md px-md h-touch-target rounded-lg font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span> Orders
+            </a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors duration-200 flex items-center gap-md px-md h-touch-target rounded-lg font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined" data-icon="gavel">gavel</span> Disputes
+            </a>
+<a class="text-primary dark:text-primary-fixed font-bold border-r-4 border-primary dark:border-primary-fixed bg-secondary-container/20 flex items-center gap-md px-md h-touch-target rounded-l-lg font-body-md text-body-md opacity-90 transition-opacity" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span> Requested Refunds
+            </a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors duration-200 flex items-center gap-md px-md h-touch-target rounded-lg font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined" data-icon="timer">timer</span> SLA
+            </a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors duration-200 flex items-center gap-md px-md h-touch-target rounded-lg font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span> Knowledge Base
+            </a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors duration-200 flex items-center gap-md px-md h-touch-target rounded-lg font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined" data-icon="bar_chart">bar_chart</span> Reports
+            </a>
+</nav>
+</aside>
+<!-- Main Content -->
+<main class="ml-64 p-lg md:p-xl max-w-7xl mx-auto">
+<div class="mb-lg flex justify-between items-end">
+<div>
+<div class="flex items-center gap-sm mb-xs text-on-surface-variant">
+<span class="font-label-sm text-label-sm">Requested Refunds</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="font-label-sm text-label-sm text-primary">New Request</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Solicitud de Reembolso</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-sm">Order #ORD-2023-8942 • Henri Pittier National Park</p>
+</div>
+<div class="flex items-center gap-sm">
+<span class="bg-secondary-container/30 text-secondary px-sm py-1 rounded-full font-label-sm text-label-sm flex items-center gap-1 border border-secondary-container">
+<span class="material-symbols-outlined text-sm">pending</span> En proceso
+                </span>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-lg">
+<!-- Left Column: Form -->
+<div class="lg:col-span-2 space-y-lg">
+<!-- Refund Details Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg shadow-sm">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-md border-b border-outline-variant pb-sm">Detalles del Reembolso</h2>
+<div class="space-y-md">
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs">Motivo del Reembolso *</label>
+<select class="w-full h-touch-target border-outline-variant rounded-md bg-surface-container-lowest text-on-surface focus:border-primary focus:ring-primary font-body-md">
+<option value="">Seleccione un motivo...</option>
+<option value="weather">Condiciones climáticas adversas</option>
+<option value="park_closure">Cierre inesperado del parque</option>
+<option value="service_failure">Fallo en servicio contratado</option>
+<option value="customer_cancel">Cancelación por parte del cliente (Sujeto a política)</option>
+<option value="other">Otro</option>
+</select>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs">Descripción Detallada</label>
+<textarea class="w-full border-outline-variant rounded-md bg-surface-container-lowest text-on-surface focus:border-primary focus:ring-primary font-body-md" placeholder="Explique brevemente la situación..." rows="4"></textarea>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md pt-sm">
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs">Tipo de Reembolso</label>
+<div class="flex gap-md h-touch-target items-center">
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="text-primary focus:ring-primary" name="refund_type" type="radio" value="total"/>
+<span class="font-body-md text-on-surface">Total</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer">
+<input checked="" class="text-primary focus:ring-primary" name="refund_type" type="radio" value="partial"/>
+<span class="font-body-md text-on-surface">Parcial</span>
+</label>
+</div>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs">Monto Calculado ($)</label>
+<div class="relative">
+<span class="absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant font-body-md">$</span>
+<input class="w-full h-touch-target pl-xl border-outline-variant rounded-md bg-surface-container-lowest text-on-surface focus:border-primary focus:ring-primary font-body-md" type="number" value="45.00"/>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Monto original: $150.00</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Evidence & Policy Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg shadow-sm">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-md border-b border-outline-variant pb-sm">Evidencia y Políticas</h2>
+<div class="space-y-md">
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs">Carga de Evidencia Justificativa</label>
+<div class="border-2 border-dashed border-outline-variant rounded-lg p-xl text-center bg-surface hover:bg-surface-container-low transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-outline text-3xl mb-sm">upload_file</span>
+<p class="font-body-md text-on-surface-variant">Arrastre los archivos aquí o <span class="text-primary font-bold">examine</span></p>
+<p class="font-label-sm text-label-sm text-outline mt-1">Soporta JPG, PNG, PDF (Max. 5MB)</p>
+</div>
+<div class="mt-sm flex flex-col gap-xs">
+<div class="flex items-center justify-between bg-surface-container-low p-sm rounded-md border border-outline-variant">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-secondary">image</span>
+<span class="font-body-md text-sm text-on-surface">recibo_pago_hp.jpg</span>
+</div>
+<button class="text-error hover:opacity-80"><span class="material-symbols-outlined text-sm">delete</span></button>
+</div>
+</div>
+</div>
+<div class="bg-tertiary-fixed/30 p-md rounded-md border border-tertiary-fixed-dim">
+<div class="flex gap-sm">
+<span class="material-symbols-outlined text-tertiary">info</span>
+<div>
+<h4 class="font-label-md text-label-md text-on-tertiary-fixed-variant">Política de Cancelación Aplicable</h4>
+<p class="font-body-md text-sm text-on-surface-variant mt-1">Cancelación moderada: Reembolso del 50% si se cancela con menos de 7 días de anticipación. Retención administrativa del 10% aplica.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Agent & Actions -->
+<div class="space-y-lg">
+<!-- Agent Recommendation -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg shadow-sm">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-sm">Recomendación del Agente</h3>
+<div class="mb-md">
+<textarea class="w-full border-outline-variant rounded-md bg-surface text-on-surface focus:border-primary focus:ring-primary font-body-md" placeholder="Escriba su recomendación para el departamento de finanzas..." rows="4"></textarea>
+</div>
+<div class="space-y-sm">
+<button class="w-full h-touch-target bg-primary-container text-on-primary rounded-md font-label-md text-label-md hover:opacity-90 transition-opacity flex items-center justify-center gap-sm shadow-sm">
+<span class="material-symbols-outlined text-sm">send</span> Enviar a Aprobación (Finanzas)
+                        </button>
+<button class="w-full h-touch-target border border-outline-variant text-on-surface rounded-md font-label-md text-label-md hover:bg-surface-container-low transition-colors">
+                            Guardar Borrador
+                        </button>
+</div>
+</div>
+<!-- Order Summary Mini -->
+<div class="bg-surface-container-low border border-outline-variant rounded-lg p-md">
+<h4 class="font-label-md text-label-md text-on-surface mb-sm border-b border-outline-variant pb-xs">Resumen de Orden</h4>
+<ul class="space-y-xs font-body-md text-sm">
+<li class="flex justify-between">
+<span class="text-on-surface-variant">Cliente</span>
+<span class="text-on-surface font-semibold">Carlos Mendoza</span>
+</li>
+<li class="flex justify-between">
+<span class="text-on-surface-variant">Fecha de Orden</span>
+<span class="text-on-surface">12 Oct 2023</span>
+</li>
+<li class="flex justify-between">
+<span class="text-on-surface-variant">Servicio</span>
+<span class="text-on-surface text-right w-3/4">Permiso Acampada - Zona Norte</span>
+</li>
+<li class="flex justify-between pt-sm border-t border-outline-variant mt-sm">
+<span class="text-on-surface-variant font-semibold">Total Original</span>
+<span class="text-primary font-bold">$150.00</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</main>
+</body></html>

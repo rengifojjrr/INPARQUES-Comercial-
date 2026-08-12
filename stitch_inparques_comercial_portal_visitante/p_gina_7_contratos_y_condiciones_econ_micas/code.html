@@ -1,0 +1,332 @@
+<!DOCTYPE html><html class="h-full" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Portal de Concesionarios - Contrato Activo</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#e4e2dd",
+                        "on-tertiary": "#ffffff",
+                        "inverse-primary": "#88d7a8",
+                        "on-tertiary-fixed-variant": "#3a4a43",
+                        "surface-container-high": "#eae8e2",
+                        "tertiary-fixed": "#d5e7dd",
+                        "inverse-on-surface": "#f3f1eb",
+                        "background": "#fbf9f3",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#6f7a71",
+                        "primary": "#005131",
+                        "outline-variant": "#bfc9c0",
+                        "error": "#ba1a1a",
+                        "secondary-fixed": "#c0edd4",
+                        "surface-container": "#f0eee8",
+                        "primary-container": "#176b45",
+                        "on-secondary-fixed": "#002114",
+                        "on-tertiary-fixed": "#0f1e19",
+                        "surface-tint": "#186c45",
+                        "on-background": "#1b1c18",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#b9cbc1",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#516159",
+                        "on-secondary-fixed-variant": "#264e3c",
+                        "secondary-fixed-dim": "#a4d0b8",
+                        "surface-container-highest": "#e4e2dd",
+                        "on-primary-container": "#99e9b9",
+                        "on-error": "#ffffff",
+                        "on-surface-variant": "#3f4942",
+                        "primary-fixed": "#a4f4c3",
+                        "surface-dim": "#dcdad4",
+                        "on-primary-fixed": "#002111",
+                        "surface": "#fbf9f3",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#005232",
+                        "tertiary": "#3a4942",
+                        "on-tertiary-container": "#cadbd2",
+                        "secondary": "#3e6753",
+                        "on-surface": "#1b1c18",
+                        "secondary-container": "#c0edd4",
+                        "primary-fixed-dim": "#88d7a8",
+                        "on-secondary-container": "#446d59",
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#f5f3ed",
+                        "surface-bright": "#fbf9f3",
+                        "inverse-surface": "#30312d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "xl": "32px",
+                        "xxl": "48px",
+                        "lg": "24px",
+                        "touch-target": "44px",
+                        "xs": "8px",
+                        "md": "16px",
+                        "sm": "12px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Manrope"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "display-lg": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "label-sm": ["Manrope"],
+                        "headline-md": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body-md h-full antialiased overflow-hidden flex">
+<!-- SideNavBar -->
+<aside class="bg-surface dark:bg-inverse-surface text-primary dark:text-inverse-primary h-screen w-64 fixed left-0 top-0 border-r border-outline-variant z-50 flex flex-col p-md">
+<div class="mb-xl">
+<h1 class="text-headline-md font-headline-md font-bold text-primary dark:text-inverse-primary mb-1">Gestión Comercial</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Parques Nacionales</p>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Resumen
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+                Negocios y locales
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-lg font-bold font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="folder_open" data-weight="fill" style="font-variation-settings: 'FILL' 1;">folder_open</span>
+                Expediente
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+                Equipo
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+                Finanzas
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                Configuración
+            </a>
+</nav>
+<div class="mt-auto pt-4 border-t border-outline-variant">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+                Ayuda
+            </a>
+</div>
+</aside>
+<div class="flex-1 flex flex-col ml-64 h-screen">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-inverse-surface text-primary dark:text-inverse-primary h-16 w-[calc(100%-16rem)] fixed top-0 right-0 z-40 border-b border-outline-variant shadow-sm dark:shadow-none flex justify-between items-center px-lg ml-64">
+<div class="flex items-center">
+<h2 class="text-headline-md font-headline-md font-extrabold text-primary dark:text-inverse-primary">Portal de Concesionarios</h2>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="search">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-full text-body-md font-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none w-64 min-h-[44px]" placeholder="Buscar..." type="text">
+</div>
+<button aria-label="Notificaciones" class="p-2 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-full flex items-center justify-center min-h-[44px] min-w-[44px]">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button aria-label="Ayuda" class="p-2 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-full flex items-center justify-center min-h-[44px] min-w-[44px]">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+<button aria-label="Seguridad" class="p-2 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-full flex items-center justify-center min-h-[44px] min-w-[44px]">
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+</button>
+<button class="flex items-center gap-2 hover:bg-surface-container-low py-1 px-2 rounded-full transition-colors min-h-[44px]">
+<img alt="Usuario con MFA Activo" class="w-8 h-8 rounded-full object-cover border border-outline-variant" data-alt="A small, circular avatar portrait of a professional individual against a clean, light mode corporate background. The image should be sharp, conveying a sense of reliability and modern administrative capability within an environmental context. The lighting is bright and even." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFzrSOu3oJ7d4rW-Z7LVBHMw3jEznynH0R7gztd6SehxDpKF14x1YiXdTUzjj6aC1TUpHo3XfqQvP9Il1sJXkNIA3sns3mvX4ZIKh4sbylOkyfxnDYQ2Ouqe0bTo5YeZNEjE35znS6UI8PFTFh6mDG_70HDXOqCwPShbWAiNpq06aPWhYgmxf4RM_rIYwyBHZ5i0WOsxaXlbgIXcWv_acD9v0Mif8ly9UskYLKVi07cogDlPc3683O">
+<span class="font-label-md text-label-md hidden md:block">Perfil</span>
+</button>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 overflow-y-auto pt-16 px-lg pb-xxl bg-background">
+<div class="max-w-6xl mx-auto py-lg space-y-lg">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<div class="flex items-center gap-2 mb-2">
+<span class="bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm px-2 py-1 rounded-sm uppercase tracking-wider">Contrato Vigente</span>
+<span class="text-on-surface-variant font-label-md text-label-md">ID: CON-2023-0482</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-1">Condiciones Económicas</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Vista detallada de los términos autorizados para la operación comercial.</p>
+</div>
+<div class="flex gap-3">
+<button class="min-h-[44px] px-6 border border-outline-variant text-on-surface bg-surface rounded-full font-label-md text-label-md hover:bg-surface-container-low transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+                            Descargar PDF
+                        </button>
+<button class="min-h-[44px] px-6 bg-primary-container text-on-primary font-label-md text-label-md rounded-full hover:opacity-90 transition-opacity flex items-center gap-2 shadow-sm">
+<span class="material-symbols-outlined" data-icon="autorenew">autorenew</span>
+                            Solicitar Renovación
+                        </button>
+</div>
+</div>
+<!-- Bento Grid Content -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-lg">
+<!-- Contract Status Card (Spans 4) -->
+<div class="md:col-span-4 bg-surface border border-outline-variant rounded-xl p-lg relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-secondary-container rounded-full opacity-50 blur-xl group-hover:scale-110 transition-transform duration-500"></div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="timer">timer</span>
+                             Vigencia
+                        </h3>
+<div class="space-y-6">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Fecha de Inicio</p>
+<p class="font-body-lg text-body-lg font-semibold text-on-surface">15 de Enero, 2023</p>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Fecha de Término</p>
+<p class="font-body-lg text-body-lg font-semibold text-on-surface">14 de Enero, 2028</p>
+</div>
+<div class="pt-4 border-t border-outline-variant">
+<div class="flex justify-between items-end mb-2">
+<p class="font-label-md text-label-md text-on-surface">Tiempo Transcurrido</p>
+<p class="font-label-sm text-label-sm text-primary">20%</p>
+</div>
+<div class="w-full bg-surface-variant rounded-full h-2 overflow-hidden">
+<div class="bg-primary h-2 rounded-full" style="width: 20%"></div>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-2 text-right">4 años restantes</p>
+</div>
+</div>
+</div>
+<!-- Financial Terms Card (Spans 8) -->
+<div class="md:col-span-8 bg-surface border border-outline-variant rounded-xl p-lg">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="account_balance">account_balance</span>
+                             Condiciones del Canon
+                        </h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-lg mb-8">
+<div class="bg-surface-container-low p-md rounded-lg border border-surface-variant">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="percent">percent</span> Porcentaje Base
+                                </p>
+<div class="flex items-baseline gap-2">
+<span class="font-display-lg text-display-lg text-primary">4.5</span>
+<span class="font-headline-md text-headline-md text-on-surface-variant">%</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Sobre ingresos brutos mensuales</p>
+</div>
+<div class="bg-surface-container-low p-md rounded-lg border border-surface-variant">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="payments">payments</span> Canon Mínimo Garantizado
+                                </p>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-md text-headline-md text-on-surface-variant">$</span>
+<span class="font-display-lg text-display-lg text-on-surface">1,200</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Mensual, equivalente en moneda local</p>
+</div>
+</div>
+<div class="space-y-4">
+<h4 class="font-label-md text-label-md text-on-surface uppercase tracking-wider border-b border-outline-variant pb-2">Desglose de Aportes Adicionales</h4>
+<div class="flex items-center justify-between py-2">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined" data-icon="park">park</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Fondo de Conservación</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Aporte mensual directo al parque</p>
+</div>
+</div>
+<span class="font-headline-md text-headline-md text-secondary">0.5%</span>
+</div>
+<div class="flex items-center justify-between py-2">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed">
+<span class="material-symbols-outlined" data-icon="cleaning_services">cleaning_services</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Cuota de Mantenimiento Común</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Áreas de uso compartido</p>
+</div>
+</div>
+<span class="font-label-md text-label-md text-on-surface">$150 / mes</span>
+</div>
+</div>
+</div>
+<!-- Authorized Categories (Spans 12) -->
+<div class="md:col-span-12 bg-surface border border-outline-variant rounded-xl p-lg">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="category">category</span>
+                                Categorías Comerciales Autorizadas
+                            </h3>
+<span class="bg-surface-variant text-on-surface-variant px-3 py-1 rounded-full font-label-sm text-label-sm">Uso Restringido</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+<!-- Category 1 -->
+<div class="border border-outline-variant rounded-lg p-4 hover:shadow-md transition-shadow bg-surface-container-lowest">
+<div class="w-12 h-12 rounded-lg bg-primary-container text-on-primary flex items-center justify-center mb-3">
+<span class="material-symbols-outlined" data-icon="restaurant">restaurant</span>
+</div>
+<h4 class="font-label-md text-label-md text-on-surface mb-1">Gastronomía</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Alimentos preparados, bebidas sin alcohol.</p>
+</div>
+<!-- Category 2 -->
+<div class="border border-outline-variant rounded-lg p-4 hover:shadow-md transition-shadow bg-surface-container-lowest">
+<div class="w-12 h-12 rounded-lg bg-secondary-container text-on-secondary-container flex items-center justify-center mb-3">
+<span class="material-symbols-outlined" data-icon="local_mall">local_mall</span>
+</div>
+<h4 class="font-label-md text-label-md text-on-surface mb-1">Souvenirs</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Artesanía local, indumentaria, recuerdos.</p>
+</div>
+<!-- Category 3 -->
+<div class="border border-outline-variant rounded-lg p-4 hover:shadow-md transition-shadow bg-surface-container-lowest opacity-50 grayscale cursor-not-allowed">
+<div class="w-12 h-12 rounded-lg bg-surface-variant text-on-surface-variant flex items-center justify-center mb-3">
+<span class="material-symbols-outlined" data-icon="liquor">liquor</span>
+</div>
+<h4 class="font-label-md text-label-md text-on-surface mb-1">Bebidas Alcohólicas</h4>
+<p class="font-label-sm text-label-sm text-error mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="block">block</span> No Autorizado
+                                </p>
+</div>
+<!-- Category 4 -->
+<div class="border border-outline-variant rounded-lg p-4 hover:shadow-md transition-shadow bg-surface-container-lowest opacity-50 grayscale cursor-not-allowed">
+<div class="w-12 h-12 rounded-lg bg-surface-variant text-on-surface-variant flex items-center justify-center mb-3">
+<span class="material-symbols-outlined" data-icon="directions_bus">directions_bus</span>
+</div>
+<h4 class="font-label-md text-label-md text-on-surface mb-1">Transporte</h4>
+<p class="font-label-sm text-label-sm text-error mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="block">block</span> No Autorizado
+                                </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

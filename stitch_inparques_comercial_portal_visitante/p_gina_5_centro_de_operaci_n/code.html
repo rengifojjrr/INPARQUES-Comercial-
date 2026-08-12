@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Centro de Operación - Parques Nacionales Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#b9cbc1",
+                        "on-primary-container": "#99e9b9",
+                        "primary-container": "#176b45",
+                        "surface-dim": "#dcdad4",
+                        "on-surface-variant": "#3f4942",
+                        "outline-variant": "#bfc9c0",
+                        "inverse-surface": "#30312d",
+                        "surface-container": "#f0eee8",
+                        "on-primary-fixed": "#002111",
+                        "on-primary-fixed-variant": "#005232",
+                        "inverse-on-surface": "#f3f1eb",
+                        "tertiary-container": "#516159",
+                        "primary-fixed-dim": "#88d7a8",
+                        "on-secondary-fixed": "#002114",
+                        "on-error-container": "#93000a",
+                        "surface-tint": "#186c45",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#6f7a71",
+                        "on-tertiary-container": "#cadbd2",
+                        "surface-container-low": "#f5f3ed",
+                        "secondary-container": "#c0edd4",
+                        "tertiary-fixed": "#d5e7dd",
+                        "error-container": "#ffdad6",
+                        "primary": "#005131",
+                        "tertiary": "#3a4942",
+                        "surface-container-high": "#eae8e2",
+                        "on-tertiary-fixed-variant": "#3a4a43",
+                        "on-secondary": "#ffffff",
+                        "surface-container-highest": "#e4e2dd",
+                        "on-secondary-container": "#446d59",
+                        "surface": "#fbf9f3",
+                        "surface-variant": "#e4e2dd",
+                        "on-background": "#1b1c18",
+                        "secondary-fixed": "#c0edd4",
+                        "background": "#fbf9f3",
+                        "inverse-primary": "#88d7a8",
+                        "surface-bright": "#fbf9f3",
+                        "on-tertiary-fixed": "#0f1e19",
+                        "secondary": "#3e6753",
+                        "primary-fixed": "#a4f4c3",
+                        "error": "#ba1a1a",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed-dim": "#a4d0b8",
+                        "on-surface": "#1b1c18",
+                        "on-secondary-fixed-variant": "#264e3c",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "32px",
+                        "xs": "8px",
+                        "base": "4px",
+                        "lg": "24px",
+                        "xxl": "48px",
+                        "touch-target": "44px",
+                        "sm": "12px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Manrope"],
+                        "label-sm": ["Manrope"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "headline-lg": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased flex">
+<!-- SideNavBar -->
+<nav class="bg-surface dark:bg-surface-dim h-screen w-64 fixed left-0 top-0 overflow-y-auto border-r border-outline-variant dark:border-outline flex flex-col py-lg px-md z-50 hidden md:flex">
+<div class="mb-xl">
+<div class="flex items-center gap-sm mb-xs">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed font-headline-lg text-headline-lg font-bold" data-icon="park" style="font-variation-settings: 'FILL' 1;">park</span>
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed tracking-tight">Gestión de Parques</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface-variant block pl-10">Portal Administrativo</span>
+</div>
+<button class="bg-primary-container text-on-tertiary font-label-md text-label-md min-h-touch-target rounded-lg flex items-center justify-center gap-xs mb-xl hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors duration-200">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+            Nueva Inspección
+        </button>
+<ul class="flex-1 flex flex-col gap-xs">
+<li>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant font-medium font-label-md text-label-md hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                    Inicio
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant font-medium font-label-md text-label-md hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+                    Zonas y puntos
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant font-medium font-label-md text-label-md hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+                    Negocios
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-primary font-bold border-r-4 border-primary bg-secondary-container/20 font-label-md text-label-md opacity-80 transition-all duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="settings_applications">settings_applications</span>
+                    Operación
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant font-medium font-label-md text-label-md hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="schedule">schedule</span>
+                    Horarios
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant font-medium font-label-md text-label-md hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="report_problem">report_problem</span>
+                    Incidencias
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant font-medium font-label-md text-label-md hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="verified">verified</span>
+                    Inspecciones
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant font-medium font-label-md text-label-md hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+                    Desempeño
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant font-medium font-label-md text-label-md hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="badge">badge</span>
+                    Usuarios locales
+                </a>
+</li>
+</ul>
+<ul class="mt-auto border-t border-outline-variant pt-md flex flex-col gap-xs">
+<li>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant font-medium font-label-md text-label-md hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                    Ajustes
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-on-surface-variant font-medium font-label-md text-label-md hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+                    Cerrar sesión
+                </a>
+</li>
+</ul>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 ml-0 md:ml-64 flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-surface-dim docked full-width top-0 sticky z-40 border-b border-outline-variant dark:border-outline shadow-sm flex justify-between items-center h-touch-target px-lg">
+<div class="flex items-center gap-md">
+<span class="font-headline-md text-headline-md font-extrabold text-primary dark:text-primary-fixed md:hidden">Parques Admin</span>
+<span class="font-headline-md text-headline-md font-extrabold text-primary dark:text-primary-fixed hidden md:block">Parques Nacionales Admin</span>
+</div>
+<div class="flex items-center gap-md">
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
+<input class="pl-xl pr-sm py-xs border border-outline-variant rounded-full bg-surface-container-lowest text-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none" placeholder="Buscar..." type="text"/>
+</div>
+<button class="bg-secondary-container text-on-secondary-container font-label-md text-label-md px-md py-xs rounded-full hover:bg-surface-container-low transition-colors hidden sm:block">Descargar Reporte</button>
+<div class="flex items-center gap-xs">
+<button class="p-xs text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-container-high rounded-full transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-xs text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-container-high rounded-full transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<main class="flex-1 p-lg md:p-xl overflow-y-auto">
+<div class="mb-xl flex justify-between items-end">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-background mb-xs">Centro de Operación</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Monitoreo en tiempo real de actividades comerciales.</p>
+</div>
+<div class="flex gap-sm">
+<span class="flex items-center gap-xs bg-surface-container-low px-sm py-xs rounded-full border border-outline-variant text-label-sm font-label-sm">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                        En vivo
+                    </span>
+<button class="bg-primary-container text-on-tertiary px-md py-xs rounded-lg font-label-md text-label-md hover:opacity-90 flex items-center gap-xs min-h-touch-target">
+<span class="material-symbols-outlined" data-icon="support_agent">support_agent</span>
+                        Contactar Operador
+                    </button>
+</div>
+</div>
+<!-- Dashboard Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg">
+<!-- Columna Izquierda: Alertas y Procedimientos -->
+<div class="lg:col-span-8 flex flex-col gap-lg">
+<!-- Alertas Críticas (Pedidos y Comercios) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<!-- Pedidos con Retraso -->
+<div class="bg-surface-container-lowest border border-error-container rounded-xl p-lg shadow-sm relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-32 h-32 bg-error-container/20 rounded-bl-full -z-10 transition-transform group-hover:scale-110"></div>
+<div class="flex items-center justify-between mb-md">
+<h2 class="font-headline-md text-headline-md text-error flex items-center gap-xs">
+<span class="material-symbols-outlined" data-icon="timer">timer</span>
+                                    Pedidos +15m
+                                </h2>
+<span class="bg-error/10 text-error px-sm py-xs rounded-full font-label-md text-label-md font-bold">4 Activos</span>
+</div>
+<ul class="space-y-sm">
+<li class="flex justify-between items-center border-b border-outline-variant/30 pb-xs last:border-0">
+<div>
+<p class="font-label-md text-label-md text-on-background">Restaurante El Salto</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Ord. #492 - Retraso: 22m</p>
+</div>
+<button class="text-primary hover:bg-surface-container p-xs rounded-full"><span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span></button>
+</li>
+<li class="flex justify-between items-center border-b border-outline-variant/30 pb-xs last:border-0">
+<div>
+<p class="font-label-md text-label-md text-on-background">Café del Mirador</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Ord. #118 - Retraso: 18m</p>
+</div>
+<button class="text-primary hover:bg-surface-container p-xs rounded-full"><span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span></button>
+</li>
+</ul>
+</div>
+<!-- Comercios Cerrados -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-sm">
+<div class="flex items-center justify-between mb-md">
+<h2 class="font-headline-md text-headline-md text-tertiary flex items-center gap-xs">
+<span class="material-symbols-outlined" data-icon="store_closed">replace_image</span>
+                                    Fuera de Horario
+                                </h2>
+<span class="bg-outline-variant/30 text-on-surface px-sm py-xs rounded-full font-label-md text-label-md font-bold">2 Locales</span>
+</div>
+<ul class="space-y-sm">
+<li class="flex items-center gap-sm bg-surface-container-low p-sm rounded-lg">
+<span class="material-symbols-outlined text-error" data-icon="cancel">cancel</span>
+<div>
+<p class="font-label-md text-label-md text-on-background">Kiosko Norte</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Debería estar abierto h. 18:00</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<!-- Procedimiento de Contingencia -->
+<div class="bg-tertiary-fixed border border-tertiary-fixed-dim rounded-xl p-lg shadow-sm">
+<div class="flex items-center justify-between mb-md">
+<h2 class="font-headline-md text-headline-md text-on-tertiary-fixed flex items-center gap-xs">
+<span class="material-symbols-outlined" data-icon="gavel">gavel</span>
+                                Procedimiento Contingencia
+                            </h2>
+<span class="bg-primary-container text-on-primary-container px-sm py-xs rounded-full font-label-md text-label-md font-bold text-xs uppercase tracking-wider">Auditado</span>
+</div>
+<p class="font-body-md text-body-md text-on-tertiary-fixed-variant mb-md">En caso de fallas sistémicas o incidentes graves en concesiones, activar protocolo Alpha-3. Requiere autorización de supervisor de turno.</p>
+<div class="flex gap-sm">
+<button class="bg-surface text-on-surface border border-outline font-label-md text-label-md px-md py-xs min-h-touch-target rounded-lg hover:bg-surface-container-low transition-colors">Revisar Manual</button>
+<button class="bg-error text-on-error font-label-md text-label-md px-md py-xs min-h-touch-target rounded-lg hover:opacity-90 flex items-center gap-xs">
+<span class="material-symbols-outlined" data-icon="warning">warning</span>
+                                Iniciar Protocolo
+                            </button>
+</div>
+</div>
+</div>
+<!-- Columna Derecha: Pagos, Stock y Reservas -->
+<div class="lg:col-span-4 flex flex-col gap-lg">
+<!-- Pagos Pendientes -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-sm">
+<h3 class="font-headline-md text-headline-md text-on-background mb-md flex items-center gap-xs">
+<span class="material-symbols-outlined text-secondary" data-icon="payments">payments</span>
+                            Pagos s/Confirmar
+                        </h3>
+<div class="space-y-sm">
+<div class="flex justify-between items-center p-sm bg-surface-container rounded-lg border-l-4 border-secondary">
+<div>
+<p class="font-label-md text-label-md">Reserva Refugio #A2</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Transferencia 0422</p>
+</div>
+<span class="font-body-md text-body-md font-bold text-secondary">$45.00</span>
+</div>
+<div class="flex justify-between items-center p-sm bg-surface-container rounded-lg border-l-4 border-secondary">
+<div>
+<p class="font-label-md text-label-md">Guía Zona Sur</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Pago Móvil</p>
+</div>
+<span class="font-body-md text-body-md font-bold text-secondary">$12.50</span>
+</div>
+</div>
+<button class="w-full mt-md text-primary font-label-md text-label-md hover:underline text-center">Ver todos los pendientes</button>
+</div>
+<!-- Artículos Agotados -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-sm">
+<h3 class="font-headline-md text-headline-md text-on-background mb-md flex items-center gap-xs">
+<span class="material-symbols-outlined text-outline" data-icon="inventory_2">inventory_2</span>
+                            Stock Crítico
+                        </h3>
+<div class="flex flex-wrap gap-xs">
+<span class="bg-surface-container-high text-on-surface px-sm py-xs rounded-full font-label-sm text-label-sm border border-outline-variant">Agua Mineral 1L (Kiosko 2)</span>
+<span class="bg-surface-container-high text-on-surface px-sm py-xs rounded-full font-label-sm text-label-sm border border-outline-variant">Mapa Físico Ruta 4</span>
+<span class="bg-error/10 text-error px-sm py-xs rounded-full font-label-sm text-label-sm border border-error-container font-bold">Botiquín Básico (Centro Vis.)</span>
+</div>
+</div>
+<!-- Reservas Próxima Hora -->
+<div class="bg-secondary-container/30 border border-secondary-container rounded-xl p-lg shadow-sm flex-1">
+<h3 class="font-headline-md text-headline-md text-on-background mb-md flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary" data-icon="event_upcoming">event_upcoming</span>
+                            Próxima Hora
+                        </h3>
+<div class="relative pl-sm border-l-2 border-primary-container/30 space-y-md">
+<div class="relative">
+<div class="absolute -left-[21px] top-1 w-3 h-3 bg-primary rounded-full border-2 border-surface"></div>
+<p class="font-label-md text-label-md text-on-background">14:00 - Tour Guiado Cascada</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">12 personas - Guía: R. Mendoza</p>
+</div>
+<div class="relative">
+<div class="absolute -left-[21px] top-1 w-3 h-3 bg-outline rounded-full border-2 border-surface"></div>
+<p class="font-label-md text-label-md text-on-background">14:30 - Ingreso Refugio B</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Grupo Escolar (25 pax)</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

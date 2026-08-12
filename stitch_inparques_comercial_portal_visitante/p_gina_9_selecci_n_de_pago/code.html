@@ -1,0 +1,347 @@
+<!DOCTYPE html><html lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>INPARQUES Comercial - Pago</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-lowest": "#ffffff",
+                      "primary-container": "#176b45",
+                      "on-surface-variant": "#3f4942",
+                      "outline-variant": "#bfc9c0",
+                      "on-primary": "#ffffff",
+                      "surface-tint": "#186c45",
+                      "on-surface": "#1b1c18",
+                      "surface-bright": "#fbf9f3",
+                      "surface-container-high": "#eae8e2",
+                      "on-tertiary-container": "#cadbd2",
+                      "tertiary-container": "#516159",
+                      "surface-container-highest": "#e4e2dd",
+                      "surface-container": "#f0eee8",
+                      "on-primary-fixed-variant": "#005232",
+                      "background": "#fbf9f3",
+                      "on-background": "#1b1c18",
+                      "primary-fixed-dim": "#88d7a8",
+                      "secondary-fixed": "#c0edd4",
+                      "secondary-container": "#c0edd4",
+                      "on-secondary-container": "#446d59",
+                      "on-primary-fixed": "#002111",
+                      "surface-variant": "#e4e2dd",
+                      "on-primary-container": "#99e9b9",
+                      "primary": "#005131",
+                      "error": "#ba1a1a",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary-fixed": "#002114",
+                      "outline": "#6f7a71",
+                      "inverse-primary": "#88d7a8",
+                      "primary-fixed": "#a4f4c3",
+                      "secondary-fixed-dim": "#a4d0b8",
+                      "secondary": "#3e6753",
+                      "surface-dim": "#dcdad4",
+                      "tertiary-fixed": "#d5e7dd",
+                      "inverse-on-surface": "#f3f1eb",
+                      "surface": "#fbf9f3",
+                      "tertiary-fixed-dim": "#b9cbc1",
+                      "on-error": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "on-secondary-fixed-variant": "#264e3c",
+                      "on-secondary": "#ffffff",
+                      "tertiary": "#3a4942",
+                      "on-tertiary-fixed-variant": "#3a4a43",
+                      "on-error-container": "#93000a",
+                      "on-tertiary-fixed": "#0f1e19",
+                      "surface-container-low": "#f5f3ed",
+                      "inverse-surface": "#30312d"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xl": "32px",
+                      "lg": "24px",
+                      "xxl": "48px",
+                      "md": "16px",
+                      "xs": "8px",
+                      "sm": "12px",
+                      "base": "4px",
+                      "touch-target": "44px"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": [
+                              "Manrope"
+                      ],
+                      "body-lg": [
+                              "Manrope"
+                      ],
+                      "headline-lg": [
+                              "Manrope"
+                      ],
+                      "label-md": [
+                              "Manrope"
+                      ],
+                      "body-md": [
+                              "Manrope"
+                      ],
+                      "headline-md": [
+                              "Manrope"
+                      ],
+                      "display-lg": [
+                              "Manrope"
+                      ],
+                      "label-sm": [
+                              "Manrope"
+                      ]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "800"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md font-body-md min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-surface text-primary border-b border-outline-variant flex justify-between items-center px-lg w-full h-14 sticky top-0 z-40 shadow-sm">
+<div class="flex items-center gap-sm">
+<button class="h-touch-target w-touch-target flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+</div>
+<div class="font-headline-md text-headline-md font-bold text-primary truncate flex-1 text-center">
+            Pago
+        </div>
+<div class="flex items-center gap-sm w-touch-target">
+<!-- Empty space for balance -->
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col md:flex-row max-w-7xl mx-auto w-full p-md md:p-xl gap-lg pt-lg pb-[100px] md:pb-xl">
+<!-- Payment Methods Section -->
+<section class="flex-1 flex flex-col gap-lg">
+<div class="mb-sm">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface mb-xs">Método de Pago</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Selecciona cómo deseas procesar tu transacción.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-md">
+<!-- Pago Móvil (Active) -->
+<label class="cursor-pointer group relative">
+<input checked="" class="peer sr-only" name="payment_method" type="radio" value="pago_movil">
+<div class="border-2 border-primary bg-surface rounded-lg p-md flex items-center gap-md peer-checked:bg-surface-container-low peer-checked:shadow-sm transition-all h-full">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined" data-icon="smartphone">smartphone</span>
+</div>
+<div class="flex-1">
+<h3 class="font-label-md text-label-md text-on-surface">Pago Móvil</h3>
+<p class="font-body-md text-sm text-on-surface-variant">Inmediato</p>
+</div>
+<div class="w-6 h-6 rounded-full border-2 border-primary flex items-center justify-center bg-primary text-on-primary opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-[16px]" data-icon="check">check</span>
+</div>
+</div>
+</label>
+<!-- Transferencia -->
+<label class="cursor-pointer group relative">
+<input class="peer sr-only" name="payment_method" type="radio" value="transferencia">
+<div class="border border-outline-variant bg-surface rounded-lg p-md flex items-center gap-md peer-checked:border-2 peer-checked:border-primary peer-checked:bg-surface-container-low hover:border-outline hover:shadow-sm transition-all h-full">
+<div class="w-10 h-10 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined" data-icon="account_balance">account_balance</span>
+</div>
+<div class="flex-1">
+<h3 class="font-label-md text-label-md text-on-surface">Transferencia</h3>
+<p class="font-body-md text-sm text-on-surface-variant">Hasta 24 hrs</p>
+</div>
+</div>
+</label>
+<!-- Tarjeta -->
+<label class="cursor-pointer group relative">
+<input class="peer sr-only" name="payment_method" type="radio" value="tarjeta">
+<div class="border border-outline-variant bg-surface rounded-lg p-md flex items-center gap-md peer-checked:border-2 peer-checked:border-primary peer-checked:bg-surface-container-low hover:border-outline hover:shadow-sm transition-all h-full">
+<div class="w-10 h-10 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined" data-icon="credit_card">credit_card</span>
+</div>
+<div class="flex-1">
+<h3 class="font-label-md text-label-md text-on-surface">Tarjeta</h3>
+<p class="font-body-md text-sm text-on-surface-variant">Simulado</p>
+</div>
+</div>
+</label>
+<!-- Efectivo -->
+<label class="cursor-pointer group relative">
+<input class="peer sr-only" name="payment_method" type="radio" value="efectivo">
+<div class="border border-outline-variant bg-surface rounded-lg p-md flex items-center gap-md peer-checked:border-2 peer-checked:border-primary peer-checked:bg-surface-container-low hover:border-outline hover:shadow-sm transition-all h-full">
+<div class="w-10 h-10 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+</div>
+<div class="flex-1">
+<h3 class="font-label-md text-label-md text-on-surface">Efectivo</h3>
+<p class="font-body-md text-sm text-on-surface-variant">En mostrador</p>
+</div>
+</div>
+</label>
+</div>
+<!-- Pago Movil Details (Shown when selected) -->
+<div class="mt-lg bg-surface border border-outline-variant rounded-lg p-lg shadow-sm" id="pagoMovilDetails">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-md">Datos del Comercio</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md mb-lg">
+<div class="bg-surface-container-lowest p-md rounded-md border border-outline-variant flex items-center gap-sm">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="account_balance">account_balance</span>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Banco</p>
+<p class="font-body-md text-body-md font-semibold text-on-surface">0102 - Banco de Venezuela</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-md rounded-md border border-outline-variant flex items-center gap-sm">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="badge">badge</span>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">RIF</p>
+<p class="font-body-md text-body-md font-semibold text-on-surface">G-20000000-0</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-md rounded-md border border-outline-variant flex items-center gap-sm md:col-span-2">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="call">call</span>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Teléfono</p>
+<p class="font-body-md text-body-md font-semibold text-on-surface">0414-1234567</p>
+</div>
+</div>
+</div>
+<div class="mb-lg">
+<label class="font-label-md text-label-md text-on-surface block mb-xs">Monto a Transferir</label>
+<div class="flex items-center bg-surface-container-lowest border border-outline-variant rounded-md px-md py-sm">
+<span class="font-headline-md text-headline-md font-bold text-primary mr-2">VES</span>
+<span class="font-headline-md text-headline-md font-bold text-on-surface">1.250,50</span>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Por favor transfiera el monto exacto.</p>
+</div>
+<div>
+<label class="font-label-md text-label-md text-on-surface block mb-xs" for="reference">Número de Referencia</label>
+<input class="w-full h-touch-target px-md py-sm border border-outline-variant rounded-md focus:border-primary focus:ring-2 focus:ring-primary focus:outline-none bg-surface-container-lowest text-on-surface font-body-md" id="reference" placeholder="Ej: 123456" type="text">
+</div>
+</div>
+</section>
+<!-- Order Summary Sidebar -->
+<aside class="w-full md:w-[350px] flex flex-col gap-lg">
+<div class="bg-surface border border-outline-variant rounded-lg p-lg shadow-sm sticky top-[80px]">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-md pb-md border-b border-outline-variant">Resumen de Pedido</h3>
+<div class="flex flex-col gap-sm mb-lg">
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface-variant">Concepto</span>
+<span class="font-body-md text-body-md text-on-surface">Concesión Parque</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface-variant">Periodo</span>
+<span class="font-body-md text-body-md text-on-surface">Octubre 2023</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface-variant">Subtotal</span>
+<span class="font-body-md text-body-md text-on-surface">VES 1.000,00</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface-variant">Impuestos</span>
+<span class="font-body-md text-body-md text-on-surface">VES 250,50</span>
+</div>
+</div>
+<div class="pt-md border-t border-outline-variant flex justify-between items-center mb-lg">
+<span class="font-label-md text-label-md text-on-surface font-bold">Total a Pagar</span>
+<span class="font-headline-md text-headline-md text-primary font-bold">VES 1.250,50</span>
+</div>
+<button class="w-full h-touch-target bg-primary text-on-primary rounded-lg font-label-md text-label-md flex items-center justify-center gap-sm hover:bg-surface-tint transition-colors relative overflow-hidden" id="verifyBtn">
+<span class="btn-text">Verificar mi pago</span>
+<span class="material-symbols-outlined btn-icon" data-icon="verified_user">verified_user</span>
+<!-- Loading state -->
+<div class="loading-state absolute inset-0 bg-primary flex items-center justify-center gap-sm opacity-0 pointer-events-none transition-opacity">
+<svg class="animate-spin h-5 w-5 text-on-primary" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+<path class="opacity-75" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" fill="currentColor"></path>
+</svg>
+<span>Verificando con el banco...</span>
+</div>
+</button>
+</div>
+</aside>
+</main>
+<script>
+        document.getElementById('verifyBtn').addEventListener('click', function() {
+            this.classList.add('pointer-events-none');
+            const loadingState = this.querySelector('.loading-state');
+            loadingState.classList.remove('opacity-0');
+            loadingState.classList.add('opacity-100');
+            
+            setTimeout(() => {
+                loadingState.classList.remove('opacity-100');
+                loadingState.classList.add('opacity-0');
+                this.classList.remove('pointer-events-none');
+                alert('Pago verificado exitosamente (Simulación)');
+            }, 3000);
+        });
+    </script>
+</body></html>

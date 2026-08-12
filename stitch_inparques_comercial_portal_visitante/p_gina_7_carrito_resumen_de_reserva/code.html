@@ -1,0 +1,256 @@
+<!DOCTYPE html><html lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>INPARQUES Comercial - Carrito de Compras</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#176b45",
+                        "on-surface-variant": "#3f4942",
+                        "outline-variant": "#bfc9c0",
+                        "on-primary": "#ffffff",
+                        "surface-tint": "#186c45",
+                        "on-surface": "#1b1c18",
+                        "surface-bright": "#fbf9f3",
+                        "surface-container-high": "#eae8e2",
+                        "on-tertiary-container": "#cadbd2",
+                        "tertiary-container": "#516159",
+                        "surface-container-highest": "#e4e2dd",
+                        "surface-container": "#f0eee8",
+                        "on-primary-fixed-variant": "#005232",
+                        "background": "#fbf9f3",
+                        "on-background": "#1b1c18",
+                        "primary-fixed-dim": "#88d7a8",
+                        "secondary-fixed": "#c0edd4",
+                        "secondary-container": "#c0edd4",
+                        "on-secondary-container": "#446d59",
+                        "on-primary-fixed": "#002111",
+                        "surface-variant": "#e4e2dd",
+                        "on-primary-container": "#99e9b9",
+                        "primary": "#005131",
+                        "error": "#ba1a1a",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#002114",
+                        "outline": "#6f7a71",
+                        "inverse-primary": "#88d7a8",
+                        "primary-fixed": "#a4f4c3",
+                        "secondary-fixed-dim": "#a4d0b8",
+                        "secondary": "#3e6753",
+                        "surface-dim": "#dcdad4",
+                        "tertiary-fixed": "#d5e7dd",
+                        "inverse-on-surface": "#f3f1eb",
+                        "surface": "#fbf9f3",
+                        "tertiary-fixed-dim": "#b9cbc1",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#264e3c",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#3a4942",
+                        "on-tertiary-fixed-variant": "#3a4a43",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#0f1e19",
+                        "surface-container-low": "#f5f3ed",
+                        "inverse-surface": "#30312d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "32px",
+                        "lg": "24px",
+                        "xxl": "48px",
+                        "md": "16px",
+                        "xs": "8px",
+                        "sm": "12px",
+                        "base": "4px",
+                        "touch-target": "44px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "display-lg": ["Manrope"],
+                        "label-sm": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col pt-14 pb-20 md:pb-0">
+<!-- TopAppBar -->
+<header class="bg-surface border-b border-outline-variant flex justify-between items-center px-lg w-full h-14 fixed top-0 z-50">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary cursor-pointer hover:bg-surface-container-low p-2 rounded-full" data-icon="park">park</span>
+<span class="font-headline-md text-headline-md-mobile font-bold text-primary">INPARQUES Comercial</span>
+</div>
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:bg-surface-container-low p-2 rounded-full" data-icon="notifications">notifications</span>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow w-full max-w-7xl mx-auto px-4 md:px-lg py-lg md:py-xl grid grid-cols-1 lg:grid-cols-12 gap-lg">
+<!-- Cart Items Section -->
+<section class="lg:col-span-8 space-y-md">
+<div class="flex justify-between items-end mb-md">
+<h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">Mi Carrito</h1>
+<span class="font-label-md text-label-md text-on-surface-variant">3 artículos</span>
+</div>
+<!-- Cart Item 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md flex flex-col sm:flex-row gap-md items-start sm:items-center relative">
+<img class="w-24 h-24 object-cover rounded-md flex-shrink-0" data-alt="A close-up photograph of a steaming cup of artisan coffee on a wooden table outdoors, with lush green park scenery in the softly blurred background. Bright, natural lighting highlights the rich brown crema of the coffee and the modern ceramic mug. Natural, earthy aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9OAcbCsSn5alppZDuDg148PtEXBaI6ydlaSCY23zGOCRUW2jLHmE2RDls0_kJwk0b1cOvAE2fPFnz5PVG3KGLnk_gD3dJb6VfBAI2wlOlHudZKJyhTn5PrxgB3PGINLitpiKiAwN63Dy6-r7l7lzn7RF9biZiZ0Qhu8hCnLHRF7Sby--UDjVy0TpNgNTQEUms1bGFQfWRdbNvYFM8DWlekG2U_J5z_z8K7S5WqJ044_U5iachGdKY">
+<div class="flex-grow">
+<h3 class="font-headline-md text-headline-md-mobile text-on-surface">Café Artesanal Ávila</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Kiosco El Mirador</p>
+<div class="flex items-center gap-4 mt-2">
+<div class="flex items-center border border-outline-variant rounded-md">
+<button aria-label="Disminuir cantidad" class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low">
+<span class="material-symbols-outlined text-sm">remove</span>
+</button>
+<span class="w-8 text-center font-label-md text-label-md">2</span>
+<button aria-label="Aumentar cantidad" class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+<button class="text-error font-label-md text-label-md flex items-center gap-1 hover:underline">
+<span class="material-symbols-outlined text-sm">delete</span> Eliminar
+                        </button>
+</div>
+</div>
+<div class="text-right sm:ml-auto">
+<p class="font-headline-md text-headline-md-mobile text-on-surface">$5.00</p>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Bs. 182,50</p>
+</div>
+</div>
+<!-- Cart Item 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md flex flex-col sm:flex-row gap-md items-start sm:items-center relative">
+<div class="w-24 h-24 bg-surface-container flex items-center justify-center rounded-md flex-shrink-0">
+<span class="material-symbols-outlined text-4xl text-on-surface-variant">local_pizza</span>
+</div>
+<div class="flex-grow">
+<h3 class="font-headline-md text-headline-md-mobile text-on-surface">Empanada Operada</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Arepería del Parque</p>
+<div class="flex items-center gap-4 mt-2">
+<div class="flex items-center border border-outline-variant rounded-md">
+<button class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low">
+<span class="material-symbols-outlined text-sm">remove</span>
+</button>
+<span class="w-8 text-center font-label-md text-label-md">1</span>
+<button class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+</div>
+<button class="text-error font-label-md text-label-md flex items-center gap-1 hover:underline">
+<span class="material-symbols-outlined text-sm">delete</span> Eliminar
+                        </button>
+</div>
+</div>
+<div class="text-right sm:ml-auto">
+<p class="font-headline-md text-headline-md-mobile text-on-surface">$3.50</p>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Bs. 127,75</p>
+</div>
+</div>
+<a class="inline-flex items-center gap-2 text-primary font-label-md text-label-md hover:underline mt-sm" href="#">
+<span class="material-symbols-outlined text-sm">arrow_back</span> Seguir comprando
+            </a>
+</section>
+<!-- Summary & Checkout Section -->
+<section class="lg:col-span-4">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg sticky top-20 shadow-sm">
+<h2 class="font-headline-md text-headline-md-mobile text-on-surface mb-md pb-xs border-b border-outline-variant">Resumen del Pedido</h2>
+<div class="space-y-sm mb-lg">
+<div class="flex justify-between font-body-md text-body-md text-on-surface-variant">
+<span>Subtotal</span>
+<span>$8.50</span>
+</div>
+<div class="flex justify-between font-body-md text-body-md text-on-surface-variant">
+<span>Tasa BCV Referencial</span>
+<span>36,50 Bs/$</span>
+</div>
+</div>
+<div class="border-t border-outline-variant pt-sm mb-lg">
+<div class="flex justify-between items-end">
+<span class="font-headline-md text-headline-md-mobile text-on-surface">Total USD</span>
+<span class="font-headline-lg text-headline-lg-mobile text-primary font-bold">$8.50</span>
+</div>
+<div class="flex justify-between items-end mt-1">
+<span class="font-body-md text-body-md text-on-surface-variant">Total VES</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Bs. 310,25</span>
+</div>
+</div>
+<div class="mb-lg">
+<h3 class="font-label-md text-label-md text-on-surface mb-xs">Opciones de Retiro</h3>
+<div class="grid grid-cols-2 gap-sm">
+<label class="relative flex cursor-pointer rounded-lg border border-outline-variant bg-surface-container-lowest p-sm hover:bg-surface-container-low has-[:checked]:border-primary has-[:checked]:bg-secondary-container">
+<input checked="" class="peer sr-only" name="pickup_option" type="radio">
+<div class="flex flex-col items-center justify-center w-full">
+<span class="material-symbols-outlined mb-1 peer-checked:text-primary">storefront</span>
+<span class="font-label-md text-label-sm text-center peer-checked:text-primary">Retirar ahora</span>
+</div>
+</label>
+<label class="relative flex cursor-pointer rounded-lg border border-outline-variant bg-surface-container-lowest p-sm hover:bg-surface-container-low has-[:checked]:border-primary has-[:checked]:bg-secondary-container">
+<input class="peer sr-only" name="pickup_option" type="radio">
+<div class="flex flex-col items-center justify-center w-full">
+<span class="material-symbols-outlined mb-1 peer-checked:text-primary">schedule</span>
+<span class="font-label-md text-label-sm text-center peer-checked:text-primary">Programar hora</span>
+</div>
+</label>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary font-label-md text-label-md py-3 rounded-lg min-h-[44px] hover:bg-primary-container transition-colors shadow-sm">
+                    Continuar al pago
+                </button>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) - Semantic active state: Pedidos (Shopping Bag) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-2 pb-safe bg-surface-container-lowest border-t border-outline-variant shadow-sm">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high rounded-full p-2 min-h-[44px] min-w-[44px]" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm mt-1">Inicio</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high rounded-full p-2 min-h-[44px] min-w-[44px]" href="#">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="font-label-sm text-label-sm mt-1">Explorar</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 min-h-[44px]" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_bag" style="font-variation-settings: 'FILL' 1;">shopping_bag</span>
+<span class="font-label-sm text-label-sm mt-1">Pedidos</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high rounded-full p-2 min-h-[44px] min-w-[44px]" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-label-sm text-label-sm mt-1">Ayuda</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high rounded-full p-2 min-h-[44px] min-w-[44px]" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm mt-1">Perfil</span>
+</a>
+</nav>
+</body></html>

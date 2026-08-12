@@ -1,0 +1,418 @@
+<!DOCTYPE html><html lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Disponibilidad Rápida - Operaciones Parque</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#b9cbc1",
+                        "primary-container": "#176b45",
+                        "on-tertiary-fixed-variant": "#3a4a43",
+                        "inverse-on-surface": "#f3f1eb",
+                        "outline-variant": "#bfc9c0",
+                        "tertiary": "#3a4942",
+                        "secondary-container": "#c0edd4",
+                        "surface-container-low": "#f5f3ed",
+                        "surface-container-high": "#eae8e2",
+                        "tertiary-container": "#516159",
+                        "surface-variant": "#e4e2dd",
+                        "on-primary-fixed": "#002111",
+                        "on-error-container": "#93000a",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed": "#a4f4c3",
+                        "error": "#ba1a1a",
+                        "inverse-surface": "#30312d",
+                        "on-error": "#ffffff",
+                        "surface-container": "#f0eee8",
+                        "on-surface": "#1b1c18",
+                        "on-primary-fixed-variant": "#005232",
+                        "on-tertiary-fixed": "#0f1e19",
+                        "on-secondary-fixed-variant": "#264e3c",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "secondary": "#3e6753",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed-dim": "#a4d0b8",
+                        "surface": "#fbf9f3",
+                        "secondary-fixed": "#c0edd4",
+                        "primary": "#005131",
+                        "on-surface-variant": "#3f4942",
+                        "on-tertiary-container": "#cadbd2",
+                        "background": "#fbf9f3",
+                        "surface-tint": "#186c45",
+                        "on-primary-container": "#99e9b9",
+                        "inverse-primary": "#88d7a8",
+                        "surface-container-highest": "#e4e2dd",
+                        "on-secondary-container": "#446d59",
+                        "primary-fixed-dim": "#88d7a8",
+                        "on-secondary-fixed": "#002114",
+                        "surface-bright": "#fbf9f3",
+                        "tertiary-fixed": "#d5e7dd",
+                        "surface-dim": "#dcdad4",
+                        "on-background": "#1b1c18",
+                        "outline": "#6f7a71"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "8px",
+                        "base": "4px",
+                        "lg": "24px",
+                        "xxl": "48px",
+                        "md": "16px",
+                        "sm": "12px",
+                        "touch-target": "44px",
+                        "xl": "32px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Manrope"],
+                        "display-lg": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "label-sm": ["Manrope"],
+                        "headline-lg": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Custom Switch Styles */
+        .toggle-switch input:checked ~ div {
+            background-color: theme('colors.primary');
+        }
+        .toggle-switch input:checked ~ div > div {
+            transform: translateX(100%);
+        }
+        
+        /* Modals and Overlays */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background-color: rgba(40, 51, 46, 0.4);
+            z-index: 100;
+            backdrop-filter: blur(2px);
+        }
+        .modal-content {
+            box-shadow: 0px 12px 32px rgba(40, 51, 46, 0.12);
+        }
+        
+        .modal-open {
+            overflow: hidden;
+        }
+
+        /* Ambient Shadows */
+        .card-surface {
+            background-color: theme('colors.surface-container-lowest');
+            border: 1px solid theme('colors.outline-variant');
+            box-shadow: 0px 4px 12px rgba(40, 51, 46, 0.08);
+            border-radius: theme('borderRadius.lg');
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen flex flex-col pb-safe">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline flat no shadows flex justify-between items-center px-md h-touch-target w-full max-w-full z-40">
+<button class="text-primary dark:text-primary-fixed-dim hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors active:scale-95 duration-100 flex items-center justify-center w-touch-target h-touch-target rounded-full">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="font-headline-md text-headline-md-mobile font-bold text-primary dark:text-primary-fixed-dim">
+            Operaciones Parque
+        </h1>
+<button class="text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors active:scale-95 duration-100 flex items-center justify-center w-touch-target h-touch-target rounded-full">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow p-md md:p-lg w-full max-w-[1200px] mx-auto pb-xxl">
+<!-- Header Section -->
+<div class="mb-lg flex flex-col md:flex-row justify-between items-start md:items-center gap-sm">
+<div>
+<h2 class="font-headline-lg text-headline-lg-mobile text-on-surface mb-base">Disponibilidad Rápida</h2>
+<p class="font-body-md text-on-surface-variant text-body-md">Ajuste inmediato de stock e inventario en puntos de venta.</p>
+</div>
+<!-- Quick Filter -->
+<div class="flex items-center bg-surface-container-low rounded-lg p-base border border-outline-variant w-full md:w-auto">
+<span class="material-symbols-outlined text-outline ml-sm mr-xs" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-on-surface font-body-md w-full md:w-64 py-xs" placeholder="Buscar artículo o servicio..." type="text">
+</div>
+</div>
+<!-- Inventory Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md">
+<!-- Item Card 1: Disponible -->
+<article class="card-surface p-lg flex flex-col justify-between transition-transform duration-200 hover:-translate-y-1">
+<div class="flex justify-between items-start mb-md">
+<div class="flex items-center gap-sm">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-primary border border-outline-variant shrink-0">
+<span class="material-symbols-outlined" data-icon="lunch_dining">lunch_dining</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md-mobile text-on-surface">Hamburguesa Clásica</h3>
+<span class="inline-block bg-primary-fixed/20 text-primary font-label-sm px-2 py-1 rounded mt-1">Disponible</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-md">
+<!-- Stock Adjuster -->
+<div class="flex justify-between items-center bg-surface-container-low p-sm rounded-lg border border-outline-variant">
+<span class="font-label-md text-on-surface-variant">Stock Actual</span>
+<div class="flex items-center gap-sm">
+<button class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface hover:bg-surface-variant active:scale-95" onclick="openReasonModal('Hamburguesa Clásica', 'decreased')">
+<span class="material-symbols-outlined text-sm" data-icon="remove">remove</span>
+</button>
+<span class="font-body-lg font-bold w-8 text-center">45</span>
+<button class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface hover:bg-surface-variant active:scale-95" onclick="openReasonModal('Hamburguesa Clásica', 'increased')">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+</button>
+</div>
+</div>
+<!-- Availability Switch -->
+<label class="flex items-center justify-between cursor-pointer group">
+<span class="font-label-md text-on-surface">Estado General</span>
+<div class="relative toggle-switch">
+<input checked="" class="sr-only" onchange="openReasonModal('Hamburguesa Clásica', 'toggled state')" type="checkbox">
+<div class="block bg-outline-variant w-14 h-8 rounded-full transition-colors duration-300">
+<div class="absolute left-1 top-1 bg-on-secondary w-6 h-6 rounded-full transition-transform duration-300 flex items-center justify-center shadow-sm">
+</div>
+</div>
+</div>
+</label>
+</div>
+</article>
+<!-- Item Card 2: Agotado -->
+<article class="card-surface p-lg flex flex-col justify-between transition-transform duration-200 hover:-translate-y-1 bg-surface-container-lowest/50">
+<div class="flex justify-between items-start mb-md opacity-70">
+<div class="flex items-center gap-sm">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-error border border-error/30 shrink-0">
+<span class="material-symbols-outlined" data-icon="water_drop">water_drop</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md-mobile text-on-surface line-through decoration-outline-variant">Agua Mineral 500ml</h3>
+<span class="inline-block bg-error/10 text-error font-label-sm px-2 py-1 rounded mt-1">Agotado</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-md">
+<!-- Stock Adjuster -->
+<div class="flex justify-between items-center bg-surface-container-low p-sm rounded-lg border border-outline-variant opacity-70">
+<span class="font-label-md text-on-surface-variant">Stock Actual</span>
+<div class="flex items-center gap-sm">
+<button class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface hover:bg-surface-variant active:scale-95" disabled="">
+<span class="material-symbols-outlined text-sm opacity-50" data-icon="remove">remove</span>
+</button>
+<span class="font-body-lg font-bold w-8 text-center text-error">0</span>
+<button class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface hover:bg-surface-variant active:scale-95" onclick="openReasonModal('Agua Mineral 500ml', 'increased')">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+</button>
+</div>
+</div>
+<!-- Availability Switch -->
+<label class="flex items-center justify-between cursor-pointer group">
+<span class="font-label-md text-on-surface">Estado General</span>
+<div class="relative toggle-switch">
+<input class="sr-only" onchange="openReasonModal('Agua Mineral 500ml', 'toggled state')" type="checkbox">
+<div class="block bg-surface-variant w-14 h-8 rounded-full transition-colors duration-300 border border-outline-variant">
+<div class="absolute left-1 top-1 bg-outline w-6 h-6 rounded-full transition-transform duration-300 flex items-center justify-center">
+</div>
+</div>
+</div>
+</label>
+</div>
+</article>
+<!-- Item Card 3: Servicio -->
+<article class="card-surface p-lg flex flex-col justify-between transition-transform duration-200 hover:-translate-y-1">
+<div class="flex justify-between items-start mb-md">
+<div class="flex items-center gap-sm">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-secondary border border-outline-variant shrink-0">
+<span class="material-symbols-outlined" data-icon="directions_bike">directions_bike</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md-mobile text-on-surface">Alquiler Bici Montaña</h3>
+<span class="inline-block bg-secondary-container text-on-secondary-container font-label-sm px-2 py-1 rounded mt-1">Servicio Activo</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-md">
+<!-- Stock Adjuster -->
+<div class="flex justify-between items-center bg-surface-container-low p-sm rounded-lg border border-outline-variant">
+<span class="font-label-md text-on-surface-variant">Bicis Disponibles</span>
+<div class="flex items-center gap-sm">
+<button class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface hover:bg-surface-variant active:scale-95" onclick="openReasonModal('Alquiler Bici Montaña', 'decreased')">
+<span class="material-symbols-outlined text-sm" data-icon="remove">remove</span>
+</button>
+<span class="font-body-lg font-bold w-8 text-center">12</span>
+<button class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface hover:bg-surface-variant active:scale-95" onclick="openReasonModal('Alquiler Bici Montaña', 'increased')">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+</button>
+</div>
+</div>
+<!-- Availability Switch -->
+<label class="flex items-center justify-between cursor-pointer group">
+<span class="font-label-md text-on-surface">Servicio Operativo</span>
+<div class="relative toggle-switch">
+<input checked="" class="sr-only" onchange="openReasonModal('Alquiler Bici Montaña', 'toggled service')" type="checkbox">
+<div class="block bg-outline-variant w-14 h-8 rounded-full transition-colors duration-300">
+<div class="absolute left-1 top-1 bg-on-secondary w-6 h-6 rounded-full transition-transform duration-300 flex items-center justify-center shadow-sm">
+</div>
+</div>
+</div>
+</label>
+</div>
+</article>
+<!-- Item Card 4: Poco Stock -->
+<article class="card-surface p-lg flex flex-col justify-between transition-transform duration-200 hover:-translate-y-1">
+<div class="flex justify-between items-start mb-md">
+<div class="flex items-center gap-sm">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center text-tertiary border border-outline-variant shrink-0">
+<span class="material-symbols-outlined" data-icon="icecream">icecream</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md-mobile text-on-surface">Helado Artesanal</h3>
+<span class="inline-block bg-tertiary-fixed-dim/30 text-on-tertiary-fixed-variant font-label-sm px-2 py-1 rounded mt-1">Poco Stock</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-md">
+<!-- Stock Adjuster -->
+<div class="flex justify-between items-center bg-surface-container-low p-sm rounded-lg border border-outline-variant">
+<span class="font-label-md text-on-surface-variant">Stock Actual</span>
+<div class="flex items-center gap-sm">
+<button class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface hover:bg-surface-variant active:scale-95" onclick="openReasonModal('Helado Artesanal', 'decreased')">
+<span class="material-symbols-outlined text-sm" data-icon="remove">remove</span>
+</button>
+<span class="font-body-lg font-bold w-8 text-center text-tertiary">3</span>
+<button class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface hover:bg-surface-variant active:scale-95" onclick="openReasonModal('Helado Artesanal', 'increased')">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+</button>
+</div>
+</div>
+<!-- Availability Switch -->
+<label class="flex items-center justify-between cursor-pointer group">
+<span class="font-label-md text-on-surface">Estado General</span>
+<div class="relative toggle-switch">
+<input checked="" class="sr-only" onchange="openReasonModal('Helado Artesanal', 'toggled state')" type="checkbox">
+<div class="block bg-outline-variant w-14 h-8 rounded-full transition-colors duration-300">
+<div class="absolute left-1 top-1 bg-on-secondary w-6 h-6 rounded-full transition-transform duration-300 flex items-center justify-center shadow-sm">
+</div>
+</div>
+</div>
+</label>
+</div>
+</article>
+</div>
+</main>
+<!-- Reason Modal Overlay -->
+<div class="modal-overlay flex items-center justify-center p-md" id="reasonModal">
+<div class="modal-content bg-surface-container-lowest rounded-xl max-w-sm w-full p-lg animate-[fadeIn_0.2s_ease-out]">
+<h3 class="font-headline-md text-headline-md-mobile text-on-surface mb-xs" id="modalTitle">Confirmar Cambio</h3>
+<p class="font-body-md text-on-surface-variant mb-md">Por favor, indique el motivo para el ajuste de <strong class="text-on-surface" id="modalItemName"></strong>.</p>
+<form class="flex flex-col gap-sm" id="reasonForm" onsubmit="event.preventDefault(); closeReasonModal();">
+<div class="flex flex-col gap-base">
+<label class="flex items-center gap-sm p-sm border border-outline-variant rounded-lg cursor-pointer hover:bg-surface-container-low transition-colors">
+<input checked="" class="text-primary focus:ring-primary w-4 h-4" name="reason" type="radio" value="inventory">
+<span class="font-label-md text-on-surface">Ajuste de inventario (Conteo)</span>
+</label>
+<label class="flex items-center gap-sm p-sm border border-outline-variant rounded-lg cursor-pointer hover:bg-surface-container-low transition-colors">
+<input class="text-primary focus:ring-primary w-4 h-4" name="reason" type="radio" value="damage">
+<span class="font-label-md text-on-surface">Producto dañado/merma</span>
+</label>
+<label class="flex items-center gap-sm p-sm border border-outline-variant rounded-lg cursor-pointer hover:bg-surface-container-low transition-colors">
+<input class="text-primary focus:ring-primary w-4 h-4" name="reason" type="radio" value="resupply">
+<span class="font-label-md text-on-surface">Nuevo ingreso (Resurtido)</span>
+</label>
+<label class="flex items-center gap-sm p-sm border border-outline-variant rounded-lg cursor-pointer hover:bg-surface-container-low transition-colors">
+<input class="text-primary focus:ring-primary w-4 h-4" name="reason" type="radio" value="other">
+<span class="font-label-md text-on-surface">Otro (Especificar en notas)</span>
+</label>
+</div>
+<div class="mt-md flex gap-sm">
+<button class="flex-1 bg-surface-container h-touch-target rounded-lg font-label-md text-on-surface border border-outline-variant hover:bg-surface-variant transition-colors" onclick="closeReasonModal()" type="button">
+                        Cancelar
+                    </button>
+<button class="flex-1 bg-primary h-touch-target rounded-lg font-label-md text-on-primary hover:bg-on-primary-fixed-variant transition-colors" type="submit">
+                        Confirmar
+                    </button>
+</div>
+</form>
+</div>
+</div>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 h-[80px] bg-surface dark:bg-surface-dim border-t border-outline-variant dark:border-outline shadow-sm flex justify-around items-center px-xs pb-safe">
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant p-xs hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors active:scale-90 transition-transform">
+<span class="material-symbols-outlined mb-1" data-icon="receipt_long">receipt_long</span>
+<span class="font-label-sm text-label-sm">Pedidos</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant p-xs hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors active:scale-90 transition-transform">
+<span class="material-symbols-outlined mb-1" data-icon="calendar_today">calendar_today</span>
+<span class="font-label-sm text-label-sm">Reservas</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant p-xs hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors active:scale-90 transition-transform">
+<span class="material-symbols-outlined mb-1" data-icon="bolt">bolt</span>
+<span class="font-label-sm text-label-sm">Venta</span>
+</button>
+<!-- Active Tab -->
+<button class="flex flex-col items-center justify-center bg-secondary-container dark:bg-primary-container text-on-secondary-container dark:text-on-primary-container rounded-full px-sm py-xs hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors active:scale-90 transition-transform">
+<span class="material-symbols-outlined mb-1" data-icon="event_available">event_available</span>
+<span class="font-label-sm text-label-sm font-bold">Disponibilidad</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant p-xs hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-colors active:scale-90 transition-transform">
+<span class="material-symbols-outlined mb-1" data-icon="report_problem">report_problem</span>
+<span class="font-label-sm text-label-sm">Incidencias</span>
+</button>
+</nav>
+<script>
+        const modal = document.getElementById('reasonModal');
+        const itemNameSpan = document.getElementById('modalItemName');
+        let currentItem = '';
+        let currentAction = '';
+
+        function openReasonModal(itemName, action) {
+            currentItem = itemName;
+            currentAction = action;
+            itemNameSpan.textContent = itemName;
+            modal.style.display = 'flex';
+            document.body.classList.add('modal-open');
+        }
+
+        function closeReasonModal() {
+            modal.style.display = 'none';
+            document.body.classList.remove('modal-open');
+            // If it was a switch toggle and canceled, we should ideally revert the UI state here,
+            // but for this prototype, we'll just close the modal.
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeReasonModal();
+            }
+        }
+    </script>
+</body></html>
