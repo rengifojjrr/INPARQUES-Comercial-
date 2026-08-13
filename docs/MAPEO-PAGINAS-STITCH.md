@@ -119,6 +119,14 @@ Avance de fase 2:
   `inparques.direccion_comercial`, con otra barra lateral); esas dos vistas
   se armaron con el mismo lenguaje visual de las páginas de propietario ya
   confirmadas.
-- **Pendiente:** interior de `comercio.admin_local` / `comercio.operador` /
-  `comercio.contador` (pedidos, reservas, caja, turnos, reportes,
-  conciliación); interior de los 6 roles de INPARQUES.
+- **Completo:** operación diaria del comercio (pedidos, reservas, caja,
+  venta de mostrador, apertura y cierre de turno) —
+  `src/ui/vistas/stitch-comercio-operacion.ts`. Stitch generó dos vistas
+  distintas del mismo módulo de pedidos: el tablero kanban de escritorio
+  (`50/p_gina_2_centro_de_pedidos_tablero`) y la cola móvil por pestañas
+  (`50/p_gina_2_cola_de_pedidos`, del portal "Operaciones Parque"). Se
+  respetan ambas: el operador ve la cola, los demás roles ven el tablero.
+- **Pendiente:** reportes y finanzas del comercio (conciliación,
+  comprobantes, facturas, estado de cuenta, exportaciones); catálogo
+  avanzado (variantes, modificadores, alérgenos, horarios, cupos,
+  inventario); interior de los 6 roles de INPARQUES.

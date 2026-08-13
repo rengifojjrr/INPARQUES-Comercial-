@@ -17,6 +17,7 @@ import { superadminInicio, direccionComercialInicio, finanzasInicio, adminParque
 import { inicioVisitante } from './stitch-visitante';
 import * as stitchCompra from './stitch-visitante-compra';
 import * as stitchComercioInterior from './stitch-comercio-interior';
+import * as stitchComercioOp from './stitch-comercio-operacion';
 import { sesion } from '../../app/session';
 
 /**
@@ -134,15 +135,15 @@ export const VISTAS_POR_ID: Record<string, Render> = {
   'c.horarios': com.horarios,
   'c.cupos': com.cupos,
   'c.inventario': com.inventario,
-  'c.pedidos': com.pedidos,
-  'c.pedido': com.detallePedido,
-  'c.reservas': com.reservas,
-  'c.reserva': com.detalleReserva,
-  'c.caja': com.caja,
-  'c.mostrador': com.ventaMostrador,
-  'c.turno.abrir': com.abrirTurnoVista,
-  'c.turno.cerrar': com.cerrarTurnoVista,
-  'c.turno': com.detalleTurno,
+  'c.pedidos': stitchComercioOp.pedidosStitch,
+  'c.pedido': stitchComercioOp.detallePedidoStitch,
+  'c.reservas': stitchComercioOp.reservasStitch,
+  'c.reserva': stitchComercioOp.detallePedidoStitch,
+  'c.caja': stitchComercioOp.cajaStitch,
+  'c.mostrador': stitchComercioOp.ventaMostradorStitch,
+  'c.turno.abrir': stitchComercioOp.abrirTurnoStitch,
+  'c.turno.cerrar': stitchComercioOp.cerrarTurnoStitch,
+  'c.turno': stitchComercioOp.detalleTurnoStitch,
   'c.reportes': com.reportes,
   'c.conciliacion': com.conciliacion,
   'c.comprobantes': com.comprobantes,
