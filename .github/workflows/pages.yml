@@ -55,7 +55,13 @@ jobs:
       - name: Evitar que Pages procese el sitio con Jekyll
         run: touch dist/.nojekyll
 
+      # `enablement: true` habilita Pages en el repositorio la primera vez y lo
+      # configura para construir desde Actions. Sin esto, la acción falla con
+      # "Get Pages site failed / Not Found" hasta que alguien lo active a mano
+      # en Ajustes.
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
       - uses: actions/upload-pages-artifact@v3
         with:
