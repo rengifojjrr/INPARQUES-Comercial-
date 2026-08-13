@@ -118,10 +118,24 @@ class Router {
     window.history.back();
   }
 
+  /**
+   * Destino cuando la URL no trae hash: es lo que ve quien abre el enlace
+   * compartido. Con sesión abierta, su propio inicio; sin sesión, la
+   * pantalla de acceso.
+   *
+   * Antes caía siempre en `/v`, que es publica: quien abriera el enlace
+   * entraba directo a la PWA del visitante sin pasar por el acceso y sin
+   * enterarse de que hay once perfiles que probar.
+   */
+  private rutaPorDefecto(): string {
+    const rol = sesion.rol();
+    return rol ? inicioDeRol(rol) : '/acceso';
+  }
+
   private leerHash(): { ruta: string; consulta: URLSearchParams } {
-    const crudo = window.location.hash.replace(/^#/, '') || '/v';
+    const crudo = window.location.hash.replace(/^#/, '') || this.rutaPorDefecto();
     const [ruta, qs] = crudo.split('?');
-    return { ruta: ruta || '/v', consulta: new URLSearchParams(qs ?? '') };
+    return { ruta: ruta || this.rutaPorDefecto(), consulta: new URLSearchParams(qs ?? '') };
   }
 
   private resolver(): void {

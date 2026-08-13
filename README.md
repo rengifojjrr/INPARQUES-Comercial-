@@ -9,9 +9,16 @@ de API, tarjeta ni suscripción.
 
 ## Probar la beta
 
-### → **https://claude.ai/code/artifact/debdfa1c-77b9-49c2-9548-41f9b4d3a948**
+### → **https://rengifojjrr.github.io/INPARQUES-Comercial-/**
 
-Abre en teléfono o computadora, sin instalar nada. Verá la pantalla de acceso:
+Enlace público: se abre en teléfono o computadora sin instalar nada. Se
+republica solo con GitHub Pages en cada empuje a la rama, según
+[`.github/workflows/pages.yml`](.github/workflows/pages.yml).
+
+Para usar sin conexión o mandar por correo, la misma demo en un solo archivo:
+[`inparques-demo.html`](https://rengifojjrr.github.io/INPARQUES-Comercial-/inparques-demo.html).
+
+Verá la pantalla de acceso:
 **pulse una de las cuentas de prueba**, se cargan sus credenciales, y pulse
 **Ingresar** para entrar a la versión de ese rol.
 

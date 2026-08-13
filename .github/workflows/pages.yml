@@ -1,0 +1,72 @@
+# Publica la demo en GitHub Pages.
+#
+# La aplicación es estática y usa enrutado por hash (`#/...`), así que se
+# sirve tal cual desde cualquier subcarpeta: `vite.config.ts` ya trae
+# `base: './'` y no hace falta redirección de rutas profundas ni un
+# `404.html` de respaldo.
+#
+# Además del sitio, el flujo publica dentro de él el archivo único
+# `inparques-demo.html`, por si hace falta pasar la demo por correo o abrirla
+# sin conexión.
+
+name: Publicar demo en Pages
+
+on:
+  push:
+    branches:
+      - main
+      - claude/commerce-inparques-templates-kpggv8
+  workflow_dispatch:
+
+# Permisos mínimos que exige el despliegue oficial de Pages.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Un despliegue a la vez; si llegan dos empujes seguidos, gana el último
+# pero se deja terminar el que ya está en curso.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  construir:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Comprobar tipos y construir
+        run: npm run build
+
+      - name: Empaquetar también el archivo único
+        run: |
+          npm run unico
+          cp dist-unico/inparques-demo.html dist/inparques-demo.html
+
+      - name: Evitar que Pages procese el sitio con Jekyll
+        run: touch dist/.nojekyll
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  publicar:
+    needs: construir
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.despliegue.outputs.page_url }}
+    steps:
+      - id: despliegue
+        uses: actions/deploy-pages@v4
