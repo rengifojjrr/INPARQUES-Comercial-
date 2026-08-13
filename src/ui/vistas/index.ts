@@ -18,6 +18,7 @@ import { inicioVisitante } from './stitch-visitante';
 import * as stitchCompra from './stitch-visitante-compra';
 import * as stitchComercioInterior from './stitch-comercio-interior';
 import * as stitchComercioOp from './stitch-comercio-operacion';
+import * as stitchComercioFin from './stitch-comercio-finanzas';
 import { sesion } from '../../app/session';
 
 /**
@@ -144,14 +145,14 @@ export const VISTAS_POR_ID: Record<string, Render> = {
   'c.turno.abrir': stitchComercioOp.abrirTurnoStitch,
   'c.turno.cerrar': stitchComercioOp.cerrarTurnoStitch,
   'c.turno': stitchComercioOp.detalleTurnoStitch,
-  'c.reportes': com.reportes,
-  'c.conciliacion': com.conciliacion,
-  'c.comprobantes': com.comprobantes,
-  'c.facturas': com.facturas,
-  'c.factura': com.detalleFactura,
-  'c.estado_cuenta': com.estadoCuenta,
-  'c.ajustes': com.ajustes,
-  'c.exportaciones': com.exportaciones,
+  'c.reportes': stitchComercioFin.reportesStitch,
+  'c.conciliacion': stitchComercioFin.conciliacionStitch,
+  'c.comprobantes': stitchComercioFin.comprobantesStitch,
+  'c.facturas': stitchComercioFin.facturasStitch,
+  'c.factura': stitchComercioFin.detalleFacturaStitch,
+  'c.estado_cuenta': stitchComercioFin.estadoCuentaStitch,
+  'c.ajustes': stitchComercioFin.ajustesStitch,
+  'c.exportaciones': stitchComercioFin.exportacionesStitch,
 
   // ---------------------------------------------------------------- INPARQUES
   'i.inicio': inicioInparquesPorRol(),

@@ -721,11 +721,15 @@ const ETIQUETA_LIQUIDACION: Record<string, string> = {
   cerrada: 'Liquidación cerrada',
 };
 
-function barraLateralContador(): string {
+export function barraLateralContador(activo = '/c'): string {
   const items: Array<[string, string, string]> = [
     ['dashboard', 'Summary', '/c'],
     ['book_2', 'Sales Books', '/c/reportes'],
-    ['payments', 'Payments', '/c/estado-cuenta'],
+    ['payments', 'Payments', '/c/comprobantes'],
+    ['account_balance', 'Reconciliation', '/c/conciliacion'],
+    ['receipt', 'Invoices', '/c/facturas'],
+    ['event_available', 'Daily Closings', '/c/caja'],
+    ['percent', 'Commissions', '/c/estado-cuenta'],
   ];
   const pie: Array<[string, string, string]> = [
     ['ios_share', 'Export Manager', '/c/exportaciones'],
@@ -733,8 +737,8 @@ function barraLateralContador(): string {
   ];
   const item = ([icono, texto, ruta]: [string, string, string]) => `<li>
     <button type="button" data-accion="ir" data-valor="${ruta}"
-      class="w-full flex items-center gap-sm px-sm py-sm rounded-lg ${ruta === '/c' ? 'bg-secondary-container text-on-secondary-container font-bold' : 'text-on-surface-variant hover:bg-surface-variant'} transition-all duration-200 ease-in-out text-left">
-      <span class="material-symbols-outlined ${ruta === '/c' ? 'icon-fill' : ''}">${icono}</span>
+      class="w-full flex items-center gap-sm px-sm py-sm rounded-lg ${ruta === activo ? 'bg-secondary-container text-on-secondary-container font-bold' : 'text-on-surface-variant hover:bg-surface-variant'} transition-all duration-200 ease-in-out text-left">
+      <span class="material-symbols-outlined ${ruta === activo ? 'icon-fill' : ''}">${icono}</span>
       <span class="font-label-md text-label-md">${esc(texto)}</span>
     </button>
   </li>`;
