@@ -139,11 +139,20 @@ Avance de fase 2:
   varios roles institucionales; cada uno conserva la barra lateral que
   Stitch le dibujó, y el control de acceso por rol de `app/registry.ts`
   sigue devolviendo 403 donde corresponde.
+- **Completo:** concesiones y control de INPARQUES (solicitudes, revisión de
+  expediente, aprobación y publicación, permisos, contratos, cánones,
+  vencimientos, inspecciones, incidencias, centro de operación) —
+  `src/ui/vistas/stitch-inparques-concesiones.ts`.
+- **Completo:** finanzas y soporte de INPARQUES (contabilidad, conciliación
+  bancaria, cuentas por cobrar, auditoría de cierres, reembolsos, ajustes,
+  disputas, SLA, reportes comerciales) —
+  `src/ui/vistas/stitch-inparques-finanzas.ts`.
+
+Con esto, las tres superficies quedan portadas salvo lo que sigue:
+
 - **Pendiente:** catálogo avanzado del comercio (variantes, modificadores,
-  alérgenos, horarios, cupos, inventario); módulos de concesiones,
-  operación, finanzas y soporte de INPARQUES (solicitudes, revisión
-  documental, aprobaciones, permisos, contratos, cánones, inspecciones,
-  incidencias, contabilidad, conciliación, cuentas por cobrar, cierres,
-  reembolsos, disputas, SLA); interior de `inparques.inspector`, que en el
-  original es una superficie móvil sin barra lateral y necesita su propia
-  envoltura.
+  alérgenos, horarios, cupos, inventario), que hoy sigue usando la vista
+  genérica; el tablero por parque (`i.dashboard.parque`); y el interior de
+  `inparques.inspector`, que en el original es una superficie móvil sin
+  barra lateral y necesita su propia envoltura en vez de reutilizar la del
+  panel de escritorio.
