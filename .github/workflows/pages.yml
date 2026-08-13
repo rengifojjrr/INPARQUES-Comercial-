@@ -55,15 +55,15 @@ jobs:
       - name: Evitar que Pages procese el sitio con Jekyll
         run: touch dist/.nojekyll
 
-      # Requiere que Pages esté activado una vez en el repositorio:
-      #   Settings › Pages › Build and deployment › Source: GitHub Actions
+      # Pages ya está activado en el repositorio (Settings › Pages › Build and
+      # deployment › Source: GitHub Actions), así que este paso solo lee la
+      # configuración del sitio.
       #
-      # Es un paso manual inevitable. Se probó `enablement: true`, que pide a
-      # la API que lo cree, y el token de Actions no tiene permiso para eso:
-      # responde "Create Pages site failed: Resource not accessible by
-      # integration". Crear el sitio exige permisos de administración del
-      # repositorio, que el GITHUB_TOKEN no lleva. Una vez activado, este
-      # flujo publica solo en cada empuje y no hay que volver a tocarlo.
+      # Si algún día hubiera que recrearlo, vuelve a ser manual: se probó
+      # `enablement: true`, que pide a la API que cree el sitio, y el
+      # GITHUB_TOKEN de Actions no tiene permiso para eso ("Create Pages site
+      # failed: Resource not accessible by integration"); crear el sitio exige
+      # permisos de administración del repositorio.
       - uses: actions/configure-pages@v5
 
       - uses: actions/upload-pages-artifact@v3

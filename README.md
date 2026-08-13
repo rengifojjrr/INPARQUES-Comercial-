@@ -11,14 +11,9 @@ de API, tarjeta ni suscripción.
 
 ### → **https://rengifojjrr.github.io/INPARQUES-Comercial-/**
 
-Enlace público: se abre en teléfono o computadora sin instalar nada. Se
-republica solo con GitHub Pages en cada empuje a la rama, según
+Enlace público, ya en línea: se abre en teléfono o computadora sin instalar
+nada. Se republica solo con GitHub Pages en cada empuje a la rama, según
 [`.github/workflows/pages.yml`](.github/workflows/pages.yml).
-
-> **Falta activar Pages una vez.** En *Settings › Pages › Build and
-> deployment*, poner **Source: GitHub Actions**. Es un paso manual: el token
-> de Actions puede publicar en un sitio ya existente, pero no crearlo. Hasta
-> entonces el enlace da 404 y el flujo falla en el paso `configure-pages`.
 
 Para usar sin conexión o mandar por correo, la misma demo en un solo archivo:
 [`inparques-demo.html`](https://rengifojjrr.github.io/INPARQUES-Comercial-/inparques-demo.html).
