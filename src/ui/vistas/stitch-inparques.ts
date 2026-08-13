@@ -22,7 +22,7 @@ import { consultar } from '../../data/audit';
 import { conectividad } from '../../net/connectivity';
 import { colaSincronizacion } from '../../net/sync-queue';
 
-function barraLateralInparques(activo: string, items: Array<[string, string, string]>, subtitulo: string): string {
+export function barraLateralInparques(activo: string, items: Array<[string, string, string]>, subtitulo: string): string {
   return `
 <aside class="bg-surface border-r border-outline-variant flex flex-col h-screen fixed left-0 top-0 overflow-y-auto px-xs py-md w-72 z-50">
   <div class="px-md pb-lg mb-md border-b border-outline-variant">
@@ -50,7 +50,7 @@ function barraLateralInparques(activo: string, items: Array<[string, string, str
 </aside>`;
 }
 
-function cabeceraInparques(titulo: string, nombreUsuario: string): string {
+export function cabeceraInparques(titulo: string, nombreUsuario: string): string {
   return `
 <header class="bg-white border-b border-outline-variant shadow-sm flex justify-between items-center w-full h-16 pl-16 lg:pl-80 pr-lg fixed top-0 z-40">
   <h1 class="font-headline-sm text-headline-sm font-bold text-primary truncate">${esc(titulo)}</h1>
@@ -68,7 +68,7 @@ function cabeceraInparques(titulo: string, nombreUsuario: string): string {
 
 // ---------------------------------------------------------------- Superadmin
 
-const NAV_SUPERADMIN: Array<[string, string, string]> = [
+export const NAV_SUPERADMIN: Array<[string, string, string]> = [
   ['dashboard', 'Inicio nacional', '/i'],
   ['account_tree', 'Estructura territorial', '/i/territorio'],
   ['park', 'Parques', '/i/parques'],
@@ -272,7 +272,7 @@ ${cabeceraInparques('INPARQUES Control Panel', u.nombre)}
  * exige un negocio); usa la misma página que "Solicitudes", que ya cubre
  * ambos conceptos ("Solicitudes y expedientes" en el registro de rutas).
  */
-const NAV_DIRECCION: Array<[string, string, string]> = [
+export const NAV_DIRECCION: Array<[string, string, string]> = [
   ['dashboard', 'Resumen Comercial', '/i'],
   ['description', 'Solicitudes', '/i/solicitudes'],
   ['folder_open', 'Expedientes', '/i/solicitudes'],
@@ -452,7 +452,7 @@ ${cabeceraInparques('Parques Nacionales | Dirección Comercial', u.nombre)}
 
 // ------------------------------------------------------------------ Finanzas
 
-const NAV_FINANZAS: Array<[string, string, string]> = [
+export const NAV_FINANZAS: Array<[string, string, string]> = [
   ['dashboard', 'Financial Overview', '/i'],
   ['payments', 'Sales', '/i/contabilidad'],
   ['account_balance', 'Reconciliation', '/i/conciliacion'],
@@ -598,7 +598,7 @@ const ICONO_INCIDENCIA: Record<string, string> = {
  * financiero (`INP_FINANZAS`, sin este rol), se lleva al selector de
  * accesibilidad del perfil.
  */
-const NAV_ADMIN_PARQUE: Array<[string, string, string]> = [
+export const NAV_ADMIN_PARQUE: Array<[string, string, string]> = [
   ['dashboard', 'Inicio', '/i'],
   ['map', 'Zonas y puntos', '/i/zonas'],
   ['storefront', 'Negocios', '/i/negocios'],
@@ -866,7 +866,7 @@ export const inspectorInicio: Render = (): Pagina => {
 
 // -------------------------------------------------------------------- Soporte
 
-const NAV_SOPORTE: Array<[string, string, string]> = [
+export const NAV_SOPORTE: Array<[string, string, string]> = [
   ['inbox', 'Inbox', '/i'],
   ['assignment_turned_in', 'Assigned Cases', '/i/disputas'],
   ['receipt_long', 'Orders', '/i/reembolsos'],

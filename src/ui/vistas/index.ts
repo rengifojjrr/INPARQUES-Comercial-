@@ -19,6 +19,7 @@ import * as stitchCompra from './stitch-visitante-compra';
 import * as stitchComercioInterior from './stitch-comercio-interior';
 import * as stitchComercioOp from './stitch-comercio-operacion';
 import * as stitchComercioFin from './stitch-comercio-finanzas';
+import * as stitchInp from './stitch-inparques-interior';
 import { sesion } from '../../app/session';
 
 /**
@@ -158,13 +159,13 @@ export const VISTAS_POR_ID: Record<string, Render> = {
   'i.inicio': inicioInparquesPorRol(),
   'i.mas': c.masOpciones('inparques'),
   'i.dashboard.parque': inp.dashboardParque,
-  'i.territorio': inp.territorio,
-  'i.parques': inp.parques,
-  'i.parque': inp.detalleParque,
-  'i.zonas': inp.zonas,
-  'i.puntos': inp.puntos,
-  'i.negocios': inp.negocios,
-  'i.negocio': inp.detalleNegocio,
+  'i.territorio': stitchInp.territorioStitch,
+  'i.parques': stitchInp.parquesStitch,
+  'i.parque': stitchInp.detalleParqueStitch,
+  'i.zonas': stitchInp.zonasStitch,
+  'i.puntos': stitchInp.puntosStitch,
+  'i.negocios': stitchInp.negociosStitch,
+  'i.negocio': stitchInp.detalleNegocioStitch,
   'i.solicitudes': inp.solicitudes,
   'i.expediente': inp.expediente,
   'i.revision': inp.revisionDocumental,
@@ -186,12 +187,12 @@ export const VISTAS_POR_ID: Record<string, Render> = {
   'i.disputas': inp.disputas,
   'i.disputa': inp.detalleDisputa,
   'i.sla': inp.sla,
-  'i.auditoria': inp.auditoria,
-  'i.usuarios': inp.usuarios,
-  'i.roles': inp.roles,
-  'i.ambitos': inp.ambitos,
-  'i.sesiones': inp.sesionesAdmin,
-  'i.reglas': inp.reglas,
-  'i.integraciones': inp.integraciones,
+  'i.auditoria': stitchInp.auditoriaStitch,
+  'i.usuarios': stitchInp.usuariosStitch,
+  'i.roles': stitchInp.rolesStitch,
+  'i.ambitos': stitchInp.ambitosStitch,
+  'i.sesiones': stitchInp.sesionesStitch,
+  'i.reglas': stitchInp.reglasStitch,
+  'i.integraciones': stitchInp.integracionesStitch,
   'i.reportes': inp.reportes,
 };

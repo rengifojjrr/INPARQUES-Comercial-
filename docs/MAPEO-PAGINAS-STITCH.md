@@ -126,7 +126,24 @@ Avance de fase 2:
   (`50/p_gina_2_centro_de_pedidos_tablero`) y la cola móvil por pestañas
   (`50/p_gina_2_cola_de_pedidos`, del portal "Operaciones Parque"). Se
   respetan ambas: el operador ve la cola, los demás roles ven el tablero.
-- **Pendiente:** reportes y finanzas del comercio (conciliación,
-  comprobantes, facturas, estado de cuenta, exportaciones); catálogo
-  avanzado (variantes, modificadores, alérgenos, horarios, cupos,
-  inventario); interior de los 6 roles de INPARQUES.
+- **Completo:** finanzas del comercio (reportes, conciliación, comprobantes,
+  facturas, estado de cuenta, ajustes, exportaciones) —
+  `src/ui/vistas/stitch-comercio-finanzas.ts`, del portal "Park Commerce
+  Finance". La barra lateral de ese portal está en inglés en el original y
+  se conserva tal cual: es el rótulo real, no una traducción pendiente.
+- **Completo:** territorio y registro de INPARQUES (estructura territorial,
+  parques, ficha del parque, zonas, puntos, directorio de negocios,
+  expediente del negocio, usuarios, roles, ámbitos, sesiones, reglas
+  globales, integraciones, auditoría) —
+  `src/ui/vistas/stitch-inparques-interior.ts`. Estas rutas las comparten
+  varios roles institucionales; cada uno conserva la barra lateral que
+  Stitch le dibujó, y el control de acceso por rol de `app/registry.ts`
+  sigue devolviendo 403 donde corresponde.
+- **Pendiente:** catálogo avanzado del comercio (variantes, modificadores,
+  alérgenos, horarios, cupos, inventario); módulos de concesiones,
+  operación, finanzas y soporte de INPARQUES (solicitudes, revisión
+  documental, aprobaciones, permisos, contratos, cánones, inspecciones,
+  incidencias, contabilidad, conciliación, cuentas por cobrar, cierres,
+  reembolsos, disputas, SLA); interior de `inparques.inspector`, que en el
+  original es una superficie móvil sin barra lateral y necesita su propia
+  envoltura.
