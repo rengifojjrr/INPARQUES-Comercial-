@@ -195,7 +195,7 @@ function barraOperador(activa: string): string {
     ['calendar_today', 'Reservas', '/c/reservas'],
     ['bolt', 'Venta', '/c/caja/venta-mostrador'],
     ['menu_book', 'Catálogo', '/c/catalogo'],
-    ['apps', 'Más', '/c/mas'],
+    ['list_alt', 'Más', '/c/mas'],
   ];
   return `
 <nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center bg-surface border-t border-outline-variant shadow-sm pb-safe pt-xs" aria-label="Navegación principal">

@@ -156,3 +156,41 @@ Con esto, las tres superficies quedan portadas salvo lo que sigue:
   `inparques.inspector`, que en el original es una superficie móvil sin
   barra lateral y necesita su propia envoltura en vez de reutilizar la del
   panel de escritorio.
+
+## Correcciones de coherencia (posteriores al porte)
+
+Al revisar la demo completa aparecieron cuatro problemas que no eran de
+porte de una pantalla concreta sino del conjunto, y se resolvieron de raíz:
+
+1. **Dos paletas conviviendo.** `src/ui/estilos.css` y `src/dev/andamiaje.css`
+   tenían tokens propios y un bloque `prefers-color-scheme: dark`. Con el
+   sistema operativo en modo oscuro, cualquier pantalla aún no portada se
+   dibujaba oscura mientras las portadas seguían claras. Ahora ambas hojas
+   usan los tokens de `tailwind.config.js` y la tipografía Manrope, y no hay
+   modo oscuro: Stitch entregó las 119 páginas en claro y sin variante
+   oscura, así que inventarla sería diseñar, no portar.
+
+2. **El visitante sin navegación en escritorio.** La barra inferior de la PWA
+   es `md:hidden` en el original y no había nada que la sustituyera. Se añade
+   `src/ui/vistas/stitch-visitante-nav.ts`: la misma barra en teléfono y los
+   mismos cinco destinos en la cabecera a partir de `md`.
+
+3. **Huecos donde el diseño pedía fotos.** `src/ui/ilustraciones.ts` genera
+   escenas SVG (paisaje, fachada, plato, bebida, artesanía, juguetes,
+   alquiler) en la paleta del sistema, deterministas por identificador y sin
+   red. Sustituyen a las fotografías de `lh3.googleusercontent.com`, que la
+   política de contenido del artefacto bloquea.
+
+4. **Mapas inertes.** `src/ui/mapa.ts` dibuja el esquema del parque en SVG con
+   las coordenadas que ya viven en el modelo (`zona.mapa`, `punto.mapa`), con
+   cada punto enfocable y navegable. Se usa en el mapa del visitante y en la
+   ficha del nodo territorial.
+
+### Comprobaciones automáticas
+
+- `tests/auditoria.mjs` entra con los once perfiles y recorre las rutas de las
+  tres superficies en 390px y 1440px, comprobando errores de consola,
+  desborde horizontal, ausencia de navegación y fondo fuera de la paleta.
+- `tests/iconos.mjs` verifica que cada ícono referenciado exista en el
+  subconjunto autohospedado de Material Symbols. Es un fallo silencioso: un
+  ícono ausente se dibuja como su nombre en texto, sin error de consola.
