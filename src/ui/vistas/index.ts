@@ -16,6 +16,7 @@ import { propietarioInicio, adminLocalInicio, operadorInicio, contadorInicio } f
 import { superadminInicio, direccionComercialInicio, finanzasInicio, adminParqueInicio, inspectorInicio, soporteInicio } from './stitch-inparques';
 import { inicioVisitante } from './stitch-visitante';
 import * as stitchCompra from './stitch-visitante-compra';
+import { mapaStitch } from './stitch-visitante-mapa';
 import * as stitchComercioInterior from './stitch-comercio-interior';
 import * as stitchComercioOp from './stitch-comercio-operacion';
 import * as stitchComercioFin from './stitch-comercio-finanzas';
@@ -90,7 +91,7 @@ export const VISTAS_POR_ID: Record<string, Render> = {
   'v.buscar': v.buscar,
   'v.categorias': v.categorias,
   'v.filtros': v.filtros,
-  'v.mapa': v.mapa,
+  'v.mapa': mapaStitch,
   'v.zona': v.zona,
   'v.comercio': stitchCompra.fichaComercioStitch,
   'v.catalogo': stitchCompra.fichaComercioStitch,

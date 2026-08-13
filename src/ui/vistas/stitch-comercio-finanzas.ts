@@ -25,7 +25,7 @@
  */
 
 import { esc } from '../componentes';
-import { avatar, barraLateral, barraLateralContador, barraSuperior } from './stitch-comercio';
+import { avatar, barraLateral, barraLateralAdminLocal, barraLateralContador, barraSuperior } from './stitch-comercio';
 import { conCajonMovil } from '../stitch-shell';
 import type { Pagina, Render } from './tipos';
 import { store } from '../../data/store';
@@ -60,18 +60,43 @@ function misOrdenes(): Orden[] {
 
 /**
  * El portal financiero de Stitch tiene barra lateral propia (Finance
- * Portal) y su propia barra superior. Para el propietario, que llega a
- * estas mismas rutas desde su dashboard, se conserva su barra lateral de
- * "Gestión Comercial": cada rol ve el portal que Stitch le dibujó.
+ * Portal) y su propia barra superior. Pero estas rutas también las abren el
+ * propietario y el administrador de local desde sus propios paneles, y cada
+ * uno tiene en Stitch una barra lateral distinta. Se dibuja la que le
+ * corresponde a cada rol en vez de imponer una sola: el lienzo es el mismo,
+ * el portal que lo enmarca no.
  */
 function marcoFinanzas(activo: string, cuerpo: string): string {
   const u = sesion.usuario()!;
-  if (u.rol !== 'comercio.contador') {
+
+  if (u.rol === 'comercio.propietario') {
     return `
 ${conCajonMovil(barraLateral('/c/estado-cuenta'))}
 ${barraSuperior(u.nombre)}
 <main class="lg:ml-64 pt-16 min-h-screen bg-surface-container-lowest">${cuerpo}</main>`;
   }
+
+  if (u.rol !== 'comercio.contador') {
+    // Administrador de local y operador: portal "Portal Admin", cuya
+    // entrada de Ventas apunta justamente a /c/reportes.
+    return `
+${conCajonMovil(barraLateralAdminLocal('/c/reportes'), false)}
+<main class="md:ml-64 min-h-screen bg-background">
+  <header class="md:hidden flex justify-between items-center w-full px-lg h-touch-target sticky top-0 z-30 bg-surface border-b border-outline-variant">
+    <div class="flex items-center gap-sm">
+      <button type="button" data-accion="abrir-cajon" aria-label="Abrir menú" class="min-h-touch-target min-w-[44px] flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-full">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+      <span class="font-headline-md text-headline-md font-bold text-primary">Parques Nacionales</span>
+    </div>
+    <button type="button" data-accion="ir" data-valor="/perfil" class="min-h-touch-target min-w-[44px] flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-full">
+      <span class="material-symbols-outlined">person</span>
+    </button>
+  </header>
+  ${cuerpo}
+</main>`;
+  }
+
   return `
 ${conCajonMovil(barraLateralContador(activo), false)}
 <div class="flex-1 flex flex-col md:ml-64 min-h-screen">

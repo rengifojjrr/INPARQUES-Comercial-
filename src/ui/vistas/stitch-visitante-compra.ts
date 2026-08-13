@@ -11,7 +11,8 @@
  */
 
 import { esc } from '../componentes';
-import { marcadorFoto } from '../stitch-comun';
+import { ilustracion, ilustracionPortada } from '../ilustraciones';
+import { cabeceraVisitante, barraInferiorVisitante } from './stitch-visitante-nav';
 import type { Pagina, Render } from './tipos';
 import { store } from '../../data/store';
 import { sesion } from '../../app/session';
@@ -26,20 +27,16 @@ const NOMBRE_CATEGORIA: Record<string, string> = {
   comida: 'Comida', bebidas: 'Bebidas', juguetes: 'Juguetes', artesania: 'Artesanía',
   recuerdos: 'Recuerdos', alquileres: 'Alquileres', atracciones: 'Atracciones', paseos: 'Paseos',
 };
-const ICONO_CATEGORIA: Record<string, string> = {
-  comida: 'restaurant', bebidas: 'local_cafe', juguetes: 'toys', artesania: 'palette',
-  recuerdos: 'redeem', alquileres: 'pedal_bike', atracciones: 'star', paseos: 'hiking',
-};
 
-function cabeceraSimple(titulo: string, atras: string): string {
-  return `
-<header class="bg-surface border-b border-outline-variant flex justify-between items-center px-lg w-full h-14 sticky top-0 z-40">
-  <button type="button" data-accion="ir" data-valor="${atras}" aria-label="Volver" class="h-touch-target w-touch-target flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors">
-    <span class="material-symbols-outlined">arrow_back</span>
-  </button>
-  <span class="font-headline-md text-headline-md font-bold text-primary truncate">${esc(titulo)}</span>
-  <div class="h-touch-target w-touch-target"></div>
-</header>`;
+/**
+ * Las pantallas del recorrido de compra tenían en el original solo una
+ * flecha de volver. Se mantiene esa flecha, pero delegando en la cabecera
+ * compartida del visitante, que a partir de `md` añade los destinos
+ * principales: en escritorio la barra inferior no se dibuja y sin esto la
+ * pantalla quedaba sin navegación.
+ */
+function cabeceraSimple(titulo: string, atras: string, activa = ''): string {
+  return cabeceraVisitante(activa, titulo, atras);
 }
 
 // ------------------------------------------------------- Ficha + menú (v.comercio / v.catalogo)
@@ -61,16 +58,12 @@ export const fichaComercioStitch: Render = (ctx): Pagina => {
   const totalCarritoUsd = totalesCarrito(estadoUi.carrito, e.tasaBcv.valor).totalUsd;
 
   const contenido = `
-<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-lg py-sm">
-  <button type="button" data-accion="ir" data-valor="/v" aria-label="Volver" class="w-touch-target h-touch-target flex items-center justify-center bg-surface-container-lowest rounded-full shadow-sm text-on-surface hover:bg-surface-container-high transition-colors">
-    <span class="material-symbols-outlined">arrow_back</span>
-  </button>
-</header>
+${cabeceraVisitante('', negocio.nombreComercial, '/v')}
 <div class="relative w-full h-[220px] md:h-[300px] bg-surface-container-highest">
-  ${marcadorFoto(ICONO_CATEGORIA[negocio.categoria] ?? 'storefront', 'w-full h-full')}
+  ${ilustracionPortada(negocio.categoria, negocio.id, 'w-full h-full object-cover', `Imagen de ${negocio.nombreComercial}`)}
   <div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-80"></div>
 </div>
-<main class="relative -mt-xl px-4 md:px-lg max-w-4xl mx-auto z-10 pb-[100px]">
+<main class="relative -mt-xl px-4 md:px-lg max-w-4xl mx-auto z-10 pb-[180px] md:pb-[110px]">
   <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg shadow-sm mb-lg">
     <div class="flex flex-col md:flex-row md:justify-between md:items-start gap-md">
       <div>
@@ -107,7 +100,7 @@ export const fichaComercioStitch: Render = (ctx): Pagina => {
           ${arts.filter((a) => a.categoria === cat).map((a) => `
           <button type="button" data-accion="ir" data-valor="/v/${a.tipo === 'servicio' ? 'servicio' : 'articulo'}/${esc(a.id)}"
             class="bg-surface-container-lowest border border-outline-variant rounded-lg p-sm flex gap-md hover:shadow-sm transition-shadow text-left w-full">
-            <div class="w-24 h-24 rounded-md shrink-0 overflow-hidden">${marcadorFoto(ICONO_CATEGORIA[cat] ?? 'restaurant', 'w-full h-full')}</div>
+            <div class="w-24 h-24 rounded-md shrink-0 overflow-hidden">${ilustracion(a.categoria || cat, a.id, 'w-full h-full object-cover', `Imagen de ${a.nombre}`)}</div>
             <div class="flex-1 flex flex-col justify-between min-w-0">
               <div>
                 <h3 class="font-label-md text-label-md text-on-surface">${esc(a.nombre)}</h3>
@@ -126,7 +119,7 @@ export const fichaComercioStitch: Render = (ctx): Pagina => {
   </div>
 </main>
 ${unidades > 0
-  ? `<div class="fixed bottom-0 left-0 w-full p-md bg-gradient-to-t from-surface-container-lowest to-transparent z-50 flex justify-center pb-safe">
+  ? `<div class="fixed bottom-[72px] md:bottom-0 left-0 w-full p-md bg-gradient-to-t from-surface-container-lowest to-transparent z-50 flex justify-center pb-safe">
       <button type="button" data-accion="ir" data-valor="/v/carrito" class="w-full max-w-md bg-primary text-on-primary rounded-full h-touch-target flex items-center justify-between px-lg shadow-lg hover:bg-surface-tint transition-colors">
         <div class="flex items-center gap-sm">
           <div class="bg-on-primary text-primary font-label-sm text-label-sm w-6 h-6 rounded-full flex items-center justify-center">${unidades}</div>
@@ -137,7 +130,7 @@ ${unidades > 0
     </div>`
   : ''}`;
 
-  return { titulo: negocio.nombreComercial, standalone: true, contenido };
+  return { titulo: negocio.nombreComercial, standalone: true, contenido: contenido + barraInferiorVisitante('') };
 };
 
 // ---------------------------------------------------------- Personalizar producto (v.articulo)
@@ -152,9 +145,9 @@ export const articuloStitch: Render = (ctx): Pagina => {
 
   const contenido = `
 ${cabeceraSimple('INPARQUES Comercial', `/v/comercio/${a.negocioId}`)}
-<main class="flex-1 overflow-y-auto w-full max-w-3xl mx-auto pb-24 md:pb-lg">
+<main class="flex-1 overflow-y-auto w-full max-w-3xl mx-auto pb-[180px] md:pb-[110px]">
   <div class="w-full h-64 md:h-80 bg-surface-container-highest relative rounded-b-xl overflow-hidden shadow-sm">
-    ${marcadorFoto(ICONO_CATEGORIA[negocio.categoria] ?? 'restaurant', 'w-full h-full')}
+    ${ilustracion(a.categoria || negocio.categoria, a.id, 'w-full h-full object-cover', `Imagen de ${a.nombre}`)}
   </div>
   <div class="px-md md:px-lg py-lg space-y-lg">
     <div>
@@ -200,7 +193,7 @@ ${cabeceraSimple('INPARQUES Comercial', `/v/comercio/${a.negocioId}`)}
     </form>
   </div>
 </main>
-<div class="fixed bottom-0 left-0 w-full bg-surface border-t border-outline-variant shadow-[0_-4px_12px_rgba(40,51,46,0.08)] z-40 px-md py-sm pb-safe">
+<div class="fixed bottom-[72px] md:bottom-0 left-0 w-full bg-surface border-t border-outline-variant shadow-[0_-4px_12px_rgba(40,51,46,0.08)] z-40 px-md py-sm pb-safe">
   <div class="flex items-center justify-between gap-md max-w-3xl mx-auto">
     <div class="flex items-center bg-surface-container-low rounded-lg border border-outline-variant">
       <button type="button" data-accion="cant-menos" data-valor="${esc(a.id)}" class="h-touch-target w-touch-target flex items-center justify-center text-on-surface hover:bg-surface-container-high rounded-l-lg transition-colors">
@@ -220,7 +213,7 @@ ${cabeceraSimple('INPARQUES Comercial', `/v/comercio/${a.negocioId}`)}
   <div id="error-agregar" class="max-w-3xl mx-auto"></div>
 </div>`;
 
-  return { titulo: a.nombre, standalone: true, contenido };
+  return { titulo: a.nombre, standalone: true, contenido: contenido + barraInferiorVisitante('') };
 };
 
 // -------------------------------------------------------------- Reservar servicio (v.servicio)
@@ -240,8 +233,8 @@ export const servicioStitch: Render = (ctx): Pagina => {
 
   const contenido = `
 ${cabeceraSimple(a.nombre, `/v/comercio/${a.negocioId}`)}
-<main class="flex-1 flex flex-col pb-[120px]">
-  <div class="w-full h-48 relative">${marcadorFoto(ICONO_CATEGORIA[negocio.categoria] ?? 'hiking', 'w-full h-full')}</div>
+<main class="flex-1 flex flex-col pb-[200px] md:pb-[130px]">
+  <div class="w-full h-48 relative">${ilustracion(a.categoria || negocio.categoria, a.id, 'w-full h-full object-cover', `Imagen de ${a.nombre}`)}</div>
   <div class="px-md md:px-lg max-w-3xl mx-auto w-full -mt-md relative z-10 flex flex-col gap-xl">
     <section>
       <div class="flex items-center gap-sm mb-xs">
@@ -299,7 +292,7 @@ ${cabeceraSimple(a.nombre, `/v/comercio/${a.negocioId}`)}
     <div id="error-agregar"></div>
   </div>
 </main>
-<div class="fixed bottom-0 left-0 w-full bg-surface-container-lowest border-t border-outline-variant p-md pb-safe shadow-[0_-4px_12px_rgba(40,51,46,0.08)] z-50">
+<div class="fixed bottom-[72px] md:bottom-0 left-0 w-full bg-surface-container-lowest border-t border-outline-variant p-md pb-safe shadow-[0_-4px_12px_rgba(40,51,46,0.08)] z-50">
   <div class="max-w-3xl mx-auto flex items-center justify-between gap-md">
     <button type="button" data-accion="agregar-servicio" data-valor="${esc(a.id)}" ${!franjaSel ? 'disabled' : ''}
       class="flex-1 h-touch-target bg-primary text-on-primary font-label-md text-label-md rounded-full flex items-center justify-center gap-sm disabled:opacity-50 transition-opacity hover:bg-surface-tint">
@@ -308,7 +301,7 @@ ${cabeceraSimple(a.nombre, `/v/comercio/${a.negocioId}`)}
   </div>
 </div>`;
 
-  return { titulo: a.nombre, standalone: true, contenido };
+  return { titulo: a.nombre, standalone: true, contenido: contenido + barraInferiorVisitante('') };
 };
 
 // --------------------------------------------------------------------- Carrito
@@ -328,7 +321,7 @@ ${cabeceraSimple('Mi Carrito', '/v')}
   <p class="font-body-md text-body-md text-on-surface-variant max-w-xs">Elija un comercio del parque y agregue lo que desee.</p>
   <button type="button" data-accion="ir" data-valor="/v" class="bg-primary text-on-primary font-label-md text-label-md h-touch-target px-lg rounded-full">Ver comercios</button>
 </main>`;
-    return { titulo: 'Carrito', standalone: true, contenido };
+    return { titulo: 'Carrito', standalone: true, contenido: contenido + barraInferiorVisitante('') };
   }
 
   const contenido = `
@@ -342,9 +335,10 @@ ${cabeceraSimple('INPARQUES Comercial', '/v')}
     ${c.items.map((i) => {
       const extras = extrasDeItem(i);
       const totalItem = (i.precioUnitarioUsd + extras) * i.cantidad;
+      const art = e.articulos.find((x) => x.id === i.articuloId);
       return `
     <div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-md flex flex-col sm:flex-row gap-md items-start sm:items-center relative">
-      <div class="w-24 h-24 rounded-md flex-shrink-0 overflow-hidden">${marcadorFoto('restaurant', 'w-full h-full')}</div>
+      <div class="w-24 h-24 rounded-md flex-shrink-0 overflow-hidden">${ilustracion(art?.categoria ?? 'comida', i.articuloId, 'w-full h-full object-cover', `Imagen de ${i.nombre}`)}</div>
       <div class="flex-grow min-w-0">
         <h3 class="font-headline-md text-headline-md-mobile text-on-surface">${esc(i.nombre)}</h3>
         ${i.seleccionVariantes.map((v) => `<p class="font-body-md text-body-md text-on-surface-variant text-sm">${esc(v.nombre)}</p>`).join('')}
@@ -385,7 +379,7 @@ ${cabeceraSimple('INPARQUES Comercial', '/v')}
   </section>
 </main>`;
 
-  return { titulo: 'Carrito', standalone: true, contenido };
+  return { titulo: 'Carrito', standalone: true, contenido: contenido + barraInferiorVisitante('') };
 };
 
 // -------------------------------------------------------------------- Checkout
@@ -459,7 +453,7 @@ ${cabeceraSimple('Identificación y Checkout', '/v/carrito')}
   </div>
 </main>`;
 
-  return { titulo: 'Checkout', standalone: true, contenido };
+  return { titulo: 'Checkout', standalone: true, contenido: contenido + barraInferiorVisitante('') };
 };
 
 // --------------------------------------------------------------- Selección de pago
@@ -493,7 +487,7 @@ ${cabeceraSimple('Pago', '/v/checkout')}
   <div class="bg-secondary-container/20 border border-secondary/20 rounded-lg p-md font-body-md text-body-md text-on-surface mt-lg">Nunca se piden datos reales: la demo no almacena números completos de tarjeta ni códigos de seguridad. Todos los pagos los resuelve un adaptador simulado.</div>
 </main>`;
 
-  return { titulo: 'Forma de pago', standalone: true, contenido };
+  return { titulo: 'Forma de pago', standalone: true, contenido: contenido + barraInferiorVisitante('') };
 };
 
 function paginaPagoStitch(metodo: string, titulo: string, icono: string, campos: string, nota: string): Pagina {
@@ -518,7 +512,7 @@ ${cabeceraSimple(titulo, '/v/checkout/pago')}
     Pagar ${esc(formatearVes(t.totalVes))}
   </button>
 </main>`;
-  return { titulo, standalone: true, contenido };
+  return { titulo, standalone: true, contenido: contenido + barraInferiorVisitante('') };
 }
 
 function campoDato(icono: string, etiqueta: string, valor: string): string {
@@ -668,7 +662,7 @@ ${cabeceraSimple('INPARQUES Comercial', '/v/historial')}
   </div>
 </main>`;
 
-  return { titulo: orden.codigo, standalone: true, contenido };
+  return { titulo: orden.codigo, standalone: true, contenido: contenido + barraInferiorVisitante('/v/historial') };
 }
 
 export const seguimientoPedidoStitch: Render = (ctx) => seguimientoStitch(ctx, false);

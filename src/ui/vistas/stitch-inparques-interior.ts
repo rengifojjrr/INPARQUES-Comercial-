@@ -26,6 +26,7 @@
 
 import { esc } from '../componentes';
 import { conCajonMovil } from '../stitch-shell';
+import { mapaParque, leyendaMapa } from '../mapa';
 import {
   barraLateralInparques, cabeceraInparques,
   NAV_SUPERADMIN, NAV_DIRECCION, NAV_FINANZAS, NAV_ADMIN_PARQUE, NAV_SOPORTE,
@@ -240,6 +241,22 @@ ${encabezado(
                 <span class="material-symbols-outlined text-lg">monitoring</span>
               </button>
             </div>
+          </div>`
+        : ''
+    }
+    ${
+      seleccionado
+        ? `<div class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm overflow-hidden">
+            <div class="px-lg py-md border-b border-outline-variant flex justify-between items-center">
+              <h3 class="font-headline-md text-headline-md text-on-surface">Mapa del nodo</h3>
+              <span class="material-symbols-outlined text-on-surface-variant">map</span>
+            </div>
+            <div class="overflow-x-auto"><div class="min-w-[420px]">${mapaParque(seleccionado.id, {
+              rutaPunto: (negocioId) => `/i/negocio/${negocioId}`,
+              rutaZona: () => `/i/zonas`,
+              mostrarNoOcupados: true,
+            })}</div></div>
+            <div class="p-md border-t border-outline-variant bg-surface">${leyendaMapa(true)}</div>
           </div>`
         : ''
     }

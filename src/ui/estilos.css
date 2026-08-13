@@ -1,9 +1,17 @@
 /*
  * Sistema visual de la demo — mobile-first.
  *
- * Provisional: sustituye al diseño original mientras las plantillas HTML no
- * estén disponibles. Se construye con tokens para que el reemplazo sea
- * cambiar valores, no reescribir componentes.
+ * Los tokens de aquí abajo son **los mismos** de `tailwind.config.js`, es
+ * decir los del sistema de diseño real de Stitch. Antes este archivo tenía
+ * una paleta propia (otro verde, otros grises) y además un modo oscuro por
+ * `prefers-color-scheme`. El resultado era que, con el sistema operativo en
+ * oscuro, cada pantalla todavía no portada salía oscura mientras las
+ * portadas seguían claras: dos productos distintos en la misma demo.
+ *
+ * Ahora hay una sola paleta y un solo modo. Stitch entregó las 119 páginas
+ * en claro y sin variante oscura, así que el modo oscuro se retira en vez de
+ * inventar una versión oscura que el diseño nunca definió. Lo mismo con la
+ * tipografía: Manrope, la del diseño, en lugar de la del sistema.
  *
  * Prioridades de teléfono:
  *  - Acciones principales en la zona del pulgar (barra inferior, hojas).
@@ -14,40 +22,44 @@
  */
 
 :root {
-  --verde-900: #0d3d2a;
-  --verde-700: #16603f;
-  --verde-600: #1f7a50;
-  --verde-500: #2a9463;
-  --verde-100: #e3f2ea;
+  color-scheme: light;
 
-  --fondo: #f6f8f7;
+  /* Verdes: primary / primary-container / surface-tint / secondary-container. */
+  --verde-900: #002114;
+  --verde-700: #005131;
+  --verde-600: #176b45;
+  --verde-500: #186c45;
+  --verde-100: #c0edd4;
+
+  /* Superficies y texto: los tokens `surface*` y `on-*` de Stitch. */
+  --fondo: #f7f5ef;
   --superficie: #ffffff;
-  --superficie-2: #f0f4f2;
-  --texto: #12211a;
-  --texto-2: #566761;
-  --texto-3: #8a9a93;
-  --borde: #dde5e1;
-  --borde-fuerte: #c3d0ca;
+  --superficie-2: #f5f3ed;
+  --texto: #1b1c18;
+  --texto-2: #3f4942;
+  --texto-3: #6f7a71;
+  --borde: #bfc9c0;
+  --borde-fuerte: #a9b4aa;
 
-  --exito: #17693f;
-  --exito-fondo: #e4f4ea;
-  --alerta: #8a5a00;
-  --alerta-fondo: #fdf1dc;
-  --error: #9c2320;
-  --error-fondo: #fce9e8;
-  --info: #1b5b8a;
-  --info-fondo: #e5f0f8;
+  --exito: #005131;
+  --exito-fondo: #c0edd4;
+  --alerta: #3a4a43;
+  --alerta-fondo: #d5e7dd;
+  --error: #ba1a1a;
+  --error-fondo: #ffdad6;
+  --info: #3a4942;
+  --info-fondo: #e4e2dd;
 
   --r-sm: 8px;
   --r-md: 12px;
   --r-lg: 16px;
   --r-xl: 22px;
 
-  --sombra-1: 0 1px 2px rgba(12, 34, 25, 0.06);
-  --sombra-2: 0 4px 16px rgba(12, 34, 25, 0.10);
-  --sombra-3: 0 -6px 24px rgba(12, 34, 25, 0.14);
+  --sombra-1: 0 1px 2px rgba(40, 51, 46, 0.06);
+  --sombra-2: 0 4px 12px rgba(40, 51, 46, 0.10);
+  --sombra-3: 0 -6px 24px rgba(40, 51, 46, 0.14);
 
-  --fuente: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --fuente: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
   --seg-arriba: env(safe-area-inset-top, 0px);
@@ -56,60 +68,6 @@
   --alto-nav: 60px;
   --alto-cabecera: 56px;
   --tactil: 44px;
-}
-
-/* Tema oscuro del sistema, salvo que el visor haya pedido claro. */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --fondo: #0d1512;
-    --superficie: #141f1a;
-    --superficie-2: #1b2822;
-    --texto: #e9f1ec;
-    --texto-2: #a3b3ac;
-    --texto-3: #71847c;
-    --borde: #26352e;
-    --borde-fuerte: #35473e;
-    --verde-100: #16301f;
-    --verde-500: #4cc287;
-    --verde-600: #3fae76;
-    --exito: #63d19c;
-    --exito-fondo: #10301f;
-    --alerta: #e5b56a;
-    --alerta-fondo: #2e2412;
-    --error: #f2938e;
-    --error-fondo: #331816;
-    --info: #7cb8e0;
-    --info-fondo: #12252f;
-    --sombra-1: 0 1px 2px rgba(0, 0, 0, 0.4);
-    --sombra-2: 0 4px 16px rgba(0, 0, 0, 0.5);
-    --sombra-3: 0 -6px 24px rgba(0, 0, 0, 0.6);
-  }
-}
-
-/* Eleccion explicita del visor: gana sobre la del sistema. */
-:root[data-theme="dark"] {
-  --fondo: #0d1512;
-  --superficie: #141f1a;
-  --superficie-2: #1b2822;
-  --texto: #e9f1ec;
-  --texto-2: #a3b3ac;
-  --texto-3: #71847c;
-  --borde: #26352e;
-  --borde-fuerte: #35473e;
-  --verde-100: #16301f;
-  --verde-500: #4cc287;
-  --verde-600: #3fae76;
-  --exito: #63d19c;
-  --exito-fondo: #10301f;
-  --alerta: #e5b56a;
-  --alerta-fondo: #2e2412;
-  --error: #f2938e;
-  --error-fondo: #331816;
-  --info: #7cb8e0;
-  --info-fondo: #12252f;
-  --sombra-1: 0 1px 2px rgba(0, 0, 0, 0.4);
-  --sombra-2: 0 4px 16px rgba(0, 0, 0, 0.5);
-  --sombra-3: 0 -6px 24px rgba(0, 0, 0, 0.6);
 }
 
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }

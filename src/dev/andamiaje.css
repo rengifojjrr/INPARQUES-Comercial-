@@ -9,47 +9,22 @@
  * sus propios estilos; este archivo se mantiene aparte y no los toca.
  */
 
+/* Sin modo oscuro: el diseno de Stitch es claro y unico, y tener aqui una
+   variante oscura hacia que el andamiaje no combinara con el producto. */
 :root {
-  --and-fondo: #ffffff;
-  --and-texto: #16211c;
-  --and-tenue: #5c6b64;
-  --and-borde: #d9e2dc;
-  --and-panel: #f5f8f6;
-  --and-acento: #1f6b4a;
-  --and-alerta: #8a5a00;
-  --and-error: #97231f;
-  --and-ok: #1f6b4a;
+  color-scheme: light;
+  --and-fondo: #f7f5ef;
+  --and-texto: #1b1c18;
+  --and-tenue: #3f4942;
+  --and-borde: #bfc9c0;
+  --and-panel: #f5f3ed;
+  --and-acento: #005131;
+  --and-alerta: #3a4a43;
+  --and-error: #ba1a1a;
+  --and-ok: #005131;
   --and-radio: 8px;
-  --and-fuente: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --and-fuente: 'Manrope', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --and-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-}
-
-/* Tema oscuro del sistema, salvo que el visor haya pedido claro. */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --and-fondo: #101613;
-    --and-texto: #e8efea;
-    --and-tenue: #9aa8a1;
-    --and-borde: #2b3833;
-    --and-panel: #18211d;
-    --and-acento: #5fd39b;
-    --and-alerta: #e0b062;
-    --and-error: #f08b86;
-    --and-ok: #5fd39b;
-  }
-}
-
-/* Eleccion explicita del visor: gana sobre la del sistema. */
-:root[data-theme="dark"] {
-  --and-fondo: #101613;
-  --and-texto: #e8efea;
-  --and-tenue: #9aa8a1;
-  --and-borde: #2b3833;
-  --and-panel: #18211d;
-  --and-acento: #5fd39b;
-  --and-alerta: #e0b062;
-  --and-error: #f08b86;
-  --and-ok: #5fd39b;
 }
 
 * { box-sizing: border-box; }

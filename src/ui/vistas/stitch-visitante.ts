@@ -8,7 +8,8 @@
  */
 
 import { esc } from '../componentes';
-import { marcadorFoto } from '../stitch-comun';
+import { ilustracionPortada } from '../ilustraciones';
+import { cabeceraVisitante, barraInferiorVisitante } from './stitch-visitante-nav';
 import type { Pagina, Render } from './tipos';
 import { store } from '../../data/store';
 import { estadoUi } from '../estado-ui';
@@ -50,7 +51,7 @@ function tarjetaNegocio(local: Local, negocio: Negocio): string {
 <div class="bg-surface rounded-xl border border-outline-variant overflow-hidden hover:shadow-md transition-shadow flex flex-col sm:flex-row group cursor-pointer relative"
   data-accion="ir" data-valor="/v/comercio/${esc(negocio.id)}">
   <div class="h-48 sm:h-auto sm:w-2/5 relative overflow-hidden bg-surface-container-high">
-    ${marcadorFoto(ICONO_CATEGORIA[negocio.categoria] ?? 'storefront')}
+    ${ilustracionPortada(negocio.categoria, negocio.id, 'w-full h-full object-cover', `Imagen de ${negocio.nombreComercial}`)}
     ${media
       ? `<div class="absolute top-sm right-sm bg-surface/90 backdrop-blur-sm px-2 py-1 rounded-md flex items-center gap-1 shadow-sm">
         <span class="material-symbols-outlined text-[14px] text-primary icon-fill">star</span>
@@ -86,15 +87,7 @@ export const inicioVisitante: Render = (): Pagina => {
   const destacados = lista.slice(0, 4);
 
   const contenido = `
-<header class="bg-surface top-0 border-b border-outline-variant flex justify-between items-center px-lg w-full h-14 sticky z-40">
-  <div class="flex items-center gap-xs text-primary">
-    <span class="material-symbols-outlined icon-fill">park</span>
-  </div>
-  <div class="font-headline-md text-headline-md-mobile md:text-headline-md font-bold text-primary">INPARQUES Comercial</div>
-  <div class="flex items-center gap-xs text-primary">
-    <span class="material-symbols-outlined p-1 rounded-full cursor-pointer" data-accion="ir" data-valor="/notificaciones">notifications</span>
-  </div>
-</header>
+${cabeceraVisitante('/v')}
 <!-- El envoltorio "stitch-pagina" de main.ts es flex-col: dentro de un
      contenedor flex, un margin:auto en el eje transversal desactiva el
      stretch por defecto y el ancho pasa a calcularse por contenido
@@ -151,28 +144,7 @@ export const inicioVisitante: Render = (): Pagina => {
   </section>
 </main>
 
-<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-2 pb-safe bg-surface-container-lowest border-t border-outline-variant shadow-sm">
-  <a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 scale-90 transition-all" href="#/v">
-    <span class="material-symbols-outlined icon-fill">home</span>
-    <span class="font-label-sm text-label-sm mt-1">Inicio</span>
-  </a>
-  <a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high rounded-lg px-2 py-1 transition-colors" href="#/v/buscar">
-    <span class="material-symbols-outlined">search</span>
-    <span class="font-label-sm text-label-sm mt-1">Explorar</span>
-  </a>
-  <a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high rounded-lg px-2 py-1 transition-colors" href="#/v/historial">
-    <span class="material-symbols-outlined">shopping_bag</span>
-    <span class="font-label-sm text-label-sm mt-1">Pedidos</span>
-  </a>
-  <a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high rounded-lg px-2 py-1 transition-colors" href="#/ayuda">
-    <span class="material-symbols-outlined">help</span>
-    <span class="font-label-sm text-label-sm mt-1">Ayuda</span>
-  </a>
-  <a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high rounded-lg px-2 py-1 transition-colors" href="#/v/perfil">
-    <span class="material-symbols-outlined">person</span>
-    <span class="font-label-sm text-label-sm mt-1">Perfil</span>
-  </a>
-</nav>`;
+${barraInferiorVisitante('/v')}`;
 
   return { titulo: parque.nombre, standalone: true, contenido };
 };
