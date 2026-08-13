@@ -15,6 +15,7 @@ import { entradaStitch } from './stitch-acceso';
 import { propietarioInicio, adminLocalInicio, operadorInicio, contadorInicio } from './stitch-comercio';
 import { superadminInicio, direccionComercialInicio, finanzasInicio, adminParqueInicio, inspectorInicio, soporteInicio } from './stitch-inparques';
 import { inicioVisitante } from './stitch-visitante';
+import * as stitchCompra from './stitch-visitante-compra';
 import { sesion } from '../../app/session';
 
 /**
@@ -85,22 +86,22 @@ export const VISTAS_POR_ID: Record<string, Render> = {
   'v.filtros': v.filtros,
   'v.mapa': v.mapa,
   'v.zona': v.zona,
-  'v.comercio': v.fichaComercio,
-  'v.catalogo': v.catalogo,
-  'v.articulo': v.articulo,
-  'v.servicio': v.servicio,
+  'v.comercio': stitchCompra.fichaComercioStitch,
+  'v.catalogo': stitchCompra.fichaComercioStitch,
+  'v.articulo': stitchCompra.articuloStitch,
+  'v.servicio': stitchCompra.servicioStitch,
   'v.como_llegar': v.comoLlegar,
-  'v.carrito': v.carrito,
-  'v.checkout': v.checkout,
-  'v.checkout.cumplimiento': v.checkout,
-  'v.checkout.pago': v.seleccionPago,
-  'v.pago.movil': v.pagoMovil,
-  'v.pago.transferencia': v.pagoTransferencia,
-  'v.pago.tarjeta': v.pagoTarjeta,
-  'v.pago.efectivo': v.pagoEfectivo,
+  'v.carrito': stitchCompra.carritoStitch,
+  'v.checkout': stitchCompra.checkoutStitch,
+  'v.checkout.cumplimiento': stitchCompra.checkoutStitch,
+  'v.checkout.pago': stitchCompra.seleccionPagoStitch,
+  'v.pago.movil': stitchCompra.pagoMovilStitch,
+  'v.pago.transferencia': stitchCompra.pagoTransferenciaStitch,
+  'v.pago.tarjeta': stitchCompra.pagoTarjetaStitch,
+  'v.pago.efectivo': stitchCompra.pagoEfectivoStitch,
   'v.confirmacion': v.confirmacion,
-  'v.pedido': v.seguimientoPedido,
-  'v.reserva': v.seguimientoReserva,
+  'v.pedido': stitchCompra.seguimientoPedidoStitch,
+  'v.reserva': stitchCompra.seguimientoReservaStitch,
   'v.retiro': v.codigoRetiro,
   'v.historial': v.historial,
   'v.comprobante': v.comprobante,
