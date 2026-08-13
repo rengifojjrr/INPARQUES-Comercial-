@@ -176,6 +176,46 @@ function pedidosKanban(): string {
   return marcoPortalAdmin('/c/pedidos', cuerpo);
 }
 
+/**
+ * Barra inferior del portal "Operaciones Parque".
+ *
+ * El original (`50/p_gina_2_cola_de_pedidos`) la trae con cinco destinos:
+ * Pedidos, Reservas, Venta, Disponibilidad e Incidencias. Aquí se conservan
+ * los cinco, pero apuntando a rutas que el operador sí puede abrir según
+ * `app/registry.ts`: "Disponibilidad" va al catálogo (que es lo que el
+ * operador puede tocar de la oferta) y "Más" sustituye a "Incidencias",
+ * que en esta aplicación no es un módulo del comercio.
+ *
+ * Sin esta barra la cola de pedidos quedaba sin ninguna navegación: el
+ * operador entraba y no podía salir.
+ */
+function barraOperador(activa: string): string {
+  const destinos: Array<[string, string, string]> = [
+    ['receipt_long', 'Pedidos', '/c/pedidos'],
+    ['calendar_today', 'Reservas', '/c/reservas'],
+    ['bolt', 'Venta', '/c/caja/venta-mostrador'],
+    ['menu_book', 'Catálogo', '/c/catalogo'],
+    ['apps', 'Más', '/c/mas'],
+  ];
+  return `
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center bg-surface border-t border-outline-variant shadow-sm pb-safe pt-xs" aria-label="Navegación principal">
+  ${destinos
+    .map(([icono, texto, ruta]) => {
+      const on = ruta === activa;
+      return `<button type="button" data-accion="ir" data-valor="${ruta}"
+        class="flex flex-col items-center justify-center w-16 py-1 rounded-lg transition-colors ${
+          on ? 'text-on-secondary-container' : 'text-on-surface-variant hover:bg-surface-container-high'
+        }"${on ? ' aria-current="page"' : ''}>
+        <span class="flex items-center justify-center rounded-full px-3 py-0.5 mb-0.5 ${on ? 'bg-secondary-container' : ''}">
+          <span class="material-symbols-outlined ${on ? 'icon-fill' : ''}">${icono}</span>
+        </span>
+        <span class="font-label-sm text-[10px]">${esc(texto)}</span>
+      </button>`;
+    })
+    .join('')}
+</nav>`;
+}
+
 /** Cola móvil por pestañas (operador). */
 function pedidosCola(): string {
   const ordenes = misOrdenes().filter((o) => o.tipo === 'pedido' && !['entregada', 'cancelada'].includes(o.estado));
@@ -247,7 +287,7 @@ function pedidosCola(): string {
   }
 </main>`;
 
-  return `<div class="min-h-screen flex flex-col pb-[80px]">${cuerpo}</div>`;
+  return `<div class="min-h-screen flex flex-col pb-[86px]">${cuerpo}${barraOperador('/c/pedidos')}</div>`;
 }
 
 export const pedidosStitch: Render = (): Pagina => {

@@ -7,7 +7,7 @@
  */
 
 import { store } from '../data/store';
-import { sesion } from '../app/session';
+import { sesion, CLAVE_DEMO } from '../app/session';
 import { router, inicioDeRol } from '../app/router';
 import { conectividad } from '../net/connectivity';
 import { colaSincronizacion } from '../net/sync-queue';
@@ -240,6 +240,22 @@ function despachar(accion: string, valor: string): void {
         router.ir(valor);
       }
       break;
+
+    /**
+     * Carga en el formulario de acceso las credenciales de una cuenta de
+     * prueba. No entra por su cuenta: quien mira la demo ve el correo y la
+     * contraseña rellenados y pulsa "Ingresar", que es el mismo camino que
+     * seguiría un usuario real.
+     */
+    case 'usar-cuenta': {
+      const u = store.leer().usuarios.find((x) => x.id === valor);
+      if (!u) break;
+      estadoUi.seleccion['acceso-perfil'] = u.id;
+      estadoUi.seleccion['acceso-correo'] = u.correo;
+      estadoUi.seleccion['acceso-clave'] = CLAVE_DEMO;
+      repintar();
+      break;
+    }
 
     case 'cerrar-hoja':
       cerrarHoja();

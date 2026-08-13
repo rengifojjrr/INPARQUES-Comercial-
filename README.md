@@ -1,53 +1,48 @@
 # INPARQUES Comercial — demo
 
-Demo local y navegable de la plataforma de comercio en parques: PWA de
+Demo navegable de la plataforma de comercio en parques nacionales: PWA de
 visitante, portal de comercio y panel institucional sobre **una sola base de
 datos** y un solo sistema de rutas y permisos.
 
 Se ejecuta entera en el navegador. No requiere servidor, cuenta externa, clave
 de API, tarjeta ni suscripción.
 
-## Enlace para probar
+## Probar la beta
 
-**https://claude.ai/code/artifact/debdfa1c-77b9-49c2-9548-41f9b4d3a948**
+### → **https://claude.ai/code/artifact/debdfa1c-77b9-49c2-9548-41f9b4d3a948**
 
-Se abre desde el teléfono sin instalar nada. Empieza en el selector de
-perfiles: toque cualquiera de los 11 roles para entrar.
+Abre en teléfono o computadora, sin instalar nada. Verá la pantalla de acceso:
+**pulse una de las cuentas de prueba**, se cargan sus credenciales, y pulse
+**Ingresar** para entrar a la versión de ese rol.
 
----
+| Superficie | Cuentas de prueba disponibles desde la pantalla de acceso |
+| --- | --- |
+| Visitante | Visitante |
+| Comercio | Propietario · Administrador de local · Operador · Contador |
+| INPARQUES | Superadmin · Dirección comercial · Finanzas · Administrador de parque · Inspector · Soporte |
 
-## Estado — leer antes de revisar
-
-**Las plantillas HTML del cliente todavía no se han recibido.** El repositorio
-`rengifojjrr/INPARQUES-Comercial-` estaba vacío al iniciar el trabajo, y la
-carpeta `C:\Users\pekas\Downloads\Comercio e INPARQUES` está en un equipo
-Windows al que esta sesión no tiene acceso. El único material recibido fue el
-documento funcional en PDF.
-
-Por eso **el aspecto de las pantallas es provisional**, construido para que
-hubiera algo que recorrer. Todo lo demás —rutas, permisos, estados, datos,
-auditoría, conectividad— responde al documento funcional y está probado.
-
-Cuando lleguen las plantillas se sustituye la capa visual sin tocar el núcleo:
-el marcado vive en `src/ui/vistas/`, separado de la lógica.
-
-### Cómo entregar las plantillas
-
-1. Subirlas al repositorio (`git add` + `git push`) en cualquier carpeta.
-2. Adjuntarlas en el chat, como se adjuntó el PDF.
-3. Comprimirlas en un `.zip` y adjuntarlo.
-
-La ruta de Windows no funciona: esta sesión corre en un contenedor Linux
-aislado que no ve el disco local.
+Contraseña de todos los perfiles: **`demo1234`**.
+Código de verificación en dos pasos: **`123456`**.
+No son secretos: son constantes de demostración declaradas en
+`src/app/session.ts`. El visitante también puede **entrar como invitado**, sin
+cuenta.
 
 ---
+
+## Estado
+
+Las 119 pantallas de Stitch están portadas en las tres superficies: el
+recorrido completo del visitante, el portal de comercio entero y el panel
+institucional entero, con datos reales del almacén y el control de acceso por
+rol y ámbito funcionando.
+
+Detalle de qué página de Stitch corresponde a cada ruta, y qué queda
+pendiente, en [`docs/MAPEO-PAGINAS-STITCH.md`](docs/MAPEO-PAGINAS-STITCH.md).
 
 ## Perfiles de prueba
 
-Desde el selector inicial se entra con un toque. Si prefiere el formulario,
-**la contraseña de todos los perfiles es `demo1234`** y el **código de
-verificación es `123456`**. No son secretos: son constantes de demostración
-declaradas en `src/app/session.ts`.
+Correos completos, por si quiere escribirlos a mano en vez de usar los chips
+de la pantalla de acceso.
 
 | Rol | Correo | Ámbito | MFA |
 | --- | --- | --- | --- |
@@ -69,9 +64,9 @@ El visitante también puede **comprar como invitado**, sin cuenta.
 
 Recorridos que atraviesan las tres superficies y demuestran las reglas:
 
-1. **Compra completa.** Visitante → Café Los Cedros → agregar → carrito →
-   checkout → Pago Móvil (referencia `123456`) → confirmación. El pago queda
-   **pendiente de verificación**, no confirmado.
+1. **Compra completa.** Entre con la cuenta *Visitante* → Café Los Cedros →
+   agregar → carrito → checkout → Pago Móvil (referencia `123456`) →
+   confirmación. El pago queda **pendiente de verificación**, no confirmado.
 2. **Un comercio por carrito.** Con algo de Café Los Cedros en el carrito,
    intente agregar un juguete de Orinoco: aparece el modal para conservar o
    vaciar.
@@ -83,6 +78,8 @@ Recorridos que atraviesan las tres superficies y demuestran las reglas:
    el cierre y en los reportes, junto con las ventas de la aplicación.
 6. **Rutas prohibidas.** Como Operador, escriba `#/i/contabilidad` en la
    barra de direcciones: recibe un 403 con vuelta a su inicio.
+11. **Mapa del parque.** Visitante → Explorar → mapa: las zonas y los puntos
+   comerciales son clicables y abren la ficha del comercio que los ocupa.
 7. **Datos bancarios.** El Propietario ve la cuenta enmascarada; el Inspector
    no recibe el campo en absoluto.
 8. **Acción sensible.** Cobro → Cambiar cuenta bancaria: exige motivo,
@@ -166,4 +163,5 @@ completos de tarjeta ni documentos sensibles reales.
 
 - [`docs/ARQUITECTURA.md`](docs/ARQUITECTURA.md) — modelo de datos, persistencia, roles, permisos y adaptadores.
 - [`docs/MATRIZ-COBERTURA.md`](docs/MATRIZ-COBERTURA.md) — las 137 vistas con ruta, roles y estado.
-- [`plantillas-originales/`](plantillas-originales/) — carpeta reservada para los HTML de referencia.
+- [`docs/MAPEO-PAGINAS-STITCH.md`](docs/MAPEO-PAGINAS-STITCH.md) — qué página de Stitch corresponde a cada ruta.
+- `50/`, `los 25/`, `stitch_inparques_comercial_portal_visitante/` — los HTML originales de referencia.

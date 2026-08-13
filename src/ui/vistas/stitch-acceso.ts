@@ -1,180 +1,183 @@
 /**
- * Pantalla de entrada, construida con los componentes reales de Stitch.
+ * Pantalla de acceso de la demostración: la portada del enlace que se
+ * comparte.
  *
- * No existe en las 119 páginas entregadas una pantalla literal de "selector
- * de perfiles": es específica de esta demostración. Se compone reutilizando
- * el mismo lenguaje visual que el resto del material (la tarjeta bento de
- * bienvenida de `50/p_gina_1_acceso_qr_selecci_n_parquef`, las tarjetas de
- * lista con icono + chip de `50/p_gina_1_inicio_y_estado_de_habilitaci_n`),
- * no un estilo propio.
+ * No existe en las 119 páginas de Stitch una pantalla de "selector de
+ * perfiles": es propia de esta demo. Se compone con el mismo lenguaje visual
+ * del resto del material (tarjeta sobre lienzo, campos de `p_gina_8_identificaci_n_y_checkout`,
+ * chips de `p_gina_3_explorar_y_resultados`), no con un estilo inventado.
+ *
+ * Funciona como un acceso real —correo, contraseña y el mismo
+ * `data-formulario="acceso"` que ya valida la sesión— y encima ofrece las
+ * cuentas de prueba: al pulsar una, se rellenan las credenciales y se puede
+ * entrar. Así el enlace sirve tanto para enseñar el acceso como para saltar
+ * a cualquiera de los once roles sin tener que recordar un correo.
  */
 
 import { esc } from '../componentes';
 import type { Pagina, Render } from './tipos';
 import { store } from '../../data/store';
+import { estadoUi } from '../estado-ui';
 import { ROLES } from '../../domain/roles';
 import { CLAVE_DEMO } from '../../app/session';
 import { CODIGO_MFA_DEMO } from '../../adapters/simulados';
 import type { RoleId } from '../../domain/types';
 
-interface PerfilDemo {
-  usuarioId: string;
-  icono: string;
-  descripcion: string;
-}
-
-const GRUPOS: Array<{ titulo: string; icono: string; perfiles: PerfilDemo[] }> = [
-  {
-    titulo: 'Visitante',
-    icono: 'hiking',
-    perfiles: [
-      { usuarioId: 'us_visitante', icono: 'person', descripcion: 'Compra, reserva y consulta su propio historial.' },
-    ],
-  },
+/** Cuentas de prueba, agrupadas por la superficie a la que entran. */
+const GRUPOS: Array<{ titulo: string; icono: string; usuarios: string[] }> = [
+  { titulo: 'Visitante', icono: 'hiking', usuarios: ['us_visitante'] },
   {
     titulo: 'Comercio',
     icono: 'storefront',
-    perfiles: [
-      { usuarioId: 'us_prop_cedros', icono: 'storefront', descripcion: 'Cuenta bancaria, contratos, equipo y reportes.' },
-      { usuarioId: 'us_admin_cedros', icono: 'store', descripcion: 'Catálogo, horarios, pedidos, caja y personal.' },
-      { usuarioId: 'us_operador_cedros', icono: 'restaurant', descripcion: 'Acepta, prepara y marca listos los pedidos.' },
-      { usuarioId: 'us_contador_cedros', icono: 'calculate', descripcion: 'Facturas, cierres, reportes y conciliación.' },
-    ],
+    usuarios: ['us_prop_cedros', 'us_admin_cedros', 'us_operador_cedros', 'us_contador_cedros'],
   },
   {
     titulo: 'INPARQUES',
     icono: 'account_balance',
-    perfiles: [
-      { usuarioId: 'us_superadmin', icono: 'admin_panel_settings', descripcion: 'Configuración global, usuarios y auditoría.' },
-      { usuarioId: 'us_direccion', icono: 'business_center', descripcion: 'Expedientes, contratos, permisos y cánones.' },
-      { usuarioId: 'us_finanzas', icono: 'account_balance_wallet', descripcion: 'Conciliación, liquidaciones y cuentas por cobrar.' },
-      { usuarioId: 'us_admin_parque', icono: 'park', descripcion: 'Operación, zonas, horarios y desempeño del parque.' },
-      { usuarioId: 'us_inspector', icono: 'verified', descripcion: 'Valida permisos, registra inspecciones e incidencias.' },
-      { usuarioId: 'us_soporte', icono: 'support_agent', descripcion: 'Casos, evidencias y reembolsos sujetos a aprobación.' },
+    usuarios: [
+      'us_superadmin', 'us_direccion', 'us_finanzas',
+      'us_admin_parque', 'us_inspector', 'us_soporte',
     ],
   },
 ];
 
-function tarjetaPerfil(p: PerfilDemo): string {
-  const e = store.leer();
-  const u = e.usuarios.find((x) => x.id === p.usuarioId);
-  if (!u) return '';
-  const d = ROLES[u.rol as RoleId];
-  return `
-    <button type="button" data-accion="ir" data-valor="#perfil:${esc(u.id)}"
-      class="w-full flex items-center gap-md bg-surface-container-lowest border border-outline-variant rounded-xl p-md text-left hover:shadow-[0px_4px_12px_rgba(40,51,46,0.08)] hover:border-primary/30 transition-all active:scale-[0.99]">
-      <div class="w-11 h-11 shrink-0 rounded-lg bg-primary-container flex items-center justify-center text-on-primary-container">
-        <span class="material-symbols-outlined text-[22px]">${esc(p.icono)}</span>
-      </div>
-      <div class="flex-1 min-w-0">
-        <div class="flex items-center gap-xs flex-wrap">
-          <span class="font-label-md text-label-md text-on-surface">${esc(d.nombre)}</span>
-          ${d.requiereMfa ? '<span class="inline-flex items-center gap-1 bg-secondary-container text-on-secondary-container text-[11px] font-bold px-2 py-0.5 rounded-full">MFA</span>' : ''}
-        </div>
-        <p class="font-body-md text-sm text-on-surface-variant mt-0.5 truncate">${esc(p.descripcion)}</p>
-      </div>
-      <span class="material-symbols-outlined text-on-surface-variant shrink-0">chevron_right</span>
-    </button>`;
-}
+/** Nombre corto del rol para el chip; el completo es largo para este sitio. */
+const CORTO: Record<string, string> = {
+  'visitante.cliente': 'Visitante',
+  'comercio.propietario': 'Propietario',
+  'comercio.admin_local': 'Admin. de local',
+  'comercio.operador': 'Operador',
+  'comercio.contador': 'Contador',
+  'inparques.superadmin': 'Superadmin',
+  'inparques.direccion_comercial': 'Dirección comercial',
+  'inparques.finanzas': 'Finanzas',
+  'inparques.admin_parque': 'Admin. de parque',
+  'inparques.inspector': 'Inspector',
+  'inparques.soporte': 'Soporte',
+};
 
 export const entradaStitch: Render = (): Pagina => {
-  const grupos = GRUPOS.map(
-    (g) => `
-    <section class="flex flex-col gap-sm">
-      <h2 class="font-label-md text-label-md text-outline uppercase tracking-wider flex items-center gap-2">
-        <span class="material-symbols-outlined text-[16px]">${esc(g.icono)}</span>
+  const e = store.leer();
+  const correo = estadoUi.seleccion['acceso-correo'] ?? '';
+  const clave = estadoUi.seleccion['acceso-clave'] ?? '';
+  const elegido = estadoUi.seleccion['acceso-perfil'] ?? '';
+
+  const chips = GRUPOS.map((g) => {
+    const botones = g.usuarios
+      .map((id) => {
+        const u = e.usuarios.find((x) => x.id === id);
+        if (!u) return '';
+        const d = ROLES[u.rol as RoleId];
+        const on = elegido === id;
+        return `
+        <button type="button" data-accion="usar-cuenta" data-valor="${esc(id)}"
+          title="${esc(u.nombre)} · ${esc(u.correo)}"
+          class="inline-flex items-center gap-1.5 px-3 h-9 rounded-lg border font-label-md text-label-md transition-colors ${
+            on
+              ? 'bg-primary text-on-primary border-primary'
+              : 'bg-surface-container-lowest text-on-surface border-outline-variant hover:bg-surface-container-high'
+          }">
+          ${esc(CORTO[u.rol] ?? d.nombre)}
+          ${d.requiereMfa ? `<span class="text-[10px] font-bold ${on ? 'opacity-80' : 'text-on-surface-variant'}">MFA</span>` : ''}
+        </button>`;
+      })
+      .join('');
+    return `
+    <div class="flex flex-col gap-2">
+      <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider flex items-center gap-1.5">
+        <span class="material-symbols-outlined text-[15px]">${esc(g.icono)}</span>
         ${esc(g.titulo)}
-      </h2>
-      <div class="flex flex-col gap-xs">
-        ${g.perfiles.map(tarjetaPerfil).join('')}
-      </div>
-    </section>`,
-  ).join('');
+      </span>
+      <div class="flex flex-wrap gap-2">${botones}</div>
+    </div>`;
+  }).join('');
+
+  const usuarioElegido = elegido ? e.usuarios.find((x) => x.id === elegido) : undefined;
 
   const contenido = `
-<!-- TopAppBar, mismo patrón que 50/p_gina_1_acceso_qr_selecci_n_parquef -->
-<header class="bg-surface text-primary font-headline-md flex justify-between items-center px-lg w-full h-14 border-b border-outline-variant sticky top-0 z-40">
-  <div class="flex items-center gap-sm">
-    <span class="material-symbols-outlined">park</span>
-    <span class="font-bold">INPARQUES Comercial</span>
+<div class="min-h-screen w-full flex flex-col items-center justify-center px-md py-xl relative overflow-hidden bg-surface">
+  <!-- Lienzo: la misma banda de verdes de las portadas del sistema. -->
+  <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+    <div class="absolute inset-0 bg-gradient-to-b from-secondary-container/40 via-surface to-surface"></div>
+    <svg class="absolute bottom-0 left-0 w-full h-[46%]" viewBox="0 0 1440 420" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 250 Q 240 150 480 236 Q 720 322 960 216 Q 1200 110 1440 200 L1440 420 L0 420 Z" fill="#c0edd4" opacity="0.55"/>
+      <path d="M0 300 Q 260 214 520 292 Q 780 370 1040 280 Q 1240 210 1440 268 L1440 420 L0 420 Z" fill="#88d7a8" opacity="0.45"/>
+      <path d="M0 356 Q 300 292 600 348 Q 900 404 1200 344 Q 1330 318 1440 336 L1440 420 L0 420 Z" fill="#005131" opacity="0.16"/>
+    </svg>
   </div>
-  <span class="inline-flex items-center gap-1 bg-error-container/40 text-error text-[11px] font-bold px-2 py-1 rounded-full">
-    <span class="material-symbols-outlined text-[14px]">warning</span>
-    Demostración
-  </span>
-</header>
 
-<main class="flex-grow flex flex-col p-lg gap-xl max-w-2xl mx-auto w-full pb-16">
-  <section class="flex flex-col gap-sm">
-    <h1 class="font-headline-lg text-headline-lg-mobile text-on-surface">Bienvenido</h1>
-    <p class="font-body-md text-body-md text-on-surface-variant">
-      Toque un perfil de demostración para entrar directamente con su rol, permisos y ámbito.
-      Puede cambiar de perfil en cualquier momento.
-    </p>
-  </section>
+  <main class="relative z-10 w-full max-w-[420px]">
+    <div class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-[0_8px_32px_rgba(40,51,46,0.10)] p-lg md:p-xl flex flex-col gap-lg">
 
-  <section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg relative overflow-hidden flex flex-col gap-sm">
-    <div class="absolute -right-12 -top-12 w-48 h-48 bg-secondary-container rounded-full opacity-30 blur-2xl pointer-events-none"></div>
-    <div class="flex items-start gap-md z-10">
-      <div class="w-11 h-11 rounded-lg bg-surface-container-low border border-outline-variant flex items-center justify-center shrink-0">
-        <span class="material-symbols-outlined text-primary">badge</span>
+      <div class="flex flex-col gap-sm">
+        <div class="w-12 h-12 rounded-lg bg-primary flex items-center justify-center text-on-primary">
+          <span class="material-symbols-outlined icon-fill">park</span>
+        </div>
+        <div>
+          <h1 class="font-headline-lg text-headline-lg-mobile text-on-surface">INPARQUES Comercial</h1>
+          <p class="font-body-md text-body-md text-on-surface-variant mt-1">
+            Comercio en parques nacionales — acceso a la plataforma
+          </p>
+        </div>
       </div>
-      <div class="flex flex-col gap-1">
-        <h3 class="font-headline-md text-headline-lg-mobile text-on-surface" style="font-size:18px">Once roles, una sola base de datos</h3>
-        <p class="font-body-md text-sm text-on-surface-variant">
-          Lo que hace un rol lo ven los demás de inmediato: si el operador marca un pedido listo,
-          el visitante lo ve en su seguimiento.
+
+      <form class="flex flex-col gap-md" data-formulario="acceso">
+        <div class="flex flex-col gap-1.5">
+          <label class="font-label-md text-label-md text-on-surface" for="acceso-correo">Correo</label>
+          <input id="acceso-correo" name="correo" type="email" autocomplete="username"
+            value="${esc(correo)}" placeholder="usuario@demo.ve"
+            class="w-full h-touch-target px-4 rounded-lg border border-outline-variant bg-surface text-on-surface font-body-md text-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors">
+        </div>
+        <div class="flex flex-col gap-1.5">
+          <label class="font-label-md text-label-md text-on-surface" for="acceso-clave">Contraseña</label>
+          <input id="acceso-clave" name="clave" type="password" autocomplete="current-password"
+            value="${esc(clave)}"
+            class="w-full h-touch-target px-4 rounded-lg border border-outline-variant bg-surface text-on-surface font-body-md text-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors">
+        </div>
+        <div id="error-acceso"></div>
+        <button type="submit"
+          class="w-full h-touch-target rounded-lg bg-primary text-on-primary font-label-md text-label-md flex items-center justify-center gap-2 hover:bg-surface-tint transition-colors">
+          Ingresar
+          <span class="material-symbols-outlined text-[18px]">login</span>
+        </button>
+      </form>
+
+      <div class="flex flex-wrap justify-center gap-x-lg gap-y-2">
+        <button type="button" data-accion="ir" data-valor="/registro/visitante"
+          class="font-label-md text-label-md text-primary hover:underline">¿No tienes cuenta? Regístrate</button>
+        <button type="button" data-accion="invitado"
+          class="font-label-md text-label-md text-primary hover:underline">Entrar como invitado</button>
+      </div>
+
+      <div class="border-t border-outline-variant pt-lg flex flex-col gap-md">
+        <p class="font-label-md text-label-md text-on-surface-variant">
+          Cuentas de prueba (contraseña <strong class="text-on-surface font-mono">${esc(CLAVE_DEMO)}</strong>):
         </p>
+        ${chips}
+        ${
+          usuarioElegido
+            ? `<div class="flex items-start gap-2 bg-secondary-container/30 border border-secondary-container rounded-lg p-3">
+                <span class="material-symbols-outlined text-primary text-[18px] mt-0.5">check_circle</span>
+                <div class="min-w-0">
+                  <p class="font-label-md text-label-md text-on-surface">${esc(usuarioElegido.nombre)}</p>
+                  <p class="font-body-md text-sm text-on-surface-variant break-all">${esc(usuarioElegido.correo)}</p>
+                  <p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Credenciales cargadas. Pulse <strong class="text-on-surface">Ingresar</strong>.</p>
+                </div>
+              </div>`
+            : `<p class="font-body-md text-sm text-on-surface-variant">
+                Pulse una cuenta para cargar sus credenciales en el formulario.
+                Los perfiles marcados <strong class="text-on-surface">MFA</strong> piden después el código
+                <strong class="text-on-surface font-mono">${esc(CODIGO_MFA_DEMO)}</strong>.
+              </p>`
+        }
       </div>
     </div>
-    <button type="button" data-accion="invitado"
-      class="w-full mt-2 bg-primary-container text-on-primary font-label-md text-label-md h-touch-target rounded-lg flex items-center justify-center gap-sm hover:bg-surface-tint transition-colors">
-      <span>Comprar como invitado, sin cuenta</span>
-      <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
-    </button>
-  </section>
 
-  <div class="flex items-center gap-md">
-    <div class="h-px bg-outline-variant flex-grow"></div>
-    <span class="font-label-sm text-label-sm text-on-surface-variant uppercase">O elija un perfil</span>
-    <div class="h-px bg-outline-variant flex-grow"></div>
-  </div>
+    <p class="text-center font-label-sm text-label-sm text-on-surface-variant mt-lg">
+      Versión de demostración · datos ficticios · sin cobros reales
+    </p>
+  </main>
+</div>`;
 
-  ${grupos}
-
-  <div class="flex items-center gap-md">
-    <div class="h-px bg-outline-variant flex-grow"></div>
-    <span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Otras entradas</span>
-    <div class="h-px bg-outline-variant flex-grow"></div>
-  </div>
-
-  <div class="flex flex-col gap-xs">
-    <button type="button" data-accion="ir" data-valor="/acceso/visitante"
-      class="w-full flex items-center justify-between bg-surface-container-lowest border border-outline-variant rounded-lg px-md h-touch-target text-left hover:bg-surface-container-high transition-colors">
-      <span class="font-label-md text-label-md text-on-surface">Formulario de acceso del visitante</span>
-      <span class="material-symbols-outlined text-on-surface-variant text-[20px]">login</span>
-    </button>
-    <button type="button" data-accion="ir" data-valor="/acceso/comercio"
-      class="w-full flex items-center justify-between bg-surface-container-lowest border border-outline-variant rounded-lg px-md h-touch-target text-left hover:bg-surface-container-high transition-colors">
-      <span class="font-label-md text-label-md text-on-surface">Formulario de acceso del comercio</span>
-      <span class="material-symbols-outlined text-on-surface-variant text-[20px]">login</span>
-    </button>
-    <button type="button" data-accion="ir" data-valor="/acceso/inparques"
-      class="w-full flex items-center justify-between bg-surface-container-lowest border border-outline-variant rounded-lg px-md h-touch-target text-left hover:bg-surface-container-high transition-colors">
-      <span class="font-label-md text-label-md text-on-surface">Formulario de acceso institucional</span>
-      <span class="material-symbols-outlined text-on-surface-variant text-[20px]">login</span>
-    </button>
-  </div>
-
-  <p class="font-body-md text-sm text-on-surface-variant text-center">
-    Si usa el formulario, la contraseña de todos los perfiles es <strong class="text-on-surface">${esc(CLAVE_DEMO)}</strong>
-    y el código de verificación es <strong class="text-on-surface">${esc(CODIGO_MFA_DEMO)}</strong>.
-  </p>
-</main>`;
-
-  return {
-    titulo: 'INPARQUES Comercial',
-    standalone: true,
-    contenido,
-  };
+  return { titulo: 'INPARQUES Comercial', standalone: true, contenido };
 };
