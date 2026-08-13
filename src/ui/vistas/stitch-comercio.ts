@@ -17,7 +17,7 @@ import { diasHasta, fechaCorta, desde } from '../formato';
 import { ETIQUETA_ORDEN, TONO_ORDEN } from '../../domain/state-machines';
 import { conectividad } from '../../net/connectivity';
 
-function iniciales(nombre: string): string {
+export function iniciales(nombre: string): string {
   return nombre
     .split(' ')
     .filter(Boolean)
@@ -27,11 +27,11 @@ function iniciales(nombre: string): string {
 }
 
 /** Avatar local: iniciales sobre un círculo de color, sin imagen externa. */
-function avatar(nombre: string, clases = 'w-8 h-8 text-[11px]'): string {
+export function avatar(nombre: string, clases = 'w-8 h-8 text-[11px]'): string {
   return `<div class="${clases} rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold shrink-0">${esc(iniciales(nombre))}</div>`;
 }
 
-function barraLateral(activo: string): string {
+export function barraLateral(activo: string): string {
   const items: Array<[string, string, string]> = [
     ['dashboard', 'Resumen', '/c'],
     ['storefront', 'Negocios y locales', '/c/expediente'],
@@ -80,7 +80,7 @@ function barraLateral(activo: string): string {
 </aside>`;
 }
 
-function barraSuperior(nombreUsuario: string): string {
+export function barraSuperior(nombreUsuario: string): string {
   return `
 <nav class="h-16 w-full lg:w-[calc(100%-16rem)] fixed top-0 right-0 z-40 border-b border-outline-variant bg-surface flex justify-between items-center pl-16 lg:pl-lg pr-lg shadow-sm">
   <div class="flex items-center gap-md">
@@ -335,7 +335,7 @@ ${barraSuperior(u.nombre)}
  * hay quien absorba ese margen). Se omite `w-full`; sin él, el ancho se
  * resuelve automáticamente restando el margen, sin desbordar.
  */
-function barraLateralAdminLocal(): string {
+export function barraLateralAdminLocal(activo = '/c'): string {
   const items: Array<[string, string, string]> = [
     ['dashboard', 'Resumen', '/c'],
     ['shopping_cart', 'Pedidos', '/c/pedidos'],
@@ -362,8 +362,8 @@ function barraLateralAdminLocal(): string {
     ${items
       .map(
         ([icono, texto, ruta]) => `<button type="button" data-accion="ir" data-valor="${ruta}"
-        class="w-full flex items-center gap-sm px-sm py-xs min-h-touch-target ${ruta === '/c' ? 'bg-secondary-container text-on-secondary-container font-bold' : 'text-on-surface-variant hover:bg-surface-variant'} rounded-lg transition-all duration-200 ease-in-out font-label-md text-label-md text-left">
-        <span class="material-symbols-outlined" ${ruta === '/c' ? "style=\"font-variation-settings: 'FILL' 1;\"" : ''}>${icono}</span>
+        class="w-full flex items-center gap-sm px-sm py-xs min-h-touch-target ${ruta === activo ? 'bg-secondary-container text-on-secondary-container font-bold' : 'text-on-surface-variant hover:bg-surface-variant'} rounded-lg transition-all duration-200 ease-in-out font-label-md text-label-md text-left">
+        <span class="material-symbols-outlined" ${ruta === activo ? "style=\"font-variation-settings: 'FILL' 1;\"" : ''}>${icono}</span>
         ${esc(texto)}
       </button>`,
       )

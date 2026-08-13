@@ -16,6 +16,7 @@ import { propietarioInicio, adminLocalInicio, operadorInicio, contadorInicio } f
 import { superadminInicio, direccionComercialInicio, finanzasInicio, adminParqueInicio, inspectorInicio, soporteInicio } from './stitch-inparques';
 import { inicioVisitante } from './stitch-visitante';
 import * as stitchCompra from './stitch-visitante-compra';
+import * as stitchComercioInterior from './stitch-comercio-interior';
 import { sesion } from '../../app/session';
 
 /**
@@ -114,18 +115,18 @@ export const VISTAS_POR_ID: Record<string, Render> = {
   // ----------------------------------------------------------------- Comercio
   'c.inicio': inicioComercioPorRol(),
   'c.mas': c.masOpciones('comercio'),
-  'c.expediente': com.expediente,
-  'c.documentos': com.documentos,
-  'c.documento': com.detalleDocumento,
-  'c.permisos': com.permisos,
-  'c.contratos': com.contratos,
-  'c.contrato': com.detalleContrato,
-  'c.cobro': com.cobro,
-  'c.cuenta_bancaria': com.cuentaBancaria,
-  'c.equipo': com.equipo,
-  'c.equipo.invitar': com.invitarEquipo,
-  'c.equipo.detalle': com.detalleEquipo,
-  'c.catalogo': com.catalogo,
+  'c.expediente': stitchComercioInterior.expedienteStitch,
+  'c.documentos': stitchComercioInterior.documentosStitch,
+  'c.documento': stitchComercioInterior.detalleDocumentoStitch,
+  'c.permisos': stitchComercioInterior.permisosStitch,
+  'c.contratos': stitchComercioInterior.contratosStitch,
+  'c.contrato': stitchComercioInterior.detalleContratoStitch,
+  'c.cobro': stitchComercioInterior.cobroStitch,
+  'c.cuenta_bancaria': stitchComercioInterior.cuentaBancariaStitch,
+  'c.equipo': stitchComercioInterior.equipoStitch,
+  'c.equipo.invitar': stitchComercioInterior.invitarEquipoStitch,
+  'c.equipo.detalle': stitchComercioInterior.detalleEquipoStitch,
+  'c.catalogo': stitchComercioInterior.catalogoStitch,
   'c.articulo': com.articuloComercio,
   'c.variantes': com.variantes,
   'c.modificadores': com.modificadores,

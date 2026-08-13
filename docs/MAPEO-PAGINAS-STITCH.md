@@ -96,10 +96,29 @@ finanzas, no configuración general). En esos casos el enlace se llevó a la
 página accesible más cercana en vez de a un enlace que daría 403; queda
 anotado con un comentario en cada archivo.
 
-**Fase 2 (pendiente):** las ~108 pantallas interiores restantes de cada rol
-(catálogo, caja, expedientes, disputas, reportes, etc.), que hoy siguen
-usando la vista genérica anterior en vez del HTML real de Stitch. Se portan
+**Fase 2 (en curso):** las pantallas interiores de cada rol (catálogo, caja,
+expedientes, disputas, reportes, etc.), que hasta ahora seguían usando la
+vista genérica anterior en vez del HTML real de Stitch. Se portan
 progresivamente reutilizando la misma infraestructura ya construida en la
 fase 1 (fuentes, Tailwind, `conCajonMovil`, `avatar`/`marcadorFoto` en vez
 de fotos generadas por IA) — portar cada pantalla adicional es un trabajo
 mecánico, no una reconstrucción desde cero.
+
+Avance de fase 2:
+
+- **Completo:** recorrido de compra del visitante de punta a punta (ficha
+  del comercio, catálogo, producto, servicio, carrito, checkout, métodos de
+  pago, seguimiento de pedido/reserva) — `src/ui/vistas/stitch-visitante-compra.ts`.
+- **Completo:** interior de `comercio.propietario` — expediente (fusiona
+  `50/p_gina_2_mis_negocios` y `50/p_gina_3_detalle_del_negocio`, adaptado a
+  "un local = una tarjeta" porque el modelo de datos da un solo negocio por
+  propietario), documentos, permisos, contratos, cobro y cuenta bancaria,
+  equipo, catálogo — `src/ui/vistas/stitch-comercio-interior.ts`. No hay
+  página de Stitch dedicada a "Permisos" ni "Contratos" para este rol (la
+  única carpeta con esos nombres es del portal de
+  `inparques.direccion_comercial`, con otra barra lateral); esas dos vistas
+  se armaron con el mismo lenguaje visual de las páginas de propietario ya
+  confirmadas.
+- **Pendiente:** interior de `comercio.admin_local` / `comercio.operador` /
+  `comercio.contador` (pedidos, reservas, caja, turnos, reportes,
+  conciliación); interior de los 6 roles de INPARQUES.
