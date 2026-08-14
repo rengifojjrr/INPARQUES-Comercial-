@@ -7,6 +7,7 @@ import type { Pagina, Render } from './tipos';
 import { ROLES, ROLE_IDS } from '../../domain/roles';
 import { store } from '../../data/store';
 import { sesion, CLAVE_DEMO } from '../../app/session';
+import { resolverAmbito } from '../../domain/scope';
 import { CODIGO_MFA_DEMO, inventarioAdaptadores } from '../../adapters/simulados';
 import { conectividad } from '../../net/connectivity';
 import { colaSincronizacion } from '../../net/sync-queue';
@@ -380,8 +381,23 @@ export const notificaciones: Render = () => {
   const e = store.leer();
   const rol = sesion.rol();
   const s = sesion.activa();
+  // El ámbito importa tanto como el rol: sin esta comprobación el operador de
+  // un local veía los pedidos de todos los demás locales del país, en una
+  // pantalla que promete por escrito lo contrario.
+  const u = sesion.usuario();
+  const ambito = u ? resolverAmbito(u, e) : null;
+  const alcanza = (ambitoId?: string): boolean => {
+    if (!ambitoId) return true;              // aviso general, sin ámbito
+    if (!ambito || ambito.nacional) return true;
+    return (
+      ambito.localIds.includes(ambitoId) ||
+      ambito.negocioIds.includes(ambitoId) ||
+      ambito.parqueIds.includes(ambitoId)
+    );
+  };
   const mias = e.notificaciones
     .filter((n) => n.destinatarioRol === rol && (!n.destinatarioId || n.destinatarioId === s?.usuarioId))
+    .filter((n) => alcanza(n.ambitoId))
     .sort((a, b) => b.creadaEn.localeCompare(a.creadaEn));
 
   const iconos: Record<string, string> = {

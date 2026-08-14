@@ -345,6 +345,7 @@ export function barraLateralAdminLocal(activo = '/c'): string {
     ['account_balance_wallet', 'Caja', '/c/caja'],
     ['payments', 'Ventas', '/c/reportes'],
     ['star', 'Valoraciones', '/c/valoraciones'],
+    ['verified', 'Aprobaciones', '/aprobaciones'],
     ['group', 'Equipo operativo', '/c/equipo'],
     ['settings', 'Configuración del local', '/c/horarios'],
   ];

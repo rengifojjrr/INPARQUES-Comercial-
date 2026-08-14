@@ -20,7 +20,7 @@ import { estadoUi } from '../estado-ui';
 import { totalesCarrito, unidadesEnCarrito, extrasDeItem } from '../../domain/cart';
 import { ETIQUETA_DISPUTA, ETIQUETA_ORDEN, clientePuedeCancelar } from '../../domain/state-machines';
 import { formatearUsd, formatearVes } from '../../domain/money';
-import { fechaCorta, desde } from '../formato';
+import { diaSemanaCorto, fechaCorta, desde } from '../formato';
 import { error403, error404 } from './compartidas';
 import { alcanzaOrden } from '../../domain/ownership';
 
@@ -251,7 +251,7 @@ ${cabeceraSimple(a.nombre, `/v/comercio/${a.negocioId}`)}
         : `<div class="flex gap-sm overflow-x-auto pb-sm">
           ${fechas.map((f) => `<button type="button" data-accion="fecha-servicio" data-valor="${esc(a.id)}|${esc(f)}"
             class="shrink-0 w-[72px] h-[88px] flex flex-col items-center justify-center rounded-lg border ${f === fechaSel ? 'border-2 border-primary bg-primary-container text-on-primary-container shadow-sm' : 'border-outline-variant bg-surface-container-lowest text-on-surface hover:bg-surface-container'} transition-colors">
-            <span class="font-label-sm text-label-sm uppercase ${f === fechaSel ? '' : 'text-on-surface-variant'}">${esc(fechaCorta(`${f}T12:00:00`).slice(0, 3))}</span>
+            <span class="font-label-sm text-label-sm uppercase ${f === fechaSel ? '' : 'text-on-surface-variant'}">${esc(diaSemanaCorto(f))}</span>
             <span class="font-headline-md text-headline-md-mobile">${f.slice(-2)}</span>
           </button>`).join('')}
         </div>`}

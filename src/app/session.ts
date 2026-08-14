@@ -18,6 +18,46 @@ const CLAVE_SESION = 'inparques.demo.sesion';
 export const CLAVE_DEMO = 'demo1234';
 
 /**
+ * Claves cambiadas durante la sesion de demostracion.
+ *
+ * "Contrasena actualizada. Ya puede entrar" era mentira: no se guardaba nada
+ * y la clave seguia siendo la de siempre, asi que quien completaba el flujo
+ * de recuperacion y probaba su clave nueva no entraba. Aqui se recuerdan las
+ * que se cambian, para que el mensaje sea cierto.
+ *
+ * Sigue siendo una demostracion: se guardan en el navegador y en claro. No es
+ * un almacen de credenciales y no debe convertirse en uno — cuando esto
+ * hable con un servidor de verdad, la clave no se guarda nunca del lado del
+ * cliente.
+ */
+const CLAVE_CLAVES = 'inparques.demo.claves';
+
+function clavesCambiadas(): Record<string, string> {
+  if (typeof window === 'undefined') return {};
+  try {
+    return JSON.parse(window.localStorage.getItem(CLAVE_CLAVES) ?? '{}') as Record<string, string>;
+  } catch {
+    return {};
+  }
+}
+
+/** Devuelve `false` si el correo no corresponde a ninguna cuenta. */
+export function cambiarClaveDe(correo: string, nueva: string): boolean {
+  const u = store.leer().usuarios.find((x) => x.correo.toLowerCase() === correo.trim().toLowerCase());
+  if (!u) return false;
+  if (typeof window === 'undefined') return false;
+  const mapa = clavesCambiadas();
+  mapa[u.id] = nueva;
+  window.localStorage.setItem(CLAVE_CLAVES, JSON.stringify(mapa));
+  return true;
+}
+
+/** La clave vigente de un usuario: la que cambio, o la de la demo. */
+export function claveVigente(usuarioId: string): string {
+  return clavesCambiadas()[usuarioId] ?? CLAVE_DEMO;
+}
+
+/**
  * Cuanto dura una sesion antes de pedir credenciales otra vez.
  *
  * Doce horas: cubre una jornada entera de un operador de parque —que no
@@ -124,7 +164,7 @@ class Sesion {
   acceder(correo: string, clave: string, superficie?: 'visitante' | 'comercio' | 'inparques'): ResultadoAcceso {
     const u = store.leer().usuarios.find((x) => x.correo.toLowerCase() === correo.trim().toLowerCase());
 
-    if (!u || clave !== CLAVE_DEMO) {
+    if (!u || clave !== claveVigente(u.id)) {
       return { ok: false, motivo: 'credenciales', mensaje: 'Correo o contrasena incorrectos.' };
     }
     if (u.estado !== 'activo') {

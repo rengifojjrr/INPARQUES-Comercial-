@@ -1,0 +1,15 @@
+{
+  "name": "INPARQUES Comercial",
+  "short_name": "INPARQUES",
+  "description": "Comercio en parques nacionales: pedidos, reservas y seguimiento.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f7f5ef",
+  "theme_color": "#005131",
+  "lang": "es-VE",
+  "icons": [
+    { "src": "./icono.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

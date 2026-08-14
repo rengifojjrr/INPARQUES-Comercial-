@@ -114,8 +114,23 @@ function pintar(r: ResultadoNavegacion, esRepintado = false): void {
 
   if (!esRepintado) cerrarHoja();
 
+  // El índice técnico es una herramienta interna: lista las 137 rutas con sus
+  // roles y la estructura entera. Antes se pintaba antes de mirar la sesión,
+  // así que cualquiera que abriera el enlace público podía verlo escribiendo
+  // `#/__mapa`. Ahora exige sesión y rol institucional, como el resto.
   if (RUTAS_DEV.includes(ruta)) {
-    renderizarMapa(raiz);
+    const rol = sesion.rol();
+    if (rol && rol.startsWith('inparques.')) {
+      renderizarMapa(raiz);
+      return;
+    }
+    // Se pinta el 403 aquí mismo. Volver a llamar a `pintar` no sirve: la ruta
+    // sigue siendo `/__mapa` y la llamada vuelve a entrar por este mismo `if`,
+    // en bucle hasta agotar la pila.
+    const ctx403 = { params: {}, consulta: new URLSearchParams(), ruta };
+    const p403 = compartidas.error403(ctx403);
+    const { contenido: c403, ...op403 } = p403;
+    raiz.innerHTML = marco(c403, op403, ruta);
     return;
   }
 
@@ -234,4 +249,21 @@ function exponerHerramientasDeDemo(): void {
   });
 }
 
+/**
+ * Registro del service worker.
+ *
+ * Va al final y sin bloquear: si falla —navegador viejo, `file://`, sitio sin
+ * HTTPS— la demo funciona igual, solo que sin poder abrirse sin conexión.
+ */
+function registrarServiceWorker(): void {
+  if (typeof navigator === 'undefined' || !('serviceWorker' in navigator)) return;
+  if (window.location.protocol === 'file:') return;   // archivo único abierto directo
+  window.addEventListener('load', () => {
+    void navigator.serviceWorker.register(new URL('sw.js', document.baseURI).href).catch(() => {
+      /* sin service worker: la demo sigue funcionando con red */
+    });
+  });
+}
+
 void arrancar();
+registrarServiceWorker();

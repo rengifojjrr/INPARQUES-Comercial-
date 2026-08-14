@@ -34,6 +34,7 @@ import { formatearUsd, formatearVes } from '../../domain/money';
 import { fechaCorta, fechaHora, horaCorta } from '../formato';
 import { error403, error404 } from './compartidas';
 import { alcanzaOrden } from '../../domain/ownership';
+import { puede } from '../../domain/permissions';
 import type { Local, Orden } from '../../domain/types';
 
 function misLocales(): Local[] {
@@ -306,6 +307,9 @@ export const detallePedidoStitch: Render = (ctx): Pagina => {
   // —cliente, artículos, pago— y con los botones de avance funcionando.
   if (!alcanzaOrden(u, o, e)) return error403(ctx);
   const puedeOperar = u.rol !== 'comercio.contador';
+  const pagoConfirmado = e.pagos.find((x) => x.ordenId === o.id)?.estado === 'confirmado';
+  const yaHayReembolso = e.reembolsos.some((r) => r.ordenId === o.id && r.estado !== 'rechazado');
+  const puedeReembolsar = puede(u.rol, 'reembolso:solicitar') && pagoConfirmado && !yaHayReembolso;
   const pago = e.pagos.find((p) => p.ordenId === o.id);
   const paso = SIGUIENTE[o.estado];
 
@@ -382,6 +386,17 @@ export const detallePedidoStitch: Render = (ctx): Pagina => {
       ? `<div class="flex gap-sm">
           ${paso ? `<button type="button" data-accion="avanzar-orden" data-valor="${esc(o.id)}|${paso.destino}" class="flex-1 h-touch-target bg-primary-container text-on-primary rounded-lg font-label-md text-label-md hover:bg-primary transition-colors">${esc(paso.texto)}</button>` : ''}
           ${!['entregada', 'cancelada'].includes(o.estado) ? `<button type="button" data-accion="cancelar-orden" data-valor="${esc(o.id)}" class="h-touch-target px-6 border border-outline-variant text-on-surface rounded-lg font-label-md text-label-md hover:bg-surface-container-low transition-colors">Cancelar</button>` : ''}
+        </div>`
+      : ''
+  }
+
+  ${
+    // Devolver el dinero era imposible: no existía forma de crear un
+    // reembolso en ninguna pantalla.
+    puedeReembolsar
+      ? `<div class="mt-md border-t border-outline-variant pt-md">
+          <button type="button" data-accion="solicitar-reembolso" data-valor="${esc(o.id)}" class="h-touch-target px-6 border border-outline-variant text-on-surface rounded-lg font-label-md text-label-md hover:bg-surface-container-low transition-colors">Solicitar reembolso</button>
+          <p class="font-body-md text-body-md text-on-surface-variant text-sm mt-sm">Lo revisa Finanzas de INPARQUES.</p>
         </div>`
       : ''
   }

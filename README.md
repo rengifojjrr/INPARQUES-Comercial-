@@ -99,12 +99,20 @@ Recorridos que atraviesan las tres superficies y demuestran las reglas:
    comerciales son clicables y abren la ficha del comercio que los ocupa.
 11. **Datos bancarios.** El Propietario ve la cuenta enmascarada; el Inspector
    no recibe el campo en absoluto.
-12. **Acción sensible.** Cobro → Cambiar cuenta bancaria: exige motivo,
-   evidencia, verificación y segunda aprobación. Nadie firma su propia
-   solicitud, ni siquiera un superadministrador.
-13. **Sin conexión.** Perfil → Conexión. Opere sin red, **recargue la
+12. **Segunda firma de verdad.** Como Propietario, Cobro → Cambiar cuenta
+   bancaria. La cuenta **no cambia**: queda en `#/aprobaciones` esperando. Ni
+   usted mismo puede firmarla. Entre como Dirección Comercial, fírmela, y
+   entonces se aplica. La bitácora guarda quién pidió y quién firmó.
+13. **Reembolsos.** Detalle de un pedido pagado → Solicitar reembolso. Y una
+   disputa resuelta a favor del cliente abre la solicitud sola.
+14. **Dos pestañas.** Abra el visitante en una y el comercio en otra: lo que
+   hace una ya no borra lo de la otra.
+15. **Instalable y sin conexión.** Se puede añadir a la pantalla de inicio, y
+   abre sin red gracias al service worker.
+16. **Sin conexión.** Perfil → Conexión. Opere sin red, **recargue la
    página**, y la cola sigue ahí.
-14. **Auditoría.** Como Finanzas, `#/i/auditoria` muestra todo lo anterior.
+17. **Auditoría.** Como Finanzas, `#/i/auditoria` muestra todo lo anterior —
+   cada rol ve solo los eventos de su ámbito.
 
 ## Ejecutar en local
 
@@ -119,7 +127,7 @@ npm run dev     # http://localhost:5173
 | `npm run build` | Comprobación de tipos + construcción |
 | `npm run preview` | Sirve la construcción en el puerto 4173 |
 | `npm run unico` | Empaqueta todo en un solo HTML en `dist-unico/` |
-| `npm test` | 105 pruebas automáticas |
+| `npm test` | 120 pruebas automáticas |
 | `npm run matriz` | Regenera `docs/MATRIZ-COBERTURA.md` |
 | `npm run verificar` | 58 comprobaciones en navegador real (requiere `preview` activo) |
 

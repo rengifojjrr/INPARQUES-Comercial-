@@ -1,4 +1,30 @@
-/** Formato de fechas y textos, en español de Venezuela. */
+/**
+ * Formato de fechas y textos, en español de Venezuela.
+ *
+ * Una franja de reserva es una hora *local del parque* ("09:00"), no un
+ * instante universal. Pegarle una `Z` la convertía en 09:00 UTC, y como todo
+ * usuario real de esto está en UTC−4, la pantalla mostraba 05:00: la reserva
+ * se veía cuatro horas antes de la hora a la que hay que presentarse.
+ *
+ * Estas dos funciones son el puente correcto entre "fecha + hora local" y el
+ * instante que se guarda.
+ */
+
+/** "2026-08-14" + "09:00" -> instante real de esa hora local. */
+export function instanteLocal(fecha: string, hora: string): string {
+  const [a, m, d] = fecha.split('-').map(Number);
+  const [hh, mm] = hora.split(':').map(Number);
+  // Sin `Z`: el constructor interpreta los componentes en la zona del
+  // dispositivo, que es justo lo que significa la hora de una franja.
+  return new Date(a, m - 1, d, hh, mm, 0, 0).toISOString();
+}
+
+/** Día de la semana abreviado ("mié") de una fecha `AAAA-MM-DD`. */
+export function diaSemanaCorto(fecha: string): string {
+  const [a, m, d] = fecha.split('-').map(Number);
+  return new Date(a, m - 1, d).toLocaleDateString('es-VE', { weekday: 'short' }).replace('.', '');
+}
+
 
 export function fechaCorta(iso: string): string {
   return new Date(iso).toLocaleDateString('es-VE', { day: '2-digit', month: 'short', year: 'numeric' });

@@ -207,6 +207,7 @@ export const buscar: Render = () => {
   return {
     titulo: 'Buscar',
     contenido: html`
+      <h1 class="titulo-pag">Buscar</h1>
       ${crudo(buscador('q', 'Buscar comercios o artículos', texto('buscar'), 'buscar'))}
       ${!q
         ? crudo(vacio('⌕', 'Escriba para buscar', 'Puede buscar por nombre de comercio, de artículo o de categoría.'))

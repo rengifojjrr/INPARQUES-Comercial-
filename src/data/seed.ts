@@ -35,6 +35,27 @@ import { calcularTotales, calcularParticipacion, redondear, usdAVes } from '../d
 // los nuevos pedidos de la cola del operador en vez de quedarse con la vieja.
 export const VERSION_DATOS = 2;
 
+/**
+ * Fecha de hoy, en formato `AAAA-MM-DD`.
+ *
+ * Los datos de demostracion se construyen alrededor de esta fecha para que la
+ * demo no envejezca: pedidos de hoy y de ayer, franjas desde hoy, permisos
+ * que vencen dentro de unas semanas.
+ */
+function hoy(): string {
+  return new Date().toISOString().slice(0, 10);
+}
+
+/** Un dia relativo a hoy, en formato `AAAA-MM-DD`. */
+function diaRelativo(dias: number): string {
+  return new Date(Date.now() + dias * 86400000).toISOString().slice(0, 10);
+}
+
+/** Un instante relativo a ahora, en ISO completo. */
+function haceHoras(h: number): string {
+  return new Date(Date.now() - h * 3600000).toISOString();
+}
+
 /** Tasa BCV de demostracion. Las ventas historicas conservan la suya. */
 export const TASA_BCV_INICIAL = { valor: 51.87, fecha: '2026-08-12T09:00:00.000Z', fuente: 'BCV (simulado)' };
 
@@ -117,6 +138,7 @@ export function construirEstadoInicial(): DemoState {
     inspecciones: inspecciones(),
     incidencias: incidencias(),
     disputas: [],
+    aprobaciones: [],
     valoraciones: [],
     auditoria: [],
     notificaciones: [],
@@ -131,13 +153,13 @@ export function construirEstadoInicial(): DemoState {
 
 function documentos(): DemoState['documentos'] {
   return [
-    { id: 'dc_1', negocioId: 'ng_cedros', tipo: 'rif', nombreArchivo: 'rif-los-cedros.pdf', cargadoEn: '2026-03-04T09:30:00.000Z', vigenciaHasta: '2027-03-04', estado: 'aprobado', revisadoPor: 'us_direccion' },
-    { id: 'dc_2', negocioId: 'ng_cedros', tipo: 'permiso_sanitario', nombreArchivo: 'sanitario-los-cedros.pdf', cargadoEn: '2026-03-04T09:35:00.000Z', vigenciaHasta: '2026-09-15', estado: 'aprobado', revisadoPor: 'us_admin_parque' },
-    { id: 'dc_3', negocioId: 'ng_cedros', tipo: 'certificado_manipulacion', nombreArchivo: 'manipulacion-alimentos.pdf', cargadoEn: '2026-03-04T09:40:00.000Z', vigenciaHasta: '2026-08-30', estado: 'aprobado', revisadoPor: 'us_admin_parque' },
-    { id: 'dc_4', negocioId: 'ng_orinoco', tipo: 'rif', nombreArchivo: 'rif-orinoco.pdf', cargadoEn: '2026-03-19T15:00:00.000Z', vigenciaHasta: '2027-03-19', estado: 'aprobado', revisadoPor: 'us_direccion' },
+    { id: 'dc_1', negocioId: 'ng_cedros', tipo: 'rif', nombreArchivo: 'rif-los-cedros.pdf', cargadoEn: '2026-03-04T09:30:00.000Z', vigenciaHasta: diaRelativo(200), estado: 'aprobado', revisadoPor: 'us_direccion' },
+    { id: 'dc_2', negocioId: 'ng_cedros', tipo: 'permiso_sanitario', nombreArchivo: 'sanitario-los-cedros.pdf', cargadoEn: '2026-03-04T09:35:00.000Z', vigenciaHasta: diaRelativo(32), estado: 'aprobado', revisadoPor: 'us_admin_parque' },
+    { id: 'dc_3', negocioId: 'ng_cedros', tipo: 'certificado_manipulacion', nombreArchivo: 'manipulacion-alimentos.pdf', cargadoEn: '2026-03-04T09:40:00.000Z', vigenciaHasta: diaRelativo(16), estado: 'aprobado', revisadoPor: 'us_admin_parque' },
+    { id: 'dc_4', negocioId: 'ng_orinoco', tipo: 'rif', nombreArchivo: 'rif-orinoco.pdf', cargadoEn: '2026-03-19T15:00:00.000Z', vigenciaHasta: diaRelativo(215), estado: 'aprobado', revisadoPor: 'us_direccion' },
     { id: 'dc_5', negocioId: 'ng_orinoco', tipo: 'registro_mercantil', nombreArchivo: 'registro-orinoco.pdf', cargadoEn: '2026-03-19T15:05:00.000Z', estado: 'aprobado', revisadoPor: 'us_direccion' },
-    { id: 'dc_6', negocioId: 'ng_aventuras', tipo: 'poliza', nombreArchivo: 'poliza-responsabilidad.pdf', cargadoEn: '2026-04-02T11:30:00.000Z', vigenciaHasta: '2026-08-20', estado: 'aprobado', revisadoPor: 'us_direccion' },
-    { id: 'dc_7', negocioId: 'ng_aventuras', tipo: 'rif', nombreArchivo: 'rif-aventuras.pdf', cargadoEn: '2026-04-02T11:32:00.000Z', vigenciaHasta: '2027-04-02', estado: 'aprobado', revisadoPor: 'us_direccion' },
+    { id: 'dc_6', negocioId: 'ng_aventuras', tipo: 'poliza', nombreArchivo: 'poliza-responsabilidad.pdf', cargadoEn: '2026-04-02T11:30:00.000Z', vigenciaHasta: diaRelativo(6), estado: 'aprobado', revisadoPor: 'us_direccion' },
+    { id: 'dc_7', negocioId: 'ng_aventuras', tipo: 'rif', nombreArchivo: 'rif-aventuras.pdf', cargadoEn: '2026-04-02T11:32:00.000Z', vigenciaHasta: diaRelativo(230), estado: 'aprobado', revisadoPor: 'us_direccion' },
     { id: 'dc_8', negocioId: 'ng_manantial', tipo: 'rif', nombreArchivo: 'rif-manantial.pdf', cargadoEn: '2026-07-28T16:30:00.000Z', estado: 'en_revision' },
     { id: 'dc_9', negocioId: 'ng_manantial', tipo: 'cedula_responsable', nombreArchivo: 'cedula-responsable.pdf', cargadoEn: '2026-07-28T16:31:00.000Z', estado: 'observado', observacion: 'La imagen está cortada en el margen inferior. Cargue nuevamente el documento completo.', revisadoPor: 'us_admin_parque' },
     { id: 'dc_10', negocioId: 'ng_manantial', tipo: 'registro_mercantil', nombreArchivo: 'registro-manantial.pdf', cargadoEn: '2026-07-28T16:33:00.000Z', estado: 'pendiente' },
@@ -146,24 +168,30 @@ function documentos(): DemoState['documentos'] {
 
 function permisos(): DemoState['permisos'] {
   return [
-    { id: 'pm_cedros_jc', negocioId: 'ng_cedros', puntoId: 'pt_jc_01', tipo: 'concesion', numero: 'CON-2026-0041', desde: '2026-03-15', hasta: '2027-03-14', estado: 'vigente' },
-    { id: 'pm_cedros_en', negocioId: 'ng_cedros', puntoId: 'pt_en_01', tipo: 'permiso_temporal', numero: 'PTE-2026-0112', desde: '2026-06-01', hasta: '2026-08-31', estado: 'por_vencer' },
-    { id: 'pm_orinoco', negocioId: 'ng_orinoco', puntoId: 'pt_ai_01', tipo: 'concesion', numero: 'CON-2026-0052', desde: '2026-04-01', hasta: '2027-03-31', estado: 'vigente' },
-    { id: 'pm_aventuras', negocioId: 'ng_aventuras', puntoId: 'pt_lg_01', tipo: 'concesion', numero: 'CON-2026-0063', desde: '2026-04-15', hasta: '2027-04-14', estado: 'vigente' },
+    { id: 'pm_cedros_jc', negocioId: 'ng_cedros', puntoId: 'pt_jc_01', tipo: 'concesion', numero: 'CON-2026-0041', desde: '2026-03-15', hasta: diaRelativo(210), estado: 'vigente' },
+    { id: 'pm_cedros_en', negocioId: 'ng_cedros', puntoId: 'pt_en_01', tipo: 'permiso_temporal', numero: 'PTE-2026-0112', desde: '2026-06-01', hasta: diaRelativo(17), estado: 'por_vencer' },
+    { id: 'pm_orinoco', negocioId: 'ng_orinoco', puntoId: 'pt_ai_01', tipo: 'concesion', numero: 'CON-2026-0052', desde: '2026-04-01', hasta: diaRelativo(228), estado: 'vigente' },
+    { id: 'pm_aventuras', negocioId: 'ng_aventuras', puntoId: 'pt_lg_01', tipo: 'concesion', numero: 'CON-2026-0063', desde: '2026-04-15', hasta: diaRelativo(242), estado: 'vigente' },
   ];
 }
 
 function contratos(): DemoState['contratos'] {
   return [
-    { id: 'ct_cedros', negocioId: 'ng_cedros', permisoId: 'pm_cedros_jc', desde: '2026-03-15', hasta: '2027-03-14', canonFijoUsd: 120, porcentajeSobreVenta: 8, minimoGarantizadoUsd: 150, estado: 'vigente' },
-    { id: 'ct_orinoco', negocioId: 'ng_orinoco', permisoId: 'pm_orinoco', desde: '2026-04-01', hasta: '2027-03-31', canonFijoUsd: 90, porcentajeSobreVenta: 6, minimoGarantizadoUsd: 110, estado: 'vigente' },
-    { id: 'ct_aventuras', negocioId: 'ng_aventuras', permisoId: 'pm_aventuras', desde: '2026-04-15', hasta: '2027-04-14', canonFijoUsd: 150, porcentajeSobreVenta: 10, minimoGarantizadoUsd: 200, estado: 'vigente' },
+    { id: 'ct_cedros', negocioId: 'ng_cedros', permisoId: 'pm_cedros_jc', desde: '2026-03-15', hasta: diaRelativo(210), canonFijoUsd: 120, porcentajeSobreVenta: 8, minimoGarantizadoUsd: 150, estado: 'vigente' },
+    { id: 'ct_orinoco', negocioId: 'ng_orinoco', permisoId: 'pm_orinoco', desde: '2026-04-01', hasta: diaRelativo(228), canonFijoUsd: 90, porcentajeSobreVenta: 6, minimoGarantizadoUsd: 110, estado: 'vigente' },
+    { id: 'ct_aventuras', negocioId: 'ng_aventuras', permisoId: 'pm_aventuras', desde: '2026-04-15', hasta: diaRelativo(242), canonFijoUsd: 150, porcentajeSobreVenta: 10, minimoGarantizadoUsd: 200, estado: 'vigente' },
   ];
 }
 
 function franjas(): DemoState['franjas'] {
   const salida: DemoState['franjas'] = [];
-  const base = new Date('2026-08-12T00:00:00.000Z');
+  // Los horarios arrancan HOY, no en una fecha escrita a mano.
+  //
+  // Con una fecha fija la demo envejece sola: a los dos dias ya habia veinte
+  // franjas en el pasado ofreciendose para reservar, y al mes el calendario
+  // quedaba vacio. Al anclarlo al dia de hoy, la semana de reservas siempre
+  // empieza hoy, se abra la demo cuando se abra.
+  const base = new Date(`${hoy()}T00:00:00.000Z`);
   for (let d = 0; d < 7; d++) {
     const fecha = new Date(base.getTime() + d * 86400000).toISOString().slice(0, 10);
     const horas = ['09:00', '10:00', '11:00', '14:00', '15:00'];
@@ -277,7 +305,7 @@ function sembrarTransacciones(e: DemoState): void {
   crearOrdenDemo(e, {
     id: 'or_1001',
     codigo: 'PE-1001',
-    fecha: '2026-08-11T13:20:00.000Z',
+    fecha: haceHoras(28),
     localId: 'lc_cedros_jc',
     canal: 'app',
     clienteId: 'us_visitante',
@@ -298,7 +326,7 @@ function sembrarTransacciones(e: DemoState): void {
   crearOrdenDemo(e, {
     id: 'or_1002',
     codigo: 'PE-1002',
-    fecha: '2026-08-12T12:05:00.000Z',
+    fecha: haceHoras(5),
     localId: 'lc_cedros_jc',
     canal: 'app',
     clienteNombre: 'Invitado',
@@ -315,7 +343,7 @@ function sembrarTransacciones(e: DemoState): void {
   crearOrdenDemo(e, {
     id: 'or_1003',
     codigo: 'MO-1003',
-    fecha: '2026-08-12T12:40:00.000Z',
+    fecha: haceHoras(4),
     localId: 'lc_cedros_jc',
     canal: 'mostrador',
     clienteNombre: 'Venta de mostrador',
@@ -331,7 +359,7 @@ function sembrarTransacciones(e: DemoState): void {
   crearOrdenDemo(e, {
     id: 'or_1004',
     codigo: 'RE-1004',
-    fecha: '2026-08-12T09:30:00.000Z',
+    fecha: haceHoras(6),
     localId: 'lc_aventuras_lg',
     canal: 'app',
     clienteId: 'us_visitante',
@@ -358,7 +386,7 @@ function sembrarTransacciones(e: DemoState): void {
   crearOrdenDemo(e, {
     id: 'or_1005',
     codigo: 'PE-1005',
-    fecha: new Date(Date.now() - 4 * 60000).toISOString(),
+    fecha: haceHoras(0.07),
     localId: 'lc_cedros_jc',
     canal: 'app',
     clienteNombre: 'Invitado',
@@ -377,7 +405,7 @@ function sembrarTransacciones(e: DemoState): void {
   crearOrdenDemo(e, {
     id: 'or_1006',
     codigo: 'PE-1006',
-    fecha: new Date(Date.now() - 11 * 60000).toISOString(),
+    fecha: haceHoras(0.19),
     localId: 'lc_cedros_jc',
     canal: 'app',
     clienteId: 'us_visitante',
@@ -394,7 +422,7 @@ function sembrarTransacciones(e: DemoState): void {
   crearOrdenDemo(e, {
     id: 'or_0987',
     codigo: 'PE-0987',
-    fecha: '2026-07-24T15:10:00.000Z',
+    fecha: haceHoras(24 * 21),
     localId: 'lc_orinoco_ai',
     canal: 'app',
     clienteId: 'us_visitante',
@@ -411,7 +439,7 @@ function sembrarTransacciones(e: DemoState): void {
   crearOrdenDemo(e, {
     id: 'or_0990',
     codigo: 'PE-0990',
-    fecha: '2026-07-30T16:00:00.000Z',
+    fecha: haceHoras(24 * 15),
     localId: 'lc_cedros_jc',
     canal: 'app',
     clienteNombre: 'Invitado',

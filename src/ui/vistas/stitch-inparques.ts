@@ -872,6 +872,7 @@ export const NAV_SOPORTE: Array<[string, string, string]> = [
   ['receipt_long', 'Orders', '/i/reembolsos'],
   ['gavel', 'Disputes', '/i/disputas'],
   ['star', 'Valoraciones', '/i/valoraciones'],
+  ['verified', 'Aprobaciones', '/aprobaciones'],
   ['payments', 'Requested Refunds', '/i/reembolsos'],
   ['timer', 'SLA', '/i/sla'],
   ['menu_book', 'Knowledge Base', '/ayuda'],

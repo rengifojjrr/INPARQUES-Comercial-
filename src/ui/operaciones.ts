@@ -21,6 +21,7 @@ import {
   exigirPago,
 } from '../domain/state-machines';
 import { calcularTotales } from '../domain/money';
+import { porQueNoPuedeFirmar } from '../domain/approvals';
 import { puede } from '../domain/permissions';
 import { resolverAmbito } from '../domain/scope';
 import { identificador } from '../domain/ids';
@@ -33,6 +34,7 @@ import {
   exigirTurnoPropio,
 } from '../domain/ownership';
 import type {
+  SolicitudAprobacion,
   EstadoOrden,
   ItemOrden,
   MetodoCumplimiento,
@@ -70,12 +72,48 @@ export interface DatosCheckout {
   telefono?: string;
 }
 
+/** El carrito no se pudo convertir en orden. */
+export class CheckoutRechazado extends Error {
+  constructor(mensaje: string) {
+    super(mensaje);
+    this.name = 'CheckoutRechazado';
+  }
+}
+
 export async function crearOrdenDesdeCarrito(d: DatosCheckout): Promise<{ ordenId: string; estadoPago: string }> {
   const e = store.leer();
   const carrito = estadoUi.carrito;
   const local = e.locales.find((l) => l.id === carrito.localId)!;
   const tasa = e.tasaBcv.valor;
   const s = sesion.activa();
+
+  // El cupo y las existencias se comprobaban al meter en el carrito y no al
+  // pagar. Entre una cosa y otra puede pasar un rato —o puede haber comprado
+  // otra persona—, y la reserva entraba igual: la franja acababa en 13/12.
+  const unidades = carrito.items.reduce((n, i) => n + i.cantidad, 0);
+  if (d.franjaId) {
+    const f = e.franjas.find((x) => x.id === d.franjaId);
+    if (!f) throw new CheckoutRechazado('Esa franja ya no está publicada.');
+    if (f.cupoTotal - f.cupoTomado < unidades) {
+      const libre = Math.max(0, f.cupoTotal - f.cupoTomado);
+      throw new CheckoutRechazado(
+        libre === 0
+          ? 'Esa franja se llenó mientras completaba el pedido. Elija otro horario.'
+          : `Solo quedan ${libre} cupo(s) en esa franja. Ajuste la cantidad o elija otro horario.`,
+      );
+    }
+  }
+  for (const it of carrito.items) {
+    const art = e.articulos.find((x) => x.id === it.articuloId);
+    if (!art) throw new CheckoutRechazado('Un artículo del carrito ya no existe.');
+    if (!art.disponible) throw new CheckoutRechazado(`${art.nombre} ya no está disponible.`);
+    if (typeof art.stock === 'number') {
+      const pedidas = carrito.items.filter((x) => x.articuloId === art.id).reduce((n, x) => n + x.cantidad, 0);
+      if (pedidas > art.stock) {
+        throw new CheckoutRechazado(`Solo quedan ${art.stock} unidades de ${art.nombre}.`);
+      }
+    }
+  }
 
   const totales = calcularTotales(
     carrito.items.map((i) => ({
@@ -509,7 +547,7 @@ export function resolverExpediente(negocioId: string, decision: 'aprobado' | 're
   });
 }
 
-export function suspenderNegocio(negocioId: string, motivo: string, evidencia: string, aprobadoPor: string): void {
+function aplicarSuspension(negocioId: string, motivo: string, evidencia: string, aprobadoPor: string, mfaVerificado: boolean): void {
   const a = actor();
   store.actualizar((st) => {
     const n = st.negocios.find((x) => x.id === negocioId);
@@ -517,7 +555,7 @@ export function suspenderNegocio(negocioId: string, motivo: string, evidencia: s
     registrar(st, {
       usuario: a, accion: 'negocio.suspender', entidad: 'negocio', entidadId: negocioId,
       antes: { estado: n.estado }, despues: { estado: 'suspendido' },
-      motivo, evidencia, mfaVerificado: true, aprobadoPor,
+      motivo, evidencia, mfaVerificado, aprobadoPor,
     });
     n.estado = 'suspendido';
     for (const l of st.locales.filter((x) => x.negocioId === negocioId)) l.abierto = false;
@@ -558,7 +596,7 @@ export function registrarInspeccion(
 
 // ----------------------------------------------------------------- Finanzas
 
-export function aprobarReembolso(reembolsoId: string, motivo: string, evidencia: string, aprobadoPor?: string): void {
+function aplicarReembolso(reembolsoId: string, motivo: string, evidencia: string, aprobadoPor: string, mfaVerificado: boolean): void {
   const a = actor();
   store.actualizar((st) => {
     const r = st.reembolsos.find((x) => x.id === reembolsoId);
@@ -573,7 +611,7 @@ export function aprobarReembolso(reembolsoId: string, motivo: string, evidencia:
     r.aprobadoPor = aprobadoPor ?? a.id;
     registrar(st, {
       usuario: a, accion: 'reembolso.aprobar', entidad: 'reembolso', entidadId: reembolsoId,
-      despues: { montoUsd: r.montoUsd }, motivo, evidencia, mfaVerificado: true, aprobadoPor,
+      despues: { montoUsd: r.montoUsd }, motivo, evidencia, mfaVerificado, aprobadoPor,
     });
   });
 }
@@ -592,7 +630,7 @@ export function conciliarLiquidacion(liquidacionId: string): void {
   });
 }
 
-export function cerrarLiquidacion(liquidacionId: string, motivo: string, aprobadoPor: string): void {
+function aplicarCierreLiquidacion(liquidacionId: string, motivo: string, aprobadoPor: string, mfaVerificado: boolean): void {
   const a = actor();
   store.actualizar((st) => {
     const l = st.liquidaciones.find((x) => x.id === liquidacionId);
@@ -603,7 +641,7 @@ export function cerrarLiquidacion(liquidacionId: string, motivo: string, aprobad
     l.cerradaEn = new Date().toISOString();
     registrar(st, {
       usuario: a, accion: 'liquidacion.cerrar', entidad: 'liquidacion', entidadId: liquidacionId,
-      motivo, mfaVerificado: true, aprobadoPor,
+      motivo, mfaVerificado, aprobadoPor,
     });
   });
 }
@@ -716,8 +754,69 @@ export function abrirReclamo(ordenId: string, motivo: string, descripcion: strin
   return id;
 }
 
+/**
+ * Solicitud de reembolso.
+ *
+ * No existia ninguna: `reembolsos.push` solo aparecia en los datos iniciales,
+ * asi que el permiso `reembolso:solicitar` —que tienen tres roles— no hacia
+ * nada, y una disputa resuelta a favor del cliente se marcaba como resuelta
+ * sin devolver un bolivar. El circuito estaba cortado en el ultimo paso.
+ */
+export function solicitarReembolso(
+  ordenId: string,
+  montoUsd: number,
+  motivo: string,
+  evidencia?: string,
+): { ok: boolean; id?: string; error?: string } {
+  const e = store.leer();
+  const orden = e.ordenes.find((o) => o.id === ordenId);
+  if (!orden) return { ok: false, error: 'El pedido ya no existe.' };
+  const pago = e.pagos.find((p) => p.ordenId === ordenId);
+  if (!pago) return { ok: false, error: 'Ese pedido no tiene un pago asociado.' };
+  if (pago.estado !== 'confirmado') {
+    return { ok: false, error: 'Solo se reembolsa un pago confirmado.' };
+  }
+  if (e.reembolsos.some((r) => r.ordenId === ordenId && r.estado !== 'rechazado')) {
+    return { ok: false, error: 'Ese pedido ya tiene un reembolso en curso.' };
+  }
+  if (montoUsd <= 0 || montoUsd > orden.totalUsd) {
+    return { ok: false, error: `El monto debe estar entre 0 y ${orden.totalUsd} USD.` };
+  }
+
+  const a = actor();
+  const id = identificador('rb');
+  store.actualizar((st) => {
+    st.reembolsos.push({
+      id, ordenId, pagoId: pago.id, montoUsd, motivo, evidencia,
+      solicitadoPor: a.id, estado: 'solicitado', creadoEn: new Date().toISOString(),
+    });
+    st.notificaciones.push({
+      id: identificador('nt'),
+      destinatarioRol: 'inparques.finanzas',
+      titulo: `Reembolso solicitado sobre ${orden.codigo}`,
+      cuerpo: `${formatearUsdSimple(montoUsd)} · ${motivo}`,
+      tipo: 'pago',
+      rutaDestino: '/i/reembolsos',
+      leida: false,
+      creadaEn: new Date().toISOString(),
+    });
+    registrar(st, {
+      usuario: a, accion: 'reembolso.solicitar', entidad: 'reembolso', entidadId: id,
+      despues: { montoUsd, ordenId }, motivo, evidencia,
+    });
+  });
+  return { ok: true, id };
+}
+
+function formatearUsdSimple(n: number): string {
+  return `$${n.toFixed(2)}`;
+}
+
 export function resolverDisputa(disputaId: string, resultado: 'resuelta_favor_cliente' | 'resuelta_favor_comercio', motivo: string): void {
   const a = actor();
+  const e = store.leer();
+  const d0 = e.disputas.find((x) => x.id === disputaId);
+
   store.actualizar((st) => {
     const d = st.disputas.find((x) => x.id === disputaId);
     if (!d) return;
@@ -728,6 +827,16 @@ export function resolverDisputa(disputaId: string, resultado: 'resuelta_favor_cl
     d.estado = resultado;
     d.agenteId = a.id;
   });
+
+  // Resolver a favor del cliente sin devolver el dinero no resuelve nada: se
+  // abre la solicitud de reembolso por el total del pedido, que sigue su
+  // propio camino de aprobación.
+  if (resultado === 'resuelta_favor_cliente' && d0?.ordenId) {
+    const orden = store.leer().ordenes.find((o) => o.id === d0.ordenId);
+    if (orden) {
+      solicitarReembolso(orden.id, orden.totalUsd, `Disputa ${disputaId} resuelta a favor del cliente: ${motivo}`);
+    }
+  }
 }
 
 /**
@@ -811,12 +920,13 @@ export function ocultarValoracion(valoracionId: string, motivo: string): { ok: b
 
 // ------------------------------------------------------- Cuenta bancaria
 
-export function cambiarCuentaBancaria(
+function aplicarCambioCuenta(
   negocioId: string,
   datos: { banco: string; numero: string; titular: string },
   motivo: string,
   evidencia: string,
   aprobadoPor: string,
+  mfaVerificado: boolean,
 ): void {
   const a = actor();
   store.actualizar((st) => {
@@ -827,7 +937,9 @@ export function cambiarCuentaBancaria(
       // La auditoría guarda los últimos cuatro dígitos, nunca el número entero.
       antes: { banco: c.banco, ultimos4: c.numero.slice(-4) },
       despues: { banco: datos.banco, ultimos4: datos.numero.slice(-4) },
-      motivo, evidencia, mfaVerificado: true, aprobadoPor,
+      // `mfaVerificado` era un `true` fijo: la bitácora afirmaba un control
+      // que podía no haber ocurrido. Ahora se graba lo que pasó de verdad.
+      motivo, evidencia, mfaVerificado, aprobadoPor,
     });
     c.banco = datos.banco;
     c.numero = datos.numero;
@@ -835,6 +947,166 @@ export function cambiarCuentaBancaria(
     c.verificada = false;
     c.actualizadaEn = new Date().toISOString();
   });
+}
+
+// ------------------------------------------------------- Segunda aprobación
+
+/**
+ * Deja una acción sensible esperando la firma de otra persona.
+ *
+ * Antes estas acciones se completaban en el mismo clic con una firma escrita
+ * en el código. Ahora se detienen aquí: quedan pendientes, se avisa a los
+ * roles que pueden firmarlas, y no tocan el estado hasta que alguien distinto
+ * las apruebe.
+ */
+export function solicitarAprobacion(d: {
+  accion: string;
+  resumen: string;
+  carga: Record<string, unknown>;
+  entidad: string;
+  entidadId: string;
+  motivo: string;
+  evidencia?: string;
+  mfaVerificado: boolean;
+  aprobadores: RoleId[];
+}): string {
+  const a = actor();
+  const id = identificador('ap');
+  store.actualizar((st) => {
+    st.aprobaciones.push({
+      id,
+      accion: d.accion,
+      resumen: d.resumen,
+      carga: d.carga,
+      entidad: d.entidad,
+      entidadId: d.entidadId,
+      solicitadaPor: a.id,
+      solicitadaPorNombre: a.nombre,
+      solicitadaPorRol: a.rol,
+      solicitadaEn: new Date().toISOString(),
+      motivo: d.motivo,
+      evidencia: d.evidencia,
+      mfaVerificado: d.mfaVerificado,
+      aprobadores: d.aprobadores,
+      estado: 'pendiente',
+    });
+    for (const rol of d.aprobadores) {
+      if (rol === a.rol) continue; // no se avisa a quien la pidió
+      st.notificaciones.push({
+        id: identificador('nt'),
+        destinatarioRol: rol,
+        titulo: `Aprobación pendiente: ${d.resumen}`,
+        cuerpo: `${a.nombre} solicita su firma. Motivo: ${d.motivo}`,
+        tipo: 'sistema',
+        rutaDestino: '/aprobaciones',
+        leida: false,
+        creadaEn: new Date().toISOString(),
+      });
+    }
+    registrar(st, {
+      usuario: a, accion: `${d.accion}.solicitar`, entidad: d.entidad, entidadId: d.entidadId,
+      motivo: d.motivo, evidencia: d.evidencia,
+      // Se graba lo que de verdad ocurrió, no un `true` fijo.
+      mfaVerificado: d.mfaVerificado,
+    });
+  });
+  return id;
+}
+
+/** Firma de la segunda persona: valida y ejecuta. */
+export function firmarAprobacion(solicitudId: string): { ok: boolean; error?: string } {
+  const e = store.leer();
+  const s = e.aprobaciones.find((x) => x.id === solicitudId);
+  if (!s) return { ok: false, error: 'Esa solicitud ya no existe.' };
+
+  const u = sesion.usuario();
+  const impedimento = porQueNoPuedeFirmar(s, u);
+  if (impedimento) return { ok: false, error: impedimento };
+
+  const a = actor();
+  ejecutarAprobada(s, a.id);
+
+  store.actualizar((st) => {
+    const x = st.aprobaciones.find((y) => y.id === solicitudId)!;
+    x.estado = 'aprobada';
+    x.resueltaPor = a.id;
+    x.resueltaPorNombre = a.nombre;
+    x.resueltaEn = new Date().toISOString();
+    st.notificaciones.push({
+      id: identificador('nt'),
+      destinatarioRol: s.solicitadaPorRol,
+      destinatarioId: s.solicitadaPor,
+      titulo: `Aprobada: ${s.resumen}`,
+      cuerpo: `${a.nombre} firmó su solicitud.`,
+      tipo: 'sistema',
+      rutaDestino: '/aprobaciones',
+      leida: false,
+      creadaEn: new Date().toISOString(),
+    });
+    registrar(st, {
+      usuario: a, accion: `${s.accion}.aprobar`, entidad: s.entidad, entidadId: s.entidadId,
+      motivo: s.motivo, evidencia: s.evidencia,
+      mfaVerificado: s.mfaVerificado,
+      // Ahora sí: quien firmó es una persona real y distinta.
+      aprobadoPor: a.id,
+    });
+  });
+  return { ok: true };
+}
+
+export function rechazarAprobacion(solicitudId: string, motivo: string): { ok: boolean; error?: string } {
+  if (!motivo.trim()) return { ok: false, error: 'Indique por qué la rechaza.' };
+  const e = store.leer();
+  const s = e.aprobaciones.find((x) => x.id === solicitudId);
+  if (!s) return { ok: false, error: 'Esa solicitud ya no existe.' };
+  const impedimento = porQueNoPuedeFirmar(s, sesion.usuario());
+  if (impedimento) return { ok: false, error: impedimento };
+
+  const a = actor();
+  store.actualizar((st) => {
+    const x = st.aprobaciones.find((y) => y.id === solicitudId)!;
+    x.estado = 'rechazada';
+    x.resueltaPor = a.id;
+    x.resueltaPorNombre = a.nombre;
+    x.resueltaEn = new Date().toISOString();
+    x.motivoResolucion = motivo;
+    st.notificaciones.push({
+      id: identificador('nt'),
+      destinatarioRol: s.solicitadaPorRol,
+      destinatarioId: s.solicitadaPor,
+      titulo: `Rechazada: ${s.resumen}`,
+      cuerpo: motivo,
+      tipo: 'sistema',
+      rutaDestino: '/aprobaciones',
+      leida: false,
+      creadaEn: new Date().toISOString(),
+    });
+    registrar(st, {
+      usuario: a, accion: `${s.accion}.rechazar`, entidad: s.entidad, entidadId: s.entidadId, motivo,
+    });
+  });
+  return { ok: true };
+}
+
+/** Qué hace cada acción una vez firmada. */
+function ejecutarAprobada(s: SolicitudAprobacion, aprobadorId: string): void {
+  const c = s.carga as Record<string, string>;
+  switch (s.accion) {
+    case 'bancario.cambiar_cuenta':
+      aplicarCambioCuenta(s.entidadId, { banco: c.banco, numero: c.numero, titular: c.titular }, s.motivo, s.evidencia ?? '', aprobadorId, s.mfaVerificado);
+      break;
+    case 'negocio.suspender':
+      aplicarSuspension(s.entidadId, s.motivo, s.evidencia ?? '', aprobadorId, s.mfaVerificado);
+      break;
+    case 'liquidacion.cerrar':
+      aplicarCierreLiquidacion(s.entidadId, s.motivo, aprobadorId, s.mfaVerificado);
+      break;
+    case 'reembolso.aprobar':
+      aplicarReembolso(s.entidadId, s.motivo, s.evidencia ?? '', aprobadorId, s.mfaVerificado);
+      break;
+    default:
+      break;
+  }
 }
 
 /**
@@ -889,10 +1161,24 @@ export function revocarSesion(sesionId: string): { ok: boolean; error?: string }
 export function marcarNotificacionesLeidas(): void {
   const rol = sesion.rol();
   const s = sesion.activa();
+  const u = sesion.usuario();
   if (!rol) return;
+  const e = store.leer();
+  const ambito = u ? resolverAmbito(u, e) : null;
+  // Mismo criterio de ámbito que la pantalla: no se marcan como leídas
+  // notificaciones que no son suyas.
+  const alcanza = (ambitoId?: string): boolean =>
+    !ambitoId ||
+    !ambito ||
+    ambito.nacional ||
+    ambito.localIds.includes(ambitoId) ||
+    ambito.negocioIds.includes(ambitoId) ||
+    ambito.parqueIds.includes(ambitoId);
   store.actualizar((st) => {
     for (const n of st.notificaciones) {
-      if (n.destinatarioRol === rol && (!n.destinatarioId || n.destinatarioId === s?.usuarioId)) n.leida = true;
+      if (n.destinatarioRol === rol && (!n.destinatarioId || n.destinatarioId === s?.usuarioId) && alcanza(n.ambitoId)) {
+        n.leida = true;
+      }
     }
   });
 }

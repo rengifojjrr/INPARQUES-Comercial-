@@ -7,10 +7,10 @@
 
 | Concepto | Valor |
 | --- | --- |
-| Rutas registradas | 139 |
+| Rutas registradas | 140 |
 | Vistas segun el enunciado | 119 |
-| Diferencia por reconciliar | +20 |
-| Compartidas | 27 |
+| Diferencia por reconciliar | +21 |
+| Compartidas | 28 |
 | Visitante | 33 |
 | Comercio | 39 |
 | INPARQUES | 40 |
@@ -18,7 +18,7 @@
 | Estado | Vistas |
 | --- | --- |
 | Pendiente de HTML | 0 |
-| Implementada | 139 |
+| Implementada | 140 |
 | Conectada | 0 |
 | Revisada | 0 |
 | Bloqueada | 0 |
@@ -30,7 +30,7 @@ vistas proviene del enunciado. La reconciliacion solo puede hacerse comparando
 esta tabla con los archivos entregados.
 
 
-## Compartidas (acceso, identidad, estados, conectividad) — 27 vistas
+## Compartidas (acceso, identidad, estados, conectividad) — 28 vistas
 
 
 ### Acceso
@@ -57,6 +57,7 @@ esta tabla con los archivos entregados.
 | Ruta | Vista | Roles autorizados | HTML de referencia | Estado |
 | --- | --- | --- | --- | --- |
 | `/sesiones` | Mis sesiones activas | Todos | — | Implementada |
+| `/aprobaciones` | Aprobaciones pendientes | Superadministrador nacional; Dirección comercial / concesiones; Finanzas / auditoría; Propietario legal; Administrador de local | — | Implementada |
 | `/notificaciones` | Centro de notificaciones | Todos | — | Implementada |
 | `/perfil` | Perfil | Todos | — | Implementada |
 | `/perfil/accesibilidad` | Accesibilidad | Todos | — | Implementada |
@@ -283,7 +284,7 @@ esta tabla con los archivos entregados.
 
 | Ruta | Vista | Roles autorizados | HTML de referencia | Estado |
 | --- | --- | --- | --- | --- |
-| `/i/auditoria` | Bitacora de auditoria | Superadministrador nacional; Finanzas / auditoría; Dirección comercial / concesiones | — | Implementada |
+| `/i/auditoria` | Bitacora de auditoria | Superadministrador nacional; Finanzas / auditoría; Dirección comercial / concesiones; Administrador de parque | — | Implementada |
 | `/i/usuarios` | Usuarios | Superadministrador nacional; Dirección comercial / concesiones | — | Implementada |
 | `/i/roles` | Roles y permisos | Superadministrador nacional | — | Implementada |
 | `/i/ambitos` | Ambitos | Superadministrador nacional | — | Implementada |

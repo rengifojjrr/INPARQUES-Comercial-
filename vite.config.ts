@@ -8,7 +8,10 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     target: 'es2022',
-    sourcemap: true,
+    // Sin mapa de fuentes en la construcción publicada: pesaba 1,36 MB
+    // —más que el propio JS— y se descargaba en cada visita desde el móvil.
+    // Para depurar en local: `npm run build -- --sourcemap`.
+    sourcemap: false,
     // Las fuentes autohospedadas (Manrope, Material Symbols) deben quedar
     // incrustadas como base64 en el CSS: el empaquetado de un solo archivo
     // (scripts/construir-unico.mjs) solo copia el CSS y el JS generados,

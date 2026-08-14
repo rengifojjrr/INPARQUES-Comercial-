@@ -863,15 +863,24 @@ export const sla: Render = () => {
 
 // ----------------------------------------------------------- Administración
 
+/** Cuántos eventos se muestran de una vez. */
+const PAGINA_AUDITORIA = 60;
+
 export const auditoria: Render = () => {
   const e = store.leer();
+  const u = sesion.usuario()!;
   const q = texto('auditoria');
-  const eventos = consultar(e, q ? { texto: q } : {});
+  // La bitácora respeta el ámbito como todo lo demás: Dirección Comercial
+  // tiene alcance regional y antes veía el país entero.
+  const todos = filtrarAuditoriaPorAmbito(consultar(e, q ? { texto: q } : {}), u, e);
+  // Y ya no se cortan los eventos antiguos en seco: se van mostrando más.
+  const tope = Number(filtro('auditoria-tope', String(PAGINA_AUDITORIA)));
+  const eventos = todos.slice(0, tope);
 
   return {
     titulo: 'Bitácora de auditoría',
     contenido: html`
-      <p class="bajada">Registro append-only. No admite borrado ni edición.</p>
+      <p class="bajada">Registro append-only. No admite borrado ni edición. ${todos.length} evento(s) en su ámbito.</p>
       ${crudo(buscador('q-aud', 'Buscar por usuario, acción o motivo', q, 'buscar-auditoria'))}
       ${eventos.length === 0
         ? crudo(vacio('▤', 'Sin eventos', q ? 'Ningún evento coincide con la búsqueda.' : 'Todavía no se han registrado acciones. Opere en cualquier panel y vuelva aquí.'))
@@ -892,9 +901,67 @@ export const auditoria: Render = () => {
               ['Fecha', fechaHora(ev.en)],
             ]))}</div>
           `)))}</div>`)}
+      ${todos.length > eventos.length
+        ? crudo(`<div class="mt-2" style="text-align:center">
+            ${boton(`Ver ${Math.min(PAGINA_AUDITORIA, todos.length - eventos.length)} más de ${todos.length - eventos.length}`, {
+              variante: 'secundario',
+              accion: 'filtro-auditoria-tope',
+              valor: String(tope + PAGINA_AUDITORIA),
+            })}
+          </div>`)
+        : ''}
     `,
   };
 };
+
+/**
+ * La bitácora vista desde el ámbito de quien mira.
+ *
+ * Un evento pertenece a un ámbito por la entidad que toca. Los que no se
+ * pueden situar —cambios de reglas, sesiones, acciones de alcance nacional—
+ * solo los ve quien tiene alcance nacional.
+ */
+function filtrarAuditoriaPorAmbito(
+  eventos: ReturnType<typeof consultar>,
+  usuario: Parameters<typeof resolverAmbito>[0],
+  estado: Parameters<typeof resolverAmbito>[1],
+) {
+  const a = resolverAmbito(usuario, estado);
+  if (a.nacional) return eventos;
+
+  const localDe = (negocioId: string) => estado.locales.filter((l) => l.negocioId === negocioId).map((l) => l.id);
+  const alcanza = (entidad: string, id: string): boolean => {
+    switch (entidad) {
+      case 'negocio':
+      case 'cuenta_bancaria':
+        return a.negocioIds.includes(id) || localDe(id).some((l) => a.localIds.includes(l));
+      case 'orden': {
+        const o = estado.ordenes.find((x) => x.id === id);
+        return Boolean(o && (a.localIds.includes(o.localId) || a.negocioIds.includes(o.negocioId) || a.parqueIds.includes(o.parqueId)));
+      }
+      case 'articulo': {
+        const art = estado.articulos.find((x) => x.id === id);
+        return Boolean(art && a.localIds.includes(art.localId));
+      }
+      case 'turno': {
+        const t = estado.turnos.find((x) => x.id === id);
+        return Boolean(t && a.localIds.includes(t.localId));
+      }
+      case 'liquidacion': {
+        const l = estado.liquidaciones.find((x) => x.id === id);
+        return Boolean(l && a.negocioIds.includes(l.negocioId));
+      }
+      case 'inspeccion': {
+        const i = estado.inspecciones.find((x) => x.id === id);
+        return Boolean(i && a.localIds.includes(i.localId));
+      }
+      default:
+        // Sin forma de situarlo, solo lo ve el alcance nacional.
+        return false;
+    }
+  };
+  return eventos.filter((ev) => alcanza(ev.entidad, ev.entidadId));
+}
 
 export const usuarios: Render = () => {
   const e = store.leer();

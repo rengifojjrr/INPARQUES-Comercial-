@@ -18,6 +18,7 @@
 
 import type { RoleId, Surface } from '../domain/types';
 import { ROLE_IDS, ROLES } from '../domain/roles';
+import { ROLES_APROBADORES } from '../domain/approvals';
 
 /**
  * pendiente_html : registrada, sin vista que la dibuje.
@@ -91,6 +92,9 @@ const COMPARTIDAS: Vista[] = [
   v('recuperar.codigo', '/acceso/recuperar/codigo', 'Codigo de recuperacion', 'compartida', 'Acceso', PUBLICO),
   v('recuperar.clave', '/acceso/recuperar/nueva-clave', 'Nueva contrasena', 'compartida', 'Acceso', PUBLICO),
   v('sesiones.propias', '/sesiones', 'Mis sesiones activas', 'compartida', 'Cuenta', TODOS),
+  v('aprobaciones', '/aprobaciones', 'Aprobaciones pendientes', 'compartida', 'Cuenta', ROLES_APROBADORES, {
+    notas: 'Segunda firma real: la accion espera aqui hasta que la firme otra persona.',
+  }),
   v('notificaciones', '/notificaciones', 'Centro de notificaciones', 'compartida', 'Cuenta', TODOS),
   v('perfil', '/perfil', 'Perfil', 'compartida', 'Cuenta', TODOS),
   v('perfil.accesibilidad', '/perfil/accesibilidad', 'Accesibilidad', 'compartida', 'Cuenta', TODOS),
@@ -254,7 +258,9 @@ const INPARQUES_VISTAS: Vista[] = [
   }),
   v('i.disputa', '/i/disputa/:disputaId', 'Detalle de disputa', 'inparques', 'Soporte', INP_SOPORTE),
   v('i.sla', '/i/sla', 'SLA de soporte', 'inparques', 'Soporte', INP_SOPORTE),
-  v('i.auditoria', '/i/auditoria', 'Bitacora de auditoria', 'inparques', 'Administracion', ['inparques.superadmin', 'inparques.finanzas', 'inparques.direccion_comercial']),
+  v('i.auditoria', '/i/auditoria', 'Bitacora de auditoria', 'inparques', 'Administracion', ['inparques.superadmin', 'inparques.finanzas', 'inparques.direccion_comercial', 'inparques.admin_parque'], {
+    notas: 'Cada rol ve solo los eventos de su ambito. El administrador de parque tenia el permiso y no la ruta.',
+  }),
   v('i.usuarios', '/i/usuarios', 'Usuarios', 'inparques', 'Administracion', ['inparques.superadmin', 'inparques.direccion_comercial']),
   v('i.roles', '/i/roles', 'Roles y permisos', 'inparques', 'Administracion', ['inparques.superadmin']),
   v('i.ambitos', '/i/ambitos', 'Ambitos', 'inparques', 'Administracion', ['inparques.superadmin']),

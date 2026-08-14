@@ -9,6 +9,7 @@
 import type { Render } from './tipos';
 import * as c from './compartidas';
 import * as valoraciones from './valoraciones';
+import { bandejaAprobaciones } from './aprobaciones';
 import * as v from './visitante';
 import * as com from './comercio';
 import * as inp from './inparques';
@@ -122,6 +123,7 @@ export const VISTAS_POR_ID: Record<string, Render> = {
   // ----------------------------------------------------------------- Comercio
   'c.inicio': inicioComercioPorRol(),
   'c.mas': c.masOpciones('comercio'),
+  aprobaciones: bandejaAprobaciones,
   'c.valoraciones': valoraciones.valoracionesComercio,
   'c.expediente': stitchComercioInterior.expedienteStitch,
   'c.documentos': stitchComercioInterior.documentosStitch,

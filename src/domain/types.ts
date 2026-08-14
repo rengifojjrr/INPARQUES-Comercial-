@@ -529,6 +529,41 @@ export interface Valoracion {
   motivoModeracion?: string;
 }
 
+/**
+ * Solicitud que espera una segunda firma.
+ *
+ * La doble aprobacion no puede resolverse en el mismo clic de quien actua:
+ * antes la interfaz mandaba una firma escrita en el codigo (`us_direccion`,
+ * `us_superadmin`) y nadie aprobaba nada. Ahora la accion queda aqui,
+ * pendiente, hasta que otra persona con rol aprobador la firme, y solo
+ * entonces se ejecuta.
+ */
+export interface SolicitudAprobacion {
+  id: ID;
+  /** Accion sensible que se ejecutara al aprobarse. */
+  accion: string;
+  /** Descripcion legible para quien tiene que decidir. */
+  resumen: string;
+  /** Datos que necesita la operacion cuando se ejecute. */
+  carga: Record<string, unknown>;
+  entidad: string;
+  entidadId: ID;
+  solicitadaPor: ID;
+  solicitadaPorNombre: string;
+  solicitadaPorRol: RoleId;
+  solicitadaEn: ISODateTime;
+  motivo: string;
+  evidencia?: string;
+  mfaVerificado: boolean;
+  /** Roles habilitados para firmar. */
+  aprobadores: RoleId[];
+  estado: 'pendiente' | 'aprobada' | 'rechazada';
+  resueltaPor?: ID;
+  resueltaPorNombre?: string;
+  resueltaEn?: ISODateTime;
+  motivoResolucion?: string;
+}
+
 /** Bitacora append-only. No existe operacion de borrado ni de edicion. */
 export interface EventoAuditoria {
   id: ID;
@@ -602,6 +637,7 @@ export interface DemoState {
   inspecciones: Inspeccion[];
   incidencias: Incidencia[];
   disputas: Disputa[];
+  aprobaciones: SolicitudAprobacion[];
   valoraciones: Valoracion[];
   auditoria: EventoAuditoria[];
   notificaciones: Notificacion[];

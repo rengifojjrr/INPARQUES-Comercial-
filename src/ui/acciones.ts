@@ -7,17 +7,29 @@
  */
 
 import { store } from '../data/store';
-import { sesion, CLAVE_DEMO } from '../app/session';
+import { sesion, cambiarClaveDe, CLAVE_DEMO } from '../app/session';
 import { router, inicioDeRol } from '../app/router';
 import { conectividad } from '../net/connectivity';
 import { colaSincronizacion } from '../net/sync-queue';
 import { adaptadores } from '../adapters/simulados';
 import { estadoUi, fijarCarrito, fijarFiltro, fijarTexto, vaciarCarrito, recordarOrdenInvitado } from './estado-ui';
 import { agregarAlCarrito, cambiarCantidad, quitarDelCarrito, reiniciarCon, topeDeLinea } from '../domain/cart';
-import { validarAccion } from '../domain/sensitive-actions';
+import { requisitosDe, validarAccion, type Validacion } from '../domain/sensitive-actions';
+
+/**
+ * `true` cuando lo unico que falta es la segunda firma.
+ *
+ * Es el caso normal ahora: la accion se detiene y queda pendiente. Si falta
+ * ademas el motivo, la evidencia o el MFA, eso si es un error del formulario
+ * y hay que decirlo antes de crear ninguna solicitud.
+ */
+function soloFaltaAprobacion(v: Validacion): boolean {
+  return !v.ok && v.faltan.length === 1 && v.faltan[0] === 'aprobacion';
+}
 import * as op from './operaciones';
 import { esc } from './componentes';
 import { formatearUsd } from '../domain/money';
+import { instanteLocal } from './formato';
 import { alternarCajon } from './stitch-shell';
 import type { EstadoOrden, MetodoPago } from '../domain/types';
 
@@ -174,10 +186,19 @@ function alEnviar(ev: Event): void {
     case 'qr':
       leerQr();
       break;
-    case 'recuperar':
+    case 'recuperar': {
+      const correo = valorCampo('correo');
+      if (!correo.includes('@')) {
+        mostrarError('error-recuperar', 'Indique el correo de su cuenta.');
+        break;
+      }
+      // Hace falta recordarlo: sin él, el último paso no sabe a qué cuenta
+      // cambiarle la clave.
+      estadoUi.seleccion['recuperar-correo'] = correo;
       router.ir('/acceso/recuperar/codigo');
-      brindis('Código generado. En la demo no se envía correo.');
+      brindis('Código generado. En la demo no se envía correo: es 123456.');
       break;
+    }
     case 'recuperar-codigo':
       if (valorCampo('codigo') === '123456') router.ir('/acceso/recuperar/nueva-clave');
       else mostrarError('error-recuperar-codigo', 'El código no es válido. En la demo es 123456.');
@@ -432,6 +453,62 @@ function despachar(accion: string, valor: string): void {
       if (!r.ok) brindis(r.error ?? 'No se pudo avanzar el pedido.', true);
       else if (r.encolada) brindis('Sin conexión: la acción quedó en la cola de sincronización.');
       else brindis('Pedido actualizado. El visitante ya lo ve.');
+      break;
+    }
+
+    case 'solicitar-reembolso':
+      abrirHoja({
+        titulo: 'Solicitar un reembolso',
+        cuerpo: `<p class="tenue mb-1">Lo aprueba Finanzas de INPARQUES. Por encima de $50 exige además una segunda firma.</p>
+          <input class="entrada" name="monto-reem-sol" inputmode="decimal" placeholder="Monto en USD" />
+          <input class="entrada mt-1" name="motivo-reem-sol" placeholder="Motivo" required />
+          <input class="entrada mt-1" name="evidencia-reem-sol" placeholder="Evidencia (referencia o archivo)" />`,
+        confirmar: 'Enviar solicitud',
+        accionConfirmar: 'confirmar-solicitud-reembolso',
+        valor,
+      });
+      break;
+
+    case 'confirmar-solicitud-reembolso': {
+      const monto = Number(valorCampo('monto-reem-sol'));
+      const motivo = valorCampo('motivo-reem-sol');
+      if (!motivo) {
+        brindis('Indique el motivo.', true);
+        break;
+      }
+      const r = op.solicitarReembolso(valor, monto, motivo, valorCampo('evidencia-reem-sol'));
+      cerrarHoja();
+      repintar();
+      brindis(r.ok ? 'Reembolso solicitado. Finanzas lo revisará.' : (r.error ?? 'No se pudo solicitar.'), !r.ok);
+      break;
+    }
+
+    // ----------------------------------------------- Segunda aprobación
+
+    case 'firmar-aprobacion': {
+      const r = op.firmarAprobacion(valor);
+      repintar();
+      brindis(r.ok ? 'Firmada. La acción quedó ejecutada y registrada.' : (r.error ?? 'No se pudo firmar.'), !r.ok);
+      break;
+    }
+
+    case 'rechazar-aprobacion':
+      abrirHoja({
+        titulo: 'Rechazar la solicitud',
+        cuerpo: `<p class="tenue mb-1">Quien la pidió verá su motivo. Queda en la bitácora.</p>
+          <textarea class="area" name="motivo-rechazo" placeholder="Por qué la rechaza…" required></textarea>`,
+        confirmar: 'Rechazar',
+        accionConfirmar: 'confirmar-rechazo-aprobacion',
+        valor,
+        peligro: true,
+      });
+      break;
+
+    case 'confirmar-rechazo-aprobacion': {
+      const r = op.rechazarAprobacion(valor, valorCampo('motivo-rechazo'));
+      cerrarHoja();
+      repintar();
+      brindis(r.ok ? 'Solicitud rechazada.' : (r.error ?? 'No se pudo rechazar.'), !r.ok);
       break;
     }
 
@@ -811,22 +888,33 @@ function despachar(accion: string, valor: string): void {
       const motivo = valorCampo('motivo-cierre');
       const mfa = valorCampo('mfa-cierre');
       const rol = sesion.rol()!;
+      // La firma de la segunda persona ya no la pone el código: la acción
+      // queda pendiente hasta que alguien distinto la apruebe.
       const val = validarAccion({
         accion: 'liquidacion.cerrar',
         rol,
         usuarioId: sesion.activa()?.usuarioId,
         motivo,
         mfaVerificado: mfa === '123456',
-        aprobadoPor: { usuarioId: 'us_superadmin', rol: 'inparques.superadmin' },
       });
-      if (!val.ok) {
+      if (!val.ok && !soloFaltaAprobacion(val)) {
         brindis(val.mensaje, true);
         break;
       }
-      op.cerrarLiquidacion(valor, motivo, 'us_superadmin');
+      const liq = store.leer().liquidaciones.find((x) => x.id === valor);
+      op.solicitarAprobacion({
+        accion: 'liquidacion.cerrar',
+        resumen: `Cierre de liquidación ${liq ? `${liq.periodoDesde} a ${liq.periodoHasta}` : valor}`,
+        carga: {},
+        entidad: 'liquidacion',
+        entidadId: valor,
+        motivo,
+        mfaVerificado: mfa === '123456',
+        aprobadores: requisitosDe('liquidacion.cerrar').aprobadores,
+      });
       cerrarHoja();
       repintar();
-      brindis('Liquidación cerrada. Solo admite ajustes desde ahora.');
+      brindis('Solicitud enviada. Queda pendiente de la firma de otra persona.');
       break;
     }
 
@@ -1126,9 +1214,12 @@ function registrar(): void {
     mostrarError('error-registro', 'La contraseña debe tener al menos 8 caracteres.');
     return;
   }
+  // No se crea ninguna cuenta: la demo trae sus once perfiles y no tiene
+  // servidor donde registrar uno nuevo. Antes decía "Cuenta creada", que era
+  // sencillamente falso.
   sesion.continuarComoInvitado();
   router.ir('/v');
-  brindis('Cuenta creada. En la demostración entra como visitante.');
+  brindis('En la demostración no se crean cuentas: entra como invitado, con acceso a lo suyo.');
 }
 
 function cambiarClave(): void {
@@ -1142,8 +1233,16 @@ function cambiarClave(): void {
     mostrarError('error-nueva-clave', 'Las contraseñas no coinciden.');
     return;
   }
+  // Antes solo se decía "actualizada" y no se guardaba nada: quien probaba
+  // su clave nueva no entraba.
+  const correo = estadoUi.seleccion['recuperar-correo'] ?? '';
+  if (!correo || !cambiarClaveDe(correo, a)) {
+    mostrarError('error-nueva-clave', 'No se pudo identificar la cuenta. Vuelva a empezar la recuperación.');
+    return;
+  }
+  delete estadoUi.seleccion['recuperar-correo'];
   router.ir('/acceso');
-  brindis('Contraseña actualizada. Ya puede entrar.');
+  brindis('Contraseña actualizada. Ya puede entrar con la nueva.');
 }
 
 function activarComercio(): void {
@@ -1267,7 +1366,7 @@ function agregarServicio(articuloId: string): void {
 
   const r = agregarAlCarrito(estadoUi.carrito, { articulo: art, cantidad, variantes, modificadores: [] });
   if (r.ok) {
-    const carrito = { ...r.carrito, franjaId, programadaPara: `${franja.fecha}T${franja.desde}:00.000Z` };
+    const carrito = { ...r.carrito, franjaId, programadaPara: instanteLocal(franja.fecha, franja.desde) };
     fijarCarrito(carrito);
     router.ir('/v/carrito');
     brindis('Reserva agregada al carrito.');
@@ -1399,16 +1498,26 @@ function confirmarSuspension(negocioId: string): void {
     motivo,
     evidencia,
     mfaVerificado: mfa === '123456',
-    aprobadoPor: { usuarioId: 'us_superadmin', rol: 'inparques.superadmin' },
   });
-  if (!val.ok) {
+  if (!val.ok && !soloFaltaAprobacion(val)) {
     brindis(val.mensaje, true);
     return;
   }
-  op.suspenderNegocio(negocioId, motivo, evidencia, 'us_superadmin');
+  const neg = store.leer().negocios.find((x) => x.id === negocioId);
+  op.solicitarAprobacion({
+    accion: 'negocio.suspender',
+    resumen: `Suspensión de ${neg?.nombreComercial ?? negocioId}`,
+    carga: {},
+    entidad: 'negocio',
+    entidadId: negocioId,
+    motivo,
+    evidencia,
+    mfaVerificado: mfa === '123456',
+    aprobadores: requisitosDe('negocio.suspender').aprobadores,
+  });
   cerrarHoja();
   repintar();
-  brindis('Negocio suspendido. Sus locales dejaron de publicarse.');
+  brindis('Solicitud enviada. La suspensión requiere la firma de otra persona.');
 }
 
 function confirmarReembolso(reembolsoId: string): void {
@@ -1425,16 +1534,27 @@ function confirmarReembolso(reembolsoId: string): void {
     evidencia,
     montoUsd: r?.montoUsd,
     mfaVerificado: mfa === '123456',
-    aprobadoPor: { usuarioId: 'us_superadmin', rol: 'inparques.superadmin' },
   });
-  if (!val.ok) {
+  if (!val.ok && !soloFaltaAprobacion(val)) {
     brindis(val.mensaje, true);
     return;
   }
-  op.aprobarReembolso(reembolsoId, motivo, evidencia, 'us_superadmin');
+  // Por debajo del umbral se ejecuta al momento; por encima exige segunda firma.
+  const req = requisitosDe('reembolso.aprobar', { montoUsd: r?.montoUsd });
+  op.solicitarAprobacion({
+    accion: 'reembolso.aprobar',
+    resumen: `Reembolso de ${formatearUsd(r?.montoUsd ?? 0)}`,
+    carga: {},
+    entidad: 'reembolso',
+    entidadId: reembolsoId,
+    motivo,
+    evidencia,
+    mfaVerificado: mfa === '123456',
+    aprobadores: req.aprobadores,
+  });
   cerrarHoja();
   repintar();
-  brindis('Reembolso aprobado y registrado.');
+  brindis('Solicitud enviada. Queda pendiente de la firma de otra persona.');
 }
 
 function nuevaInspeccion(): void {
@@ -1475,10 +1595,9 @@ function cambiarCuenta(): void {
     motivo,
     evidencia,
     mfaVerificado: false,
-    aprobadoPor: { usuarioId: 'us_direccion', rol: 'inparques.direccion_comercial' },
   });
 
-  if (!val.ok && !val.faltan.includes('mfa')) {
+  if (!val.ok && !val.faltan.includes('mfa') && !soloFaltaAprobacion(val)) {
     mostrarError('error-cuenta-bancaria', val.mensaje);
     return;
   }
@@ -1488,7 +1607,7 @@ function cambiarCuenta(): void {
     titulo: 'Verificación en dos pasos',
     cuerpo: `<p class="tenue mb-1">Este cambio exige verificación. Introduzca el código de la demostración.</p>
       <input class="entrada" name="mfa-banco" inputmode="numeric" placeholder="123456" />
-      <p class="tenue-2 mt-1">Al confirmar se solicita además la aprobación de la Dirección Comercial.</p>`,
+      <p class="tenue-2 mt-1">Al confirmar, el cambio queda pendiente hasta que lo firme la Dirección Comercial. No se aplica todavía.</p>`,
     confirmar: 'Confirmar cambio',
     accionConfirmar: 'confirmar-cambio-cuenta',
     valor: JSON.stringify({ banco, titular, numero, motivo, evidencia }),
@@ -1509,19 +1628,28 @@ document.addEventListener('click', (ev) => {
     motivo: datos.motivo,
     evidencia: datos.evidencia,
     mfaVerificado: mfa === '123456',
-    aprobadoPor: { usuarioId: 'us_direccion', rol: 'inparques.direccion_comercial' },
   });
-  if (!val.ok) {
+  if (!val.ok && !soloFaltaAprobacion(val)) {
     brindis(val.mensaje, true);
     return;
   }
   const negocio = sesion.usuario()?.scope.ids[0];
   if (negocio) {
-    op.cambiarCuentaBancaria(negocio, datos, datos.motivo, datos.evidencia, 'us_direccion');
+    op.solicitarAprobacion({
+      accion: 'bancario.cambiar_cuenta',
+      resumen: `Cambio de cuenta bancaria (${datos.banco})`,
+      carga: { banco: datos.banco, numero: datos.numero, titular: datos.titular },
+      entidad: 'negocio',
+      entidadId: negocio,
+      motivo: datos.motivo,
+      evidencia: datos.evidencia,
+      mfaVerificado: mfa === '123456',
+      aprobadores: requisitosDe('bancario.cambiar_cuenta').aprobadores,
+    });
   }
   cerrarHoja();
   router.ir('/c/cobro');
-  brindis('Cuenta actualizada. Queda pendiente de verificación bancaria.');
+  brindis('Solicitud enviada. La cuenta no cambia hasta que la firme la Dirección Comercial.');
 });
 
 /**
