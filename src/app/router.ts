@@ -45,6 +45,23 @@ function compilar(patron: string): { re: RegExp; claves: string[] } {
 
 const COMPILADAS = VISTAS.map((vista) => ({ vista, ...compilar(vista.ruta) }));
 
+/**
+ * `decodeURIComponent` lanza `URIError` ante un porcentaje suelto o una
+ * secuencia incompleta: `#/v/comercio/%E0%A4%A`. Eso pasa mas de lo que
+ * parece — un enlace cortado al copiarlo, o recortado por un chat — y sin
+ * proteccion la excepcion sube hasta el manejador de `hashchange`, que muere
+ * sin pintar: la pantalla anterior se queda congelada con una URL que ya no
+ * le corresponde. Ante un segmento ilegible se usa el texto crudo, que no
+ * casara con ningun identificador y acabara en el 404 de siempre.
+ */
+function decodificar(segmento: string): string {
+  try {
+    return decodeURIComponent(segmento);
+  } catch {
+    return segmento;
+  }
+}
+
 export function emparejar(ruta: string): { vista: Vista; params: Record<string, string> } | null {
   // Coincidencia exacta primero: evita que "/c/pedido/:id" capture "/c/pedidos".
   const exacta = COMPILADAS.find((c) => c.vista.ruta === ruta);
@@ -54,7 +71,7 @@ export function emparejar(ruta: string): { vista: Vista; params: Record<string, 
     const m = c.re.exec(ruta);
     if (!m) continue;
     const params: Record<string, string> = {};
-    c.claves.forEach((k, i) => (params[k] = decodeURIComponent(m[i + 1])));
+    c.claves.forEach((k, i) => (params[k] = decodificar(m[i + 1])));
     return { vista: c.vista, params };
   }
   return null;

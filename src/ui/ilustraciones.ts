@@ -18,6 +18,8 @@
  * escena, así que un comercio no cambia de imagen al repintar la vista.
  */
 
+import { esc } from './componentes';
+
 /** Paleta derivada de `tailwind.config.js` (el sistema real de Stitch). */
 const C = {
   crema: '#fbf9f3',
@@ -56,8 +58,14 @@ function azar(semilla: number): () => number {
   };
 }
 
+/**
+ * La etiqueta suele venir de un nombre que escribe el comercio ("Imagen de
+ * ${articulo.nombre}"), asi que hay que escaparla: sin esto, un nombre con
+ * comillas cierra el atributo y lo que siga se convierte en atributos del
+ * `<svg>`.
+ */
 function envolver(contenido: string, clases: string, etiqueta: string): string {
-  return `<svg class="${clases}" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="${etiqueta}" xmlns="http://www.w3.org/2000/svg">${contenido}</svg>`;
+  return `<svg class="${esc(clases)}" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="${esc(etiqueta)}" xmlns="http://www.w3.org/2000/svg">${contenido}</svg>`;
 }
 
 // ---------------------------------------------------------------- Paisajes

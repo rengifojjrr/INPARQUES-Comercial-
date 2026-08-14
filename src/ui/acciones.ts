@@ -13,7 +13,7 @@ import { conectividad } from '../net/connectivity';
 import { colaSincronizacion } from '../net/sync-queue';
 import { adaptadores } from '../adapters/simulados';
 import { estadoUi, fijarCarrito, fijarFiltro, fijarTexto, vaciarCarrito } from './estado-ui';
-import { agregarAlCarrito, cambiarCantidad, quitarDelCarrito, reiniciarCon } from '../domain/cart';
+import { agregarAlCarrito, cambiarCantidad, quitarDelCarrito, reiniciarCon, topeDeLinea } from '../domain/cart';
 import { validarAccion } from '../domain/sensitive-actions';
 import * as op from './operaciones';
 import { esc } from './componentes';
@@ -209,13 +209,18 @@ function alPulsar(ev: Event): void {
 
 function despachar(accion: string, valor: string): void {
   // Filtros y chips: `filtro-<clave>` cambia el filtro y repinta.
-  if (accion.startsWith('filtro-')) {
-    fijarFiltro(accion.replace('filtro-', ''), valor);
+  //
+  // `filtro-cat:<negocioId>` va primero a proposito: es un caso particular de
+  // `filtro-`, y con el orden inverso nunca llegaba a ejecutarse — el filtro
+  // se guardaba bajo `cat:ng_x` mientras la vista lo leia en `cat-ng_x`, de
+  // modo que los chips de categoria no filtraban nada.
+  if (accion.startsWith('filtro-cat:')) {
+    fijarFiltro(`cat-${accion.split(':')[1]}`, valor);
     repintar();
     return;
   }
-  if (accion.startsWith('filtro-cat:')) {
-    fijarFiltro(`cat-${accion.split(':')[1]}`, valor);
+  if (accion.startsWith('filtro-')) {
+    fijarFiltro(accion.replace('filtro-', ''), valor);
     repintar();
     return;
   }
@@ -340,7 +345,19 @@ function despachar(accion: string, valor: string): void {
     case 'item-menos': {
       const item = estadoUi.carrito.items.find((i) => i.id === valor);
       if (!item) break;
-      fijarCarrito(cambiarCantidad(estadoUi.carrito, valor, item.cantidad + (accion === 'item-mas' ? 1 : -1)));
+      const destino = item.cantidad + (accion === 'item-mas' ? 1 : -1);
+      // El "+" del carrito tambien respeta las existencias, igual que el
+      // boton de agregar desde la ficha del articulo.
+      const tope = topeDeLinea(
+        estadoUi.carrito,
+        valor,
+        store.leer().articulos.find((a) => a.id === item.articuloId),
+      );
+      if (destino > tope) {
+        brindis(`Solo quedan ${tope} unidades de ${item.nombre}.`, true);
+        break;
+      }
+      fijarCarrito(cambiarCantidad(estadoUi.carrito, valor, destino));
       repintar();
       break;
     }
@@ -1224,6 +1241,19 @@ function registrarMostrador(localId: string): void {
     mostrarError('error-mostrador', 'Agregue al menos un artículo.');
     return;
   }
+
+  // Misma regla que en el carrito del visitante: no se vende por encima de
+  // las existencias. Sin esto la venta se registraba igual y el inventario
+  // se quedaba en cero, ocultando que faltó mercancía.
+  const arts = store.leer().articulos;
+  for (const l of lineas) {
+    const art = arts.find((a) => a.id === l.articuloId);
+    if (art && typeof art.stock === 'number' && l.cantidad > art.stock) {
+      mostrarError('error-mostrador', `${art.nombre}: solo quedan ${art.stock} en existencia.`);
+      return;
+    }
+  }
+
   const metodo = (valorRadio('metodo-mostrador') || 'efectivo') as MetodoPago;
   op.registrarVentaMostrador(localId, lineas, metodo);
   for (const k of Object.keys(estadoUi.seleccion)) {
@@ -1366,6 +1396,21 @@ document.addEventListener('click', (ev) => {
   brindis('Cuenta actualizada. Queda pendiente de verificación bancaria.');
 });
 
+/**
+ * Una celda de CSV, entrecomillada y sin formulas.
+ *
+ * Excel y LibreOffice interpretan como formula cualquier celda que empiece
+ * por `= + - @` o por tabulador o retorno, y las comillas no lo evitan. Los
+ * nombres de articulo y de comercio los escribe el propio comercio, asi que
+ * un nombre como `=HYPERLINK("http://...")` se ejecutaria al abrir el
+ * reporte en la maquina de quien lo descarga. Se antepone un apostrofo, que
+ * la hoja de calculo trata como "esto es texto" y no muestra.
+ */
+function celdaCsv(valor: string): string {
+  const seguro = /^[=+\-@\t\r]/.test(valor) ? `'${valor}` : valor;
+  return `"${seguro.replace(/"/g, '""')}"`;
+}
+
 async function exportarCsv(tipo: string): Promise<void> {
   const e = store.leer();
   let filas: string[][] = [];
@@ -1409,7 +1454,7 @@ async function exportarCsv(tipo: string): Promise<void> {
     ];
   }
 
-  const csv = filas.map((f) => f.map((c) => `"${c.replace(/"/g, '""')}"`).join(',')).join('\n');
+  const csv = filas.map((f) => f.map(celdaCsv).join(',')).join('\n');
   const contenido = `﻿${csv}`;
   const nombreArchivo = `inparques-${tipo}.csv`;
 
@@ -1430,12 +1475,20 @@ async function exportarCsv(tipo: string): Promise<void> {
     return;
   }
 
+  // El enlace tiene que estar en el documento para que Firefox lo active, y
+  // la URL no se puede liberar en la misma vuelta del bucle de eventos: si se
+  // revoca antes de que arranque la descarga, el archivo sale vacio o no sale.
   const blob = new Blob([contenido], { type: 'text/csv;charset=utf-8' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
   a.download = nombreArchivo;
+  a.style.display = 'none';
+  document.body.appendChild(a);
   a.click();
-  URL.revokeObjectURL(url);
+  setTimeout(() => {
+    a.remove();
+    URL.revokeObjectURL(url);
+  }, 0);
   brindis(`Archivo ${tipo}.csv descargado.`);
 }

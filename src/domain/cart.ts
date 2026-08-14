@@ -123,6 +123,33 @@ export function cambiarCantidad(carrito: Carrito, itemId: string, cantidad: numb
   };
 }
 
+/**
+ * Tope al que puede subir una linea del carrito sin pasarse de las
+ * existencias.
+ *
+ * `agregarAlCarrito` ya comprueba el stock, pero el boton "+" del carrito
+ * llamaba a `cambiarCantidad` directamente y se saltaba la regla: se podian
+ * poner diez unidades de un articulo con tres en existencia. Peor aun, al
+ * crear la orden el inventario baja con `Math.max(0, ...)` y al cancelarla
+ * vuelve a sumar la cantidad pedida, asi que la operacion inventaba
+ * existencias que nunca hubo.
+ *
+ * Devuelve `Infinity` cuando el articulo no lleva control de existencias
+ * (servicios, preparados al momento), que es el caso normal.
+ */
+export function topeDeLinea(
+  carrito: Carrito,
+  itemId: string,
+  articulo: Pick<Articulo, 'id' | 'stock'> | undefined,
+): number {
+  if (!articulo || typeof articulo.stock !== 'number') return Infinity;
+  // Otras lineas del mismo articulo ya consumen parte de las existencias.
+  const otras = carrito.items
+    .filter((i) => i.id !== itemId && i.articuloId === articulo.id)
+    .reduce((s, i) => s + i.cantidad, 0);
+  return Math.max(0, articulo.stock - otras);
+}
+
 export function extrasDeItem(item: ItemOrden): number {
   const v = item.seleccionVariantes.reduce((s, x) => s + x.deltaUsd, 0);
   const m = item.seleccionModificadores.reduce((s, x) => s + x.deltaUsd, 0);
