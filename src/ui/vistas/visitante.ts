@@ -4,11 +4,10 @@
  */
 
 import {
-  html, crudo, esc, boton, tarjeta, insignia, listaDatos, vacio, aviso, etiquetaDemo,
-  entradaTexto, areaTexto, seccion, precio, chips, buscador, lineaTiempo, barraAccion,
+  html, crudo, esc, boton, tarjeta, insignia, listaDatos, vacio, aviso, entradaTexto, areaTexto, seccion, precio, chips, buscador, lineaTiempo, barraAccion,
   contador, opcionRadio, metrica,
 } from '../componentes';
-import type { Pagina, Render } from './tipos';
+import type { Render } from './tipos';
 import { store } from '../../data/store';
 import { sesion } from '../../app/session';
 import { estadoUi, filtro, texto } from '../estado-ui';
@@ -358,67 +357,6 @@ export const zona: Render = (ctx) => {
 
 // --------------------------------------------------------------------- Oferta
 
-export const fichaComercio: Render = (ctx) => {
-  const e = store.leer();
-  const negocio = e.negocios.find((n) => n.id === ctx.params.negocioId);
-  if (!negocio) return error404(ctx);
-  const locales = e.locales.filter((l) => l.negocioId === negocio.id);
-  const local = locales[0];
-  const punto = e.puntos.find((p) => p.id === local?.puntoId);
-  const zona = e.zonas.find((z) => z.id === punto?.zonaId);
-  const val = e.valoraciones.filter((v) => v.negocioId === negocio.id);
-  const media = val.length ? (val.reduce((s, v) => s + v.estrellas, 0) / val.length).toFixed(1) : null;
-
-  const modos = [
-    local?.cumplimiento.retiroInmediato ? 'Retiro inmediato' : null,
-    local?.cumplimiento.retiroProgramado ? 'Retiro programado' : null,
-    local?.cumplimiento.mesa ? 'Consumo en mesa' : null,
-  ].filter(Boolean);
-
-  return {
-    titulo: negocio.nombreComercial,
-    atras: '/v',
-    contenido: html`
-      <div class="fila mb-2">
-        <span aria-hidden="true" style="font-size:38px">${ICONO_CATEGORIA[negocio.categoria] ?? '◻'}</span>
-        <div class="crece">
-          <h1 style="font-size:20px">${negocio.nombreComercial}</h1>
-          <div class="tenue">${zona?.nombre ?? ''} · ${punto?.codigo ?? ''}</div>
-          <div class="fila fila--envuelve mt-1" style="gap:6px">
-            ${crudo(insignia(local?.abierto ? 'Abierto ahora' : 'Cerrado', local?.abierto ? 'exito' : 'neutro'))}
-            ${media ? crudo(insignia(`★ ${media}`, 'neutro')) : ''}
-          </div>
-        </div>
-      </div>
-
-      ${modos.length ? crudo(aviso('info', 'Modalidades disponibles', modos.join(' · '))) : ''}
-
-      <div class="fila mt-2" style="gap:8px">
-        ${crudo(boton('Ver catálogo', { variante: 'principal', accion: 'ir', valor: `/v/comercio/${negocio.id}/catalogo` }))}
-        ${crudo(boton('Cómo llegar', { variante: 'secundario', accion: 'ir', valor: `/v/como-llegar/${local?.id ?? ''}` }))}
-      </div>
-
-      ${crudo(seccion('Información', html`${crudo(listaDatos([
-        ['Razón social', esc(negocio.razonSocial)],
-        ['Categoría', esc(NOMBRE_CATEGORIA[negocio.categoria] ?? negocio.categoria)],
-        ['Punto comercial', esc(punto?.nombre ?? '—')],
-        ['Horario', local ? 'Martes a domingo, 07:00 a 17:00' : '—'],
-      ]))}`))}
-
-      ${val.length
-        ? crudo(seccion(`Valoraciones (${val.length})`, html`<div class="pila">
-            ${val.slice(0, 3).map((v) => crudo(tarjeta(html`
-              <div class="fila fila--sep">
-                <span aria-hidden="true" style="color:var(--alerta)">${'★'.repeat(v.estrellas)}</span>
-                <span class="tenue-2">${desde(v.creadaEn)}</span>
-              </div>
-              ${v.comentario ? crudo(`<p class="tenue mt-1">${esc(v.comentario)}</p>`) : ''}
-            `, { clase: 'tarjeta--plana' })))}
-          </div>`))
-        : ''}
-    `,
-  };
-};
 
 export const catalogo: Render = (ctx) => {
   const e = store.leer();
@@ -729,102 +667,11 @@ export const checkout: Render = () => {
   };
 };
 
-export const seleccionPago: Render = () => {
-  const e = store.leer();
-  const t = totalesCarrito(estadoUi.carrito, e.tasaBcv.valor);
-  return {
-    titulo: 'Forma de pago',
-    atras: '/v/checkout',
-    sinNav: true,
-    contenido: html`
-      <h1 class="titulo-pag">¿Cómo desea pagar?</h1>
-      <p class="bajada">Monto pagadero: <strong>${formatearVes(t.totalVes)}</strong> · ${formatearUsd(t.totalUsd)}</p>
-      ${crudo(etiquetaDemo())}
-      <div class="pila mt-2">
-        ${crudo(tarjeta(html`<div class="fila"><span aria-hidden="true" style="font-size:22px">▣</span><div class="crece"><div style="font-weight:650">Pago Móvil</div><div class="tenue-2">Se verifica con el banco antes de confirmar</div></div><span aria-hidden="true">›</span></div>`, { accionIr: '/v/checkout/pago/pago-movil' }))}
-        ${crudo(tarjeta(html`<div class="fila"><span aria-hidden="true" style="font-size:22px">⇄</span><div class="crece"><div style="font-weight:650">Transferencia</div><div class="tenue-2">Para montos mayores; conciliación por referencia</div></div><span aria-hidden="true">›</span></div>`, { accionIr: '/v/checkout/pago/transferencia' }))}
-        ${crudo(tarjeta(html`<div class="fila"><span aria-hidden="true" style="font-size:22px">▤</span><div class="crece"><div style="font-weight:650">Tarjeta</div><div class="tenue-2">Débito o crédito</div></div><span aria-hidden="true">›</span></div>`, { accionIr: '/v/checkout/pago/tarjeta' }))}
-        ${crudo(tarjeta(html`<div class="fila"><span aria-hidden="true" style="font-size:22px">◎</span><div class="crece"><div style="font-weight:650">Efectivo en el punto</div><div class="tenue-2">Paga al retirar; queda registrado en caja</div></div><span aria-hidden="true">›</span></div>`, { accionIr: '/v/checkout/pago/efectivo' }))}
-      </div>
-      ${crudo(aviso('info', 'Nunca se piden datos reales', 'La demo no almacena números completos de tarjeta ni códigos de seguridad. Todos los pagos los resuelve un adaptador simulado.'))}
-    `,
-  };
-};
 
-function paginaPago(metodo: string, titulo: string, campos: string, nota: string): Pagina {
-  const e = store.leer();
-  const t = totalesCarrito(estadoUi.carrito, e.tasaBcv.valor);
-  return {
-    titulo,
-    atras: '/v/checkout/pago',
-    sinNav: true,
-    contenido: html`
-      <h1 class="titulo-pag">${titulo}</h1>
-      <p class="bajada">Monto pagadero: <strong>${formatearVes(t.totalVes)}</strong></p>
-      ${crudo(etiquetaDemo())}
-      <form class="mt-2" data-formulario="pago" data-metodo="${metodo}">
-        ${crudo(campos)}
-        <div id="error-pago"></div>
-      </form>
-      ${crudo(aviso('info', 'Cómo se comporta la demo', nota))}
-      ${crudo(barraAccion([
-        boton(`Pagar ${formatearVes(t.totalVes)}`, { variante: 'principal', bloque: true, accion: 'pagar', valor: metodo }),
-      ]))}
-    `,
-  };
-}
 
-export const pagoMovil: Render = () =>
-  paginaPago(
-    'pago_movil',
-    'Pago Móvil',
-    html`${crudo(listaDatos([
-      ['Banco receptor', 'Banco Demo Nacional'],
-      ['RIF', 'J-41025896-7'],
-      ['Teléfono', '0414-0000000'],
-    ]))}
-    <div class="mt-2">
-      ${crudo(entradaTexto('referencia', 'Número de referencia', { modo: 'numeric', requerido: true, marcador: '123456', ayuda: 'Escriba 000000 para probar un pago fallido.' }))}
-      ${crudo(entradaTexto('telefono', 'Teléfono emisor', { tipo: 'tel', modo: 'tel', marcador: '0414-0000000' }))}
-    </div>`,
-    'El pago queda pendiente de verificación: el documento advierte que nunca debe aceptarse la captura como prueba final. El comercio lo verifica contra el banco.',
-  );
 
-export const pagoTransferencia: Render = () =>
-  paginaPago(
-    'transferencia',
-    'Transferencia',
-    html`${crudo(listaDatos([
-      ['Banco', 'Banco Demo Nacional'],
-      ['Cuenta', '0102 •••• •••• 1234'],
-      ['Titular', 'Inversiones Los Cedros, C.A.'],
-    ]))}
-    <div class="mt-2">
-      ${crudo(entradaTexto('referencia', 'Referencia bancaria', { modo: 'numeric', requerido: true, ayuda: 'Escriba 000000 para probar un pago fallido.' }))}
-    </div>`,
-    'La transferencia se concilia por referencia, monto y fecha. Hasta que el banco confirme, el pago aparece como pendiente de verificación.',
-  );
 
-export const pagoTarjeta: Render = () =>
-  paginaPago(
-    'tarjeta',
-    'Tarjeta',
-    html`${crudo(entradaTexto('titular', 'Nombre en la tarjeta', { requerido: true, autocompletar: 'cc-name' }))}
-    ${crudo(entradaTexto('numero', 'Número de tarjeta', { modo: 'numeric', requerido: true, marcador: '4111 1111 1111 1111', ayuda: 'Datos ficticios. No se almacena el número.' }))}
-    <div class="fila" style="gap:10px">
-      <div class="crece">${crudo(entradaTexto('vence', 'Vence', { marcador: 'MM/AA' }))}</div>
-      <div class="crece">${crudo(entradaTexto('cvv', 'Código', { modo: 'numeric', marcador: '123' }))}</div>
-    </div>`,
-    'La plataforma no almacena el número completo ni el código de seguridad: en producción se usaría el token del adquirente.',
-  );
 
-export const pagoEfectivo: Render = () =>
-  paginaPago(
-    'efectivo',
-    'Efectivo en el punto',
-    html`${crudo(aviso('alerta', 'Pague al retirar', 'El pedido se prepara y usted paga en el mostrador. El operador registra el cobro en la caja.'))}`,
-    'El efectivo se confirma en el punto, no por el banco, y entra en el cierre de turno del local junto con las ventas de la aplicación.',
-  );
 
 export const confirmacion: Render = (ctx) => {
   const e = store.leer();
@@ -868,91 +715,7 @@ export const confirmacion: Render = (ctx) => {
 
 // ---------------------------------------------------------------- Seguimiento
 
-function paginaSeguimiento(ctx: Parameters<Render>[0], esReserva: boolean): Pagina {
-  const e = store.leer();
-  const orden = e.ordenes.find((o) => o.id === ctx.params.ordenId);
-  if (!orden) return error404(ctx);
-  const pago = e.pagos.find((p) => p.ordenId === orden.id);
-  const factura = e.facturas.find((f) => f.ordenId === orden.id);
-  const negocio = e.negocios.find((n) => n.id === orden.negocioId)!;
 
-  const secuencia: Array<[string, string]> = esReserva
-    ? [['pendiente_aceptacion', 'Reserva recibida'], ['aceptada', 'Confirmada'], ['lista', 'Lista para el turno'], ['entregada', 'Completada']]
-    : [['pendiente_aceptacion', 'Recibido'], ['aceptada', 'Aceptado'], ['preparando', 'En preparación'], ['lista', 'Listo para retirar'], ['entregada', 'Entregado']];
-
-  const idx = secuencia.findIndex(([s]) => s === orden.estado);
-  const pasos = secuencia.map(([, titulo], i) => ({
-    titulo,
-    estado: (orden.estado === 'cancelada' ? 'pendiente' : i < idx ? 'hecho' : i === idx ? 'activo' : 'pendiente') as 'hecho' | 'activo' | 'pendiente',
-  }));
-
-  return {
-    titulo: orden.codigo,
-    subtitulo: negocio.nombreComercial,
-    atras: '/v/historial',
-    contenido: html`
-      ${orden.estado === 'cancelada' ? crudo(aviso('error', 'Pedido cancelado', 'Consulte el historial de la operación para ver el motivo.')) : ''}
-
-      ${orden.estado === 'lista'
-        ? crudo(tarjeta(html`
-            <div class="centrado">
-              <p class="tenue">Presente este código en el punto</p>
-              <div class="mono" style="font-size:30px;font-weight:700;letter-spacing:0.1em;margin:8px 0">${orden.codigoRetiro}</div>
-              ${crudo(boton('Ver código QR', { variante: 'principal', accion: 'ir', valor: `/v/pedido/${orden.id}/qr` }))}
-            </div>
-          `))
-        : ''}
-
-      ${crudo(seccion('Estado del pedido', html`${crudo(lineaTiempo(pasos))}`))}
-
-      ${crudo(seccion('Estados por separado', html`${crudo(listaDatos([
-        ['Pedido', insignia(ETIQUETA_ORDEN[orden.estado], TONO_ORDEN[orden.estado])],
-        ['Pago', pago ? insignia(ETIQUETA_PAGO[pago.estado], TONO_PAGO[pago.estado]) : '—'],
-        ['Factura', factura ? insignia(factura.estado === 'emitida' ? 'Emitida' : factura.estado, factura.estado === 'emitida' ? 'exito' : 'neutro') : insignia('Pendiente', 'neutro')],
-      ]))}
-      <p class="tenue-2 mt-1">El pedido, el pago y la factura avanzan por separado: uno puede estar listo mientras otro sigue pendiente.</p>`))}
-
-      ${crudo(seccion('Detalle', html`
-        <div class="pila">
-          ${orden.items.map((i) => crudo(tarjeta(html`
-            <div class="fila fila--sep">
-              <div class="crece">
-                <div style="font-weight:600">${i.cantidad} × ${i.nombre}</div>
-                ${i.seleccionVariantes.map((v) => crudo(`<div class="tenue-2">${esc(v.nombre)}</div>`))}
-                ${i.seleccionModificadores.map((m) => crudo(`<div class="tenue-2">+ ${esc(m.nombre)}</div>`))}
-              </div>
-              <span class="precio">${formatearUsd((i.precioUnitarioUsd + extrasDeItem(i)) * i.cantidad)}</span>
-            </div>
-          `, { clase: 'tarjeta--plana' })))}
-        </div>
-        <div class="mt-2">${crudo(listaDatos([
-          ['Total en USD', formatearUsd(orden.totalUsd)],
-          ['Monto pagado', formatearVes(orden.totalVes)],
-          ['Tasa aplicada', `${orden.tasaBcv.toFixed(2)} Bs/USD · ${fechaCorta(orden.tasaBcvFecha)}`],
-        ]))}</div>
-        <p class="tenue-2 mt-1">La tasa quedó congelada al registrar la venta y no se recalcula.</p>
-      `))}
-
-      ${crudo(seccion('Historial de la operación', html`
-        ${crudo(lineaTiempo(orden.historial.map((h) => ({
-          titulo: ETIQUETA_ORDEN[h.a as keyof typeof ETIQUETA_ORDEN] ?? h.a,
-          detalle: `${fechaHora(h.en)}${h.motivo ? ` · ${h.motivo}` : ''}`,
-          estado: 'hecho' as const,
-        }))))}
-      `))}
-
-      <div class="pila mt-2">
-        ${crudo(boton('Ver comprobante', { bloque: true, accion: 'ir', valor: `/v/comprobante/${orden.id}` }))}
-        ${factura ? crudo(boton('Ver factura del comercio', { bloque: true, accion: 'ir', valor: `/v/factura/${orden.id}` })) : ''}
-        ${orden.estado === 'entregada' ? crudo(boton('Valorar', { bloque: true, accion: 'ir', valor: `/v/valorar/${orden.id}` })) : ''}
-        ${crudo(boton('Tengo un problema', { variante: 'texto', bloque: true, accion: 'ir', valor: `/v/reclamo/${orden.id}` }))}
-      </div>
-    `,
-  };
-}
-
-export const seguimientoPedido: Render = (ctx) => paginaSeguimiento(ctx, false);
-export const seguimientoReserva: Render = (ctx) => paginaSeguimiento(ctx, true);
 
 export const codigoRetiro: Render = (ctx) => {
   const e = store.leer();

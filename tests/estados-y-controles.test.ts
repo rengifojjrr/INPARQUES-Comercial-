@@ -98,10 +98,14 @@ describe('acciones sensibles', () => {
     expect(requisitosDe('reembolso.aprobar', { montoUsd: UMBRAL_REEMBOLSO_ALTO_USD }).dobleAprobacion).toBe(true);
   });
 
+  // La segregacion de funciones es entre personas, no entre cargos: dos
+  // personas del mismo cargo son cuatro ojos; una sola persona no lo es por
+  // mucho cargo que tenga.
   it('nadie puede aprobarse a si mismo', () => {
     const r = validarAccion({
       accion: 'finanzas.ajuste',
       rol: 'inparques.finanzas',
+      usuarioId: 'us_finanzas',
       motivo: 'Diferencia de caja',
       evidencia: 'acta.pdf',
       mfaVerificado: true,
@@ -110,6 +114,50 @@ describe('acciones sensibles', () => {
     expect(r.ok).toBe(false);
     if (!r.ok) expect(r.faltan).toContain('aprobacion');
   });
+
+  it('dos personas del mismo cargo si se aprueban entre si', () => {
+    const r = validarAccion({
+      accion: 'finanzas.ajuste',
+      rol: 'inparques.finanzas',
+      usuarioId: 'us_finanzas',
+      motivo: 'Diferencia de caja',
+      evidencia: 'acta.pdf',
+      mfaVerificado: true,
+      aprobadoPor: { usuarioId: 'us_finanzas_2', rol: 'inparques.finanzas' },
+    });
+    expect(r.ok).toBe(true);
+  });
+
+  // Con la regla anterior —aprobador de *otro cargo*— estas dos acciones eran
+  // imposibles: solo admiten aprobadores superadmin, asi que un superadmin no
+  // tenia ningun aprobador valido y la accion quedaba muerta.
+  for (const accion of ['usuario.cambiar_rol', 'reglas.editar'] as const) {
+    it(`un superadmin puede completar ${accion} con la firma de otro`, () => {
+      const r = validarAccion({
+        accion,
+        rol: 'inparques.superadmin',
+        usuarioId: 'us_superadmin',
+        motivo: 'Rotacion de personal',
+        evidencia: 'memo.pdf',
+        mfaVerificado: true,
+        aprobadoPor: { usuarioId: 'us_superadmin_2', rol: 'inparques.superadmin' },
+      });
+      expect(r.ok).toBe(true);
+    });
+
+    it(`${accion} sigue bloqueada si la firma es de la misma persona`, () => {
+      const r = validarAccion({
+        accion,
+        rol: 'inparques.superadmin',
+        usuarioId: 'us_superadmin',
+        motivo: 'Rotacion de personal',
+        evidencia: 'memo.pdf',
+        mfaVerificado: true,
+        aprobadoPor: { usuarioId: 'us_superadmin', rol: 'inparques.superadmin' },
+      });
+      expect(r.ok).toBe(false);
+    });
+  }
 });
 
 describe('registros que no se borran ni se editan', () => {

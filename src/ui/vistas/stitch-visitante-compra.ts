@@ -18,10 +18,11 @@ import { store } from '../../data/store';
 import { sesion } from '../../app/session';
 import { estadoUi } from '../estado-ui';
 import { totalesCarrito, unidadesEnCarrito, extrasDeItem } from '../../domain/cart';
-import { ETIQUETA_ORDEN } from '../../domain/state-machines';
+import { ETIQUETA_DISPUTA, ETIQUETA_ORDEN, clientePuedeCancelar } from '../../domain/state-machines';
 import { formatearUsd, formatearVes } from '../../domain/money';
 import { fechaCorta, desde } from '../formato';
-import { error404 } from './compartidas';
+import { error403, error404 } from './compartidas';
+import { alcanzaOrden } from '../../domain/ownership';
 
 const NOMBRE_CATEGORIA: Record<string, string> = {
   comida: 'Comida', bebidas: 'Bebidas', juguetes: 'Juguetes', artesania: 'Artesanía',
@@ -579,9 +580,14 @@ function seguimientoStitch(ctx: Parameters<Render>[0], esReserva: boolean): Pagi
   const e = store.leer();
   const orden = e.ordenes.find((o) => o.id === ctx.params.ordenId);
   if (!orden) return error404(ctx);
+  // Antes bastaba con escribir la URL para leer el pedido de otro —y su
+  // código de retiro, que es lo que se presenta para llevarse la comida—.
+  if (!alcanzaOrden(sesion.usuario(), orden, e, Boolean(sesion.activa()?.invitado))) return error403(ctx);
   const negocio = e.negocios.find((n) => n.id === orden.negocioId)!;
   const local = e.locales.find((l) => l.id === orden.localId);
   const punto = e.puntos.find((p) => p.id === local?.puntoId);
+  const yaValorada = e.valoraciones.some((v) => v.ordenId === orden.id);
+  const miReclamo = e.disputas.find((d) => d.ordenId === orden.id);
 
   const secuencia: Array<[string, string, string]> = esReserva
     ? [['pendiente_aceptacion', 'done', 'Reserva recibida'], ['aceptada', 'event_available', 'Confirmada'], ['lista', 'schedule', 'Lista para el turno'], ['entregada', 'shopping_bag', 'Completada']]
@@ -655,6 +661,39 @@ ${cabeceraSimple('INPARQUES Comercial', '/v/historial')}
           </div>
         </section>`}
     <section class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg shadow-sm flex flex-col gap-md">
+      ${
+        // Antes esta pantalla no ofrecía ninguna acción: ni cancelar, ni
+        // reclamar, ni valorar. Se miraba el pedido y ya.
+        clientePuedeCancelar(orden.estado)
+          ? `<button type="button" data-accion="cancelar-pedido-cliente" data-valor="${esc(orden.id)}" class="w-full min-h-touch-target border border-error/40 text-error font-label-md text-label-md rounded-lg flex items-center justify-center gap-2 hover:bg-error-container/20 transition-colors">
+              <span class="material-symbols-outlined">cancel</span> Cancelar pedido
+            </button>
+            <p class="font-body-md text-body-md text-on-surface-variant text-sm">Puede cancelar mientras el comercio no lo haya aceptado.</p>`
+          : ''
+      }
+      ${
+        orden.estado === 'entregada' && !yaValorada
+          ? `<button type="button" data-accion="valorar-pedido" data-valor="${esc(orden.id)}" class="w-full min-h-touch-target bg-primary-container text-on-primary font-label-md text-label-md rounded-lg flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+              <span class="material-symbols-outlined">star</span> Valorar el pedido
+            </button>`
+          : ''
+      }
+      ${
+        !['creada', 'pendiente_aceptacion'].includes(orden.estado)
+          ? `<button type="button" data-accion="abrir-reclamo" data-valor="${esc(orden.id)}" class="w-full min-h-touch-target bg-surface-container-lowest border border-outline-variant text-on-surface font-label-md text-label-md rounded-lg flex items-center justify-center gap-2 hover:bg-surface-container-low transition-colors">
+              <span class="material-symbols-outlined">report</span> Abrir un reclamo
+            </button>`
+          : ''
+      }
+      ${
+        miReclamo
+          ? `<div class="border border-outline-variant rounded-lg p-md">
+              <p class="font-label-md text-label-md text-on-surface flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">gavel</span> Reclamo ${esc(ETIQUETA_DISPUTA[miReclamo.estado] ?? miReclamo.estado)}</p>
+              <p class="font-body-md text-body-md text-on-surface-variant text-sm mt-1">${esc(miReclamo.motivo)}</p>
+              <p class="font-body-md text-body-md text-on-surface-variant text-sm mt-1">Respuesta comprometida en ${miReclamo.slaHoras} h.</p>
+            </div>`
+          : ''
+      }
       <button type="button" data-accion="ir" data-valor="/ayuda" class="w-full min-h-touch-target bg-surface-container-lowest border border-outline-variant text-on-surface font-label-md text-label-md rounded-lg flex items-center justify-center gap-2 hover:bg-surface-container-low transition-colors">
         <span class="material-symbols-outlined">support_agent</span> Contactar soporte
       </button>

@@ -135,6 +135,8 @@ export function requisitosDe(accion: AccionSensible, contexto?: { montoUsd?: num
 export interface IntentoAccion {
   accion: AccionSensible;
   rol: RoleId;
+  /** Quien ejecuta. Necesario para que nadie se apruebe a si mismo. */
+  usuarioId?: string;
   motivo?: string;
   evidencia?: string;
   mfaVerificado?: boolean;
@@ -155,8 +157,18 @@ export function validarAccion(intento: IntentoAccion): Validacion {
   // El MFA solo se exige a roles que lo tienen habilitado por definicion.
   if (req.mfa && ROLES[intento.rol].requiereMfa && !intento.mfaVerificado) faltan.push('mfa');
   if (req.dobleAprobacion) {
+    // La segregacion de funciones es entre *personas*, no entre cargos.
+    //
+    // Antes se exigia que el aprobador tuviera un rol distinto al de quien
+    // actuaba, y eso dejaba dos acciones muertas: `usuario.cambiar_rol` y
+    // `reglas.editar` solo admiten aprobadores superadmin, asi que un
+    // superadmin no podia completarlas nunca —no existe aprobador valido con
+    // otro rol—. Con la regla por persona, dos superadministradores se
+    // aprueban entre si y ninguno se aprueba a si mismo, que es justo lo que
+    // pide un control de cuatro ojos.
     const a = intento.aprobadoPor;
-    const valido = a && req.aprobadores.includes(a.rol) && a.rol !== intento.rol;
+    const mismaPersona = Boolean(a && intento.usuarioId && a.usuarioId === intento.usuarioId);
+    const valido = a && req.aprobadores.includes(a.rol) && !mismaPersona;
     if (!valido) faltan.push('aprobacion');
   }
 

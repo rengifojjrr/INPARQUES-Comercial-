@@ -10,10 +10,21 @@
 
 import type { TasaBcv } from './types';
 
-/** Trabajamos en centimos para evitar el error de coma flotante acumulado. */
+/**
+ * Redondeo a dos decimales, aplicado despues de cada operacion para que el
+ * error de coma flotante no se acumule linea a linea.
+ *
+ * (El comentario anterior decia que se trabajaba en centimos, y no era cierto:
+ * se trabaja en unidades con redondeo. Se deja dicho lo que hace el codigo,
+ * porque un comentario que miente es peor que ninguno.)
+ */
 export function redondear(monto: number, decimales = 2): number {
   const f = 10 ** decimales;
-  return Math.round((monto + Number.EPSILON) * f) / f;
+  // El signo se separa para que -2.345 y 2.345 redondeen igual de lejos del
+  // cero: `Math.round` empata siempre hacia +infinito y trataria distinto a
+  // un reembolso que a un cobro del mismo importe.
+  const signo = monto < 0 ? -1 : 1;
+  return (signo * Math.round(Math.abs(monto) * f + Number.EPSILON)) / f;
 }
 
 export function usdAVes(montoUsd: number, tasa: number): number {

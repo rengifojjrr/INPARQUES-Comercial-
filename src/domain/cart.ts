@@ -12,6 +12,7 @@
 
 import type { Articulo, ItemOrden, MetodoCumplimiento } from './types';
 import { calcularTotales, redondear } from './money';
+import { identificador } from './ids';
 
 export interface Carrito {
   negocioId: string | null;
@@ -83,7 +84,7 @@ export function agregarAlCarrito(carrito: Carrito, sel: SeleccionArticulo): Resu
   });
 
   const item: ItemOrden = {
-    id: `it_${Math.random().toString(36).slice(2, 10)}`,
+    id: identificador('it'),
     articuloId: articulo.id,
     nombre: articulo.nombre,
     cantidad: sel.cantidad,

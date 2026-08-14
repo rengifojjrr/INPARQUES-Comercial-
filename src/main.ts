@@ -18,7 +18,8 @@ import { renderizarMapa } from './dev/product-map';
 import { marco } from './ui/shell';
 import { VISTAS_POR_ID } from './ui/vistas';
 import { configurarAcciones, cerrarHoja } from './ui/acciones';
-import { estadoUi, restaurarCarrito } from './ui/estado-ui';
+import { estadoUi, esOrdenDeEsteInvitado, restaurarCarrito, restaurarOrdenesInvitado } from './ui/estado-ui';
+import { instalarRegistroInvitado } from './domain/ownership';
 import * as compartidas from './ui/vistas/compartidas';
 import type { Pagina } from './ui/vistas/tipos';
 
@@ -33,6 +34,10 @@ async function arrancar(): Promise<void> {
   await store.iniciar();
   sesion.restaurar();
   restaurarCarrito();
+  restaurarOrdenesInvitado();
+  // El dominio pregunta "¿este pedido anónimo es de este dispositivo?" y la
+  // respuesta solo la tiene la interfaz, que lleva ese registro.
+  instalarRegistroInvitado(esOrdenDeEsteInvitado);
   conectividad.iniciar();
   configurarCola();
   configurarAcciones(repintar);
@@ -92,6 +97,10 @@ function configurarCola(): void {
       });
     },
   );
+  // La cola sobrevive a la recarga: sin esto, operar sin señal y refrescar
+  // borraba en silencio todo lo encolado.
+  colaSincronizacion.restaurar();
+  estadoUi.colaPendientes = colaSincronizacion.pendientes().length;
 }
 
 /** Vuelve a dibujar la ruta actual sin navegar. */
@@ -150,16 +159,55 @@ function pintar(r: ResultadoNavegacion, esRepintado = false): void {
       break;
   }
 
+  // Cada repintado reemplaza el documento entero, así que antes de hacerlo hay
+  // que anotar dónde estaba el usuario. Sin esto, pulsar un chip de filtro
+  // devolvía el foco al `<body>`: quien navega con teclado tenía que tabular
+  // desde el principio de la página tras cada clic, y el desplazamiento
+  // saltaba arriba en listas largas.
+  const foco = esRepintado ? marcaDeFoco() : null;
+  const desplazamiento = esRepintado ? window.scrollY : 0;
+
   const { contenido, ...opciones } = pagina;
   raiz.innerHTML = pagina.standalone
     ? `<div class="stitch-pagina bg-background text-on-background min-h-screen flex flex-col antialiased">${contenido}</div>`
     : marco(contenido, opciones, ruta);
 
-  if (!esRepintado) {
+  if (esRepintado) {
+    if (desplazamiento) window.scrollTo({ top: desplazamiento });
+    restaurarFoco(foco);
+  } else {
     window.scrollTo({ top: 0 });
     const anuncios = document.getElementById('anuncios');
     if (anuncios) anuncios.textContent = pagina.titulo;
   }
+}
+
+/**
+ * Cómo volver a encontrar el control que tenía el foco.
+ *
+ * El elemento en sí no sirve: el repintado lo destruye. Se guarda cómo
+ * localizar al que ocupa su lugar en el documento nuevo — por `id` si lo
+ * tiene, y si no por su par acción/valor, que es lo que identifica a un
+ * control en esta aplicación.
+ */
+function marcaDeFoco(): string | null {
+  const el = document.activeElement as HTMLElement | null;
+  if (!el || el === document.body) return null;
+  if (el.id) return `#${CSS.escape(el.id)}`;
+  const accion = el.dataset?.accion;
+  if (!accion) return null;
+  const valor = el.dataset.valor;
+  return valor === undefined
+    ? `[data-accion="${CSS.escape(accion)}"]`
+    : `[data-accion="${CSS.escape(accion)}"][data-valor="${CSS.escape(valor)}"]`;
+}
+
+function restaurarFoco(marca: string | null): void {
+  if (!marca) return;
+  const el = document.querySelector<HTMLElement>(marca);
+  // `preventScroll` porque el desplazamiento ya se restauró arriba: sin él, el
+  // navegador volvería a centrar el elemento y desharía ese trabajo.
+  el?.focus({ preventScroll: true });
 }
 
 /**

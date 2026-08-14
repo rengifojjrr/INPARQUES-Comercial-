@@ -52,6 +52,17 @@ export type ResolutorVersion = (tipo: TipoAccionCola, entidadId: string) => stri
 /** Aplica la accion sobre el estado cuando la sincronizacion tiene exito. */
 export type Aplicador = (accion: AccionEncolada) => void;
 
+/**
+ * Donde vive la cola entre recargas.
+ *
+ * Antes vivia solo en memoria, y eso vaciaba de sentido la funcion entera:
+ * el operador trabajaba sin senal, la pantalla le prometia que nada se
+ * perdia, y al recargar —o al matar el navegador la pestana en un telefono,
+ * que pasa solo— la cola desaparecia sin decir nada. Justo el escenario que
+ * alguien probaria en el parque.
+ */
+const CLAVE_COLA = 'inparques.demo.cola';
+
 class ColaSincronizacion {
   private cola: AccionEncolada[] = [];
   private oyentes = new Set<Oyente>();
@@ -62,6 +73,34 @@ class ColaSincronizacion {
   configurar(resolutor: ResolutorVersion, aplicador: Aplicador): void {
     this.resolutor = resolutor;
     this.aplicador = aplicador;
+  }
+
+  /** Recupera lo encolado antes de la recarga. */
+  restaurar(): void {
+    if (typeof window === 'undefined') return;
+    try {
+      const crudo = window.localStorage.getItem(CLAVE_COLA);
+      if (!crudo) return;
+      const guardadas = JSON.parse(crudo) as AccionEncolada[];
+      if (!Array.isArray(guardadas)) return;
+      // Lo que quedo a medio sincronizar vuelve a pendiente: la escritura no
+      // llego a confirmarse, asi que se reintenta.
+      this.cola = guardadas.map((a) => (a.estado === 'sincronizando' ? { ...a, estado: 'pendiente' } : a));
+      // El contador arranca por encima de lo ya usado para no repetir ids.
+      this.n = this.cola.reduce((max, a) => Math.max(max, Number(a.id.replace('sq_', '')) || 0), 0);
+      this.notificar();
+    } catch {
+      this.cola = [];
+    }
+  }
+
+  private guardar(): void {
+    if (typeof window === 'undefined') return;
+    try {
+      window.localStorage.setItem(CLAVE_COLA, JSON.stringify(this.cola));
+    } catch {
+      /* almacenamiento lleno o bloqueado: la cola sigue viva en memoria */
+    }
   }
 
   listar(): AccionEncolada[] {
@@ -196,6 +235,9 @@ class ColaSincronizacion {
   }
 
   private notificar(): void {
+    // Se guarda en el mismo punto por el que pasa todo cambio de la cola, para
+    // que no exista una via de modificarla sin persistirla.
+    this.guardar();
     for (const o of this.oyentes) o(this.listar());
   }
 }

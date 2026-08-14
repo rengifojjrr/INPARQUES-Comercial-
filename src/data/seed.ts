@@ -31,7 +31,9 @@ import type {
 } from '../domain/types';
 import { calcularTotales, calcularParticipacion, redondear, usdAVes } from '../domain/money';
 
-export const VERSION_DATOS = 1;
+// Subir esta version obliga a resembrar: quien ya tenga datos guardados recibe
+// los nuevos pedidos de la cola del operador en vez de quedarse con la vieja.
+export const VERSION_DATOS = 2;
 
 /** Tasa BCV de demostracion. Las ventas historicas conservan la suya. */
 export const TASA_BCV_INICIAL = { valor: 51.87, fecha: '2026-08-12T09:00:00.000Z', fuente: 'BCV (simulado)' };
@@ -341,6 +343,48 @@ function sembrarTransacciones(e: DemoState): void {
     lineas: [{ articuloId: 'ar_paseo_lancha', nombre: 'Paseo en lancha por el lago', cantidad: 1, precioUnitarioUsd: 5 }],
     tasa: TASA_BCV_INICIAL.valor,
     estadoOrden: 'aceptada',
+    estadoPago: 'confirmado',
+    metodo: 'pago_movil',
+    conFactura: false,
+  });
+
+  // 4b y 4c. Cola viva del operador.
+  //
+  // Sin estos dos, el Operador —una de las cuentas que mas se enseña— entraba
+  // y encontraba "Nuevos 0 · Preparando 0" con el cartel de "Sin pedidos en
+  // esta cola": la pantalla principal de su rol se veia rota sin estarlo.
+  // Ahora hay uno por aceptar y otro en preparacion, que es como se ve un
+  // local abierto.
+  crearOrdenDemo(e, {
+    id: 'or_1005',
+    codigo: 'PE-1005',
+    fecha: new Date(Date.now() - 4 * 60000).toISOString(),
+    localId: 'lc_cedros_jc',
+    canal: 'app',
+    clienteNombre: 'Invitado',
+    invitado: true,
+    lineas: [
+      { articuloId: 'ar_cafe_guayoyo', nombre: 'Guayoyo grande', cantidad: 1, precioUnitarioUsd: 1.2 },
+      { articuloId: 'ar_tequeyoyo', nombre: 'Tequeños (6 unidades)', cantidad: 1, precioUnitarioUsd: 3 },
+    ],
+    tasa: TASA_BCV_INICIAL.valor,
+    estadoOrden: 'pendiente_aceptacion',
+    estadoPago: 'confirmado',
+    metodo: 'pago_movil',
+    conFactura: false,
+  });
+
+  crearOrdenDemo(e, {
+    id: 'or_1006',
+    codigo: 'PE-1006',
+    fecha: new Date(Date.now() - 11 * 60000).toISOString(),
+    localId: 'lc_cedros_jc',
+    canal: 'app',
+    clienteId: 'us_visitante',
+    clienteNombre: 'Daniela Ochoa',
+    lineas: [{ articuloId: 'ar_cachito', nombre: 'Cachito de jamón', cantidad: 2, precioUnitarioUsd: 1.5 }],
+    tasa: TASA_BCV_INICIAL.valor,
+    estadoOrden: 'preparando',
     estadoPago: 'confirmado',
     metodo: 'pago_movil',
     conFactura: false,

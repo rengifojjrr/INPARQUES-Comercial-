@@ -521,6 +521,12 @@ export interface Valoracion {
   estrellas: number;
   comentario?: string;
   creadaEn: ISODateTime;
+  /** Respuesta publica del comercio valorado. */
+  respuesta?: string;
+  respondidaEn?: ISODateTime;
+  /** Moderacion: la valoracion deja de mostrarse, pero no se borra. */
+  oculta?: boolean;
+  motivoModeracion?: string;
 }
 
 /** Bitacora append-only. No existe operacion de borrado ni de edicion. */

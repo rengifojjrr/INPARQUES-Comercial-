@@ -32,7 +32,8 @@ import { estadoUi, filtro } from '../estado-ui';
 import { ETIQUETA_ORDEN, TONO_ORDEN } from '../../domain/state-machines';
 import { formatearUsd, formatearVes } from '../../domain/money';
 import { fechaCorta, fechaHora, horaCorta } from '../formato';
-import { error404 } from './compartidas';
+import { error403, error404 } from './compartidas';
+import { alcanzaOrden } from '../../domain/ownership';
 import type { Local, Orden } from '../../domain/types';
 
 function misLocales(): Local[] {
@@ -301,6 +302,9 @@ export const detallePedidoStitch: Render = (ctx): Pagina => {
   const o = e.ordenes.find((x) => x.id === ctx.params.ordenId);
   if (!o) return error404(ctx);
   const u = sesion.usuario()!;
+  // Sin esto, escribir la URL del pedido de otro comercio lo abría entero
+  // —cliente, artículos, pago— y con los botones de avance funcionando.
+  if (!alcanzaOrden(u, o, e)) return error403(ctx);
   const puedeOperar = u.rol !== 'comercio.contador';
   const pago = e.pagos.find((p) => p.ordenId === o.id);
   const paso = SIGUIENTE[o.estado];

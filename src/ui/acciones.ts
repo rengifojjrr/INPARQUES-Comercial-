@@ -12,7 +12,7 @@ import { router, inicioDeRol } from '../app/router';
 import { conectividad } from '../net/connectivity';
 import { colaSincronizacion } from '../net/sync-queue';
 import { adaptadores } from '../adapters/simulados';
-import { estadoUi, fijarCarrito, fijarFiltro, fijarTexto, vaciarCarrito } from './estado-ui';
+import { estadoUi, fijarCarrito, fijarFiltro, fijarTexto, vaciarCarrito, recordarOrdenInvitado } from './estado-ui';
 import { agregarAlCarrito, cambiarCantidad, quitarDelCarrito, reiniciarCon, topeDeLinea } from '../domain/cart';
 import { validarAccion } from '../domain/sensitive-actions';
 import * as op from './operaciones';
@@ -435,6 +435,127 @@ function despachar(accion: string, valor: string): void {
       break;
     }
 
+    // --------------------------------------------- Acciones del propio cliente
+
+    case 'cancelar-pedido-cliente':
+      abrirHoja({
+        titulo: 'Cancelar su pedido',
+        cuerpo: `<p class="tenue mb-1">Solo puede cancelar mientras el comercio no lo haya aceptado. Indique el motivo; el comercio lo verá.</p>
+          <textarea class="area" name="motivo-cancelar-cliente" placeholder="Motivo…" required></textarea>`,
+        confirmar: 'Cancelar pedido',
+        accionConfirmar: 'confirmar-cancelar-cliente',
+        valor,
+        peligro: true,
+      });
+      break;
+
+    case 'confirmar-cancelar-cliente': {
+      const motivo = valorCampo('motivo-cancelar-cliente') || 'Cancelado por el cliente';
+      const r = op.avanzarOrden(valor, 'cancelada', motivo);
+      cerrarHoja();
+      repintar();
+      brindis(r.ok ? 'Pedido cancelado. Se liberó el cupo y el inventario.' : (r.error ?? 'No se pudo cancelar.'), !r.ok);
+      break;
+    }
+
+    case 'abrir-reclamo':
+      abrirHoja({
+        titulo: 'Abrir un reclamo',
+        cuerpo: `<p class="tenue mb-1">Lo atiende Soporte de INPARQUES. Podrá seguir su estado desde esta misma pantalla.</p>
+          <input class="campo" name="motivo-reclamo" placeholder="Motivo (ej. pedido incompleto)" required />
+          <textarea class="area mt-1" name="detalle-reclamo" placeholder="Cuéntenos qué pasó…"></textarea>`,
+        confirmar: 'Enviar reclamo',
+        accionConfirmar: 'confirmar-reclamo',
+        valor,
+      });
+      break;
+
+    case 'confirmar-reclamo': {
+      const motivo = valorCampo('motivo-reclamo');
+      if (!motivo) {
+        brindis('Indique el motivo del reclamo.', true);
+        break;
+      }
+      try {
+        op.abrirReclamo(valor, motivo, valorCampo('detalle-reclamo'));
+        cerrarHoja();
+        repintar();
+        brindis('Reclamo enviado. Soporte responde en 48 h.');
+      } catch {
+        cerrarHoja();
+        brindis('Solo puede reclamar sobre sus propios pedidos.', true);
+      }
+      break;
+    }
+
+    case 'valorar-pedido':
+      abrirHoja({
+        titulo: 'Valorar el pedido',
+        cuerpo: `<p class="tenue mb-1">¿Cuántas estrellas le pone?</p>
+          <div class="fila" role="radiogroup" aria-label="Estrellas">
+            ${[1, 2, 3, 4, 5]
+              .map((n) => `<label class="chip"><input type="radio" name="estrellas" value="${n}"${n === 5 ? ' checked' : ''} /> ${'★'.repeat(n)}</label>`)
+              .join('')}
+          </div>
+          <textarea class="area mt-1" name="comentario-valoracion" placeholder="Comentario (opcional)"></textarea>`,
+        confirmar: 'Enviar valoración',
+        accionConfirmar: 'confirmar-valoracion',
+        valor,
+      });
+      break;
+
+    case 'confirmar-valoracion': {
+      const r = op.valorar(valor, Number(valorRadio('estrellas') || '5'), valorCampo('comentario-valoracion'));
+      cerrarHoja();
+      repintar();
+      brindis(r.ok ? 'Gracias por su valoración.' : (r.error ?? 'No se pudo valorar.'), !r.ok);
+      break;
+    }
+
+    case 'responder-valoracion':
+      abrirHoja({
+        titulo: 'Responder a la valoración',
+        cuerpo: `<p class="tenue mb-1">Su respuesta se muestra junto a la valoración, en público.</p>
+          <textarea class="area" name="respuesta-valoracion" placeholder="Su respuesta…" required></textarea>`,
+        confirmar: 'Publicar respuesta',
+        accionConfirmar: 'confirmar-respuesta-valoracion',
+        valor,
+      });
+      break;
+
+    case 'confirmar-respuesta-valoracion': {
+      const texto = valorCampo('respuesta-valoracion');
+      if (!texto) {
+        brindis('Escriba la respuesta.', true);
+        break;
+      }
+      const r = op.responderValoracion(valor, texto);
+      cerrarHoja();
+      repintar();
+      brindis(r.ok ? 'Respuesta publicada.' : (r.error ?? 'No se pudo responder.'), !r.ok);
+      break;
+    }
+
+    case 'moderar-valoracion':
+      abrirHoja({
+        titulo: 'Retirar la valoración',
+        cuerpo: `<p class="tenue mb-1">La valoración deja de mostrarse, pero no se borra: queda con su motivo en la bitácora.</p>
+          <textarea class="area" name="motivo-moderacion" placeholder="Motivo de la moderación…" required></textarea>`,
+        confirmar: 'Retirar',
+        accionConfirmar: 'confirmar-moderacion',
+        valor,
+        peligro: true,
+      });
+      break;
+
+    case 'confirmar-moderacion': {
+      const r = op.ocultarValoracion(valor, valorCampo('motivo-moderacion'));
+      cerrarHoja();
+      repintar();
+      brindis(r.ok ? 'Valoración retirada.' : (r.error ?? 'No se pudo retirar.'), !r.ok);
+      break;
+    }
+
     case 'cancelar-orden':
       abrirHoja({
         titulo: 'Cancelar pedido',
@@ -693,6 +814,7 @@ function despachar(accion: string, valor: string): void {
       const val = validarAccion({
         accion: 'liquidacion.cerrar',
         rol,
+        usuarioId: sesion.activa()?.usuarioId,
         motivo,
         mfaVerificado: mfa === '123456',
         aprobadoPor: { usuarioId: 'us_superadmin', rol: 'inparques.superadmin' },
@@ -846,14 +968,14 @@ function despachar(accion: string, valor: string): void {
       cambiarCuenta();
       break;
 
-    case 'revocar-sesion':
-      store.actualizar((st) => {
-        const s = st.sesiones.find((x) => x.id === valor);
-        if (s) s.vigente = false;
-      });
+    case 'revocar-sesion': {
+      // Antes cerraba cualquier sesión sin preguntar quién lo pedía: bastaba
+      // con tener a mano el identificador.
+      const r = op.revocarSesion(valor);
       repintar();
-      brindis('Sesión cerrada.');
+      brindis(r.ok ? 'Sesión cerrada.' : (r.error ?? 'No se pudo cerrar la sesión.'), !r.ok);
       break;
+    }
 
     case 'enviar-invitacion': {
       const correo = valorCampo('correo');
@@ -1186,6 +1308,8 @@ async function pagar(metodo: MetodoPago): Promise<void> {
       franjaId: estadoUi.carrito.franjaId,
       programadaPara: estadoUi.carrito.programadaPara,
     });
+    // Sin cuenta, esta anotación es lo único que ata el pedido a quien lo hizo.
+    if (sesion.activa()?.invitado) recordarOrdenInvitado(ordenId);
     vaciarCarrito();
     estadoUi.cargando = false;
     router.ir(`/v/checkout/confirmacion?orden=${ordenId}`);
@@ -1271,6 +1395,7 @@ function confirmarSuspension(negocioId: string): void {
   const val = validarAccion({
     accion: 'negocio.suspender',
     rol,
+    usuarioId: sesion.activa()?.usuarioId,
     motivo,
     evidencia,
     mfaVerificado: mfa === '123456',
@@ -1295,6 +1420,7 @@ function confirmarReembolso(reembolsoId: string): void {
   const val = validarAccion({
     accion: 'reembolso.aprobar',
     rol,
+    usuarioId: sesion.activa()?.usuarioId,
     motivo,
     evidencia,
     montoUsd: r?.montoUsd,
@@ -1345,6 +1471,7 @@ function cambiarCuenta(): void {
   const val = validarAccion({
     accion: 'bancario.cambiar_cuenta',
     rol,
+    usuarioId: sesion.activa()?.usuarioId,
     motivo,
     evidencia,
     mfaVerificado: false,
@@ -1378,6 +1505,7 @@ document.addEventListener('click', (ev) => {
   const val = validarAccion({
     accion: 'bancario.cambiar_cuenta',
     rol,
+    usuarioId: sesion.activa()?.usuarioId,
     motivo: datos.motivo,
     evidencia: datos.evidencia,
     mfaVerificado: mfa === '123456',

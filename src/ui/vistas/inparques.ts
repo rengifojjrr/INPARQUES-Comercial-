@@ -13,8 +13,7 @@ import { store } from '../../data/store';
 import { sesion } from '../../app/session';
 import { filtro, texto } from '../estado-ui';
 import { ROLES, ROLE_IDS } from '../../domain/roles';
-import { PERMISOS_POR_ROL, puedeVerBancario } from '../../domain/permissions';
-import { proyectarCuenta } from '../../domain/masking';
+import { PERMISOS_POR_ROL } from '../../domain/permissions';
 import { resolverAmbito, filtrarPorAmbito } from '../../domain/scope';
 import { consultar } from '../../data/audit';
 import { ETIQUETA_ORDEN, ETIQUETA_PAGO, ETIQUETA_LIQUIDACION, TONO_ORDEN, TONO_PAGO } from '../../domain/state-machines';
@@ -240,44 +239,6 @@ export const parques: Render = () => {
   };
 };
 
-export const detalleParque: Render = (ctx) => {
-  const e = store.leer();
-  const p = e.parques.find((x) => x.id === ctx.params.parqueId);
-  if (!p) return error404(ctx);
-  const zonas = e.zonas.filter((z) => z.parqueId === p.id);
-  const puntos = e.puntos.filter((x) => x.parqueId === p.id);
-
-  return {
-    titulo: p.nombre,
-    atras: '/i/parques',
-    contenido: html`
-      ${crudo(listaDatos([
-        ['Tipo', esc(p.tipo)],
-        ['Región', esc(e.regiones.find((r) => r.id === p.regionId)?.nombre ?? '')],
-        ['Horario', esc(p.horario)],
-        ['Estado', insignia(p.activo ? 'Activo' : 'Inactivo', p.activo ? 'exito' : 'neutro')],
-        ['Programa piloto', p.piloto ? 'Sí' : 'No'],
-      ]))}
-      ${crudo(seccion('Zonas', html`${crudo(tabla(
-        [
-          { clave: 'n', titulo: 'Zona', render: (z: typeof zonas[0]) => esc(z.nombre) },
-          { clave: 'p', titulo: 'Puntos', render: (z) => String(puntos.filter((x) => x.zonaId === z.id).length), numerica: true },
-          { clave: 'o', titulo: 'Ocupados', render: (z) => String(puntos.filter((x) => x.zonaId === z.id && x.estado === 'ocupado').length), numerica: true },
-        ],
-        zonas,
-      ))}`))}
-      ${crudo(seccion('Puntos comerciales', html`${crudo(tabla(
-        [
-          { clave: 'c', titulo: 'Código', render: (x: typeof puntos[0]) => `<span class="mono">${esc(x.codigo)}</span>` },
-          { clave: 'n', titulo: 'Nombre', render: (x) => esc(x.nombre) },
-          { clave: 'e', titulo: 'Estado', render: (x) => insignia(x.estado, x.estado === 'ocupado' ? 'exito' : x.estado === 'libre' ? 'neutro' : 'error') },
-        ],
-        puntos,
-      ))}`))}
-      ${crudo(boton('Ver tablero del parque', { variante: 'principal', bloque: true, accion: 'ir', valor: `/i/dashboard/parque/${p.id}` }))}
-    `,
-  };
-};
 
 export const zonas: Render = () => {
   const e = store.leer();
@@ -368,79 +329,6 @@ export const negocios: Render = () => {
   };
 };
 
-export const detalleNegocio: Render = (ctx) => {
-  const e = store.leer();
-  const u = sesion.usuario()!;
-  const n = e.negocios.find((x) => x.id === ctx.params.negocioId);
-  if (!n) return error404(ctx);
-
-  const locales = e.locales.filter((l) => l.negocioId === n.id);
-  const docs = e.documentos.filter((d) => d.negocioId === n.id);
-  const permisos = e.permisos.filter((p) => p.negocioId === n.id);
-  const ordenes = e.ordenes.filter((o) => o.negocioId === n.id);
-  const cuenta = e.cuentasBancarias.find((c) => c.negocioId === n.id);
-  const proy = cuenta ? proyectarCuenta(cuenta, u.rol) : null;
-  const inspecciones = e.inspecciones.filter((i) => i.negocioId === n.id);
-
-  return {
-    titulo: n.nombreComercial,
-    atras: '/i/negocios',
-    contenido: html`
-      <div class="fila fila--sep mb-2">
-        <div class="crece"><div class="tenue">${n.razonSocial}</div></div>
-        ${crudo(insignia(n.estado.replace('_', ' '), n.estado === 'activo' ? 'exito' : n.estado === 'suspendido' ? 'error' : 'alerta'))}
-      </div>
-
-      ${crudo(listaDatos([
-        ['RIF', `<span class="mono">${esc(n.rif)}</span>`],
-        ['Categoría', esc(NOMBRE_CATEGORIA[n.categoria] ?? n.categoria)],
-        ['Responsable', esc(e.usuarios.find((x) => x.id === n.responsableId)?.nombre ?? '—')],
-        ['Alta', fechaCorta(n.creadoEn)],
-        ['Locales', String(locales.length)],
-      ]))}
-
-      ${crudo(seccion('Datos bancarios', html`
-        ${proy && proy.visible
-          ? crudo(listaDatos([
-              ['Banco', esc(proy.banco)],
-              ['Cuenta', `<span class="mono">${esc(proy.numeroEnmascarado)}</span>`],
-              ['Verificada', insignia(proy.verificada ? 'Sí' : 'No', proy.verificada ? 'exito' : 'alerta')],
-            ]))
-          : crudo(aviso('info', 'No disponible para su rol', `El rol ${ROLES[u.rol].nombre} no accede a los datos bancarios del negocio.`))}
-      `))}
-
-      ${crudo(seccion('Documentos', html`${crudo(tabla(
-        [
-          { clave: 't', titulo: 'Documento', render: (d: typeof docs[0]) => esc(d.tipo.replace(/_/g, ' ')) },
-          { clave: 'e', titulo: 'Estado', render: (d) => insignia(d.estado, d.estado === 'aprobado' ? 'exito' : d.estado === 'observado' ? 'error' : 'alerta') },
-          { clave: 'v', titulo: 'Vigencia', render: (d) => (d.vigenciaHasta ? esc(fechaCorta(`${d.vigenciaHasta}T12:00:00`)) : '—') },
-        ],
-        docs,
-      ))}`, { texto: 'Revisar', ruta: `/i/revision-documental/${n.id}` }))}
-
-      ${crudo(seccion('Permisos', html`${crudo(tabla(
-        [
-          { clave: 'n', titulo: 'Número', render: (p: typeof permisos[0]) => `<span class="mono">${esc(p.numero)}</span>` },
-          { clave: 't', titulo: 'Tipo', render: (p) => esc(p.tipo.replace(/_/g, ' ')) },
-          { clave: 'h', titulo: 'Vence', render: (p) => esc(fechaCorta(`${p.hasta}T12:00:00`)) },
-          { clave: 'e', titulo: 'Estado', render: (p) => insignia(p.estado.replace('_', ' '), p.estado === 'vigente' ? 'exito' : p.estado === 'por_vencer' ? 'alerta' : 'error') },
-        ],
-        permisos,
-      ))}`))}
-
-      ${crudo(seccion('Actividad', html`<div class="rejilla">
-        ${crudo(metrica(String(ordenes.length), 'Órdenes'))}
-        ${crudo(metrica(formatearUsd(ordenes.filter((o) => o.estado === 'entregada').reduce((s, o) => s + o.totalUsd, 0)), 'Ventas'))}
-        ${crudo(metrica(String(inspecciones.length), 'Inspecciones'))}
-        ${crudo(metrica(String(e.valoraciones.filter((v) => v.negocioId === n.id).length), 'Valoraciones'))}
-      </div>`))}
-
-      ${PERMISOS_POR_ROL[u.rol].includes('permiso:suspender') && n.estado === 'activo'
-        ? crudo(barraAccion([boton('Suspender negocio', { variante: 'peligro', bloque: true, accion: 'suspender-negocio', valor: n.id })]))
-        : ''}
-    `,
-  };
-};
 
 export const solicitudes: Render = () => {
   const e = store.leer();
@@ -519,7 +407,6 @@ export const expediente: Render = (ctx) => {
   };
 };
 
-export const revisionDocumental: Render = (ctx) => expediente(ctx);
 
 export const aprobaciones: Render = () => {
   const e = store.leer();
@@ -688,31 +575,6 @@ export const inspecciones: Render = () => {
   };
 };
 
-export const detalleInspeccion: Render = (ctx) => {
-  const e = store.leer();
-  const i = e.inspecciones.find((x) => x.id === ctx.params.inspeccionId);
-  if (!i) return error404(ctx);
-
-  return {
-    titulo: 'Inspección',
-    atras: '/i/inspecciones',
-    contenido: html`
-      ${crudo(listaDatos([
-        ['Comercio', esc(e.negocios.find((n) => n.id === i.negocioId)?.nombreComercial ?? '')],
-        ['Local', esc(e.locales.find((l) => l.id === i.localId)?.nombre ?? '')],
-        ['Inspector', esc(e.usuarios.find((u) => u.id === i.inspectorId)?.nombre ?? '')],
-        ['Fecha', fechaHora(i.fecha)],
-        ['Resultado', insignia(i.resultado.replace('_', ' '), i.resultado === 'conforme' ? 'exito' : i.resultado === 'observado' ? 'alerta' : 'error')],
-      ]))}
-      ${crudo(seccion('Hallazgos', html`
-        ${i.hallazgos.length === 0
-          ? crudo('<p class="tenue">Sin hallazgos.</p>')
-          : crudo(`<ul style="padding-left:20px;margin:0">${i.hallazgos.map((h) => `<li style="margin-bottom:6px">${esc(h)}</li>`).join('')}</ul>`)}
-      `))}
-      ${crudo(aviso('info', 'Sin datos bancarios', 'El rol Inspector nunca recibe datos bancarios del comercio, ni siquiera enmascarados.'))}
-    `,
-  };
-};
 
 export const incidencias: Render = () => {
   const e = store.leer();
@@ -844,27 +706,6 @@ export const conciliacion: Render = () => {
   };
 };
 
-export const cuentasPorCobrar: Render = () => {
-  const e = store.leer();
-  const lista = e.liquidaciones.filter((l) => ['por_cobrar', 'calculada'].includes(l.estado));
-  return {
-    titulo: 'Cuentas por cobrar',
-    contenido: html`
-      <p class="bajada">Obligaciones de los comercios con INPARQUES.</p>
-      ${crudo(tabla(
-        [
-          { clave: 'n', titulo: 'Comercio', render: (l: typeof lista[0]) => esc(e.negocios.find((x) => x.id === l.negocioId)?.nombreComercial ?? '') },
-          { clave: 'p', titulo: 'Periodo', render: (l) => `${esc(l.periodoDesde)} – ${esc(l.periodoHasta)}` },
-          { clave: 'm', titulo: 'Monto', render: (l) => `<strong>${esc(formatearUsd(l.netoUsd))}</strong>`, numerica: true },
-          { clave: 'e', titulo: 'Estado', render: (l) => insignia(ETIQUETA_LIQUIDACION[l.estado], 'alerta') },
-          { clave: 'a', titulo: 'Acción', render: (l) => boton('Conciliar', { variante: 'texto', pequeno: true, accion: 'conciliar', valor: l.id }) },
-        ],
-        lista,
-        { vacio: 'No hay obligaciones pendientes de cobro.' },
-      ))}
-    `,
-  };
-};
 
 export const cierres: Render = () => {
   const e = store.leer();
@@ -988,49 +829,6 @@ export const disputas: Render = () => {
   };
 };
 
-export const detalleDisputa: Render = (ctx) => {
-  const e = store.leer();
-  const d = e.disputas.find((x) => x.id === ctx.params.disputaId);
-  if (!d) return error404(ctx);
-  const o = e.ordenes.find((x) => x.id === d.ordenId);
-  const pago = e.pagos.find((p) => p.ordenId === d.ordenId);
-  const u = sesion.usuario()!;
-
-  return {
-    titulo: 'Disputa',
-    atras: '/i/disputas',
-    contenido: html`
-      ${crudo(listaDatos([
-        ['Motivo', esc(d.motivo)],
-        ['Estado', insignia(d.estado.replace(/_/g, ' '), d.estado.startsWith('resuelta') ? 'exito' : 'alerta')],
-        ['Abierta', fechaHora(d.creadaEn)],
-        ['Compromiso', `${d.slaHoras} horas`],
-        ['Agente', esc(e.usuarios.find((x) => x.id === d.agenteId)?.nombre ?? 'Sin asignar')],
-      ]))}
-
-      ${crudo(seccion('Descripción del cliente', html`${crudo(tarjeta(html`<p class="tenue">${d.descripcion}</p>`))}`))}
-
-      ${o
-        ? crudo(seccion('Orden relacionada', html`${crudo(listaDatos([
-            ['Código', `<span class="mono">${esc(o.codigo)}</span>`],
-            ['Comercio', esc(e.negocios.find((n) => n.id === o.negocioId)?.nombreComercial ?? '')],
-            ['Estado del pedido', insignia(ETIQUETA_ORDEN[o.estado], TONO_ORDEN[o.estado])],
-            ['Estado del pago', pago ? insignia(ETIQUETA_PAGO[pago.estado], TONO_PAGO[pago.estado]) : '—'],
-            ['Total', formatearUsd(o.totalUsd)],
-          ]))}`))
-        : ''}
-
-      ${crudo(aviso('info', 'Datos mínimos necesarios', 'El rol Soporte accede solo a lo indispensable para resolver el caso: no ve datos bancarios del comercio.'))}
-
-      ${!d.estado.startsWith('resuelta') && !puedeVerBancario(u.rol)
-        ? crudo(barraAccion([
-            boton('Resolver a favor del cliente', { variante: 'principal', bloque: true, accion: 'resolver-disputa', valor: `${d.id}|cliente` }),
-            boton('A favor del comercio', { variante: 'secundario', accion: 'resolver-disputa', valor: `${d.id}|comercio` }),
-          ]))
-        : ''}
-    `,
-  };
-};
 
 export const sla: Render = () => {
   const e = store.leer();
@@ -1176,27 +974,6 @@ export const ambitos: Render = () => {
   };
 };
 
-export const sesionesAdmin: Render = () => {
-  const e = store.leer();
-  return {
-    titulo: 'Sesiones',
-    contenido: html`
-      <p class="bajada">Sesiones registradas del sistema.</p>
-      ${e.sesiones.length === 0
-        ? crudo(vacio('⧉', 'Sin sesiones', 'No hay sesiones registradas todavía.'))
-        : crudo(tabla(
-            [
-              { clave: 'u', titulo: 'Usuario', render: (s: typeof e.sesiones[0]) => esc(e.usuarios.find((x) => x.id === s.usuarioId)?.nombre ?? s.usuarioId) },
-              { clave: 'd', titulo: 'Dispositivo', render: (s) => `<span class="tenue-2">${esc(s.dispositivo)}</span>` },
-              { clave: 'i', titulo: 'Inicio', render: (s) => esc(fechaCorta(s.iniciadaEn)) },
-              { clave: 'e', titulo: 'Estado', render: (s) => insignia(s.vigente ? 'Vigente' : 'Cerrada', s.vigente ? 'exito' : 'neutro') },
-              { clave: 'a', titulo: 'Acción', render: (s) => (s.vigente ? boton('Revocar', { variante: 'texto', pequeno: true, accion: 'revocar-sesion', valor: s.id }) : '—') },
-            ],
-            e.sesiones,
-          ))}
-    `,
-  };
-};
 
 export const reglas: Render = () => {
   const e = store.leer();

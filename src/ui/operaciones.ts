@@ -14,12 +14,24 @@ import { conectividad } from '../net/connectivity';
 import { colaSincronizacion } from '../net/sync-queue';
 import { adaptadores } from '../adapters/simulados';
 import {
+  clientePuedeCancelar,
   exigirFactura,
   exigirLiquidacion,
   exigirOrden,
   exigirPago,
 } from '../domain/state-machines';
 import { calcularTotales } from '../domain/money';
+import { puede } from '../domain/permissions';
+import { resolverAmbito } from '../domain/scope';
+import { identificador } from '../domain/ids';
+import {
+  FueraDeAmbito,
+  alcanzaNegocioDe,
+  alcanzaOrden,
+  exigirArticuloPropio,
+  exigirLocalPropio,
+  exigirTurnoPropio,
+} from '../domain/ownership';
 import type {
   EstadoOrden,
   ItemOrden,
@@ -78,7 +90,7 @@ export async function crearOrdenDesdeCarrito(d: DatosCheckout): Promise<{ ordenI
 
   const esReserva = carrito.items.some((i) => e.articulos.find((a) => a.id === i.articuloId)?.tipo === 'servicio');
   const cod = codigo(esReserva ? 'RE' : 'PE');
-  const ordenId = `or_${Date.now().toString(36)}`;
+  const ordenId = identificador('or');
   const ahora = new Date().toISOString();
   const a = actor();
 
@@ -161,7 +173,7 @@ export async function crearOrdenDesdeCarrito(d: DatosCheckout): Promise<{ ordenI
     }
 
     st.notificaciones.push({
-      id: `nt_${ordenId}`,
+      id: identificador('nt'),
       destinatarioRol: 'comercio.operador',
       ambitoId: local.id,
       titulo: `Nuevo ${esReserva ? 'reserva' : 'pedido'} ${cod}`,
@@ -189,6 +201,24 @@ export function avanzarOrden(ordenId: string, destino: EstadoOrden, motivo?: str
   const e = store.leer();
   const orden = e.ordenes.find((o) => o.id === ordenId);
   if (!orden) return { ok: false, error: 'La orden ya no existe.' };
+
+  // Pertenencia antes que estado: da igual que la transición sea válida si el
+  // pedido es de otro comercio.
+  if (!alcanzaOrden(sesion.usuario(), orden, e, Boolean(sesion.activa()?.invitado))) {
+    return { ok: false, error: 'Este pedido no pertenece a su ámbito.' };
+  }
+
+  // El cliente solo puede cancelar, y solo mientras nadie haya empezado.
+  const rolActor = sesion.rol();
+  if (rolActor === 'visitante.cliente') {
+    if (destino !== 'cancelada') return { ok: false, error: 'Acción reservada al comercio.' };
+    if (!clientePuedeCancelar(orden.estado)) {
+      return {
+        ok: false,
+        error: 'El comercio ya aceptó el pedido. Abra un reclamo desde el seguimiento.',
+      };
+    }
+  }
 
   try {
     exigirOrden(orden.estado, destino);
@@ -229,7 +259,7 @@ export function avanzarOrden(ordenId: string, destino: EstadoOrden, motivo?: str
 
     if (o.clienteId || o.invitado) {
       st.notificaciones.push({
-        id: `nt_${ordenId}_${destino}`,
+        id: identificador('nt'),
         destinatarioRol: 'visitante.cliente',
         destinatarioId: o.clienteId,
         titulo: `Su pedido ${o.codigo} ${destino === 'lista' ? 'está listo' : destino === 'entregada' ? 'fue entregado' : `pasó a ${destino}`}`,
@@ -286,6 +316,7 @@ export function cambiarDisponibilidad(articuloId: string, disponible: boolean): 
   const e = store.leer();
   const art = e.articulos.find((a) => a.id === articuloId);
   if (!art) return { encolada: false };
+  exigirArticuloPropio(sesion.usuario(), articuloId, e);
 
   if (!conectividad.hayRed()) {
     colaSincronizacion.encolar('catalogo.disponibilidad', articuloId, { disponible }, String(art.disponible));
@@ -306,6 +337,7 @@ export function cambiarDisponibilidad(articuloId: string, disponible: boolean): 
 }
 
 export function cambiarPrecio(articuloId: string, precioUsd: number, motivo: string): void {
+  exigirArticuloPropio(sesion.usuario(), articuloId, store.leer());
   const a = actor();
   store.actualizar((st) => {
     const x = st.articulos.find((y) => y.id === articuloId);
@@ -326,6 +358,7 @@ export function registrarVentaMostrador(
   metodo: MetodoPago,
 ): string {
   const e = store.leer();
+  exigirLocalPropio(sesion.usuario(), localId, e);
   const local = e.locales.find((l) => l.id === localId)!;
   const tasa = e.tasaBcv.valor;
   const ahora = new Date().toISOString();
@@ -350,7 +383,7 @@ export function registrarVentaMostrador(
   );
 
   const cod = codigo('MO');
-  const ordenId = `or_${Date.now().toString(36)}`;
+  const ordenId = identificador('or');
 
   store.actualizar((st) => {
     st.ordenes.push({
@@ -395,8 +428,9 @@ export function registrarVentaMostrador(
 }
 
 export function abrirTurno(localId: string, fondoInicialVes: number): string {
+  exigirLocalPropio(sesion.usuario(), localId, store.leer());
   const a = actor();
-  const id = `tn_${Date.now().toString(36)}`;
+  const id = identificador('tn');
   store.actualizar((st) => {
     st.turnos.push({
       id, localId, operadorId: a.id,
@@ -411,6 +445,7 @@ export function abrirTurno(localId: string, fondoInicialVes: number): string {
 }
 
 export function cerrarTurno(turnoId: string, efectivoDeclaradoVes: number, motivo: string): { diferencia: number } {
+  exigirTurnoPropio(sesion.usuario(), turnoId, store.leer());
   const a = actor();
   let diferencia = 0;
   store.actualizar((st) => {
@@ -498,7 +533,7 @@ export function registrarInspeccion(
   hallazgos: string[],
 ): string {
   const a = actor();
-  const id = `in_${Date.now().toString(36)}`;
+  const id = identificador('in');
   store.actualizar((st) => {
     st.inspecciones.push({
       id, negocioId, localId, inspectorId: a.id,
@@ -510,7 +545,7 @@ export function registrarInspeccion(
     });
     if (resultado !== 'conforme') {
       st.incidencias.push({
-        id: `ic_${Date.now().toString(36)}`,
+        id: identificador('ic'),
         parqueId: st.locales.find((l) => l.id === localId)?.parqueId ?? '',
         negocioId, reportadaPor: a.id, tipo: 'permiso',
         descripcion: hallazgos.join('; '),
@@ -576,7 +611,7 @@ export function cerrarLiquidacion(liquidacionId: string, motivo: string, aprobad
 export function crearAjuste(concepto: string, montoUsd: number, motivo: string, evidencia: string, liquidacionId?: string): void {
   const a = actor();
   store.actualizar((st) => {
-    const id = `aj_${Date.now().toString(36)}`;
+    const id = identificador('aj');
     st.ajustes.push({
       id, liquidacionId, concepto, montoUsd, motivo, evidencia,
       solicitadoPor: a.id, estado: 'solicitado', creadoEn: new Date().toISOString(),
@@ -636,7 +671,7 @@ export async function emitirNotaCredito(facturaId: string, motivo: string): Prom
     exigirFactura(f.estado, 'nota_credito');
     const nueva = {
       ...f,
-      id: `fc_nc_${Date.now().toString(36)}`,
+      id: identificador('fc_nc'),
       numero: r.numero,
       numeroControl: r.numeroControl,
       estado: 'nota_credito' as const,
@@ -656,8 +691,14 @@ export async function emitirNotaCredito(facturaId: string, motivo: string): Prom
 // ------------------------------------------------------------------ Disputas
 
 export function abrirReclamo(ordenId: string, motivo: string, descripcion: string): string {
+  const e = store.leer();
+  const orden = e.ordenes.find((x) => x.id === ordenId);
+  // Solo se reclama sobre un pedido propio.
+  if (orden && !alcanzaOrden(sesion.usuario(), orden, e, Boolean(sesion.activa()?.invitado))) {
+    throw new FueraDeAmbito('orden', ordenId);
+  }
   const a = actor();
-  const id = `ds_${Date.now().toString(36)}`;
+  const id = identificador('ds');
   store.actualizar((st) => {
     const o = st.ordenes.find((x) => x.id === ordenId);
     st.disputas.push({
@@ -665,7 +706,7 @@ export function abrirReclamo(ordenId: string, motivo: string, descripcion: strin
       estado: 'abierta', slaHoras: 48, creadaEn: new Date().toISOString(),
     });
     st.notificaciones.push({
-      id: `nt_${id}`, destinatarioRol: 'inparques.soporte',
+      id: identificador('nt'), destinatarioRol: 'inparques.soporte',
       titulo: `Nuevo reclamo sobre ${o?.codigo ?? ordenId}`,
       cuerpo: motivo, tipo: 'disputa', rutaDestino: `/i/disputa/${id}`,
       leida: false, creadaEn: new Date().toISOString(),
@@ -689,17 +730,83 @@ export function resolverDisputa(disputaId: string, resultado: 'resuelta_favor_cl
   });
 }
 
-export function valorar(ordenId: string, estrellas: number, comentario: string): void {
+/**
+ * Valorar tenia tres agujeros a la vez: no comprobaba que el pedido fuera
+ * suyo, ni que estuviera entregado, ni que no lo hubiera valorado ya. Con eso
+ * la reputacion de un comercio se movia con un bucle.
+ */
+export function valorar(
+  ordenId: string,
+  estrellas: number,
+  comentario: string,
+): { ok: boolean; error?: string } {
+  const e = store.leer();
+  const orden = e.ordenes.find((x) => x.id === ordenId);
+  if (!orden) return { ok: false, error: 'El pedido ya no existe.' };
+
+  if (!alcanzaOrden(sesion.usuario(), orden, e, Boolean(sesion.activa()?.invitado))) {
+    return { ok: false, error: 'Solo puede valorar sus propios pedidos.' };
+  }
+  if (orden.estado !== 'entregada') {
+    return { ok: false, error: 'Solo se valora un pedido ya entregado.' };
+  }
+  if (e.valoraciones.some((v) => v.ordenId === ordenId)) {
+    return { ok: false, error: 'Este pedido ya tiene una valoración.' };
+  }
+  if (!Number.isInteger(estrellas) || estrellas < 1 || estrellas > 5) {
+    return { ok: false, error: 'La valoración va de 1 a 5 estrellas.' };
+  }
+
   const a = actor();
   store.actualizar((st) => {
-    const o = st.ordenes.find((x) => x.id === ordenId);
-    if (!o) return;
+    const o = st.ordenes.find((x) => x.id === ordenId)!;
     st.valoraciones.push({
-      id: `vl_${Date.now().toString(36)}`, ordenId, negocioId: o.negocioId,
+      id: identificador('vl'), ordenId, negocioId: o.negocioId,
       estrellas, comentario, creadaEn: new Date().toISOString(),
     });
     registrar(st, { usuario: a, accion: 'valoracion.crear', entidad: 'orden', entidadId: ordenId, despues: { estrellas } });
   });
+  return { ok: true };
+}
+
+/**
+ * Moderacion de valoraciones. Antes no existia: el comercio no podia
+ * responder y INPARQUES no podia retirar una difamatoria, que en una
+ * plataforma del Estado es un problema legal y no de producto.
+ */
+export function responderValoracion(valoracionId: string, respuesta: string): { ok: boolean; error?: string } {
+  const e = store.leer();
+  const v = e.valoraciones.find((x) => x.id === valoracionId);
+  if (!v) return { ok: false, error: 'La valoración ya no existe.' };
+  if (!alcanzaNegocioDe(sesion.usuario(), v.negocioId, e)) {
+    return { ok: false, error: 'Solo el comercio valorado puede responder.' };
+  }
+  const a = actor();
+  store.actualizar((st) => {
+    const x = st.valoraciones.find((y) => y.id === valoracionId)!;
+    x.respuesta = respuesta;
+    x.respondidaEn = new Date().toISOString();
+    registrar(st, { usuario: a, accion: 'valoracion.responder', entidad: 'valoracion', entidadId: valoracionId, despues: { respuesta } });
+  });
+  return { ok: true };
+}
+
+export function ocultarValoracion(valoracionId: string, motivo: string): { ok: boolean; error?: string } {
+  if (!motivo.trim()) return { ok: false, error: 'Indique el motivo de la moderación.' };
+  const a = actor();
+  let ok = false;
+  store.actualizar((st) => {
+    const x = st.valoraciones.find((y) => y.id === valoracionId);
+    if (!x) return;
+    registrar(st, {
+      usuario: a, accion: 'valoracion.ocultar', entidad: 'valoracion', entidadId: valoracionId,
+      antes: { oculta: Boolean(x.oculta) }, despues: { oculta: true }, motivo,
+    });
+    x.oculta = true;
+    x.motivoModeracion = motivo;
+    ok = true;
+  });
+  return ok ? { ok: true } : { ok: false, error: 'La valoración ya no existe.' };
 }
 
 // ------------------------------------------------------- Cuenta bancaria
@@ -728,6 +835,55 @@ export function cambiarCuentaBancaria(
     c.verificada = false;
     c.actualizadaEn = new Date().toISOString();
   });
+}
+
+/**
+ * Cerrar la sesion de otra persona.
+ *
+ * Dos cosas que faltaban: el permiso —`sesion:revocar` era exclusivo del
+ * superadministrador, asi que un propietario veia las sesiones de su personal
+ * y no podia cerrarlas: si se iba un empleado, no habia forma de echarlo del
+ * sistema— y el ambito, porque la accion cerraba cualquier sesion con solo
+ * tener a mano su identificador.
+ *
+ * La sesion propia siempre se puede cerrar, sin permiso especial.
+ */
+export function revocarSesion(sesionId: string): { ok: boolean; error?: string } {
+  const e = store.leer();
+  const u = sesion.usuario();
+  const objetivo = e.sesiones.find((x) => x.id === sesionId);
+  if (!objetivo) return { ok: false, error: 'Esa sesión ya no existe.' };
+  if (!u) return { ok: false, error: 'Necesita iniciar sesión.' };
+
+  const esPropia = objetivo.usuarioId === u.id;
+  if (!esPropia) {
+    if (!puede(u.rol, 'sesion:revocar')) {
+      return { ok: false, error: 'Su rol no puede cerrar sesiones de otras personas.' };
+    }
+    // Y solo dentro de su ámbito: el dueño de un comercio no cierra la sesión
+    // del personal de otro.
+    const duenoDeLaSesion = e.usuarios.find((x) => x.id === objetivo.usuarioId);
+    const ambito = resolverAmbito(u, e);
+    const alcanza =
+      ambito.nacional ||
+      (duenoDeLaSesion?.scope.ids ?? []).some(
+        (id) => ambito.negocioIds.includes(id) || ambito.localIds.includes(id) || ambito.parqueIds.includes(id),
+      );
+    if (!alcanza) return { ok: false, error: 'Esa sesión está fuera de su ámbito.' };
+  }
+
+  const a = actor();
+  store.actualizar((st) => {
+    const s = st.sesiones.find((x) => x.id === sesionId);
+    if (!s) return;
+    s.vigente = false;
+    registrar(st, {
+      usuario: a, accion: 'sesion.revocar', entidad: 'sesion', entidadId: sesionId,
+      antes: { vigente: true }, despues: { vigente: false },
+      motivo: esPropia ? 'Cierre de sesión propia' : 'Revocación por administrador',
+    });
+  });
+  return { ok: true };
 }
 
 export function marcarNotificacionesLeidas(): void {

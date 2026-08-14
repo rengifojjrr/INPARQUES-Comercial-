@@ -72,7 +72,7 @@ const PORTAL_POR_ROL: Partial<Record<RoleId, { nav: Array<[string, string, strin
   'inparques.soporte': { nav: NAV_SOPORTE, subtitulo: 'Administrative Portal' },
 };
 
-function marco(activo: string, titulo: string, cuerpo: string): string {
+export function marcoInparques(activo: string, titulo: string, cuerpo: string): string {
   const u = sesion.usuario()!;
   const portal = PORTAL_POR_ROL[u.rol] ?? { nav: NAV_SUPERADMIN, subtitulo: 'Panel institucional' };
   return `
@@ -192,7 +192,7 @@ ${
       </div>`
 }`;
 
-  return { titulo: 'Solicitudes', standalone: true, contenido: marco('/i/solicitudes', 'Bandeja de solicitudes', cuerpo) };
+  return { titulo: 'Solicitudes', standalone: true, contenido: marcoInparques('/i/solicitudes', 'Bandeja de solicitudes', cuerpo) };
 };
 
 export const expedienteStitch: Render = (ctx): Pagina => {
@@ -272,7 +272,7 @@ ${
     : ''
 }`;
 
-  return { titulo: 'Expediente', standalone: true, contenido: marco('/i/solicitudes', `Expediente · ${n.nombreComercial}`, cuerpo) };
+  return { titulo: 'Expediente', standalone: true, contenido: marcoInparques('/i/solicitudes', `Expediente · ${n.nombreComercial}`, cuerpo) };
 };
 
 export const aprobacionesStitch: Render = (): Pagina => {
@@ -312,7 +312,7 @@ ${
       )
 }`;
 
-  return { titulo: 'Aprobaciones', standalone: true, contenido: marco('/i/aprobaciones', 'Aprobación y publicación', cuerpo) };
+  return { titulo: 'Aprobaciones', standalone: true, contenido: marcoInparques('/i/aprobaciones', 'Aprobación y publicación', cuerpo) };
 };
 
 // --------------------------------------------------------------- Concesiones
@@ -390,7 +390,7 @@ ${
       </div>`
 }`;
 
-  return { titulo: 'Permisos y concesiones', standalone: true, contenido: marco('/i/permisos', 'Contratos y permisos', cuerpo) };
+  return { titulo: 'Permisos y concesiones', standalone: true, contenido: marcoInparques('/i/permisos', 'Contratos y permisos', cuerpo) };
 };
 
 export const contratosStitch: Render = (): Pagina => {
@@ -415,7 +415,7 @@ export const contratosStitch: Render = (): Pagina => {
 ${encabezado('Contratos', 'Contratos y condiciones económicas', 'Condiciones económicas acordadas con cada concesionario. Modificarlas exige motivo, evidencia y verificación en dos pasos.')}
 ${panel('Contratos vigentes', tabla(['Comercio', 'Canon fijo', '% sobre venta', 'Mínimo', 'Vence', 'Estado'], filas, 'No hay contratos en su ámbito.'), `${lista.length} contrato${lista.length === 1 ? '' : 's'}`)}`;
 
-  return { titulo: 'Contratos', standalone: true, contenido: marco('/i/contratos', 'Contratos', cuerpo) };
+  return { titulo: 'Contratos', standalone: true, contenido: marcoInparques('/i/contratos', 'Contratos', cuerpo) };
 };
 
 export const canonesStitch: Render = (): Pagina => {
@@ -461,7 +461,7 @@ ${panel(
   ),
 )}`;
 
-  return { titulo: 'Cánones y comisiones', standalone: true, contenido: marco('/i/canones', 'Cánones y comisiones', cuerpo) };
+  return { titulo: 'Cánones y comisiones', standalone: true, contenido: marcoInparques('/i/canones', 'Cánones y comisiones', cuerpo) };
 };
 
 export const vencimientosStitch: Render = (): Pagina => {
@@ -513,7 +513,7 @@ ${panel(
   ),
 )}`;
 
-  return { titulo: 'Vencimientos', standalone: true, contenido: marco('/i/vencimientos', 'Renovaciones y vencimientos', cuerpo) };
+  return { titulo: 'Vencimientos', standalone: true, contenido: marcoInparques('/i/vencimientos', 'Renovaciones y vencimientos', cuerpo) };
 };
 
 // ------------------------------------------------------------------- Control
@@ -564,7 +564,7 @@ ${
       )
 }`;
 
-  return { titulo: 'Inspecciones', standalone: true, contenido: marco('/i/inspecciones', 'Inspecciones comerciales', cuerpo) };
+  return { titulo: 'Inspecciones', standalone: true, contenido: marcoInparques('/i/inspecciones', 'Inspecciones comerciales', cuerpo) };
 };
 
 export const detalleInspeccionStitch: Render = (ctx): Pagina => {
@@ -608,7 +608,7 @@ ${encabezado('Inspección', `Inspección · ${negocio?.nombreComercial ?? ''}`, 
   </div>
 </div>`;
 
-  return { titulo: 'Inspección', standalone: true, contenido: marco('/i/inspecciones', 'Detalle de inspección', cuerpo) };
+  return { titulo: 'Inspección', standalone: true, contenido: marcoInparques('/i/inspecciones', 'Detalle de inspección', cuerpo) };
 };
 
 export const incidenciasStitch: Render = (): Pagina => {
@@ -665,7 +665,7 @@ ${
       </div>`
 }`;
 
-  return { titulo: 'Incidencias', standalone: true, contenido: marco('/i/incidencias', 'Incidencias operativas', cuerpo) };
+  return { titulo: 'Incidencias', standalone: true, contenido: marcoInparques('/i/incidencias', 'Incidencias operativas', cuerpo) };
 };
 
 export const operacionStitch: Render = (): Pagina => {
@@ -703,5 +703,5 @@ ${panel(
   `${activas.length} en curso`,
 )}`;
 
-  return { titulo: 'Operación del parque', standalone: true, contenido: marco('/i/operacion', 'Centro de operación', cuerpo) };
+  return { titulo: 'Operación del parque', standalone: true, contenido: marcoInparques('/i/operacion', 'Centro de operación', cuerpo) };
 };

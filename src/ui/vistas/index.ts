@@ -8,6 +8,7 @@
 
 import type { Render } from './tipos';
 import * as c from './compartidas';
+import * as valoraciones from './valoraciones';
 import * as v from './visitante';
 import * as com from './comercio';
 import * as inp from './inparques';
@@ -121,6 +122,7 @@ export const VISTAS_POR_ID: Record<string, Render> = {
   // ----------------------------------------------------------------- Comercio
   'c.inicio': inicioComercioPorRol(),
   'c.mas': c.masOpciones('comercio'),
+  'c.valoraciones': valoraciones.valoracionesComercio,
   'c.expediente': stitchComercioInterior.expedienteStitch,
   'c.documentos': stitchComercioInterior.documentosStitch,
   'c.documento': stitchComercioInterior.detalleDocumentoStitch,
@@ -187,6 +189,7 @@ export const VISTAS_POR_ID: Record<string, Render> = {
   'i.cierres': stitchInpFin.cierresStitch,
   'i.reembolsos': stitchInpFin.reembolsosStitch,
   'i.ajustes': stitchInpFin.ajustesStitch,
+  'i.valoraciones': valoraciones.valoracionesInparques,
   'i.disputas': stitchInpFin.disputasStitch,
   'i.disputa': stitchInpFin.detalleDisputaStitch,
   'i.sla': stitchInpFin.slaStitch,

@@ -10,11 +10,21 @@ import type { RoleId, Scope, User } from '../domain/types';
 import { ROLES } from '../domain/roles';
 import { store } from '../data/store';
 import { adaptadores } from '../adapters/simulados';
+import { identificador } from '../domain/ids';
 
 const CLAVE_SESION = 'inparques.demo.sesion';
 
 /** Clave unica de la demo. Documentada en el README; no es un secreto. */
 export const CLAVE_DEMO = 'demo1234';
+
+/**
+ * Cuanto dura una sesion antes de pedir credenciales otra vez.
+ *
+ * Doce horas: cubre una jornada entera de un operador de parque —que no
+ * quiere volver a escribir la clave a media manana— sin dejar la sesion viva
+ * indefinidamente en un telefono que se pierde.
+ */
+export const DURACION_SESION_MS = 12 * 60 * 60 * 1000;
 
 export interface SesionActiva {
   usuarioId: string;
@@ -44,17 +54,41 @@ class Sesion {
       const crudo = window.localStorage.getItem(CLAVE_SESION);
       if (!crudo) return null;
       const s = JSON.parse(crudo) as SesionActiva;
-      // Solo se restaura si el usuario sigue existiendo y activo.
-      const u = store.leer().usuarios.find((x) => x.id === s.usuarioId);
-      if (!u || u.estado !== 'activo') {
-        if (!s.invitado) return null;
+
+      if (!s.invitado) {
+        // Solo se restaura si el usuario sigue existiendo y activo.
+        const u = store.leer().usuarios.find((x) => x.id === s.usuarioId);
+        if (!u || u.estado !== 'activo') return null;
+
+        // La sesion caduca. `vencer()` existia desde el principio y no la
+        // llamaba nadie: una sesion abierta lo seguia estando para siempre.
+        if (this.vencida(s)) {
+          this.vencer();
+          return null;
+        }
+
+        // El rol se relee del usuario, no del blob guardado. Si a alguien le
+        // cambian el cargo, antes conservaba el anterior —con sus permisos—
+        // hasta que cerrara sesion por su cuenta.
+        if (u.rol !== s.rol) {
+          s.rol = u.rol;
+          // Un rol distinto puede exigir MFA que esta sesion nunca paso.
+          if (ROLES[u.rol].requiereMfa) s.mfaVerificado = false;
+        }
       }
+
       this.actual = s;
-      this.notificar();
+      this.establecer(s);
       return s;
     } catch {
       return null;
     }
+  }
+
+  private vencida(s: SesionActiva): boolean {
+    const inicio = new Date(s.iniciadaEn).getTime();
+    if (Number.isNaN(inicio)) return true;
+    return Date.now() - inicio > DURACION_SESION_MS;
   }
 
   usuario(): User | null {
@@ -213,7 +247,7 @@ class Sesion {
         return;
       }
       e.sesiones.push({
-        id: `se_${s.usuarioId}_${Date.now().toString(36)}`,
+        id: identificador('se'),
         usuarioId: s.usuarioId,
         dispositivo: typeof navigator !== 'undefined' ? navigator.userAgent.slice(0, 60) : 'Demo',
         iniciadaEn: s.iniciadaEn,

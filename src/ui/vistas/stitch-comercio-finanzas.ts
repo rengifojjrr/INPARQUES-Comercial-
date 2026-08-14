@@ -66,7 +66,7 @@ function misOrdenes(): Orden[] {
  * corresponde a cada rol en vez de imponer una sola: el lienzo es el mismo,
  * el portal que lo enmarca no.
  */
-function marcoFinanzas(activo: string, cuerpo: string): string {
+export function marcoFinanzas(activo: string, cuerpo: string): string {
   const u = sesion.usuario()!;
 
   if (u.rol === 'comercio.propietario') {

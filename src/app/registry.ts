@@ -164,6 +164,9 @@ const COMERCIO_VISTAS: Vista[] = [
   v('c.mas', '/c/mas', 'Todos los módulos', 'comercio', 'Panel', COMERCIO_TODOS, {
     notas: 'Acceso a los módulos del rol en teléfono; en escritorio equivale al lateral.',
   }),
+  v('c.valoraciones', '/c/valoraciones', 'Valoraciones de clientes', 'comercio', 'Panel', COMERCIO_TODOS, {
+    notas: 'El comercio responde en publico a quien le valoro.',
+  }),
   v('c.expediente', '/c/expediente', 'Expediente del negocio', 'comercio', 'Registro', [...COMERCIO_GESTION, 'comercio.contador']),
   v('c.documentos', '/c/expediente/documentos', 'Documentos y vigencias', 'comercio', 'Registro', COMERCIO_GESTION),
   v('c.documento', '/c/expediente/documento/:documentoId', 'Detalle de documento', 'comercio', 'Registro', COMERCIO_GESTION),
@@ -246,6 +249,9 @@ const INPARQUES_VISTAS: Vista[] = [
   v('i.reembolsos', '/i/reembolsos', 'Reembolsos', 'inparques', 'Finanzas', [...INP_FINANZAS, 'inparques.soporte']),
   v('i.ajustes', '/i/ajustes', 'Ajustes', 'inparques', 'Finanzas', INP_FINANZAS),
   v('i.disputas', '/i/disputas', 'Disputas', 'inparques', 'Soporte', INP_SOPORTE),
+  v('i.valoraciones', '/i/valoraciones', 'Valoraciones y moderacion', 'inparques', 'Soporte', [...INP_SOPORTE, 'inparques.direccion_comercial'], {
+    notas: 'Retirar no borra: marca la valoracion como oculta con su motivo.',
+  }),
   v('i.disputa', '/i/disputa/:disputaId', 'Detalle de disputa', 'inparques', 'Soporte', INP_SOPORTE),
   v('i.sla', '/i/sla', 'SLA de soporte', 'inparques', 'Soporte', INP_SOPORTE),
   v('i.auditoria', '/i/auditoria', 'Bitacora de auditoria', 'inparques', 'Administracion', ['inparques.superadmin', 'inparques.finanzas', 'inparques.direccion_comercial']),

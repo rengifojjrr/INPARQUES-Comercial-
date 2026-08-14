@@ -19,6 +19,7 @@
  */
 
 import { esc } from './componentes';
+import { etiquetaFoto } from './fotos';
 
 /** Paleta derivada de `tailwind.config.js` (el sistema real de Stitch). */
 const C = {
@@ -316,7 +317,9 @@ export function ilustracion(
   // El id evita que dos <defs> con el mismo nombre colisionen al haber
   // varias escenas en la misma página.
   const id = `g${(semilla % 100000).toString(36)}`;
-  return envolver(escena(semilla, id), clases, etiqueta || `Ilustración de ${cat}`);
+  const alt = etiqueta || `Ilustración de ${cat}`;
+  // Si alguien dejó una fotografía con este identificador, manda la foto.
+  return etiquetaFoto(clave, clases, alt) ?? envolver(escena(semilla, id), clases, alt);
 }
 
 /**
@@ -338,7 +341,13 @@ export function ilustracionPortada(
   const escena = cat === 'paseos' || cat === 'atracciones' || cat === 'alquileres' ? bodegonPaseo : bodegonLocal;
   const semilla = hash(`portada:${cat}:${clave}`);
   const id = `p${(semilla % 100000).toString(36)}`;
-  return envolver(escena(semilla, id), clases, etiqueta || 'Imagen de portada');
+  const alt = etiqueta || 'Imagen de portada';
+  // Portada propia si existe (`<clave>-portada.jpg`), y si no la misma foto.
+  return (
+    etiquetaFoto(`${clave}-portada`, clases, alt) ??
+    etiquetaFoto(clave, clases, alt) ??
+    envolver(escena(semilla, id), clases, alt)
+  );
 }
 
 /** Paisaje de parque, para encabezados y tarjetas de zona. */

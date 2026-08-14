@@ -41,10 +41,16 @@ export type Permiso =
   | 'reglas:ver' | 'reglas:editar' | 'integracion:ver'
   // Visitante
   | 'tienda:navegar' | 'carrito:usar' | 'pedido:crear' | 'pedido:seguir'
-  | 'historial:propio' | 'valoracion:crear' | 'reclamo:crear';
+  | 'pedido:cancelar'
+  | 'historial:propio' | 'valoracion:crear' | 'valoracion:responder' | 'valoracion:moderar'
+  | 'reclamo:crear';
 
 const V: Permiso[] = [
   'tienda:navegar', 'carrito:usar', 'pedido:crear', 'pedido:seguir',
+  // Cancelar mientras el comercio no haya aceptado, y seguir el reclamo que
+  // uno mismo abrio: sin esto el reclamo caia en un pozo sin estado ni
+  // respuesta.
+  'pedido:cancelar', 'disputa:ver',
   'historial:propio', 'valoracion:crear', 'reclamo:crear', 'factura:ver',
 ];
 
@@ -57,6 +63,7 @@ const OPERADOR: Permiso[] = [
 
 const ADMIN_LOCAL: Permiso[] = [
   ...OPERADOR,
+  'valoracion:responder',
   'catalogo:editar', 'catalogo:precio',
   'orden:cancelar', 'caja:cerrar',
   'expediente:ver', 'permiso:ver',
@@ -76,7 +83,9 @@ const PROPIETARIO: Permiso[] = [
   ...ADMIN_LOCAL, ...CONTADOR,
   'expediente:editar', 'documento:cargar',
   'contrato:ver', 'bancario:ver', 'bancario:editar',
-  'usuario:invitar', 'usuario:rol', 'sesion:ver',
+  // Ver la sesion de un empleado y no poder cerrarla no sirve de nada: si se
+  // va alguien, el dueno tiene que poder echarlo del sistema.
+  'usuario:invitar', 'usuario:rol', 'sesion:ver', 'sesion:revocar',
 ];
 
 const INSPECTOR: Permiso[] = [
@@ -92,14 +101,16 @@ const ADMIN_PARQUE: Permiso[] = [
   'permiso:ver', 'documento:revisar',
   'orden:ver', 'catalogo:ver',
   'inspeccion:ver', 'incidencia:ver', 'incidencia:registrar',
-  'reporte:ver', 'usuario:ver',
+  // Asigna puntos y revisa expedientes: tiene que poder consultar el rastro
+  // de lo que se hizo en su parque.
+  'reporte:ver', 'usuario:ver', 'auditoria:ver',
 ];
 
 const SOPORTE: Permiso[] = [
   'orden:ver', 'pedido:seguir',
   'disputa:ver', 'disputa:atender', 'disputa:resolver',
   'reembolso:solicitar',
-  'incidencia:ver', 'factura:ver',
+  'incidencia:ver', 'factura:ver', 'valoracion:moderar',
 ];
 
 const FINANZAS: Permiso[] = [
@@ -119,7 +130,7 @@ const DIRECCION: Permiso[] = [
   'contrato:ver', 'contrato:editar',
   'reporte:ver', 'reporte:exportar', 'auditoria:ver',
   'usuario:ver', 'usuario:invitar',
-  'orden:ver', 'catalogo:ver', 'inspeccion:ver',
+  'orden:ver', 'catalogo:ver', 'inspeccion:ver', 'valoracion:moderar',
 ];
 
 const SUPERADMIN: Permiso[] = [

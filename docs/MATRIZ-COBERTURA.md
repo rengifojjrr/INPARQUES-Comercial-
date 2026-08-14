@@ -7,18 +7,18 @@
 
 | Concepto | Valor |
 | --- | --- |
-| Rutas registradas | 137 |
+| Rutas registradas | 139 |
 | Vistas segun el enunciado | 119 |
-| Diferencia por reconciliar | +18 |
+| Diferencia por reconciliar | +20 |
 | Compartidas | 27 |
 | Visitante | 33 |
-| Comercio | 38 |
-| INPARQUES | 39 |
+| Comercio | 39 |
+| INPARQUES | 40 |
 
 | Estado | Vistas |
 | --- | --- |
 | Pendiente de HTML | 0 |
-| Implementada | 137 |
+| Implementada | 139 |
 | Conectada | 0 |
 | Revisada | 0 |
 | Bloqueada | 0 |
@@ -77,8 +77,8 @@ esta tabla con los archivos entregados.
 | Ruta | Vista | Roles autorizados | HTML de referencia | Estado |
 | --- | --- | --- | --- | --- |
 | `/conexion/degradada` | Conexion degradada | Todos | — | Implementada |
-| `/conexion/cola` | Cola de sincronizacion | Propietario legal; Administrador de local; Operador / cocina / servicio; Contador; Superadministrador nacional; Direccion comercial / concesiones; Finanzas / auditoria; Administrador de parque; Inspector / guardaparque; Soporte / disputas | — | Implementada |
-| `/conexion/conflicto` | Conflicto de sincronizacion | Propietario legal; Administrador de local; Operador / cocina / servicio; Contador; Superadministrador nacional; Direccion comercial / concesiones; Finanzas / auditoria; Administrador de parque; Inspector / guardaparque; Soporte / disputas | — | Implementada |
+| `/conexion/cola` | Cola de sincronizacion | Propietario legal; Administrador de local; Operador / cocina / servicio; Contador; Superadministrador nacional; Dirección comercial / concesiones; Finanzas / auditoría; Administrador de parque; Inspector / guardaparque; Soporte / disputas | — | Implementada |
+| `/conexion/conflicto` | Conflicto de sincronizacion | Propietario legal; Administrador de local; Operador / cocina / servicio; Contador; Superadministrador nacional; Dirección comercial / concesiones; Finanzas / auditoría; Administrador de parque; Inspector / guardaparque; Soporte / disputas | — | Implementada |
 
 ## Visitante — PWA movil — 33 vistas
 
@@ -141,7 +141,7 @@ esta tabla con los archivos entregados.
 | `/v/reclamos` | Mis reclamos | Visitante / cliente | — | Implementada |
 | `/v/perfil` | Mi perfil | Visitante / cliente | — | Implementada |
 
-## Comercio — portal — 38 vistas
+## Comercio — portal — 39 vistas
 
 
 ### Panel
@@ -150,6 +150,7 @@ esta tabla con los archivos entregados.
 | --- | --- | --- | --- | --- |
 | `/c` | Inicio del comercio | Propietario legal; Administrador de local; Operador / cocina / servicio; Contador | — | Implementada |
 | `/c/mas` | Todos los módulos | Propietario legal; Administrador de local; Operador / cocina / servicio; Contador | — | Implementada |
+| `/c/valoraciones` | Valoraciones de clientes | Propietario legal; Administrador de local; Operador / cocina / servicio; Contador | — | Implementada |
 
 ### Registro
 
@@ -212,42 +213,42 @@ esta tabla con los archivos entregados.
 | `/c/ajustes` | Solicitudes de ajuste | Propietario legal; Contador | — | Implementada |
 | `/c/exportaciones` | Exportaciones | Propietario legal; Contador | — | Implementada |
 
-## INPARQUES — panel institucional — 39 vistas
+## INPARQUES — panel institucional — 40 vistas
 
 
 ### Tableros
 
 | Ruta | Vista | Roles autorizados | HTML de referencia | Estado |
 | --- | --- | --- | --- | --- |
-| `/i` | Dashboard nacional | Superadministrador nacional; Direccion comercial / concesiones; Finanzas / auditoria; Administrador de parque; Inspector / guardaparque; Soporte / disputas | — | Implementada |
-| `/i/mas` | Todos los módulos | Superadministrador nacional; Direccion comercial / concesiones; Finanzas / auditoria; Administrador de parque; Inspector / guardaparque; Soporte / disputas | — | Implementada |
-| `/i/dashboard/parque/:parqueId` | Dashboard por parque | Superadministrador nacional; Direccion comercial / concesiones; Finanzas / auditoria; Administrador de parque; Inspector / guardaparque; Soporte / disputas | — | Implementada |
-| `/i/reportes` | Reportes | Superadministrador nacional; Direccion comercial / concesiones; Finanzas / auditoria; Administrador de parque; Inspector / guardaparque; Soporte / disputas | — | Implementada |
+| `/i` | Dashboard nacional | Superadministrador nacional; Dirección comercial / concesiones; Finanzas / auditoría; Administrador de parque; Inspector / guardaparque; Soporte / disputas | — | Implementada |
+| `/i/mas` | Todos los módulos | Superadministrador nacional; Dirección comercial / concesiones; Finanzas / auditoría; Administrador de parque; Inspector / guardaparque; Soporte / disputas | — | Implementada |
+| `/i/dashboard/parque/:parqueId` | Dashboard por parque | Superadministrador nacional; Dirección comercial / concesiones; Finanzas / auditoría; Administrador de parque; Inspector / guardaparque; Soporte / disputas | — | Implementada |
+| `/i/reportes` | Reportes | Superadministrador nacional; Dirección comercial / concesiones; Finanzas / auditoría; Administrador de parque; Inspector / guardaparque; Soporte / disputas | — | Implementada |
 
 ### Territorio
 
 | Ruta | Vista | Roles autorizados | HTML de referencia | Estado |
 | --- | --- | --- | --- | --- |
-| `/i/territorio` | Estructura territorial | Superadministrador nacional; Direccion comercial / concesiones; Finanzas / auditoria; Administrador de parque; Inspector / guardaparque; Soporte / disputas | — | Implementada |
-| `/i/parques` | Parques | Superadministrador nacional; Direccion comercial / concesiones; Finanzas / auditoria; Administrador de parque; Inspector / guardaparque; Soporte / disputas | — | Implementada |
-| `/i/parque/:parqueId` | Detalle del parque | Superadministrador nacional; Direccion comercial / concesiones; Finanzas / auditoria; Administrador de parque; Inspector / guardaparque; Soporte / disputas | — | Implementada |
-| `/i/zonas` | Zonas | Superadministrador nacional; Direccion comercial / concesiones; Finanzas / auditoria; Administrador de parque; Inspector / guardaparque; Soporte / disputas | — | Implementada |
-| `/i/puntos` | Puntos comerciales | Superadministrador nacional; Direccion comercial / concesiones; Finanzas / auditoria; Administrador de parque; Inspector / guardaparque; Soporte / disputas | — | Implementada |
+| `/i/territorio` | Estructura territorial | Superadministrador nacional; Dirección comercial / concesiones; Finanzas / auditoría; Administrador de parque; Inspector / guardaparque; Soporte / disputas | — | Implementada |
+| `/i/parques` | Parques | Superadministrador nacional; Dirección comercial / concesiones; Finanzas / auditoría; Administrador de parque; Inspector / guardaparque; Soporte / disputas | — | Implementada |
+| `/i/parque/:parqueId` | Detalle del parque | Superadministrador nacional; Dirección comercial / concesiones; Finanzas / auditoría; Administrador de parque; Inspector / guardaparque; Soporte / disputas | — | Implementada |
+| `/i/zonas` | Zonas | Superadministrador nacional; Dirección comercial / concesiones; Finanzas / auditoría; Administrador de parque; Inspector / guardaparque; Soporte / disputas | — | Implementada |
+| `/i/puntos` | Puntos comerciales | Superadministrador nacional; Dirección comercial / concesiones; Finanzas / auditoría; Administrador de parque; Inspector / guardaparque; Soporte / disputas | — | Implementada |
 
 ### Concesiones
 
 | Ruta | Vista | Roles autorizados | HTML de referencia | Estado |
 | --- | --- | --- | --- | --- |
-| `/i/negocios` | Directorio de negocios | Superadministrador nacional; Direccion comercial / concesiones; Finanzas / auditoria; Administrador de parque; Inspector / guardaparque; Soporte / disputas | — | Implementada |
-| `/i/negocio/:negocioId` | Detalle del negocio | Superadministrador nacional; Direccion comercial / concesiones; Finanzas / auditoria; Administrador de parque; Inspector / guardaparque; Soporte / disputas | — | Implementada |
-| `/i/solicitudes` | Solicitudes y expedientes | Superadministrador nacional; Direccion comercial / concesiones; Administrador de parque | — | Implementada |
-| `/i/expediente/:negocioId` | Expediente | Superadministrador nacional; Direccion comercial / concesiones; Administrador de parque | — | Implementada |
-| `/i/revision-documental/:negocioId` | Revision documental | Superadministrador nacional; Direccion comercial / concesiones; Administrador de parque | — | Implementada |
-| `/i/aprobaciones` | Aprobaciones | Superadministrador nacional; Direccion comercial / concesiones | — | Implementada |
-| `/i/permisos` | Permisos y concesiones | Superadministrador nacional; Direccion comercial / concesiones; Inspector / guardaparque; Administrador de parque | — | Implementada |
-| `/i/contratos` | Contratos | Superadministrador nacional; Direccion comercial / concesiones; Finanzas / auditoria | — | Implementada |
-| `/i/canones` | Canones y comisiones | Superadministrador nacional; Direccion comercial / concesiones; Finanzas / auditoria | — | Implementada |
-| `/i/vencimientos` | Vencimientos | Superadministrador nacional; Direccion comercial / concesiones; Administrador de parque | — | Implementada |
+| `/i/negocios` | Directorio de negocios | Superadministrador nacional; Dirección comercial / concesiones; Finanzas / auditoría; Administrador de parque; Inspector / guardaparque; Soporte / disputas | — | Implementada |
+| `/i/negocio/:negocioId` | Detalle del negocio | Superadministrador nacional; Dirección comercial / concesiones; Finanzas / auditoría; Administrador de parque; Inspector / guardaparque; Soporte / disputas | — | Implementada |
+| `/i/solicitudes` | Solicitudes y expedientes | Superadministrador nacional; Dirección comercial / concesiones; Administrador de parque | — | Implementada |
+| `/i/expediente/:negocioId` | Expediente | Superadministrador nacional; Dirección comercial / concesiones; Administrador de parque | — | Implementada |
+| `/i/revision-documental/:negocioId` | Revision documental | Superadministrador nacional; Dirección comercial / concesiones; Administrador de parque | — | Implementada |
+| `/i/aprobaciones` | Aprobaciones | Superadministrador nacional; Dirección comercial / concesiones | — | Implementada |
+| `/i/permisos` | Permisos y concesiones | Superadministrador nacional; Dirección comercial / concesiones; Inspector / guardaparque; Administrador de parque | — | Implementada |
+| `/i/contratos` | Contratos | Superadministrador nacional; Dirección comercial / concesiones; Finanzas / auditoría | — | Implementada |
+| `/i/canones` | Canones y comisiones | Superadministrador nacional; Dirección comercial / concesiones; Finanzas / auditoría | — | Implementada |
+| `/i/vencimientos` | Vencimientos | Superadministrador nacional; Dirección comercial / concesiones; Administrador de parque | — | Implementada |
 
 ### Control
 
@@ -262,18 +263,19 @@ esta tabla con los archivos entregados.
 
 | Ruta | Vista | Roles autorizados | HTML de referencia | Estado |
 | --- | --- | --- | --- | --- |
-| `/i/contabilidad` | Contabilidad | Superadministrador nacional; Finanzas / auditoria | — | Implementada |
-| `/i/conciliacion` | Conciliacion | Superadministrador nacional; Finanzas / auditoria | — | Implementada |
-| `/i/cuentas-por-cobrar` | Cuentas por cobrar | Superadministrador nacional; Finanzas / auditoria | — | Implementada |
-| `/i/cierres` | Cierres | Superadministrador nacional; Finanzas / auditoria | — | Implementada |
-| `/i/reembolsos` | Reembolsos | Superadministrador nacional; Finanzas / auditoria; Soporte / disputas | — | Implementada |
-| `/i/ajustes` | Ajustes | Superadministrador nacional; Finanzas / auditoria | — | Implementada |
+| `/i/contabilidad` | Contabilidad | Superadministrador nacional; Finanzas / auditoría | — | Implementada |
+| `/i/conciliacion` | Conciliacion | Superadministrador nacional; Finanzas / auditoría | — | Implementada |
+| `/i/cuentas-por-cobrar` | Cuentas por cobrar | Superadministrador nacional; Finanzas / auditoría | — | Implementada |
+| `/i/cierres` | Cierres | Superadministrador nacional; Finanzas / auditoría | — | Implementada |
+| `/i/reembolsos` | Reembolsos | Superadministrador nacional; Finanzas / auditoría; Soporte / disputas | — | Implementada |
+| `/i/ajustes` | Ajustes | Superadministrador nacional; Finanzas / auditoría | — | Implementada |
 
 ### Soporte
 
 | Ruta | Vista | Roles autorizados | HTML de referencia | Estado |
 | --- | --- | --- | --- | --- |
 | `/i/disputas` | Disputas | Superadministrador nacional; Soporte / disputas | — | Implementada |
+| `/i/valoraciones` | Valoraciones y moderacion | Superadministrador nacional; Soporte / disputas; Dirección comercial / concesiones | — | Implementada |
 | `/i/disputa/:disputaId` | Detalle de disputa | Superadministrador nacional; Soporte / disputas | — | Implementada |
 | `/i/sla` | SLA de soporte | Superadministrador nacional; Soporte / disputas | — | Implementada |
 
@@ -281,8 +283,8 @@ esta tabla con los archivos entregados.
 
 | Ruta | Vista | Roles autorizados | HTML de referencia | Estado |
 | --- | --- | --- | --- | --- |
-| `/i/auditoria` | Bitacora de auditoria | Superadministrador nacional; Finanzas / auditoria; Direccion comercial / concesiones | — | Implementada |
-| `/i/usuarios` | Usuarios | Superadministrador nacional; Direccion comercial / concesiones | — | Implementada |
+| `/i/auditoria` | Bitacora de auditoria | Superadministrador nacional; Finanzas / auditoría; Dirección comercial / concesiones | — | Implementada |
+| `/i/usuarios` | Usuarios | Superadministrador nacional; Dirección comercial / concesiones | — | Implementada |
 | `/i/roles` | Roles y permisos | Superadministrador nacional | — | Implementada |
 | `/i/ambitos` | Ambitos | Superadministrador nacional | — | Implementada |
 | `/i/sesiones` | Sesiones | Superadministrador nacional | — | Implementada |

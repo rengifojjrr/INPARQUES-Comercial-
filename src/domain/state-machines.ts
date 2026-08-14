@@ -27,6 +27,21 @@ export class TransicionInvalida extends Error {
 
 // --- Orden -----------------------------------------------------------------
 
+/**
+ * Hasta donde puede cancelar el propio cliente.
+ *
+ * Antes no podia en absoluto: `pedido:cancelar` no existia y su pantalla de
+ * seguimiento no ofrecia ninguna accion. Cancelar mientras el comercio aun no
+ * ha aceptado —nadie ha empezado a cocinar— es lo minimo que espera quien
+ * compra. En cuanto el comercio acepta, ya hay trabajo y coste de por medio:
+ * a partir de ahi se pide por reclamo, no por cancelacion unilateral.
+ */
+export const CANCELABLE_POR_CLIENTE: EstadoOrden[] = ['creada', 'pendiente_aceptacion'];
+
+export function clientePuedeCancelar(estado: EstadoOrden): boolean {
+  return CANCELABLE_POR_CLIENTE.includes(estado);
+}
+
 export const TRANSICIONES_ORDEN: Record<EstadoOrden, EstadoOrden[]> = {
   creada: ['pendiente_aceptacion', 'cancelada'],
   pendiente_aceptacion: ['aceptada', 'cancelada'],
@@ -149,6 +164,15 @@ export const TONO_ORDEN: Record<EstadoOrden, Tono> = {
   lista: 'exito',
   entregada: 'exito',
   cancelada: 'error',
+};
+
+/** Estado del reclamo, en palabras que entiende quien lo abrio. */
+export const ETIQUETA_DISPUTA: Record<string, string> = {
+  abierta: 'recibido, en espera',
+  en_analisis: 'en analisis por INPARQUES',
+  resuelta_favor_cliente: 'resuelto a su favor',
+  resuelta_favor_comercio: 'resuelto a favor del comercio',
+  cerrada: 'cerrado',
 };
 
 export const TONO_PAGO: Record<EstadoPago, Tono> = {

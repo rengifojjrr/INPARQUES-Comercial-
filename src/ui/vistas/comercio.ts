@@ -5,20 +5,19 @@
 
 import {
   html, crudo, esc, boton, tarjeta, insignia, listaDatos, vacio, aviso, etiquetaDemo,
-  entradaTexto, areaTexto, seccion, chips, tabla, lineaTiempo, barraAccion, conmutador,
-  metrica, opcionRadio, buscador,
+  entradaTexto, areaTexto, seccion, chips, tabla, barraAccion, conmutador,
+  metrica, buscador,
 } from '../componentes';
 import type { Pagina, Render } from './tipos';
 import { store } from '../../data/store';
 import { sesion } from '../../app/session';
-import { estadoUi, filtro, texto } from '../estado-ui';
+import { filtro, texto } from '../estado-ui';
 import { ROLES } from '../../domain/roles';
 import { proyectarCuenta } from '../../domain/masking';
-import { puedeVerBancario } from '../../domain/permissions';
-import { ETIQUETA_ORDEN, ETIQUETA_PAGO, TONO_ORDEN, TONO_PAGO, ETIQUETA_LIQUIDACION } from '../../domain/state-machines';
-import { formatearUsd, formatearVes, formatearTasa, calcularParticipacion } from '../../domain/money';
-import { fechaCorta, fechaHora, horaCorta, desde, diasHasta, pluralizar } from '../formato';
-import { error403, error404 } from './compartidas';
+import { ETIQUETA_ORDEN, ETIQUETA_PAGO, TONO_ORDEN, TONO_PAGO } from '../../domain/state-machines';
+import { formatearUsd, formatearVes, formatearTasa } from '../../domain/money';
+import { fechaCorta, horaCorta, desde, diasHasta, pluralizar } from '../formato';
+import { error404 } from './compartidas';
 import type { Local, Orden } from '../../domain/types';
 
 /** Locales que el usuario puede operar, según su ámbito. */
@@ -173,97 +172,6 @@ export const pedidos: Render = () => {
   };
 };
 
-export const detallePedido: Render = (ctx) => {
-  const e = store.leer();
-  const o = e.ordenes.find((x) => x.id === ctx.params.ordenId);
-  if (!o) return error404(ctx);
-  if (!misLocales().some((l) => l.id === o.localId)) return error403(ctx);
-
-  const pago = e.pagos.find((p) => p.ordenId === o.id);
-  const factura = e.facturas.find((f) => f.ordenId === o.id);
-  const u = sesion.usuario()!;
-  const puedeOperar = u.rol !== 'comercio.contador';
-
-  const siguiente: Record<string, { destino: string; texto: string } | undefined> = {
-    pendiente_aceptacion: { destino: 'aceptada', texto: 'Aceptar pedido' },
-    aceptada: { destino: 'preparando', texto: 'Comenzar preparación' },
-    preparando: { destino: 'lista', texto: 'Marcar como listo' },
-    lista: { destino: 'entregada', texto: 'Confirmar entrega' },
-  };
-  const paso = siguiente[o.estado];
-
-  return {
-    titulo: o.codigo,
-    subtitulo: o.clienteNombre,
-    atras: '/c/pedidos',
-    contenido: html`
-      <div class="fila fila--envuelve mb-2" style="gap:6px">
-        ${crudo(insignia(ETIQUETA_ORDEN[o.estado], TONO_ORDEN[o.estado]))}
-        ${pago ? crudo(insignia(ETIQUETA_PAGO[pago.estado], TONO_PAGO[pago.estado])) : ''}
-        ${crudo(insignia(o.canal === 'mostrador' ? 'Mostrador' : 'Aplicación', 'neutro'))}
-      </div>
-
-      ${pago?.estado === 'pendiente_verificacion'
-        ? crudo(html`
-            ${crudo(aviso('alerta', 'Pago sin verificar', 'No entregue el pedido hasta confirmar el pago con el banco. La captura del cliente no es prueba suficiente.'))}
-            <div class="mt-1">${crudo(boton('Verificar pago con el banco', { variante: 'principal', bloque: true, accion: 'verificar-pago', valor: pago.id }))}</div>
-          `)
-        : ''}
-
-      ${crudo(seccion('Artículos', html`<div class="pila">
-        ${o.items.map((i) => crudo(tarjeta(html`
-          <div class="fila fila--sep">
-            <div class="crece">
-              <div style="font-weight:650">${i.cantidad} × ${i.nombre}</div>
-              ${i.seleccionVariantes.map((v) => crudo(`<div class="tenue-2">${esc(v.nombre)}</div>`))}
-              ${i.seleccionModificadores.map((m) => crudo(`<div class="tenue-2">+ ${esc(m.nombre)}</div>`))}
-              ${i.notas ? crudo(`<div class="tenue mt-1">Nota: ${esc(i.notas)}</div>`) : ''}
-            </div>
-            <span class="precio">${formatearUsd(i.precioUnitarioUsd * i.cantidad)}</span>
-          </div>
-        `, { clase: 'tarjeta--plana' })))}
-      </div>`))}
-
-      ${crudo(seccion('Importes', html`${crudo(listaDatos([
-        ['Subtotal', formatearUsd(o.subtotalUsd)],
-        ['IVA (16 %)', formatearUsd(o.impuestosUsd)],
-        ['Total en USD', `<strong>${formatearUsd(o.totalUsd)}</strong>`],
-        ['Monto pagadero', `<strong>${formatearVes(o.totalVes)}</strong>`],
-        ['Tasa aplicada', `${o.tasaBcv.toFixed(2)} Bs/USD · ${fechaCorta(o.tasaBcvFecha)}`],
-        pago ? ['Método', pago.metodo.replace('_', ' ')] : null,
-        pago?.referencia ? ['Referencia', `<span class="mono">${esc(pago.referencia)}</span>`] : null,
-      ]))}`))}
-
-      ${crudo(seccion('Cumplimiento', html`${crudo(listaDatos([
-        ['Modalidad', o.cumplimiento.replace(/_/g, ' ')],
-        ['Código de retiro', `<span class="mono">${esc(o.codigoRetiro)}</span>`],
-        o.programadaPara ? ['Programado para', fechaHora(o.programadaPara)] : null,
-      ]))}`))}
-
-      ${crudo(seccion('Documentos', html`${crudo(listaDatos([
-        ['Factura', factura ? `${factura.numero} · ${factura.estado}` : 'No emitida'],
-      ]))}
-      ${!factura && o.estado === 'entregada' && puedeOperar
-        ? crudo(`<div class="mt-1">${boton('Emitir factura', { variante: 'secundario', bloque: true, accion: 'emitir-factura', valor: o.id })}</div>`)
-        : ''}`))}
-
-      ${crudo(seccion('Historial', html`${crudo(lineaTiempo(o.historial.map((h) => ({
-        titulo: ETIQUETA_ORDEN[h.a as keyof typeof ETIQUETA_ORDEN] ?? h.a,
-        detalle: `${fechaHora(h.en)} · ${ROLES[h.porRol]?.nombre ?? h.porRol}${h.motivo ? ` · ${h.motivo}` : ''}`,
-        estado: 'hecho' as const,
-      }))))}`))}
-
-      ${puedeOperar && (paso || !['entregada', 'cancelada'].includes(o.estado))
-        ? crudo(barraAccion([
-            ...(paso ? [boton(paso.texto, { variante: 'principal', bloque: true, accion: 'avanzar-orden', valor: `${o.id}|${paso.destino}` })] : []),
-            ...(!['entregada', 'cancelada'].includes(o.estado)
-              ? [boton('Cancelar', { variante: 'secundario', accion: 'cancelar-orden', valor: o.id })]
-              : []),
-          ]))
-        : ''}
-    `,
-  };
-};
 
 export const reservas: Render = () => {
   const lista = misOrdenes().filter((o) => o.tipo === 'reserva').sort((a, b) => (a.programadaPara ?? '').localeCompare(b.programadaPara ?? ''));
@@ -277,7 +185,6 @@ export const reservas: Render = () => {
   };
 };
 
-export const detalleReserva: Render = (ctx) => detallePedido(ctx);
 
 // ------------------------------------------------------------------ Catálogo
 
@@ -586,178 +493,9 @@ export const caja: Render = () => {
   };
 };
 
-export const ventaMostrador: Render = () => {
-  const e = store.leer();
-  const locales = misLocales();
-  const turno = e.turnos.find((t) => locales.some((l) => l.id === t.localId) && t.estado === 'abierto');
-  if (!turno) {
-    return {
-      titulo: 'Venta de mostrador',
-      atras: '/c/caja',
-      contenido: html`
-        ${crudo(vacio('▦', 'Necesita un turno abierto', 'Toda venta de mostrador debe quedar dentro de un turno para poder cuadrar la caja.'))}
-        <div class="centrado">${crudo(boton('Abrir turno', { variante: 'principal', accion: 'ir', valor: '/c/caja/turno/abrir' }))}</div>
-      `,
-    };
-  }
 
-  const arts = e.articulos.filter((a) => a.localId === turno.localId && a.disponible && a.tipo !== 'servicio');
-  const sel: Record<string, number> = {};
-  for (const [k, v] of Object.entries(estadoUi.seleccion)) {
-    if (k.startsWith('mostrador-')) sel[k.replace('mostrador-', '')] = Number(v);
-  }
-  const total = Object.entries(sel).reduce((s, [id, n]) => {
-    const a = arts.find((x) => x.id === id);
-    return s + (a ? a.precioUsd * n : 0);
-  }, 0);
-  const totalConIva = Math.round(total * 1.16 * 100) / 100;
 
-  return {
-    titulo: 'Venta de mostrador',
-    atras: '/c/caja',
-    sinNav: true,
-    contenido: html`
-      <p class="bajada">Registre la venta para que entre en la caja, el cierre y los reportes.</p>
-      <div class="pila">
-        ${arts.map((a) => {
-          const n = sel[a.id] ?? 0;
-          return crudo(tarjeta(html`
-            <div class="fila fila--sep">
-              <div class="crece">
-                <div style="font-weight:650">${a.nombre}</div>
-                <div class="tenue-2">${formatearUsd(a.precioUsd)}${typeof a.stock === 'number' ? ` · ${a.stock} disp.` : ''}</div>
-              </div>
-              <div class="contador">
-                <button data-accion="mostrador-menos" data-valor="${a.id}" aria-label="Quitar ${esc(a.nombre)}" ${n <= 0 ? crudo('disabled') : ''}>−</button>
-                <span>${n}</span>
-                <button data-accion="mostrador-mas" data-valor="${a.id}" aria-label="Agregar ${esc(a.nombre)}">+</button>
-              </div>
-            </div>
-          `, { clase: 'tarjeta--plana' }));
-        })}
-      </div>
 
-      ${crudo(seccion('Forma de cobro', html`
-        ${crudo(opcionRadio('metodo-mostrador', 'efectivo', 'Efectivo', undefined, true))}
-        ${crudo(opcionRadio('metodo-mostrador', 'pago_movil', 'Pago Móvil'))}
-        ${crudo(opcionRadio('metodo-mostrador', 'tarjeta', 'Tarjeta'))}
-      `))}
-
-      ${crudo(listaDatos([
-        ['Subtotal', formatearUsd(total)],
-        ['IVA (16 %)', formatearUsd(Math.round(total * 0.16 * 100) / 100)],
-        ['Total', `<strong>${formatearUsd(totalConIva)}</strong>`],
-        ['Monto en bolívares', `<strong>${formatearVes(totalConIva * e.tasaBcv.valor)}</strong>`],
-      ]))}
-      <div id="error-mostrador" class="mt-1"></div>
-
-      ${crudo(barraAccion([
-        boton('Registrar venta', { variante: 'principal', bloque: true, accion: 'registrar-mostrador', valor: turno.localId, desactivado: total === 0 }),
-      ]))}
-    `,
-  };
-};
-
-export const abrirTurnoVista: Render = () => {
-  const locales = misLocales();
-  return {
-    titulo: 'Abrir turno',
-    atras: '/c/caja',
-    sinNav: true,
-    contenido: html`
-      <h1 class="titulo-pag">Apertura de caja</h1>
-      <p class="bajada">Declare el fondo inicial para poder cuadrar al cierre.</p>
-      <form data-formulario="abrir-turno">
-        ${locales.length > 1
-          ? crudo(seccion('Local', html`${locales.map((l, i) => crudo(opcionRadio('local', l.id, l.nombre, undefined, i === 0)))}`))
-          : crudo(`<input type="hidden" name="local" value="${esc(locales[0]?.id ?? '')}" />`)}
-        ${crudo(entradaTexto('fondo', 'Fondo inicial en bolívares', { modo: 'decimal', valor: '500', requerido: true }))}
-        <div id="error-abrir-turno"></div>
-      </form>
-      ${crudo(barraAccion([boton('Abrir turno', { variante: 'principal', bloque: true, accion: 'confirmar-abrir-turno' })]))}
-    `,
-  };
-};
-
-export const cerrarTurnoVista: Render = () => {
-  const e = store.leer();
-  const locales = misLocales();
-  const turno = e.turnos.find((t) => locales.some((l) => l.id === t.localId) && t.estado === 'abierto');
-  if (!turno) {
-    return { titulo: 'Cerrar turno', atras: '/c/caja', contenido: vacio('▦', 'No hay turno abierto', 'Debe existir un turno abierto para poder cerrarlo.') };
-  }
-  const esperado = turno.esperadoPorMetodo.efectivo + turno.fondoInicialVes;
-
-  return {
-    titulo: 'Cerrar turno',
-    atras: '/c/caja',
-    sinNav: true,
-    contenido: html`
-      <h1 class="titulo-pag">Cierre de caja</h1>
-      <p class="bajada">El cierre es inmutable: una vez confirmado solo se corrige con un ajuste autorizado.</p>
-
-      ${crudo(seccion('Ventas esperadas por método', html`${crudo(listaDatos([
-        ['Pago Móvil', formatearVes(turno.esperadoPorMetodo.pago_movil)],
-        ['Transferencia', formatearVes(turno.esperadoPorMetodo.transferencia)],
-        ['Tarjeta', formatearVes(turno.esperadoPorMetodo.tarjeta)],
-        ['Efectivo por ventas', formatearVes(turno.esperadoPorMetodo.efectivo)],
-        ['Fondo inicial', formatearVes(turno.fondoInicialVes)],
-        ['Efectivo esperado', `<strong>${formatearVes(esperado)}</strong>`],
-      ]))}`))}
-
-      <form data-formulario="cerrar-turno" data-turno="${turno.id}">
-        ${crudo(entradaTexto('declarado', 'Efectivo contado en caja', { modo: 'decimal', requerido: true, valor: String(esperado), ayuda: 'Cuente el efectivo físico e introdúzcalo aquí.' }))}
-        ${crudo(areaTexto('motivo', 'Observaciones del cierre', { requerido: true, marcador: 'Cierre normal de jornada…' }))}
-        <div id="error-cerrar-turno"></div>
-      </form>
-
-      ${crudo(aviso('alerta', 'Acción con motivo obligatorio', 'El cierre queda registrado en la bitácora con responsable, diferencia y motivo.'))}
-      ${crudo(barraAccion([boton('Confirmar cierre', { variante: 'principal', bloque: true, accion: 'confirmar-cerrar-turno', valor: turno.id })]))}
-    `,
-  };
-};
-
-export const detalleTurno: Render = (ctx) => {
-  const e = store.leer();
-  const t = e.turnos.find((x) => x.id === ctx.params.turnoId);
-  if (!t) return error404(ctx);
-  const ventas = e.ordenes.filter((o) => o.localId === t.localId && o.creadaEn >= t.abiertoEn && (!t.cerradoEn || o.creadaEn <= t.cerradoEn));
-
-  return {
-    titulo: `Turno ${fechaCorta(t.abiertoEn)}`,
-    atras: '/c/caja',
-    contenido: html`
-      ${t.estado === 'cerrado' ? crudo(aviso('info', 'Cierre inmutable', 'Este turno está cerrado. No puede editarse ni borrarse: las correcciones se hacen con un ajuste que deja trazabilidad.')) : ''}
-
-      <div class="mt-2">${crudo(listaDatos([
-        ['Estado', t.estado],
-        ['Apertura', fechaHora(t.abiertoEn)],
-        t.cerradoEn ? ['Cierre', fechaHora(t.cerradoEn)] : null,
-        ['Fondo inicial', formatearVes(t.fondoInicialVes)],
-        ['Efectivo esperado', formatearVes(t.esperadoPorMetodo.efectivo + t.fondoInicialVes)],
-        t.efectivoDeclaradoVes !== undefined ? ['Efectivo declarado', formatearVes(t.efectivoDeclaradoVes)] : null,
-        t.diferenciaVes !== undefined ? ['Diferencia', insignia(formatearVes(t.diferenciaVes), t.diferenciaVes === 0 ? 'exito' : 'alerta')] : null,
-        t.responsableCierreId ? ['Responsable', esc(e.usuarios.find((u) => u.id === t.responsableCierreId)?.nombre ?? '—')] : null,
-        t.aprobadoPorId ? ['Aprobado por', esc(e.usuarios.find((u) => u.id === t.aprobadoPorId)?.nombre ?? '—')] : null,
-      ]))}</div>
-
-      ${crudo(seccion(`Ventas del turno (${ventas.length})`, html`
-        ${ventas.length === 0
-          ? crudo('<p class="tenue">Sin ventas registradas en este turno.</p>')
-          : crudo(tabla(
-              [
-                { clave: 'c', titulo: 'Código', render: (o: Orden) => `<span class="mono">${esc(o.codigo)}</span>` },
-                { clave: 'ca', titulo: 'Canal', render: (o) => (o.canal === 'mostrador' ? 'Mostrador' : 'App') },
-                { clave: 'e', titulo: 'Estado', render: (o) => insignia(ETIQUETA_ORDEN[o.estado], TONO_ORDEN[o.estado]) },
-                { clave: 't', titulo: 'Total', render: (o) => esc(formatearUsd(o.totalUsd)), numerica: true },
-              ],
-              ventas,
-              { rutaFila: (o) => `/c/pedido/${o.id}` },
-            ))}
-      `))}
-    `,
-  };
-};
 
 // ------------------------------------------------------------------ Finanzas
 
@@ -876,41 +614,6 @@ export const facturas: Render = () => {
   };
 };
 
-export const detalleFactura: Render = (ctx) => {
-  const e = store.leer();
-  const f = e.facturas.find((x) => x.id === ctx.params.facturaId);
-  if (!f) return error404(ctx);
-  const o = e.ordenes.find((x) => x.id === f.ordenId);
-
-  return {
-    titulo: `Factura ${f.numero}`,
-    atras: '/c/facturas',
-    contenido: html`
-      ${f.estado === 'emitida' ? crudo(aviso('info', 'Documento inmutable', 'Una factura emitida no se edita ni se borra. Para corregirla se emite una nota de crédito o débito.')) : ''}
-      <div class="mt-2">${crudo(listaDatos([
-        ['Emisor', esc(f.emisorRazonSocial)],
-        ['RIF', `<span class="mono">${esc(f.emisorRif)}</span>`],
-        ['Número', `<span class="mono">${esc(f.numero)}</span>`],
-        ['N.º de control', `<span class="mono">${esc(f.numeroControl)}</span>`],
-        ['Estado', insignia(f.estado.replace('_', ' '), f.estado === 'emitida' ? 'exito' : 'alerta')],
-        ['Orden', o ? `<span class="mono">${esc(o.codigo)}</span>` : '—'],
-        ['Base imponible', formatearUsd(f.baseImponibleUsd)],
-        ['IVA', formatearUsd(f.ivaUsd)],
-        ['Total', `<strong>${formatearUsd(f.totalUsd)}</strong>`],
-        ['Total en bolívares', formatearVes(f.totalVes)],
-        ['Tasa aplicada', `${f.tasaBcv.toFixed(2)} Bs/USD`],
-        ['Adaptador', `<span class="mono">${esc(f.adaptador)}</span>`],
-        f.motivoNota ? ['Motivo de la nota', esc(f.motivoNota)] : null,
-      ]))}</div>
-
-      ${f.estado === 'emitida'
-        ? crudo(barraAccion([
-            boton('Emitir nota de crédito', { variante: 'secundario', bloque: true, accion: 'nota-credito', valor: f.id }),
-          ]))
-        : ''}
-    `,
-  };
-};
 
 export const comprobantes: Render = () => {
   const ordenes = misOrdenes().filter((o) => o.estado === 'entregada');
@@ -933,51 +636,6 @@ export const comprobantes: Render = () => {
   };
 };
 
-export const estadoCuenta: Render = () => {
-  const e = store.leer();
-  const negocioId = miNegocioId();
-  const contrato = e.contratos.find((c) => c.negocioId === negocioId);
-  const liqs = e.liquidaciones.filter((l) => l.negocioId === negocioId);
-  const ventas = misOrdenes().filter((o) => o.estado === 'entregada').reduce((s, o) => s + o.totalUsd, 0);
-  const p = contrato ? calcularParticipacion(ventas, contrato) : null;
-
-  return {
-    titulo: 'Estado de cuenta',
-    atras: '/c/mas',
-    contenido: html`
-      <p class="bajada">Cada concepto por separado: ingreso, impuesto, comisión y canon.</p>
-      ${contrato && p
-        ? crudo(seccion('Periodo en curso', html`${crudo(listaDatos([
-            ['Ventas acumuladas', formatearUsd(ventas)],
-            ['Comisión sobre venta', `${contrato.porcentajeSobreVenta} % · ${formatearUsd(p.comisionUsd)}`],
-            ['Canon fijo', formatearUsd(p.canonUsd)],
-            ['Mínimo garantizado', formatearUsd(contrato.minimoGarantizadoUsd)],
-            ['Obligación con INPARQUES', `<strong>${formatearUsd(p.totalUsd)}</strong>`],
-          ]))}`))
-        : crudo(aviso('alerta', 'Sin contrato vigente', 'No hay condiciones económicas registradas para este negocio.'))}
-
-      ${crudo(seccion('Liquidaciones', html`
-        ${liqs.length === 0
-          ? crudo('<p class="tenue">Sin liquidaciones registradas.</p>')
-          : crudo(html`<div class="pila">${liqs.map((l) => crudo(tarjeta(html`
-              <div class="fila fila--sep">
-                <div class="crece">
-                  <div style="font-weight:650">${fechaCorta(`${l.periodoDesde}T12:00:00`)} – ${fechaCorta(`${l.periodoHasta}T12:00:00`)}</div>
-                  <div class="tenue-2">Ventas ${formatearUsd(l.ventasUsd)}</div>
-                </div>
-                ${crudo(insignia(ETIQUETA_LIQUIDACION[l.estado], l.estado === 'cerrada' ? 'exito' : l.estado === 'conciliada' ? 'progreso' : 'alerta'))}
-              </div>
-              <div class="mt-2">${crudo(listaDatos([
-                ['Comisión', formatearUsd(l.comisionUsd)],
-                ['Canon', formatearUsd(l.canonUsd)],
-                ['Neto', `<strong>${formatearUsd(l.netoUsd)}</strong>`],
-              ]))}</div>
-              ${l.estado === 'cerrada' ? crudo('<p class="tenue-2 mt-1">Cerrada: solo se corrige con un ajuste autorizado.</p>') : ''}
-            `)))}</div>`)}
-      `))}
-    `,
-  };
-};
 
 export const ajustes: Render = () => {
   const e = store.leer();
@@ -1095,28 +753,6 @@ export const documentos: Render = () => {
   };
 };
 
-export const detalleDocumento: Render = (ctx) => {
-  const e = store.leer();
-  const d = e.documentos.find((x) => x.id === ctx.params.documentoId);
-  if (!d) return error404(ctx);
-  return {
-    titulo: d.tipo.replace(/_/g, ' '),
-    atras: '/c/expediente/documentos',
-    contenido: html`
-      ${d.estado === 'observado' && d.observacion ? crudo(aviso('alerta', 'Documento observado', d.observacion)) : ''}
-      <div class="mt-2">${crudo(listaDatos([
-        ['Archivo', `<span class="mono">${esc(d.nombreArchivo)}</span>`],
-        ['Estado', insignia(d.estado, d.estado === 'aprobado' ? 'exito' : d.estado === 'observado' ? 'error' : 'alerta')],
-        ['Cargado', fechaHora(d.cargadoEn)],
-        d.vigenciaHasta ? ['Vigencia', fechaCorta(`${d.vigenciaHasta}T12:00:00`)] : null,
-        d.revisadoPor ? ['Revisado por', esc(e.usuarios.find((u) => u.id === d.revisadoPor)?.nombre ?? '—')] : null,
-      ]))}</div>
-      ${d.estado === 'observado'
-        ? crudo(barraAccion([boton('Cargar nueva versión', { variante: 'principal', bloque: true, accion: 'cargar-documento' })]))
-        : ''}
-    `,
-  };
-};
 
 export const permisos: Render = () => {
   const e = store.leer();
@@ -1173,25 +809,6 @@ export const contratos: Render = () => {
   };
 };
 
-export const detalleContrato: Render = (ctx) => {
-  const e = store.leer();
-  const c = e.contratos.find((x) => x.id === ctx.params.contratoId);
-  if (!c) return error404(ctx);
-  return {
-    titulo: 'Condiciones económicas',
-    atras: '/c/contratos',
-    contenido: html`
-      ${crudo(listaDatos([
-        ['Vigencia', `${fechaCorta(`${c.desde}T12:00:00`)} – ${fechaCorta(`${c.hasta}T12:00:00`)}`],
-        ['Estado', insignia(c.estado, c.estado === 'vigente' ? 'exito' : 'neutro')],
-        ['Canon fijo por periodo', formatearUsd(c.canonFijoUsd)],
-        ['Porcentaje sobre venta', `${c.porcentajeSobreVenta} %`],
-        ['Mínimo garantizado', formatearUsd(c.minimoGarantizadoUsd)],
-      ]))}
-      ${crudo(aviso('info', 'Modificación restringida', 'Cambiar las condiciones económicas exige motivo, evidencia y verificación en dos pasos, y solo puede hacerlo la Dirección Comercial.'))}
-    `,
-  };
-};
 
 export const cobro: Render = () => {
   const e = store.leer();
@@ -1237,41 +854,6 @@ export const cobro: Render = () => {
   };
 };
 
-export const cuentaBancaria: Render = (ctx) => {
-  const e = store.leer();
-  const u = sesion.usuario()!;
-  if (!puedeVerBancario(u.rol)) return error403(ctx);
-  const cuenta = e.cuentasBancarias.find((c) => c.negocioId === miNegocioId());
-  const proy = cuenta ? proyectarCuenta(cuenta, u.rol) : null;
-
-  return {
-    titulo: 'Cuenta bancaria',
-    atras: '/c/cobro',
-    sinNav: true,
-    contenido: html`
-      <h1 class="titulo-pag">Cambiar cuenta bancaria</h1>
-      ${crudo(aviso('alerta', 'Cambio sensible', 'Exige motivo, evidencia documental, verificación en dos pasos y una segunda aprobación de INPARQUES.'))}
-
-      ${proy && proy.visible
-        ? crudo(html`<div class="mt-2">${crudo(seccion('Cuenta actual', html`${crudo(listaDatos([
-            ['Banco', esc(proy.banco)],
-            ['Cuenta', `<span class="mono">${esc(proy.numeroEnmascarado)}</span>`],
-          ]))}`))}</div>`)
-        : ''}
-
-      <form data-formulario="cuenta-bancaria">
-        ${crudo(entradaTexto('banco', 'Banco', { requerido: true, marcador: 'Banco Demo Central' }))}
-        ${crudo(entradaTexto('titular', 'Titular de la cuenta', { requerido: true }))}
-        ${crudo(entradaTexto('numero', 'Número de cuenta', { modo: 'numeric', requerido: true, marcador: '0102 0000 0000 0000 0000', ayuda: 'Datos ficticios. La demo no valida cuentas reales.' }))}
-        ${crudo(areaTexto('motivo', 'Motivo del cambio', { requerido: true, marcador: 'Cierre de la cuenta anterior…' }))}
-        ${crudo(entradaTexto('evidencia', 'Evidencia documental', { requerido: true, valor: 'carta-banco.pdf', ayuda: 'Nombre del documento que respalda el cambio.' }))}
-        <div id="error-cuenta-bancaria"></div>
-      </form>
-
-      ${crudo(barraAccion([boton('Solicitar cambio', { variante: 'principal', bloque: true, accion: 'cambiar-cuenta' })]))}
-    `,
-  };
-};
 
 export const equipo: Render = () => {
   const e = store.leer();
@@ -1303,56 +885,4 @@ export const equipo: Render = () => {
   };
 };
 
-export const invitarEquipo: Render = () => ({
-  titulo: 'Invitar integrante',
-  atras: '/c/equipo',
-  sinNav: true,
-  contenido: html`
-    <h1 class="titulo-pag">Nueva invitación</h1>
-    <p class="bajada">La persona recibe un código y define su propia contraseña.</p>
-    <form data-formulario="invitar">
-      ${crudo(entradaTexto('correo', 'Correo electrónico', { tipo: 'email', requerido: true }))}
-      ${crudo(seccion('Rol', html`
-        ${crudo(opcionRadio('rol', 'comercio.admin_local', 'Administrador de local', 'Catálogo, horarios, pedidos, caja y personal', true))}
-        ${crudo(opcionRadio('rol', 'comercio.operador', 'Operador / cocina', 'Aceptar, preparar, marcar listo y validar entrega'))}
-        ${crudo(opcionRadio('rol', 'comercio.contador', 'Contador', 'Facturas, cierres, reportes y conciliación'))}
-      `))}
-      <div id="error-invitar"></div>
-    </form>
-    ${crudo(aviso('info', 'Sin envío real', 'La demo no envía correos: el código aparecerá en pantalla.'))}
-    ${crudo(barraAccion([boton('Enviar invitación', { variante: 'principal', bloque: true, accion: 'enviar-invitacion' })]))}
-  `,
-});
 
-export const detalleEquipo: Render = (ctx) => {
-  const e = store.leer();
-  const m = e.usuarios.find((u) => u.id === ctx.params.usuarioId);
-  if (!m) return error404(ctx);
-  const d = ROLES[m.rol];
-
-  return {
-    titulo: m.nombre,
-    atras: '/c/equipo',
-    contenido: html`
-      ${crudo(listaDatos([
-        ['Rol', esc(d.nombre)],
-        ['Correo', esc(m.correo)],
-        ['Estado', insignia(m.estado, m.estado === 'activo' ? 'exito' : 'alerta')],
-        ['Ámbito', esc(d.limite)],
-        ['Segundo factor', d.requiereMfa ? 'Obligatorio' : 'No requerido'],
-        ['Datos bancarios', d.puedeVerDatosBancarios ? 'Accesibles enmascarados' : 'No accesibles'],
-        ['Último acceso', m.ultimoAcceso ? fechaHora(m.ultimoAcceso) : 'Nunca'],
-      ]))}
-      ${crudo(seccion('Permisos del rol', html`
-        <div class="fila fila--envuelve" style="gap:6px">
-          ${(d.nombre === 'Operador / cocina / servicio'
-            ? ['Aceptar pedidos', 'Preparar', 'Marcar listo', 'Validar entrega', 'Venta de mostrador']
-            : d.nombre === 'Contador'
-              ? ['Facturas', 'Cierres', 'Reportes', 'Conciliación', 'Exportar']
-              : ['Catálogo', 'Horarios', 'Pedidos', 'Caja', 'Personal']
-          ).map((x) => crudo(insignia(x, 'neutro')))}
-        </div>
-      `))}
-    `,
-  };
-};

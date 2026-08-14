@@ -344,6 +344,7 @@ export function barraLateralAdminLocal(activo = '/c'): string {
     ['event_available', 'Disponibilidad', '/c/cupos'],
     ['account_balance_wallet', 'Caja', '/c/caja'],
     ['payments', 'Ventas', '/c/reportes'],
+    ['star', 'Valoraciones', '/c/valoraciones'],
     ['group', 'Equipo operativo', '/c/equipo'],
     ['settings', 'Configuración del local', '/c/horarios'],
   ];
@@ -725,6 +726,7 @@ export function barraLateralContador(activo = '/c'): string {
   const items: Array<[string, string, string]> = [
     ['dashboard', 'Summary', '/c'],
     ['book_2', 'Sales Books', '/c/reportes'],
+    ['star', 'Valoraciones', '/c/valoraciones'],
     ['payments', 'Payments', '/c/comprobantes'],
     ['account_balance', 'Reconciliation', '/c/conciliacion'],
     ['receipt', 'Invoices', '/c/facturas'],

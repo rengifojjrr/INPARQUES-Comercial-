@@ -85,14 +85,26 @@ Recorridos que atraviesan las tres superficies y demuestran las reglas:
    el cierre y en los reportes, junto con las ventas de la aplicación.
 6. **Rutas prohibidas.** Como Operador, escriba `#/i/contabilidad` en la
    barra de direcciones: recibe un 403 con vuelta a su inicio.
-11. **Mapa del parque.** Visitante → Explorar → mapa: las zonas y los puntos
+7. **Lo ajeno no se toca.** Como Operador de Café Los Cedros, escriba el
+   pedido de otro comercio (`#/c/pedido/or_1004`): recibe un 403, y el estado
+   del pedido no se mueve. Igual el visitante con el pedido de otro, que
+   además lleva el código de retiro.
+8. **Cancelar, reclamar y valorar.** Haga un pedido y cancélelo antes de que
+   el comercio lo acepte. Acéptelo con el Operador y verá que ya solo queda
+   el reclamo. Un pedido entregado se valora una sola vez.
+9. **Responder y moderar.** El comercio responde en `#/c/valoraciones`;
+   Soporte retira una valoración con motivo en `#/i/valoraciones`, y queda en
+   la bitácora sin borrarse.
+10. **Mapa del parque.** Visitante → Explorar → mapa: las zonas y los puntos
    comerciales son clicables y abren la ficha del comercio que los ocupa.
-7. **Datos bancarios.** El Propietario ve la cuenta enmascarada; el Inspector
+11. **Datos bancarios.** El Propietario ve la cuenta enmascarada; el Inspector
    no recibe el campo en absoluto.
-8. **Acción sensible.** Cobro → Cambiar cuenta bancaria: exige motivo,
-   evidencia, verificación y segunda aprobación.
-9. **Sin conexión.** Perfil → Conexión. Opere sin red y vea la cola.
-10. **Auditoría.** Como Finanzas, `#/i/auditoria` muestra todo lo anterior.
+12. **Acción sensible.** Cobro → Cambiar cuenta bancaria: exige motivo,
+   evidencia, verificación y segunda aprobación. Nadie firma su propia
+   solicitud, ni siquiera un superadministrador.
+13. **Sin conexión.** Perfil → Conexión. Opere sin red, **recargue la
+   página**, y la cola sigue ahí.
+14. **Auditoría.** Como Finanzas, `#/i/auditoria` muestra todo lo anterior.
 
 ## Ejecutar en local
 
@@ -107,7 +119,7 @@ npm run dev     # http://localhost:5173
 | `npm run build` | Comprobación de tipos + construcción |
 | `npm run preview` | Sirve la construcción en el puerto 4173 |
 | `npm run unico` | Empaqueta todo en un solo HTML en `dist-unico/` |
-| `npm test` | 78 pruebas automáticas |
+| `npm test` | 105 pruebas automáticas |
 | `npm run matriz` | Regenera `docs/MATRIZ-COBERTURA.md` |
 | `npm run verificar` | 58 comprobaciones en navegador real (requiere `preview` activo) |
 
